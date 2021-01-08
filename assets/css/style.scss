@@ -1,0 +1,322 @@
+$oa-blue: #41acdd;
+$oa-black: #413a42;
+$oa-dark-purple: #413a42;
+$oa-white: #fff;
+$oa-silver: silver;
+$oa-gray: gray;
+$oa-gray-lightish: #bbb;
+$oa-gray-light: #ccc;
+$oa-gray-lighter: #eee;
+$oa-gray-lightest: #fafafa;
+$oa-red: #da4453;
+$oa-green: #5cb85c;
+$oa-yellow: rgba(240, 194, 12, 0.6);
+$oa-orange: #ff813d;
+$oa-warning: #f6bb42;
+$oa-dark: #333;
+
+
+/*****************************
+ * Screen reader text helper
+ *****************************/
+.oa-sr-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/**************
+ * Events
+ **************/
+.oa-list-item {
+    margin-bottom: 4rem;
+}
+.oa-event-title {
+    margin-top: 0;
+}
+.oa-meta {
+	p {
+		margin: .25rem 0;
+	}
+}
+
+/**************
+ * Pagination
+ **************/
+.oa-pagination {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+}
+.oa-page {
+    margin: 0;
+}
+.oa-page a,
+.oa-page span {
+    display: inline-block;
+    line-height: 1;
+    padding: .5rem;
+}
+
+/*****************
+ * Exports and Share Buttons
+ *****************/
+.oa-exports,
+.oa-sharers {
+	align-items: center;
+	display: flex;
+	justify-content: flex-end;
+	margin: 1rem 0;
+}
+.oa-exports-links,
+.oa-sharers-links {
+	display: flex;
+	list-style: none;
+	margin: 0;
+}
+.oa-export-button,
+.oa-sharer-button {
+	align-items: center;
+	display: inline-flex;
+	padding: .25rem;
+	margin-left: 8px;
+}
+
+/*****************
+ * Timings & range
+ *****************/
+.oa-event-timing,
+.oa-event-range {
+	align-items: center;
+	display: flex;
+	.oa-icon {
+		margin-right: 5px;
+	}
+}
+.oa-timing {
+	display: flex;
+}
+.oa-timing-seperator {
+	margin: 0 5px;
+}
+.oa-timing-times {
+	margin-left: auto;
+}
+.oa-month {
+	list-style: none;
+	&.oa-hidden {
+		display: none;
+	}
+}
+.oa-month-header {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+.oa-week {
+	margin-top: .75rem;
+	list-style: none;
+}
+button.oa-button {
+	background: transparent;
+	border: none;
+	line-height: 1;
+	padding: 0;
+	margin: 0;
+	&:hover,
+	&:focus {
+		background: transparent;
+		border: none;
+	}
+	&[disabled=true] {
+		opacity: 0.5;
+	}
+}
+
+/******************
+ * Update overlay
+ *****************/
+div[data-container-id="oa-wrapper"]{
+	position: relative;
+	.oa-update-overlay {
+		align-items: center;
+		background-color: rgba( white, .9 );
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		left:0;
+		padding: 2rem;
+		position: absolute;
+		text-align: center;
+		top: 0;
+		width: 100%;
+		.oa-icon-refresh {
+			display: inline-block;
+			height: 2rem;
+			margin: 0 1rem;
+			width: 2rem;
+		}
+		p {
+			margin: 1rem 0;
+		}
+	}
+}
+
+
+/***************
+ * Notices
+ **************/
+.oa-notice {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  
+  p {
+    margin: 0;
+  }
+}
+.oa-notice-error {
+  background-color: #FEF2F2;
+  border-left: 3px solid #B91C1C;
+}
+
+/***************
+ * Tags Filter
+ **************/
+.cbpgtg .tags {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+	flex-wrap: wrap;
+	li {
+		padding: 5px;
+	}
+	.no-current-match {
+		opacity: .5;
+	}
+}
+
+
+/*******************
+ * Calendar Filter
+ *******************/
+.ccal {
+	* {
+		-moz-user-select: -moz-none;
+		-khtml-user-select: none;
+		-webkit-user-select: none;
+		-o-user-select: none;
+		user-select: none;
+	}
+
+	ul {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-around;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	ul.calweekdays,
+	.calbody ul {
+		li {
+
+			border: 2px solid $oa-gray-lighter;
+			cursor: pointer;
+			color: $oa-gray;
+			display: inline-block;
+			line-height: 25px;
+			text-align: center;
+			transition: color 0.1s;
+			width: 1 / 7 * 100%;
+			&:hover {
+				color: $oa-blue;
+			}
+			&.today {
+				font-weight: bold;
+				color: $oa-blue;
+			}
+		}
+	}
+
+	.calbody,
+	.calhead {
+		box-sizing: border-box;
+	}
+
+	.calbody {
+		li:hover {
+			box-shadow: 0 0 0 1px $oa-blue inset;
+		}
+	}
+
+	.calprev, .calnext {
+		opacity: 0.2;
+	}
+
+	.calweekdays {
+		li {
+			cursor: auto;
+			&:hover {
+				color: $oa-gray;
+			}
+		}
+	}
+
+	.calmonthnav {
+		background: $oa-gray-lighter;
+		border-bottom: 1px solid $oa-silver;
+		line-height: 46px;
+	}
+
+	.hasdates {
+		background: $oa-white;
+	}
+
+	.selected {
+		background: $oa-blue;
+		border-radius: 0;
+		span {
+			color: $oa-white;
+		}
+		&:hover {
+			color: $oa-white;
+			opacity: 0.9;
+		}
+	}
+
+	.preselected {
+		background: $oa-blue;
+		opacity: 0.8;
+		span {
+			color: $oa-white;
+		}
+	}
+}
+
+
+/***************
+ * Map Filter
+ ***************/
+.cbpgmp {
+	.map-sync {
+		align-items: center;
+		display: flex;
+		flex-direction: row-reverse;
+	}
+	label {
+		margin: 0;
+	}
+}
+
+.event-map {
+	height: 300px;
+}

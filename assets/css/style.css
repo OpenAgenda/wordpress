@@ -1,0 +1,295 @@
+/*****************************
+ * Screen reader text helper
+ *****************************/
+.oa-sr-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/**************
+ * Events
+ **************/
+.oa-list-item {
+  margin-bottom: 4rem;
+}
+
+.oa-event-title {
+  margin-top: 0;
+}
+
+.oa-meta p {
+  margin: 0.25rem 0;
+}
+
+/**************
+ * Pagination
+ **************/
+.oa-pagination {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.oa-page {
+  margin: 0;
+}
+
+.oa-page a,
+.oa-page span {
+  display: inline-block;
+  line-height: 1;
+  padding: 0.5rem;
+}
+
+/*****************
+ * Exports and Share Buttons
+ *****************/
+.oa-exports,
+.oa-sharers {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0;
+}
+
+.oa-exports-links,
+.oa-sharers-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.oa-export-button,
+.oa-sharer-button {
+  align-items: center;
+  display: inline-flex;
+  padding: 0.25rem;
+  margin-left: 8px;
+}
+
+/*****************
+ * Timings & range
+ *****************/
+.oa-event-timing,
+.oa-event-range {
+  align-items: center;
+  display: flex;
+}
+.oa-event-timing .oa-icon,
+.oa-event-range .oa-icon {
+  margin-right: 5px;
+}
+
+.oa-timing {
+  display: flex;
+}
+
+.oa-timing-seperator {
+  margin: 0 5px;
+}
+
+.oa-timing-times {
+  margin-left: auto;
+}
+
+.oa-month {
+  list-style: none;
+}
+.oa-month.oa-hidden {
+  display: none;
+}
+
+.oa-month-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.oa-week {
+  margin-top: 0.75rem;
+  list-style: none;
+}
+
+button.oa-button {
+  background: transparent;
+  border: none;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+button.oa-button:hover, button.oa-button:focus {
+  background: transparent;
+  border: none;
+}
+button.oa-button[disabled=true] {
+  opacity: 0.5;
+}
+
+/******************
+ * Update overlay
+ *****************/
+div[data-container-id=oa-wrapper] {
+  position: relative;
+}
+div[data-container-id=oa-wrapper] .oa-update-overlay {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  left: 0;
+  padding: 2rem;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+}
+div[data-container-id=oa-wrapper] .oa-update-overlay .oa-icon-refresh {
+  display: inline-block;
+  height: 2rem;
+  margin: 0 1rem;
+  width: 2rem;
+}
+div[data-container-id=oa-wrapper] .oa-update-overlay p {
+  margin: 1rem 0;
+}
+
+/***************
+ * Notices
+ **************/
+.oa-notice {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.oa-notice p {
+  margin: 0;
+}
+
+.oa-notice-error {
+  background-color: #FEF2F2;
+  border-left: 3px solid #B91C1C;
+}
+
+/***************
+ * Tags Filter
+ **************/
+.cbpgtg .tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.cbpgtg .tags li {
+  padding: 5px;
+}
+.cbpgtg .tags .no-current-match {
+  opacity: 0.5;
+}
+
+/*******************
+ * Calendar Filter
+ *******************/
+.ccal * {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.ccal ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ccal ul.calweekdays li,
+.ccal .calbody ul li {
+  border: 2px solid #eee;
+  cursor: pointer;
+  color: gray;
+  display: inline-block;
+  line-height: 25px;
+  text-align: center;
+  transition: color 0.1s;
+  width: 14.2857142857%;
+}
+.ccal ul.calweekdays li:hover,
+.ccal .calbody ul li:hover {
+  color: #41acdd;
+}
+.ccal ul.calweekdays li.today,
+.ccal .calbody ul li.today {
+  font-weight: bold;
+  color: #41acdd;
+}
+.ccal .calbody,
+.ccal .calhead {
+  box-sizing: border-box;
+}
+.ccal .calbody li:hover {
+  box-shadow: 0 0 0 1px #41acdd inset;
+}
+.ccal .calprev, .ccal .calnext {
+  opacity: 0.2;
+}
+.ccal .calweekdays li {
+  cursor: auto;
+}
+.ccal .calweekdays li:hover {
+  color: gray;
+}
+.ccal .calmonthnav {
+  background: #eee;
+  border-bottom: 1px solid silver;
+  line-height: 46px;
+}
+.ccal .hasdates {
+  background: #fff;
+}
+.ccal .selected {
+  background: #41acdd;
+  border-radius: 0;
+}
+.ccal .selected span {
+  color: #fff;
+}
+.ccal .selected:hover {
+  color: #fff;
+  opacity: 0.9;
+}
+.ccal .preselected {
+  background: #41acdd;
+  opacity: 0.8;
+}
+.ccal .preselected span {
+  color: #fff;
+}
+
+/***************
+ * Map Filter
+ ***************/
+.cbpgmp .map-sync {
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.cbpgmp label {
+  margin: 0;
+}
+
+.event-map {
+  height: 300px;
+}
+
+/*# sourceMappingURL=style.css.map */

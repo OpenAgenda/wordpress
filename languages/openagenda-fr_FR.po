@@ -1,0 +1,444 @@
+# Open Agenda Pot
+# Copyright 2020 ...
+# This file is distributed under the GNU General Public License v3 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Open Agenda\n"
+"Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
+"POT-Creation-Date: 2021-01-08 15:48+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/class-admin-pages.php:24
+msgid "Open Agenda Settings"
+msgstr "Réglages Open Agenda"
+
+#: inc/class-admin-pages.php:25
+msgid "Settings"
+msgstr "Réglages"
+
+#: inc/class-admin-pages.php:32
+msgid "General"
+msgstr "Généraux"
+
+#: inc/class-admin-pages.php:124 inc/class-settings.php:46
+msgid "General settings"
+msgstr "Réglages généraux"
+
+#: inc/class-admin-pages.php:140
+msgid "Display settings"
+msgstr "Réglages d'affichage"
+
+#: inc/class-ajax-handler.php:34
+msgid "No post ID was provided."
+msgstr "Aucun ID de publication n'a été fourni."
+
+#: inc/class-ajax-handler.php:40
+msgid "The post ID provided does not refer to a calendar."
+msgstr "L'identifiant fourni ne correspond à aucun agenda."
+
+#: inc/class-content-manager.php:18 inc/class-content-manager.php:104
+#: inc/class-settings.php:322
+msgid "calendar"
+msgstr "agenda"
+
+#: inc/class-content-manager.php:23
+msgctxt "Post type general name"
+msgid "Calendars"
+msgstr "Agendas"
+
+#: inc/class-content-manager.php:24
+msgctxt "Post type singular name"
+msgid "Calendar"
+msgstr "Agenda"
+
+#: inc/class-content-manager.php:25
+msgctxt "Admin Menu text"
+msgid "Calendars"
+msgstr "Agendas"
+
+#: inc/class-content-manager.php:26
+msgctxt "Add New on Toolbar"
+msgid "Calendar"
+msgstr "Agenda"
+
+#: inc/class-content-manager.php:27
+msgid "Add New Calendar"
+msgstr "Ajouter un nouvel agenda"
+
+#: inc/class-content-manager.php:28
+msgid "New Calendar"
+msgstr "Nouvel agenda"
+
+#: inc/class-content-manager.php:29
+msgid "Edit Calendar"
+msgstr "Modifier l'agenda"
+
+#: inc/class-content-manager.php:30
+msgid "View Calendar"
+msgstr "Voir l'agenda"
+
+#: inc/class-content-manager.php:31
+msgid "All Calendars"
+msgstr "Tous les agendas"
+
+#: inc/class-content-manager.php:32
+msgid "Search Calendars"
+msgstr "Chercher dans les agendas"
+
+#: inc/class-content-manager.php:33
+msgid "Parent Calendars:"
+msgstr "Agenda parent&nbsp;:"
+
+#: inc/class-content-manager.php:34
+msgid "No Calendars found."
+msgstr "Aucun agenda trouvé."
+
+#: inc/class-content-manager.php:35
+msgid "No Calendars found in Trash."
+msgstr "Aucun agenda dans la corbeille."
+
+#: inc/class-content-manager.php:36
+msgctxt ""
+"Overrides the “Featured Image” phrase for this post type. Added in 4.3"
+msgid "Calendar Cover Image"
+msgstr "Image mise en avant de l'agenda"
+
+#: inc/class-content-manager.php:37
+msgctxt ""
+"The post type archive label used in nav menus. Default “Post Archives”. "
+"Added in 4.4"
+msgid "Calendar archives"
+msgstr "Archive des agendas"
+
+#: inc/class-content-manager.php:38
+msgctxt ""
+"Overrides the “Insert into post”/”Insert into page” phrase (used when "
+"inserting media into a post). Added in 4.4"
+msgid "Insert into Calendar"
+msgstr "Insérer dans l'agenda"
+
+#: inc/class-content-manager.php:39
+msgctxt ""
+"Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used "
+"when viewing media attached to a post). Added in 4.4"
+msgid "Uploaded to this Calendar"
+msgstr "Téléversé vers cet agenda"
+
+#: inc/class-content-manager.php:40
+msgctxt ""
+"Screen reader text for the filter links heading on the post type listing "
+"screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
+msgid "Filter Calendars list"
+msgstr "Filtrer la liste des agendas"
+
+#: inc/class-content-manager.php:41
+msgctxt ""
+"Screen reader text for the pagination heading on the post type listing "
+"screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
+msgid "Calendars list navigation"
+msgstr "Navigation de la liste des agendas"
+
+#: inc/class-content-manager.php:42
+msgctxt ""
+"Screen reader text for the items list heading on the post type listing "
+"screen. Default “Posts list”/”Pages list”. Added in 4.4"
+msgid "Calendars list"
+msgstr "Liste des agendas"
+
+#: inc/class-filter-widget.php:29
+msgid "Open Agenda Filter"
+msgstr "Open Agenda - Filtre"
+
+#: inc/class-filter-widget.php:31
+msgid "Displays a filter widget."
+msgstr "Affiche un filtre."
+
+#: inc/class-filter-widget.php:82
+msgid "Title :"
+msgstr "Titre&nbsp;:"
+
+#: inc/class-filter-widget.php:86
+msgid "Filter to display :"
+msgstr "Filtre à afficher&nbsp;:"
+
+#: inc/class-filter-widget.php:88
+msgid "Choose filter"
+msgstr "Choisissez un filtre"
+
+#: inc/class-filter-widget.php:122 inc/class-settings.php:143
+#: inc/template-tags.php:338
+msgid "OpenStreetMap contributors"
+msgstr "Les contributeurs OpenStreetMap"
+
+#: inc/class-filter-widget.php:179
+msgid "Map tiles link :"
+msgstr "Liens du fond de carte&nbsp;:"
+
+#: inc/class-filter-widget.php:187
+msgid "Automatically update map on scroll ?"
+msgstr "Ajuster automatiquement la carte au défilement ?"
+
+#: inc/class-filter-widget.php:195
+msgid "Default longitude :"
+msgstr "Longitude par défaut&nbsp;:"
+
+#: inc/class-filter-widget.php:203
+msgid "Default latitude :"
+msgstr "Latitude par défaut&nbsp;:"
+
+#: inc/class-filter-widget.php:211
+msgid "Map default zoom :"
+msgstr "Niveau de zoom par défaut&nbsp;:"
+
+#: inc/class-filter-widget.php:221
+msgid "Preview label :"
+msgstr "Label du lien de prévisualisation&nbsp;:"
+
+#: inc/class-filter-widget.php:225 inc/class-main.php:46
+msgid "Preview"
+msgstr "Prévisualisation"
+
+#: inc/class-filter-widget.php:231
+msgid "Placeholder text :"
+msgstr "Texte de substitution&nbsp;:"
+
+#: inc/class-filter-widget.php:235
+msgid "Search events"
+msgstr "Rechercher un événement"
+
+#: inc/class-filter-widget.php:241
+msgid "Tag group :"
+msgstr "Groupe tag&nbsp;:"
+
+#: inc/class-filter-widget.php:249
+msgid "Tags to display :"
+msgstr "Tags à afficher&nbsp;:"
+
+#: inc/class-filter-widget.php:250
+msgid "Enter tags separated by a comma."
+msgstr "Entrer les tags séparés par des virgules."
+
+#: inc/class-main.php:26
+msgid "Active filters"
+msgstr "Filtres actifs"
+
+#: inc/class-main.php:31
+msgid "Tags"
+msgstr "Tags"
+
+#: inc/class-main.php:36
+msgid "Calendar"
+msgstr "Calendrier"
+
+#: inc/class-main.php:41
+msgid "Map"
+msgstr "Carte"
+
+#: inc/class-main.php:51
+msgid "Relative"
+msgstr "Relatifs"
+
+#: inc/class-main.php:56
+msgid "Search"
+msgstr "Recherche"
+
+#: inc/class-metaboxes.php:24
+msgid "Calendar settings"
+msgstr "Réglages de l'agenda"
+
+#: inc/class-metaboxes.php:36
+msgid "Calendar UID"
+msgstr "UID de l'agenda"
+
+#: inc/class-metaboxes.php:42
+msgid "Events per page"
+msgstr "Evénements par page"
+
+#: inc/class-metaboxes.php:124
+msgid "New field"
+msgstr "Nouveau champ"
+
+#: inc/class-openagenda.php:272
+msgid "XLSX"
+msgstr "XLSX"
+
+#: inc/class-openagenda.php:273
+msgid "JSON"
+msgstr "JSON"
+
+#: inc/class-openagenda.php:274
+msgid "RSS"
+msgstr "RSS"
+
+#: inc/class-openagenda.php:275
+msgid "PDF"
+msgstr "PDF"
+
+#: inc/class-openagenda.php:328
+msgid "There was an error parsing the JSON."
+msgstr "Il y a eu une erreur de lecture du JSON."
+
+#: inc/class-settings.php:54
+msgid "Open Agenda API key"
+msgstr "Clé API Open Agenda"
+
+#: inc/class-settings.php:65
+#, php-format
+msgid ""
+"Your API key can be found in your <a href=\"%s\">Open Agenda account</a>."
+msgstr ""
+"Vous pouvez trouver votre clé API sur votre <a href=\"%s\">compte Open "
+"Agenda</a>."
+
+#: inc/class-settings.php:70
+msgid "Allow embedded content."
+msgstr "Autoriser les contenus embarqués."
+
+#: inc/class-settings.php:81
+msgid "Allow for embedded content in the event's content."
+msgstr "Autoriser le contenu embarqué dans le contenu des événements."
+
+#: inc/class-settings.php:86
+msgid "Load default stylesheets."
+msgstr "Charger des styles par défaut."
+
+#: inc/class-settings.php:97
+msgid "Load default styling."
+msgstr "Charger les styles par défaut."
+
+#: inc/class-settings.php:102
+msgid "Cache duration"
+msgstr "Durée du cache"
+
+#: inc/class-settings.php:113
+msgid ""
+"Requests responses are temporarily stored for performance reasons. This "
+"setting controls the number of seconds basic requests responses are stored"
+msgstr ""
+"Les requêtes sont mise en cache temporaire pour des raisons de performance. "
+"Ce réglage contrôle le nombre de secondes pendant lesquelles les requêtes "
+"sont stockées"
+
+#: inc/class-settings.php:118
+msgid "Default map tiles link"
+msgstr "Liens du fond de carte"
+
+#: inc/class-settings.php:133
+msgid "Default map tiles attribution link"
+msgstr "URL des crédits du fond de carte"
+
+#: inc/class-settings.php:148
+msgid "Calendar base"
+msgstr "Base des agendas"
+
+#: inc/class-settings.php:159
+#, php-format
+msgid ""
+"You can modify the URL prefix for the calendars. For example, the default "
+"prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/"
+"calendar-name</code>."
+msgstr ""
+"Vous pouvez modifier le préfixe des URLs des agendas. Par exemple, le "
+"préfixe par défaut est <code>agenda</code>, donc vos URLs ressembleront à "
+"<code>%s/agenda/nom-de-l-agenda</code>."
+
+#: inc/class-shortcodes.php:68
+msgid ""
+"Please provide a valid calendar UID to display, either in the shortcode "
+"parameters or in the calendar settings."
+msgstr ""
+"Veuillez fournir un UID d'agenda valide, soit dans le code court utilisé "
+"pour afficher l'agenda, soit dans les réglages de l'agenda."
+
+#: inc/class-shortcodes.php:215
+msgid "Preview the calendar"
+msgstr "Prévisualiser l'agenda"
+
+#: inc/class-shortcodes.php:271
+msgid "Search this calendar"
+msgstr "Chercher dans cet agenda"
+
+#: inc/helper-functions.php:213
+msgid "Fetching events... Please wait a moment."
+msgstr "Recherche des événements en cours... Veuillez patienter un moment."
+
+#: inc/helper-functions.php:225
+msgid ""
+"There was an error updating the events. Pleaser refresh the page and try "
+"again."
+msgstr ""
+"Il y a eu une erreur lors de la mise à jour des événements. Veuillez "
+"rafraichir la page et réessayer."
+
+#: inc/helper-functions.php:256
+#, php-format
+msgctxt "next event timing"
+msgid "In %s"
+msgstr "Dans %s"
+
+#: inc/helper-functions.php:257
+#, php-format
+msgctxt "last event timing"
+msgid "%s ago"
+msgstr "Il y a %s"
+
+#: inc/template-tags.php:225
+msgid "No timing avilable"
+msgstr "Pas d'horaire disponible"
+
+#: inc/template-tags.php:284
+msgid "View previous month"
+msgstr "Voir le mois précédent"
+
+#: inc/template-tags.php:287
+msgid "View next month"
+msgstr "Voir le mois suivant"
+
+#: inc/template-tags.php:372
+msgid "Share on Facebook"
+msgstr "Partagez sur Facebook"
+
+#: inc/template-tags.php:377
+msgid "Share on Twitter"
+msgstr "Partagez sur Twitter"
+
+#: inc/template-tags.php:385
+msgid "Share on Linkedin"
+msgstr "Partagez sur LinkedIn"
+
+#: inc/template-tags.php:415
+msgid "Share :"
+msgstr "Partager :"
+
+#: inc/template-tags.php:479
+msgid "Previous page"
+msgstr "Page précédente"
+
+#: inc/template-tags.php:480
+msgid "Next page"
+msgstr "Page suivante"
+
+#: inc/template-tags.php:603
+msgid "Download :"
+msgstr "Télécharger :"
+
+#~ msgid "Map tiles attribution text :"
+#~ msgstr "Texte de crédits du fond de carte"
+
+#~ msgid "Map tiles attribution URL :"
+#~ msgstr "URL des crédits du fond de carte"
