@@ -6,10 +6,17 @@ jQuery(document).ready( function($) {
     $( '[data-container-id="oa-wrapper"]' ).prepend('<div class="oa-notice-wrapper"></div>');
     
     window.oa = {
-        onReloadWithPassed: (filter, update, query) => {},
+        onReloadWithPassed: (query) => {
+            $( '[data-container-id="oa-wrapper"]' ).prepend(oaData.overlayHtml);
+            if(query){
+                oa.getEvents( 'tags', query, query );
+            }
+        },
         onWidgetUpdate: (filter, update, query) => {
             $( '[data-container-id="oa-wrapper"]' ).prepend(oaData.overlayHtml);
-            
+            oa.getEvents( filter, update, query );
+        },
+        getEvents: (filter, update, query) => {
             $.post(
                 oaData.ajaxUrl,
                 {         

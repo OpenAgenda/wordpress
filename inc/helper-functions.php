@@ -19,10 +19,10 @@ function openagenda_get_template( $slug ) {
     $located = '';
     
     $template_name = sanitize_file_name( "{$slug}.php" );
-    if ( file_exists( STYLESHEETPATH . '/open-agenda/' . $template_name ) ) {
-        $located = STYLESHEETPATH . '/open-agenda/' . $template_name;
-    } elseif ( file_exists( TEMPLATEPATH . '/open-agenda/' . $template_name ) ) {
-        $located = TEMPLATEPATH . '/open-agenda/' . $template_name;
+    if ( file_exists( STYLESHEETPATH . '/openagenda/' . $template_name ) ) {
+        $located = STYLESHEETPATH . '/openagenda/' . $template_name;
+    } elseif ( file_exists( TEMPLATEPATH . '/openagenda/' . $template_name ) ) {
+        $located = TEMPLATEPATH . '/openagenda/' . $template_name;
     } elseif ( file_exists( OPENAGENDA_PATH . 'templates/' . $template_name ) ) {
         $located = OPENAGENDA_PATH . 'templates/' . $template_name;
     }
@@ -49,8 +49,7 @@ function openagenda_get_locale(){
     $current_locale = get_locale();
     $oa_locales     = openagenda_supported_locales();
     
-    // Default to FR for now.
-    $locale = 'fr';
+    $locale = 'en';
     if( array_key_exists( $current_locale, $oa_locales ) ){
         $locale = sanitize_key( $oa_locales[$current_locale] ); 
     }
@@ -66,6 +65,8 @@ function openagenda_get_locale(){
 function openagenda_supported_locales(){
     $locales = array(
         'fr_FR' => 'fr',
+        'en_US' => 'en',
+        'en_GB' => 'en'
     );
     return apply_filters( 'openagenda_supported_locales', $locales );
 }
@@ -173,6 +174,27 @@ function openagenda_icon( $slug, $echo = true ){
     return $icon;
 }
 
+/**
+ * Wrapper for the is_single() method of openagenda global object
+ * 
+ * @return  bool  Whether we're on a single event page or not.
+ */
+function openagenda_is_single(){
+    global $openagenda;
+    return $openagenda->is_single();
+}
+
+
+/**
+ * Wrapper for the is_archive() method of openagenda global object
+ * 
+ * @return  bool  Whether we're on the event list page or not.
+ */
+function openagenda_is_archive(){
+    global $openagenda;
+    return $openagenda->is_archive();
+}
+
 
 /**
  * Returns the HTML content of the content area.
@@ -186,19 +208,7 @@ function openagenda_get_events_html( $view = 'list' ){
     $template = $openagenda->is_single() ? 'single-event' : 'event'; 
     $class    = $openagenda->is_single() ? 'oa-event' : 'oa-event-list';
 
-    if( $openagenda->have_events() ) : ?>
-        <div class="<?php echo esc_attr( $class ); ?>">
-            <?php
-                if( $openagenda->is_archive() ) openagenda_exports();
-                if( $openagenda->is_archive() ) openagenda_pagination();
-                while( $openagenda->have_events() ) : $openagenda->the_event();
-                    include openagenda_get_template( $template );
-                endwhile; 
-                if( $openagenda->is_archive() ) openagenda_pagination();
-            ?>
-        </div>
-    <?php endif;
-
+    include openagenda_get_template( 'event-loop' );
     return ob_get_clean();
 }
 
@@ -308,7 +318,7 @@ if( ! function_exists( 'wp_date' ) ){
         }
         
         if ( ! $timezone ) {
-            $timezone = wp_timezone();
+            $timezone = new DateTimeZone( wp_timezone_string() );
         }
         
         $datetime = date_create( '@' . $timestamp );
@@ -377,4 +387,26 @@ if( ! function_exists( 'wp_date' ) ){
         
         return $date;
     }  
+}
+
+
+if ( ! function_exists( 'wp_timezone_string' )){
+    function wp_timezone_string() {
+        $timezone_string = get_option( 'timezone_string' );
+     
+        if ( $timezone_string ) {
+            return $timezone_string;
+        }
+     
+        $offset  = (float) get_option( 'gmt_offset' );
+        $hours   = (int) $offset;
+        $minutes = ( $offset - $hours );
+     
+        $sign      = ( $offset < 0 ) ? '-' : '+';
+        $abs_hour  = abs( $hours );
+        $abs_mins  = abs( $minutes * 60 );
+        $tz_offset = sprintf( '%s%02d:%02d', $sign, $abs_hour, $abs_mins );
+     
+        return $tz_offset;
+    }
 }

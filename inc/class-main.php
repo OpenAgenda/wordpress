@@ -79,7 +79,9 @@ class Main {
         require_once OPENAGENDA_PATH . 'inc/template-tags.php';
         require_once OPENAGENDA_PATH . 'inc/class-content-manager.php';
         require_once OPENAGENDA_PATH . 'inc/class-openagenda.php';
+        require_once OPENAGENDA_PATH . 'inc/class-customizer-settings.php';
         $this->dependencies['content-manager'] = new Content_Manager();
+        $this->dependencies['customizer']      = new Customizer_Settings();
 
         if( is_admin() ){
             // Only needed in the admin
@@ -116,7 +118,16 @@ class Main {
      * Writes necessary <head> styles for spinner
      */
     public function wp_head(){
-        echo '<style id="oa-styles">.oa-icon{width: 24px; height: 24px;}.oa-icon-refresh{animation: rotate 1s linear infinite;}@keyframes rotate{to{transform: rotateZ(360deg)}}</style>';
+        $customizer_settings = get_option( 'openagenda_customizer' );
+        $main_color = ! empty( $customizer_settings['main_color'] ) ? $customizer_settings['main_color'] : '#41acdd';
+
+        $oa_styles = '.oa-icon{width: 24px; height: 24px;}.oa-icon-refresh{animation: rotate 1s linear infinite;}@keyframes rotate{to{transform: rotateZ(360deg)}}';
+        
+        if( $main_color ){
+            $oa_styles .= sprintf( ':root{--oa-main-color: %s }', sanitize_hex_color( $main_color ));
+        }
+
+        printf( '<style id="oa-styles">%s</style>', $oa_styles );
     }
 
 
@@ -154,7 +165,7 @@ class Main {
         
         // Timings calendar JS
         wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings.js', array(), OPENAGENDA_VERSION, true );
-
+        
         if( is_singular( 'oa-calendar' ) ){
             wp_enqueue_script( 'openagenda-main' );
             wp_localize_script( 'openagenda-main', 'oaData', array(
@@ -204,10 +215,6 @@ class Main {
 
             if( $uid ){
                 $openagenda = new Openagenda( $uid, $args );
-                if( (int) $args['page'] > $openagenda->get_total_pages() ){
-                    wp_safe_redirect( \openagenda_get_page_permalink() );
-                    exit;
-                }
             }
         }
     }

@@ -32,7 +32,6 @@
         <div class="oa-event-timings"><?php openagenda_event_timings(); ?></div>
         <div class="oa-event-details"><?php openagenda_field( 'html' ); ?></div>
         
-        <?php openagenda_get_template( 'event-location' ); ?>
-        
+        <?php include openagenda_get_template( 'event-location' ); ?>
     </div>
 </article>

@@ -8,9 +8,24 @@ Author:      Vincent Dubroeucq
 Author URI:  https://vincentdubroeucq.com/
 Text Domain: openagenda
 Domain Path: /languages
-License:     GPL v3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Requires at least: 4.6.
+License:     GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Requires PHP: 7.0
+Requires at least: 4.7
+Tested up to: 5.6
+
+OpenAgenda is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+any later version.
+ 
+OpenAgenda is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with OpenAgenda. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
 defined( 'ABSPATH' ) || die();
@@ -49,6 +64,35 @@ register_deactivation_hook( __FILE__, 'openagenda_deactivation' );
  */
 function openagenda_deactivation(){
     flush_rewrite_rules();
+}
+
+
+register_uninstall_hook(__FILE__, 'openagenda_uninstallation' );
+/**
+ * Uninstall procedure
+ */
+function openagenda_uninstallation(){
+    $settings = get_option( 'openagenda_general_settings' );
+    $should_delete_content = ! empty( $settings ) && ! empty( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false;
+    $should_delete_options = ! empty( $settings ) && ! empty( $settings['openagenda_delete_options_on_uninstall'] ) ? (bool) $settings['openagenda_delete_options_on_uninstall'] : false;
+
+    if( $should_delete_content ){
+        $calendar_ids = get_posts( array(
+            'post_type' => 'oa-calendar',
+            'fields'    => 'ids',
+        ) );
+        if( ! empty( $calendar_ids ) ){
+            foreach ( $calendar_ids as $calendar_id) {
+                wp_delete_post( $calendar_id, true );
+            }
+        }
+    }
+
+    if( $should_delete_options ){
+        delete_option( 'openagenda_general_settings' );
+        delete_option( 'openagenda_permalinks_settings' );
+        delete_expired_transients();
+    }
 }
 
 

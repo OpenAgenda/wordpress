@@ -64,9 +64,10 @@ class Content_Manager implements Hookable {
         add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 10, 1 );
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
         // add_filter( 'post_type_link', array( $this, 'permalink' ), 10, 4 );
+        add_filter( 'write_your_story', array( $this, 'write_your_story' ), 10, 2 );
     }
 
-
+    
     /**
      * Registers necessary post types
      */
@@ -126,14 +127,48 @@ class Content_Manager implements Hookable {
      * Filters the content
      */
     public function the_content( $content ){
-        global $openagenda;
-        if( is_singular( 'oa-calendar' ) && $openagenda ){
+        if( is_singular( 'oa-calendar' ) ){
             if( ! has_shortcode( $content, 'openagenda' ) ){
                 $content = $content . do_shortcode( '[openagenda]' );
             }
         }
         return $content;
     }
+
+
+    /**
+     * Filters the content prompt on calendars.
+     * 
+     * @param   string   $prompt  Default Prompt
+     * @param   WP_Post  $post    Current post
+     * @return  string   $prompt  Default Prompt
+     */
+    public function write_your_story( $prompt, $post ){
+        if( 'oa-calendar' === $post->post_type ){
+            return __( 'Please provide a calendar UID in this calendar\'s settings box first.', 'openagenda' );
+        }
+        return $prompt;
+    }
+    
+
+    /**
+     * Filters the permalink for single events.
+     * 
+     * @param   string   $post_link  Post permalink
+     * @param   WP_Post  $post       Post object
+     * @param   bool     $leavename  Whether to keep the post name
+     * @param   bool     $sample     Is it a sample permalink
+     * @return  string   $post_link
+     */
+    public function permalink( $post_link, $post, $leavename, $sample ){
+        global $openagenda;
+        if ( 'oa-calendar' === $post->post_type && $openagenda->is_single() ){
+            $slug      = \openagenda_get_field( 'slug' );
+            $post_link = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $post_link ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $post_link );
+        }
+        return $post_link;
+    }
+
 
     /**
      * Writes meta tags in the <head> of the page
@@ -237,24 +272,5 @@ class Content_Manager implements Hookable {
         }
 
         return apply_filters( 'openagenda_default_properties', $properties );
-    }
-
-
-    /**
-     * Filters the permalink for single events.
-     * 
-     * @param   string   $post_link  Post permalink
-     * @param   WP_Post  $post       Post object
-     * @param   bool     $leavename  Whether to keep the post name
-     * @param   bool     $sample     Is it a sample permalink
-     * @return  string   $post_link
-     */
-    public function permalink( $post_link, $post, $leavename, $sample ){
-        global $openagenda;
-        if ( 'oa-calendar' === $post->post_type && $openagenda->is_single() ){
-            $slug      = \openagenda_get_field( 'slug' );
-            $post_link = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $post_link ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $post_link );
-        }
-        return $post_link;
     }
 }

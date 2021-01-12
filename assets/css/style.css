@@ -1,3 +1,7 @@
+:root {
+  --oa-main-color: $oa-blue;
+}
+
 /*****************************
  * Screen reader text helper
  *****************************/
@@ -227,11 +231,13 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .ccal ul.calweekdays li:hover,
 .ccal .calbody ul li:hover {
   color: #41acdd;
+  color: var(--oa-main-color, #41acdd);
 }
 .ccal ul.calweekdays li.today,
 .ccal .calbody ul li.today {
   font-weight: bold;
   color: #41acdd;
+  color: var(--oa-main-color, #41acdd);
 }
 .ccal .calbody,
 .ccal .calhead {
@@ -239,6 +245,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 .ccal .calbody li:hover {
   box-shadow: 0 0 0 1px #41acdd inset;
+  box-shadow: 0 0 0 1px var(--oa-main-color, #41acdd) inset;
 }
 .ccal .calprev, .ccal .calnext {
   opacity: 0.2;
@@ -259,6 +266,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 .ccal .selected {
   background: #41acdd;
+  background: var(--oa-main-color, #41acdd);
   border-radius: 0;
 }
 .ccal .selected span {
@@ -270,6 +278,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 .ccal .preselected {
   background: #41acdd;
+  background: var(--oa-main-color, #41acdd);
   opacity: 0.8;
 }
 .ccal .preselected span {

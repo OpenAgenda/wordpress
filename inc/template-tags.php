@@ -242,7 +242,7 @@ function openagenda_event_timing( $display = 'date', $uid = false, $echo = true 
                     openagenda_icon( 'month', false ),
                     esc_html( $timing['start_date_label'] ),
                     esc_html( $timing['start_time_label'] ),
-                    esc_html( $timing['end_time_label'] ),
+                    esc_html( $timing['end_time_label'] )
                 );
             }
             break;
@@ -284,7 +284,7 @@ function openagenda_event_timings( $uid = false, $echo = true ){
                 esc_html( __( 'View previous month', 'openagenda' ) ),
                 esc_html( $month['label'] ),
                 openagenda_icon( 'next', false ),
-                esc_html( __( 'View next month', 'openagenda' ) ),
+                esc_html( __( 'View next month', 'openagenda' ) )
             );
             foreach( $month['weeks'] as $week ){
                 $html .= '<ul class="oa-week">';
@@ -300,7 +300,7 @@ function openagenda_event_timings( $uid = false, $echo = true ){
                         </li>',
                         esc_html( $timing['start_day_label'] ),
                         esc_html( $timing['start_time_label'] ),
-                        esc_html( $timing['end_time_label'] ),
+                        esc_html( $timing['end_time_label'] )
                     );
                 }
                 $html .= '</ul>';
@@ -342,7 +342,7 @@ function openagenda_event_map( $uid = false, $echo = true ){
         esc_attr( $latitude ),
         esc_attr( $longitude ),
         esc_attr( $tiles ),
-        esc_attr( $attribution ),
+        esc_attr( $attribution )
     );
 
     $html = apply_filters( 'openagenda_event_map_html', $html, $uid );

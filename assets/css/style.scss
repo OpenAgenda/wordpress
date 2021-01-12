@@ -15,6 +15,10 @@ $oa-orange: #ff813d;
 $oa-warning: #f6bb42;
 $oa-dark: #333;
 
+:root {
+	--oa-main-color: $oa-blue;
+}
+
 
 /*****************************
  * Screen reader text helper
@@ -239,10 +243,12 @@ div[data-container-id="oa-wrapper"]{
 			width: 1 / 7 * 100%;
 			&:hover {
 				color: $oa-blue;
+				color: var(--oa-main-color, $oa_blue);
 			}
 			&.today {
 				font-weight: bold;
 				color: $oa-blue;
+				color: var(--oa-main-color, $oa_blue);
 			}
 		}
 	}
@@ -255,6 +261,7 @@ div[data-container-id="oa-wrapper"]{
 	.calbody {
 		li:hover {
 			box-shadow: 0 0 0 1px $oa-blue inset;
+			box-shadow: 0 0 0 1px var(--oa-main-color, $oa_blue) inset;
 		}
 	}
 
@@ -283,6 +290,7 @@ div[data-container-id="oa-wrapper"]{
 
 	.selected {
 		background: $oa-blue;
+		background: var(--oa-main-color, $oa_blue);
 		border-radius: 0;
 		span {
 			color: $oa-white;
@@ -295,6 +303,7 @@ div[data-container-id="oa-wrapper"]{
 
 	.preselected {
 		background: $oa-blue;
+		background: var(--oa-main-color, $oa_blue );
 		opacity: 0.8;
 		span {
 			color: $oa-white;

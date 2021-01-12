@@ -60,10 +60,10 @@ class Ajax_Handler {
 
         $openagenda = new Openagenda( $uid, $args );
         $response    = array(
-            'totalPages' => (int)  $openagenda->get_total_pages(),
-            'total'      => (int)  $openagenda->get_total(),
+            'totalPages' => (int) $openagenda->get_total_pages(),
+            'total'      => (int) $openagenda->get_total(),
             'updatedUrl' => esc_url( $updatedUrl ),
-            'source'     =>  $openagenda->source,
+            'source'     => $openagenda->source,
             'html'       => \openagenda_get_events_html( $view ),
         );
         

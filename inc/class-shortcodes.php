@@ -60,12 +60,12 @@ class Shortcodes implements Hookable {
         $atts = shortcode_atts( array(
             'uid'    => get_post_meta( get_the_ID(), 'oa-calendar-uid', true ),
             'view'   => 'list',
-            'limit'  => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : 20,
+            'limit'  => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
             'event'  => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_title( get_query_var( 'oa-slug' ) ) : '',
         ), $atts, $tag );
 
         if( empty( $atts['uid'] ) ){
-            return sprintf( '<p>%s</p>', __( 'Please provide a valid calendar UID to display, either in the shortcode parameters or in the calendar settings.', 'openagenda' ) );
+            return sprintf( '<p>%s</p>', __( 'Please provide a valid calendar UID to display in the calendar settings.', 'openagenda' ) );
         }
 
         $html = \openagenda_get_events_html( $atts['view'] );

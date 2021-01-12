@@ -30,7 +30,7 @@ class Filter_Widget extends \WP_Widget {
             array( 
                 'description'                 => __( 'Displays a filter widget.', 'openagenda' ),
                 'customize_selective_refresh' => true,
-            ),
+            )
         );
     }
     
@@ -292,7 +292,7 @@ class Filter_Widget extends \WP_Widget {
                     esc_attr( $this->get_field_name( $field['name'] ) ),
                     esc_html( $field['label'] ),
                     esc_attr( $field['class'] ),
-                    checked( $value, true, false ),
+                    checked( $value, true, false )
                 );
                 break;
             default:

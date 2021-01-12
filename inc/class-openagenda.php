@@ -118,14 +118,18 @@ class Openagenda {
      */
     public function __construct( $uid, $args = array() ){
         $settings       = get_option( 'openagenda_general_settings' );
-        $this->api_key  = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
         $this->uid      = $uid;
+        $this->api_key  = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
+        $this->include_embedded = ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true; 
         
         $this->args        = $this->parse_args( $args );
         $this->page        = ! empty ( $this->get_args() ) && ! empty( $this->get_args()['page'] ) ? (int) $this->get_args()['page'] : 1;
-        $this->is_archive  = $this->is_archive();
         $this->is_single   = $this->is_single();
-        $this->events      = $this->request( $this->args );
+        $this->is_archive  = $this->is_archive();
+
+        $this->raw_response = $this->request( $this->args );
+        $this->json        = $this->parse_response( $this->args );
+        $this->events      = is_array( $this->json['events'] ) && ! empty( $this->json['events'] ) ? $this->json['events'] : array();
         $this->event       = ! empty( $this->get_events() ) ? $this->get_events()[0] : null;
         
         $this->count    = count( $this->events );
@@ -133,7 +137,8 @@ class Openagenda {
         $this->limit    = ! empty( $this->json['limit'] ) ? (int) $this->json['limit'] : 20;
         $this->offset   = ! empty( $this->json['offset'] ) ? (int) $this->json['offset'] : 0;
         $this->total_pages = (int) ceil( $this->total / $this->limit );
-        $this->include_embedded = ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true; 
+        
+        $this->maybe_cache();
     }
 
 
@@ -310,53 +315,46 @@ class Openagenda {
      * @param  array   $args
      */
     public function request( $args = array() ){
-
         // Check if the request response is not already cached.
-        $response = $this->maybe_request();
-        // $response = wp_safe_remote_get( $this->get_request_url() );
-
-        $this->raw_response = $response;
+        $cache = get_transient( $this->get_transient_name() );
+        if( ! empty( $cache ) ){
+            $response     = $cache;
+            $this->source = 'cache';
+        } else {
+            $response     = wp_safe_remote_get( $this->get_request_url() );
+            $this->source = 'request';
+        }
 
         if( is_wp_error( $response ) ){
             $this->errors[] = $response;
         }
 
-        $body = wp_remote_retrieve_body( $response );
-        $json = json_decode( $body, true );
-        
-        if( null === $json ){
-            $this->errors[] = new \WP_Error( 'parsing-error', __( 'There was an error parsing the JSON.', 'openagenda' ), $body );
-        }
-
-        $this->json = $json;
-        
-        $events = is_array( $json['events'] ) && ! empty( $json['events'] ) ? $json['events'] : array();
-        return apply_filters( 'openagenda_queried_events', $events, $this->uid );
+        return $response;
     }
 
 
     /**
-     * Checks whether we need to make an actual request.
-     * 
-     * @return  object  $response
+     * Parses the raw response to get the JSON
      */
-    public function maybe_request(){
-        $cache = get_transient( $this->get_transient_name() );
-        if( ! empty( $cache ) ){
-            // If response is already stored, just pass it
-            $response = $cache;
-            $this->source = 'cache';
-        } else {
-            // Make the actual request and cache the reponse.
-            $response = wp_safe_remote_get( $this->get_request_url() );
-            $settings = get_option( 'openagenda_general_settings' );
-            $cache_duration  = ! empty( $settings['openagenda_cache_duration'] ) ? (int) $settings['openagenda_cache_duration'] : HOUR_IN_SECONDS;
-            $this->source = 'request';
-            if( $this->should_cache() ){
-                set_transient( $this->get_transient_name(), $response, $cache_duration );
-            }
+    public function parse_response(){
+        $body = wp_remote_retrieve_body( $this->raw_response );
+        $json = json_decode( $body, true );
+        if( null === $json ){
+            $this->errors[] = new \WP_Error( 'parsing-error', __( 'There was an error parsing the JSON.', 'openagenda' ), $body );
         }
-        return $response;
+        return $json;
+    }
+
+
+    /**
+     * Maybe cache the raw reponse.
+     */
+    public function maybe_cache(){
+        if( $this->should_cache() ){
+            $settings        = get_option( 'openagenda_general_settings' );
+            $cache_duration  = ! empty( $settings['openagenda_cache_duration'] ) ? (int) $settings['openagenda_cache_duration'] : HOUR_IN_SECONDS;
+            set_transient( $this->get_transient_name(), $this->raw_response, $cache_duration );
+        }
     }
 
 
@@ -402,6 +400,7 @@ class Openagenda {
      */
     public function should_cache(){
         if( defined( 'DOING_AJAX' ) && DOING_AJAX ) return false;
+        if( $this->total_pages === 0 ) return false;
         $should_cache = empty( $this->get_filters() ) || $this->is_single();
         return $should_cache;
     }
