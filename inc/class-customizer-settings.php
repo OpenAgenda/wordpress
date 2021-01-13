@@ -40,10 +40,10 @@ class Customizer_Settings implements Hookable {
         );
         $this->settings = array(
             'openagenda_customizer[main_color]' => array(
-                'default' => '#41acdd',
+                'default'           => '#41acdd',
                 'sanitize_callback' => 'sanitize_hex_color',
-                'transport' => 'postMessage',
-                'control' => array(
+                'transport'         => 'postMessage',
+                'control'           => array(
                     'type'    => 'color',
                     'label'   => __( 'OpenAgenda main color', 'openagenda' ),
                     'section' => 'oa_colors',
@@ -65,7 +65,7 @@ class Customizer_Settings implements Hookable {
      * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
      */
     function customize_preview_js() {
-        wp_enqueue_script( 'oa-customizer', OPENAGENDA_URL . 'assets/js/customizer.js', array( 'jquery', 'customize-preview' ), OPENAGENDA_VERSION, true );
+        wp_enqueue_script( 'oa-customizer', OPENAGENDA_URL . 'assets/js/customizer.js', array( 'customize-preview' ), OPENAGENDA_VERSION, true );
     }
 
 

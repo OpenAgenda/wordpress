@@ -19,8 +19,8 @@ class Metaboxes implements Hookable {
      */
     public function __construct(){
         $this->metaboxes = array(
-            'calendar-settings' => array(
-                'id'            => 'calendar-settings',
+            'oa-calendar-settings' => array(
+                'id'            => 'oa-calendar-settings',
                 'title'         => __( 'Calendar settings', 'openagenda' ),
                 'callback'      => array( $this, 'calendar_settings_markup' ),
                 'screen'        => 'oa-calendar',
@@ -31,13 +31,13 @@ class Metaboxes implements Hookable {
         );
         $this->fields = array(
             'oa-calendar-uid' => array(
-                'metabox' => 'calendar-settings',
+                'metabox' => 'oa-calendar-settings',
                 'type'    => 'text',
                 'label'   => __( 'Calendar UID', 'openagenda' ),
                 'default' => '',
             ),
             'oa-calendar-per-page' => array(
-                'metabox' => 'calendar-settings',
+                'metabox' => 'oa-calendar-settings',
                 'type'    => 'number',
                 'label'   => __( 'Events per page', 'openagenda' ),
                 'default' => (int) get_option( 'posts_per_page' ),

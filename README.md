@@ -1,24 +1,16 @@
-=== Openagenda ===
-Contributors: vincentdubroeucq
-Tags: openagenda, open agenda, agenda, calendar, event, events
-Requires at least: 4.7
-Tested up to: 5.6
-Stable tag: 0.1
-Requires PHP: 7.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-
-Display calendars from openagenda.com on your site.
-
-== Description ==
-
-## Basic usage
+# Openagenda WordPress Plugin
 
 This WordPress plugin allows you to embed any calendar hosted on [https://openagenda.com](https://openagenda.com) on your WordPress site.
 
+## Basic usage
+
 Upon activation, the plugin creates a new post type named *Calendars*. Just create a new calendar, provide the UID of the calendar you wish to display in the calendar settings box, and that's it !
 
+![A new *Calendars* menu entry is created, allowing you to manage your calendars and settings](assets/screenshots/screenshot-1.png)
+
 You can leave the content area for this calendar empty, as it will be populated automatically with your events !
+
+![Just create a new calendar post, and provide the Open Agenda calendar UID in the *Calendar settings* metabox.](assets/screenshots/screenshot-3.png)
 
 Your events are automatically inserted after your content. If you wish to control where your events will be listed, just use the shortcode `[openagenda]` in your content.
 
@@ -27,6 +19,8 @@ Your events are automatically inserted after your content. If you wish to contro
 General settings can be found under the *Calendar > Settings* entry in the admin menu.
 
 All data related to your API key or calendars can be found on https://openagenda.com.
+
+![The simple settings page allow you to enter in your API key and tweak various settings.](assets/screenshots/screenshot-2.png)
 
 The main settings page provides the following settings : 
 
@@ -43,9 +37,13 @@ In the *Permalinks* settings, you can change the prefix for your calendar pages.
 
 In the *Customizer*, a new panel is available to house various display settings. For now only a main color setting is available.
 
+![The simple settings page allow you to enter in your API key and tweak various settings.](assets/screenshots/screenshot-6.png)
+
 ## Filter widget and shortcodes
 
 To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additionnal settings in the widgets admin.
+
+![You can use convenient filter widgets to add filtering functionnality to your calendars.](assets/screenshots/screenshot-4.png)
 
 To integrate filters directly in your content instead of widget areas, the plugin also provide shortcodes.
 
@@ -109,38 +107,3 @@ Just create a folder named `openagenda/` in your theme, then copy and paste the 
 The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. Feel free to define your own in your theme.
 
 The plugin also provides many hooks to allow you to customize the html output or other various data. The hooks documentation is in writing for now !
-
-== Frequently Asked Questions ==
-
-= Where is the settings page ? =
-
-The settings page is located under the *Calendar* main menu entry, just alongside your content. It is not polluting the main *Settings* menu entry, or adding any top-level entry. 
-
-= Where can I find API key and calendar UIDs ? =
-
-All data related to your personal account and API keys can be found on your profile page at [https://openagenda.com/settings](https://openagenda.com/settings).
-
-All data related to calendars can be found on the calendar itself on [https://openagenda.com](https://openagenda.com). Just look for the calendar you wish to display, and find the UID in the sidebar, under the filter widgets.
-
-= Can I display any calendar ? Even if it's not mine ? =
-
-Yes ! No problem ! Just create a new Calendar post, provide its UID and it will work. 
-
-== Screenshots ==
-
-1. A new *Calendars* menu entry is created, allowing you to manage your calendars and settings.
-2. The simple settings page allow you to enter in your API key and tweak various settings.
-3. Just create a new calendar post, and provide the Open Agenda calendar UID in the *Calendar settings* metabox.
-4. You can use convenient filter widgets to add filtering functionnality to your calendars.
-5. Enjoy !
-6. In the *Customizer*, a new panel is available to house various display settings.
-
-== Changelog ==
-
-= 0.1 =
-* Initial release
-
-== Upgrade Notice ==
-
-= 0.1 =
-* Initial release

@@ -174,6 +174,7 @@ function openagenda_icon( $slug, $echo = true ){
     return $icon;
 }
 
+
 /**
  * Wrapper for the is_single() method of openagenda global object
  * 
@@ -263,7 +264,9 @@ function openagenda_format_timing( $timing, $datetimezone = null ){
     $now       = time();
     $time_diff = human_time_diff( $now, strtotime( $timing['start'] ) );
     $timing['relative_label'] = strtotime( $timing['start'] ) >= $now
+        /* translators: %s : next event relative timing */
         ? sprintf( _x( 'In %s', 'next event timing', 'openagenda' ), esc_html( $time_diff ) )
+        /* translators: %s : last event relative timing */
         : sprintf( _x( '%s ago', 'last event timing', 'openagenda' ), esc_html( $time_diff ) );
     
     return $timing;

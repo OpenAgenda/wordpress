@@ -1,10 +1,11 @@
+'use strict';
 document.addEventListener('DOMContentLoaded', e => {
     const nextButtons = document.querySelectorAll( '.oa-button-next' );
     const previousButtons = document.querySelectorAll( '.oa-button-previous' );
     const months = document.querySelectorAll( '.oa-month' );
 
-    previousButtons[0].setAttribute('disabled', true );
-    nextButtons[nextButtons.length - 1].setAttribute('disabled', true );
+    previousButtons[0].setAttribute('disabled', true);
+    nextButtons[nextButtons.length - 1].setAttribute('disabled', true);
 
     let currentIndex = 0;
     months.forEach( (month, index) => {

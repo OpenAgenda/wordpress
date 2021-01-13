@@ -1,5 +1,5 @@
 :root {
-  --oa-main-color: $oa-blue;
+  --oa-main-color: #41acdd;
 }
 
 /*****************************
@@ -53,9 +53,9 @@
   padding: 0.5rem;
 }
 
-/*****************
+/*****************************
  * Exports and Share Buttons
- *****************/
+ *****************************/
 .oa-exports,
 .oa-sharers {
   align-items: center;
@@ -79,9 +79,9 @@
   margin-left: 8px;
 }
 
-/*****************
+/*******************
  * Timings & range
- *****************/
+ *******************/
 .oa-event-timing,
 .oa-event-range {
   align-items: center;
@@ -139,7 +139,7 @@ button.oa-button[disabled=true] {
 
 /******************
  * Update overlay
- *****************/
+ ******************/
 div[data-container-id=oa-wrapper] {
   position: relative;
 }
@@ -182,6 +182,19 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   border-left: 3px solid #B91C1C;
 }
 
+/******************
+ * Active Filters
+ *****************/
+.active-filters li a {
+  padding: 4px;
+  line-height: 1;
+  text-decoration: none;
+}
+.active-filters li a:hover, .active-filters li a:focus {
+  color: white;
+  text-decoration: none;
+}
+
 /***************
  * Tags Filter
  **************/
@@ -197,6 +210,19 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 .cbpgtg .tags .no-current-match {
   opacity: 0.5;
+}
+.cbpgtg .tags a:hover {
+  cursor: pointer;
+}
+.cbpgtg .tags .selected {
+  font-weight: bold;
+}
+.cbpgtg .tags .selected a {
+  color: var(--oa-main-color, #41acdd);
+  text-decoration: none;
+}
+.cbpgtg .tags .count {
+  margin-left: 4px;
 }
 
 /*******************

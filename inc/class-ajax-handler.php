@@ -1,7 +1,7 @@
 <?php
 namespace Openagenda;
 /**
- * Ajax Handler .
+ * Ajax Handler
  * 
  * Handles all Ajax requests.
  */
@@ -63,7 +63,7 @@ class Ajax_Handler {
             'totalPages' => (int) $openagenda->get_total_pages(),
             'total'      => (int) $openagenda->get_total(),
             'updatedUrl' => esc_url( $updatedUrl ),
-            'source'     => $openagenda->source,
+            'source'     => sanitize_key( $openagenda->source ),
             'html'       => \openagenda_get_events_html( $view ),
         );
         

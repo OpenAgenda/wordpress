@@ -2,7 +2,7 @@
 /*
 Plugin Name: OpenAgenda
 Plugin URI:  https://vincentdubroeucq.com/
-Description: Display your Open Agenda data on your WordPress site.
+Description: Display your OpenAgenda data on your WordPress site.
 Version:     0.1
 Author:      Vincent Dubroeucq
 Author URI:  https://vincentdubroeucq.com/
@@ -91,8 +91,34 @@ function openagenda_uninstallation(){
     if( $should_delete_options ){
         delete_option( 'openagenda_general_settings' );
         delete_option( 'openagenda_permalinks_settings' );
+        delete_option( 'openagenda_customizer' );
         delete_expired_transients();
     }
+}
+
+
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'openagenda_plugin_action_links', 10, 4 );
+/**
+ * Adds plugin action links
+ * 
+ * @param   array  $actions  Available actions
+ * @param   string  $file  Plugin file
+ * @param   array  $data  $plugin data
+ * @param   string  $context  Context
+ * @return  array  $actions
+ */
+function openagenda_plugin_action_links( $actions, $file, $data, $context ){
+    $actions['settings'] = sprintf( 
+        '<a href="%s">%s</a>', 
+        esc_url( menu_page_url( 'openagenda', false ) ),
+        esc_html__( 'Settings', 'openagenda' ) 
+    );
+    $actions['documentation'] = sprintf( 
+        '<a href="%s" target="_blank" rel="nooepener noreferrer">%s</a>', 
+        esc_url( 'https://openagenda.com' ),
+        esc_html__( 'Documentation', 'openagenda' ) 
+    );
+    return $actions;
 }
 
 

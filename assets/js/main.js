@@ -1,5 +1,4 @@
 'use strict';
-
 jQuery(document).ready( function($) {
     if(! oaData ) return;
 

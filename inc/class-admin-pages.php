@@ -21,7 +21,7 @@ class Admin_Pages implements Hookable {
     public function __construct(){
         $this->main_page = array(
             'parent_slug' => 'edit.php?post_type=oa-calendar',
-            'page_title'  => __( 'Open Agenda Settings', 'openagenda' ),
+            'page_title'  => __( 'OpenAgenda Settings', 'openagenda' ),
             'menu_title'  => __( 'Settings', 'openagenda' ),
             'capability'  => 'manage_options',
             'menu_slug'   => 'openagenda',
@@ -88,11 +88,9 @@ class Admin_Pages implements Hookable {
      * Settings page display callback
      */
     public function settings_page_markup(){
-
         $tabs        = $this->get_tabs();
         $current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs  ) ? $_GET['tab'] : 'general';
         $base_url    = menu_page_url( 'openagenda', false );
-
         ?>
             <div class="wrap">
                 <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
@@ -117,11 +115,11 @@ class Admin_Pages implements Hookable {
 
 
     /**
-     * Content for the 'general' settings tab
+     * Content for the "General" settings tab
      */
     public function general_tab_content(){
         ?>
-        <h2><?php esc_html_e( 'General settings', 'openagenda' );?></h2>
+            <h2><?php esc_html_e( 'General settings', 'openagenda' );?></h2>
             <form action="options.php" method="POST">
                 <?php settings_fields( 'openagenda_general_settings' ); ?>
                 <table class="form-table" role="presentation">
@@ -137,13 +135,12 @@ class Admin_Pages implements Hookable {
      */
     public function display_tab_content(){
         ?>
-        <h2><?php esc_html_e( 'Display settings', 'openagenda' );?></h2>
+            <h2><?php esc_html_e( 'Display settings', 'openagenda' );?></h2>
             <form action="options.php" method="POST">
-                <?php
-                    // settings_fields( 'delalande_ftp_settings' );
-                    // do_settings_sections( 'delalande_settings' );
-                    // submit_button();
-                ?>     
+                <?php settings_fields( 'openagenda_display_settings' ); ?>
+                <table class="form-table" role="presentation">
+                    <?php do_settings_fields( 'openagenda', 'openagenda_display_settings' ); ?>   
+                </table> 
             </form>
         <?php
     }

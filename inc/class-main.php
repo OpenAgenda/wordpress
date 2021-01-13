@@ -96,7 +96,7 @@ class Main {
         } else {
             // Only needed on frontend
             require_once OPENAGENDA_PATH . 'inc/class-shortcodes.php';
-            $this->dependencies['shortcodes']  = new Shortcodes();
+            $this->dependencies['shortcodes'] = new Shortcodes();
         }
     }
 
@@ -119,8 +119,7 @@ class Main {
      */
     public function wp_head(){
         $customizer_settings = get_option( 'openagenda_customizer' );
-        $main_color = ! empty( $customizer_settings['main_color'] ) ? $customizer_settings['main_color'] : '#41acdd';
-
+        $main_color = isset( $customizer_settings['main_color'] ) ? $customizer_settings['main_color'] : '#41acdd';
         $oa_styles = '.oa-icon{width: 24px; height: 24px;}.oa-icon-refresh{animation: rotate 1s linear infinite;}@keyframes rotate{to{transform: rotateZ(360deg)}}';
         
         if( $main_color ){

@@ -55,7 +55,7 @@ class Filter_Widget extends \WP_Widget {
         }
 
         $filter    = $available_filters[$instance['filter']];
-        $shortcode = ! empty( $filter['shortcode'] ) ? $filter['shortcode'] : false;
+        $shortcode = ! empty( $filter['shortcode'] ) ? sanitize_key( $filter['shortcode'] ) : false;
 
         if( $shortcode ){
             $atts = $this->get_shortcode_attributes( $instance );
@@ -73,7 +73,6 @@ class Filter_Widget extends \WP_Widget {
      * @return string          Default return is 'noform'.
      */
 	public function form( $instance ) {
-
         $title  = ! empty( $instance['title'] ) ? $instance['title'] : '';
         $filter = ! empty( $instance['filter'] ) ? $instance['filter'] : '';
         $available_filters = $this->get_available_filters();
@@ -84,7 +83,7 @@ class Filter_Widget extends \WP_Widget {
             </p>
             <p>
                 <label for="<?php echo esc_attr( $this->get_field_id( 'filter' ) ); ?>"><?php esc_html_e( 'Filter to display :', 'openagenda' ); ?></label>
-                <select id="<?php echo esc_attr( $this->get_field_id( 'filter' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'filter' ) ); ?>" class="widefat" >
+                <select id="<?php echo esc_attr( $this->get_field_id( 'filter' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'filter' ) ); ?>" class="widefat">
                     <option value=""><?php esc_html_e( 'Choose filter', 'openagenda' ); ?></option>
                     <?php foreach ( $available_filters as $key => $filter_data ) : ?>
                         <option value="<?php echo esc_attr( $key ); ?>" <?php selected( $filter, $key ); ?>><?php echo esc_html( $filter_data['label'] ); ?></option>
@@ -95,7 +94,13 @@ class Filter_Widget extends \WP_Widget {
 
         $additional_settings = $this->additional_settings();
         if( ! empty( $additional_settings ) && array_key_exists( $filter, $additional_settings ) ){
-            foreach ($additional_settings[$instance['filter']] as $field_id => $field ) {
+            foreach ( $additional_settings[$instance['filter']] as $field_id => $field ) {
+                $field = wp_parse_args( $field, array(
+                    'description' => '',
+                    'type'        => 'text',
+                    'class'       => '',
+                    'default'     => ''
+                ) );
                 echo $this->additional_setting_field( $field, $instance );
             }
         }
@@ -118,13 +123,11 @@ class Filter_Widget extends \WP_Widget {
         switch ( $instance['filter'] ) {
             case 'openagenda_filter_map':
                 $additional_settings = array( 
-                    'map_tiles_link'             => ! empty( $new_instance['map_tiles_link'] ) ? sanitize_text_field( $new_instance['map_tiles_link'] ) : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    'map_tiles_attribution_text' => ! empty( $new_instance['map_tiles_attribution_text'] ) ? sanitize_text_field( $new_instance['map_tiles_attribution_text'] ) : __( 'OpenStreetMap contributors', 'open_agenda' ),
-                    'map_tiles_attribution_url'  => ! empty( $new_instance['map_tiles_attribution_url'] ) ? sanitize_text_field( $new_instance['map_tiles_attribution_url'] ) : 'https://www.openstreetmap.org/copyright',
-                    'map_zoom'                   => ! empty( $new_instance['map_zoom'] ) ? (int) $new_instance['map_zoom'] : 12,    
-                    'map_auto'      => isset( $new_instance['map_auto'] ) ? (bool) $new_instance['map_auto'] : false,    
-                    'map_longitude' => ! empty( $new_instance['map_longitude'] ) ? (float) $new_instance['map_longitude'] : '',    
-                    'map_latitude'  => ! empty( $new_instance['map_latitude'] ) ? (float) $new_instance['map_latitude'] : '',    
+                    'map_tiles_link' => ! empty( $new_instance['map_tiles_link'] ) ? sanitize_text_field( $new_instance['map_tiles_link'] ) : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    'map_zoom'       => ! empty( $new_instance['map_zoom'] ) ? (int) $new_instance['map_zoom'] : 12,    
+                    'map_auto'       => isset( $new_instance['map_auto'] ) ? (bool) $new_instance['map_auto'] : false,    
+                    'map_longitude'  => ! empty( $new_instance['map_longitude'] ) ? (float) $new_instance['map_longitude'] : '',    
+                    'map_latitude'   => ! empty( $new_instance['map_latitude'] ) ? (float) $new_instance['map_latitude'] : '',    
                 );
                 break;
             case 'openagenda_filter_preview':
@@ -140,11 +143,11 @@ class Filter_Widget extends \WP_Widget {
             case 'openagenda_filter_tags':
                 $tags_string = '';
                 if( ! empty( $new_instance['tags'] ) ){
-                    $tags_array  = array_map( function( $tag ){ return sanitize_title( trim( $tag ) ); }, explode( ',', $new_instance['tags'] ) );
+                    $tags_array  = array_map( function( $tag ){ return sanitize_title( trim( $tag ) ); }, explode( ',', sanitize_textarea_field( $new_instance['tags'] ) ) );
                     $tags_string = join( ',', $tags_array );
                 }
                 $additional_settings = array( 
-                    'tags' => ! empty( $tags_string ) ? sanitize_textarea_field( $tags_string ) : '',
+                    'tags'      => ! empty( $tags_string ) ? $tags_string : '',
                     'tag_group' => ! empty( $new_instance['tag_group'] ) ? sanitize_text_field( $new_instance['tag_group'] ) : '',
                 );
                 break;
@@ -177,39 +180,28 @@ class Filter_Widget extends \WP_Widget {
                 'map_tiles_link' => array(
                     'name'        => 'map_tiles_link',
                     'label'       => __( 'Map tiles link :', 'openagenda' ),
-                    'description' => '',
-                    'type'        => 'text',
                     'class'       => 'widefat',
                     'default'     => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 ),
                 'map_auto' => array(
                     'name'        => 'map_auto',
                     'label'       => __( 'Automatically update map on scroll ?', 'openagenda' ),
-                    'description' => '',
                     'type'        => 'checkbox',
-                    'class'       => '',
                     'default'     => false
                 ),
                 'map_longitude' => array(
                     'name'        => 'map_longitude',
                     'label'       => __( 'Default longitude :', 'openagenda' ),
-                    'description' => '',
-                    'type'        => 'text',
-                    'class'       => 'regular-text',
-                    'default'     => ''
+                    'class'       => 'widefat',
                 ),
                 'map_latitude' => array(
                     'name'        => 'map_latitude',
                     'label'       => __( 'Default latitude :', 'openagenda' ),
-                    'description' => '',
-                    'type'        => 'text',
-                    'class'       => 'regular-text',
-                    'default'     => ''
+                    'class'       => 'widefat',
                 ),
                 'map_zoom' => array(
                     'name'        => 'map_zoom',
                     'label'       => __( 'Map default zoom :', 'openagenda' ),
-                    'description' => '',
                     'type'        => 'number',
                     'class'       => 'tiny-text',
                     'default'     => 12
@@ -219,8 +211,6 @@ class Filter_Widget extends \WP_Widget {
                 'preview_label' => array(
                     'name'        => 'preview_label',
                     'label'       => __( 'Preview label :', 'openagenda' ),
-                    'description' => '',
-                    'type'        => 'text',
                     'class'       => 'widefat',
                     'default'     => __( 'Preview', 'openagenda' )
                 ),
@@ -229,8 +219,6 @@ class Filter_Widget extends \WP_Widget {
                 'placeholder'     => array(
                     'name'        => 'placeholder',
                     'label'       => __( 'Placeholder text :', 'openagenda' ),
-                    'description' => '',
-                    'type'        => 'text',
                     'class'       => 'widefat',
                     'default'     => __( 'Search events', 'openagenda' )
                 ),
@@ -239,10 +227,7 @@ class Filter_Widget extends \WP_Widget {
                 'tag_group' => array(
                     'name'        => 'tag_group',
                     'label'       => __( 'Tag group :', 'openagenda' ),
-                    'description' => '',
-                    'type'        => 'text',
-                    'class'       => 'small-text',
-                    'default'     => '',
+                    'class'       => 'widefat',
                 ),
                 'tags' => array(
                     'name'        => 'tags',
@@ -250,10 +235,8 @@ class Filter_Widget extends \WP_Widget {
                     'description' => __( 'Enter tags separated by a comma.', 'openagenda' ),
                     'type'        => 'textarea',
                     'class'       => 'large-text',
-                    'default'     => '',
                 ),
-            ),
-            
+            ), 
         );
         return apply_filters( 'openagenda_filters_widget_additional_settings', $additional_settings );
     }
@@ -261,6 +244,9 @@ class Filter_Widget extends \WP_Widget {
 
     /**
      * Generates a settings field
+     * 
+     * @param  array  $field     Array of field arguments
+     * @param  array  $instance  Instance settings
      */
     public function additional_setting_field( $field, $instance ){
         $value = isset( $instance[$field['name']] ) ? $instance[$field['name']] : $field['default'];

@@ -51,7 +51,7 @@ class Settings implements Hookable {
         $this->fields = array(
             'api-key' => array(
                 'id'       => 'openagenda_api_key',
-                'title'    => __( 'Open Agenda API key', 'openagenda' ),
+                'title'    => __( 'OpenAgenda API key', 'openagenda' ),
                 'callback' => array( $this, 'input_field_markup' ),
                 'page'     => 'openagenda',
                 'section'  => 'openagenda_general_settings',
@@ -62,7 +62,11 @@ class Settings implements Hookable {
                     'type'        => 'password',
                     'placeholder' => '',
                     'default'     => '',
-                    'description' => sprintf( __( 'Your API key can be found in your <a href="%s">Open Agenda account</a>.', 'openagenda' ), 'https://openagenda.com' ),
+                    'description' => sprintf(
+                        /* translators: %s: openagenda site url */ 
+                        __( 'Your API key can be found in your <a href="%s">OpenAgenda account</a>.', 'openagenda' ),
+                         'https://openagenda.com' 
+                    ),
                 ),
             ),
             'include-embeds' => array(
@@ -188,6 +192,7 @@ class Settings implements Hookable {
                     'type'        => 'text',
                     'default'     => 'calendar',
                     'description' => sprintf( 
+                        /* translators: %s : home url */
                         __( 'You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>.', 'openagenda' ), 
                         esc_url( get_home_url() )
                     ),
@@ -208,21 +213,21 @@ class Settings implements Hookable {
      * Returns the array of settings to register
      */
     public function get_settings(){
-        return apply_filters( 'openagenda_registered_settings', $this->settings );
+        return apply_filters( 'openagenda_settings', $this->settings );
     }
 
     /**
      * Returns the array of settings sections to register
      */
     public function get_sections(){
-        return apply_filters( 'openagenda_registered_settings_sections', $this->sections );
+        return apply_filters( 'openagenda_settings_sections', $this->sections );
     }
 
     /**
      * Returns the array of settings fields to register
      */
     public function get_fields(){
-        return apply_filters( 'openagenda_registered_settings_fields', $this->fields );
+        return apply_filters( 'openagenda_settings_fields', $this->fields );
     }
 
     /**
@@ -326,10 +331,10 @@ class Settings implements Hookable {
             'openagenda_cache_duration' => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] : HOUR_IN_SECONDS,
             'openagenda_include_embeds' => isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : false,
             'openagenda_include_styles' => isset( $settings['openagenda_include_styles'] ) ? (bool) $settings['openagenda_include_styles'] : false,
+            'openagenda_map_tiles_link' => ! empty( $settings['openagenda_map_tiles_link'] ) ? sanitize_text_field( $settings['openagenda_map_tiles_link'] ) : '',
+            'openagenda_map_tiles_attribution_link'  => ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? wp_kses_post( $settings['openagenda_map_tiles_attribution_link'] ) : '',
             'openagenda_delete_content_on_uninstall' => isset( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false,
             'openagenda_delete_options_on_uninstall' => isset( $settings['openagenda_delete_options_on_uninstall'] ) ? (bool) $settings['openagenda_delete_options_on_uninstall'] : false,
-            'openagenda_map_tiles_link' => ! empty( $settings['openagenda_map_tiles_link'] ) ? sanitize_text_field( $settings['openagenda_map_tiles_link'] ) : '',
-            'openagenda_map_tiles_attribution_link' => ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? wp_kses_post( $settings['openagenda_map_tiles_attribution_link'] ) : '',
         );
         return $new_settings;
     }

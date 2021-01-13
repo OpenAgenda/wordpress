@@ -16,7 +16,7 @@ $oa-warning: #f6bb42;
 $oa-dark: #333;
 
 :root {
-	--oa-main-color: $oa-blue;
+	--oa-main-color: #{$oa-blue};
 }
 
 
@@ -69,9 +69,9 @@ $oa-dark: #333;
     padding: .5rem;
 }
 
-/*****************
+/*****************************
  * Exports and Share Buttons
- *****************/
+ *****************************/
 .oa-exports,
 .oa-sharers {
 	align-items: center;
@@ -93,9 +93,9 @@ $oa-dark: #333;
 	margin-left: 8px;
 }
 
-/*****************
+/*******************
  * Timings & range
- *****************/
+ *******************/
 .oa-event-timing,
 .oa-event-range {
 	align-items: center;
@@ -146,7 +146,7 @@ button.oa-button {
 
 /******************
  * Update overlay
- *****************/
+ ******************/
 div[data-container-id="oa-wrapper"]{
 	position: relative;
 	.oa-update-overlay {
@@ -190,6 +190,23 @@ div[data-container-id="oa-wrapper"]{
   border-left: 3px solid #B91C1C;
 }
 
+
+/******************
+ * Active Filters
+ *****************/
+.active-filters {
+	li a {
+		padding: 4px;
+		line-height: 1;
+		text-decoration: none;
+		&:hover,
+		&:focus {
+			color: white;
+			text-decoration: none;
+		}
+	}
+}
+
 /***************
  * Tags Filter
  **************/
@@ -204,6 +221,22 @@ div[data-container-id="oa-wrapper"]{
 	}
 	.no-current-match {
 		opacity: .5;
+	}
+	a {
+		&:hover {
+			cursor: pointer;
+		}
+	}
+	.selected {
+		// background: var(--oa-main-color, $oa-blue);
+		font-weight: bold;
+		a {
+			color: var(--oa-main-color, $oa-blue);
+			text-decoration: none;
+		}
+	}
+	.count {
+		margin-left: 4px;
 	}
 }
 
@@ -243,12 +276,12 @@ div[data-container-id="oa-wrapper"]{
 			width: 1 / 7 * 100%;
 			&:hover {
 				color: $oa-blue;
-				color: var(--oa-main-color, $oa_blue);
+				color: var(--oa-main-color, $oa-blue);
 			}
 			&.today {
 				font-weight: bold;
 				color: $oa-blue;
-				color: var(--oa-main-color, $oa_blue);
+				color: var(--oa-main-color, $oa-blue);
 			}
 		}
 	}
@@ -261,7 +294,7 @@ div[data-container-id="oa-wrapper"]{
 	.calbody {
 		li:hover {
 			box-shadow: 0 0 0 1px $oa-blue inset;
-			box-shadow: 0 0 0 1px var(--oa-main-color, $oa_blue) inset;
+			box-shadow: 0 0 0 1px var(--oa-main-color, $oa-blue) inset;
 		}
 	}
 
@@ -290,7 +323,7 @@ div[data-container-id="oa-wrapper"]{
 
 	.selected {
 		background: $oa-blue;
-		background: var(--oa-main-color, $oa_blue);
+		background: var(--oa-main-color, $oa-blue);
 		border-radius: 0;
 		span {
 			color: $oa-white;
@@ -303,7 +336,7 @@ div[data-container-id="oa-wrapper"]{
 
 	.preselected {
 		background: $oa-blue;
-		background: var(--oa-main-color, $oa_blue );
+		background: var(--oa-main-color, $oa-blue );
 		opacity: 0.8;
 		span {
 			color: $oa-white;

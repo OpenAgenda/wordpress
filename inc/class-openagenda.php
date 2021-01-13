@@ -430,5 +430,4 @@ class Openagenda {
     public function have_pages(){
         return $this->total_pages > 1;
     }
-
 }
