@@ -64,9 +64,32 @@ function openagenda_get_locale(){
  */
 function openagenda_supported_locales(){
     $locales = array(
-        'fr_FR' => 'fr',
+        'de_DE' => 'de',
+        'de_DE_formal' => 'de',
+        'de_CH' => 'de',
+        'de_CH_informal' => 'de',
+        'de_AT' => 'de',
         'en_US' => 'en',
-        'en_GB' => 'en'
+        'en_AU' => 'en',
+        'en_CA' => 'en',
+        'en_ZA' => 'en',
+        'en_NZ' => 'en',
+        'en_GB' => 'en',
+        'es_ES' => 'es',
+        'es_CO' => 'es',
+        'es_MX' => 'es',
+        'es_VE' => 'es',
+        'es_EC' => 'es',
+        'es_AR' => 'es',
+        'es_CL' => 'es',
+        'es_PE' => 'es',
+        'es_PR' => 'es',
+        'es_UY' => 'es',
+        'es_GT' => 'es',
+        'fr_FR' => 'fr',
+        'fr_BE' => 'fr',
+        'fr_CA' => 'fr',
+        'it_IT' => 'it'
     );
     return apply_filters( 'openagenda_supported_locales', $locales );
 }
