@@ -145,9 +145,13 @@ class Main {
      * Loads scripts and styles
      */
     public function register_scripts(){
+
+        $css_suffix = defined( 'WP_DEBUG' ) && WP_DEBUG || defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.css' : '.min.css';
+        $js_suffix  = defined( 'WP_DEBUG' ) && WP_DEBUG || defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
+
         // Register main styles and scripts
-        wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style.css', array(), OPENAGENDA_VERSION );
-        wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main.js', array( 'jquery' ), OPENAGENDA_VERSION, true );
+        wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style' . $css_suffix, array(), OPENAGENDA_VERSION );
+        wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'jquery' ), OPENAGENDA_VERSION, true );
         
         // Register filters style and scripts
         $filters = $this->get_available_filters();
@@ -160,10 +164,10 @@ class Main {
         // Register map dependencies
         wp_register_style( 'oa-leaflet', '//unpkg.com/leaflet@1.3.4/dist/leaflet.css', array(), OPENAGENDA_VERSION );
         wp_register_script( 'oa-leaflet', '//unpkg.com/leaflet@1.3.4/dist/leaflet.js', array(), OPENAGENDA_VERSION, true );
-        wp_register_script( 'oa-event-map', OPENAGENDA_URL . 'assets/js/event-map.js', array( 'jquery', 'oa-leaflet' ), OPENAGENDA_VERSION, true );
+        wp_register_script( 'oa-event-map', OPENAGENDA_URL . 'assets/js/event-map' . $js_suffix, array( 'jquery', 'oa-leaflet' ), OPENAGENDA_VERSION, true );
         
         // Timings calendar JS
-        wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings.js', array(), OPENAGENDA_VERSION, true );
+        wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings' . $js_suffix, array(), OPENAGENDA_VERSION, true );
         
         if( is_singular( 'oa-calendar' ) ){
             wp_enqueue_script( 'openagenda-main' );
