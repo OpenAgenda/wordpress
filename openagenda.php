@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: OpenAgenda
-Plugin URI:  https://vincentdubroeucq.com/
+Plugin URI:  https://openagenda.com/
 Description: Display your OpenAgenda data on your WordPress site.
 Version:     0.1
-Author:      Vincent Dubroeucq
-Author URI:  https://vincentdubroeucq.com/
+Author:      OpenAgenda
+Author URI:  https://openagenda.com/
 Text Domain: openagenda
 Domain Path: /languages
 License:     GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.0
-Requires at least: 4.7
+Requires at least: 4.9
 Tested up to: 5.6
 
 OpenAgenda is free software: you can redistribute it and/or modify
@@ -113,11 +113,11 @@ function openagenda_plugin_action_links( $actions, $file, $data, $context ){
         esc_url( menu_page_url( 'openagenda', false ) ),
         esc_html__( 'Settings', 'openagenda' ) 
     );
-    $actions['documentation'] = sprintf( 
-        '<a href="%s" target="_blank" rel="nooepener noreferrer">%s</a>', 
-        esc_url( 'https://openagenda.com' ),
-        esc_html__( 'Documentation', 'openagenda' ) 
-    );
+    // $actions['documentation'] = sprintf( 
+    //     '<a href="%s" target="_blank" rel="nooepener noreferrer">%s</a>', 
+    //     esc_url( 'https://openagenda.com' ),
+    //     esc_html__( 'Documentation', 'openagenda' ) 
+    // );
     return $actions;
 }
 

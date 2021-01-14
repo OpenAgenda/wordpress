@@ -1,7 +1,7 @@
 === Openagenda ===
-Contributors: vincentdubroeucq
+Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
-Requires at least: 4.7
+Requires at least: 4.9
 Tested up to: 5.6
 Stable tag: 0.1
 Requires PHP: 7.0
