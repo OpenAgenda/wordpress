@@ -221,6 +221,20 @@ function openagenda_is_archive(){
 
 
 /**
+ * Stringifies an associative array to use in a shortcode.
+ * 
+ * @param   array   $array  Associative array you wish to turn to shortcode attributes
+ * @return  string  $atts   Converted shortcode attributes
+ */
+function openagenda_get_shortcode_attributes( $array ){
+    $atts = array_map( function( $key, $value ){
+        return sprintf( '%s="%s"', $key, sanitize_text_field( $value ) );
+    }, array_keys( $array ), array_values( $array ) );
+    return join( ' ', $atts );
+}
+
+
+/**
  * Returns the HTML content of the content area.
  * 
  * @return  string  $html  Template HTML.

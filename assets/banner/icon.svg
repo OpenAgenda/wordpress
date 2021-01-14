@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="67.73333mm"
+   height="67.73333mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
+   sodipodi:docname="logo openagenda WP.svg">
+  <defs
+     id="defs4">
+    <clipPath
+       id="clipPath3075"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3077"
+         d="m 88.916,170.559 h 38.069 V 143.39 H 88.916 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3047"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3049"
+         d="m 96.582,101.662 h 28.889 V 97.3823 H 96.582 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath2999"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3001"
+         d="M 0,255 H 600 V 0 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3477"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3479"
+         d="m 88.917,170.558 h 38.068 V 143.39 H 88.917 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3449"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3451"
+         d="M 96.5811,101.661 H 125.469 V 97.3804 H 96.5811 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3401"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3403"
+         d="M 0,255 H 600 V 0 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3622"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3624"
+         d="m 88.917,170.558 h 38.067 V 143.39 H 88.917 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3598"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3600"
+         d="M 96.5811,101.661 H 125.469 V 97.3804 H 96.5811 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath3550"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path3552"
+         d="M 0,255 H 600 V 0 H 0 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4403">
+      <rect
+         style="fill:#41acdd;fill-opacity:1;stroke:none"
+         id="rect4405"
+         width="189.13043"
+         height="60.326084"
+         x="804.8913"
+         y="689.31873"
+         ry="5.8346" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.65053826"
+     inkscape:cx="-398.87989"
+     inkscape:cy="134.16221"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:document-rotation="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3139"
+       originx="-1236.1826"
+       originy="-152.96416"
+       spacingx="1"
+       spacingy="1" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-1236.1826,-152.96416)">
+    <g
+       transform="matrix(1.25,0,0,-1.25,130.46376,398.69441)"
+       id="g3253" />
+    <g
+       id="g3073"
+       transform="matrix(1.25,0,0,-1.25,-9.9797542,702.27152)" />
+    <g
+       id="g3620"
+       transform="matrix(1.25,0,0,-1.25,-9.9789417,329.74859)" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.538712"
+       id="rect3184"
+       width="256"
+       height="256"
+       x="1236.1826"
+       y="152.96416"
+       rx="10.067875"
+       ry="0" />
+    <g
+       id="g3163"
+       inkscape:export-filename="/home/kaore/Dev/lib/oa/packages/agenda-portal/boot/assets/apple-touch-icon.png"
+       inkscape:export-xdpi="161.39"
+       inkscape:export-ydpi="161.39"
+       transform="matrix(2.2417671,0,0,2.2417671,1139.079,-1372.0683)">
+      <rect
+         ry="0.56103212"
+         y="687.31641"
+         x="50.845833"
+         height="100.37578"
+         width="100.37578"
+         id="rect3137"
+         style="fill:none;stroke:none;stroke-width:0.243817;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <g
+         transform="translate(-27.101856,205.50071)"
+         id="g3115">
+        <rect
+           inkscape:export-ydpi="413"
+           inkscape:export-xdpi="413"
+           inkscape:export-filename="C:\Users\Romain\Dropbox\OA\logo\avatarOA.png"
+           ry="0.46020737"
+           y="483.73358"
+           x="86.293236"
+           height="83.695648"
+           width="83.695648"
+           id="rect3117"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;stroke:none;stroke-width:9;marker:none;enable-background:accumulate" />
+        <g
+           inkscape:export-ydpi="413.77747"
+           inkscape:export-xdpi="413.77747"
+           inkscape:export-filename="C:\Users\Romain\Dropbox\OA\logo\avatarOA.png"
+           transform="matrix(1.25,0,0,-1.25,-9.9797542,702.27152)"
+           id="g3119">
+          <g
+             id="g3121" />
+          <g
+             id="g3123">
+            <g
+               id="g3125"
+               clip-path="url(#clipPath3047)">
+              <g
+                 id="g3127"
+                 transform="translate(125.4707,99.5229)">
+                <path
+                   id="path3129"
+                   style="fill:#cdcdcc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                   d="m 0,0 c 0,-1.182 -6.466,-2.141 -14.444,-2.141 -7.979,0 -14.445,0.959 -14.445,2.141 0,1.182 6.466,2.139 14.445,2.139 C -6.466,2.139 0,1.182 0,0"
+                   inkscape:connector-curvature="0" />
+              </g>
+            </g>
+          </g>
+        </g>
+        <path
+           inkscape:export-ydpi="413.77747"
+           inkscape:export-xdpi="413.77747"
+           inkscape:export-filename="C:\Users\Romain\Dropbox\OA\logo\avatarOA.png"
+           id="path3131"
+           d="m 128.14106,484.18752 c -18.015,0 -32.625002,14.60875 -32.625002,32.625 0,5.66125 1.43,10.98375 3.96875,15.625 0.25625,0.57625 0.617502,1.17125 1.062502,1.78125 l 0.0625,0.0937 c 0.77125,1.20875 1.64375,2.37375 2.5625,3.46875 l 1.9375,2.65625 c 3.39,4.6325 8.9225,12.18 12.3125,16.8125 l 4.5625,6.25 c 3.3875,4.63375 8.92625,4.63375 12.3125,0 l 4.5625,-6.21875 c 3.39125,-4.6312 8.95375,-12.2137 12.34375,-16.8437 l 2.09375,-2.875 c 0.77875,-0.94625 1.48375,-1.9375 2.15625,-2.96875 l 0.3125,-0.375 c 0.4925,-0.67 0.835,-1.3425 1.09375,-1.96875 2.48,-4.59875 3.90625,-9.84625 3.90625,-15.4375 0,-18.01625 -14.61,-32.625 -32.625,-32.625 z m 0,4.71875 c 14.895,0 26.96875,12.075 26.96875,26.96875 0,14.89625 -12.07375,26.96875 -26.96875,26.96875 -14.89625,0 -26.96875,-12.0725 -26.96875,-26.96875 0,-14.89375 12.0725,-26.96875 26.96875,-26.96875 z"
+           style="fill:#413a42;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           inkscape:connector-curvature="0" />
+        <g
+           inkscape:export-ydpi="413.77747"
+           inkscape:export-xdpi="413.77747"
+           inkscape:export-filename="C:\Users\Romain\Dropbox\OA\logo\avatarOA.png"
+           transform="matrix(1.25,0,0,-1.25,112.47387,507.12377)"
+           id="g3133">
+          <path
+             id="path3135"
+             style="fill:none;stroke:#41acdd;stroke-width:5.135;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             d="M 0,0 11.728,-12.324 24.105,5.832"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

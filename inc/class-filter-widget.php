@@ -58,7 +58,7 @@ class Filter_Widget extends \WP_Widget {
         $shortcode = ! empty( $filter['shortcode'] ) ? sanitize_key( $filter['shortcode'] ) : false;
 
         if( $shortcode ){
-            $atts = $this->get_shortcode_attributes( $instance );
+            $atts = openagenda_get_shortcode_attributes( $instance );
             echo do_shortcode( sprintf( '[%s %s]', $shortcode, $atts ) );
         }
         
@@ -297,19 +297,5 @@ class Filter_Widget extends \WP_Widget {
                 break;
         }
         return $html;
-    }
-
-
-    /**
-     * Stringifies the widget instance settings to use in the shortcode.
-     * 
-     * @param   array   $instance  Widget instance settings
-     * @return  string  $atts      Converted shortcode attributes
-     */
-    public function get_shortcode_attributes( $instance ){
-        $atts = array_map( function( $key, $value ){
-            return sprintf( '%s="%s"', $key, sanitize_text_field( $value ) );
-        }, array_keys( $instance ), array_values( $instance ) );
-        return join( ' ', $atts );
     }
 }

@@ -625,6 +625,18 @@ function openagenda_exports( $uid = false, $echo = true ) {
     return $html;
 }
 
+
+/**
+ * Displays a filter widget
+ * 
+ * @param  $args  Array of arguments to pass to the filter
+ */
+function openagenda_filter( $filter, $args = array() ){
+    $atts = openagenda_get_shortcode_attributes( $args );
+    echo do_shortcode( sprintf( '[openagenda_filter_%s %s]', sanitize_key( $filter ), $atts ) );
+}
+
+
 /**
  * Displays the Copy to Clipboard modal
  */

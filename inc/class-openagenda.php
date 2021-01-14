@@ -315,8 +315,13 @@ class Openagenda {
      * @param  array   $args
      */
     public function request( $args = array() ){
+        
         // Check if the request response is not already cached.
         $cache = get_transient( $this->get_transient_name() );
+        if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+            $cache = false;
+        }
+
         if( ! empty( $cache ) ){
             $response     = $cache;
             $this->source = 'cache';

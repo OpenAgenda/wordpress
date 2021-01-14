@@ -5,7 +5,6 @@ Plugin URI:  https://openagenda.com/
 Description: Display your OpenAgenda data on your WordPress site.
 Version:     0.1
 Author:      OpenAgenda
-Author URI:  https://openagenda.com/
 Text Domain: openagenda
 Domain Path: /languages
 License:     GPL v2 or later
