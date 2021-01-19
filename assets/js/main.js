@@ -29,8 +29,8 @@ jQuery(document).ready( function($) {
                 },
                 function(data) {
                     if (data.success) {
-                        if( data.data.updatedUrl ) window.history.pushState( {}, '', data.data.updatedUrl );
                         $('[data-container-id="oa-wrapper"]').html( data.data.html );
+                        if( data.data.updatedUrl ) window.history.replaceState( {}, '', data.data.updatedPath );
                     } else {
                         $( '.oa-update-overlay' ).remove();
                         $( '.oa-notice-wrapper' ).html( oaData.errorNotice );

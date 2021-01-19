@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2021-01-13 14:57+0100\n"
-"PO-Revision-Date: 2021-01-13 15:01+0100\n"
+"PO-Revision-Date: 2021-01-15 13:51+0100\n"
 "X-Generator: Poedit 2.4.1\n"
 "X-Domain: openagenda\n"
 "Last-Translator: \n"
@@ -235,6 +235,7 @@ msgid "Preview label :"
 msgstr "Label du lien de prévisualisation&nbsp;:"
 
 #: inc/class-filter-widget.php:215 inc/class-main.php:46
+msgctxt "Filter name"
 msgid "Preview"
 msgstr "Prévisualisation"
 
@@ -259,26 +260,32 @@ msgid "Enter tags separated by a comma."
 msgstr "Entrer les tags séparés par des virgules."
 
 #: inc/class-main.php:26
+msgctxt "Filter name"
 msgid "Active filters"
 msgstr "Filtres actifs"
 
 #: inc/class-main.php:31
+msgctxt "Filter name"
 msgid "Tags"
 msgstr "Tags"
 
 #: inc/class-main.php:36
+msgctxt "Filter name"
 msgid "Calendar"
-msgstr "Agenda"
+msgstr "Calendrier"
 
 #: inc/class-main.php:41
+msgctxt "Filter name"
 msgid "Map"
 msgstr "Carte"
 
 #: inc/class-main.php:51
+msgctxt "Filter name"
 msgid "Relative"
 msgstr "Relatifs"
 
 #: inc/class-main.php:56
+msgctxt "Filter name"
 msgid "Search"
 msgstr "Recherche"
 

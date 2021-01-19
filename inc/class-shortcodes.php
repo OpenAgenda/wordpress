@@ -193,6 +193,7 @@ class Shortcodes implements Hookable {
             \openagenda_icon( 'refresh', false )
         );
 
+        wp_enqueue_style( 'oa-leaflet' );
         wp_enqueue_script( 'openagenda_filter_map' );
         return apply_filters( 'openagenda_filter_map', $filter, $uid, $atts );
     }

@@ -41,9 +41,7 @@ class Ajax_Handler {
             exit;
         }
         
-        $filter = isset( $_POST['filter'] ) ? sanitize_title( $_POST['filter'] ) : false;
-        $update = isset( $_POST['update'] ) ? $_POST['update'] : false;
-        $query  = isset( $_POST['query'] ) ? $_POST['query'] : false;
+        $query = isset( $_POST['query'] ) ? $this->sanitize_query( $_POST['query'] ) : false;
 
         $args = array(
             'limit' => get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
@@ -53,21 +51,48 @@ class Ajax_Handler {
         $updatedUrl = get_permalink( $post_id );
         if( $query ){
             $args['oaq'] = $query;
-            $updatedUrl  = add_query_arg( 'oaq', $query, $updatedUrl );
+            $updatedUrl  = esc_url( add_query_arg( 'oaq', $query, $updatedUrl ) );
+            $updatedPath = wp_parse_url( $updatedUrl, PHP_URL_PATH ) . '?' . wp_parse_url( $updatedUrl, PHP_URL_QUERY ); 
         }
 
         $view = sanitize_title( $_POST['view'] );
 
         $openagenda = new Openagenda( $uid, $args );
         $response    = array(
-            'totalPages' => (int) $openagenda->get_total_pages(),
-            'total'      => (int) $openagenda->get_total(),
-            'updatedUrl' => esc_url( $updatedUrl ),
-            'source'     => sanitize_key( $openagenda->source ),
-            'html'       => \openagenda_get_events_html( $view ),
+            'totalPages'  => (int) $openagenda->get_total_pages(),
+            'total'       => (int) $openagenda->get_total(),
+            'updatedUrl'  => $updatedUrl,
+            'updatedPath' => $updatedPath,
+            'source'      => sanitize_key( $openagenda->source ),
+            'html'        => \openagenda_get_events_html( $view ),
         );
         
         wp_send_json_success( $response );
         wp_die();
+    }
+
+    /**
+     * Sanitizes the received oaq query data
+     * 
+     * @param  array  $query 
+     */
+    public function sanitize_query( $query ){
+        $clean = array();
+        if( is_array( $query ) ){
+            foreach ( $query as $filter_key => $filter_value ) {
+                switch ( $filter_key ) {
+                    case 'tags':
+                        if( is_array( $filter_value ) ){
+                            $filter_value = array_map( 'sanitize_title', $filter_value );
+                        }
+                        break; 
+                    default:
+                        $filter_value = sanitize_title( $filter_value );
+                        break;
+                }
+                $clean[sanitize_key( $filter_key )] = $filter_value;
+            }
+        }
+        return $clean;
     }
 }

@@ -109,6 +109,11 @@ class Openagenda {
      * Whether to allow for rich embeded content.
      */
     protected $include_embedded;
+    
+    /**
+     * Whether to use caching.
+     */
+    protected $use_cache;
 
     /**
      * Constructor
@@ -116,12 +121,13 @@ class Openagenda {
      * @param  int    $uid   UID of the calendar
      * @param  array  $args  Array of arguments
      */
-    public function __construct( $uid, $args = array() ){
+    public function __construct( $uid, $args = array(), $use_cache = true ){
         $settings       = get_option( 'openagenda_general_settings' );
         $this->uid      = $uid;
         $this->api_key  = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
         $this->include_embedded = ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true; 
-        
+        $this->use_cache = (bool) $use_cache;
+
         $this->args        = $this->parse_args( $args );
         $this->page        = ! empty ( $this->get_args() ) && ! empty( $this->get_args()['page'] ) ? (int) $this->get_args()['page'] : 1;
         $this->is_single   = $this->is_single();
@@ -318,11 +324,7 @@ class Openagenda {
         
         // Check if the request response is not already cached.
         $cache = get_transient( $this->get_transient_name() );
-        if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-            $cache = false;
-        }
-
-        if( ! empty( $cache ) ){
+        if( ! empty( $cache ) && $this->should_serve_cache()){
             $response     = $cache;
             $this->source = 'cache';
         } else {
@@ -406,8 +408,22 @@ class Openagenda {
     public function should_cache(){
         if( defined( 'DOING_AJAX' ) && DOING_AJAX ) return false;
         if( $this->total_pages === 0 ) return false;
+        if( ! $this->use_cache ) return false;
         $should_cache = empty( $this->get_filters() ) || $this->is_single();
         return $should_cache;
+    }
+
+
+    /**
+     * Returns whether the current request should be cached or not.
+     * 
+     * @return  bool  $should_cache
+     */
+    public function should_serve_cache(){
+        if( defined( 'DOING_AJAX' ) && DOING_AJAX ) return false;
+        if( ! $this->use_cache ) return false;
+        $should_serve_cache = empty( $this->get_filters() ) || $this->is_single();
+        return $should_serve_cache;
     }
 
 

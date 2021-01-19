@@ -221,6 +221,7 @@ msgid "Preview label :"
 msgstr ""
 
 #: inc/class-filter-widget.php:215 inc/class-main.php:46
+msgctxt "Filter name"
 msgid "Preview"
 msgstr ""
 
@@ -245,26 +246,32 @@ msgid "Enter tags separated by a comma."
 msgstr ""
 
 #: inc/class-main.php:26
+msgctxt "Filter name"
 msgid "Active filters"
 msgstr ""
 
 #: inc/class-main.php:31
+msgctxt "Filter name"
 msgid "Tags"
 msgstr ""
 
 #: inc/class-main.php:36
+msgctxt "Filter name"
 msgid "Calendar"
 msgstr ""
 
 #: inc/class-main.php:41
+msgctxt "Filter name"
 msgid "Map"
 msgstr ""
 
 #: inc/class-main.php:51
+msgctxt "Filter name"
 msgid "Relative"
 msgstr ""
 
 #: inc/class-main.php:56
+msgctxt "Filter name"
 msgid "Search"
 msgstr ""
 
