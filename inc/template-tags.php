@@ -725,14 +725,14 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
             $html = sprintf( 
                 '<span class="oa-nav-link oa-%1$s-link oa-nav-link-disabled">%2$s</span>',
                 esc_attr( $direction ),
-                'previous' === $direction ? $previous_label : $next_label,
+                'previous' === $direction ? $previous_label : $next_label
             );
         } else {
             $html = sprintf( 
                 '<a class="oa-nav-link oa-%1$s-link" href="%2$s">%3$s</a>',
                 esc_attr( $direction ),
                 esc_url( $url ),
-                'previous' === $direction ? $previous_label : $next_label,
+                'previous' === $direction ? $previous_label : $next_label
             );
         }
     }
@@ -764,7 +764,7 @@ function openagenda_get_back_link(){
             esc_url( $page_link ),
             openagenda_icon( 'home', false ),
             (int) $event_number,
-            (int) $total,
+            (int) $total
         );
     }
 
