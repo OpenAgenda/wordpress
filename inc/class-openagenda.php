@@ -96,6 +96,16 @@ class Openagenda {
     protected $event = null;
 
     /**
+     * Context data
+     */
+    protected $context = null;
+    
+    /**
+     * Whether to allow for rich embeded content.
+     */
+    protected $include_embedded = true;
+
+    /**
      * Is the query for a list of events ?
      */
     protected $is_archive = true;
@@ -106,14 +116,14 @@ class Openagenda {
     protected $is_single = false;
     
     /**
-     * Whether to allow for rich embeded content.
-     */
-    protected $include_embedded;
-    
-    /**
      * Whether to use caching.
      */
-    protected $use_cache;
+    protected $use_cache = true;
+    
+    /**
+     * Whether the query should set the context cookie.
+     */
+    protected $use_context = true;
 
     /**
      * Constructor
@@ -121,12 +131,13 @@ class Openagenda {
      * @param  int    $uid   UID of the calendar
      * @param  array  $args  Array of arguments
      */
-    public function __construct( $uid, $args = array(), $use_cache = true ){
+    public function __construct( $uid, $args = array(), $use_cache = true, $use_context = true ){
         $settings       = get_option( 'openagenda_general_settings' );
         $this->uid      = $uid;
         $this->api_key  = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
         $this->include_embedded = ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true; 
-        $this->use_cache = (bool) $use_cache;
+        $this->use_cache   = (bool) $use_cache;
+        $this->use_context = (bool) $use_context;
 
         $this->args        = $this->parse_args( $args );
         $this->page        = ! empty ( $this->get_args() ) && ! empty( $this->get_args()['page'] ) ? (int) $this->get_args()['page'] : 1;
@@ -134,16 +145,17 @@ class Openagenda {
         $this->is_archive  = $this->is_archive();
 
         $this->raw_response = $this->request( $this->args );
-        $this->json        = $this->parse_response( $this->args );
-        $this->events      = is_array( $this->json['events'] ) && ! empty( $this->json['events'] ) ? $this->json['events'] : array();
-        $this->event       = ! empty( $this->get_events() ) ? $this->get_events()[0] : null;
+        $this->json         = $this->parse_response( $this->args );
+        $this->events       = is_array( $this->json['events'] ) && ! empty( $this->json['events'] ) ? $this->json['events'] : array();
+        $this->event        = ! empty( $this->get_events() ) ? $this->get_events()[0] : null;
         
-        $this->count    = count( $this->events );
-        $this->total    = ! empty( $this->json['total'] ) ? (int) $this->json['total'] : 0;
-        $this->limit    = ! empty( $this->json['limit'] ) ? (int) $this->json['limit'] : 20;
-        $this->offset   = ! empty( $this->json['offset'] ) ? (int) $this->json['offset'] : 0;
+        $this->count       = count( $this->events );
+        $this->total       = ! empty( $this->json['total'] ) ? (int) $this->json['total'] : 0;
+        $this->limit       = ! empty( $this->json['limit'] ) ? (int) $this->json['limit'] : 20;
+        $this->offset      = ! empty( $this->json['offset'] ) ? (int) $this->json['offset'] : 0;
         $this->total_pages = (int) ceil( $this->total / $this->limit );
         
+        $this->set_context();
         $this->maybe_cache();
     }
 
@@ -153,6 +165,14 @@ class Openagenda {
      */
     public function get_uid(){
         return $this->uid;
+    }
+
+
+    /**
+     * Returns the user API key.
+     */
+    public function get_api_key(){
+        return $this->api_key;
     }
 
 
@@ -177,14 +197,6 @@ class Openagenda {
      */
     public function get_total_pages(){
         return $this->total_pages;
-    }
-
-
-    /**
-     * Returns the User API key.
-     */
-    public function get_api_key(){
-        return $this->api_key;
     }
 
 
@@ -233,6 +245,45 @@ class Openagenda {
 
 
     /**
+     * Returns whether we're on a listing page or not.
+     * 
+     * @return  bool  $is_archive
+     */
+    public function is_archive(){
+        $is_archive = ! $this->is_single(); 
+        return apply_filters( 'openagenda_is_archive', $is_archive, $this->uid );
+    }
+
+
+    /**
+     * Returns whether we're on a single page
+     * 
+     * @return  bool  $is_single
+     */
+    public function is_single(){
+        $args      = $this->get_args();
+        $is_single = ! empty( $args['oaq'] ) && ! empty( $args['oaq']['slug'] ); 
+        return apply_filters( 'openagenda_is_single', $is_single, $this->uid );
+    }
+
+
+    /**
+     * Retrieve an array of supported exports formats
+     * 
+     * @return  array  $formats
+     */ 
+    public function get_exports_formats(){
+        $formats = array(
+            'xlsx' => __( 'XLSX', 'openagenda' ),
+            'json' => __( 'JSON', 'openagenda' ),
+            'rss'  => __( 'RSS', 'openagenda' ),
+            'pdf'  => __( 'PDF', 'openagenda' ),
+        );
+        return apply_filters( 'openagenda_exports_formats', $formats, $this->uid );
+    }
+
+
+    /**
      * Returns the Base export URL.
      * 
      * @param   string  $uid              Calendar identifier
@@ -270,22 +321,6 @@ class Openagenda {
         }
 
         return apply_filters( 'openagenda_request_url', $url, $this->uid, $args, $format );
-    }
-
-
-    /**
-     * Retrieve an array of supported exports formats
-     * 
-     * @return  array  $formats
-     */ 
-    public function get_exports_formats(){
-        $formats = array(
-            'xlsx' => __( 'XLSX', 'openagenda' ),
-            'json' => __( 'JSON', 'openagenda' ),
-            'rss'  => __( 'RSS', 'openagenda' ),
-            'pdf'  => __( 'PDF', 'openagenda' ),
-        );
-        return apply_filters( 'openagenda_exports_formats', $formats, $this->uid );
     }
 
 
@@ -366,29 +401,6 @@ class Openagenda {
 
 
     /**
-     * Returns whether we're on a listing page or not.
-     * 
-     * @return  bool  $is_archive
-     */
-    public function is_archive(){
-        $is_archive = ! $this->is_single(); 
-        return apply_filters( 'openagenda_is_archive', $is_archive, $this->uid );
-    }
-
-
-    /**
-     * Returns whether we're on a single page
-     * 
-     * @return  bool  $is_single
-     */
-    public function is_single(){
-        $args      = $this->get_args();
-        $is_single = ! empty( $args['oaq'] ) && ! empty( $args['oaq']['slug'] ); 
-        return apply_filters( 'openagenda_is_single', $is_single, $this->uid );
-    }
-
-
-    /**
      * Returns the transient in which data should be stored for this request.
      * 
      * @return  string  $transient_name
@@ -450,5 +462,52 @@ class Openagenda {
      */
     public function have_pages(){
         return $this->total_pages > 1;
+    }
+
+
+    /**
+     * Returns the offset of the current event in the loop
+     */
+    public function get_event_offset(){
+        $offset = (int) $this->offset;
+        $index  = (int) $this->index === 0 ? 0 : (int) $this->index - 1;
+        $event_offset = $offset + $index;
+        return $event_offset;
+    }
+
+
+    /**
+     * Returns whether this instance uses context
+     */
+    public function use_context(){
+        return (bool) $this->use_context;
+    }
+
+
+    /**
+     * Gets the navigation context
+     */
+    function get_context(){
+        if( ! $this->use_context ) return false;
+        $context = ! empty( $this->context ) ? $this->context : false;
+        return $context;            
+    }
+    
+
+    /**
+     * Sets the navigation context
+     */
+    function set_context(){
+        if( ! $this->use_context ) return;
+        if( $this->is_archive() ){
+            $args = $this->get_args();
+            $this->context = $this->get_args();
+            $this->context['total'] = (int) $this->total;
+        } else {
+            $context = openagenda_decode_context();
+            if( $context ){
+                $this->context = $context;
+            }
+        }
     }
 }

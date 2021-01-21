@@ -18,6 +18,8 @@ class Ajax_Handler {
     public function register_hooks(){
         add_action( 'wp_ajax_update_events', array( $this, 'update_events' ) );
         add_action( 'wp_ajax_nopriv_update_events', array( $this, 'update_events' ) );
+        add_action( 'admin_post_get_adjacent_event', array( $this, 'get_adjacent_event' ) );
+        add_action( 'admin_post_nopriv_get_adjacent_event', array( $this, 'get_adjacent_event' ) );
     }
 
     /**
@@ -70,6 +72,70 @@ class Ajax_Handler {
         wp_send_json_success( $response );
         wp_die();
     }
+
+
+    /**
+     * Handler for event navigation on single event pages.
+     */
+    public function get_adjacent_event(){
+        global $openagenda;
+
+        if( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], 'get_adjacent_event' ) ){
+            wp_die();
+        }
+        
+        // Read request
+        $referer   = wp_get_referer();
+        $context   = openagenda_decode_context();
+        $direction = 'next' === $_GET['direction'] ? 'next' : 'previous';
+        $uid       = isset( $_GET['uid'] ) ? (int) $_GET['uid'] : false;
+        
+        if( ! $context || ! $uid ) {
+            wp_safe_redirect( $referer );
+            exit;
+        }
+        
+        // Read context
+        $event_offset = isset( $context['event_offset'] ) ? (int) $context['event_offset'] : null;
+        $filters      = isset( $context['oaq'] ) ? $this->sanitize_query( $context['oaq'] ): null;
+        
+        if( null === $event_offset ) {
+            wp_safe_redirect( $referer );
+            exit;
+        }
+        
+        // Prepare another query to fetch adjacent event
+        $offset = 'next' === $direction ? $event_offset + 1 : $event_offset - 1;
+        if ( 0 >= $offset ) $offset = 0;
+        
+        $args = array(
+            'offset' => $offset,
+            'limit'  => 1,
+        );
+        if ( ! empty( $filters ) ) {
+            $args['oaq'] = $filters;
+        }
+        
+        // Fetch the event
+        $openagenda = new Openagenda( $uid, $args, false, false );
+        $event      = $openagenda->get_current_event();
+        
+        if( ! empty( $event ) ){
+            $event_permalink = openagenda_get_field( 'permalink' );
+            
+            // Update context
+            $context['event_offset'] = $offset;
+            $encoded_context = openagenda_encode_context( $context );
+            $event_permalink = add_query_arg( 'context', $encoded_context, $event_permalink );
+            
+            wp_safe_redirect( $event_permalink );
+            exit;
+        }
+
+        wp_safe_redirect( $referer );
+        exit;        
+    }
+
 
     /**
      * Sanitizes the received oaq query data

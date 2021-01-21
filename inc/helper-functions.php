@@ -341,8 +341,35 @@ function openagenda_group_timings( $timings ){
     }
 
     return $months;
-
 }
+
+
+/**
+ * Reads context from URL or passed string, and returns it.
+ * 
+ * @param   string  $context_string  Context data stringified array. Should be base64-encoded.
+ * @return  array   $context         Decoded array of context data.
+ */
+function openagenda_decode_context( $context_string = null ){
+    if( ! $context_string ){
+        $context_string = isset( $_GET['context'] ) ? $_GET['context'] : false;
+    }
+    $decoded_context = ! empty( $context_string ) ? base64_decode( $_GET['context'] ) : false;
+    $context         = $decoded_context ? json_decode( $decoded_context, true ) : false;
+    return $context;
+}
+
+
+/**
+ * Encodes the context data into a string.
+ * 
+ * @param   array   $context_array    Context data
+ * @return  string  $encoded_context  Bas64 encode
+ */
+function openagenda_encode_context( $context_array ){
+    return base64_encode( json_encode( $context_array ) );
+}
+
 
 /**
  * Temporary fix for older installs.

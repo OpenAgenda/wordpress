@@ -69,6 +69,34 @@ $oa-dark: #333;
     padding: .5rem;
 }
 
+/**************
+ * Navigation
+ **************/
+.oa-event-navigation {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 1rem 0;
+}
+.oa-nav-link {
+	align-items: center;
+	box-shadow: none;
+	display: inline-flex;
+	text-decoration: none;
+	padding: .25rem;
+}
+.oa-next-link {
+	margin-left: auto;
+	.oa-icon {
+		margin-left: 4px;
+	}
+}
+
+.oa-previous-link {
+	.oa-icon {
+		margin-right: 4px;
+	}
+}
 /*****************************
  * Exports and Share Buttons
  *****************************/
@@ -96,6 +124,10 @@ $oa-dark: #333;
 /*******************
  * Timings & range
  *******************/
+.oa-event-timings {
+	margin: 1rem 0;
+}
+
 .oa-event-timing,
 .oa-event-range {
 	align-items: center;

@@ -11,12 +11,12 @@
     <div class="oa-event-wrapper">
         <header class="oa-event-header">
             <div class="oa-event-thumbnail">
-                <a class="oa-event-permalink" href="<?php openagenda_field( 'permalink' ); ?>">
+                <a class="oa-event-permalink" href="<?php openagenda_event_permalink( true ); ?>">
                     <?php openagenda_event_image( 'image' ); ?>
                 </a>
             </div>
             <h2 class="oa-event-title">
-                <a class="oa-event-permalink" href="<?php openagenda_field( 'permalink' ); ?>">
+                <a class="oa-event-permalink" href="<?php openagenda_event_permalink( true ); ?>">
                     <?php openagenda_field( 'title' ); ?>
                 </a>
             </h2>

@@ -54,7 +54,7 @@ function openagenda_get_field( $field, $uid = false ){
         case 'permalink':
             $calendar_permalink = openagenda_get_permalink();
             $slug  = sanitize_title( $event['slug'] );
-            $value = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $calendar_permalink );
+            $value = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $calendar_permalink );            
             break;
         case 'timings':
         case 'next-timings':
@@ -92,7 +92,6 @@ function openagenda_get_field( $field, $uid = false ){
                 }, $next_timings );;
                 break;
             }
-            
             break;
         default:
             $end_value = array_reduce( explode( '.', $field ), function( $array, $field ) use ( $locale ) {
@@ -157,6 +156,26 @@ function openagenda_esc_field( $value, $field ){
             break;
     }
     return $value;
+}
+
+
+/**
+ * Returns the permalink to the current event, with or without context
+ */
+function openagenda_event_permalink( $use_context = false, $uid = false, $echo = true ){
+    global $openagenda;
+
+    $permalink = openagenda_get_field( 'permalink', $uid );
+    if( $openagenda->is_archive() && $openagenda->use_context() && $use_context ){
+        $context = $openagenda->get_context();
+        $context['event_offset'] = $openagenda->get_event_offset();
+        $encoded_context = openagenda_encode_context( $context );
+        $permalink = add_query_arg( 'context', $encoded_context, $permalink ); 
+    }
+
+    $permalink = apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context );
+    if( $echo ) echo openagenda_esc_field( $permalink, 'permalink' );
+    return $permalink;
 }
 
 
@@ -571,7 +590,7 @@ function openagenda_get_permalink(){
         $posts = get_posts( array(
             'post_type'   => 'oa-calendar',
             'meta_key'    => 'oa-calendar-uid',
-            'meta_value'  => $uid,
+            'meta_value'  => (int) $uid,
             'numberposts' => 1,
             'fields'      => 'ids',
         ) );
@@ -634,6 +653,92 @@ function openagenda_exports( $uid = false, $echo = true ) {
 function openagenda_filter( $filter, $args = array() ){
     $atts = openagenda_get_shortcode_attributes( $args );
     echo do_shortcode( sprintf( '[openagenda_filter_%s %s]', sanitize_key( $filter ), $atts ) );
+}
+
+
+/**
+ * Displays navigation between events on single events page
+ */
+function open_agenda_navigation( $echo = true ){
+    global $openagenda;
+    if( ! $openagenda->is_single() ) return;
+        
+    $previous_link = openagenda_get_previous_event_link();
+    $next_link     = openagenda_get_next_event_link();
+
+    if( ! $previous_link && ! $next_link ){
+        return;
+    }
+
+    $html = sprintf( 
+        '<nav class="oa-event-navigation">%s%s</nav>',
+        $previous_link,
+        $next_link
+    );
+
+    $html = apply_filters( 'openagenda_event_navigation', $html, $previous_link, $next_link );
+    if ( $echo ) echo $html;
+    return $html;
+}
+
+
+/**
+ * Returns a link to an adjacent event, if any
+ * 
+ * @param   string  $direction  'next' or 'previous'
+ * @return  string  $html        Link html  
+ */
+function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false ){
+    global $openagenda;
+    $event = openagenda_get_event( $uid );
+    if( ! $uid ) $uid = $event['uid'];
+    if( ! $openagenda->is_single() ) return false;
+    
+    $encoded_context = isset( $_GET['context'] ) ? sanitize_text_field( $_GET['context'] ) : false ;
+    $context = openagenda_decode_context();
+    $total   = (int) $context['total'];
+    $event_offset = (int) $context['event_offset'];
+
+    $html = '';
+    $invalid = 'next' === $direction ? (bool) ( ( $event_offset + 1 ) >= $total ) : (bool) ( $event_offset <= 0 ) ;
+
+    if( $encoded_context && ! $invalid ){
+        $url = add_query_arg( array(
+            'action'    => 'get_adjacent_event',
+            'nonce'     => wp_create_nonce( 'get_adjacent_event' ),
+            'uid'       => $openagenda->get_uid(),
+            'direction' => 'next' === $direction ? 'next' : 'previous',
+            'context'   => $encoded_context,
+        ), admin_url( 'admin-post.php' ) );
+
+        $next_label     = sprintf( '<span>%s</span>%s', esc_html_x( 'Next event', 'event navigation', 'openagenda' ), openagenda_icon( 'next', false ) );
+        $previous_label = sprintf( '%s<span>%s</span>', openagenda_icon( 'previous', false ), esc_html_x( 'Previous event', 'event navigation', 'openagenda' ) );
+
+        $html = sprintf( 
+            '<a class="oa-nav-link oa-%1$s-link" href="%2$s">%3$s</a>',
+            esc_attr( $direction ),
+            esc_url( $url ),
+            'previous' === $direction ? $previous_label : $next_label
+        );
+    }
+    $html = apply_filters( 'openagenda_adjacent_event_link', $html, $uid, $direction );
+    return $html;
+}
+
+
+/**
+ * Returns previous event link
+ */
+function openagenda_get_previous_event_link(){
+    return openagenda_get_adjacent_event_link( 'previous' );
+}
+
+
+/**
+ * Returns next event link
+ */
+function openagenda_get_next_event_link(){
+    return openagenda_get_adjacent_event_link( 'next' );
 }
 
 

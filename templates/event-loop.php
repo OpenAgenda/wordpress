@@ -16,6 +16,7 @@ if( $openagenda->have_events() ) : ?>
         <?php
             if( $openagenda->is_archive() ) openagenda_exports();
             if( $openagenda->is_archive() ) openagenda_pagination();
+            if( $openagenda->is_single() ) open_agenda_navigation();
             while( $openagenda->have_events() ) : $openagenda->the_event();
                 include openagenda_get_template( $template );
             endwhile; 
