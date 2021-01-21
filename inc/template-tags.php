@@ -696,8 +696,8 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
     
     $encoded_context = isset( $_GET['context'] ) ? sanitize_text_field( $_GET['context'] ) : false ;
     $context = openagenda_decode_context();
-    $total   = (int) $context['total'];
-    $event_offset = (int) $context['event_offset'];
+    $total   = $context && isset( $context['total'] ) ? (int) $context['total'] : 0;
+    $event_offset = $context && isset( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
 
     $html = '';
     $invalid = 'next' === $direction ? (bool) ( ( $event_offset + 1 ) >= $total ) : (bool) ( $event_offset <= 0 ) ;
