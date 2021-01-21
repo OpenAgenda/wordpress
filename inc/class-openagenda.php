@@ -193,6 +193,14 @@ class Openagenda {
 
 
     /**
+     * Returns the total number of events.
+     */
+    public function get_limit(){
+        return $this->limit;
+    }
+
+
+    /**
      * Returns the total number of pages.
      */
     public function get_total_pages(){

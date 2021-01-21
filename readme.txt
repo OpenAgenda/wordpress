@@ -116,6 +116,8 @@ This plugin displays data hosted and provided by [https://openagenda.com](https:
 
 By default, maps displayed by this plugin use data from [https://openstreetmap.org/](https://openstreetmap.org/) and uses the [leaflet JS library](https://leafletjs.com/). By using this plugin, you accept and agree with OpenStreeMap's [terms of use](https://wiki.osmfoundation.org/wiki/Terms_of_Use), [acceptable use policy](https://wiki.openstreetmap.org/wiki/Acceptable_Use_Policy) and [privacy policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy) 
 
+Icons used in the UI are [Genericons](https://genericons.com/), licenced under the GPL 2.0.
+
 == Frequently Asked Questions ==
 
 = Where is the settings page ? =

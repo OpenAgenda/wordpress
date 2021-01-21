@@ -554,7 +554,7 @@ function openagenda_get_page_links( $args = array() ){
  * @param   int     $page       Page to get link for.
  * @return  string  $permalink  Permalink to the page
  */
-function openagenda_get_page_permalink( $page = 1 ){
+function openagenda_get_page_permalink( $page = 1, $filters = null ){
     global $openagenda;    
     
     if( ! empty( get_option( 'permalink_structure' ) ) ){
@@ -567,9 +567,14 @@ function openagenda_get_page_permalink( $page = 1 ){
         $permalink = openagenda_get_permalink();
     }
 
-    if( ! empty( $filters = $openagenda->get_filters() ) ){
+    if( null === $filters && ! empty( $openagenda->get_filters() ) ){
+        $filters = $openagenda->get_filters();
+    }
+    
+    if( ! empty( $filters ) ){
         $permalink = add_query_arg( 'oaq', $filters, $permalink );
     }
+
     return apply_filters( 'openagenda_page_permalink', $permalink,  $openagenda->get_uid(), $page );
 }
 
@@ -665,14 +670,16 @@ function open_agenda_navigation( $echo = true ){
         
     $previous_link = openagenda_get_previous_event_link();
     $next_link     = openagenda_get_next_event_link();
+    $back_link     = openagenda_get_back_link();
 
     if( ! $previous_link && ! $next_link ){
         return;
     }
 
     $html = sprintf( 
-        '<nav class="oa-event-navigation">%s%s</nav>',
+        '<nav class="oa-event-navigation">%s%s%s</nav>',
         $previous_link,
+        $back_link,
         $next_link
     );
 
@@ -702,7 +709,7 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
     $html = '';
     $invalid = 'next' === $direction ? (bool) ( ( $event_offset + 1 ) >= $total ) : (bool) ( $event_offset <= 0 ) ;
 
-    if( $encoded_context && ! $invalid ){
+    if( $encoded_context ){
         $url = add_query_arg( array(
             'action'    => 'get_adjacent_event',
             'nonce'     => wp_create_nonce( 'get_adjacent_event' ),
@@ -714,14 +721,54 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
         $next_label     = sprintf( '<span>%s</span>%s', esc_html_x( 'Next event', 'event navigation', 'openagenda' ), openagenda_icon( 'next', false ) );
         $previous_label = sprintf( '%s<span>%s</span>', openagenda_icon( 'previous', false ), esc_html_x( 'Previous event', 'event navigation', 'openagenda' ) );
 
+        if( $invalid ){
+            $html = sprintf( 
+                '<span class="oa-nav-link oa-%1$s-link oa-nav-link-disabled">%2$s</span>',
+                esc_attr( $direction ),
+                'previous' === $direction ? $previous_label : $next_label,
+            );
+        } else {
+            $html = sprintf( 
+                '<a class="oa-nav-link oa-%1$s-link" href="%2$s">%3$s</a>',
+                esc_attr( $direction ),
+                esc_url( $url ),
+                'previous' === $direction ? $previous_label : $next_label,
+            );
+        }
+    }
+
+    $html = apply_filters( 'openagenda_adjacent_event_link', $html, $uid, $direction );
+    return $html;
+}
+
+/**
+ * Returns a 'Back to list' button on single events pages.
+ */
+function openagenda_get_back_link(){
+    global $openagenda;
+    $context = openagenda_decode_context();
+    
+    $filters = $context && isset( $context['oaq'] ) ? $context['oaq'] : array();
+    $total   = $context && isset( $context['total'] ) ? (int) $context['total'] : 0;
+    $limit   = $context && isset( $context['limit'] ) ? (int) $context['limit'] : $openagenda->get_limit();
+    $event_offset = $context && isset( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
+    $event_number = $event_offset + 1;
+    
+    $page = (int) ceil( $event_number / $limit );
+    $page_link = openagenda_get_page_permalink( $page, $filters );
+
+    $html = '';
+    if( $page_link ){
         $html = sprintf( 
-            '<a class="oa-nav-link oa-%1$s-link" href="%2$s">%3$s</a>',
-            esc_attr( $direction ),
-            esc_url( $url ),
-            'previous' === $direction ? $previous_label : $next_label
+            '<a class="oa-nav-link oa-back-link" href="%s">%s<span>%d / %d</span></a>',
+            esc_url( $page_link ),
+            openagenda_icon( 'home', false ),
+            (int) $event_number,
+            (int) $total,
         );
     }
-    $html = apply_filters( 'openagenda_adjacent_event_link', $html, $uid, $direction );
+
+    $html = apply_filters( 'openagenda_back_link', $html, $page_link, $page, $context );
     return $html;
 }
 

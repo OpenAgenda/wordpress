@@ -59,6 +59,7 @@
 .oa-event-navigation {
   align-items: center;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin: 1rem 0;
 }
@@ -67,19 +68,22 @@
   align-items: center;
   box-shadow: none;
   display: inline-flex;
+  line-height: 1;
   text-decoration: none;
   padding: 0.25rem;
 }
 
-.oa-next-link {
-  margin-left: auto;
-}
 .oa-next-link .oa-icon {
   margin-left: 4px;
 }
 
-.oa-previous-link .oa-icon {
+.oa-previous-link .oa-icon,
+.oa-back-link .oa-icon {
   margin-right: 4px;
+}
+
+.oa-nav-link-disabled {
+  opacity: 0.5;
 }
 
 /*****************************

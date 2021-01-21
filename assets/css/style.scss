@@ -75,6 +75,7 @@ $oa-dark: #333;
 .oa-event-navigation {
 	align-items: center;
 	display: flex;
+	justify-content: space-between;
 	flex-wrap: wrap;
 	margin: 1rem 0;
 }
@@ -82,20 +83,25 @@ $oa-dark: #333;
 	align-items: center;
 	box-shadow: none;
 	display: inline-flex;
+	line-height: 1;
 	text-decoration: none;
 	padding: .25rem;
 }
 .oa-next-link {
-	margin-left: auto;
 	.oa-icon {
 		margin-left: 4px;
 	}
 }
 
-.oa-previous-link {
+.oa-previous-link,
+.oa-back-link {
 	.oa-icon {
 		margin-right: 4px;
 	}
+}
+
+.oa-nav-link-disabled {
+	opacity: .5;
 }
 /*****************************
  * Exports and Share Buttons
