@@ -1,15 +1,15 @@
-# Copyright (C) 2021 Vincent Dubroeucq
+# Copyright (C) 2021 OpenAgenda
 # This file is distributed under the same license as the OpenAgenda plugin.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenAgenda 0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
-"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-01-13 14:57+0100\n"
-"PO-Revision-Date: 2021-01-15 13:51+0100\n"
+"POT-Creation-Date: 2021-01-25 14:49+0100\n"
+"PO-Revision-Date: 2021-01-25 14:53+0100\n"
 "X-Generator: Poedit 2.4.1\n"
 "X-Domain: openagenda\n"
 "Last-Translator: \n"
@@ -17,27 +17,23 @@ msgstr ""
 "Language: fr\n"
 
 #. Plugin Name of the plugin
+#. Author of the plugin
 msgid "OpenAgenda"
 msgstr "OpenAgenda"
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
-msgid "https://vincentdubroeucq.com/"
-msgstr "https://vincentdubroeucq.com/"
+msgid "https://openagenda.com/"
+msgstr "https://openagenda.com/"
 
 #. Description of the plugin
 msgid "Display your OpenAgenda data on your WordPress site."
 msgstr "Affiche vos agendas OpenAgenda sur votre site WordPress."
 
-#. Author of the plugin
-msgid "Vincent Dubroeucq"
-msgstr "Vincent Dubroeucq"
-
 #: inc/class-admin-pages.php:24
 msgid "OpenAgenda Settings"
 msgstr "Réglages OpenAgenda"
 
-#: inc/class-admin-pages.php:25 openagenda.php:114
+#: inc/class-admin-pages.php:25 openagenda.php:113
 msgid "Settings"
 msgstr "Réglages"
 
@@ -53,11 +49,11 @@ msgstr "Réglages généraux"
 msgid "Display settings"
 msgstr "Réglages d'affichage"
 
-#: inc/class-ajax-handler.php:34
+#: inc/class-ajax-handler.php:36
 msgid "No post ID was provided."
 msgstr "Aucun ID de publication n'a été fourni."
 
-#: inc/class-ajax-handler.php:40
+#: inc/class-ajax-handler.php:42
 msgid "The post ID provided does not refer to a calendar."
 msgstr "L'identifiant fourni ne correspond à aucun agenda."
 
@@ -234,8 +230,7 @@ msgstr "Niveau de zoom par défaut&nbsp;:"
 msgid "Preview label :"
 msgstr "Label du lien de prévisualisation&nbsp;:"
 
-#: inc/class-filter-widget.php:215 inc/class-main.php:46
-msgctxt "Filter name"
+#: inc/class-filter-widget.php:215
 msgid "Preview"
 msgstr "Prévisualisation"
 
@@ -279,6 +274,11 @@ msgctxt "Filter name"
 msgid "Map"
 msgstr "Carte"
 
+#: inc/class-main.php:46
+msgctxt "Filter name"
+msgid "Preview"
+msgstr "Prévisualisation"
+
 #: inc/class-main.php:51
 msgctxt "Filter name"
 msgid "Relative"
@@ -305,23 +305,23 @@ msgstr "Evénements par page"
 msgid "New field"
 msgstr "Nouveau champ"
 
-#: inc/class-openagenda.php:277
+#: inc/class-openagenda.php:285
 msgid "XLSX"
 msgstr "XLSX"
 
-#: inc/class-openagenda.php:278
+#: inc/class-openagenda.php:286
 msgid "JSON"
 msgstr "JSON"
 
-#: inc/class-openagenda.php:279
+#: inc/class-openagenda.php:287
 msgid "RSS"
 msgstr "RSS"
 
-#: inc/class-openagenda.php:280
+#: inc/class-openagenda.php:288
 msgid "PDF"
 msgstr "PDF"
 
-#: inc/class-openagenda.php:343
+#: inc/class-openagenda.php:393
 msgid "There was an error parsing the JSON."
 msgstr "Il y a eu une erreur de lecture du JSON."
 
@@ -419,19 +419,19 @@ msgid ""
 "Please provide a valid calendar UID to display in the calendar settings."
 msgstr "Veuillez fournir un UID d'agenda valide dans les réglages de l'agenda."
 
-#: inc/class-shortcodes.php:215
+#: inc/class-shortcodes.php:216
 msgid "Preview the calendar"
 msgstr "Prévisualiser l'agenda"
 
-#: inc/class-shortcodes.php:271
+#: inc/class-shortcodes.php:272
 msgid "Search this calendar"
 msgstr "Chercher dans cet agenda"
 
-#: inc/helper-functions.php:224
+#: inc/helper-functions.php:262
 msgid "Fetching events... Please wait a moment."
 msgstr "Recherche des événements en cours... Veuillez patienter un moment."
 
-#: inc/helper-functions.php:236
+#: inc/helper-functions.php:274
 msgid ""
 "There was an error updating the events. Pleaser refresh the page and try "
 "again."
@@ -440,57 +440,63 @@ msgstr ""
 "rafraichir la page et réessayer."
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:268
+#: inc/helper-functions.php:306
 msgctxt "next event timing"
 msgid "In %s"
 msgstr "Dans %s"
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:270
+#: inc/helper-functions.php:308
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr "Il y a %s"
 
-#: inc/template-tags.php:227
+#: inc/template-tags.php:246
 msgid "No timing avilable"
 msgstr "Pas d'horaire disponible"
 
-#: inc/template-tags.php:287
+#: inc/template-tags.php:306
 msgid "View previous month"
 msgstr "Voir le mois précédent"
 
-#: inc/template-tags.php:290
+#: inc/template-tags.php:309
 msgid "View next month"
 msgstr "Voir le mois suivant"
 
-#: inc/template-tags.php:378
+#: inc/template-tags.php:397
 msgid "Share on Facebook"
 msgstr "Partagez sur Facebook"
 
-#: inc/template-tags.php:383
+#: inc/template-tags.php:402
 msgid "Share on Twitter"
 msgstr "Partagez sur Twitter"
 
-#: inc/template-tags.php:391
+#: inc/template-tags.php:410
 msgid "Share on Linkedin"
 msgstr "Partagez sur LinkedIn"
 
-#: inc/template-tags.php:421
+#: inc/template-tags.php:440
 msgid "Share :"
-msgstr "Partager :"
+msgstr "Partager&nbsp;:"
 
-#: inc/template-tags.php:485
+#: inc/template-tags.php:504
 msgid "Previous page"
 msgstr "Page précédente"
 
-#: inc/template-tags.php:486
+#: inc/template-tags.php:505
 msgid "Next page"
 msgstr "Page suivante"
 
-#: inc/template-tags.php:617
+#: inc/template-tags.php:641
 msgid "Download :"
-msgstr "Télécharger :"
+msgstr "Télécharger&nbsp;:"
 
-#: openagenda.php:119
-msgid "Documentation"
-msgstr "Documentation"
+#: inc/template-tags.php:721
+msgctxt "event navigation"
+msgid "Next event"
+msgstr "Evénement suivant"
+
+#: inc/template-tags.php:722
+msgctxt "event navigation"
+msgid "Previous event"
+msgstr "Evénement précédent"
