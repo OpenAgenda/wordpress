@@ -79,6 +79,11 @@ class Openagenda {
      * Raw response
      */
     protected $raw_response = null;
+    
+    /**
+     * Errors
+     */
+    protected $errors = null;
 
     /**
      * Parsed JSON response
@@ -146,7 +151,7 @@ class Openagenda {
 
         $this->raw_response = $this->request( $this->args );
         $this->json         = $this->parse_response( $this->args );
-        $this->events       = is_array( $this->json['events'] ) && ! empty( $this->json['events'] ) ? $this->json['events'] : array();
+        $this->events       = isset( $this->json['events'] ) && is_array( $this->json['events'] ) && ! empty( $this->json['events'] ) ? $this->json['events'] : array();
         $this->event        = ! empty( $this->get_events() ) ? $this->get_events()[0] : null;
         
         $this->count       = count( $this->events );
@@ -444,6 +449,16 @@ class Openagenda {
         if( ! $this->use_cache ) return false;
         $should_serve_cache = empty( $this->get_filters() ) || $this->is_single();
         return $should_serve_cache;
+    }
+
+
+    /**
+     * Flushes cache
+     */
+    public function openagenda_flush_cache(){
+        global $wpdb;
+        $wpdb->query( "DELETE FROM `$wpdb->options` WHERE `option_name` LIKE ('_transient_oa_%')" );
+        $wpdb->query( "DELETE FROM `$wpdb->options` WHERE `option_name` LIKE ('_transient_timeout_oa_%')" );
     }
 
 

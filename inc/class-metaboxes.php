@@ -31,10 +31,15 @@ class Metaboxes implements Hookable {
         );
         $this->fields = array(
             'oa-calendar-uid' => array(
-                'metabox' => 'oa-calendar-settings',
-                'type'    => 'text',
-                'label'   => __( 'Calendar UID', 'openagenda' ),
-                'default' => '',
+                'metabox'     => 'oa-calendar-settings',
+                'type'        => 'text',
+                'label'       => __( 'Calendar UID', 'openagenda' ),
+                'default'     => '',
+                'description' => sprintf( 
+                    '<a href="%s" class="components-external-link" target="_blank" rel="external noopener noreferrer">%s</a>',
+                    'https://github.com/OpenAgenda/wordpress#howtogetagendauid',
+                    __( 'How to find my calendar UID ?', 'openagenda' ),
+                ),
             ),
             'oa-calendar-per-page' => array(
                 'metabox' => 'oa-calendar-settings',
@@ -119,10 +124,11 @@ class Metaboxes implements Hookable {
         global $post;
 
         $args = wp_parse_args( $args, array(
-            'metabox' => 'calendar-settings',
-            'type'    => 'text',
-            'label'   => __( 'New field', 'openagenda' ),
-            'default' => '',
+            'metabox'     => 'calendar-settings',
+            'type'        => 'text',
+            'label'       => __( 'New field', 'openagenda' ),
+            'default'     => '',
+            'description' => '',
         ) );
 
         $field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];  
@@ -135,6 +141,11 @@ class Metaboxes implements Hookable {
                             <label for="<?php echo esc_attr( $name ); ?>" class="components-base-control__label" style="display: block; margin-bottom: 8px"><?php echo esc_html( $args['label'] ); ?></label>
                             <input id="<?php echo esc_attr( $name ); ?>" name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $args['type'] ); ?>" class="components-text-control__input" value="<?php echo esc_attr( $field_value ); ?>" />
                         </div>
+                        <?php 
+                            if( ! empty( $args['description'] ) ) {
+                                printf( '<p>%s</p>', wp_kses_post( $args['description'] ) );
+                            }
+                        ?>
                     </div>
                 <?php
                 break;
@@ -172,5 +183,11 @@ class Metaboxes implements Hookable {
         if( ! empty( $_POST['oa-calendar-per-page'] ) ){
             update_post_meta( $post_ID, 'oa-calendar-per-page', (int) $_POST['oa-calendar-per-page'] );
         }
+        
+        if( $update ){
+            $openagenda = new Openagenda( get_post_meta( $post_ID, 'oa-calendar-uid', true ), array( 'limit' => 1 ) );
+            $openagenda->openagenda_flush_cache();
+        }
+
     }
 }

@@ -53,7 +53,7 @@ $oa-dark: #333;
 /**************
  * Pagination
  **************/
-.oa-pagination {
+ul.oa-pagination {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -92,14 +92,12 @@ $oa-dark: #333;
 		margin-left: 4px;
 	}
 }
-
 .oa-previous-link,
 .oa-back-link {
 	.oa-icon {
 		margin-right: 4px;
 	}
 }
-
 .oa-nav-link-disabled {
 	opacity: .5;
 }
@@ -113,8 +111,8 @@ $oa-dark: #333;
 	justify-content: flex-end;
 	margin: 1rem 0;
 }
-.oa-exports-links,
-.oa-sharers-links {
+ul.oa-exports-links,
+ul.oa-sharers-links {
 	display: flex;
 	list-style: none;
 	margin: 0;
@@ -133,7 +131,6 @@ $oa-dark: #333;
 .oa-event-timings {
 	margin: 1rem 0;
 }
-
 .oa-event-timing,
 .oa-event-range {
 	align-items: center;
@@ -151,7 +148,7 @@ $oa-dark: #333;
 .oa-timing-times {
 	margin-left: auto;
 }
-.oa-month {
+ul.oa-month {
 	list-style: none;
 	&.oa-hidden {
 		display: none;
@@ -162,7 +159,7 @@ $oa-dark: #333;
 	display: flex;
 	justify-content: space-between;
 }
-.oa-week {
+ul.oa-week {
 	margin-top: .75rem;
 	list-style: none;
 }
@@ -382,7 +379,6 @@ div[data-container-id="oa-wrapper"]{
 	}
 }
 
-
 /***************
  * Map Filter
  ***************/
@@ -396,7 +392,6 @@ div[data-container-id="oa-wrapper"]{
 		margin: 0;
 	}
 }
-
 .event-map {
 	height: 300px;
 }

@@ -83,6 +83,7 @@ class Settings implements Hookable {
                     'placeholder' => '',
                     'default'     => true,
                     'description' => sprintf( __( 'Allow for embedded content in the event\'s content.', 'openagenda' ), 'https://openagenda.com' ),
+                    'help-text'   => sprintf( __( 'By default, embedded content like Youtube players will be filtered, and will not appear on the frontend. Checking this option will disable filtering.', 'openagenda' ) ),
                 ),
             ),
             'include-styles' => array(
@@ -312,8 +313,9 @@ class Settings implements Hookable {
                     placeholder="<?php echo esc_attr( $args['placeholder']); ?>"
                     <?php checked( $value ) ?>
                 >
-                <?php if( ! empty( $args['description'] ) ) printf( '<span class="description">%s</span>', wp_kses_post( $args['description'] ) ); ?>
+                <?php if( ! empty( $args['description'] ) ) printf( '<span>%s</span>', wp_kses_post( $args['description'] ) ); ?>
             </label>
+            <?php if( ! empty( $args['help-text']) ) printf( '<p class="description">%s</p>', wp_kses_post( $args['help-text'] ) ); ?>
         <?php
         
     }

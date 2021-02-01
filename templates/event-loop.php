@@ -23,4 +23,8 @@ if( $openagenda->have_events() ) : ?>
             if( $openagenda->is_archive() ) openagenda_pagination();
         ?>
     </div>
+<?php else: ?>
+    <div class="<?php echo esc_attr( $class ); ?>">
+        <p><?php esc_html_e( 'Sorry, we could not find any event.', 'openagenda' ); ?></p>
+    </div>
 <?php endif;
