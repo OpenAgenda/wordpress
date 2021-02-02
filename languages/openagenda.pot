@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-01-25 14:49+0100\n"
+"POT-Creation-Date: 2021-02-02 15:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: Poedit 2.4.1\n"
 "X-Domain: openagenda\n"
@@ -57,7 +57,7 @@ msgid "The post ID provided does not refer to a calendar."
 msgstr ""
 
 #: inc/class-content-manager.php:18 inc/class-content-manager.php:105
-#: inc/class-settings.php:361
+#: inc/class-settings.php:363
 msgid "calendar"
 msgstr ""
 
@@ -192,51 +192,59 @@ msgstr ""
 msgid "Choose filter"
 msgstr ""
 
-#: inc/class-filter-widget.php:182
+#: inc/class-filter-widget.php:183
 msgid "Map tiles link :"
 msgstr ""
 
-#: inc/class-filter-widget.php:188
+#: inc/class-filter-widget.php:189
 msgid "Automatically update map on scroll ?"
 msgstr ""
 
-#: inc/class-filter-widget.php:194
+#: inc/class-filter-widget.php:195
 msgid "Default longitude :"
 msgstr ""
 
-#: inc/class-filter-widget.php:199
+#: inc/class-filter-widget.php:200
 msgid "Default latitude :"
 msgstr ""
 
-#: inc/class-filter-widget.php:204
+#: inc/class-filter-widget.php:205
 msgid "Map default zoom :"
 msgstr ""
 
-#: inc/class-filter-widget.php:213
+#: inc/class-filter-widget.php:214
+msgid "Agenda UID :"
+msgstr ""
+
+#: inc/class-filter-widget.php:220
 msgid "Preview label :"
 msgstr ""
 
-#: inc/class-filter-widget.php:215
+#: inc/class-filter-widget.php:222
 msgid "Preview"
 msgstr ""
 
-#: inc/class-filter-widget.php:221
-msgid "Placeholder text :"
-msgstr ""
-
 #: inc/class-filter-widget.php:223
-msgid "Search events"
+msgid "This corresponds to the text for the link to the calendar."
 msgstr ""
 
 #: inc/class-filter-widget.php:229
+msgid "Placeholder text :"
+msgstr ""
+
+#: inc/class-filter-widget.php:231
+msgid "Search events"
+msgstr ""
+
+#: inc/class-filter-widget.php:237
 msgid "Tag group :"
 msgstr ""
 
-#: inc/class-filter-widget.php:234
+#: inc/class-filter-widget.php:242
 msgid "Tags to display :"
 msgstr ""
 
-#: inc/class-filter-widget.php:235
+#: inc/class-filter-widget.php:243
 msgid "Enter tags separated by a comma."
 msgstr ""
 
@@ -267,7 +275,7 @@ msgstr ""
 
 #: inc/class-main.php:51
 msgctxt "Filter name"
-msgid "Relative"
+msgid "Upcoming"
 msgstr ""
 
 #: inc/class-main.php:56
@@ -283,31 +291,35 @@ msgstr ""
 msgid "Calendar UID"
 msgstr ""
 
-#: inc/class-metaboxes.php:42
+#: inc/class-metaboxes.php:41
+msgid "How to find my calendar UID ?"
+msgstr ""
+
+#: inc/class-metaboxes.php:47
 msgid "Events per page"
 msgstr ""
 
-#: inc/class-metaboxes.php:124
+#: inc/class-metaboxes.php:129
 msgid "New field"
 msgstr ""
 
-#: inc/class-openagenda.php:285
+#: inc/class-openagenda.php:290
 msgid "XLSX"
 msgstr ""
 
-#: inc/class-openagenda.php:286
+#: inc/class-openagenda.php:291
 msgid "JSON"
 msgstr ""
 
-#: inc/class-openagenda.php:287
+#: inc/class-openagenda.php:292
 msgid "RSS"
 msgstr ""
 
-#: inc/class-openagenda.php:288
+#: inc/class-openagenda.php:293
 msgid "PDF"
 msgstr ""
 
-#: inc/class-openagenda.php:393
+#: inc/class-openagenda.php:398
 msgid "There was an error parsing the JSON."
 msgstr ""
 
@@ -328,52 +340,56 @@ msgstr ""
 msgid "Allow for embedded content in the event's content."
 msgstr ""
 
-#: inc/class-settings.php:90
+#: inc/class-settings.php:86
+msgid "By default, embedded content like Youtube players will be filtered, and will not appear on the frontend. Checking this option will disable filtering."
+msgstr ""
+
+#: inc/class-settings.php:91
 msgid "Load default stylesheets."
 msgstr ""
 
-#: inc/class-settings.php:101
+#: inc/class-settings.php:102
 msgid "Load default styling."
 msgstr ""
 
-#: inc/class-settings.php:106
+#: inc/class-settings.php:107
 msgid "Cache duration"
 msgstr ""
 
-#: inc/class-settings.php:117
+#: inc/class-settings.php:118
 msgid "Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored"
 msgstr ""
 
-#: inc/class-settings.php:122
+#: inc/class-settings.php:123
 msgid "Default map tiles link"
 msgstr ""
 
-#: inc/class-settings.php:137
+#: inc/class-settings.php:138
 msgid "Default map tiles attribution link"
 msgstr ""
 
-#: inc/class-settings.php:152
+#: inc/class-settings.php:153
 msgid "Delete all calendar content on uninstall ?"
 msgstr ""
 
-#: inc/class-settings.php:163
+#: inc/class-settings.php:164
 msgid "Delete all posts of type \"Calendar\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
 msgstr ""
 
-#: inc/class-settings.php:168
+#: inc/class-settings.php:169
 msgid "Delete all options on uninstall ?"
 msgstr ""
 
-#: inc/class-settings.php:179
+#: inc/class-settings.php:180
 msgid "Delete all of this plugin's settings permanently when I uninstall the plugin."
 msgstr ""
 
-#: inc/class-settings.php:184
+#: inc/class-settings.php:185
 msgid "Calendar base"
 msgstr ""
 
 #. translators: %s : home url
-#: inc/class-settings.php:196
+#: inc/class-settings.php:197
 msgid "You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>."
 msgstr ""
 
@@ -385,26 +401,26 @@ msgstr ""
 msgid "Preview the calendar"
 msgstr ""
 
-#: inc/class-shortcodes.php:272
+#: inc/class-shortcodes.php:278
 msgid "Search this calendar"
 msgstr ""
 
-#: inc/helper-functions.php:262
+#: inc/helper-functions.php:263
 msgid "Fetching events... Please wait a moment."
 msgstr ""
 
-#: inc/helper-functions.php:274
+#: inc/helper-functions.php:275
 msgid "There was an error updating the events. Pleaser refresh the page and try again."
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:306
+#: inc/helper-functions.php:307
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:308
+#: inc/helper-functions.php:309
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
@@ -445,16 +461,20 @@ msgstr ""
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:641
+#: inc/template-tags.php:645
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:721
+#: inc/template-tags.php:725
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
-#: inc/template-tags.php:722
+#: inc/template-tags.php:726
 msgctxt "event navigation"
 msgid "Previous event"
+msgstr ""
+
+#: templates/event-loop.php:28
+msgid "Sorry, we could not find any event."
 msgstr ""

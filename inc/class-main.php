@@ -48,7 +48,7 @@ class Main {
                 'script'    => 'assets/js/filters/oaPreviewWidget.min.js',
             ),
             'openagenda_filter_relative' => array(
-                'label'     => _x( 'Relative', 'Filter name', 'openagenda' ),
+                'label'     => _x( 'Upcoming', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_relative',
                 'script'    => 'assets/js/filters/oaRelativeWidget.min.js',
             ),

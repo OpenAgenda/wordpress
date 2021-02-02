@@ -133,6 +133,7 @@ class Filter_Widget extends \WP_Widget {
             case 'openagenda_filter_preview':
                 $additional_settings = array( 
                     'preview_label' => ! empty( $new_instance['preview_label'] ) ? sanitize_text_field( $new_instance['preview_label'] ) : '',
+                    'preview_uid'   => ! empty( $new_instance['preview_uid'] ) ? sanitize_text_field( $new_instance['preview_uid'] ) : '',
                 );
                 break;
             case 'openagenda_filter_search':
@@ -208,11 +209,18 @@ class Filter_Widget extends \WP_Widget {
                 ),
             ),
             'openagenda_filter_preview' => array(
+                'preview_uid' => array(
+                    'name'        => 'preview_uid',
+                    'label'       => __( 'Agenda UID :', 'openagenda' ),
+                    'class'       => 'widefat',
+                    'default'     => ''
+                ),
                 'preview_label' => array(
                     'name'        => 'preview_label',
                     'label'       => __( 'Preview label :', 'openagenda' ),
                     'class'       => 'widefat',
-                    'default'     => __( 'Preview', 'openagenda' )
+                    'default'     => __( 'Preview', 'openagenda' ),
+                    'help-text'   => __( 'This corresponds to the text for the link to the calendar.', 'openagenda' ),
                 ),
             ),
             'openagenda_filter_search' => array(
@@ -282,17 +290,20 @@ class Filter_Widget extends \WP_Widget {
                 );
                 break;
             default:
+                $help = ! empty( $field['help-text'] ) ? sprintf('<span class="description">%s</span>', esc_html( $field['help-text'] ) ) : '';    
                 $html = sprintf( 
                     '<p>
                         <label for="%1$s">%3$s</label>
                         <input type="%4$s" class="%5$s" id="%1$s" name="%2$s" value="%6$s">
+                        %7$s
                     </p>',
                     esc_attr( $this->get_field_id( $field['name'] ) ),
                     esc_attr( $this->get_field_name( $field['name'] ) ),
                     esc_html( $field['label'] ),
                     esc_attr( $field['type'] ),
                     esc_attr( $field['class'] ),
-                    esc_attr( $value )
+                    esc_attr( $value ),
+                    $help
                 );
                 break;
         }

@@ -124,12 +124,14 @@ ul.oa-sharers-links {
 }
 
 .oa-event-timing,
-.oa-event-range {
+.oa-event-range,
+.oa-card-meta {
   align-items: center;
   display: flex;
 }
 .oa-event-timing .oa-icon,
-.oa-event-range .oa-icon {
+.oa-event-range .oa-icon,
+.oa-card-meta .oa-icon {
   margin-right: 5px;
 }
 
@@ -375,6 +377,53 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 
 .event-map {
   height: 300px;
+}
+
+/******************
+ * Preview Filter
+ ******************/
+.oa-preview-card {
+  margin-bottom: 0.5rem;
+}
+
+.oa-card {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (min-width: 576px) {
+  .oa-card {
+    flex-wrap: nowrap;
+  }
+}
+
+.oa-card-image-link {
+  display: block;
+  flex-shrink: 0;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.oa-card-img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.oa-card-body {
+  padding: 0.5rem 1rem;
+}
+
+.oa-card-link {
+  margin-bottom: 0.5rem;
+}
+
+.oa-list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.2;
 }
 
 /*# sourceMappingURL=style.css.map */

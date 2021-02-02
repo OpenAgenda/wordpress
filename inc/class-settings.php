@@ -114,7 +114,7 @@ class Settings implements Hookable {
                     'label_for'   => 'openagenda_cache_duration',
                     'type'        => 'number',
                     'placeholder' => '',
-                    'default'     => HOUR_IN_SECONDS,
+                    'default'     => (int) ( HOUR_IN_SECONDS / 2 ),
                     'description' => __( 'Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored', 'openagenda' ),
                 ),
             ),
@@ -330,7 +330,7 @@ class Settings implements Hookable {
     public function sanitize_general_settings( $settings ){
         $new_settings = array(
             'openagenda_api_key'        => ! empty( $settings['openagenda_api_key'] ) ? sanitize_text_field( $settings['openagenda_api_key'] ) : '',
-            'openagenda_cache_duration' => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] : HOUR_IN_SECONDS,
+            'openagenda_cache_duration' => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] :  (int) ( HOUR_IN_SECONDS / 2 ),
             'openagenda_include_embeds' => isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : false,
             'openagenda_include_styles' => isset( $settings['openagenda_include_styles'] ) ? (bool) $settings['openagenda_include_styles'] : false,
             'openagenda_map_tiles_link' => ! empty( $settings['openagenda_map_tiles_link'] ) ? sanitize_text_field( $settings['openagenda_map_tiles_link'] ) : '',

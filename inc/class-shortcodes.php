@@ -123,7 +123,7 @@ class Shortcodes implements Hookable {
             $data_group, 
             openagenda_icon( 'refresh', false )
         );
-        return apply_filters( 'openagenda_filter_tags', $filter, $uid );
+        return apply_filters( 'openagenda_filter_tags', $filter, $uid, $atts );
     }
 
 
@@ -142,7 +142,7 @@ class Shortcodes implements Hookable {
 
         wp_enqueue_script( 'openagenda_filter_calendar' );
         $filter = sprintf( '<div class="cbpgcl cibulCalendar" data-cbctl="%s|%s">%s</div>', esc_attr( $uid ), esc_attr( openagenda_get_locale() ), openagenda_icon( 'refresh', false ) );
-        return apply_filters( 'openagenda_filter_calendar', $filter, $uid );
+        return apply_filters( 'openagenda_filter_calendar', $filter, $uid, $atts );
     }
 
 
@@ -211,25 +211,28 @@ class Shortcodes implements Hookable {
      * @return  string  $html     HTML to display.
      */
     public function openagenda_filter_preview( $atts = array(), $content = null, $tag = 'openagenda_filter_preview' ){
-        global $openagenda;
-        if( ! $openagenda ) return '';
-        $uid = $openagenda->get_uid();
-
         $defaults = array(
+            'preview_uid'   => '',
             'preview_label' => __( 'Preview the calendar', 'openagenda' ),
+            'preview_count' => 3,
         );
         $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
 
-        $filter = sprintf( 
-            '<div data-oapr class="preview cbpgpr" data-cbctl="%s"><a href="%s">%s</a>%s</div>', 
-            esc_attr( $uid ),
-            esc_url( get_permalink() ),
+        ob_start();
+        printf(
+            '<div data-oapr class="preview cbpgpr" data-cbctl="%s" data-count="%d"><a href="%s">%s</a>%s', 
+            esc_attr( $atts['preview_uid'] ),
+            (int) $atts['preview_count'],
+            esc_url( openagenda_get_permalink( $atts['preview_uid'] ) ),
             esc_html( $atts['preview_label'] ),
-            openagenda_icon( 'refresh', false )
+            openagenda_icon( 'refresh', false ),
         );
+        include openagenda_get_template( 'preview' );
+        echo '</div>'; // Previous <div> was left open to insert template
+        $filter = ob_get_clean();
 
         wp_enqueue_script( 'openagenda_filter_preview' );
-        return apply_filters( 'openagenda_filter_preview', $filter, $uid );
+        return apply_filters( 'openagenda_filter_preview', $filter, $atts );
     }
 
 
@@ -254,7 +257,7 @@ class Shortcodes implements Hookable {
         );
         
         wp_enqueue_script( 'openagenda_filter_relative' );
-        return apply_filters( 'openagenda_filter_relative', $filter, $uid );
+        return apply_filters( 'openagenda_filter_relative', $filter, $uid, $atts );
     }
 
 
@@ -286,6 +289,6 @@ class Shortcodes implements Hookable {
         );
         
         wp_enqueue_script( 'openagenda_filter_search' );
-        return apply_filters( 'openagenda_filter_search', $filter, $uid );
+        return apply_filters( 'openagenda_filter_search', $filter, $uid, $atts );
     }
 }

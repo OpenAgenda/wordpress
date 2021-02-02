@@ -580,27 +580,31 @@ function openagenda_get_page_permalink( $page = 1, $filters = null ){
 
 
 /**
- * Returns the current calendar permalink
+ * Returns a calendar permalink. Defaults to current calendar.
  * 
+ * @param   string  $uid        UID of calendar to get permalink for.
  * @return  string  $permalink
  */
-function openagenda_get_permalink(){
+function openagenda_get_permalink( $uid = false ){
     global $openagenda;
-    $uid = $openagenda->get_uid();
-    $permalink = false;
     
-    if( is_singular( 'oa-calendar' ) ){
-        $permalink = get_permalink();
+    $permalink = false;
+
+    if( ! $uid ){
+        if( is_singular( 'oa-calendar' ) ) {
+            $uid       = $openagenda->get_uid();
+            $permalink = get_permalink();
+        }
     } else {
         $posts = get_posts( array(
             'post_type'   => 'oa-calendar',
             'meta_key'    => 'oa-calendar-uid',
-            'meta_value'  => (int) $uid,
+            'meta_value'  => sanitize_text_field( $uid ),
             'numberposts' => 1,
             'fields'      => 'ids',
         ) );
         if( ! empty( $posts ) ){
-            $post_id = $posts[0];
+            $post_id   = $posts[0];
             $permalink = get_permalink( $post_id );
         }
     }        
