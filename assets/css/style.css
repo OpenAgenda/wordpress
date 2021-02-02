@@ -32,10 +32,14 @@
   margin: 0.25rem 0;
 }
 
+.oa-event-thumbnail {
+  margin-bottom: 1rem;
+}
+
 /**************
  * Pagination
  **************/
-.oa-pagination {
+ul.oa-pagination {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -97,8 +101,8 @@
   margin: 1rem 0;
 }
 
-.oa-exports-links,
-.oa-sharers-links {
+ul.oa-exports-links,
+ul.oa-sharers-links {
   display: flex;
   list-style: none;
   margin: 0;
@@ -141,10 +145,10 @@
   margin-left: auto;
 }
 
-.oa-month {
+ul.oa-month {
   list-style: none;
 }
-.oa-month.oa-hidden {
+ul.oa-month.oa-hidden {
   display: none;
 }
 
@@ -154,7 +158,7 @@
   justify-content: space-between;
 }
 
-.oa-week {
+ul.oa-week {
   margin-top: 0.75rem;
   list-style: none;
 }
@@ -223,7 +227,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
  * Active Filters
  *****************/
 .active-filters li a {
-  padding: 4px;
+  padding: 5px;
   line-height: 1;
   text-decoration: none;
 }
@@ -265,6 +269,9 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 /*******************
  * Calendar Filter
  *******************/
+.ccal {
+  background-color: #eee;
+}
 .ccal * {
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -323,6 +330,12 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   background: #eee;
   border-bottom: 1px solid silver;
   line-height: 46px;
+  padding: 5px;
+}
+.ccal .calmonthnav .calprevmonth,
+.ccal .calmonthnav .calmonth,
+.ccal .calmonthnav .calnextmonth {
+  margin: 0;
 }
 .ccal .hasdates {
   background: #fff;

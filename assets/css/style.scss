@@ -19,7 +19,6 @@ $oa-dark: #333;
 	--oa-main-color: #{$oa-blue};
 }
 
-
 /*****************************
  * Screen reader text helper
  *****************************/
@@ -48,6 +47,9 @@ $oa-dark: #333;
 	p {
 		margin: .25rem 0;
 	}
+}
+.oa-event-thumbnail {
+	margin-bottom: 1rem;
 }
 
 /**************
@@ -101,6 +103,7 @@ ul.oa-pagination {
 .oa-nav-link-disabled {
 	opacity: .5;
 }
+
 /*****************************
  * Exports and Share Buttons
  *****************************/
@@ -231,7 +234,7 @@ div[data-container-id="oa-wrapper"]{
  *****************/
 .active-filters {
 	li a {
-		padding: 4px;
+		padding: 5px;
 		line-height: 1;
 		text-decoration: none;
 		&:hover,
@@ -280,6 +283,7 @@ div[data-container-id="oa-wrapper"]{
  * Calendar Filter
  *******************/
 .ccal {
+	background-color: $oa-gray-lighter;
 	* {
 		-moz-user-select: -moz-none;
 		-khtml-user-select: none;
@@ -300,7 +304,6 @@ div[data-container-id="oa-wrapper"]{
 	ul.calweekdays,
 	.calbody ul {
 		li {
-
 			border: 2px solid $oa-gray-lighter;
 			cursor: pointer;
 			color: $oa-gray;
@@ -350,6 +353,12 @@ div[data-container-id="oa-wrapper"]{
 		background: $oa-gray-lighter;
 		border-bottom: 1px solid $oa-silver;
 		line-height: 46px;
+		padding: 5px;
+		.calprevmonth,
+		.calmonth,
+		.calnextmonth {
+			margin: 0;
+		}
 	}
 
 	.hasdates {
