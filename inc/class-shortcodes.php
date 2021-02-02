@@ -166,30 +166,33 @@ class Shortcodes implements Hookable {
             'map_longitude'  => '',
             'map_latitude'   => '',
         );
-
         $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_map' );
 
-        $coords = '';
+        $data_auto      = ! empty( $atts['map_auto'] ) ? 'data-auto="true"' : '';
+        $data_event_uid = $openagenda->is_single() ? sprintf( 'data-event-uid=%s', esc_attr( \openagenda_get_field( 'uid' ) ) ) : '';
+        $data_longitude = ! empty( $atts['map_longitude'] ) ? sprintf( 'data-longitude=%s', esc_attr( $atts['map_longitude'] ) ) : '';
+        $data_latitude  = ! empty( $atts['map_latitude'] ) ? sprintf( 'data-latitude=%s', esc_attr( $atts['map_latitude'] ) ) : '';
+        $data_zoom      = ! empty( $atts['map_zoom'] ) ? sprintf( 'data-zoom=%s', esc_attr( $atts['map_zoom'] ) ) : '';
+        $data_coords    = '';
         if( ! empty( $atts['map_longitude'] ) && ! empty( $atts['map_latitude'] ) ){
-            $coords = sprintf( 
+            $data_coords = sprintf( 
                 'data-coords="%s|%s|%d"', 
                 esc_attr( $atts['map_longitude'] ),
                 esc_attr( $atts['map_latitude'] ),
                 esc_attr( $atts['map_zoom'] )
             );
         }
-
-        $auto = ! empty( $atts['map_auto'] ) ? 'data-auto="true"' : '';
-        $data_event_uid =  $openagenda->is_single() ? sprintf( 'data-event-uid=%s', esc_attr( \openagenda_get_field( 'uid' ) ) ) : '';
-
         $filter = sprintf( 
-            '<div class="cbpgmp cibulMap" data-tiles="%s" %s %s data-oamp data-cbctl="%s" data-lang="%s" %s>%s</div>', 
+            '<div class="cbpgmp cibulMap" data-tiles="%s" data-oamp data-cbctl="%s" data-lang="%s" %s %s %s %s %s %s>%s</div>', 
             esc_attr( $atts['map_tiles_link'] ), 
-            $auto,
-            $coords,
             esc_attr( $uid ),
             esc_attr( \openagenda_get_locale() ),
+            $data_auto,
+            $data_coords,
             $data_event_uid, 
+            $data_longitude, 
+            $data_latitude, 
+            $data_zoom, 
             \openagenda_icon( 'refresh', false )
         );
 
