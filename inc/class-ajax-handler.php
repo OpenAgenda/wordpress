@@ -53,7 +53,7 @@ class Ajax_Handler {
         $updatedUrl = get_permalink( $post_id );
         if( $query ){
             $args['oaq'] = $query;
-            $updatedUrl  = esc_url( add_query_arg( 'oaq', $query, $updatedUrl ) );
+            $updatedUrl  = add_query_arg( 'oaq', $query, $updatedUrl );
             $updatedPath = wp_parse_url( $updatedUrl, PHP_URL_PATH ) . '?' . wp_parse_url( $updatedUrl, PHP_URL_QUERY ); 
         }
 
@@ -63,7 +63,7 @@ class Ajax_Handler {
         $response    = array(
             'totalPages'  => (int) $openagenda->get_total_pages(),
             'total'       => (int) $openagenda->get_total(),
-            'updatedUrl'  => $updatedUrl,
+            'updatedUrl'  => esc_url( $updatedUrl ),
             'updatedPath' => $updatedPath,
             'source'      => sanitize_key( $openagenda->source ),
             'html'        => \openagenda_get_events_html( $view ),
@@ -149,14 +149,14 @@ class Ajax_Handler {
                 switch ( $filter_key ) {
                     case 'tags':
                         if( is_array( $filter_value ) ){
-                            $filter_value = array_map( 'sanitize_title', $filter_value );
+                            $filter_value = array_map( 'sanitize_text_field', $filter_value );
                         }
                         break; 
                     default:
-                        $filter_value = sanitize_title( $filter_value );
+                        $filter_value = sanitize_text_field( $filter_value );
                         break;
                 }
-                $clean[ $filter_key ] = $filter_value;
+                $clean[ sanitize_text_field( $filter_key ) ] = $filter_value;
             }
         }
         return $clean;
