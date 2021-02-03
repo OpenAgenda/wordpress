@@ -50,13 +50,13 @@ class Metaboxes implements Hookable {
             'oa-calendar-content-on-archive' => array(
                 'metabox'     => 'oa-calendar-settings',
                 'type'        => 'checkbox',
-                'label'       => __( 'Display editor content on list view ?', 'openagenda' ),
+                'label'       => __( 'Display editor content on list view.', 'openagenda' ),
                 'default'     => 'yes',
             ),
             'oa-calendar-content-on-single' => array(
                 'metabox'     => 'oa-calendar-settings',
                 'type'        => 'checkbox',
-                'label'       => __( 'Display editor content on single event views ?', 'openagenda' ),
+                'label'       => __( 'Display editor content on single event views.', 'openagenda' ),
                 'default'     => 'no',
             ),
         );
