@@ -587,15 +587,15 @@ function openagenda_get_page_permalink( $page = 1, $filters = null ){
  */
 function openagenda_get_permalink( $uid = false ){
     global $openagenda;
-    
     $permalink = false;
 
-    if( ! $uid ){
-        if( is_singular( 'oa-calendar' ) ) {
-            $uid       = $openagenda->get_uid();
-            $permalink = get_permalink();
-        }
-    } else {
+    if ( $openagenda && ! $uid ) $uid = $openagenda->get_uid();
+    
+    if( is_singular( 'oa-calendar' ) ) {
+        $permalink = get_permalink();
+    }
+    
+    if( ! $permalink && $uid ) {
         $posts = get_posts( array(
             'post_type'   => 'oa-calendar',
             'meta_key'    => 'oa-calendar-uid',

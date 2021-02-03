@@ -147,10 +147,15 @@ ul.oa-sharers-links {
   margin-left: auto;
 }
 
-ul.oa-month {
+ul.oa-months {
+  list-style: none;
+  padding: 0;
+}
+
+li.oa-month {
   list-style: none;
 }
-ul.oa-month.oa-hidden {
+li.oa-month.oa-hidden {
   display: none;
 }
 
@@ -163,6 +168,7 @@ ul.oa-month.oa-hidden {
 ul.oa-week {
   margin-top: 0.75rem;
   list-style: none;
+  padding: 0;
 }
 
 button.oa-button {

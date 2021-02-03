@@ -156,7 +156,7 @@ class Ajax_Handler {
                         $filter_value = sanitize_title( $filter_value );
                         break;
                 }
-                $clean[sanitize_key( $filter_key )] = $filter_value;
+                $clean[ $filter_key ] = $filter_value;
             }
         }
         return $clean;

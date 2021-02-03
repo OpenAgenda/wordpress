@@ -47,6 +47,18 @@ class Metaboxes implements Hookable {
                 'label'   => __( 'Events per page', 'openagenda' ),
                 'default' => (int) get_option( 'posts_per_page' ),
             ),
+            'oa-calendar-content-on-archive' => array(
+                'metabox'     => 'oa-calendar-settings',
+                'type'        => 'checkbox',
+                'label'       => __( 'Display editor content on list view ?', 'openagenda' ),
+                'default'     => 'yes',
+            ),
+            'oa-calendar-content-on-single' => array(
+                'metabox'     => 'oa-calendar-settings',
+                'type'        => 'checkbox',
+                'label'       => __( 'Display editor content on single event views ?', 'openagenda' ),
+                'default'     => 'no',
+            ),
         );
     }
 
@@ -108,6 +120,7 @@ class Metaboxes implements Hookable {
      */
     public function calendar_settings_markup( $post, $args ){
         wp_nonce_field( 'oa_calendar_settings_metabox_save_' . (int) $post->ID, 'oa_calendar_settings_nonce' );
+        echo '<style>#oa-calendar-settings .components-base-control{margin-bottom: 1rem;}</style>';
         foreach ( $this->get_fields() as $name => $args ) {
             $this->render_field( $name, $args );
         }
@@ -133,7 +146,41 @@ class Metaboxes implements Hookable {
 
         $field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];  
 
-        switch ( $args['type'] ) {            
+        switch ( $args['type'] ) {
+            case 'checkbox':
+                $checked = 'yes' === $field_value;
+                ?>
+                    <div class="components-base-control">
+                        <div class="components-base-control__field">
+                            <span class="components-checkbox-control__input-container">
+                                <?php 
+                                    if( use_block_editor_for_post( $post ) ){
+                                        printf( '<style>#%s:checked { background-color:#11a0d2; border-color: #11a0d2; }</style>', esc_attr( $name ));
+                                    }
+                                ?>
+                                <input  id="<?php echo esc_attr( $name ); ?>" 
+                                        name="<?php echo esc_attr( $name ); ?>" 
+                                        class="components-checkbox-control__input" 
+                                        type="checkbox"
+                                        value="yes"
+                                        <?php checked( $checked ); ?> 
+                                />
+                                <?php if( use_block_editor_for_post( $post ) ) : ?>
+                                    <svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-yes components-checkbox-control__checked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                        <path d="M14.83 4.89l1.34.94-5.81 8.38H9.02L5.78 9.67l1.34-1.25 2.57 2.4z"></path>
+                                    </svg>
+                                <?php endif; ?>
+                            </span>
+                            <label for="<?php echo esc_attr( $name ); ?>" class="components-checkbox-control__label"><?php echo esc_html( $args['label'] ); ?></label>
+                        </div>
+                        <?php 
+                            if( ! empty( $args['description'] ) ) {
+                                printf( '<p>%s</p>', wp_kses_post( $args['description'] ) );
+                            }
+                        ?>
+                    </div>
+                <?php
+                break;          
             default:
                 ?>
                     <div class="components-base-control">
@@ -183,6 +230,11 @@ class Metaboxes implements Hookable {
         if( ! empty( $_POST['oa-calendar-per-page'] ) ){
             update_post_meta( $post_ID, 'oa-calendar-per-page', (int) $_POST['oa-calendar-per-page'] );
         }
+
+        $content_on_archive = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';
+        $content_on_single  = isset( $_POST['oa-calendar-content-on-single'] ) ? 'yes' : 'no';
+        update_post_meta( $post_ID, 'oa-calendar-content-on-archive', $content_on_archive );
+        update_post_meta( $post_ID, 'oa-calendar-content-on-single', $content_on_single );
         
         if( $update ){
             $openagenda = new Openagenda( get_post_meta( $post_ID, 'oa-calendar-uid', true ), array( 'limit' => 1 ) );

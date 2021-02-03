@@ -55,17 +55,25 @@ class Shortcodes implements Hookable {
      * @return  string  $html     HTML to display.
      */
     public function openagenda( $atts = array(), $content = null, $tag = 'openagenda' ){
+        global $openagenda;
 
         // Parse shortcode attributes
         $atts = shortcode_atts( array(
             'uid'    => get_post_meta( get_the_ID(), 'oa-calendar-uid', true ),
             'view'   => 'list',
             'limit'  => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
-            'event'  => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_title( get_query_var( 'oa-slug' ) ) : '',
         ), $atts, $tag );
+        
+        if( ! empty( get_query_var( 'oa-slug' ) ) ){
+            $atts['oaq']['slug'] = sanitize_title( get_query_var( 'oa-slug' ) );
+        }
 
         if( empty( $atts['uid'] ) ){
             return sprintf( '<p>%s</p>', __( 'Please provide a valid calendar UID to display in the calendar settings.', 'openagenda' ) );
+        }
+
+        if( ! $openagenda ){
+            $openagenda = new Openagenda( $atts['uid'], $atts );
         }
 
         $html = \openagenda_get_events_html( $atts['view'] );
@@ -212,7 +220,7 @@ class Shortcodes implements Hookable {
      */
     public function openagenda_filter_preview( $atts = array(), $content = null, $tag = 'openagenda_filter_preview' ){
         $defaults = array(
-            'preview_uid'   => '',
+            'uid'           => '',
             'preview_label' => __( 'Preview the calendar', 'openagenda' ),
             'preview_count' => 3,
         );
@@ -221,9 +229,9 @@ class Shortcodes implements Hookable {
         ob_start();
         printf(
             '<div data-oapr class="preview cbpgpr" data-cbctl="%s" data-count="%d"><a href="%s">%s</a>%s', 
-            esc_attr( $atts['preview_uid'] ),
+            esc_attr( $atts['uid'] ),
             (int) $atts['preview_count'],
-            esc_url( openagenda_get_permalink( $atts['preview_uid'] ) ),
+            esc_url( openagenda_get_permalink( $atts['uid'] ) ),
             esc_html( $atts['preview_label'] ),
             openagenda_icon( 'refresh', false ),
         );
@@ -231,7 +239,7 @@ class Shortcodes implements Hookable {
         echo '</div>'; // Previous <div> was left open to insert template
         $filter = ob_get_clean();
 
-        wp_enqueue_script( 'openagenda_filter_preview' );
+        wp_enqueue_script( 'oa-preview-widget' );
         return apply_filters( 'openagenda_filter_preview', $filter, $atts );
     }
 

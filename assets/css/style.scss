@@ -152,7 +152,11 @@ ul.oa-sharers-links {
 .oa-timing-times {
 	margin-left: auto;
 }
-ul.oa-month {
+ul.oa-months {
+	list-style: none;
+	padding: 0;
+}
+li.oa-month {
 	list-style: none;
 	&.oa-hidden {
 		display: none;
@@ -166,6 +170,7 @@ ul.oa-month {
 ul.oa-week {
 	margin-top: .75rem;
 	list-style: none;
+	padding: 0;
 }
 button.oa-button {
 	background: transparent;

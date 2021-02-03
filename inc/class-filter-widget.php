@@ -26,7 +26,7 @@ class Filter_Widget extends \WP_Widget {
 
         parent::__construct( 
             'openagenda-filter-widget', 
-            __( 'Open Agenda Filter', 'openagenda' ),
+            __( 'Openagenda Filter', 'openagenda' ),
             array( 
                 'description'                 => __( 'Displays a filter widget.', 'openagenda' ),
                 'customize_selective_refresh' => true,
@@ -130,12 +130,6 @@ class Filter_Widget extends \WP_Widget {
                     'map_latitude'   => ! empty( $new_instance['map_latitude'] ) ? (float) $new_instance['map_latitude'] : '',    
                 );
                 break;
-            case 'openagenda_filter_preview':
-                $additional_settings = array( 
-                    'preview_label' => ! empty( $new_instance['preview_label'] ) ? sanitize_text_field( $new_instance['preview_label'] ) : '',
-                    'preview_uid'   => ! empty( $new_instance['preview_uid'] ) ? sanitize_text_field( $new_instance['preview_uid'] ) : '',
-                );
-                break;
             case 'openagenda_filter_search':
                 $additional_settings = array( 
                     'placeholder' => ! empty( $new_instance['placeholder'] ) ? sanitize_text_field( $new_instance['placeholder'] ) : '',
@@ -206,21 +200,6 @@ class Filter_Widget extends \WP_Widget {
                     'type'        => 'number',
                     'class'       => 'tiny-text',
                     'default'     => 12
-                ),
-            ),
-            'openagenda_filter_preview' => array(
-                'preview_uid' => array(
-                    'name'        => 'preview_uid',
-                    'label'       => __( 'Agenda UID :', 'openagenda' ),
-                    'class'       => 'widefat',
-                    'default'     => ''
-                ),
-                'preview_label' => array(
-                    'name'        => 'preview_label',
-                    'label'       => __( 'Preview label :', 'openagenda' ),
-                    'class'       => 'widefat',
-                    'default'     => __( 'Preview', 'openagenda' ),
-                    'help-text'   => __( 'This corresponds to the text for the link to the calendar.', 'openagenda' ),
                 ),
             ),
             'openagenda_filter_search' => array(

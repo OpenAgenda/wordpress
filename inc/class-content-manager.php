@@ -41,6 +41,7 @@ class Content_Manager implements Hookable {
                     'items_list_navigation' => _x( 'Calendars list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'openagenda' ),
                     'items_list'            => _x( 'Calendars list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'openagenda' ),
                 ),
+                'hierarchical'  => true,
                 'public'        => true,
                 'show_in_rest'  => true,
                 'menu_icon'     => 'dashicons-book',
@@ -127,11 +128,18 @@ class Content_Manager implements Hookable {
      * Filters the content
      */
     public function the_content( $content ){
-        if( is_singular( 'oa-calendar' ) ){
+        if( ! is_singular( 'oa-calendar' ) ) return $content;
+            
+        $display_content = openagenda_is_archive() ? get_post_meta( get_the_ID(), 'oa-calendar-content-on-archive', true ) : get_post_meta( get_the_ID(), 'oa-calendar-content-on-single', true );
+
+        if( 'yes' !== $display_content ){
+            $content = do_shortcode( '[openagenda]' );
+        } else {
             if( ! has_shortcode( $content, 'openagenda' ) ){
-                $content = $content . do_shortcode( '[openagenda]' );
+                $content .= do_shortcode( '[openagenda]' );
             }
         }
+
         return $content;
     }
 

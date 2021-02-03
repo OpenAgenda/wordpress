@@ -42,11 +42,6 @@ class Main {
                 'shortcode' => 'openagenda_filter_map',
                 'script'    => 'assets/js/filters/cibulMapWidget.min.js',
             ),
-            'openagenda_filter_preview' => array(
-                'label'     => _x( 'Preview', 'Filter name', 'openagenda' ),
-                'shortcode' => 'openagenda_filter_preview',
-                'script'    => 'assets/js/filters/oaPreviewWidget.min.js',
-            ),
             'openagenda_filter_relative' => array(
                 'label'     => _x( 'Upcoming', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_relative',
@@ -135,9 +130,11 @@ class Main {
      */
     public function register_widgets(){
         require_once OPENAGENDA_PATH . 'inc/class-filter-widget.php';
+        require_once OPENAGENDA_PATH . 'inc/class-preview-widget.php';
         $args = array( 'available_filters' => $this->get_available_filters() );
         $filter_widget = new Filter_Widget( $args );
         register_widget( $filter_widget );
+        register_widget( 'Openagenda\Preview_Widget' );
     }
 
 
@@ -162,6 +159,9 @@ class Main {
             }
         }
 
+        // Preview widget JS
+        wp_register_script( 'oa-preview-widget', OPENAGENDA_URL . 'assets/js/filters/oaPreviewWidget.min.js', array( 'openagenda-controllers' ), OPENAGENDA_VERSION, true );
+
         // Register map dependencies
         wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
         wp_register_script( 'oa-leaflet', OPENAGENDA_URL . 'assets/js/leaflet.min.js', array(), OPENAGENDA_VERSION, true );
@@ -169,6 +169,10 @@ class Main {
         
         // Timings calendar JS
         wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings' . $js_suffix, array(), OPENAGENDA_VERSION, true );
+        
+        if( openagenda_should_enqueue_styles() ){
+            wp_enqueue_style( 'openagenda-main' );
+        }
         
         if( is_singular( 'oa-calendar' ) ){
             wp_enqueue_script( 'openagenda-main' );
@@ -180,11 +184,7 @@ class Main {
                 'view'        => 'list',
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
-            ) );
-                
-            if( \openagenda_should_enqueue_styles() ){
-                wp_enqueue_style( 'openagenda-main' );
-            }
+            ) );       
         }
     }
 
