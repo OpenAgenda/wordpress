@@ -59,7 +59,7 @@ class Ajax_Handler {
 
         $view = sanitize_title( $_POST['view'] );
 
-        $openagenda = new Openagenda( $uid, $args );
+        $openagenda = new Openagenda( $uid, $args, false, false );
         $response    = array(
             'totalPages'  => (int) $openagenda->get_total_pages(),
             'total'       => (int) $openagenda->get_total(),

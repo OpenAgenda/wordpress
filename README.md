@@ -4,11 +4,11 @@ This WordPress plugin allows you to embed any calendar hosted on [https://openag
 
 ## Basic usage
 
-Upon activation, the plugin creates a new post type named *Calendars*. Just create a new calendar, provide the UID of the calendar you wish to display in the calendar settings box, and that's it !
+Upon activation, the plugin creates a new post type named *Calendars*. Just create a new calendar, provide the UID of the calendar you wish to display in the  settings box, and that's it !
 
 ![A new *Calendars* menu entry is created, allowing you to manage your calendars and settings](assets/screenshots/screenshot-1.png)
 
-You can leave the content area for this calendar empty, as it will be populated automatically with your events !
+You can leave the content area for this calendar empty, as it will be populated automatically with your events.
 
 ![Just create a new calendar post, and provide the Open Agenda calendar UID in the *Calendar settings* metabox.](assets/screenshots/screenshot-3.png)
 
@@ -18,7 +18,7 @@ Your events are automatically inserted after your content. If you wish to contro
 
 General settings can be found under the *Calendar > Settings* entry in the admin menu.
 
-All data related to your API key or calendars can be found on https://openagenda.com.
+All data related to your API key or calendars can be found on [https://openagenda.com](https://openagenda.com).
 
 ![The simple settings page allow you to enter in your API key and tweak various settings.](assets/screenshots/screenshot-2.png)
 
@@ -39,11 +39,19 @@ In the *Customizer*, a new panel is available to house various display settings.
 
 ![The simple settings page allow you to enter in your API key and tweak various settings.](assets/screenshots/screenshot-6.png)
 
+## How to get my calendar UID ?
+
+The UID of the calendar you wish to display can be found directly on your calendar page on [Openagenda](https://openagenda.com). Go to the site, and click *Look for an agenda*. Then use search box to find your calendar.
+
+![Your UID is just under the widgets in the sidebar](assets/screenshots/screenshot-4.png)
+
+Once you have it displayed, scroll down a little, and you will find your UID just under the last widget, in the sidebar on the right.
+
 ## Filter widget and shortcodes
 
 To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additionnal settings in the widgets admin.
 
-![You can use convenient filter widgets to add filtering functionnality to your calendars.](assets/screenshots/screenshot-4.png)
+![You can use convenient filter widgets to add filtering functionnality to your calendars.](assets/screenshots/screenshot-5.png)
 
 To integrate filters directly in your content instead of widget areas, the plugin also provide shortcodes.
 

@@ -138,10 +138,11 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 
 1. A new *Calendars* menu entry is created, allowing you to manage your calendars and settings.
 2. The simple settings page allow you to enter in your API key and tweak various settings.
-3. Just create a new calendar post, and provide the Open Agenda calendar UID in the *Calendar settings* metabox.
-4. You can use convenient filter widgets to add filtering functionnality to your calendars.
-5. Enjoy !
+3. Just create a new calendar post, and provide the Openagenda calendar UID in the *Calendar settings* metabox.
+4. Find your Calendar UID on the openagenda.com site, just under the sidebar.
+5. You can use convenient filter widgets to add filtering functionnality to your calendars.
 6. In the *Customizer*, a new panel is available to house various display settings.
+7. Enjoy !
 
 == Changelog ==
 
