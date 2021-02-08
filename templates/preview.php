@@ -5,7 +5,7 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @var  $atts  Shortcode attributes
- * @package Open_Agenda
+ * @package Openagenda
  */
 $calendar_permalink = openagenda_get_permalink( $atts['uid'] );
 $event_permalink    = ! empty( get_option( 'permalink_structure' ) ) ? sprintf( '%s/{Slug}', untrailingslashit( $calendar_permalink ) ) : add_query_arg( 'oa-slug', '{Slug}', $calendar_permalink );

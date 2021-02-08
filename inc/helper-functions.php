@@ -2,7 +2,7 @@
 /**
  * Helper functions
  *
- * @package Open_Agenda
+ * @package Openagenda
  */
 
 

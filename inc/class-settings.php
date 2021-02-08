@@ -145,7 +145,7 @@ class Settings implements Hookable {
                     'label_for'   => 'openagenda_map_tiles_attribution_link',
                     'type'        => 'text',
                     'placeholder' => '',
-                    'default'     => sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'open_agenda' ) ),
+                    'default'     => sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) ),
                 ),
             ),
             'delete-calendars-on-uninstall' => array(

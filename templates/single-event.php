@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Open_Agenda
+ * @package Openagenda
  */
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">

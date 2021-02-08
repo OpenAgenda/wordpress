@@ -123,3 +123,179 @@ This plugin displays data hosted and provided by [https://openagenda.com](https:
 Maps displayed by this plugin use data from [https://openstreetmap.org/](https://openstreetmap.org/) and uses the [leaflet JS library](https://leafletjs.com/). By using this plugin, you accept and agree with OpenStreeMap's [terms of use](https://wiki.osmfoundation.org/wiki/Terms_of_Use), [acceptable use policy](https://wiki.openstreetmap.org/wiki/Acceptable_Use_Policy) and [privacy policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy)
 
 Icons used in the UI are [Genericons](https://genericons.com/), licenced under the GPL 2.0.
+
+## Developer documentation
+
+### Template overrides
+
+You can build customized templates for the event list view or single event view. Default templates are located in the `templates/` folder. You can copy and paste the file you want to override in a folder called `openagenda/` in your theme or child theme directory, and customize its content.
+
+The plugin will look for templates first in the `openagenda/` folder of your child theme, then in the `openagenda/` folder of your parent theme, and finally in the plugins `templates/` folder.
+
+### Function reference
+
+The file `inc/template-tags.php` contains functions used in templates to display various event data. The file `inc/helper-functions.php` contains functions used elsewhere throughout the plugin to help with various tasks or data formatting. 
+
+Here is a quick rundown of the main functions you will need when customizing the templates.
+
+#### `openagenda_get_event( $uid = false )`
+
+Returns the event corresponding to the passed in UID or the current event in the event loop if not provided. Note that the function doesn't query the main [openagenda.com](https://openagenda.com) site, but looks in the events already queried on page load. So it will return `false` if no events can be found with the provided UID within the page's events.
+
+#### `openagenda_get_field( $field, $uid = false )`
+
+This functions returns the value corresponding to the field passed in for the event corresponding to the given UID, or for the current event in the event loop if no UID was provided.
+
+Basically the functions reads the raw JSON event, except for `permalink`, `timings`, and `image` field, for which a custom treatment is needed.
+
+For multilingual fields, the value corresponding to the current locale is returned.
+
+**If you need the raw value from the JSON event, this function is the one to use.**
+
+Returned value are passed through the following filter : `apply_filters( 'openagenda_field', $value, $field, $uid );`
+
+#### `openagenda_field( $field, $uid = false )`
+
+Like `openagenda_get_field( $field, $uid = false )`, but escapes and echoes the field value.
+
+#### `openagenda_esc_field( $value, $field )`
+
+This function is used internally by `openagenda_field()` to escape the field value properly, depending on the field type.
+
+#### `openagenda_event_permalink( $uid = false, $echo = true, $use_context = false )`
+
+Returns or echoes an event permalink, corresponding to the UID passed in or the current event in the event loop. The `use_context` param is used on event list views to append a string representing the page and current list filters.
+
+The returned value is passed through the following filter : `apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context )`.
+
+#### `openagenda_get_event_image( $size = 'thumbnail', $uid = '' )`
+
+Returns the HTML used to display an event image. You get the same result with `openagenda_get_field()`, passing in `thumbnail` or `image` as first parameter. `thumbnail` size is 200px by 200px by default. `image` size is 600px wide by default.
+
+The returned HTML is passed through the following filter : `apply_filters( 'openagenda_event_image', $html, $uid, $size )`.
+
+#### `openagenda_event_image( $size = 'thumbnail', $uid = '' )`
+
+Echoes an event image. Same as `openagenda_field()` with `thumbnail` or `image` as a parameter.
+
+#### `openagenda_event_timing( $display = 'date', $uid = false, $echo = true )`
+
+Displays the next or last timing for a given event, in the format corresponding to the `$display` parameter. If no `$uid` is provided, it defaults to the current event.
+
+`$display` accepts `date` (default), or `relative`. If `relative` the next or last event timing is displayed in a human readable time difference from now (e.g. 'In two weeks', '2 hours ago'). Else, its date is displayed.
+
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_timing', $html, $uid, $display )`.
+
+#### `openagenda_event_timings( $uid = false, $echo = true )`
+
+Displays a formatted list of all timings for an event.
+
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_timings', $html, $uid, $months )`.
+
+#### `openagenda_event_map( $uid = false, $echo = true )`
+
+Displays or returns the HTML for the map corresponding to the location of the given event.
+
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_map_html', $html, $uid )`.
+
+#### `openagenda_event_share_buttons( $uid = false, $echo = true )`
+
+Displays or returns the HTML for the event share buttons. By default, Twitter, Facebook and Linkedin share links are provided. To add your own, use the following filter : `apply_filters( 'openagenda_sharers', $sharers, $uid, $event )`.
+
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_sharers_html', $html, $uid, $event )`.
+
+#### `openagenda_pagination( $args = array() )`
+
+Displays pagination on list view. Works basically like WordPress' `paginate_links()` function. Here are the defaults arguments :
+
+```php
+$args = array(
+    'end_size'     => 2,    // Number of items to display after the first page or before the last page
+    'mid_size'     => 2,    // Number of page to display around the current page
+    'label_format' => '%s', // format used in sprintf() function to display labels. Can be used to wrap labels in additional HTML.
+    'prev_label'   => __( 'Previous page', 'openagenda' ),   // Previous page label
+    'next_label'   => __( 'Next page', 'openagenda' ),       // Next page label
+);
+```
+
+The arguments can be filtered using the following filter : `apply_filters( 'openagenda_page_links_args', $args, $openagenda->get_uid() )`. 
+
+The final HTML can be filtered using the following filter : `apply_filters( 'openagenda_page_links', $links, $openagenda->get_uid() )`.
+
+#### `openagenda_get_permalink( $uid = false )`
+
+Returns the permalink to the calendar corresponding to the UID given. Defaults to the current calendar on calendar pages.
+
+The permalink can be filtrered using the following filter : `apply_filters( 'openagenda_permalink', $permalink, $uid )`.
+
+#### `openagenda_exports( $uid = false, $echo = true )`
+
+Displays exports links for the calendar corresponding to the given UID. Defaults to current calendar. 
+
+The returned HTML passes throught the following filter : `apply_filters( 'openagenda_exports_html', $html, $uid )`.
+
+#### `openagenda_filter( $filter, $args = array() )`
+
+Displays a filter widget. Values for the `$filter` parameter include `active`, `tabs`, `calendar`, `map`, `preview`, `relative`, `search`. The `$args` array contains shortcode settings. See [Filter widget and shortcodes](#filter-widget-and-shortcodes) for details.
+
+Avoid using inside the main template on list views. As the list of events may be refreshed with Ajax, the script handling the filter may loose connection to it as the DOM element will be removed and refreshed.
+
+#### `openagenda_navigation( $echo = true )`
+
+Displays or returns HTML corresponding to the event navigation on single event pages.
+
+The HTML returned goes through the following filter : `apply_filters( 'openagenda_event_navigation', $html, $previous_link, $next_link )`.
+
+#### `openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )`
+
+Used by `openagenda_navigation()`.
+
+Returns link **used to fetch** the adjacent event link. Since content is fetched from a JSON export of the agenda, on single event pages, only one event is fetched. Since events are not stored in the database, a direct reference to the adjacent event is not available.
+
+A little processing is necessary under the hood to get the actual link to the next or previous event, so this function returns the link to an admin-post action instead, where the magic happens.
+
+The returned HTML is passed through the following filter : `apply_filters( 'openagenda_adjacent_event_link', $html, $uid, $direction )`.
+
+#### `openagenda_get_back_link()`
+
+Returns the link to the list page on event pages.
+
+The returned HTML is passed throught the following filter : `apply_filters( 'openagenda_back_link', $html, $page_link, $page, $context )`.
+
+#### `openagenda_get_template( $slug )`
+
+Returns the path to a template. Looks for the template first in the `openagenda/` folder of the child theme, then in the `openagenda/` folder in the parent theme, then in the plugin's `templates/` folder.
+
+#### `openagenda_get_locale()`
+
+Returns the current openagenda locale code, if supported. Else defaults to 'en'.
+
+Supported locales can be added using this filter : `apply_filters( 'openagenda_supported_locales', $locales )`.
+
+#### `openagenda_get_image_dimensions( $size = 'thumbnail' )`
+
+Returns an array of dimensions for images of a given size.
+
+You can register additional sizes using the following filter : `apply_filters( 'openagenda_image_sizes', $sizes )`.
+
+You can customize the returned dimensions using the following filter : `apply_filters( 'openagenda_image_dimensions', $dimensions, $size )`.
+
+#### `openagenda_is_i18n_field( $field )`
+
+Returns whether an event field is a multilingual field. You can register additional multilingual fields using the following filter : `apply_filters( 'openagenda_i18n_fields', $i18n )`.
+
+#### `openagenda_icon( $slug, $echo = true )`
+
+Displays or returns an SVG icon. You can register new icons using the following filter : `apply_filters( 'openagenda_icons', $icons )`;
+
+#### `openagenda_is_single()`
+
+Returns `true` on a single event page.
+
+#### `openagenda_is_archive()`
+
+Returns `true` on a event list page.
+
+#### `openagenda_format_timing( $timing, $datetimezone = null )`
+
+Given an entry on the event `timings` field in the JSON data, this function wil return an array with formatted dates and times, based on a passed in PHP DateTimezone, or the site's timezone.

@@ -9,7 +9,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Open_Agenda
+ * @package Openagenda
  */
 if( $openagenda->have_events() ) : ?>
     <div class="oa-controls oa-controls-top">
@@ -18,7 +18,7 @@ if( $openagenda->have_events() ) : ?>
                 openagenda_exports(); 
                 openagenda_pagination();
             } else {
-                open_agenda_navigation();
+                openagenda_navigation();
             }
         ?>
     </div>

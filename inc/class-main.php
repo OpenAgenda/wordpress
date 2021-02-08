@@ -75,8 +75,10 @@ class Main {
         require_once OPENAGENDA_PATH . 'inc/class-content-manager.php';
         require_once OPENAGENDA_PATH . 'inc/class-openagenda.php';
         require_once OPENAGENDA_PATH . 'inc/class-customizer-settings.php';
+        require_once OPENAGENDA_PATH . 'inc/class-shortcodes.php';
         $this->dependencies['content-manager'] = new Content_Manager();
         $this->dependencies['customizer']      = new Customizer_Settings();
+        $this->dependencies['shortcodes']      = new Shortcodes();
 
         if( is_admin() ){
             // Only needed in the admin
@@ -88,10 +90,6 @@ class Main {
             $this->dependencies['settings']     = new Settings();
             $this->dependencies['metaboxes']    = new Metaboxes();
             $this->dependencies['ajax-handler'] = new Ajax_Handler();
-        } else {
-            // Only needed on frontend
-            require_once OPENAGENDA_PATH . 'inc/class-shortcodes.php';
-            $this->dependencies['shortcodes'] = new Shortcodes();
         }
     }
 
@@ -198,7 +196,7 @@ class Main {
 
 
     /**
-     * Initialize the global open_agenda instance
+     * Initialize the global openagenda instance
      */
     public function init_calendar(){
         global $openagenda;     

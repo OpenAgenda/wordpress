@@ -47,7 +47,7 @@ class Shortcodes implements Hookable {
 
 
     /**
-     * open_agenda shortcode callback function
+     * openagenda shortcode callback function
      * 
      * @param   array   $atts     Array of attributes passed to the shortcode
      * @param   string  $content  Content if enclosing shortcode. Defaults to null.

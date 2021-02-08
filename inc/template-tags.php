@@ -2,7 +2,7 @@
 /**
  * Template tags to display events information
  *
- * @package Open_Agenda
+ * @package Openagenda
  */
 
 
@@ -162,7 +162,7 @@ function openagenda_esc_field( $value, $field ){
 /**
  * Returns the permalink to the current event, with or without context
  */
-function openagenda_event_permalink( $use_context = false, $uid = false, $echo = true ){
+function openagenda_event_permalink( $uid = false, $echo = true, $use_context = false ){
     global $openagenda;
 
     $permalink = openagenda_get_field( 'permalink', $uid );
@@ -358,7 +358,7 @@ function openagenda_event_map( $uid = false, $echo = true ){
     $latitude    = openagenda_get_field( 'location.latitude', $uid );
     $longitude   = openagenda_get_field( 'location.longitude', $uid );
     $tiles       = ! empty( $settings['openagenda_map_tiles_link'] ) ? $settings['openagenda_map_tiles_link'] : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    $attribution = ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? $settings['openagenda_map_tiles_attribution_link'] : sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'open_agenda' ) );
+    $attribution = ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? $settings['openagenda_map_tiles_attribution_link'] : sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) );
 
     $html = sprintf( 
         '<div id="event-map" class="event-map" latitude="%s" longitude="%s" tiles="%s" attribution="%s"></div>',
@@ -505,6 +505,8 @@ function openagenda_get_page_links( $args = array() ){
         'next_label'   => __( 'Next page', 'openagenda' ),
     ) );
 
+    $args = apply_filters( 'openagenda_page_links_args', $args, $openagenda->get_uid() );
+
     $links = array();
     $dots  = false;
 
@@ -544,7 +546,7 @@ function openagenda_get_page_links( $args = array() ){
         );
     }
 
-    return apply_filters( 'openagenda_page_links', $links,  $openagenda->get_uid() );
+    return apply_filters( 'openagenda_page_links', $links, $openagenda->get_uid() );
 }
 
 
@@ -668,7 +670,7 @@ function openagenda_filter( $filter, $args = array() ){
 /**
  * Displays navigation between events on single events page
  */
-function open_agenda_navigation( $echo = true ){
+function openagenda_navigation( $echo = true ){
     global $openagenda;
     if( ! $openagenda->is_single() ) return;
         
@@ -706,11 +708,11 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
     if( ! $openagenda->is_single() ) return false;
     
     $encoded_context = isset( $_GET['context'] ) ? sanitize_text_field( $_GET['context'] ) : false ;
-    $context = openagenda_decode_context();
-    $total   = $context && isset( $context['total'] ) ? (int) $context['total'] : 0;
-    $event_offset = $context && isset( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
+    $context         = openagenda_decode_context();
+    $total           = $context && isset( $context['total'] ) ? (int) $context['total'] : 0;
+    $event_offset    = $context && isset( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
 
-    $html = '';
+    $html    = '';
     $invalid = 'next' === $direction ? (bool) ( ( $event_offset + 1 ) >= $total ) : (bool) ( $event_offset <= 0 ) ;
 
     if( $encoded_context ){
