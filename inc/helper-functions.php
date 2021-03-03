@@ -109,6 +109,10 @@ function openagenda_image_sizes(){
         'image' => array(
             'width' => 600,
         ),
+        'originalImage' => array(
+            'width'  => '',
+            'height' => '',
+        ),
     );
     return apply_filters( 'openagenda_image_sizes', $sizes );
 }

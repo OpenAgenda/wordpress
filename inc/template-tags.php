@@ -644,7 +644,7 @@ function openagenda_exports( $uid = false, $echo = true ) {
                     <span class="oa-exports-label">%s</span>
                     <ul class="oa-exports-links">%s</ul>
                 </div>', 
-                esc_html__( 'Download :', 'openagenda' ), 
+                apply_filters( 'openagenda_exports_label', esc_html__( 'Download :', 'openagenda' ) ), 
                 $links
             );
         }    
