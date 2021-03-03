@@ -47,6 +47,22 @@ class Metaboxes implements Hookable {
                 'label'   => __( 'Events per page', 'openagenda' ),
                 'default' => (int) get_option( 'posts_per_page' ),
             ),
+            'oa-calendar-view' => array(
+                'metabox' => 'oa-calendar-settings',
+                'type'    => 'radio',
+                'label'   => __( 'Display setting', 'openagenda' ),
+                'default' => 'list',
+                'choices' => array(
+                    'list' => array(
+                        'label' => __( 'Display as list', 'openagenda' ),
+                        'value' => 'list'
+                    ),
+                    'grid' => array(
+                        'label' => __( 'Display as grid', 'openagenda' ),
+                        'value' => 'grid'
+                    ),
+                ),
+            ),
             'oa-calendar-content-on-archive' => array(
                 'metabox'     => 'oa-calendar-settings',
                 'type'        => 'checkbox',
@@ -180,6 +196,36 @@ class Metaboxes implements Hookable {
                         ?>
                     </div>
                 <?php
+                break;
+            case 'radio':
+                ?>
+                    <div class="components-base-control">
+                        <div class="components-base-control__field">
+                            <fieldset class="components-radio-control__inputs">
+                                <legend class="components-radio-control__legend"><?php echo esc_html( $args['label'] );?></legend>
+                                <?php 
+                                    if( ! empty( $args['description'] ) ) {
+                                        printf( '<p>%s</p>', wp_kses_post( $args['description'] ) );
+                                    }
+                                ?>
+                                <?php foreach ( $args['choices'] as $key => $choice ) : $field_id = sprintf( '%s-%s', $name, $choice['value'] ); ?>
+                                    <div class="components-radio-control__input-container">
+                                        <input  id="<?php echo esc_attr( $field_id ); ?>" 
+                                                name="<?php echo esc_attr( $name ); ?>" 
+                                                class="components-radio-control__input" 
+                                                type="radio"
+                                                value="<?php echo esc_attr( $choice['value'] ) ?>"
+                                                <?php checked( $field_value, $choice['value']  ); ?> 
+                                        />
+                                        <label for="<?php echo esc_attr( $field_id ); ?>" class="components-radio-control__label"><?php echo esc_html( $choice['label'] ); ?></label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </fieldset>
+                        </div>
+                        
+
+                    </div>
+                <?php
                 break;          
             default:
                 ?>
@@ -231,11 +277,15 @@ class Metaboxes implements Hookable {
             update_post_meta( $post_ID, 'oa-calendar-per-page', (int) $_POST['oa-calendar-per-page'] );
         }
 
+        if( ! empty( $_POST['oa-calendar-view'] ) && in_array( $_POST['oa-calendar-view'], array( 'list', 'grid' ) ) ){
+            update_post_meta( $post_ID, 'oa-calendar-view', sanitize_title( $_POST['oa-calendar-view'] ) );
+        }
+
         $content_on_archive = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';
         $content_on_single  = isset( $_POST['oa-calendar-content-on-single'] ) ? 'yes' : 'no';
         update_post_meta( $post_ID, 'oa-calendar-content-on-archive', $content_on_archive );
         update_post_meta( $post_ID, 'oa-calendar-content-on-single', $content_on_single );
-        
+
         if( $update ){
             $openagenda = new Openagenda( get_post_meta( $post_ID, 'oa-calendar-uid', true ), array( 'limit' => 1 ) );
             $openagenda->openagenda_flush_cache();

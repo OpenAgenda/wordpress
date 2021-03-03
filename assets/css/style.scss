@@ -37,8 +37,20 @@ $oa-dark: #333;
 /**************
  * Events
  **************/
-.oa-list-item {
-    margin-bottom: 4rem;
+.oa-event-grid {
+	display: grid;
+    grid-gap: 2rem;
+	@media screen and (min-width: 768px) {
+		grid-template-columns: repeat( auto-fit, minmax( 300px, 1fr ) );
+		.oa-list-item {
+			padding: 1rem;
+		}
+	}
+}
+.oa-event-list {
+	.oa-list-item {
+		margin-bottom: 4rem;
+	}
 }
 .oa-event-title {
     margin-top: 0;

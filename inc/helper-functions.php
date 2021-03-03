@@ -246,7 +246,7 @@ function openagenda_get_events_html( $view = 'list' ){
     ob_start();
 
     $template = $openagenda->is_single() ? 'single-event' : 'event'; 
-    $class    = $openagenda->is_single() ? 'oa-event' : 'oa-event-list';
+    $class    = $openagenda->is_single() ? 'oa-event' : sprintf( 'oa-event-%s', sanitize_title( $view ) );
 
     include openagenda_get_template( 'event-loop' );
     return ob_get_clean();

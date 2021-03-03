@@ -60,7 +60,7 @@ class Shortcodes implements Hookable {
         // Parse shortcode attributes
         $atts = shortcode_atts( array(
             'uid'    => get_post_meta( get_the_ID(), 'oa-calendar-uid', true ),
-            'view'   => 'list',
+            'view'   => get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ) : 'list',
             'limit'  => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
         ), $atts, $tag );
         
