@@ -1,10 +1,11 @@
 <?php
 /*
 Plugin Name: OpenAgenda
-Plugin URI:  https://openagenda.com/
+Plugin URI:  https://wordpress.org/plugins/openagenda/
 Description: Display your OpenAgenda data on your WordPress site.
 Version:     0.1
 Author:      OpenAgenda
+Author URI:  https://openagenda.com/
 Text Domain: openagenda
 Domain Path: /languages
 License:     GPL v2 or later
