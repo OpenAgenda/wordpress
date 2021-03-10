@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2021-02-02 15:45+0100\n"
-"PO-Revision-Date: 2021-02-02 15:50+0100\n"
+"PO-Revision-Date: 2021-03-10 14:38+0100\n"
 "X-Generator: Poedit 2.4.1\n"
 "X-Domain: openagenda\n"
 "Last-Translator: \n"
@@ -228,7 +228,7 @@ msgstr "Niveau de zoom par défaut&nbsp;:"
 
 #: inc/class-filter-widget.php:214
 msgid "Agenda UID :"
-msgstr "UID de l'agenda"
+msgstr "UID de l'agenda :"
 
 #: inc/class-filter-widget.php:220
 msgid "Preview label :"

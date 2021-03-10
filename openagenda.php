@@ -10,8 +10,8 @@ Domain Path: /languages
 License:     GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.0
-Requires at least: 4.9
-Tested up to: 5.6
+Requires at least: 5.0
+Tested up to: 5.7
 
 OpenAgenda is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

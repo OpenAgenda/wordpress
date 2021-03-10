@@ -233,7 +233,7 @@ class Shortcodes implements Hookable {
             (int) $atts['preview_count'],
             esc_url( openagenda_get_permalink( $atts['uid'] ) ),
             esc_html( $atts['preview_label'] ),
-            openagenda_icon( 'refresh', false ),
+            openagenda_icon( 'refresh', false )
         );
         include openagenda_get_template( 'preview' );
         echo '</div>'; // Previous <div> was left open to insert template
