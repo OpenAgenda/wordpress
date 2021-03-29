@@ -37,7 +37,7 @@ In the *Permalinks* settings, you can change the prefix for your calendar pages.
 
 In the *Customizer*, a new panel is available to house various display settings. For now only a main color setting is available.
 
-![The simple settings page allow you to enter in your API key and tweak various settings.](assets/screenshots/screenshot-6.png)
+![A single section in the customizer houses your display settings.](assets/screenshots/screenshot-6.png)
 
 ## How to get my calendar UID ?
 
@@ -84,17 +84,11 @@ Displays a calendar. It takes no parameters.
 
 Displays an interactive map to locate and search events. It takes the following parameters :
 
- * `map_tiles_link` : Map tiles link to use. Defaults to `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+ * `map_tiles_link` : Lien tiles link to use. Defaults to `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
  * `map_auto` : Whether to automatically update map on scroll. 
  * `map_longitude` : Default longitude
  * `map_latitude` : Default latitude
  * `map_zoom` : Default zoom level. Defaults to 12. Used in conjunction with `map_latitude` and `map_longitude`.
-
-### `[openagenda_filter_preview]`
-
-Displays next events. It takes the following parameters : 
-
- * `preview_label` : Label while loading the items.
 
 ### `[openagenda_filter_relative]`
 
@@ -218,9 +212,9 @@ $args = array(
 );
 ```
 
-The arguments can be filtered using the following filter : `apply_filters( 'openagenda_page_links_args', $args, $openagenda->get_uid() )`. 
+The arguments can be filtered using the following filter : `apply_filters( 'openagenda_page_links_args', $args, $uid )`. 
 
-The final HTML can be filtered using the following filter : `apply_filters( 'openagenda_page_links', $links, $openagenda->get_uid() )`.
+The final HTML can be filtered using the following filter : `apply_filters( 'openagenda_page_links', $links, $uid )`.
 
 #### `openagenda_get_permalink( $uid = false )`
 
@@ -236,7 +230,7 @@ The returned HTML passes throught the following filter : `apply_filters( 'openag
 
 #### `openagenda_filter( $filter, $args = array() )`
 
-Displays a filter widget. Values for the `$filter` parameter include `active`, `tabs`, `calendar`, `map`, `preview`, `relative`, `search`. The `$args` array contains shortcode settings. See [Filter widget and shortcodes](#filter-widget-and-shortcodes) for details.
+Displays a filter widget. Values for the `$filter` parameter include `active`, `tags`, `calendar`, `map`, `preview`, `relative`, `search`. The `$args` array contains shortcode settings. See [Filter widget and shortcodes](#filter-widget-and-shortcodes) for details.
 
 Avoid using inside the main template on list views. As the list of events may be refreshed with Ajax, the script handling the filter may loose connection to it as the DOM element will be removed and refreshed.
 
@@ -260,7 +254,7 @@ The returned HTML is passed through the following filter : `apply_filters( 'open
 
 Returns the link to the list page on event pages.
 
-The returned HTML is passed throught the following filter : `apply_filters( 'openagenda_back_link', $html, $page_link, $page, $context )`.
+The returned HTML is passed through the following filter : `apply_filters( 'openagenda_back_link', $html, $page_link, $page, $context )`.
 
 #### `openagenda_get_template( $slug )`
 

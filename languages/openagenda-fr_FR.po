@@ -1,20 +1,29 @@
-# Copyright (C) 2021 OpenAgenda
-# This file is distributed under the same license as the OpenAgenda plugin.
+# Blank WordPress Pot
+# Copyright 2014 ...
+# This file is distributed under the GNU General Public License v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda 0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
-"Language-Team: \n"
+"Project-Id-Version: Openagenda - 0.1\n"
+"POT-Creation-Date: 2021-03-29 13:36+0200\n"
+"PO-Revision-Date: \n"
+"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
+"Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-02-02 15:45+0100\n"
-"PO-Revision-Date: 2021-03-10 14:38+0100\n"
-"X-Generator: Poedit 2.4.1\n"
-"X-Domain: openagenda\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
 "Language: fr\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: svn\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
@@ -22,18 +31,26 @@ msgid "OpenAgenda"
 msgstr "OpenAgenda"
 
 #. Plugin URI of the plugin
-msgid "https://openagenda.com/"
-msgstr "https://openagenda.com/"
+msgid "https://wordpress.org/plugins/openagenda/"
+msgstr "https://wordpress.org/plugins/openagenda/"
 
 #. Description of the plugin
 msgid "Display your OpenAgenda data on your WordPress site."
 msgstr "Affiche vos agendas OpenAgenda sur votre site WordPress."
 
+#. Author URI of the plugin
+msgid "https://openagenda.com/"
+msgstr "https://openagenda.com/"
+
+#: assets/js/filters/oaActiveFilters.min.js:1
+msgid "hidden"
+msgstr ""
+
 #: inc/class-admin-pages.php:24
 msgid "OpenAgenda Settings"
 msgstr "Réglages OpenAgenda"
 
-#: inc/class-admin-pages.php:25 openagenda.php:113
+#: inc/class-admin-pages.php:25 openagenda.php:114
 msgid "Settings"
 msgstr "Réglages"
 
@@ -57,7 +74,7 @@ msgstr "Aucun ID de publication n'a été fourni."
 msgid "The post ID provided does not refer to a calendar."
 msgstr "L'identifiant fourni ne correspond à aucun agenda."
 
-#: inc/class-content-manager.php:18 inc/class-content-manager.php:105
+#: inc/class-content-manager.php:18 inc/class-content-manager.php:106
 #: inc/class-settings.php:363
 msgid "calendar"
 msgstr "agenda"
@@ -166,7 +183,7 @@ msgctxt ""
 msgid "Calendars list"
 msgstr "Liste des agendas"
 
-#: inc/class-content-manager.php:148
+#: inc/class-content-manager.php:156
 msgid "Please provide a calendar UID in this calendar's settings box first."
 msgstr "Veuillez fournir un UID d'agenda valide dans les réglages de l'agenda."
 
@@ -187,16 +204,16 @@ msgid "OpenAgenda main color"
 msgstr "Couleur principal Openagenda"
 
 #: inc/class-filter-widget.php:29
-msgid "Open Agenda Filter"
-msgstr "Open Agenda - Filtre"
+msgid "Openagenda Filter"
+msgstr "OpenAgenda - Filtre"
 
 #: inc/class-filter-widget.php:31
 msgid "Displays a filter widget."
 msgstr "Affiche un filtre."
 
-#: inc/class-filter-widget.php:81
+#: inc/class-filter-widget.php:81 inc/class-preview-widget.php:66
 msgid "Title :"
-msgstr "Titre&nbsp;:"
+msgstr "Titre :"
 
 #: inc/class-filter-widget.php:85
 msgid "Filter to display :"
@@ -206,59 +223,43 @@ msgstr "Filtre à afficher&nbsp;:"
 msgid "Choose filter"
 msgstr "Choisissez un filtre"
 
-#: inc/class-filter-widget.php:183
+#: inc/class-filter-widget.php:177
 msgid "Map tiles link :"
 msgstr "Liens du fond de carte&nbsp;:"
 
-#: inc/class-filter-widget.php:189
+#: inc/class-filter-widget.php:183
 msgid "Automatically update map on scroll ?"
 msgstr "Ajuster automatiquement la carte au défilement ?"
 
-#: inc/class-filter-widget.php:195
+#: inc/class-filter-widget.php:189
 msgid "Default longitude :"
 msgstr "Longitude par défaut&nbsp;:"
 
-#: inc/class-filter-widget.php:200
+#: inc/class-filter-widget.php:194
 msgid "Default latitude :"
 msgstr "Latitude par défaut&nbsp;:"
 
-#: inc/class-filter-widget.php:205
+#: inc/class-filter-widget.php:199
 msgid "Map default zoom :"
 msgstr "Niveau de zoom par défaut&nbsp;:"
 
-#: inc/class-filter-widget.php:214
-msgid "Agenda UID :"
-msgstr "UID de l'agenda :"
-
-#: inc/class-filter-widget.php:220
-msgid "Preview label :"
-msgstr "Label du lien de prévisualisation&nbsp;:"
-
-#: inc/class-filter-widget.php:222
-msgid "Preview"
-msgstr "Prévisualisation"
-
-#: inc/class-filter-widget.php:223
-msgid "This corresponds to the text for the link to the calendar."
-msgstr "Correspond au texte du lien vers l'agenda."
-
-#: inc/class-filter-widget.php:229
+#: inc/class-filter-widget.php:208
 msgid "Placeholder text :"
 msgstr "Texte de substitution&nbsp;:"
 
-#: inc/class-filter-widget.php:231
+#: inc/class-filter-widget.php:210
 msgid "Search events"
 msgstr "Rechercher un événement"
 
-#: inc/class-filter-widget.php:237
+#: inc/class-filter-widget.php:216
 msgid "Tag group :"
 msgstr "Groupe tag&nbsp;:"
 
-#: inc/class-filter-widget.php:242
+#: inc/class-filter-widget.php:221
 msgid "Tags to display :"
 msgstr "Tags à afficher&nbsp;:"
 
-#: inc/class-filter-widget.php:243
+#: inc/class-filter-widget.php:222
 msgid "Enter tags separated by a comma."
 msgstr "Entrer les tags séparés par des virgules."
 
@@ -275,7 +276,7 @@ msgstr "Tags"
 #: inc/class-main.php:36
 msgctxt "Filter name"
 msgid "Calendar"
-msgstr "Calendrier"
+msgstr "Agenda"
 
 #: inc/class-main.php:41
 msgctxt "Filter name"
@@ -284,18 +285,13 @@ msgstr "Carte"
 
 #: inc/class-main.php:46
 msgctxt "Filter name"
-msgid "Preview"
-msgstr "Prévisualisation"
-
-#: inc/class-main.php:51
-msgctxt "Filter name"
 msgid "Upcoming"
 msgstr "Prochainement"
 
-#: inc/class-main.php:56
+#: inc/class-main.php:51
 msgctxt "Filter name"
 msgid "Search"
-msgstr "Recherche"
+msgstr "Rechercher"
 
 #: inc/class-metaboxes.php:24
 msgid "Calendar settings"
@@ -313,7 +309,27 @@ msgstr "Comment trouver l'UID de mon agenda ?"
 msgid "Events per page"
 msgstr "Evénements par page"
 
-#: inc/class-metaboxes.php:129
+#: inc/class-metaboxes.php:53
+msgid "Display setting"
+msgstr "Réglage d'affichage"
+
+#: inc/class-metaboxes.php:57
+msgid "Display as list"
+msgstr "Afficher en liste"
+
+#: inc/class-metaboxes.php:61
+msgid "Display as grid"
+msgstr "Afficher en grille"
+
+#: inc/class-metaboxes.php:69
+msgid "Display editor content on list view."
+msgstr "Afficher le contenu sur les vues liste."
+
+#: inc/class-metaboxes.php:75
+msgid "Display editor content on single event views."
+msgstr "Afficher le contenu sur les vues événement simples."
+
+#: inc/class-metaboxes.php:158
 msgid "New field"
 msgstr "Nouveau champ"
 
@@ -337,12 +353,36 @@ msgstr "PDF"
 msgid "There was an error parsing the JSON."
 msgstr "Il y a eu une erreur de lecture du JSON."
 
+#: inc/class-preview-widget.php:22
+msgid "Openagenda Preview"
+msgstr "OpenAgenda - Aperçu"
+
+#: inc/class-preview-widget.php:24
+msgid "Displays a calendar preview widget."
+msgstr "Affiche un aperçu de l'agenda."
+
+#: inc/class-preview-widget.php:62
+msgid "Preview"
+msgstr "Aperçu"
+
+#: inc/class-preview-widget.php:63
+msgid "This corresponds to the text for the link to the calendar."
+msgstr "Correspond au texte du lien vers l'agenda."
+
+#: inc/class-preview-widget.php:70
+msgid "Agenda UID :"
+msgstr "UID de l'agenda :"
+
+#: inc/class-preview-widget.php:74
+msgid "Preview label :"
+msgstr "Label du lien de prévisualisation&nbsp;:"
+
 #: inc/class-settings.php:54
 msgid "OpenAgenda API key"
 msgstr "Clé API OpenAgenda"
 
-#. translators: %s: openagenda site url
 #: inc/class-settings.php:67
+#, php-format
 msgid ""
 "Your API key can be found in your <a href=\"%s\">OpenAgenda account</a>."
 msgstr ""
@@ -395,6 +435,10 @@ msgstr "Liens du fond de carte"
 msgid "Default map tiles attribution link"
 msgstr "URL des crédits du fond de carte"
 
+#: inc/class-settings.php:148 inc/template-tags.php:361
+msgid "OpenStreetMap contributors"
+msgstr "Les contributeurs OpenStreetMap"
+
 #: inc/class-settings.php:153
 msgid "Delete all calendar content on uninstall ?"
 msgstr "Supprimer tous les contenus des agendas lors de la désinstallation ?"
@@ -424,8 +468,8 @@ msgstr ""
 msgid "Calendar base"
 msgstr "Base des agendas"
 
-#. translators: %s : home url
 #: inc/class-settings.php:197
+#, php-format
 msgid ""
 "You can modify the URL prefix for the calendars. For example, the default "
 "prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/"
@@ -435,24 +479,24 @@ msgstr ""
 "préfixe par défaut est <code>agenda</code>, donc vos URLs ressembleront à "
 "<code>%s/agenda/nom-de-l-agenda</code>."
 
-#: inc/class-shortcodes.php:68
+#: inc/class-shortcodes.php:72
 msgid ""
 "Please provide a valid calendar UID to display in the calendar settings."
 msgstr "Veuillez fournir un UID d'agenda valide dans les réglages de l'agenda."
 
-#: inc/class-shortcodes.php:216
+#: inc/class-shortcodes.php:224
 msgid "Preview the calendar"
 msgstr "Prévisualiser l'agenda"
 
-#: inc/class-shortcodes.php:278
+#: inc/class-shortcodes.php:286
 msgid "Search this calendar"
 msgstr "Chercher dans cet agenda"
 
-#: inc/helper-functions.php:263
+#: inc/helper-functions.php:267
 msgid "Fetching events... Please wait a moment."
 msgstr "Recherche des événements en cours... Veuillez patienter un moment."
 
-#: inc/helper-functions.php:275
+#: inc/helper-functions.php:279
 msgid ""
 "There was an error updating the events. Pleaser refresh the page and try "
 "again."
@@ -460,14 +504,14 @@ msgstr ""
 "Il y a eu une erreur lors de la mise à jour des événements. Veuillez "
 "rafraichir la page et réessayer."
 
-#. translators: %s : next event relative timing
-#: inc/helper-functions.php:307
+#: inc/helper-functions.php:311
+#, php-format
 msgctxt "next event timing"
 msgid "In %s"
 msgstr "Dans %s"
 
-#. translators: %s : last event relative timing
-#: inc/helper-functions.php:309
+#: inc/helper-functions.php:313
+#, php-format
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr "Il y a %s"
@@ -508,20 +552,20 @@ msgstr "Page précédente"
 msgid "Next page"
 msgstr "Page suivante"
 
-#: inc/template-tags.php:645
+#: inc/template-tags.php:647
 msgid "Download :"
 msgstr "Télécharger&nbsp;:"
 
-#: inc/template-tags.php:725
+#: inc/template-tags.php:727
 msgctxt "event navigation"
 msgid "Next event"
 msgstr "Evénement suivant"
 
-#: inc/template-tags.php:726
+#: inc/template-tags.php:728
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr "Evénement précédent"
 
-#: templates/event-loop.php:28
+#: templates/event-loop.php:39
 msgid "Sorry, we could not find any event."
 msgstr "Désolé, aucun événement n'a été trouvé."

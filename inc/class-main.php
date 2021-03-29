@@ -179,7 +179,7 @@ class Main {
                 'nonce'       => wp_create_nonce( 'update_events' ),
                 'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
                 'postId'      => get_the_ID(),
-                'view'        => 'list',
+                'view'        => get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ) : 'list',
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
             ) );       

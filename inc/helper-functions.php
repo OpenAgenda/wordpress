@@ -147,7 +147,7 @@ function openagenda_get_image_dimensions( $size = 'thumbnail' ){
  * @return  array  Array of i18n fields
  */
 function openagenda_i18n_fields(){
-    $i18n = array( 'title', 'description', 'longDescription', 'html', 'access', 'range' );
+    $i18n = array( 'title', 'description', 'longDescription', 'html', 'access', 'range', 'conditions', 'keywords' );
     return apply_filters( 'openagenda_i18n_fields', $i18n );
 }
 
