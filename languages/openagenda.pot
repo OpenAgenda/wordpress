@@ -7,17 +7,17 @@ msgstr ""
 "Project-Id-Version: "
 "Openagenda - 0.1\n"
 "POT-Creation-Date: "
-"2021-03-29 13:36+0200\n"
+"2021-03-31 15:10+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Your "
-"Name <you@example.com>\n"
+"Last-Translator: Vincent Dubroeucq "
+"Name <vincent@vincentdubroeucq.com>\n"
 "Language-Team: Vincent "
 "Dubroeucq "
 "<vincent@vincentdubroeucq."
 "com>\n"
 "Report-Msgid-Bugs-To: "
 "Translator Name "
-"<translations@example."
+"<vincent@vincentdubroeucq."
 "com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/"
@@ -51,10 +51,13 @@ msgstr ""
 "X-Poedit-"
 "SearchPath-0: .\n"
 "X-Poedit-"
-"SearchPathExcluded-0: "
-"svn\n"
+"SearchPathExcluded-0: ."
+"git\n"
 "X-Poedit-"
-"SearchPathExcluded-1: "
+"SearchPathExcluded-1: ."
+"idea\n"
+"X-Poedit-"
+"SearchPathExcluded-2: "
 "node_modules\n"
 
 #. Plugin Name of the plugin
@@ -113,7 +116,7 @@ msgid ""
 msgstr ""
 
 #: inc/class-content-manager.php:18
-#: inc/class-content-manager.php:106
+#: inc/class-content-manager.php:107
 #: inc/class-settings.php:363
 msgid "calendar"
 msgstr ""
@@ -256,7 +259,7 @@ msgctxt ""
 msgid "Calendars list"
 msgstr ""
 
-#: inc/class-content-manager.php:156
+#: inc/class-content-manager.php:172
 msgid ""
 "Please provide a "
 "calendar UID in this "
@@ -619,13 +622,42 @@ msgid ""
 "Search this calendar"
 msgstr ""
 
-#: inc/helper-functions.php:267
+#: inc/helper-functions.php:190
+msgid ""
+"Accessible to people "
+"suffering from motor "
+"disabilities."
+msgstr ""
+
+#: inc/helper-functions.php:191
+#: inc/helper-functions.php:194
+msgid ""
+"Accessible to people "
+"suffering from mental "
+"disabilities."
+msgstr ""
+
+#: inc/helper-functions.php:192
+msgid ""
+"Accessible to people "
+"suffering from hearing "
+"impairments."
+msgstr ""
+
+#: inc/helper-functions.php:193
+msgid ""
+"Accessible to people "
+"suffering from visual "
+"impairments."
+msgstr ""
+
+#: inc/helper-functions.php:305
 msgid ""
 "Fetching events... "
 "Please wait a moment."
 msgstr ""
 
-#: inc/helper-functions.php:279
+#: inc/helper-functions.php:317
 msgid ""
 "There was an error "
 "updating the events. "
@@ -633,13 +665,13 @@ msgid ""
 "and try again."
 msgstr ""
 
-#: inc/helper-functions.php:311
+#: inc/helper-functions.php:349
 #, php-format
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
-#: inc/helper-functions.php:313
+#: inc/helper-functions.php:351
 #, php-format
 msgctxt "last event timing"
 msgid "%s ago"

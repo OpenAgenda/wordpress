@@ -4,10 +4,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Openagenda - 0.1\n"
-"POT-Creation-Date: 2021-03-29 13:36+0200\n"
+"Report-Msgid-Bugs-To: Translator Name <vincent@vincentdubroeucq.com>\n"
+"POT-Creation-Date: 2021-03-31 15:17+0200\n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
-"Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,28 +21,27 @@ msgstr ""
 "_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Generator: Poedit 2.4.1\n"
-"Last-Translator: \n"
-"Language: fr\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: svn\n"
-"X-Poedit-SearchPathExcluded-1: node_modules\n"
+"X-Poedit-SearchPathExcluded-0: .git\n"
+"X-Poedit-SearchPathExcluded-1: .idea\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
 msgid "OpenAgenda"
-msgstr "OpenAgenda"
+msgstr ""
 
 #. Plugin URI of the plugin
 msgid "https://wordpress.org/plugins/openagenda/"
-msgstr "https://wordpress.org/plugins/openagenda/"
+msgstr ""
 
 #. Description of the plugin
 msgid "Display your OpenAgenda data on your WordPress site."
-msgstr "Affiche vos agendas OpenAgenda sur votre site WordPress."
+msgstr "Affiche vos agendas Openagenda sur votre site WordPress"
 
 #. Author URI of the plugin
 msgid "https://openagenda.com/"
-msgstr "https://openagenda.com/"
+msgstr ""
 
 #: assets/js/filters/oaActiveFilters.min.js:1
 msgid "hidden"
@@ -74,7 +75,7 @@ msgstr "Aucun ID de publication n'a été fourni."
 msgid "The post ID provided does not refer to a calendar."
 msgstr "L'identifiant fourni ne correspond à aucun agenda."
 
-#: inc/class-content-manager.php:18 inc/class-content-manager.php:106
+#: inc/class-content-manager.php:18 inc/class-content-manager.php:107
 #: inc/class-settings.php:363
 msgid "calendar"
 msgstr "agenda"
@@ -183,7 +184,7 @@ msgctxt ""
 msgid "Calendars list"
 msgstr "Liste des agendas"
 
-#: inc/class-content-manager.php:156
+#: inc/class-content-manager.php:172
 msgid "Please provide a calendar UID in this calendar's settings box first."
 msgstr "Veuillez fournir un UID d'agenda valide dans les réglages de l'agenda."
 
@@ -276,7 +277,7 @@ msgstr "Tags"
 #: inc/class-main.php:36
 msgctxt "Filter name"
 msgid "Calendar"
-msgstr "Agenda"
+msgstr "Calendrier"
 
 #: inc/class-main.php:41
 msgctxt "Filter name"
@@ -492,11 +493,27 @@ msgstr "Prévisualiser l'agenda"
 msgid "Search this calendar"
 msgstr "Chercher dans cet agenda"
 
-#: inc/helper-functions.php:267
+#: inc/helper-functions.php:190
+msgid "Accessible to people suffering from motor disabilities."
+msgstr "Accessible aux personnes souffrant de handicap moteur."
+
+#: inc/helper-functions.php:191 inc/helper-functions.php:194
+msgid "Accessible to people suffering from mental disabilities."
+msgstr "Accessible aux personnes souffrant de handicap psychique."
+
+#: inc/helper-functions.php:192
+msgid "Accessible to people suffering from hearing impairments."
+msgstr "Accessible aux personnes souffrant de handicap auditif."
+
+#: inc/helper-functions.php:193
+msgid "Accessible to people suffering from visual impairments."
+msgstr "Accessible aux personnes souffrant de handicap visuel."
+
+#: inc/helper-functions.php:305
 msgid "Fetching events... Please wait a moment."
 msgstr "Recherche des événements en cours... Veuillez patienter un moment."
 
-#: inc/helper-functions.php:279
+#: inc/helper-functions.php:317
 msgid ""
 "There was an error updating the events. Pleaser refresh the page and try "
 "again."
@@ -504,20 +521,20 @@ msgstr ""
 "Il y a eu une erreur lors de la mise à jour des événements. Veuillez "
 "rafraichir la page et réessayer."
 
-#: inc/helper-functions.php:311
+#: inc/helper-functions.php:349
 #, php-format
 msgctxt "next event timing"
 msgid "In %s"
 msgstr "Dans %s"
 
-#: inc/helper-functions.php:313
+#: inc/helper-functions.php:351
 #, php-format
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr "Il y a %s"
 
 #: inc/template-tags.php:246
-msgid "No timing avilable"
+msgid "No timing available"
 msgstr "Pas d'horaire disponible"
 
 #: inc/template-tags.php:306

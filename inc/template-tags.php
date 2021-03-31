@@ -243,7 +243,7 @@ function openagenda_event_timing( $display = 'date', $uid = false, $echo = true 
             } elseif ( ! empty( $last_timing ) ) {
                 $html = sprintf( '<span class="oa-timing oa-last-timing">%s</span>', esc_html( $last_timing['relative_label'] ) );
             } else {
-                $html = sprintf( '<span class="oa-timing oa-no-timing">%s</span>', esc_html( __( 'No timing avilable', 'openagenda' ) ) );
+                $html = sprintf( '<span class="oa-timing oa-no-timing">%s</span>', esc_html( __( 'No timing available', 'openagenda' ) ) );
             }
             break;
         default:
