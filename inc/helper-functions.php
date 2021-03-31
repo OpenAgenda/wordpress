@@ -246,8 +246,9 @@ function openagenda_get_shortcode_attributes( $array ){
  * @return  string  $html  Template HTML.
  */
 function openagenda_get_events_html( $view = 'list' ){
-    global $openagenda;    
+    global $openagenda;
     ob_start();
+    $openagenda->reset_index(); // Make sure we're at the start of the loop
 
     $template = $openagenda->is_single() ? 'single-event' : 'event'; 
     $class    = $openagenda->is_single() ? 'oa-event' : sprintf( 'oa-event-%s', sanitize_title( $view ) );

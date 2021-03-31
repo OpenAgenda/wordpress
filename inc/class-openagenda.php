@@ -461,6 +461,14 @@ class Openagenda {
         $wpdb->query( "DELETE FROM `$wpdb->options` WHERE `option_name` LIKE ('_transient_timeout_oa_%')" );
     }
 
+    
+    /**
+     * Resets the index
+     */
+    public function reset_index(){
+        $this->index = 0;
+    }
+
 
     /**
      * Returns whether there are events to display.

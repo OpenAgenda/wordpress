@@ -230,7 +230,7 @@ class Content_Manager implements Hookable {
 
         $metas = array( 'title' => wp_get_document_title(), );
         
-        if( $openagenda->is_single() && ! empty( $description = \openagenda_get_field( 'description', false, false ) ) ){
+        if( $openagenda->is_single() && ! empty( $description = \openagenda_get_field( 'description', false ) ) ){
             $metas['description'] = $description; 
         } 
         if( $openagenda->is_archive() && ! empty( $post->post_excerpt ) ){
@@ -256,11 +256,11 @@ class Content_Manager implements Hookable {
         );
         
         if( $openagenda->is_single() ){
-            $properties['og:url'] = esc_url( \openagenda_get_field( 'permalink', false, false ) ) ;
+            $properties['og:url'] = esc_url( \openagenda_get_field( 'permalink', false ) ) ;
 
             $event       = openagenda_get_event();
             $image_url   = ! empty( $event['image'] ) ? $event['image'] : false;
-            $description = ! empty( \openagenda_get_field( 'description', false, false ) ) ? \openagenda_get_field( 'description', false, false ) : false;
+            $description = ! empty( \openagenda_get_field( 'description', false ) ) ? \openagenda_get_field( 'description', false ) : false;
             if( $description ){
                 $properties['og:description'] = wp_strip_all_tags( $description );
             }
