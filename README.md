@@ -2,6 +2,16 @@
 
 This WordPress plugin allows you to embed any calendar hosted on [https://openagenda.com](https://openagenda.com) on your WordPress site.
 
+## Installation
+
+This plugin is hosted on the official WordPress repository at the following URL : 
+
+[https://wordpress.org/plugins/openagenda/](https://wordpress.org/plugins/openagenda/)
+
+If you install this plugin from the official WordPress repository, the name of the folder in your `wp-content/plugins/` directory will be `openagenda/`.
+
+If you wish to install this plugin on your local machine from this GitHub repository for development purposes, **please make sure its folder name IS NOT `openagenda/` as any update published on the official WordPress repository will overwrite your work.**
+
 ## Basic usage
 
 Upon activation, the plugin creates a new post type named *Calendars*. Just create a new calendar, provide the UID of the calendar you wish to display in the  settings box, and that's it !

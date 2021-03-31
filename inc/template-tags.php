@@ -449,6 +449,60 @@ function openagenda_event_share_buttons( $uid = false, $echo = true ){
 
 
 /**
+ * Displays a list of registration methods for the event
+ * 
+ * @param  string  $uid   UID of the event.
+ * @param  bool    $echo  Whether to echo or just return the html
+ */
+function openagenda_event_registration_methods( $uid = false, $echo = true ){
+    global $openagenda;
+    $event = openagenda_get_event( $uid );
+    if( ! $uid ) $uid = $event['uid'];
+
+    
+    $methods = openagenda_get_field( 'registration', $uid );
+    $html    = '';
+
+    if( $methods && is_array( $methods ) ) {
+        $items = array_map( function( $method ){
+            switch ( $method['type'] ) {
+                case 'link':
+                    $icon  = openagenda_icon( 'link', false );
+                    $value = esc_url( $method['value'] );
+                    break;
+                case 'email':
+                    $icon  = openagenda_icon( 'email', false );
+                    $value = sanitize_email( $method['value'] );
+                    break;
+                case 'phone':
+                    $icon  = openagenda_icon( 'phone', false );
+                    $value = sanitize_text_field( $method['value'] );
+                    break;
+                default:
+                    $icon  = '';
+                    $value = sanitize_text_field( $method['value'] );
+                    break;
+            }
+            $href  = sprintf( '%s%s', sanitize_text_field( $method['prefix'] ), $value );
+            $item  = sprintf( 
+                '<li class="oa-registration-method">%s<a href="%s" class="oa-registration-method-label">%s</a></li>',
+                $icon,
+                esc_url( $href ),
+                esc_html( $method['value'] )
+            );
+            return $item;
+        }, $methods );
+
+        $html = sprintf( '<ul class="oa-registration-methods">%s</ul>', join( '', $items )  );
+    } 
+    
+    $html = apply_filters( 'openagenda_event_registration_methods', $html, $uid );
+    if ( $echo ) echo $html;
+    return $html;
+}
+
+
+/**
  * Displays pagination on single calendar pages.
  * 
  * @param  array  $args  Array of arguments passed to openagenda_get_page_links()

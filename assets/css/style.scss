@@ -141,13 +141,14 @@ ul.oa-sharers-links {
 }
 
 /*******************
- * Timings & range
+ * Event data
  *******************/
 .oa-event-timings {
 	margin: 1rem 0;
 }
 .oa-event-timing,
 .oa-event-range,
+.oa-registration-method,
 .oa-card-meta {
 	align-items: center;
 	display: flex;
