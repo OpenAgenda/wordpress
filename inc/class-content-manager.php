@@ -62,6 +62,7 @@ class Content_Manager implements Hookable {
         add_action( 'init', array( $this, 'register_post_types' ), 10 );
         add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
         add_action( 'wp_head', array( $this, 'wp_head_meta' ), 100 );
+        add_filter( 'body_class', array( $this, 'body_class'), 10, 1 );
         add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 100, 1 );
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
         // add_filter( 'post_type_link', array( $this, 'permalink' ), 10, 4 );
@@ -107,6 +108,21 @@ class Content_Manager implements Hookable {
             add_rewrite_rule( "${rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]', 'top' );
             add_rewrite_rule( "${rewrite_base}/([^/]+)/([^&]+)?", 'index.php?oa-calendar=$matches[1]&oa-slug=$matches[2]', 'top' );
         }
+    }
+
+
+    /**
+     * Adds relevant body classes
+     * 
+     * @param   array  $classes  Array of registered body classes
+     * @return  array  $classes
+     */
+    public function body_class( $classes ) {
+        global $openagenda;
+        if( $openagenda && is_singular( 'oa-calendar' ) ){
+            $classes[] = openagenda_is_single() ? 'single-oa-calendar-event' : 'single-oa-calendar-archive';
+        }
+        return $classes;
     }
  
 
