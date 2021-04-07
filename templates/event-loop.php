@@ -4,6 +4,7 @@
  * Acts as a wrapper around actual event templates
  * 
  * @var string  $class     CSS class added to the wrapper
+ * @var string  $view      View setting
  * @var string  $template  Event template to load
  * @see openagenda_get_events_html()
  *

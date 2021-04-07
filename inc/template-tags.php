@@ -713,11 +713,15 @@ function openagenda_exports( $uid = false, $echo = true ) {
 /**
  * Displays a filter widget
  * 
- * @param  $args  Array of arguments to pass to the filter
+ * @param  string  $filter  Filter to display.
+ * @param  array   $args    Array of arguments to pass to the filter
+ * @param  bool    $echo    Whether to display or return HTML.
  */
-function openagenda_filter( $filter, $args = array() ){
+function openagenda_filter( $filter, $args = array(), $echo = true ){
     $atts = openagenda_get_shortcode_attributes( $args );
-    echo do_shortcode( sprintf( '[openagenda_filter_%s %s]', sanitize_key( $filter ), $atts ) );
+    $html = do_shortcode( sprintf( '[openagenda_filter_%s %s]', sanitize_key( $filter ), $atts ) );
+    if( $echo ) echo $html;
+    return $html;
 }
 
 

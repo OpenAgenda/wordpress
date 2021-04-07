@@ -253,9 +253,10 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   padding: 5px;
   line-height: 1;
   text-decoration: none;
+  opacity: 0.8;
 }
 .active-filters li a:hover, .active-filters li a:focus {
-  color: white;
+  opacity: 1;
   text-decoration: none;
 }
 

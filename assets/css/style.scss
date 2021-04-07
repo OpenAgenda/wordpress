@@ -256,9 +256,10 @@ div[data-container-id="oa-wrapper"]{
 		padding: 5px;
 		line-height: 1;
 		text-decoration: none;
+		opacity: .8;
 		&:hover,
 		&:focus {
-			color: white;
+			opacity: 1;
 			text-decoration: none;
 		}
 	}
