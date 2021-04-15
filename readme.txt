@@ -146,10 +146,18 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 
 == Changelog ==
 
+= 0.2 =
+* Added icons.
+* Minor CSS fixes
+
 = 0.1 =
 * Initial release
 
 == Upgrade Notice ==
+
+= 0.2 =
+* Added icons.
+* Minor CSS fixes
 
 = 0.1 =
 * Initial release

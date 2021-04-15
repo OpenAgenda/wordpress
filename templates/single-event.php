@@ -11,14 +11,14 @@
     <div class="oa-event-wrapper">
         <header class="oa-event-header">
             <h2 class="oa-event-title"><?php openagenda_field( 'title' ); ?></h2>
-            <div class="oa-meta">
-                <p class="oa-event-timing">
+            <div class="oa-metas">
+                <p class="oa-meta oa-event-timing">
                     <?php 
                         openagenda_icon( 'time' );
                         openagenda_event_timing(); 
                     ?>
                 </p>
-                <p class="oa-event-range">
+                <p class="oa-meta oa-event-range">
                     <?php
                         openagenda_icon( 'month' );
                         openagenda_field( 'range' );

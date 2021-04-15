@@ -20,14 +20,14 @@
                     <?php openagenda_field( 'title' ); ?>
                 </a>
             </h2>
-            <div class="oa-meta">
-                <p class="oa-event-timing">
+            <div class="oa-metas">
+                <p class="oa-meta oa-event-timing">
                     <?php 
                         openagenda_icon( 'time' );
                         openagenda_event_timing( 'relative' ); 
                     ?>
                 </p>
-                <p class="oa-event-range">
+                <p class="oa-meta oa-event-range">
                     <?php
                         openagenda_icon( 'month' );
                         openagenda_field( 'range' );
