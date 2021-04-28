@@ -110,6 +110,13 @@ Displays a search field. It takes the following parameters :
 
  * `placeholder` : text field placeholder.
 
+**`[openagenda_filter_preview]`**
+
+Displays next events. It takes the following parameters : 
+
+ * `preview_label` : Label while loading the items.
+ * `uid` : UID of the calendar you wish to preview.
+ 
 ## Customization
 
 Templates for the list of events and individual events can be customized in your theme.

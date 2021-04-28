@@ -89,6 +89,7 @@ Displays an interactive map to locate and search events. It takes the following 
 Displays next events. It takes the following parameters : 
 
  * `preview_label` : Label while loading the items.
+ * `uid` : UID of the calendar you wish to preview.
 
 **`[openagenda_filter_relative]`**
 
