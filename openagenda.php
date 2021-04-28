@@ -113,11 +113,11 @@ function openagenda_plugin_action_links( $actions, $file, $data, $context ){
         esc_url( menu_page_url( 'openagenda', false ) ),
         esc_html__( 'Settings', 'openagenda' ) 
     );
-    // $actions['documentation'] = sprintf( 
-    //     '<a href="%s" target="_blank" rel="nooepener noreferrer">%s</a>', 
-    //     esc_url( 'https://openagenda.com' ),
-    //     esc_html__( 'Documentation', 'openagenda' ) 
-    // );
+    $actions['documentation'] = sprintf( 
+        '<a href="%s" target="_blank" rel="nooepener noreferrer">%s</a>', 
+        esc_url( 'https://developers.openagenda.com/extension-wordpress/' ),
+        esc_html__( 'Documentation', 'openagenda' ) 
+    );
     return $actions;
 }
 
