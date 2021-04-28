@@ -1,51 +1,37 @@
-# Blank WordPress Pot
-# Copyright 2014 ...
-# This file is distributed under the GNU General Public License v3 or later.
+# Copyright (C) 2021 OpenAgenda
+# This file is distributed under the same license as the OpenAgenda plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Openagenda - 0.1\n"
-"Report-Msgid-Bugs-To: Translator Name <vincent@vincentdubroeucq.com>\n"
-"POT-Creation-Date: 2021-03-31 15:17+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
-"Language: fr\n"
+"Project-Id-Version: OpenAgenda 0.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
-"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
-"X-Poedit-Basepath: ..\n"
+"POT-Creation-Date: 2021-04-28 12:08+0200\n"
+"PO-Revision-Date: 2021-04-28 12:15+0200\n"
 "X-Generator: Poedit 2.4.1\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: .git\n"
-"X-Poedit-SearchPathExcluded-1: .idea\n"
-"X-Poedit-SearchPathExcluded-2: node_modules\n"
+"X-Domain: openagenda\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
 msgid "OpenAgenda"
-msgstr ""
+msgstr "OpenAgenda"
 
 #. Plugin URI of the plugin
 msgid "https://wordpress.org/plugins/openagenda/"
-msgstr ""
+msgstr "https://wordpress.org/plugins/openagenda/"
 
 #. Description of the plugin
 msgid "Display your OpenAgenda data on your WordPress site."
-msgstr "Affiche vos agendas Openagenda sur votre site WordPress"
+msgstr "Affiche vos agendas OpenAgenda sur votre site WordPress."
 
 #. Author URI of the plugin
 msgid "https://openagenda.com/"
-msgstr ""
-
-#: assets/js/filters/oaActiveFilters.min.js:1
-msgid "hidden"
-msgstr ""
+msgstr "https://openagenda.com/"
 
 #: inc/class-admin-pages.php:24
 msgid "OpenAgenda Settings"
@@ -184,7 +170,7 @@ msgctxt ""
 msgid "Calendars list"
 msgstr "Liste des agendas"
 
-#: inc/class-content-manager.php:172
+#: inc/class-content-manager.php:173
 msgid "Please provide a calendar UID in this calendar's settings box first."
 msgstr "Veuillez fournir un UID d'agenda valide dans les réglages de l'agenda."
 
@@ -214,7 +200,7 @@ msgstr "Affiche un filtre."
 
 #: inc/class-filter-widget.php:81 inc/class-preview-widget.php:66
 msgid "Title :"
-msgstr "Titre :"
+msgstr "Titre&nbsp;:"
 
 #: inc/class-filter-widget.php:85
 msgid "Filter to display :"
@@ -254,7 +240,7 @@ msgstr "Rechercher un événement"
 
 #: inc/class-filter-widget.php:216
 msgid "Tag group :"
-msgstr "Groupe tag&nbsp;:"
+msgstr "Groupe de tag&nbsp;:"
 
 #: inc/class-filter-widget.php:221
 msgid "Tags to display :"
@@ -292,7 +278,7 @@ msgstr "Prochainement"
 #: inc/class-main.php:51
 msgctxt "Filter name"
 msgid "Search"
-msgstr "Rechercher"
+msgstr "Recherche"
 
 #: inc/class-metaboxes.php:24
 msgid "Calendar settings"
@@ -330,7 +316,16 @@ msgstr "Afficher le contenu sur les vues liste."
 msgid "Display editor content on single event views."
 msgstr "Afficher le contenu sur les vues événement simples."
 
-#: inc/class-metaboxes.php:158
+#. translators: %s: settings page url
+#: inc/class-metaboxes.php:146
+msgid ""
+"Please provide your account API key in <a href=\"%s\">the plugin settings</"
+"a>."
+msgstr ""
+"Veuillez fournir la clé API de votre compte dans <a href=\"%s\">les réglages "
+"de l'extension</a>."
+
+#: inc/class-metaboxes.php:169
 msgid "New field"
 msgstr "Nouveau champ"
 
@@ -382,8 +377,8 @@ msgstr "Label du lien de prévisualisation&nbsp;:"
 msgid "OpenAgenda API key"
 msgstr "Clé API OpenAgenda"
 
+#. translators: %s: openagenda site url
 #: inc/class-settings.php:67
-#, php-format
 msgid ""
 "Your API key can be found in your <a href=\"%s\">OpenAgenda account</a>."
 msgstr ""
@@ -469,8 +464,8 @@ msgstr ""
 msgid "Calendar base"
 msgstr "Base des agendas"
 
+#. translators: %s : home url
 #: inc/class-settings.php:197
-#, php-format
 msgid ""
 "You can modify the URL prefix for the calendars. For example, the default "
 "prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/"
@@ -521,14 +516,14 @@ msgstr ""
 "Il y a eu une erreur lors de la mise à jour des événements. Veuillez "
 "rafraichir la page et réessayer."
 
+#. translators: %s : next event relative timing
 #: inc/helper-functions.php:349
-#, php-format
 msgctxt "next event timing"
 msgid "In %s"
 msgstr "Dans %s"
 
+#. translators: %s : last event relative timing
 #: inc/helper-functions.php:351
-#, php-format
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr "Il y a %s"
@@ -561,28 +556,28 @@ msgstr "Partagez sur LinkedIn"
 msgid "Share :"
 msgstr "Partager&nbsp;:"
 
-#: inc/template-tags.php:504
+#: inc/template-tags.php:558
 msgid "Previous page"
 msgstr "Page précédente"
 
-#: inc/template-tags.php:505
+#: inc/template-tags.php:559
 msgid "Next page"
 msgstr "Page suivante"
 
-#: inc/template-tags.php:647
+#: inc/template-tags.php:701
 msgid "Download :"
 msgstr "Télécharger&nbsp;:"
 
-#: inc/template-tags.php:727
+#: inc/template-tags.php:785
 msgctxt "event navigation"
 msgid "Next event"
 msgstr "Evénement suivant"
 
-#: inc/template-tags.php:728
+#: inc/template-tags.php:786
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr "Evénement précédent"
 
-#: templates/event-loop.php:39
+#: templates/event-loop.php:40
 msgid "Sorry, we could not find any event."
 msgstr "Désolé, aucun événement n'a été trouvé."

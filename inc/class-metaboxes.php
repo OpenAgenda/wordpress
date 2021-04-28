@@ -137,6 +137,17 @@ class Metaboxes implements Hookable {
     public function calendar_settings_markup( $post, $args ){
         wp_nonce_field( 'oa_calendar_settings_metabox_save_' . (int) $post->ID, 'oa_calendar_settings_nonce' );
         echo '<style>#oa-calendar-settings .components-base-control{margin-bottom: 1rem;}</style>';
+
+        // If no API key is provided, display an error message
+        $general_settings = get_option('openagenda_general_settings');
+        if( ! $general_settings || empty( $general_settings['openagenda_api_key'] ) ){
+            $settings_page_url = menu_page_url( 'openagenda', false );
+            /* translators: %s: settings page url */ 
+            $message = sprintf( __( 'Please provide your account API key in <a href="%s">the plugin settings</a>.', 'openagenda' ), esc_url( $settings_page_url ) );
+            $html = sprintf('<div class="components-notice is-warning"><div class="components-notice__content">%s</div></div>', wp_kses_post( $message ) );
+            echo $html;
+        }
+
         foreach ( $this->get_fields() as $name => $args ) {
             $this->render_field( $name, $args );
         }
