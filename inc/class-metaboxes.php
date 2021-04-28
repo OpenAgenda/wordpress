@@ -136,7 +136,7 @@ class Metaboxes implements Hookable {
      */
     public function calendar_settings_markup( $post, $args ){
         wp_nonce_field( 'oa_calendar_settings_metabox_save_' . (int) $post->ID, 'oa_calendar_settings_nonce' );
-        echo '<style>#oa-calendar-settings .components-base-control{margin-bottom: 1rem;}</style>';
+        echo '<style>#oa-calendar-settings .components-base-control{margin-bottom: 1rem;}#oa-calendar-settings .is-warning{margin: 5px 0;}</style>';
 
         // If no API key is provided, display an error message
         $general_settings = get_option('openagenda_general_settings');
