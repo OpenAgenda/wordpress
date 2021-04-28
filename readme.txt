@@ -30,7 +30,7 @@ All data related to your API key or calendars can be found on https://openagenda
 
 The main settings page provides the following settings : 
 
- * *Open Agenda API key* : Your user API key. It is highly recommended you provide your account API key for performance reasons. It can be found in your account on [https://openagenda.com](https://openagenda.com)
+ * *Open Agenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
  * *Cache duration* : For performance reasons, basic requests to Openagenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
@@ -53,28 +53,28 @@ Every shortcode listed here (except for `[openagenda]`) corresponds to a filter 
 
 Additionaly, shortcodes and widget filters have the same parameters, and every shortcode attribute corresponds to a widget filter setting.
 
-### `[openagenda]`
+**`[openagenda]`**
 
 Displays the calendar. You do not need to use this shortcode explicitely, as it is automatically injected in the content of your "calendars" posts.
 
 However, if you need to insert static content after your list of events, you can do so by inserting this shortcode, then your static content afterwards.
 
-### `[openagenda_filter_active]`
+**`[openagenda_filter_active]`**
 
 Displays the active filters. It takes no parameters.
 
-### `[openagenda_filter_tags]`
+**`[openagenda_filter_tags]`**
 
 Displays a list of tags. It takes the following parameters : 
 
  * `tag_group`: the slug of a tag group you want to display.
  * `tags`: A comma-seperated list of tags you want to display.
 
-### `[openagenda_filter_calendar]`
+**`[openagenda_filter_calendar]`**
 
 Displays a calendar. It takes no parameters.
 
-### `[openagenda_filter_map]`
+**`[openagenda_filter_map]`**
 
 Displays an interactive map to locate and search events. It takes the following parameters :
 
@@ -84,17 +84,17 @@ Displays an interactive map to locate and search events. It takes the following 
  * `map_latitude` : Default latitude
  * `map_zoom` : Default zoom level. Defaults to 12. Used in conjunction with `map_latitude` and `map_longitude`.
 
-### `[openagenda_filter_preview]`
+**`[openagenda_filter_preview]`**
 
 Displays next events. It takes the following parameters : 
 
  * `preview_label` : Label while loading the items.
 
-### `[openagenda_filter_relative]`
+**`[openagenda_filter_relative]`**
 
 Filters events in the near future. It takes no parameters.
 
-### `[openagenda_filter_search]`
+**`[openagenda_filter_search]`**
 
 Displays a search field. It takes the following parameters :
 
