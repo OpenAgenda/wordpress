@@ -176,21 +176,23 @@ class Metaboxes implements Hookable {
         switch ( $args['type'] ) {
             case 'checkbox':
                 $checked = 'yes' === $field_value;
+                $container_class = use_block_editor_for_post( $post ) ? 'components-checkbox-control__input-container' : '';
+                $input_class     = use_block_editor_for_post( $post ) ? 'components-checkbox-control__input' : '';
                 ?>
                     <div class="components-base-control">
                         <div class="components-base-control__field">
-                            <span class="components-checkbox-control__input-container">
+                            <span class="<?php echo $container_class; ?>">
                                 <?php 
                                     if( use_block_editor_for_post( $post ) ){
-                                        printf( '<style>#%s:checked { background-color:#11a0d2; border-color: #11a0d2; }</style>', esc_attr( $name ));
+                                        printf( '<style>#%s:checked { background-color:var(--wp-admin-theme-color); border-color: var(--wp-admin-theme-color); }</style>', esc_attr( $name ));
                                     }
                                 ?>
-                                <input  id="<?php echo esc_attr( $name ); ?>" 
-                                        name="<?php echo esc_attr( $name ); ?>" 
-                                        class="components-checkbox-control__input" 
-                                        type="checkbox"
-                                        value="yes"
-                                        <?php checked( $checked ); ?> 
+                                <input id="<?php echo esc_attr( $name ); ?>" 
+                                       name="<?php echo esc_attr( $name ); ?>" 
+                                       class="<?php echo $input_class; ?>" 
+                                       type="checkbox"
+                                       value="yes"
+                                       <?php checked( $checked ); ?> 
                                 />
                                 <?php if( use_block_editor_for_post( $post ) ) : ?>
                                     <svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-yes components-checkbox-control__checked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -209,6 +211,8 @@ class Metaboxes implements Hookable {
                 <?php
                 break;
             case 'radio':
+                $container_class = use_block_editor_for_post( $post ) ? 'components-radio-control__input-container' : '';
+                $input_class     = use_block_editor_for_post( $post ) ? 'components-radio-control__input' : '';
                 ?>
                     <div class="components-base-control">
                         <div class="components-base-control__field">
@@ -220,10 +224,10 @@ class Metaboxes implements Hookable {
                                     }
                                 ?>
                                 <?php foreach ( $args['choices'] as $key => $choice ) : $field_id = sprintf( '%s-%s', $name, $choice['value'] ); ?>
-                                    <div class="components-radio-control__input-container">
+                                    <div class="<?php echo $container_class; ?>">
                                         <input  id="<?php echo esc_attr( $field_id ); ?>" 
                                                 name="<?php echo esc_attr( $name ); ?>" 
-                                                class="components-radio-control__input" 
+                                                class="<?php echo $input_class; ?>" 
                                                 type="radio"
                                                 value="<?php echo esc_attr( $choice['value'] ) ?>"
                                                 <?php checked( $field_value, $choice['value']  ); ?> 
@@ -233,8 +237,6 @@ class Metaboxes implements Hookable {
                                 <?php endforeach; ?>
                             </fieldset>
                         </div>
-                        
-
                     </div>
                 <?php
                 break;          
