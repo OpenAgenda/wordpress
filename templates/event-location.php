@@ -6,8 +6,9 @@
  *
  * @package Openagenda
  */
-?>
 
+if( empty( openagenda_get_field( 'location' ) ) || empty( openagenda_get_field( 'location.uid' ) ) ) return;
+?>
 <div class="oa-event-location">
     <h3 class="oa-event-location-name"><?php openagenda_field( 'location.name' ); ?></h3>
     <address class="oa-event-location-address">

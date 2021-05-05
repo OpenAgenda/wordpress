@@ -31,6 +31,12 @@
         </header>
         <div class="oa-event-timings"><?php openagenda_event_timings(); ?></div>
         <div class="oa-event-details"><?php openagenda_field( 'html' ); ?></div>
+
+        <?php if( ! empty( $access_link = openagenda_get_field( 'onlineAccessLink' ) ) ) : ?>
+            <div class="oa-event-access-link">
+                <?php sprintf( '<strong>%s</strong>%s', esc_html__( 'Registration : ', 'openagenda' ), esc_url( $access_link ) ); ?>
+            </div>
+        <?php endif; ?>
         
         <?php include openagenda_get_template( 'event-location' ); ?>
     </div>
