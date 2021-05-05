@@ -1,22 +1,19 @@
 'use strict';
-jQuery(document).ready( function($) {
-    if(! oaData ) return;
-
-    $( '[data-container-id="oa-wrapper"]' ).prepend('<div class="oa-notice-wrapper"></div>');
-    
+if( oaData ) {
+    jQuery( '[data-container-id="oa-wrapper"]' ).prepend('<div class="oa-notice-wrapper"></div>');
     window.oa = {
         onReloadWithPassed: (query) => {
-            $( '[data-container-id="oa-wrapper"]' ).prepend(oaData.overlayHtml);
+            jQuery( '[data-container-id="oa-wrapper"]' ).prepend(oaData.overlayHtml);
             if(query){
                 oa.getEvents( 'tags', query, query );
             }
         },
         onWidgetUpdate: (filter, update, query) => {
-            $( '[data-container-id="oa-wrapper"]' ).prepend(oaData.overlayHtml);
+            jQuery( '[data-container-id="oa-wrapper"]' ).prepend(oaData.overlayHtml);
             oa.getEvents( filter, update, query );
         },
         getEvents: (filter, update, query) => {
-            $.post(
+            jQuery.post(
                 oaData.ajaxUrl,
                 {         
                     nonce: oaData.nonce,     
@@ -29,14 +26,14 @@ jQuery(document).ready( function($) {
                 },
                 function(data) {
                     if (data.success) {
-                        $('[data-container-id="oa-wrapper"]').html( data.data.html );
+                        jQuery('[data-container-id="oa-wrapper"]').html( data.data.html );
                         if( data.data.updatedUrl ) window.history.replaceState( {}, '', data.data.updatedPath );
                     } else {
-                        $( '.oa-update-overlay' ).remove();
-                        $( '.oa-notice-wrapper' ).html( oaData.errorNotice );
+                        jQuery( '.oa-update-overlay' ).remove();
+                        jQuery( '.oa-notice-wrapper' ).html( oaData.errorNotice );
                     }
                 }
             );
         }
     };
-});
+}
