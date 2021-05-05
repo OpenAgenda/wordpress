@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2021-04-28 12:08+0200\n"
-"PO-Revision-Date: 2021-04-28 12:20+0200\n"
+"PO-Revision-Date: 2021-05-05 11:04+0200\n"
 "X-Generator: Poedit 2.4.1\n"
 "X-Domain: openagenda\n"
 "Last-Translator: \n"
@@ -585,3 +585,7 @@ msgstr "Désolé, aucun événement n'a été trouvé."
 #: openagenda.php:119
 msgid "Documentation"
 msgstr "Documentation"
+
+#: templates/single-event.php:37
+msgid "Registration : "
+msgstr "Pour s'inscrire : "
