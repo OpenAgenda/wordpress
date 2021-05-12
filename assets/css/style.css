@@ -138,7 +138,6 @@ ul.oa-sharers-links {
 
 .oa-event-timing,
 .oa-event-range,
-.oa-event-location,
 .oa-registration-method,
 .oa-card-meta {
   align-items: center;
@@ -146,7 +145,6 @@ ul.oa-sharers-links {
 }
 .oa-event-timing .oa-icon,
 .oa-event-range .oa-icon,
-.oa-event-location .oa-icon,
 .oa-registration-method .oa-icon,
 .oa-card-meta .oa-icon {
   margin-right: 5px;

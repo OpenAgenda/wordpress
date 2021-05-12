@@ -343,6 +343,23 @@ function openagenda_event_timings( $uid = false, $echo = true ){
 
 
 /**
+ * Returns the HTML content of the events total in the list header.
+ * 
+ * @return  string  $html  Template HTML.
+ */
+function openagenda_get_events_total_html( $echo = true ){
+    global $openagenda;
+    $total = (int) $openagenda->get_total();
+    /* translators: %d: number of events */
+    $events_total = $total > 0 ? sprintf( _n( '%d upcoming event.', '%d upcoming events.'  , $total, 'openagenda' ), (int) $total ) : __( 'No upcoming event.', 'openagenda' );
+    $html = sprintf( '<p class="oa-events-total">%s</p>', esc_html( $events_total ) );
+    $html = apply_filters( 'openagenda_events_total_html', $html );
+    if ( $echo ) echo $html;
+    return $html;
+}
+
+
+/**
  * Displays a map for a single event.
  * 
  * @param  string  $uid   UID of the event to get image from.

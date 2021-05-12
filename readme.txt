@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 5.7
-Stable tag: 0.2
+Tested up to: 5.7.1
+Stable tag: 1.0.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -147,6 +147,11 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 
 == Changelog ==
 
+= 1.0.0 =
+* Fixed location template.
+* Added event count and active filters on top of the list view.
+* Added online access link display for online events
+
 = 0.2 =
 * Added icons.
 * Minor CSS fixes
@@ -155,6 +160,11 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.0.0 =
+* Fixed location template.
+* Added event count and active filters on top of the list view.
+* Added online access link display for online events
 
 = 0.2 =
 * Added icons.

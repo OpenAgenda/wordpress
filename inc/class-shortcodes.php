@@ -76,9 +76,10 @@ class Shortcodes implements Hookable {
             $openagenda = new Openagenda( $atts['uid'], $atts );
         }
 
-        $html = \openagenda_get_events_html( $atts['view'] );
+        $list_header = \openagenda_is_archive() ? \openagenda_get_list_header_html( $atts['view'] ) : '';
+        $event_html  = \openagenda_get_events_html( $atts['view'] );
 
-        return sprintf( '<div data-container-id="oa-wrapper">%s</div>', $html );
+        return sprintf( '%s<div data-container-id="oa-wrapper">%s</div>', $list_header, $event_html );
     }
 
 

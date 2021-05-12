@@ -27,6 +27,7 @@ if( oaData ) {
                 function(data) {
                     if (data.success) {
                         jQuery('[data-container-id="oa-wrapper"]').html( data.data.html );
+                        jQuery('[data-container-id="oa-events-total"]').html( data.data.totalHtml );
                         if( data.data.updatedUrl ) window.history.replaceState( {}, '', data.data.updatedPath );
                     } else {
                         jQuery( '.oa-update-overlay' ).remove();

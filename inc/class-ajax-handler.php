@@ -63,6 +63,7 @@ class Ajax_Handler {
         $response    = array(
             'totalPages'  => (int) $openagenda->get_total_pages(),
             'total'       => (int) $openagenda->get_total(),
+            'totalHtml'   => \openagenda_get_events_total_html( false ),
             'updatedUrl'  => esc_url( $updatedUrl ),
             'updatedPath' => $updatedPath,
             'source'      => sanitize_key( $openagenda->source ),

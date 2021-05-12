@@ -34,7 +34,7 @@
 
         <?php if( ! empty( $access_link = openagenda_get_field( 'onlineAccessLink' ) ) ) : ?>
             <div class="oa-event-access-link">
-                <?php sprintf( '<strong>%s</strong>%s', esc_html__( 'Registration : ', 'openagenda' ), esc_url( $access_link ) ); ?>
+                <?php printf( '<strong>%1$s</strong><a href="%2$s">%2$s</a>', esc_html__( 'Registration : ', 'openagenda' ), esc_url( $access_link ) ); ?>
             </div>
         <?php endif; ?>
         

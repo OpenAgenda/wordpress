@@ -286,11 +286,21 @@ function openagenda_get_events_html( $view = 'list' ){
     global $openagenda;
     ob_start();
     $openagenda->reset_index(); // Make sure we're at the start of the loop
-
     $template = $openagenda->is_single() ? 'single-event' : 'event'; 
     $class    = $openagenda->is_single() ? 'oa-event' : sprintf( 'oa-event-%s', sanitize_title( $view ) );
-
     include openagenda_get_template( 'event-loop' );
+    return ob_get_clean();
+}
+
+
+/**
+ * Returns the list header HTML, consisting of a filter widget and total number of events
+ */
+function openagenda_get_list_header_html( $view = 'list' ){
+    global $openagenda;
+    ob_start();
+    $class = sprintf( 'oa-event-%s-header', sanitize_title( $view ) );
+    include openagenda_get_template( 'list-header' );
     return ob_get_clean();
 }
 
