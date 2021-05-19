@@ -33,9 +33,16 @@
         <div class="oa-event-details"><?php openagenda_field( 'html' ); ?></div>
 
         <?php if( ! empty( $access_link = openagenda_get_field( 'onlineAccessLink' ) ) ) : ?>
-            <div class="oa-event-access-link">
-                <?php printf( '<strong>%1$s</strong><a href="%2$s">%2$s</a>', esc_html__( 'Registration : ', 'openagenda' ), esc_url( $access_link ) ); ?>
-            </div>
+            <p class="oa-event-access-link">
+                <?php printf( '<strong>%1$s</strong><a href="%2$s">%2$s</a>', esc_html__( 'Access the online event: ', 'openagenda' ), esc_url( $access_link ) ); ?>
+            </p>
+        <?php endif; ?>
+
+        <?php if( ! empty( $registration_methods = openagenda_get_field( 'registration' ) ) ) : ?>
+            <?php
+                printf( '<p class="openagenda-registration-label"><strong>%s</strong></p>', esc_html__( 'Registration: ', 'openagenda' ) ); 
+                openagenda_event_registration_methods(); 
+            ?>
         <?php endif; ?>
         
         <?php include openagenda_get_template( 'event-location' ); ?>

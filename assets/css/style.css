@@ -138,14 +138,14 @@ ul.oa-sharers-links {
 
 .oa-event-timing,
 .oa-event-range,
-.oa-registration-method,
+.oa-registration-method-wrapper,
 .oa-card-meta {
   align-items: center;
   display: flex;
 }
 .oa-event-timing .oa-icon,
 .oa-event-range .oa-icon,
-.oa-registration-method .oa-icon,
+.oa-registration-method-wrapper .oa-icon,
 .oa-card-meta .oa-icon {
   margin-right: 5px;
 }

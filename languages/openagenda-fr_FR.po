@@ -2,22 +2,19 @@
 # This file is distributed under the same license as the OpenAgenda plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda - 1.0.0\n"
+"Project-Id-Version: OpenAgenda 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
-"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-05-12 16:02+0200\n"
-"PO-Revision-Date: 2021-05-12 16:09+0200\n"
+"POT-Creation-Date: 2021-05-19T10:28:41+02:00\n"
+"PO-Revision-Date: 2021-05-19 10:32+0200\n"
 "X-Generator: Poedit 2.4.1\n"
 "X-Domain: openagenda\n"
-"X-Poedit-Basepath: .\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: ../node_modules\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
@@ -434,7 +431,7 @@ msgstr "Liens du fond de carte"
 msgid "Default map tiles attribution link"
 msgstr "URL des crédits du fond de carte"
 
-#: inc/class-settings.php:148 inc/template-tags.php:378
+#: inc/class-settings.php:148 inc/template-tags.php:379
 msgid "OpenStreetMap contributors"
 msgstr "Les contributeurs OpenStreetMap"
 
@@ -493,7 +490,7 @@ msgstr "Chercher dans cet agenda"
 
 #: inc/helper-functions.php:190
 msgid "Accessible to people suffering from motor disabilities."
-msgstr "Accessible aux personnes souffrant de handicap moteur."
+msgstr "Accessible aux personnes souffrant de handicap psychique."
 
 #: inc/helper-functions.php:191 inc/helper-functions.php:194
 msgid "Accessible to people suffering from mental disabilities."
@@ -531,64 +528,64 @@ msgctxt "last event timing"
 msgid "%s ago"
 msgstr "Il y a %s"
 
-#: inc/template-tags.php:246
+#: inc/template-tags.php:247
 msgid "No timing available"
 msgstr "Pas d'horaire disponible"
 
-#: inc/template-tags.php:306
+#: inc/template-tags.php:307
 msgid "View previous month"
 msgstr "Voir le mois précédent"
 
-#: inc/template-tags.php:309
+#: inc/template-tags.php:310
 msgid "View next month"
 msgstr "Voir le mois suivant"
 
 #. translators: %d: number of events
-#: inc/template-tags.php:354
+#: inc/template-tags.php:355
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] "%d événement à venir."
 msgstr[1] "%d événements à venir."
 
 #. translators: %d: number of events
-#: inc/template-tags.php:354
+#: inc/template-tags.php:355
 msgid "No upcoming event."
 msgstr "Pas d'événement à venir."
 
-#: inc/template-tags.php:414
+#: inc/template-tags.php:415
 msgid "Share on Facebook"
 msgstr "Partagez sur Facebook"
 
-#: inc/template-tags.php:419
+#: inc/template-tags.php:420
 msgid "Share on Twitter"
 msgstr "Partagez sur Twitter"
 
-#: inc/template-tags.php:427
+#: inc/template-tags.php:428
 msgid "Share on Linkedin"
 msgstr "Partagez sur LinkedIn"
 
-#: inc/template-tags.php:457
+#: inc/template-tags.php:458
 msgid "Share :"
 msgstr "Partager&nbsp;:"
 
-#: inc/template-tags.php:575
+#: inc/template-tags.php:576
 msgid "Previous page"
 msgstr "Page précédente"
 
-#: inc/template-tags.php:576
+#: inc/template-tags.php:577
 msgid "Next page"
 msgstr "Page suivante"
 
-#: inc/template-tags.php:718
+#: inc/template-tags.php:719
 msgid "Download :"
 msgstr "Télécharger&nbsp;:"
 
-#: inc/template-tags.php:802
+#: inc/template-tags.php:803
 msgctxt "event navigation"
 msgid "Next event"
 msgstr "Evénement suivant"
 
-#: inc/template-tags.php:803
+#: inc/template-tags.php:804
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr "Evénement précédent"
@@ -602,5 +599,9 @@ msgid "Sorry, we could not find any event."
 msgstr "Désolé, aucun événement n'a été trouvé."
 
 #: templates/single-event.php:37
-msgid "Registration : "
-msgstr "Pour s'inscrire&nbsp;: "
+msgid "Access the online event: "
+msgstr "Accéder à l'événement en ligne&nbsp;: "
+
+#: templates/single-event.php:43
+msgid "Registration: "
+msgstr "Inscription&nbsp;: "

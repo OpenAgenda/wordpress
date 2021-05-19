@@ -1,22 +1,18 @@
 # Copyright (C) 2021 OpenAgenda
 # This file is distributed under the same license as the OpenAgenda plugin.
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda - 1.0.0\n"
+"Project-Id-Version: OpenAgenda 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-05-12 16:02+0200\n"
+"POT-Creation-Date: 2021-05-19T10:28:41+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: openagenda\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: ../node_modules\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
@@ -39,7 +35,8 @@ msgstr ""
 msgid "OpenAgenda Settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:25 openagenda.php:114
+#: inc/class-admin-pages.php:25
+#: openagenda.php:114
 msgid "Settings"
 msgstr ""
 
@@ -47,7 +44,8 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: inc/class-admin-pages.php:122 inc/class-settings.php:46
+#: inc/class-admin-pages.php:122
+#: inc/class-settings.php:46
 msgid "General settings"
 msgstr ""
 
@@ -63,7 +61,8 @@ msgstr ""
 msgid "The post ID provided does not refer to a calendar."
 msgstr ""
 
-#: inc/class-content-manager.php:18 inc/class-content-manager.php:107
+#: inc/class-content-manager.php:18
+#: inc/class-content-manager.php:107
 #: inc/class-settings.php:363
 msgid "calendar"
 msgstr ""
@@ -187,7 +186,8 @@ msgstr ""
 msgid "Displays a filter widget."
 msgstr ""
 
-#: inc/class-filter-widget.php:81 inc/class-preview-widget.php:66
+#: inc/class-filter-widget.php:81
+#: inc/class-preview-widget.php:66
 msgid "Title :"
 msgstr ""
 
@@ -403,7 +403,8 @@ msgstr ""
 msgid "Default map tiles attribution link"
 msgstr ""
 
-#: inc/class-settings.php:148 inc/template-tags.php:378
+#: inc/class-settings.php:148
+#: inc/template-tags.php:379
 msgid "OpenStreetMap contributors"
 msgstr ""
 
@@ -448,7 +449,8 @@ msgstr ""
 msgid "Accessible to people suffering from motor disabilities."
 msgstr ""
 
-#: inc/helper-functions.php:191 inc/helper-functions.php:194
+#: inc/helper-functions.php:191
+#: inc/helper-functions.php:194
 msgid "Accessible to people suffering from mental disabilities."
 msgstr ""
 
@@ -480,64 +482,64 @@ msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
 
-#: inc/template-tags.php:246
+#: inc/template-tags.php:247
 msgid "No timing available"
 msgstr ""
 
-#: inc/template-tags.php:306
+#: inc/template-tags.php:307
 msgid "View previous month"
 msgstr ""
 
-#: inc/template-tags.php:309
+#: inc/template-tags.php:310
 msgid "View next month"
 msgstr ""
 
 #. translators: %d: number of events
-#: inc/template-tags.php:354
+#: inc/template-tags.php:355
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of events
-#: inc/template-tags.php:354
+#: inc/template-tags.php:355
 msgid "No upcoming event."
 msgstr ""
 
-#: inc/template-tags.php:414
+#: inc/template-tags.php:415
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/template-tags.php:419
+#: inc/template-tags.php:420
 msgid "Share on Twitter"
 msgstr ""
 
-#: inc/template-tags.php:427
+#: inc/template-tags.php:428
 msgid "Share on Linkedin"
 msgstr ""
 
-#: inc/template-tags.php:457
+#: inc/template-tags.php:458
 msgid "Share :"
 msgstr ""
 
-#: inc/template-tags.php:575
+#: inc/template-tags.php:576
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:576
+#: inc/template-tags.php:577
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:718
+#: inc/template-tags.php:719
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:802
+#: inc/template-tags.php:803
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
-#: inc/template-tags.php:803
+#: inc/template-tags.php:804
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
@@ -551,5 +553,9 @@ msgid "Sorry, we could not find any event."
 msgstr ""
 
 #: templates/single-event.php:37
-msgid "Registration : "
+msgid "Access the online event: "
+msgstr ""
+
+#: templates/single-event.php:43
+msgid "Registration: "
 msgstr ""

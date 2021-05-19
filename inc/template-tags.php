@@ -42,6 +42,7 @@ function openagenda_get_event( $uid = false ){
 function openagenda_get_field( $field, $uid = false ){
     global $openagenda;
     $event = openagenda_get_event( $uid );
+    if( ! $event ) return false;
     if( ! $uid ) $uid = $event['uid'];
     
     $locale = openagenda_get_locale();
@@ -502,7 +503,7 @@ function openagenda_event_registration_methods( $uid = false, $echo = true ){
             }
             $href  = sprintf( '%s%s', sanitize_text_field( $method['prefix'] ), $value );
             $item  = sprintf( 
-                '<li class="oa-registration-method">%s<a href="%s" class="oa-registration-method-label">%s</a></li>',
+                '<li class="oa-registration-method"><span class="oa-registration-method-wrapper">%s<a href="%s" class="oa-registration-method-label">%s</a></span></li>',
                 $icon,
                 esc_url( $href ),
                 esc_html( $method['value'] )
