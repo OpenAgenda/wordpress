@@ -201,6 +201,11 @@ button.oa-button[disabled=true] {
   opacity: 0.5;
 }
 
+.oa-registration-label,
+.oa-access-link-label {
+  display: block;
+}
+
 /******************
  * Update overlay
  ******************/
