@@ -671,11 +671,8 @@ function openagenda_get_permalink( $uid = false ){
     global $openagenda;
     $permalink = false;
 
-    if ( $openagenda && ! $uid ) $uid = $openagenda->get_uid();
-    
-    if( is_singular( 'oa-calendar' ) ) {
-        $permalink = get_permalink();
-    }
+    if( $openagenda && ! $uid ) $uid = $openagenda->get_uid();
+    if( is_singular( 'oa-calendar' ) ) $permalink = get_permalink();
     
     if( ! $permalink && $uid ) {
         $posts = get_posts( array(
