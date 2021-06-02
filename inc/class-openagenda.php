@@ -159,7 +159,7 @@ class Openagenda {
         $this->limit       = ! empty( $this->json['limit'] ) ? (int) $this->json['limit'] : 20;
         $this->offset      = ! empty( $this->json['offset'] ) ? (int) $this->json['offset'] : 0;
         $this->total_pages = (int) ceil( $this->total / $this->limit );
-        
+
         $this->set_context();
         $this->maybe_cache();
     }
@@ -341,10 +341,17 @@ class Openagenda {
      * Parse query arguments
      */
     public function parse_args( $args = array() ){
-        
         // Parse nested filters first
         $filters = array();
-        
+
+        // Parse context
+        $context = openagenda_decode_context();
+        if ( ! empty( $context ) && ! empty( $context['oaq'] ) ){
+            if( ! empty( $context['oaq']['passed'] && '1' === $context['oaq']['passed'] ) ){
+                $filters['passed'] = '1';
+            } 
+        }
+
         if( ! empty( $args['oaq'] ) ){
             $filters     = wp_parse_args( $args['oaq'], $filters );
             $args['oaq'] = array_filter( $filters );
@@ -357,7 +364,7 @@ class Openagenda {
         
         $args = wp_parse_args( $args, $defaults );
         $args = array_filter( $args );
-
+        
         return $args;
     }
 

@@ -3,9 +3,11 @@ if( oaData ) {
     jQuery( '[data-container-id="oa-wrapper"]' ).prepend('<div class="oa-notice-wrapper"></div>');
     window.oa = {
         onReloadWithPassed: (query) => {
-            jQuery( '[data-container-id="oa-wrapper"]' ).prepend(oaData.overlayHtml);
-            if(query){
-                oa.getEvents( 'tags', query, query );
+            if( ! oaData.isSingle ){
+                jQuery( '[data-container-id="oa-wrapper"]' ).prepend(oaData.overlayHtml);
+                if(query){
+                    oa.getEvents( 'tags', query, query );
+                }
             }
         },
         onWidgetUpdate: (filter, update, query) => {

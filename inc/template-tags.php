@@ -350,9 +350,17 @@ function openagenda_event_timings( $uid = false, $echo = true ){
  */
 function openagenda_get_events_total_html( $echo = true ){
     global $openagenda;
-    $total = (int) $openagenda->get_total();
-    /* translators: %d: number of events */
-    $events_total = $total > 0 ? sprintf( _n( '%d upcoming event.', '%d upcoming events.'  , $total, 'openagenda' ), (int) $total ) : __( 'No upcoming event.', 'openagenda' );
+    $total  = (int) $openagenda->get_total();
+    $args   = $openagenda->get_args();
+    $passed = ! empty( $args['oaq'] ) && ! empty( $args['oaq']['passed'] ) && $args['oaq']['passed'];
+    
+    /* translators: %d: number of upcoming events */
+    $events_total = $total > 0 ? sprintf( _n( '%d upcoming event.', '%d upcoming events.', $total, 'openagenda' ), (int) $total ) : __( 'No upcoming event.', 'openagenda' );
+    if( $passed ){
+        /* translators: %d: number of passed events */
+        $events_total = $total > 0 ? sprintf( _n( '%d passed event.', '%d passed events.', $total, 'openagenda' ), (int) $total ) : __( 'No passed event.', 'openagenda' );
+    }
+    
     $html = sprintf( '<p class="oa-events-total">%s</p>', esc_html( $events_total ) );
     $html = apply_filters( 'openagenda_events_total_html', $html );
     if ( $echo ) echo $html;

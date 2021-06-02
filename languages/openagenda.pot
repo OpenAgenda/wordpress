@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-05-19T10:28:41+02:00\n"
+"POT-Creation-Date: 2021-06-02T09:59:50+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: openagenda\n"
@@ -330,7 +330,7 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#: inc/class-openagenda.php:398
+#: inc/class-openagenda.php:405
 msgid "There was an error parsing the JSON."
 msgstr ""
 
@@ -404,7 +404,7 @@ msgid "Default map tiles attribution link"
 msgstr ""
 
 #: inc/class-settings.php:148
-#: inc/template-tags.php:379
+#: inc/template-tags.php:387
 msgid "OpenStreetMap contributors"
 msgstr ""
 
@@ -494,52 +494,64 @@ msgstr ""
 msgid "View next month"
 msgstr ""
 
-#. translators: %d: number of events
-#: inc/template-tags.php:355
+#. translators: %d: number of upcoming events
+#: inc/template-tags.php:358
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] ""
 msgstr[1] ""
 
-#. translators: %d: number of events
-#: inc/template-tags.php:355
+#. translators: %d: number of upcoming events
+#: inc/template-tags.php:358
 msgid "No upcoming event."
 msgstr ""
 
-#: inc/template-tags.php:415
+#. translators: %d: number of passed events
+#: inc/template-tags.php:361
+msgid "%d passed event."
+msgid_plural "%d passed events."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of passed events
+#: inc/template-tags.php:361
+msgid "No passed event."
+msgstr ""
+
+#: inc/template-tags.php:423
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/template-tags.php:420
+#: inc/template-tags.php:428
 msgid "Share on Twitter"
 msgstr ""
 
-#: inc/template-tags.php:428
+#: inc/template-tags.php:436
 msgid "Share on Linkedin"
 msgstr ""
 
-#: inc/template-tags.php:458
+#: inc/template-tags.php:466
 msgid "Share :"
 msgstr ""
 
-#: inc/template-tags.php:576
+#: inc/template-tags.php:584
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:577
+#: inc/template-tags.php:585
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:719
+#: inc/template-tags.php:727
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:803
+#: inc/template-tags.php:811
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
-#: inc/template-tags.php:804
+#: inc/template-tags.php:812
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
@@ -556,6 +568,6 @@ msgstr ""
 msgid "Access the online event: "
 msgstr ""
 
-#: templates/single-event.php:43
+#: templates/single-event.php:44
 msgid "Registration: "
 msgstr ""

@@ -182,6 +182,7 @@ class Main {
                 'view'        => get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ) : 'list',
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
+                'isSingle'    => \openagenda_is_single()
             ) );       
         }
     }
