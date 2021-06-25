@@ -48,10 +48,6 @@ function openagenda_get_field( $field, $uid = false ){
     $locale = openagenda_get_locale();
     $value  = '';
     switch ( $field ) {
-        case 'thumbnail':
-        case 'image':
-            $value = openagenda_get_event_image( $uid, $field );
-            break;
         case 'permalink':
             $calendar_permalink = openagenda_get_permalink();
             $slug  = sanitize_title( $event['slug'] );

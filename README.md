@@ -157,7 +157,7 @@ Returns the event corresponding to the passed in UID or the current event in the
 
 This functions returns the value corresponding to the field passed in for the event corresponding to the given UID, or for the current event in the event loop if no UID was provided.
 
-Basically the functions reads the raw JSON event, except for `permalink`, `timings`, and `image` field, for which a custom treatment is needed.
+Basically the functions reads the raw JSON event, except for `permalink` and `timings` fields, for which a custom treatment is needed.
 
 For multilingual fields, the value corresponding to the current locale is returned.
 

@@ -3,7 +3,7 @@ Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
 Requires at least: 5.0
 Tested up to: 5.7.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -147,10 +147,14 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 
 == Changelog ==
 
+= 1.0.1 =
+* Bug fix on `openagenda_get_field()` function, when called with 'image' and 'thumbnail' parameter.
+
 = 1.0.0 =
 * Fixed location template.
 * Added event count and active filters on top of the list view.
-* Added online access link display for online events
+* Added online access link display for online events.
+* Fix for viewing single passed event.
 
 = 0.2 =
 * Added icons.
@@ -161,10 +165,14 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+* Bug fix on `openagenda_get_field()` function, when called with 'image' and 'thumbnail' parameter.
+
 = 1.0.0 =
 * Fixed location template.
 * Added event count and active filters on top of the list view.
-* Added online access link display for online events
+* Added online access link display for online events.
+* Fix for viewing single passed event.
 
 = 0.2 =
 * Added icons.
