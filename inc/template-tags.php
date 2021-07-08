@@ -523,6 +523,37 @@ function openagenda_event_registration_methods( $uid = false, $echo = true ){
     return $html;
 }
 
+/**
+ * Displays the attendance mode of the event, as well as a link if online
+ * 
+ * @param  string  $uid   UID of the event.
+ * @param  bool    $echo  Whether to echo or just return the html
+ */
+function openagenda_event_attendance_mode( $uid = false, $echo = true ){
+    global $openagenda;
+    $event = openagenda_get_event( $uid );
+    if( ! $uid ) $uid = $event['uid'];
+
+    $attendance_mode = openagenda_get_field( 'attendanceMode', $uid );
+    $access_url      = openagenda_get_field( 'onlineAccessLink', $uid );
+    $is_online       = ( 2 === $attendance_mode ) || ( 3 === $attendance_mode );
+
+    $labels = apply_filters( 'openagenda_attendance_mode_labels', array(
+        1 => __( 'Offline', 'openagenda' ),
+        2 => __( 'Online', 'openagenda' ),
+        3 => __( 'Mixed', 'openagenda' ),
+    ) );
+
+    $label = array_key_exists( $attendance_mode, $labels ) ? $labels[$attendance_mode] : $labels[1];
+    $link  = ! empty( $access_url ) ? sprintf( '<span class="oa-seperator">|</span><a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( $access_url ), esc_html__( 'Access the event', 'openagenda' ) ) : '';
+    $html  = sprintf( '%s%s', esc_html( $label ), $link );
+
+    $html = apply_filters( 'openagenda_event_attendance_mode', $html, $uid );
+    if ( $echo ) echo $html;
+    return $html;
+}
+
+
 
 /**
  * Displays pagination on single calendar pages.

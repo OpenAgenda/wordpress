@@ -1,37 +1,29 @@
-# Copyright (C) 2021 OpenAgenda
-# This file is distributed under the same license as the OpenAgenda plugin.
+# Blank WordPress Pot
+# Copyright 2021 ...
+# This file is distributed under the GNU General Public License v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
-"Language-Team: \n"
+"Project-Id-Version: Openagenda v1.0.1\n"
+"Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
+"POT-Creation-Date: 2021-07-08 16:46+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-05-19T10:28:41+02:00\n"
-"PO-Revision-Date: 2021-05-19 10:32+0200\n"
-"X-Generator: Poedit 2.4.1\n"
-"X-Domain: openagenda\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
-
-#. Plugin Name of the plugin
-#. Author of the plugin
-msgid "OpenAgenda"
-msgstr "OpenAgenda"
-
-#. Plugin URI of the plugin
-msgid "https://wordpress.org/plugins/openagenda/"
-msgstr "https://wordpress.org/plugins/openagenda/"
-
-#. Description of the plugin
-msgid "Display your OpenAgenda data on your WordPress site."
-msgstr "Affiche vos agendas OpenAgenda sur votre site WordPress."
-
-#. Author URI of the plugin
-msgid "https://openagenda.com/"
-msgstr "https://openagenda.com/"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: assets/js/filters\n"
 
 #: inc/class-admin-pages.php:24
 msgid "OpenAgenda Settings"
@@ -200,7 +192,7 @@ msgstr "Affiche un filtre."
 
 #: inc/class-filter-widget.php:81 inc/class-preview-widget.php:66
 msgid "Title :"
-msgstr "Titre&nbsp;:"
+msgstr "Titre :"
 
 #: inc/class-filter-widget.php:85
 msgid "Filter to display :"
@@ -278,7 +270,7 @@ msgstr "Prochainement"
 #: inc/class-main.php:51
 msgctxt "Filter name"
 msgid "Search"
-msgstr "Recherche"
+msgstr "Rechercher"
 
 #: inc/class-metaboxes.php:24
 msgid "Calendar settings"
@@ -316,8 +308,8 @@ msgstr "Afficher le contenu sur les vues liste."
 msgid "Display editor content on single event views."
 msgstr "Afficher le contenu sur les vues événement simples."
 
-#. translators: %s: settings page url
 #: inc/class-metaboxes.php:146
+#, php-format
 msgid ""
 "Please provide your account API key in <a href=\"%s\">the plugin settings</"
 "a>."
@@ -345,7 +337,7 @@ msgstr "RSS"
 msgid "PDF"
 msgstr "PDF"
 
-#: inc/class-openagenda.php:398
+#: inc/class-openagenda.php:405
 msgid "There was an error parsing the JSON."
 msgstr "Il y a eu une erreur de lecture du JSON."
 
@@ -377,8 +369,8 @@ msgstr "Label du lien de prévisualisation&nbsp;:"
 msgid "OpenAgenda API key"
 msgstr "Clé API OpenAgenda"
 
-#. translators: %s: openagenda site url
 #: inc/class-settings.php:67
+#, php-format
 msgid ""
 "Your API key can be found in your <a href=\"%s\">OpenAgenda account</a>."
 msgstr ""
@@ -431,7 +423,7 @@ msgstr "Liens du fond de carte"
 msgid "Default map tiles attribution link"
 msgstr "URL des crédits du fond de carte"
 
-#: inc/class-settings.php:148 inc/template-tags.php:379
+#: inc/class-settings.php:148 inc/template-tags.php:383
 msgid "OpenStreetMap contributors"
 msgstr "Les contributeurs OpenStreetMap"
 
@@ -464,8 +456,8 @@ msgstr ""
 msgid "Calendar base"
 msgstr "Base des agendas"
 
-#. translators: %s : home url
 #: inc/class-settings.php:197
+#, php-format
 msgid ""
 "You can modify the URL prefix for the calendars. For example, the default "
 "prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/"
@@ -490,7 +482,7 @@ msgstr "Chercher dans cet agenda"
 
 #: inc/helper-functions.php:190
 msgid "Accessible to people suffering from motor disabilities."
-msgstr "Accessible aux personnes souffrant de handicap psychique."
+msgstr "Accessible aux personnes souffrant de handicap moteur."
 
 #: inc/helper-functions.php:191 inc/helper-functions.php:194
 msgid "Accessible to people suffering from mental disabilities."
@@ -516,76 +508,102 @@ msgstr ""
 "Il y a eu une erreur lors de la mise à jour des événements. Veuillez "
 "rafraichir la page et réessayer."
 
-#. translators: %s : next event relative timing
 #: inc/helper-functions.php:359
+#, php-format
 msgctxt "next event timing"
 msgid "In %s"
 msgstr "Dans %s"
 
-#. translators: %s : last event relative timing
 #: inc/helper-functions.php:361
+#, php-format
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr "Il y a %s"
 
-#: inc/template-tags.php:247
+#: inc/template-tags.php:243
 msgid "No timing available"
 msgstr "Pas d'horaire disponible"
 
-#: inc/template-tags.php:307
+#: inc/template-tags.php:303
 msgid "View previous month"
 msgstr "Voir le mois précédent"
 
-#: inc/template-tags.php:310
+#: inc/template-tags.php:306
 msgid "View next month"
 msgstr "Voir le mois suivant"
 
-#. translators: %d: number of events
-#: inc/template-tags.php:355
+#: inc/template-tags.php:354
+#, php-format
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] "%d événement à venir."
 msgstr[1] "%d événements à venir."
 
-#. translators: %d: number of events
-#: inc/template-tags.php:355
+#: inc/template-tags.php:354
 msgid "No upcoming event."
 msgstr "Pas d'événement à venir."
 
-#: inc/template-tags.php:415
+#: inc/template-tags.php:357
+#, php-format
+msgid "%d passed event."
+msgid_plural "%d passed events."
+msgstr[0] "%d événement passé."
+msgstr[1] "%d événements passés."
+
+#: inc/template-tags.php:357
+msgid "No passed event."
+msgstr "Aucun événement passé."
+
+#: inc/template-tags.php:419
 msgid "Share on Facebook"
-msgstr "Partagez sur Facebook"
+msgstr "Partager sur Facebook"
 
-#: inc/template-tags.php:420
+#: inc/template-tags.php:424
 msgid "Share on Twitter"
-msgstr "Partagez sur Twitter"
+msgstr "Partager sur Twitter"
 
-#: inc/template-tags.php:428
+#: inc/template-tags.php:432
 msgid "Share on Linkedin"
-msgstr "Partagez sur LinkedIn"
+msgstr "Partager sur Linkedin"
 
-#: inc/template-tags.php:458
+#: inc/template-tags.php:462
 msgid "Share :"
 msgstr "Partager&nbsp;:"
 
-#: inc/template-tags.php:576
+#: inc/template-tags.php:542
+msgid "Offline"
+msgstr "Physique"
+
+#: inc/template-tags.php:543
+msgid "Online"
+msgstr "En ligne"
+
+#: inc/template-tags.php:544
+msgid "Mixed"
+msgstr "Physique/en ligne"
+
+#: inc/template-tags.php:548
+msgid "Access the event"
+msgstr "Accéder à l'événement"
+
+#: inc/template-tags.php:611
 msgid "Previous page"
 msgstr "Page précédente"
 
-#: inc/template-tags.php:577
+#: inc/template-tags.php:612
 msgid "Next page"
 msgstr "Page suivante"
 
-#: inc/template-tags.php:719
+#: inc/template-tags.php:751
 msgid "Download :"
 msgstr "Télécharger&nbsp;:"
 
-#: inc/template-tags.php:803
+#: inc/template-tags.php:835
 msgctxt "event navigation"
 msgid "Next event"
 msgstr "Evénement suivant"
 
-#: inc/template-tags.php:804
+#: inc/template-tags.php:836
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr "Evénement précédent"
@@ -602,6 +620,6 @@ msgstr "Désolé, aucun événement n'a été trouvé."
 msgid "Access the online event: "
 msgstr "Accéder à l'événement en ligne&nbsp;: "
 
-#: templates/single-event.php:43
+#: templates/single-event.php:44
 msgid "Registration: "
 msgstr "Inscription&nbsp;: "

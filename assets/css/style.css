@@ -136,17 +136,15 @@ ul.oa-sharers-links {
   margin: 1rem 0;
 }
 
-.oa-event-timing,
-.oa-event-range,
-.oa-registration-method-wrapper,
-.oa-card-meta {
+.oa-meta,
+.oa-card-meta,
+.oa-registration-method-wrapper {
   align-items: center;
   display: flex;
 }
-.oa-event-timing .oa-icon,
-.oa-event-range .oa-icon,
-.oa-registration-method-wrapper .oa-icon,
-.oa-card-meta .oa-icon {
+.oa-meta .oa-icon,
+.oa-card-meta .oa-icon,
+.oa-registration-method-wrapper .oa-icon {
   margin-right: 5px;
 }
 
@@ -154,6 +152,7 @@ ul.oa-sharers-links {
   display: flex;
 }
 
+.oa-seperator,
 .oa-timing-seperator {
   margin: 0 5px;
 }

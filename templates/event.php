@@ -33,6 +33,12 @@
                         openagenda_field( 'range' );
                     ?>
                 </p>
+                <p class="oa-meta oa-event-attendance">
+                    <?php
+                        openagenda_icon( 'location' );
+                        openagenda_event_attendance_mode();
+                    ?>
+                </p>
             </div>
         </header>
         <p class="oa-event-short-description"><?php openagenda_field( 'description' ); ?></p>

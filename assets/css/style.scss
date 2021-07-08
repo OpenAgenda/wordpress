@@ -146,10 +146,9 @@ ul.oa-sharers-links {
 .oa-event-timings {
 	margin: 1rem 0;
 }
-.oa-event-timing,
-.oa-event-range,
-.oa-registration-method-wrapper,
-.oa-card-meta {
+.oa-meta,
+.oa-card-meta,
+.oa-registration-method-wrapper {
 	align-items: center;
 	display: flex;
 	.oa-icon {
@@ -159,6 +158,7 @@ ul.oa-sharers-links {
 .oa-timing {
 	display: flex;
 }
+.oa-seperator,
 .oa-timing-seperator {
 	margin: 0 5px;
 }
