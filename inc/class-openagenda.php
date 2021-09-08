@@ -347,7 +347,7 @@ class Openagenda {
         // Parse context
         $context = openagenda_decode_context();
         if ( ! empty( $context ) && ! empty( $context['oaq'] ) ){
-            if( ! empty( $context['oaq']['passed'] && '1' === $context['oaq']['passed'] ) ){
+            if( ! empty( $context['oaq']['passed'] ) && '1' === $context['oaq']['passed'] ){
                 $filters['passed'] = '1';
             } 
         }

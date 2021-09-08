@@ -147,6 +147,10 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 
 == Changelog ==
 
+= 1.1.0 =
+* Preview widget templates are overridable in the child theme.
+* Bug fix : Passed events can be displayed on single event view.
+
 = 1.0.1 =
 * Bug fix on `openagenda_get_field()` function, when called with 'image' and 'thumbnail' parameter.
 
@@ -164,6 +168,10 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+* Preview widget templates are overridable in the child theme.
+* Bug fix : Passed events can be displayed on single event view.
 
 = 1.0.1 =
 * Bug fix on `openagenda_get_field()` function, when called with 'image' and 'thumbnail' parameter.

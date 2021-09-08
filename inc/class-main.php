@@ -127,12 +127,14 @@ class Main {
      * Register the filter widget
      */
     public function register_widgets(){
+        require_once OPENAGENDA_PATH . 'inc/class-openagenda-widget.php';
         require_once OPENAGENDA_PATH . 'inc/class-filter-widget.php';
         require_once OPENAGENDA_PATH . 'inc/class-preview-widget.php';
         $args = array( 'available_filters' => $this->get_available_filters() );
-        $filter_widget = new Filter_Widget( $args );
+        $filter_widget  = new Filter_Widget( $args );
+        $preview_widget = new Preview_Widget( $args );
         register_widget( $filter_widget );
-        register_widget( 'Openagenda\Preview_Widget' );
+        register_widget( $preview_widget );
     }
 
 
@@ -209,7 +211,8 @@ class Main {
                 'limit'  => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
                 'page'   => ! empty( get_query_var( 'oa-page' ) ) ? sanitize_title( get_query_var( 'oa-page' ) ) : 1,
                 'oaq'    => array(
-                    'slug' => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_title( get_query_var( 'oa-slug' ) ) : '',
+                    'slug'   => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_title( get_query_var( 'oa-slug' ) ) : '',
+                    'passed' => ! empty( get_query_var( 'oa-slug' ) ) ? 1 : '',
                 ),
             );
 

@@ -65,7 +65,8 @@ class Shortcodes implements Hookable {
         ), $atts, $tag );
         
         if( ! empty( get_query_var( 'oa-slug' ) ) ){
-            $atts['oaq']['slug'] = sanitize_title( get_query_var( 'oa-slug' ) );
+            $atts['oaq']['slug']   = sanitize_title( get_query_var( 'oa-slug' ) );
+            $atts['oaq']['passed'] = '1';
         }
 
         if( empty( $atts['uid'] ) ){
@@ -219,7 +220,7 @@ class Shortcodes implements Hookable {
      * @param   string  $tag      Name of the shortcode
      * @return  string  $html     HTML to display.
      */
-    public function openagenda_filter_preview( $atts = array(), $content = null, $tag = 'openagenda_filter_preview' ){
+    public function openagenda_deprecated_filter_preview( $atts = array(), $content = null, $tag = 'openagenda_filter_preview' ){
         $defaults = array(
             'uid'           => '',
             'preview_label' => __( 'Preview the calendar', 'openagenda' ),
@@ -242,6 +243,37 @@ class Shortcodes implements Hookable {
 
         wp_enqueue_script( 'oa-preview-widget' );
         return apply_filters( 'openagenda_filter_preview', $filter, $atts );
+    }
+
+    
+    /**
+     * Callback function to display preview.
+     * 
+     * @param   array   $atts     Array of attributes passed to the shortcode
+     * @param   string  $content  Content if enclosing shortcode. Defaults to null.
+     * @param   string  $tag      Name of the shortcode
+     * @return  string  $html     HTML to display.
+     */
+    public function openagenda_filter_preview( $atts = array(), $content = null, $tag = 'openagenda_filter_preview' ){
+        global $openagenda;
+
+        $defaults = array(
+            'uid'   => '',
+            'limit' => 3,
+        );
+        $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
+        $atts['limit'] = (int) $atts['limit'];
+
+        // If we're on a events page, backup the main events.
+        openagenda_save();
+        $openagenda = new Openagenda( $atts['uid'], $atts, false, false );
+
+        ob_start();
+        include openagenda_get_template( 'preview-loop' );
+        $filter = ob_get_clean();
+        
+        openagenda_reset();
+        return apply_filters( 'openagenda_filter_preview', $filter, $atts );        
     }
 
 

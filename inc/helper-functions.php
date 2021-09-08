@@ -426,6 +426,31 @@ function openagenda_encode_context( $context_array ){
 
 
 /**
+ * Backups the main openagenda request, 
+ * in case of alternate request on the main events page 
+ */
+function openagenda_save(){
+    global $openagenda, $openagenda_backup;
+    if( $openagenda && ! $openagenda_backup ){
+        $openagenda_backup = $openagenda;
+    }
+}
+
+
+/**
+ * Restore the original global $openagenda,
+ * after alternate request has been treated
+ */
+function openagenda_reset(){
+    global $openagenda, $openagenda_backup;
+    if( $openagenda_backup ){
+        $openagenda        = $openagenda_backup;
+        $openagenda_backup = null;
+    }
+}
+
+
+/**
  * Temporary fix for older installs.
  */
 if( ! function_exists( 'wp_date' ) ){

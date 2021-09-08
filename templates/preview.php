@@ -4,39 +4,29 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @var  $atts  Shortcode attributes
+ * @var     $atts       Shortcode attributes
  * @package Openagenda
  */
-$calendar_permalink = openagenda_get_permalink( $atts['uid'] );
-$event_permalink    = ! empty( get_option( 'permalink_structure' ) ) ? sprintf( '%s/{Slug}', untrailingslashit( $calendar_permalink ) ) : add_query_arg( 'oa-slug', '{Slug}', $calendar_permalink );
 ?>
-<!--
-    <div class="oa-preview-events">
-    {block:Events}
-        <div class="oa-preview-card">
-            <div class="oa-card">
-                {block:ImageUrl}
-                    <a class="oa-card-image-link" href="<?php echo $event_permalink; ?>">
-                        <img class="oa-card-img" src="{ImageUrl}" alt="{Title}"/>
-                    </a>
-                {/block:ImageUrl}
-                <div class="oa-card-body">
-                    <a class="oa-card-link" href="<?php echo $event_permalink; ?>">
-                        <strong>{Title}</strong>
-                    </a>
-                    <ul class="oa-list-unstyled">
-                        <li class="oa-card-meta">
-                            <?php openagenda_icon( 'month' ); ?>
-                            <span class="oa-card-range">{DateRange}</span>
-                        </li>
-                        <li class="oa-card-meta">
-                            <?php openagenda_icon( 'location' ); ?>
-                            <span class="oa-card-location">{LocationName}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<div class="oa-preview-event oa-preview-card">
+    <div class="oa-card">
+        <a class="oa-card-image-link" href="<?php openagenda_event_permalink(); ?>">
+            <?php openagenda_event_image( 'image' ); ?>
+        </a>
+        <div class="oa-card-body">
+            <a class="oa-card-link" href="<?php openagenda_event_permalink() ?>">
+                <strong><?php openagenda_field( 'title' ); ?></strong>
+            </a>
+            <ul class="oa-card-metas oa-list-unstyled">
+                <li class="oa-card-meta">
+                    <?php openagenda_icon( 'month' ); ?>
+                    <span class="oa-card-range"><?php openagenda_field( 'range' ); ?></span>
+                </li>
+                <li class="oa-card-meta">
+                    <?php openagenda_icon( 'location' ); ?>
+                    <span class="oa-card-location"><?php openagenda_field( 'location.name' ); ?></span>
+                </li>
+            </ul>
         </div>
-    {/block:Events}
     </div>
--->
+</div>

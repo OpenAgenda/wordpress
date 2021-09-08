@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openagenda v1.0.1\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2021-07-08 16:46+0200\n"
+"POT-Creation-Date: 2021-09-08 11:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
@@ -182,65 +182,65 @@ msgstr "Couleurs"
 msgid "OpenAgenda main color"
 msgstr "Couleur principal Openagenda"
 
-#: inc/class-filter-widget.php:29
-msgid "Openagenda Filter"
-msgstr "OpenAgenda - Filtre"
-
-#: inc/class-filter-widget.php:31
-msgid "Displays a filter widget."
-msgstr "Affiche un filtre."
-
-#: inc/class-filter-widget.php:81 inc/class-preview-widget.php:66
-msgid "Title :"
-msgstr "Titre :"
-
-#: inc/class-filter-widget.php:85
-msgid "Filter to display :"
-msgstr "Filtre à afficher&nbsp;:"
-
-#: inc/class-filter-widget.php:87
-msgid "Choose filter"
-msgstr "Choisissez un filtre"
-
-#: inc/class-filter-widget.php:177
+#: inc/class-filter-widget.php:24
 msgid "Map tiles link :"
 msgstr "Liens du fond de carte&nbsp;:"
 
-#: inc/class-filter-widget.php:183
+#: inc/class-filter-widget.php:30
 msgid "Automatically update map on scroll ?"
 msgstr "Ajuster automatiquement la carte au défilement ?"
 
-#: inc/class-filter-widget.php:189
+#: inc/class-filter-widget.php:36
 msgid "Default longitude :"
 msgstr "Longitude par défaut&nbsp;:"
 
-#: inc/class-filter-widget.php:194
+#: inc/class-filter-widget.php:41
 msgid "Default latitude :"
 msgstr "Latitude par défaut&nbsp;:"
 
-#: inc/class-filter-widget.php:199
+#: inc/class-filter-widget.php:46
 msgid "Map default zoom :"
 msgstr "Niveau de zoom par défaut&nbsp;:"
 
-#: inc/class-filter-widget.php:208
+#: inc/class-filter-widget.php:55
 msgid "Placeholder text :"
 msgstr "Texte de substitution&nbsp;:"
 
-#: inc/class-filter-widget.php:210
+#: inc/class-filter-widget.php:57
 msgid "Search events"
 msgstr "Rechercher un événement"
 
-#: inc/class-filter-widget.php:216
+#: inc/class-filter-widget.php:63
 msgid "Tag group :"
 msgstr "Groupe de tag&nbsp;:"
 
-#: inc/class-filter-widget.php:221
+#: inc/class-filter-widget.php:68
 msgid "Tags to display :"
 msgstr "Tags à afficher&nbsp;:"
 
-#: inc/class-filter-widget.php:222
+#: inc/class-filter-widget.php:69
 msgid "Enter tags separated by a comma."
 msgstr "Entrer les tags séparés par des virgules."
+
+#: inc/class-filter-widget.php:78
+msgid "Openagenda Filter"
+msgstr "OpenAgenda - Filtre"
+
+#: inc/class-filter-widget.php:80
+msgid "Displays a filter widget."
+msgstr "Affiche un filtre."
+
+#: inc/class-filter-widget.php:132 inc/class-preview-widget.php:75
+msgid "Title :"
+msgstr "Titre :"
+
+#: inc/class-filter-widget.php:136
+msgid "Filter to display :"
+msgstr "Filtre à afficher&nbsp;:"
+
+#: inc/class-filter-widget.php:138
+msgid "Choose filter"
+msgstr "Choisissez un filtre"
 
 #: inc/class-main.php:26
 msgctxt "Filter name"
@@ -341,29 +341,21 @@ msgstr "PDF"
 msgid "There was an error parsing the JSON."
 msgstr "Il y a eu une erreur de lecture du JSON."
 
-#: inc/class-preview-widget.php:22
+#: inc/class-preview-widget.php:24
+msgid "Number of events to display&nbsp;:"
+msgstr "Nombre d'événements à afficher&nbsp;:"
+
+#: inc/class-preview-widget.php:31
 msgid "Openagenda Preview"
 msgstr "OpenAgenda - Aperçu"
 
-#: inc/class-preview-widget.php:24
+#: inc/class-preview-widget.php:33
 msgid "Displays a calendar preview widget."
 msgstr "Affiche un aperçu de l'agenda."
 
-#: inc/class-preview-widget.php:62
-msgid "Preview"
-msgstr "Aperçu"
-
-#: inc/class-preview-widget.php:63
-msgid "This corresponds to the text for the link to the calendar."
-msgstr "Correspond au texte du lien vers l'agenda."
-
-#: inc/class-preview-widget.php:70
+#: inc/class-preview-widget.php:79
 msgid "Agenda UID :"
 msgstr "UID de l'agenda&nbsp;:"
-
-#: inc/class-preview-widget.php:74
-msgid "Preview label :"
-msgstr "Label du lien de prévisualisation&nbsp;:"
 
 #: inc/class-settings.php:54
 msgid "OpenAgenda API key"
@@ -467,16 +459,16 @@ msgstr ""
 "préfixe par défaut est <code>agenda</code>, donc vos URLs ressembleront à "
 "<code>%s/agenda/nom-de-l-agenda</code>."
 
-#: inc/class-shortcodes.php:72
+#: inc/class-shortcodes.php:73
 msgid ""
 "Please provide a valid calendar UID to display in the calendar settings."
 msgstr "Veuillez fournir un UID d'agenda valide dans les réglages de l'agenda."
 
-#: inc/class-shortcodes.php:225
+#: inc/class-shortcodes.php:226
 msgid "Preview the calendar"
 msgstr "Prévisualiser l'agenda"
 
-#: inc/class-shortcodes.php:287
+#: inc/class-shortcodes.php:319
 msgid "Search this calendar"
 msgstr "Chercher dans cet agenda"
 
@@ -623,3 +615,12 @@ msgstr "Accéder à l'événement en ligne&nbsp;: "
 #: templates/single-event.php:44
 msgid "Registration: "
 msgstr "Inscription&nbsp;: "
+
+#~ msgid "Preview"
+#~ msgstr "Aperçu"
+
+#~ msgid "This corresponds to the text for the link to the calendar."
+#~ msgstr "Correspond au texte du lien vers l'agenda."
+
+#~ msgid "Preview label :"
+#~ msgstr "Label du lien de prévisualisation&nbsp;:"

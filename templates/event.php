@@ -35,7 +35,7 @@
                 </p>
                 <p class="oa-meta oa-event-attendance">
                     <?php
-                        openagenda_icon( 'location' );
+                        openagenda_icon( 'link' );
                         openagenda_event_attendance_mode();
                     ?>
                 </p>

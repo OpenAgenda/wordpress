@@ -3,7 +3,7 @@ namespace Openagenda;
 /**
  * Class for our filter widget.
  */
-class Preview_Widget extends \WP_Widget {
+class Preview_Widget extends Openagenda_Widget {
 
     /**
      * Constructor
@@ -16,14 +16,25 @@ class Preview_Widget extends \WP_Widget {
      * @param  array  $control_options Optional. Widget control options. See wp_register_widget_control() for
      *                                 information on accepted arguments. Default empty array.
      */
-	public function __construct() {
+	public function __construct( $args = array() ) {
+        $args['additional_settings'] = array(
+            'limit' => array(
+                'name'        => 'limit',
+                'type'        => 'number',
+                'label'       => __( 'Number of events to display&nbsp;:', 'openagenda' ),
+                'class'       => 'widefat',
+                'default'     => 3
+            ),
+        );
         parent::__construct( 
             'openagenda-preview-widget', 
             __( 'Openagenda Preview', 'openagenda' ),
             array( 
                 'description'                 => __( 'Displays a calendar preview widget.', 'openagenda' ),
                 'customize_selective_refresh' => true,
-            )
+            ),
+            array(),
+            $args
         );
     }
     
@@ -59,8 +70,6 @@ class Preview_Widget extends \WP_Widget {
 	public function form( $instance ) {
         $title  = ! empty( $instance['title'] ) ? $instance['title'] : '';
         $uid    = ! empty( $instance['uid'] ) ? $instance['uid'] : '';
-        $label  = isset( $instance['preview_label'] ) ? $instance['preview_label'] : __( 'Preview', 'openagenda' );
-        $help   = __( 'This corresponds to the text for the link to the calendar.', 'openagenda' );
         ?>
             <p>
                 <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title :', 'openagenda' ); ?></label>
@@ -69,13 +78,21 @@ class Preview_Widget extends \WP_Widget {
             <p>
                 <label for="<?php echo esc_attr( $this->get_field_id( 'uid' ) ); ?>"><?php esc_html_e( 'Agenda UID :', 'openagenda' ); ?></label>
                 <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'uid' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'uid' ) ); ?>" value="<?php echo esc_attr( $uid ); ?>">
-            </p>
-            <p>
-                <label for="<?php echo esc_attr( $this->get_field_id( 'preview_label' ) ); ?>"><?php esc_html_e( 'Preview label :', 'openagenda' ); ?></label>
-                <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'preview_label' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'preview_label' ) ); ?>" value="<?php echo esc_attr( $label ); ?>">
-                <span class="description"><?php echo wp_kses_post( $help ); ?></span>
-            </p>
+            </p>  
         <?php
+
+        $additional_settings = $this->get_additional_settings();
+        if( ! empty( $additional_settings ) ){
+            foreach ( $additional_settings as $field_id => $field ) {
+                $field = wp_parse_args( $field, array(
+                    'description' => '',
+                    'type'        => 'text',
+                    'class'       => '',
+                    'default'     => ''
+                ) );
+                echo $this->additional_setting_field( $field, $instance );
+            }
+        }
     }
 
     
@@ -88,9 +105,9 @@ class Preview_Widget extends \WP_Widget {
      */
 	public function update( $new_instance, $old_instance ) {
         $instance = array(
-            'title'         => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
-            'preview_label' => ! empty( $new_instance['preview_label'] ) ? sanitize_text_field( $new_instance['preview_label'] ) : '',
-            'uid'           => ! empty( $new_instance['uid'] ) ? sanitize_text_field( $new_instance['uid'] ) : '',
+            'title'  => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
+            'uid'    => ! empty( $new_instance['uid'] ) ? sanitize_text_field( $new_instance['uid'] ) : '',
+            'limit'  => ! empty( $new_instance['limit'] ) ? (int) $new_instance['limit'] : 3,
         );
         return $instance;
     }
