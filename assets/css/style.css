@@ -41,11 +41,12 @@
   margin-top: 0;
 }
 
-.oa-meta p {
+p.oa-meta {
   margin: 0.25rem 0;
 }
 
 .oa-event-thumbnail {
+  text-align: center;
   margin-bottom: 1rem;
 }
 
@@ -164,6 +165,7 @@ ul.oa-sharers-links {
 ul.oa-months {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 li.oa-month {
@@ -260,6 +262,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   opacity: 0.8;
 }
 .active-filters li a:hover, .active-filters li a:focus {
+  cursor: pointer;
   opacity: 1;
   text-decoration: none;
 }

@@ -3,12 +3,12 @@ Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
 Requires at least: 5.0
 Tested up to: 5.7.2
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Display calendars from openagenda.com on your site.
+Display calendars from https://openagenda.com on your site.
 
 == Description ==
 
@@ -24,6 +24,8 @@ Your events are automatically inserted after your content. If you wish to contro
 
 ## Settings
 
+### General settings
+
 General settings can be found under the *Calendar > Settings* entry in the admin menu.
 
 All data related to your API key or calendars can be found on https://openagenda.com.
@@ -34,14 +36,31 @@ The main settings page provides the following settings :
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
  * *Cache duration* : For performance reasons, basic requests to Openagenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
- * *Default map tiles link* : This is the map tile used for the various maps displayed by the plugin.
- * *Default map tiles attribution link* : this is the default attribution link placed on OpenStreetMaps.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
  * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
 
+### Integrations settings
+
+The *Integrations* tab allows you to fine tune settings for various third party services the plugin uses.
+
+**OpenStreetmap integration settings :**
+
+ * *Default map tiles link* : This is the map tile used for the various maps displayed by the plugin.
+ * *Default map tiles attribution link* : this is the default attribution link placed on OpenStreetMaps.
+
+**CloudImage integration settings :**
+
+ * *CloudImage API key* : If you wish to use CloudImage to serve your images, enter your API key here.
+
+ ### Permalinks settings
+
 In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
 
+### Customizer settings
+
 In the *Customizer*, a new panel is available to house various display settings. For now only a main color setting is available.
+
+![A single section in the customizer houses your display settings.](assets/screenshots/screenshot-6.png)
 
 ## Filter widget and shortcodes
 
@@ -88,8 +107,8 @@ Displays an interactive map to locate and search events. It takes the following 
 
 Displays next events. It takes the following parameters : 
 
- * `preview_label` : Label while loading the items.
  * `uid` : UID of the calendar you wish to preview.
+ * `limit` : Number of events to display.
 
 **`[openagenda_filter_relative]`**
 
@@ -117,6 +136,8 @@ This plugin displays data hosted and provided by [https://openagenda.com](https:
 
 By default, maps displayed by this plugin use data from [https://openstreetmap.org/](https://openstreetmap.org/) and uses the [leaflet JS library](https://leafletjs.com/). By using this plugin, you accept and agree with OpenStreeMap's [terms of use](https://wiki.osmfoundation.org/wiki/Terms_of_Use), [acceptable use policy](https://wiki.openstreetmap.org/wiki/Acceptable_Use_Policy) and [privacy policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy) 
 
+The plugin provides optional integration with CloudImage. The integration requires to create an account at [https://cloudimage.io](https://cloudimage.io) and accept and agree their [terms of use](https://assets.scaleflex.com/Sales/Legal/Scaleflex+Services+Terms+and+Conditions+%5BFR%5D.pdf).
+
 Icons used in the UI are [Genericons](https://genericons.com/), licenced under the GPL 2.0.
 
 == Frequently Asked Questions ==
@@ -133,7 +154,11 @@ All data related to calendars can be found on the calendar itself on [https://op
 
 = Can I display any calendar ? Even if it's not mine ? =
 
-Yes ! No problem ! Just create a new Calendar post, provide its UID and it will work. 
+Yes ! No problem ! Just create a new Calendar post, provide its UID and it will work.
+
+= Where can I find developer documentation ? =
+
+You can find more thorough documentation on [https://developers.openagenda.com/extension-wordpress/](https://developers.openagenda.com/extension-wordpress/) (in French) or on the Github repository at [https://github.com/OpenAgenda/wordpress](https://github.com/OpenAgenda/wordpress)
 
 == Screenshots ==
 
@@ -148,6 +173,8 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 == Changelog ==
 
 = 1.1.0 =
+* Added "Integrations" settings tab
+* Added integration with CloudImage
 * Preview widget templates are overridable in the child theme.
 * Bug fix : Passed events can be displayed on single event view.
 
@@ -170,6 +197,8 @@ Yes ! No problem ! Just create a new Calendar post, provide its UID and it will 
 == Upgrade Notice ==
 
 = 1.1.0 =
+* Added "Integrations" settings tab
+* Added integration with CloudImage
 * Preview widget templates are overridable in the child theme.
 * Bug fix : Passed events can be displayed on single event view.
 

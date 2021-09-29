@@ -26,6 +26,8 @@ Your events are automatically inserted after your content. If you wish to contro
 
 ## Settings
 
+### General settings
+
 General settings can be found under the *Calendar > Settings* entry in the admin menu.
 
 All data related to your API key or calendars can be found on [https://openagenda.com](https://openagenda.com).
@@ -38,12 +40,27 @@ The main settings page provides the following settings :
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
  * *Cache duration* : For performance reasons, basic requests to Openagenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
- * *Default map tiles link* : This is the map tile used for the various maps displayed by the plugin.
- * *Default map tiles attribution link* : this is the default attribution link placed on OpenStreetMaps.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
  * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
 
+### Integrations settings
+
+The *Integrations* tab allows you to fine tune settings for various third party services the plugin uses.
+
+**OpenStreetmap integration settings :**
+
+ * *Default map tiles link* : This is the map tile used for the various maps displayed by the plugin.
+ * *Default map tiles attribution link* : this is the default attribution link placed on OpenStreetMaps.
+
+**CloudImage integration settings :**
+
+ * *CloudImage API key* : If you wish to use CloudImage to serve your images, enter your API key here.
+
+ ### Permalinks settings
+
 In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
+
+### Customizer settings
 
 In the *Customizer*, a new panel is available to house various display settings. For now only a main color setting is available.
 
@@ -114,8 +131,8 @@ Displays a search field. It takes the following parameters :
 
 Displays next events. It takes the following parameters : 
 
- * `preview_label` : Label while loading the items.
  * `uid` : UID of the calendar you wish to preview.
+ * `limit` : Number of events to display.
  
 ## Customization
 
@@ -132,6 +149,8 @@ The plugin also provides many hooks to allow you to customize the html output or
 This plugin displays data hosted and provided by [https://openagenda.com](https://openagenda.com). By using this plugin, you accept and agree with OpenAgenda's [terms and conditions](https://openagenda.zendesk.com/hc/fr/articles/201753991) and [privacy policy](https://openagenda.zendesk.com/hc/fr/articles/360003182014). Please make sure to read them before using this plugin. Also, using this plugin does NOT require an account at [https://openagenda.com](https://openagenda.com), though it is recommended to have one.
 
 Maps displayed by this plugin use data from [https://openstreetmap.org/](https://openstreetmap.org/) and uses the [leaflet JS library](https://leafletjs.com/). By using this plugin, you accept and agree with OpenStreeMap's [terms of use](https://wiki.osmfoundation.org/wiki/Terms_of_Use), [acceptable use policy](https://wiki.openstreetmap.org/wiki/Acceptable_Use_Policy) and [privacy policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy)
+
+The plugin provides optional integration with CloudImage. The integration requires to create an account at [https://cloudimage.io](https://cloudimage.io) and accept and agree their [terms of use](https://assets.scaleflex.com/Sales/Legal/Scaleflex+Services+Terms+and+Conditions+%5BFR%5D.pdf).
 
 Icons used in the UI are [Genericons](https://genericons.com/), licenced under the GPL 2.0.
 
@@ -182,6 +201,10 @@ The returned value is passed through the following filter : `apply_filters( 'ope
 #### `openagenda_get_event_image( $size = 'thumbnail', $uid = '' )`
 
 Returns the HTML used to display an event image. You get the same result with `openagenda_get_field()`, passing in `thumbnail` or `image` as first parameter. `thumbnail` size is 200px by 200px by default. `image` size is 600px wide by default.
+
+If you use the CloudImage integration, this function also accepts an array of CloudImage arguments instead of a size string slug as its first parameter. For example, you can pass in `array( 'width'=> 500, 'height' => 500, 'grey' => 1 )` to display a 500px by 500px grayscale image, processed by CloudImage.
+
+Using this requires you to signup for an account at [https://cloudimage.io](https://cloudimage.io), and fill in the corresponding API key setting in the *Integrations* settings of the plugin. Documentation for the accepted arguments can be found at [https://docs.cloudimage.io/go/cloudimage-documentation-v7/](https://docs.cloudimage.io/go/cloudimage-documentation-v7/)
 
 The returned HTML is passed through the following filter : `apply_filters( 'openagenda_event_image', $html, $uid, $size )`.
 

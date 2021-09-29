@@ -34,6 +34,11 @@ class Settings implements Hookable {
                 'option_name'       => 'openagenda_general_settings',
                 'sanitize_callback' => array( $this, 'sanitize_general_settings' ),
             ),
+            'integrations' => array(
+                'option_group'      => 'openagenda_integrations_settings',
+                'option_name'       => 'openagenda_integrations_settings',
+                'sanitize_callback' => array( $this, 'sanitize_integrations_settings' ),
+            ),
             'permalinks' => array(
                 'option_group'      => 'permalink',
                 'option_name'       => 'openagenda_permalinks_settings',
@@ -44,6 +49,18 @@ class Settings implements Hookable {
             'general' => array(
                 'id'       => 'openagenda_general_settings',
                 'title'    => __( 'General settings', 'openagenda' ),
+                'callback' => '',
+                'page'     => 'openagenda',
+            ),
+            'openstreetmap' => array(
+                'id'       => 'openagenda_openstreetmap_settings',
+                'title'    => __( 'OpenStreetMap settings settings', 'openagenda' ),
+                'callback' => '',
+                'page'     => 'openagenda',
+            ),
+            'cloudimage' => array(
+                'id'       => 'openagenda_cloudimage_settings',
+                'title'    => __( 'CloudImage settings', 'openagenda' ),
                 'callback' => '',
                 'page'     => 'openagenda',
             ),
@@ -118,36 +135,6 @@ class Settings implements Hookable {
                     'description' => __( 'Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored', 'openagenda' ),
                 ),
             ),
-            'map-tiles-link' => array(
-                'id'       => 'openagenda_map_tiles_link',
-                'title'    => __( 'Default map tiles link', 'openagenda' ),
-                'callback' => array( $this, 'input_field_markup' ),
-                'page'     => 'openagenda',
-                'section'  => 'openagenda_general_settings',
-                'args'     => array( 
-                    'id'          => 'openagenda_map_tiles_link',
-                    'option_name' => 'openagenda_general_settings',
-                    'label_for'   => 'openagenda_map_tiles_link',
-                    'type'        => 'text',
-                    'placeholder' => '',
-                    'default'     => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                ),
-            ),
-            'map-tiles-attribution-link' => array(
-                'id'       => 'openagenda_map_tiles_attribution_link',
-                'title'    => __( 'Default map tiles attribution link', 'openagenda' ),
-                'callback' => array( $this, 'input_field_markup' ),
-                'page'     => 'openagenda',
-                'section'  => 'openagenda_general_settings',
-                'args'     => array( 
-                    'id'          => 'openagenda_map_tiles_attribution_link',
-                    'option_name' => 'openagenda_general_settings',
-                    'label_for'   => 'openagenda_map_tiles_attribution_link',
-                    'type'        => 'text',
-                    'placeholder' => '',
-                    'default'     => sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) ),
-                ),
-            ),
             'delete-calendars-on-uninstall' => array(
                 'id'       => 'openagenda_delete_content_on_uninstall',
                 'title'    => __( 'Delete all calendar content on uninstall ?', 'openagenda' ),
@@ -196,6 +183,56 @@ class Settings implements Hookable {
                         /* translators: %s : home url */
                         __( 'You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>.', 'openagenda' ), 
                         esc_url( get_home_url() )
+                    ),
+                ),
+            ),
+            'map-tiles-link' => array(
+                'id'       => 'openagenda_map_tiles_link',
+                'title'    => __( 'Default map tiles link', 'openagenda' ),
+                'callback' => array( $this, 'input_field_markup' ),
+                'page'     => 'openagenda',
+                'section'  => 'openagenda_openstreetmap_settings',
+                'args'     => array( 
+                    'id'          => 'openagenda_map_tiles_link',
+                    'option_name' => 'openagenda_integrations_settings',
+                    'label_for'   => 'openagenda_map_tiles_link',
+                    'type'        => 'text',
+                    'placeholder' => '',
+                    'default'     => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                ),
+            ),
+            'map-tiles-attribution-link' => array(
+                'id'       => 'openagenda_map_tiles_attribution_link',
+                'title'    => __( 'Default map tiles attribution link', 'openagenda' ),
+                'callback' => array( $this, 'input_field_markup' ),
+                'page'     => 'openagenda',
+                'section'  => 'openagenda_openstreetmap_settings',
+                'args'     => array( 
+                    'id'          => 'openagenda_map_tiles_attribution_link',
+                    'option_name' => 'openagenda_integrations_settings',
+                    'label_for'   => 'openagenda_map_tiles_attribution_link',
+                    'type'        => 'text',
+                    'placeholder' => '',
+                    'default'     => sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) ),
+                ),
+            ),
+            'cloudimage-api-key' => array(
+                'id'       => 'openagenda_cloudimage_api_key',
+                'title'    => __( 'CloudImage API key', 'openagenda' ),
+                'callback' => array( $this, 'input_field_markup' ),
+                'page'     => 'openagenda',
+                'section'  => 'openagenda_cloudimage_settings',
+                'args'     => array( 
+                    'id'          => 'openagenda_cloudimage_api_key',
+                    'option_name' => 'openagenda_integrations_settings',
+                    'label_for'   => 'openagenda_cloudimage_api_key',
+                    'type'        => 'password',
+                    'placeholder' => '',
+                    'default'     => '',
+                    'description' => sprintf(
+                        /* translators: %s: openagenda site url */ 
+                        __( 'Your API key can be found in your <a href="%s">CloudImage account</a>.', 'openagenda' ),
+                         'https://www.cloudimage.io/' 
                     ),
                 ),
             ),
@@ -333,10 +370,24 @@ class Settings implements Hookable {
             'openagenda_cache_duration' => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] :  (int) ( HOUR_IN_SECONDS / 2 ),
             'openagenda_include_embeds' => isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : false,
             'openagenda_include_styles' => isset( $settings['openagenda_include_styles'] ) ? (bool) $settings['openagenda_include_styles'] : false,
-            'openagenda_map_tiles_link' => ! empty( $settings['openagenda_map_tiles_link'] ) ? sanitize_text_field( $settings['openagenda_map_tiles_link'] ) : '',
-            'openagenda_map_tiles_attribution_link'  => ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? wp_kses_post( $settings['openagenda_map_tiles_attribution_link'] ) : '',
             'openagenda_delete_content_on_uninstall' => isset( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false,
             'openagenda_delete_options_on_uninstall' => isset( $settings['openagenda_delete_options_on_uninstall'] ) ? (bool) $settings['openagenda_delete_options_on_uninstall'] : false,
+        );
+        return $new_settings;
+    }
+
+
+    /**
+     * Sanitizes integrations settings
+     * 
+     * @param   array  $settings  Settings value to sanitize
+     * @return  array  $settings
+     */
+    public function sanitize_integrations_settings( $settings ){
+        $new_settings = array(
+            'openagenda_map_tiles_link'              => ! empty( $settings['openagenda_map_tiles_link'] ) ? sanitize_text_field( $settings['openagenda_map_tiles_link'] ) : '',
+            'openagenda_cloudimage_api_key'          => ! empty( $settings['openagenda_cloudimage_api_key'] ) ? sanitize_text_field( $settings['openagenda_cloudimage_api_key'] ) : '',
+            'openagenda_map_tiles_attribution_link'  => ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? wp_kses_post( $settings['openagenda_map_tiles_attribution_link'] ) : '',
         );
         return $new_settings;
     }

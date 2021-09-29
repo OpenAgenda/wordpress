@@ -187,7 +187,13 @@ function openagenda_get_event_image( $size = 'thumbnail', $uid = '' ){
     $event = openagenda_get_event( $uid );
     $html  = '';
 
-    if( $image_url  = ! empty( $event[$size] ) ? $event[$size] : false ){
+    if( is_array( $size ) ){
+        $image_url = openagenda_get_cloudimage_image_url( $event['originalImage'], $size );
+    } else {
+        $image_url = ! empty( $event[$size] ) ? $event[$size] : false;
+    }
+
+    if( $image_url ){
         $dimensions = openagenda_get_image_dimensions( $size );
         $width      = ! empty( $dimensions['width'] ) ? sprintf( 'width="%s"', esc_attr( $dimensions['width'] ) )  : '';
         $height     = ! empty( $dimensions['height'] ) ? sprintf( 'height="%s"', esc_attr( $dimensions['height'] ) )  : '';
@@ -375,7 +381,7 @@ function openagenda_event_map( $uid = false, $echo = true ){
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
-    $settings  = get_option('openagenda_general_settings');
+    $settings  = get_option( 'openagenda_integrations_settings' );
     
     $latitude    = openagenda_get_field( 'location.latitude', $uid );
     $longitude   = openagenda_get_field( 'location.longitude', $uid );

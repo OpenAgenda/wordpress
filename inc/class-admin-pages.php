@@ -29,8 +29,8 @@ class Admin_Pages implements Hookable {
             'callback'    => array( $this, 'settings_page_markup' ),
         );
         $this->tabs = array(
-            'general' => __( 'General', 'openagenda' ),
-            // 'display' => __( 'Display', 'openagenda' ),
+            'general'      => __( 'General', 'openagenda' ),
+            'integrations' => __( 'Integrations', 'openagenda' ),
         ); 
     }
 
@@ -40,7 +40,7 @@ class Admin_Pages implements Hookable {
     public function register_hooks(){
         add_action( 'admin_menu', array( $this, 'register_admin_page') );
         add_action( 'openagenda_admin_page_general_tab_content', array( $this, 'general_tab_content' ) );
-        // add_action( 'openagenda_admin_page_display_tab_content', array( $this, 'display_tab_content' ) );
+        add_action( 'openagenda_admin_page_integrations_tab_content', array( $this, 'integrations_tab_content' ) );
     }
 
 
@@ -82,6 +82,29 @@ class Admin_Pages implements Hookable {
     public function get_tabs(){
         return apply_filters( 'openagenda_admin_page_tabs', $this->tabs );
     }
+
+
+    /**
+     * Returns the settings page url.
+     * Override for menu_page_url() (to get unescaped url)
+     * 
+     * @return  string  Settings page url 
+     */
+    public function get_menu_page_url(){
+        global $_parent_pages;
+        $menu_slug = $this->get_main_page()['menu_slug'];
+        
+        $url = '';
+        if ( isset( $_parent_pages[ $menu_slug ] ) ) {
+            $parent_slug = $_parent_pages[ $menu_slug ];
+            if ( $parent_slug && ! isset( $_parent_pages[ $parent_slug ] ) ) {
+                $url = admin_url( add_query_arg( 'page', $menu_slug, $parent_slug ) );
+            } else {
+                $url = admin_url( 'admin.php?page=' . $menu_slug );
+            }
+        }
+        return apply_filters( 'openagenda_menu_page_url', $url );
+    }
     
 
     /**
@@ -90,7 +113,7 @@ class Admin_Pages implements Hookable {
     public function settings_page_markup(){
         $tabs        = $this->get_tabs();
         $current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs  ) ? $_GET['tab'] : 'general';
-        $base_url    = menu_page_url( 'openagenda', false );
+        $base_url    = $this->get_menu_page_url();
         ?>
             <div class="wrap">
                 <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
@@ -98,7 +121,7 @@ class Admin_Pages implements Hookable {
                 <?php if( count( $tabs ) > 1 ) : ?>
                     <nav class="nav-tab-wrapper">
                         <?php foreach ( $tabs as $slug => $label ) : 
-                            $url   = add_query_arg( 'tab', urlencode( $slug ), $base_url );
+                            $url   = add_query_arg( 'tab', sanitize_title( $slug ), $base_url );
                             $class = $current_tab === $slug ? 'nav-tab nav-tab-active' : 'nav-tab';
                         ?>
                             <a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $class ); ?>"><?php echo esc_html( $label );?></a>
@@ -133,14 +156,20 @@ class Admin_Pages implements Hookable {
     /**
      * Content for the 'display' settings tab
      */
-    public function display_tab_content(){
+    public function integrations_tab_content(){
         ?>
-            <h2><?php esc_html_e( 'Display settings', 'openagenda' );?></h2>
+            <h2><?php esc_html_e( 'Integrations settings', 'openagenda' );?></h2>
             <form action="options.php" method="POST">
-                <?php settings_fields( 'openagenda_display_settings' ); ?>
+                <?php settings_fields( 'openagenda_integrations_settings' ); ?>
+                <h3><?php esc_html_e( 'OpenStreetMap settings', 'openagenda' );?></h3>
                 <table class="form-table" role="presentation">
-                    <?php do_settings_fields( 'openagenda', 'openagenda_display_settings' ); ?>   
+                    <?php do_settings_fields( 'openagenda', 'openagenda_openstreetmap_settings' ); ?>   
                 </table> 
+                <h3><?php esc_html_e( 'CloudImage settings', 'openagenda' );?></h3>
+                <table class="form-table" role="presentation">
+                    <?php do_settings_fields( 'openagenda', 'openagenda_cloudimage_settings' ); ?>   
+                </table>
+                <?php submit_button(); ?> 
             </form>
         <?php
     }

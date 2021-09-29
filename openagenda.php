@@ -90,6 +90,7 @@ function openagenda_uninstallation(){
 
     if( $should_delete_options ){
         delete_option( 'openagenda_general_settings' );
+        delete_option( 'openagenda_integrations_settings' );
         delete_option( 'openagenda_permalinks_settings' );
         delete_option( 'openagenda_customizer' );
         delete_expired_transients();

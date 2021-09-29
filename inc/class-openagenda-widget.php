@@ -84,7 +84,7 @@ class Openagenda_Widget extends \WP_Widget {
         $html  = '';
         switch ( $field['type'] ) {
             case 'textarea':
-                $description = ! empty( $field['description'] ) ? sprintf( '<em>%s</em>', esc_html( $field['description'] ) ) : ''; 
+                $description = ! empty( $field['description'] ) ? sprintf( '<em>%s</em>', wp_kses_post( $field['description'] ) ) : ''; 
                 $html = sprintf(
                     '<p>
                         <label for="%1$s">%3$s</label>
@@ -113,7 +113,7 @@ class Openagenda_Widget extends \WP_Widget {
                 );
                 break;
             default:
-                $help = ! empty( $field['help-text'] ) ? sprintf('<span class="description">%s</span>', esc_html( $field['help-text'] ) ) : '';    
+                $description = ! empty( $field['description'] ) ? sprintf( '<em><span class="description">%s</span></em>', wp_kses_post( $field['description'] ) ) : '';    
                 $html = sprintf( 
                     '<p>
                         <label for="%1$s">%3$s</label>
@@ -126,7 +126,7 @@ class Openagenda_Widget extends \WP_Widget {
                     esc_attr( $field['type'] ),
                     esc_attr( $field['class'] ),
                     esc_attr( $value ),
-                    $help
+                    $description
                 );
                 break;
         }

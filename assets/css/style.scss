@@ -55,12 +55,11 @@ $oa-dark: #333;
 .oa-event-title {
     margin-top: 0;
 }
-.oa-meta {
-	p {
-		margin: .25rem 0;
-	}
+p.oa-meta {
+	margin: .25rem 0;
 }
 .oa-event-thumbnail {
+	text-align: center;
 	margin-bottom: 1rem;
 }
 
@@ -145,6 +144,7 @@ ul.oa-sharers-links {
  *******************/
 .oa-event-timings {
 	margin: 1rem 0;
+
 }
 .oa-meta,
 .oa-card-meta,
@@ -168,6 +168,7 @@ ul.oa-sharers-links {
 ul.oa-months {
 	list-style: none;
 	padding: 0;
+	margin: 0;
 }
 li.oa-month {
 	list-style: none;
@@ -263,6 +264,7 @@ div[data-container-id="oa-wrapper"]{
 		opacity: .8;
 		&:hover,
 		&:focus {
+			cursor: pointer;
 			opacity: 1;
 			text-decoration: none;
 		}

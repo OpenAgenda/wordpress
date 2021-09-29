@@ -133,11 +133,39 @@ function openagenda_get_image_dimensions( $size = 'thumbnail' ){
         'height' => 200,
     );
 
-    if( array_key_exists( $size, $sizes ) ){
+    // Regular size string is passed
+    if( is_string( $size ) && array_key_exists( $size, $sizes ) ){
         $dimensions = $sizes[$size];
     }
 
+    // If Cloudimage arguments are passed.
+    if( is_array( $size ) ){
+        $dimensions = array(
+            'width'  => ! empty( $size['width'] ) ? (int) $size['width'] : '',
+            'height' => ! empty( $size['height'] ) ? (int) $size['height'] : '',
+        );
+    }
+
     return apply_filters( 'openagenda_image_dimensions', $dimensions, $size );
+}
+
+
+/**
+ * Returns the dimensions for a given image size name.
+ * 
+ * @param   string  $url             Url to the original image.
+ * @param   array   $args            Array of Cloudimage arguments.
+ * @return  string  $cloudimage_url
+ */
+function openagenda_get_cloudimage_image_url( $url, $args ){
+    $settings = get_option( 'openagenda_integrations_settings' );
+
+    $cloudimage_token = $settings['openagenda_cloudimage_api_key'];
+    if( empty( $cloudimage_token ) || ! is_array( $args ) ) return $url;
+
+    $args['org_if_sml'] = 1;
+    $cloudimage_url     = add_query_arg( $args, sprintf( 'https://%s.cloudimg.io/v7/%s', $cloudimage_token, $url ) );
+    return apply_filters( 'openagenda_cloudimage_url', $cloudimage_url, $args );
 }
 
 

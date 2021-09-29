@@ -17,13 +17,18 @@ class Filter_Widget extends Openagenda_Widget {
      *                                 information on accepted arguments. Default empty array.
      */
 	public function __construct( $args = array() ) {
+        $settings            = get_option( 'openagenda_integrations_settings' );
+        $default_tiles       = ! empty( $settings['openagenda_map_tiles_link'] ) ? $settings['openagenda_map_tiles_link'] : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        $default_attribution = ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? $settings['openagenda_map_tiles_attribution_link'] : sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) );
+
         $args['additional_settings'] = array(
             'openagenda_filter_map' => array(
                 'map_tiles_link' => array(
                     'name'        => 'map_tiles_link',
                     'label'       => __( 'Map tiles link :', 'openagenda' ),
                     'class'       => 'widefat',
-                    'default'     => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    'default'     => $default_tiles,
+                    'description' => __( 'The default map tile link can be found in your Integrations settings.', 'openagenda' )
                 ),
                 'map_auto' => array(
                     'name'        => 'map_auto',

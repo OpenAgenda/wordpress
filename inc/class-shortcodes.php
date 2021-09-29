@@ -169,8 +169,12 @@ class Shortcodes implements Hookable {
         if( ! $openagenda ) return '';
         $uid = $openagenda->get_uid();
 
+        $settings            = get_option( 'openagenda_integrations_settings' );
+        $default_tiles       = ! empty( $settings['openagenda_map_tiles_link'] ) ? $settings['openagenda_map_tiles_link'] : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        $default_attribution = ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? $settings['openagenda_map_tiles_attribution_link'] : sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) );
+
         $defaults = array(
-            'map_tiles_link' => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            'map_tiles_link' => $default_tiles,
             'map_zoom'       => 12,
             'map_auto'       => true,
             'map_longitude'  => '',
