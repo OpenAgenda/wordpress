@@ -61,7 +61,7 @@ class Content_Manager implements Hookable {
     public function register_hooks(){
         add_action( 'init', array( $this, 'register_post_types' ), 10 );
         add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
-        add_action( 'wp_head', array( $this, 'wp_head_meta' ), 100 );
+        add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
         add_filter( 'body_class', array( $this, 'body_class'), 10, 1 );
         add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 100, 1 );
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
@@ -70,6 +70,16 @@ class Content_Manager implements Hookable {
         add_filter( 'get_canonical_url', array( $this, 'canonical_url' ), 100, 1 );
         add_filter( 'wpseo_canonical', array( $this, 'canonical_url' ), 100, 1 ); 
         add_filter( 'get_shortlink', array( $this, 'get_shortlink' ), 10, 4 );
+
+        // Yoast SEO Filters
+        add_filter( 'wpseo_metadesc', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        add_filter( 'wpseo_twitter_description', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        add_filter( 'wpseo_twitter_image', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        add_filter( 'wpseo_twitter_title', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        add_filter( 'wpseo_opengraph_title', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        add_filter( 'wpseo_opengraph_desc', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        add_filter( 'wpseo_opengraph_url', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        add_filter( 'wpseo_opengraph_image', array( $this, 'yoast_seo_metadata' ), 10, 1 );
     }
 
     
@@ -143,7 +153,7 @@ class Content_Manager implements Hookable {
         return $url;
     }
 
-    
+
     /**
      * Filters the shortlink
      * 
@@ -236,20 +246,16 @@ class Content_Manager implements Hookable {
      */
     public function wp_head_meta() {
         global $openagenda;
+        
+        // Let Yoast do the heavy lifting by default
+        if ( in_array( 'wordpress-seo/wp-seo.php', (array) get_option( 'active_plugins', array() ), true ) ) return;
+
         if( is_singular( 'oa-calendar' ) && $openagenda ){
             foreach ( $this->get_default_meta() as $name => $content ) {
-                printf( 
-                    '<meta name="%s" content="%s">',
-                    esc_attr( $name ),
-                    esc_attr( $content )
-                );
+                printf( '<meta name="%s" content="%s">', esc_attr( $name ), esc_attr( $content ) );
             }
             foreach ( $this->get_default_properties() as $name => $content ) {
-                printf( 
-                    '<meta property="%s" content="%s">',
-                    esc_attr( $name ),
-                    esc_attr( $content )
-                );
+                printf( '<meta property="%s" content="%s">', esc_attr( $name ), esc_attr( $content ) );
             }
         }
     }
@@ -278,16 +284,36 @@ class Content_Manager implements Hookable {
      * @return array  $metas  Associative array name => content
      */
     public function get_default_meta(){
-        global $openagenda;        
         global $post;
+        global $openagenda;        
 
-        $metas = array( 'title' => wp_get_document_title(), );
+        $metas = array( 
+            'title'         => wp_get_document_title(),
+            'twitter:site'  => get_bloginfo( 'name' ),
+            'twitter:card'  => 'summary_large_image',
+            'twitter:title' => wp_get_document_title(),
+        );
         
-        if( $openagenda->is_single() && ! empty( $description = \openagenda_get_field( 'description', false ) ) ){
-            $metas['description'] = $description; 
-        } 
-        if( $openagenda->is_archive() && ! empty( $post->post_excerpt ) ){
-            $metas['description'] = wp_strip_all_tags( $post->post_excerpt );
+        if( $openagenda->is_single() ){
+            $event       = openagenda_get_event();
+            $image_url   = ! empty( $event['image'] ) ? $event['image'] : false;
+            if( ! empty( $description = \openagenda_get_field( 'description', false ) ) ) {
+                $metas['description']         = $description;
+                $metas['twitter:description'] = $description;
+            }
+            if( $image_url ){
+                $metas['twitter:image'] = esc_url( $image_url );
+            }
+        }
+
+        if( $openagenda->is_archive() ){
+            if( ! empty( $description = wp_strip_all_tags( $post->post_excerpt ) ) ) {
+                $metas['description']         = $description;
+                $metas['twitter:description'] = $description;
+            }
+            if( has_post_thumbnail() ){
+                $metas['twitter:image'] = get_the_post_thumbnail_url( $post, 'medium' );
+            }
         }
 
         return apply_filters( 'openagenda_default_meta', $metas );
@@ -300,10 +326,12 @@ class Content_Manager implements Hookable {
      * @return array  $metas  Associative array property => content
      */
     public function get_default_properties(){
-        global $openagenda;
         global $post;
+        global $openagenda;
 
         $properties = array(
+            'og:locale'      => get_locale(),
+            'og:site_name'   => get_bloginfo( 'name' ),
             'og:type'        => 'article',
             'og:title'       => wp_get_document_title(),
         );
@@ -333,5 +361,48 @@ class Content_Manager implements Hookable {
         }
 
         return apply_filters( 'openagenda_default_properties', $properties );
+    }
+
+
+    /**
+     * Filters Yoast SEO metadata on single event pages
+     * 
+     * @param   string  $value  Value of the metadata
+     * @return  string  $value  
+     */
+    public function yoast_seo_metadata( $value ){
+        global $post; 
+        if( 'oa-calendar' === get_post_type( $post ) && openagenda_is_single() ){
+            $meta       = $this->get_default_meta();
+            $properties = $this->get_default_properties();
+            $key        = current_filter();
+            switch ( $key ) {
+                case 'wpseo_metadesc':
+                    if ( ! empty( $meta['description'] ) ) $value = $meta['description'];
+                    break;
+                case 'wpseo_twitter_description':
+                    if ( ! empty( $meta['twitter:description'] ) ) $value = $meta['twitter:description'];
+                    break;
+                case 'wpseo_twitter_image':
+                    if ( ! empty( $meta['twitter:image'] ) ) $value = $meta['twitter:image'];
+                    break;
+                case 'wpseo_twitter_title':
+                    if ( ! empty( $meta['twitter:title'] ) ) $value = $meta['twitter:title'];
+                    break;
+                case 'wpseo_opengraph_title':
+                    if ( ! empty( $properties['og:title'] ) ) $value = $properties['og:title'];
+                    break;
+                case 'wpseo_opengraph_desc':
+                    if ( ! empty( $properties['og:description'] ) ) $value = $properties['og:description'];
+                    break;
+                case 'wpseo_opengraph_url':
+                    if ( ! empty( $properties['og:url'] ) ) $value = $properties['og:url'];
+                    break;
+                case 'wpseo_opengraph_image':
+                    if ( ! empty( $properties['og:image'] ) ) $value = $properties['og:image'];
+                    break;
+            } 
+        }
+        return $value;
     }
 }
