@@ -67,6 +67,9 @@ class Content_Manager implements Hookable {
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
         // add_filter( 'post_type_link', array( $this, 'permalink' ), 10, 4 );
         add_filter( 'write_your_story', array( $this, 'write_your_story' ), 10, 2 );
+        add_filter( 'get_canonical_url', array( $this, 'canonical_url' ), 100, 1 );
+        add_filter( 'wpseo_canonical', array( $this, 'canonical_url' ), 100, 1 ); 
+        add_filter( 'get_shortlink', array( $this, 'get_shortlink' ), 10, 4 );
     }
 
     
@@ -124,10 +127,43 @@ class Content_Manager implements Hookable {
         }
         return $classes;
     }
+
+
+    /**
+     * Filters the canonical URL provided by WordPress
+     * 
+     * @param   string  $url  Canonical Url
+     * @return  string  $url  
+     */
+    public function canonical_url( $url ) {
+        global $post;
+        if( 'oa-calendar' === get_post_type( $post ) && openagenda_is_single() ){
+            $url = openagenda_event_permalink( false, false, false );
+        }    
+        return $url;
+    }
+
+    
+    /**
+     * Filters the shortlink
+     * 
+     * @param   string  $shortlink
+     * @param   int     $id          Post id
+     * @param   string  $context
+     * @param   bool    $allow_slug  Not used
+     * @return  string  $shortlink
+     */
+    public function get_shortlink( $shortlink, $id, $context, $allow_slugs ) {
+        if( 'oa-calendar' === get_post_type( $id ) && openagenda_is_single() ){
+            $event_slug = openagenda_get_field( 'slug' );
+            $shortlink  = add_query_arg( 'oa-slug', sanitize_title( $event_slug ), $shortlink );
+        }
+        return $shortlink;
+    }
  
 
     /**
-     * Filters the main title
+     * Filters the page title
      */
     public function the_title( $title, $id ){
         global $openagenda;
