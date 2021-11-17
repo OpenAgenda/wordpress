@@ -67,19 +67,21 @@ class Content_Manager implements Hookable {
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
         // add_filter( 'post_type_link', array( $this, 'permalink' ), 10, 4 );
         add_filter( 'write_your_story', array( $this, 'write_your_story' ), 10, 2 );
-        add_filter( 'get_canonical_url', array( $this, 'canonical_url' ), 100, 1 );
-        add_filter( 'wpseo_canonical', array( $this, 'canonical_url' ), 100, 1 ); 
-        add_filter( 'get_shortlink', array( $this, 'get_shortlink' ), 10, 4 );
-
-        // Yoast SEO Filters
-        add_filter( 'wpseo_metadesc', array( $this, 'yoast_seo_metadata' ), 10, 1 );
-        add_filter( 'wpseo_twitter_description', array( $this, 'yoast_seo_metadata' ), 10, 1 );
-        add_filter( 'wpseo_twitter_image', array( $this, 'yoast_seo_metadata' ), 10, 1 );
-        add_filter( 'wpseo_twitter_title', array( $this, 'yoast_seo_metadata' ), 10, 1 );
-        add_filter( 'wpseo_opengraph_title', array( $this, 'yoast_seo_metadata' ), 10, 1 );
-        add_filter( 'wpseo_opengraph_desc', array( $this, 'yoast_seo_metadata' ), 10, 1 );
-        add_filter( 'wpseo_opengraph_url', array( $this, 'yoast_seo_metadata' ), 10, 1 );
-        add_filter( 'wpseo_opengraph_image', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        
+        // Frontend meta tags and Yoast SEO Filters
+        if( ! is_admin() ) {
+            add_filter( 'get_canonical_url', array( $this, 'canonical_url' ), 100, 1 );
+            add_filter( 'get_shortlink', array( $this, 'get_shortlink' ), 10, 4 );
+            add_filter( 'wpseo_canonical', array( $this, 'canonical_url' ), 100, 1 ); 
+            add_filter( 'wpseo_metadesc', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+            add_filter( 'wpseo_twitter_description', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+            add_filter( 'wpseo_twitter_image', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+            add_filter( 'wpseo_twitter_title', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+            add_filter( 'wpseo_opengraph_title', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+            add_filter( 'wpseo_opengraph_desc', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+            add_filter( 'wpseo_opengraph_url', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+            add_filter( 'wpseo_opengraph_image', array( $this, 'yoast_seo_metadata' ), 10, 1 );
+        }
     }
 
     
@@ -147,7 +149,7 @@ class Content_Manager implements Hookable {
      */
     public function canonical_url( $url ) {
         global $post;
-        if( 'oa-calendar' === get_post_type( $post ) && openagenda_is_single() ){
+        if( is_singular( 'oa-calendar' ) && \openagenda_is_single() ){
             $url = openagenda_event_permalink( false, false, false );
         }    
         return $url;
@@ -164,7 +166,7 @@ class Content_Manager implements Hookable {
      * @return  string  $shortlink
      */
     public function get_shortlink( $shortlink, $id, $context, $allow_slugs ) {
-        if( 'oa-calendar' === get_post_type( $id ) && openagenda_is_single() ){
+        if( is_singular( 'oa-calendar' ) && \openagenda_is_single() ){
             $event_slug = openagenda_get_field( 'slug' );
             $shortlink  = add_query_arg( 'oa-slug', sanitize_title( $event_slug ), $shortlink );
         }
@@ -371,8 +373,7 @@ class Content_Manager implements Hookable {
      * @return  string  $value  
      */
     public function yoast_seo_metadata( $value ){
-        global $post; 
-        if( 'oa-calendar' === get_post_type( $post ) && openagenda_is_single() ){
+        if( is_singular( 'oa-calendar' ) && \openagenda_is_single() ){
             $meta       = $this->get_default_meta();
             $properties = $this->get_default_properties();
             $key        = current_filter();
