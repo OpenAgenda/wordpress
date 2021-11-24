@@ -54,7 +54,7 @@ class Settings implements Hookable {
             ),
             'openstreetmap' => array(
                 'id'       => 'openagenda_openstreetmap_settings',
-                'title'    => __( 'OpenStreetMap settings settings', 'openagenda' ),
+                'title'    => __( 'OpenStreetMap settings', 'openagenda' ),
                 'callback' => '',
                 'page'     => 'openagenda',
             ),

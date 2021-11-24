@@ -25,7 +25,7 @@ class Filter_Widget extends Openagenda_Widget {
             'openagenda_filter_map' => array(
                 'map_tiles_link' => array(
                     'name'        => 'map_tiles_link',
-                    'label'       => __( 'Map tiles link :', 'openagenda' ),
+                    'label'       => __( 'Map tiles link:', 'openagenda' ),
                     'class'       => 'widefat',
                     'default'     => $default_tiles,
                     'description' => __( 'The default map tile link can be found in your Integrations settings.', 'openagenda' )
@@ -38,17 +38,17 @@ class Filter_Widget extends Openagenda_Widget {
                 ),
                 'map_longitude' => array(
                     'name'        => 'map_longitude',
-                    'label'       => __( 'Default longitude :', 'openagenda' ),
+                    'label'       => __( 'Default longitude:', 'openagenda' ),
                     'class'       => 'widefat',
                 ),
                 'map_latitude' => array(
                     'name'        => 'map_latitude',
-                    'label'       => __( 'Default latitude :', 'openagenda' ),
+                    'label'       => __( 'Default latitude:', 'openagenda' ),
                     'class'       => 'widefat',
                 ),
                 'map_zoom' => array(
                     'name'        => 'map_zoom',
-                    'label'       => __( 'Map default zoom :', 'openagenda' ),
+                    'label'       => __( 'Map default zoom:', 'openagenda' ),
                     'type'        => 'number',
                     'class'       => 'tiny-text',
                     'default'     => 12
@@ -57,7 +57,7 @@ class Filter_Widget extends Openagenda_Widget {
             'openagenda_filter_search' => array(
                 'placeholder'     => array(
                     'name'        => 'placeholder',
-                    'label'       => __( 'Placeholder text :', 'openagenda' ),
+                    'label'       => __( 'Placeholder text:', 'openagenda' ),
                     'class'       => 'widefat',
                     'default'     => __( 'Search events', 'openagenda' )
                 ),
@@ -65,12 +65,12 @@ class Filter_Widget extends Openagenda_Widget {
             'openagenda_filter_tags' => array(
                 'tag_group' => array(
                     'name'        => 'tag_group',
-                    'label'       => __( 'Tag group :', 'openagenda' ),
+                    'label'       => __( 'Tag group:', 'openagenda' ),
                     'class'       => 'widefat',
                 ),
                 'tags' => array(
                     'name'        => 'tags',
-                    'label'       => __( 'Tags to display :', 'openagenda' ),
+                    'label'       => __( 'Tags to display:', 'openagenda' ),
                     'description' => __( 'Enter tags separated by a comma.', 'openagenda' ),
                     'type'        => 'textarea',
                     'class'       => 'large-text',
