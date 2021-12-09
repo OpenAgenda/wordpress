@@ -75,7 +75,7 @@ function openagenda_get_field( $field, $uid = false ){
 
             // If we're working with next timings, filter the timings array.
             $next_timings = array_values( array_filter( $timings, function( $timing ) {
-                return strtotime( $timing['start'] ) >= time(); 
+                return strtotime( $timing['begin'] ) >= time(); 
             } ) );
 
             if( 'next-timing' === $field ){
@@ -90,11 +90,14 @@ function openagenda_get_field( $field, $uid = false ){
                 break;
             }
             break;
+        case 'range':
+            return openagenda_get_field( 'dateRange' );
+            break;
         default:
             $end_value = array_reduce( explode( '.', $field ), function( $array, $field ) use ( $locale ) {
                 if( openagenda_is_i18n_field( $field ) && is_array( $array[$field] ) ){
                     if( array_key_exists( $locale, $array[$field] ) ){
-                        return ! empty( $array[$field][$locale] ) ? $array[$field][$locale] : '';
+                        return ! empty( $array[$field][$locale] ) ? openagenda_maybe_parse_field( $field, $array[$field][$locale] ) : '';
                     } else {
                         return ! empty( array_values( $array[$field] )[0] ) ? array_values( $array[$field] )[0] : '';
                     }
@@ -157,6 +160,26 @@ function openagenda_esc_field( $value, $field ){
 
 
 /**
+ * Maybe parse markdown field if needed
+ * 
+ * @param   string  $field  Field key
+ * @param   string  $value  Field value to maybe parse.
+ * @return  string  $value  Parsed value
+ */
+function openagenda_maybe_parse_field( $field, $value ){
+    global $openagenda;
+    if( 'longDescription' === $field ){
+        $format = $openagenda->get_longDescription_format();
+        if( 'markdown' === $format ){
+            $Parsedown = new Parsedown();
+            $value = $Parsedown->text($value);
+        }
+    }
+    return $value;
+}
+
+
+/**
  * Returns the permalink to the current event, with or without context
  */
 function openagenda_event_permalink( $uid = false, $echo = true, $use_context = false ){
@@ -183,21 +206,33 @@ function openagenda_event_permalink( $uid = false, $echo = true, $use_context = 
  * @param   string  $uid   UID of the event to get image from.
  * @return  string  $html  The corresponding <img> tag
  */
-function openagenda_get_event_image( $size = 'thumbnail', $uid = '' ){
+function openagenda_get_event_image( $size = '', $uid = '' ){
     $event = openagenda_get_event( $uid );
     $html  = '';
+    $image_url = '';
+    
+    if( ! empty( $event['image'] ) ){
+        $filename   = $event['image']['filename'];
+        $dimensions = $event['image']['size'];
+        if( ! empty( $size ) && is_string( $size ) && ! empty( $event['image']['variants'] ) ){
+            $variant = array_values( array_filter( $event['image']['variants'], function( $variant ) use ( $size ) { return $size === $variant['type']; } ) );
+            if( ! empty( $variant ) ) {
+                $filename   = $variant[0]['filename'];
+                $dimensions = $variant[0]['size'];
+            }
+        }
+        $image_url = trailingslashit( $event['image']['base'] ) . $filename;
+    }
 
     if( is_array( $size ) ){
-        $image_url = openagenda_get_cloudimage_image_url( $event['originalImage'], $size );
-    } else {
-        $image_url = ! empty( $event[$size] ) ? $event[$size] : false;
+        // If an array was passed, that means a resize has been asked to CloudImage
+        $image_url  = openagenda_get_cloudimage_image_url( $image_url, $size );
+        $dimensions = openagenda_get_image_dimensions( $size );
     }
 
     if( $image_url ){
-        $dimensions = openagenda_get_image_dimensions( $size );
         $width      = ! empty( $dimensions['width'] ) ? sprintf( 'width="%s"', esc_attr( $dimensions['width'] ) )  : '';
         $height     = ! empty( $dimensions['height'] ) ? sprintf( 'height="%s"', esc_attr( $dimensions['height'] ) )  : '';
-
         $html = sprintf( 
             '<img src="%s" %s %s alt="%s" />', 
             esc_url( $image_url ),
@@ -217,7 +252,7 @@ function openagenda_get_event_image( $size = 'thumbnail', $uid = '' ){
  * @param   string  $size  Size slug for the image
  * @param   string  $uid   UID of the event to get image from.
  */
-function openagenda_event_image( $size = 'thumbnail', $uid = '' ){
+function openagenda_event_image( $size = '', $uid = '' ){
     $image = openagenda_get_event_image( $size, $uid );
     echo wp_kses_post( $image );
 }
@@ -487,7 +522,6 @@ function openagenda_event_registration_methods( $uid = false, $echo = true ){
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
-    
     $methods = openagenda_get_field( 'registration', $uid );
     $html    = '';
 
@@ -495,23 +529,27 @@ function openagenda_event_registration_methods( $uid = false, $echo = true ){
         $items = array_map( function( $method ){
             switch ( $method['type'] ) {
                 case 'link':
-                    $icon  = openagenda_icon( 'link', false );
-                    $value = esc_url( $method['value'] );
+                    $icon   = openagenda_icon( 'link', false );
+                    $prefix = '';
+                    $value  = esc_url( $method['value'] );
                     break;
                 case 'email':
-                    $icon  = openagenda_icon( 'email', false );
-                    $value = sanitize_email( $method['value'] );
+                    $icon   = openagenda_icon( 'email', false );
+                    $prefix = 'mailto://';
+                    $value  = sanitize_email( $method['value'] );
                     break;
                 case 'phone':
-                    $icon  = openagenda_icon( 'phone', false );
-                    $value = sanitize_text_field( $method['value'] );
+                    $icon   = openagenda_icon( 'phone', false );
+                    $prefix = '';
+                    $value  = sanitize_text_field( $method['value'] );
                     break;
                 default:
-                    $icon  = '';
-                    $value = sanitize_text_field( $method['value'] );
+                    $icon   = '';
+                    $prefix = '';
+                    $value  = sanitize_text_field( $method['value'] );
                     break;
             }
-            $href  = sprintf( '%s%s', sanitize_text_field( $method['prefix'] ), $value );
+            $href  = sprintf( '%s%s', sanitize_text_field( $prefix ), $value );
             $item  = sprintf( 
                 '<li class="oa-registration-method"><span class="oa-registration-method-wrapper">%s<a href="%s" class="oa-registration-method-label">%s</a></span></li>',
                 $icon,
@@ -825,10 +863,9 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
     $context         = openagenda_decode_context();
     $total           = $context && isset( $context['total'] ) ? (int) $context['total'] : 0;
     $event_offset    = $context && isset( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
+    $invalid         = 'next' === $direction ? (bool) ( ( $event_offset + 1 ) >= $total ) : (bool) ( $event_offset <= 0 ) ;
 
     $html    = '';
-    $invalid = 'next' === $direction ? (bool) ( ( $event_offset + 1 ) >= $total ) : (bool) ( $event_offset <= 0 ) ;
-
     if( $encoded_context ){
         $url = add_query_arg( array(
             'action'    => 'get_adjacent_event',
@@ -867,10 +904,12 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
 function openagenda_get_back_link(){
     global $openagenda;
     $context = openagenda_decode_context();
+
+    // echo 'TODO: fix the event navigation';
     
     $filters = $context && isset( $context['oaq'] ) ? $context['oaq'] : array();
     $total   = $context && isset( $context['total'] ) ? (int) $context['total'] : 0;
-    $limit   = $context && isset( $context['limit'] ) ? (int) $context['limit'] : $openagenda->get_limit();
+    $limit   = $context && isset( $context['size'] ) ? (int) $context['size'] : $openagenda->get_size();
     $event_offset = $context && isset( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
     $event_number = $event_offset + 1;
     

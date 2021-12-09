@@ -12,7 +12,7 @@
         <header class="oa-event-header">
             <div class="oa-event-thumbnail">
                 <a class="oa-event-permalink" href="<?php openagenda_event_permalink( false, true, true ); ?>">
-                    <?php openagenda_event_image( 'image' ); ?>
+                    <?php openagenda_event_image(); ?>
                 </a>
             </div>
             <h2 class="oa-event-title">
@@ -30,7 +30,7 @@
                 <p class="oa-meta oa-event-range">
                     <?php
                         openagenda_icon( 'month' );
-                        openagenda_field( 'range' );
+                        openagenda_field( 'dateRange' );
                     ?>
                 </p>
                 <p class="oa-meta oa-event-attendance">

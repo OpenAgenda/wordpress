@@ -61,7 +61,7 @@ class Shortcodes implements Hookable {
         $atts = shortcode_atts( array(
             'uid'    => get_post_meta( get_the_ID(), 'oa-calendar-uid', true ),
             'view'   => get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ) : 'list',
-            'limit'  => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
+            'size'   => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
         ), $atts, $tag );
         
         if( ! empty( get_query_var( 'oa-slug' ) ) ){
@@ -72,7 +72,7 @@ class Shortcodes implements Hookable {
         if( empty( $atts['uid'] ) ){
             return sprintf( '<p>%s</p>', __( 'Please provide a valid calendar UID to display in the calendar settings.', 'openagenda' ) );
         }
-
+        
         if( ! $openagenda ){
             $openagenda = new Openagenda( $atts['uid'], $atts );
         }

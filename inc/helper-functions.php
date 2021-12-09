@@ -106,10 +106,7 @@ function openagenda_image_sizes(){
             'width'  => 200,
             'height' => 200,
         ),
-        'image' => array(
-            'width' => 600,
-        ),
-        'originalImage' => array(
+        'full' => array(
             'width'  => '',
             'height' => '',
         ),
@@ -175,7 +172,7 @@ function openagenda_get_cloudimage_image_url( $url, $args ){
  * @return  array  Array of i18n fields
  */
 function openagenda_i18n_fields(){
-    $i18n = array( 'title', 'description', 'longDescription', 'html', 'access', 'range', 'conditions', 'keywords' );
+    $i18n = array( 'title', 'description', 'longDescription', 'html', 'access', 'range','dateRange', 'conditions', 'keywords' );
     return apply_filters( 'openagenda_i18n_fields', $i18n );
 }
 
@@ -366,7 +363,7 @@ function openagenda_get_update_notice_html(){
  * @return  array         $timing        Timing with additionnal formatted data  
  */
 function openagenda_format_timing( $timing, $datetimezone = null ){
-    $start_timestamp = strtotime( $timing['start'] );
+    $start_timestamp = strtotime( $timing['begin'] );
     $end_timestamp   = strtotime( $timing['end'] );
 
     $timing['start_date_label'] = wp_date( get_option( 'date_format' ), $start_timestamp, $datetimezone ) ;
@@ -381,8 +378,8 @@ function openagenda_format_timing( $timing, $datetimezone = null ){
     $timing['end_time_label']   = wp_date( get_option( 'time_format' ), $end_timestamp, $datetimezone ) ;
 
     $now       = time();
-    $time_diff = human_time_diff( $now, strtotime( $timing['start'] ) );
-    $timing['relative_label'] = strtotime( $timing['start'] ) >= $now
+    $time_diff = human_time_diff( $now, strtotime( $timing['begin'] ) );
+    $timing['relative_label'] = strtotime( $timing['begin'] ) >= $now
         /* translators: %s : next event relative timing */
         ? sprintf( _x( 'In %s', 'next event timing', 'openagenda' ), esc_html( $time_diff ) )
         /* translators: %s : last event relative timing */

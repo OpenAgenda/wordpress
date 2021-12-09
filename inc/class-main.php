@@ -76,6 +76,8 @@ class Main {
         require_once OPENAGENDA_PATH . 'inc/class-openagenda.php';
         require_once OPENAGENDA_PATH . 'inc/class-customizer-settings.php';
         require_once OPENAGENDA_PATH . 'inc/class-shortcodes.php';
+        require_once OPENAGENDA_PATH . 'vendor/autoload.php';
+         
         $this->dependencies['content-manager'] = new Content_Manager();
         $this->dependencies['customizer']      = new Customizer_Settings();
         $this->dependencies['shortcodes']      = new Shortcodes();
@@ -208,16 +210,14 @@ class Main {
             // Parse URL structure
             $uid  = get_post_meta( get_the_ID(), 'oa-calendar-uid', true );
             $args = array(
-                'limit'  => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
+                'size'   => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
                 'page'   => ! empty( get_query_var( 'oa-page' ) ) ? sanitize_title( get_query_var( 'oa-page' ) ) : 1,
-                'oaq'    => array(
-                    'slug'   => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_title( get_query_var( 'oa-slug' ) ) : '',
-                    'passed' => ! empty( get_query_var( 'oa-slug' ) ) ? 1 : '',
-                ),
+                'slug'   => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_title( get_query_var( 'oa-slug' ) ) : '',
             );
 
-            if( ! empty( $filters = get_query_var( 'oaq' ) ) ){
-                $args['oaq'] = array_merge( $args['oaq'], $filters );
+            // Merge filters
+            if( ! empty( $_GET ) ){
+                $args = array_merge( $args, $_GET );
             }
 
             if( $uid ){

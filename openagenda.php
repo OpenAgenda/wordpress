@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || die();
 
 define( 'OPENAGENDA_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OPENAGENDA_URL', plugin_dir_url( __FILE__ ) );
-define( 'OPENAGENDA_VERSION', '1.1.1' );
+define( 'OPENAGENDA_VERSION', '2.0.0' );
 
 
 add_action( 'plugins_loaded', 'openagenda_load_textdomain' );

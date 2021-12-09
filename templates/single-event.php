@@ -21,16 +21,16 @@
                 <p class="oa-meta oa-event-range">
                     <?php
                         openagenda_icon( 'month' );
-                        openagenda_field( 'range' );
+                        openagenda_field( 'dateRange' );
                     ?>
                 </p>
                 <div class="oa-event-share"><?php openagenda_event_share_buttons(); ?></div>
             </div>
             <p class="oa-entry-description"><?php openagenda_field( 'description' ); ?></p>
-            <div class="oa-event-thumbnail"><?php openagenda_event_image( 'image' ); ?></div>
+            <div class="oa-event-thumbnail"><?php openagenda_event_image(); ?></div>
         </header>
         <div class="oa-event-timings"><?php openagenda_event_timings(); ?></div>
-        <div class="oa-event-details"><?php openagenda_field( 'html' ); ?></div>
+        <div class="oa-event-details"><?php openagenda_field( 'longDescription' ); ?></div>
 
         <?php if( ! empty( $access_link = openagenda_get_field( 'onlineAccessLink' ) ) ) : ?>
             <div class="oa-event-access-link">

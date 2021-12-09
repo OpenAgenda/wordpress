@@ -299,8 +299,9 @@ class Content_Manager implements Hookable {
         );
         
         if( $openagenda->is_single() ){
-            $event       = openagenda_get_event();
-            $image_url   = ! empty( $event['image'] ) ? $event['image'] : false;
+            $event          = openagenda_get_event();
+            $image_filename = ! empty( $event['image']['filename'] ) ? empty( $event['image']['filename'] ) : '';
+            $image_url      = ! empty( $image_filename ) && ! empty( $event['image']['base'] ) ? trailingslashit( $event['image']['base'] ) . $image_filename : false;
             if( ! empty( $description = \openagenda_get_field( 'description', false ) ) ) {
                 $metas['description']         = $description;
                 $metas['twitter:description'] = $description;
@@ -343,9 +344,10 @@ class Content_Manager implements Hookable {
         if( $openagenda->is_single() ){
             $properties['og:url'] = esc_url( \openagenda_get_field( 'permalink', false ) ) ;
 
-            $event       = openagenda_get_event();
-            $image_url   = ! empty( $event['image'] ) ? $event['image'] : false;
-            $description = ! empty( \openagenda_get_field( 'description', false ) ) ? \openagenda_get_field( 'description', false ) : false;
+            $event          = openagenda_get_event();
+            $image_filename = ! empty( $event['image']['filename'] ) ? empty( $event['image']['filename'] ) : '';
+            $image_url      = ! empty( $image_filename ) && ! empty( $event['image']['base'] ) ? trailingslashit( $event['image']['base'] ) . $image_filename : false;
+            $description    = ! empty( \openagenda_get_field( 'description', false ) ) ? \openagenda_get_field( 'description', false ) : false;
             if( $description ){
                 $properties['og:description'] = wp_strip_all_tags( $description );
             }
