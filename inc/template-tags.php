@@ -182,7 +182,7 @@ function openagenda_maybe_parse_field( $field, $value ){
 /**
  * Returns the permalink to the current event, with or without context
  */
-function openagenda_event_permalink( $uid = false, $echo = true, $use_context = false ){
+function openagenda_event_permalink( $uid = false, $echo = true, $use_context = true ){
     global $openagenda;
 
     $permalink = openagenda_get_field( 'permalink', $uid );
@@ -725,7 +725,7 @@ function openagenda_get_page_permalink( $page = 1, $filters = null ){
     }
     
     if( ! empty( $filters ) ){
-        $permalink = add_query_arg( 'oaq', $filters, $permalink );
+        $permalink = add_query_arg( $filters, $permalink );
     }
 
     return apply_filters( 'openagenda_page_permalink', $permalink,  $openagenda->get_uid(), $page );
@@ -859,14 +859,15 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
     if( ! $uid ) $uid = $event['uid'];
     if( ! $openagenda->is_single() ) return false;
     
-    $encoded_context = isset( $_GET['context'] ) ? sanitize_text_field( $_GET['context'] ) : false ;
-    $context         = openagenda_decode_context();
-    $total           = $context && isset( $context['total'] ) ? (int) $context['total'] : 0;
-    $event_offset    = $context && isset( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
-    $invalid         = 'next' === $direction ? (bool) ( ( $event_offset + 1 ) >= $total ) : (bool) ( $event_offset <= 0 ) ;
+    $encoded_context = isset( $_GET['context'] ) ? $_GET['context'] : false;
+    $context         = openagenda_decode_context( $encoded_context );
 
     $html    = '';
-    if( $encoded_context ){
+    if( $context ){
+        $total           = ! empty( $context['total'] ) ? (int) $context['total'] : 0;
+        $event_offset    = ! empty( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
+        $invalid         = 'next' === $direction ? (bool) ( ( $event_offset + 1 ) >= $total ) : (bool) ( $event_offset <= 0 ) ;
+
         $url = add_query_arg( array(
             'action'    => 'get_adjacent_event',
             'nonce'     => wp_create_nonce( 'get_adjacent_event' ),
@@ -904,27 +905,27 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
 function openagenda_get_back_link(){
     global $openagenda;
     $context = openagenda_decode_context();
-
-    // echo 'TODO: fix the event navigation';
     
-    $filters = $context && isset( $context['oaq'] ) ? $context['oaq'] : array();
-    $total   = $context && isset( $context['total'] ) ? (int) $context['total'] : 0;
-    $limit   = $context && isset( $context['size'] ) ? (int) $context['size'] : $openagenda->get_size();
-    $event_offset = $context && isset( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
-    $event_number = $event_offset + 1;
-    
-    $page = (int) ceil( $event_number / $limit );
-    $page_link = openagenda_get_page_permalink( $page, $filters );
-
     $html = '';
-    if( $page_link ){
-        $html = sprintf( 
-            '<a class="oa-nav-link oa-back-link" href="%s">%s<span>%d / %d</span></a>',
-            esc_url( $page_link ),
-            openagenda_icon( 'home', false ),
-            (int) $event_number,
-            (int) $total
-        );
+    if( $context ){
+        $filters = ! empty( $context['filters'] ) ? $context['filters'] : array();
+        $params  = ! empty( $context['params'] ) ? $context['params'] : array();
+        $size    = ! empty( $params['size'] ) ? (int) $params['size'] : $openagenda->get_size();
+        $total   = ! empty( $context['total'] ) ? (int) $context['total'] : 0;
+        $page    = ! empty( $context['page'] ) ? (int) $context['page'] : 1;
+        $event_offset = ! empty( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
+        $event_number = $event_offset + 1;
+
+        $page_link = openagenda_get_page_permalink( $page, $filters );
+        if( $page_link ){
+            $html = sprintf( 
+                '<a class="oa-nav-link oa-back-link" href="%s">%s<span>%d / %d</span></a>',
+                esc_url( $page_link ),
+                openagenda_icon( 'home', false ),
+                (int) $event_number,
+                (int) $total
+            );
+        }
     }
 
     $html = apply_filters( 'openagenda_back_link', $html, $page_link, $page, $context );

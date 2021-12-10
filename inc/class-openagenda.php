@@ -31,9 +31,19 @@ class Openagenda {
     public $source = '';
     
     /**
-     * Query arguments 
+     * Arguments 
      */
     protected $args = array();
+    
+    /**
+     * Query params 
+     */
+    protected $params = array();
+    
+    /**
+     * Query filters 
+     */
+    protected $filters = array();
     
     /**
      * Index when looping
@@ -218,12 +228,18 @@ class Openagenda {
 
 
     /**
-     * Returns oaq filters
+     * Returns query params
+     */
+    public function get_params(){
+        return apply_filters( 'openagenda_params', $this->params, $this->uid );
+    }
+
+
+    /**
+     * Returns query filters
      */
     public function get_filters(){
-        $args    = $this->get_args();
-        $filters = ! empty( $args ) && ! empty( $args['oaq'] ) ? $args['oaq'] : array();
-        return apply_filters( 'openagenda_filters', $filters, $this->uid );
+        return apply_filters( 'openagenda_filters', $this->filters, $this->uid );
     }
 
 
@@ -259,8 +275,7 @@ class Openagenda {
      * @return  bool  $is_archive
      */
     public function is_archive(){
-        $is_archive = ! $this->is_single(); 
-        return apply_filters( 'openagenda_is_archive', $is_archive, $this->uid );
+        return apply_filters( 'openagenda_is_archive', $this->is_archive, $this->uid );
     }
 
 
@@ -270,9 +285,7 @@ class Openagenda {
      * @return  bool  $is_single
      */
     public function is_single(){
-        $args      = $this->get_args();
-        $is_single = ! empty( $args ) && ! empty( $args['slug'] ); 
-        return apply_filters( 'openagenda_is_single', $is_single, $this->uid );
+        return apply_filters( 'openagenda_is_single', $this->is_single, $this->uid );
     }
 
 
@@ -336,28 +349,24 @@ class Openagenda {
     public function get_request_url( $export = false ){
 
         // Get the base url
-        $args = $this->get_args();
-        $slug = ! empty( $args['slug'] ) ? $args['slug'] : false;
-        $url  = ! empty( $export ) ? $this->get_export_url( $export ) : $this->get_api_url( $slug );
+        $args    = $this->get_args();
+        $params  = $this->get_params();
+        $filters = $this->get_filters();
+        $slug    = ! empty( $args['slug'] ) ? $args['slug'] : false;
+        $url     = ! empty( $export ) ? $this->get_export_url( $export ) : $this->get_api_url( $slug );
         
-        // Prevent passing slug twice
-        if( $slug ) unset( $args['slug'] );
+        // Remove slug and context from params
+        unset( $filters['context'] );
+        if( $slug ) unset( $filters['slug'] );
 
         // Add key query var
         $url = add_query_arg( 'key', $this->get_api_key(), $url );
 
-        // Add include_embedded key, to allow for rich content.
-        // if( $this->include_embedded() ){
-        //     $url = add_query_arg( 'include_embedded', $this->include_embedded, $url );
-        // }
-
-        // Add arguments
-        $string = http_build_query( $args );
+        // Add params and filters
+        $string = http_build_query( array_merge( $params, $filters ) );
         if( ! empty( $string ) ){
             $url .= sprintf( '&%s', $string );
         }
-
-        // var_dump($url);
 
         return apply_filters( 'openagenda_request_url', $url, $this->uid, $args, $export );
     }
@@ -367,51 +376,25 @@ class Openagenda {
      * Parse query arguments
      */
     public function parse_args( $args = array() ){
-
-        // var_dump($args);
         
-        // Parse nested filters first
-        // $filters = array();
-
-        // Parse context
-        // $context = openagenda_decode_context();
-        // if ( ! empty( $context ) && ! empty( $context['oaq'] ) ){
-        //     if( ! empty( $context['oaq']['passed'] ) && '1' === $context['oaq']['passed'] ){
-        //         $filters['passed'] = '1';
-        //     } 
-        // }
-
-        // if( ! empty( $args['oaq'] ) ){
-        //     $filters     = wp_parse_args( $args['oaq'], $filters );
-        //     $args['oaq'] = array_filter( $filters );
-        // }
-        
-        // Parse query args
-        $defaults = array(
-            'size'  => 20,
-        );
-
+        // Parse instance args
+        $defaults = $this->get_default_params();
         if ( 'markdown' !== $this->get_longDescription_format() ){
             $defaults['longDescriptionFormat'] = $this->get_longDescription_format();
         }
-        
         $args = array_filter( wp_parse_args( $args, $defaults ) );
 
         $this->is_single   = ! empty( $args['slug'] );
         $this->is_archive  = ! $this->is_single;
         $this->page        = ! empty ( $args['page'] ) ? (int) $args['page'] : 1;
-        $this->size        = (int) $args['size'];
+        $this->size        = $this->is_single() ? 1 : (int) $args['size'];
         $this->offset      = ( $this->page - 1 ) * $this->size;
-        if( $this->page > 1 ) $args['from'] = (int) $this->offset;
+        if( $this->page > 1 )    $args['from'] = (int) $this->offset;
+        if( $this->is_single() ) $args['size'] = 1;
+        unset( $args['page'] );
 
-        // If a single event is queried, remove all filters
-        if( ! empty( $args['slug'] ) ){
-            $args = array_filter( $args, function($value, $key){
-                return in_array( $key, array( 'slug' ) );
-            }, ARRAY_FILTER_USE_BOTH );
-        }
-
-        // var_dump($args);
+        $this->params  = $this->extract_params( $args );
+        $this->filters = $this->extract_filters( $args );
         return $args;
     }
 
@@ -586,13 +569,69 @@ class Openagenda {
         if( ! $this->use_context ) return;
         if( $this->is_archive() ){
             $args = $this->get_args();
-            $this->context = $this->get_args();
-            $this->context['total'] = (int) $this->total;
+            $params  = $this->get_params();
+            $filters = $this->get_filters();
+            $this->context = array(
+                'params'  => $params,
+                'filters' => $filters,
+                'page'    => (int) $this->get_current_page(),
+                'total'   => (int) $this->get_total(),
+            );
         } else {
             $context = openagenda_decode_context();
             if( $context ){
                 $this->context = $context;
             }
         }
+    }
+
+    /**
+     * Extract API params from an array or arguments
+     * 
+     * @param   array  $args     Array of args
+     * @return  array  $params   Array of params
+     */
+    public function extract_params( $args = array() ){
+        if( empty( $args ) ){
+            $args = $this->get_args();
+        }
+        $params   = array();
+        $defaults = array_keys( $this->get_default_params() );
+        $params   = array_filter( $args, function( $arg, $key ) use ( $defaults ) {
+            return in_array( $key, $defaults );
+        }, ARRAY_FILTER_USE_BOTH );
+        return apply_filters( 'openagenda_extracted_params', $params, $args );
+    }
+
+
+    /**
+     * Cleans up an array of api query argument to get only filters
+     * 
+     * @param   array  $args     Array of args
+     * @return  array  $filters  Array of filters
+     */
+    public function extract_filters( $args ){
+        $filters  = array();
+        $defaults = array_keys( $this->get_default_params() );
+        $filters  = array_filter( $args, function( $value, $key ) use ( $defaults ) {
+            return ! in_array( $key, $defaults );
+        }, ARRAY_FILTER_USE_BOTH );
+        return apply_filters( 'openagenda_extracted_filters', $filters, $args );
+    }
+
+
+    /**
+     * Returns default api params keys
+     */
+    public function get_default_params(){
+        $defaults = array( 
+            'agendaUid' => '', 
+            'detailed'  => '', 
+            'size'      => 20, 
+            'after'     => '', 
+            'from'      => '', 
+            'longDescriptionFormat' => '',
+        );
+        return apply_filters( 'openagenda_api_default_params', $defaults );
     }
 }

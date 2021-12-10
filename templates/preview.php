@@ -10,11 +10,11 @@
 ?>
 <div class="oa-preview-event oa-preview-card">
     <div class="oa-card">
-        <a class="oa-card-image-link" href="<?php openagenda_event_permalink(); ?>">
+        <a class="oa-card-image-link" href="<?php openagenda_event_permalink( false, true, false ); ?>">
             <?php openagenda_event_image(); ?>
         </a>
         <div class="oa-card-body">
-            <a class="oa-card-link" href="<?php openagenda_event_permalink() ?>">
+            <a class="oa-card-link" href="<?php openagenda_event_permalink( false, true, false ) ?>">
                 <strong><?php openagenda_field( 'title' ); ?></strong>
             </a>
             <ul class="oa-card-metas oa-list-unstyled">
