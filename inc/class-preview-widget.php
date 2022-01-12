@@ -18,8 +18,8 @@ class Preview_Widget extends Openagenda_Widget {
      */
 	public function __construct( $args = array() ) {
         $args['additional_settings'] = array(
-            'limit' => array(
-                'name'        => 'limit',
+            'size' => array(
+                'name'        => 'size',
                 'type'        => 'number',
                 'label'       => __( 'Number of events to display&nbsp;:', 'openagenda' ),
                 'class'       => 'widefat',
@@ -107,7 +107,7 @@ class Preview_Widget extends Openagenda_Widget {
         $instance = array(
             'title'  => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
             'uid'    => ! empty( $new_instance['uid'] ) ? sanitize_text_field( $new_instance['uid'] ) : '',
-            'limit'  => ! empty( $new_instance['limit'] ) ? (int) $new_instance['limit'] : 3,
+            'size'   => ! empty( $new_instance['size'] ) ? (int) $new_instance['size'] : 3,
         );
         return $instance;
     }

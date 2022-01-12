@@ -25,32 +25,32 @@ class Main {
             'openagenda_filter_active' => array(
                 'label'     => _x( 'Active filters', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_active',
-                'script'    => 'assets/js/filters/oaActiveFilters.min.js',
+                // 'script'    => 'assets/js/filters/oaActiveFilters.min.js',
             ),
-            'openagenda_filter_tags' => array(
-                'label'     => _x( 'Tags', 'Filter name', 'openagenda' ),
-                'shortcode' => 'openagenda_filter_tags',
-                'script'    => 'assets/js/filters/cibulTagsWidget.min.js',
+            'openagenda_filter_choice' => array(
+                'label'     => _x( 'Choice', 'Filter name', 'openagenda' ),
+                'shortcode' => 'openagenda_filter_choice',
+                // 'script'    => 'assets/js/filters/cibulTagsWidget.min.js',
             ),
             'openagenda_filter_calendar' => array(
                 'label'     => _x( 'Calendar', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_calendar',
-                'script'    => 'assets/js/filters/cibulCalendarWidget.min.js',
+                // 'script'    => 'assets/js/filters/cibulCalendarWidget.min.js',
             ),
             'openagenda_filter_map' => array(
                 'label'     => _x( 'Map', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_map',
-                'script'    => 'assets/js/filters/cibulMapWidget.min.js',
+                // 'script'    => 'assets/js/filters/cibulMapWidget.min.js',
             ),
             'openagenda_filter_relative' => array(
                 'label'     => _x( 'Upcoming', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_relative',
-                'script'    => 'assets/js/filters/oaRelativeWidget.min.js',
+                // 'script'    => 'assets/js/filters/oaRelativeWidget.min.js',
             ),
             'openagenda_filter_search' => array(
                 'label'     => _x( 'Search', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_search',
-                'script'    => 'assets/js/filters/cibulSearchWidget.min.js',
+                // 'script'    => 'assets/js/filters/cibulSearchWidget.min.js',
             ),
         );
     }
@@ -106,6 +106,7 @@ class Main {
         add_action( 'wp_head', array( $this, 'wp_head' ) );
         add_action( 'widgets_init', array( $this, 'register_widgets' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
     }
 
 
@@ -141,6 +142,18 @@ class Main {
 
 
     /**
+     * Registers scripts for the admin pages
+     */
+    public function register_admin_scripts( $hook ){
+        $css_suffix = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.css' : '.min.css';
+        $js_suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.js' : '.min.js';
+        if ( 'widgets.php' === $hook ) {
+            wp_enqueue_script( 'openagenda-widgets', OPENAGENDA_URL . 'assets/js/widgets' . $js_suffix, array( 'jquery' ), OPENAGENDA_VERSION, true );
+        }
+    }
+
+
+    /**
      * Loads scripts and styles
      */
     public function register_scripts(){
@@ -150,19 +163,21 @@ class Main {
 
         // Register main styles and scripts
         wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style' . $css_suffix, array(), OPENAGENDA_VERSION );
-        wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'jquery' ), OPENAGENDA_VERSION, true );
-        wp_register_script( 'openagenda-controllers', OPENAGENDA_URL . 'assets/js/filters/cibulControllers.min.js', array(), OPENAGENDA_VERSION, true );
+        wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array(), OPENAGENDA_VERSION, true );
+        wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), OPENAGENDA_VERSION );
+        wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/react-filters.min.js', array( 'openagenda-fontawesome' ), OPENAGENDA_VERSION, true );
+        // wp_register_script( 'openagenda-controllers', OPENAGENDA_URL . 'assets/js/filters/cibulControllers.min.js', array(), OPENAGENDA_VERSION, true );
         
         // Register filters style and scripts
-        $filters = $this->get_available_filters();
-        foreach ( $filters as $slug => $data ) {
-            if( ! empty( $data['script'] ) ){
-                wp_register_script( sanitize_title( $slug ), esc_url( OPENAGENDA_URL . $data['script'] ) , array( 'openagenda-main' ), OPENAGENDA_VERSION, true );
-            }
-        }
+        // $filters = $this->get_available_filters();
+        // foreach ( $filters as $slug => $data ) {
+        //     if( ! empty( $data['script'] ) ){
+        //         wp_register_script( sanitize_title( $slug ), esc_url( OPENAGENDA_URL . $data['script'] ) , array( 'openagenda-main' ), OPENAGENDA_VERSION, true );
+        //     }
+        // }
 
         // Preview widget JS
-        wp_register_script( 'oa-preview-widget', OPENAGENDA_URL . 'assets/js/filters/oaPreviewWidget.min.js', array( 'openagenda-controllers' ), OPENAGENDA_VERSION, true );
+        // wp_register_script( 'oa-preview-widget', OPENAGENDA_URL . 'assets/js/filters/oaPreviewWidget.min.js', array( 'openagenda-controllers' ), OPENAGENDA_VERSION, true );
 
         // Register map dependencies
         wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
@@ -173,21 +188,28 @@ class Main {
         wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings' . $js_suffix, array(), OPENAGENDA_VERSION, true );
         
         if( openagenda_should_enqueue_styles() ){
-            wp_enqueue_style( 'openagenda-main' );
+            wp_enqueue_style( 'openagenda-main' ); 
         }
         
         if( is_singular( 'oa-calendar' ) ){
             wp_enqueue_script( 'openagenda-main' );
-            wp_enqueue_script( 'openagenda-controllers' );
-            wp_localize_script( 'openagenda-main', 'oaData', array(
+            wp_enqueue_script( 'openagenda-filters' );
+            // wp_enqueue_script( 'openagenda-controllers' );
+            $baseData = array(
                 'nonce'       => wp_create_nonce( 'update_events' ),
-                'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
                 'postId'      => get_the_ID(),
                 'view'        => get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ) : 'list',
+                'action'      => 'update_events'
+            ); 
+            wp_localize_script( 'openagenda-main', 'oaData', array_merge( $baseData, array(
+                'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
+                'res'         => add_query_arg( $baseData, admin_url( 'admin-ajax.php' ) ),
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
-                'isSingle'    => \openagenda_is_single()
-            ) );       
+                'isSingle'    => \openagenda_is_single(),
+                'locale'      => \openagenda_get_locale(),
+                // 'messages'    => array()
+            ) ) );       
         }
     }
 

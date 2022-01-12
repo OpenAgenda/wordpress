@@ -213,7 +213,7 @@ function openagenda_get_event_image( $size = '', $uid = '' ){
     
     if( ! empty( $event['image'] ) ){
         $filename   = $event['image']['filename'];
-        $dimensions = $event['image']['size'];
+        $dimensions = ! empty( $event['image']['size'] ) ? $event['image']['size'] : array();
         if( ! empty( $size ) && is_string( $size ) && ! empty( $event['image']['variants'] ) ){
             $variant = array_values( array_filter( $event['image']['variants'], function( $variant ) use ( $size ) { return $size === $variant['type']; } ) );
             if( ! empty( $variant ) ) {

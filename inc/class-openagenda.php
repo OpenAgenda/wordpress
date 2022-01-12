@@ -28,7 +28,7 @@ class Openagenda {
     /**
      * Source of data
      */
-    public $source = '';
+    protected $source = '';
     
     /**
      * Arguments 
@@ -94,7 +94,7 @@ class Openagenda {
      * Parsed JSON response
      */
     protected $json = null;
-    
+        
     /**
      * Queried events
      */
@@ -152,7 +152,9 @@ class Openagenda {
 
         $this->args         = $this->parse_args( $args );
         $this->raw_response = $this->request( $this->args );
-        $this->json         = $this->parse_response( $this->args );
+        $this->json         = $this->parse_response();
+
+        // var_dump( $this->args);
 
         if( $this->is_single() ){
             $this->events = ! empty( $this->json['event'] ) ? array( $this->json['event'] ) : array();
@@ -258,6 +260,22 @@ class Openagenda {
      */
     public function get_current_event(){
         return $this->event;
+    }
+
+
+    /**
+     * Returns the JSON reponse.
+     */
+    public function get_json(){
+        return $this->json;
+    }
+
+
+    /**
+     * Returns the source.
+     */
+    public function get_source(){
+        return $this->source;
     }
 
 
