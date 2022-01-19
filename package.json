@@ -14,7 +14,7 @@
   "scripts": {
     "start": "npm run sass:watch",
     "build": "npm run sass && npm run postcss && npm run terser && npm run make-pot",
-    "make-pot": "wp i18n make-pot . languages/openagenda.pot --exclude=\"node_modules, svn\" ",
+    "make-pot": "wp i18n make-pot . languages/openagenda.pot --exclude=\"node_modules, svn, js\" ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass:watch": "sass --watch assets/css/style.scss:assets/css/style.css",
     "sass": "sass assets/css/style.scss:assets/css/style.css",

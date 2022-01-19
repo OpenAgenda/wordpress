@@ -42,10 +42,9 @@ class Ajax_Handler {
             wp_send_json_error( new \WP_Error( 'wrong-calendar-id', __( 'The post ID provided does not refer to a calendar.', 'openagenda' ) ) );
             exit;
         }
-
-        // $query = isset( $_REQUEST['query'] ) ? json_decode( stripslashes( html_entity_decode( $_REQUEST['query'] ) ), true ) : false;
         
         $query = array();
+        $view  = get_post_meta( $post_id, 'oa-calendar-view', true );
         $args  = array(
             'size' => get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
             'page' => 1,
@@ -56,67 +55,25 @@ class Ajax_Handler {
             $query = json_decode( stripslashes( html_entity_decode( $_POST['query'] ) ), true );
         }
 
-        // Read direct GET query param
+        // Read GET query param
         if( ! empty( $_GET ) ){
             $query = array_filter( $_GET, function( $value, $key ){
                 return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view' ) );
             }, ARRAY_FILTER_USE_BOTH );
         }
 
-        // $updatedUrl = get_permalink( $post_id );
         if( $query ){
-            $args        = array_merge( $args, $query );
-            // $updatedUrl  = add_query_arg( $query, $updatedUrl );
-            // $updatedPath = wp_parse_url( $updatedUrl, PHP_URL_PATH ) . '?' . wp_parse_url( $updatedUrl, PHP_URL_QUERY ); 
+            $args = array_merge( $args, $query );
         }
 
-        // Support for direct GET request for react-filters
-        // if( ! empty( $_GET ) ){
-        //     $get = array_filter( $_GET, function( $value, $key ){
-        //         return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view' ) );
-        //     }, ARRAY_FILTER_USE_BOTH );
-        //     // $get = array_map( function( $param ){
-        //     //     return stripslashes( html_entity_decode( $_REQUEST['query'] ) );
-        //     // }, $get );
-        //     $args = array_merge( $args, $get );
-        //     // $args = $get;
-        // }
-        
-        // $view = sanitize_title( $_POST['view'] );
-        $view = get_post_meta( $post_id, 'oa-calendar-view', true );
-
-        // wp_send_json_success( $args );
-        $openagenda = new Openagenda( $uid, $args, false, false );
-        // wp_send_json_success( $_GET );
-        // wp_send_json_success( $get );
-        // wp_send_json_success( $args );
-        // wp_send_json_success( $openagenda->get_args() );
-        // wp_send_json_success( $openagenda->get_request_url() );
-
-        // $response    = array(
-        //     'events'      => $openagenda->get_events(),
-        //     'json'        => $openagenda->get_json(),
-        //     'totalPages'  => (int) $openagenda->get_total_pages(),
-        //     'total'       => (int) $openagenda->get_total(),
-        //     'totalHtml'   => \openagenda_get_events_total_html( false ),
-        //     // 'updatedUrl'  => esc_url( $updatedUrl ),
-        //     // 'updatedPath' => $updatedPath,
-        //     'source'      => sanitize_key( $openagenda->source ),
-        //     'html'        => \openagenda_get_events_html( $view ),
-        //     'aggregations' => $openagenda->get_aggregations()
-        // );
-
-        $response    = array_merge( $openagenda->get_json(), array(
+        $openagenda = new Openagenda( $uid, $args, false, true );
+        $response   = array_merge( $openagenda->get_json(), array(
             'source'      => sanitize_key( $openagenda->get_source() ),
             'html'        => \openagenda_get_events_html( $view ),
-            // 'totalHtml'   => \openagenda_get_events_total_html( false ),
         ) );
 
         echo wp_send_json( $response );
         wp_die();
-
-        // wp_send_json_success( $response );
-        // wp_die();
     }
 
 

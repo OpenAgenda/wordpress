@@ -906,7 +906,10 @@ function openagenda_get_back_link(){
     global $openagenda;
     $context = openagenda_decode_context();
     
-    $html = '';
+    $html      = '';
+    $page_link = '';
+    $page      = 1;
+    
     if( $context ){
         $filters = ! empty( $context['filters'] ) ? $context['filters'] : array();
         $params  = ! empty( $context['params'] ) ? $context['params'] : array();

@@ -1,7 +1,7 @@
 <?php
 namespace Openagenda;
 /**
- * Class for handling request for the JSON Export.
+ * Class for handling request to Openagenda API.
  */
 class Openagenda {
 
@@ -153,8 +153,6 @@ class Openagenda {
         $this->args         = $this->parse_args( $args );
         $this->raw_response = $this->request( $this->args );
         $this->json         = $this->parse_response();
-
-        // var_dump( $this->args);
 
         if( $this->is_single() ){
             $this->events = ! empty( $this->json['event'] ) ? array( $this->json['event'] ) : array();
@@ -325,7 +323,6 @@ class Openagenda {
             'xlsx' => __( 'XLSX', 'openagenda' ),
             'json' => __( 'JSON', 'openagenda' ),
             'rss'  => __( 'RSS', 'openagenda' ),
-            'pdf'  => __( 'PDF', 'openagenda' ),
         );
         return apply_filters( 'openagenda_exports_formats', $formats, $this->uid );
     }      
@@ -338,7 +335,7 @@ class Openagenda {
      * @return  string  $base_export_url  URL to the root events export, based on UID. 
      */
     public function get_export_url( $format = 'json' ){
-        $base_export_url = sprintf( '%s/agendas/%s/events.%s', $this->base_exports_url, $this->uid, sanitize_title( $format ) );
+        $base_export_url = sprintf( '%s/agendas/%s/events.v2.%s', $this->base_exports_url, $this->uid, sanitize_title( $format ) );
         return $base_export_url;
     }
 
@@ -371,7 +368,7 @@ class Openagenda {
         $params  = $this->get_params();
         $filters = $this->get_filters();
         $slug    = ! empty( $args['slug'] ) ? $args['slug'] : false;
-        $url     = ! empty( $export ) ? $this->get_export_url( $export ) : $this->get_api_url( $slug );
+        $url     = ! empty( $export ) ? $this->get_export_url( $export ) : $this->get_api_url( $slug );      
         
         // Remove slug and context from params
         unset( $filters['context'] );

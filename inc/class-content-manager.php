@@ -66,7 +66,6 @@ class Content_Manager implements Hookable {
         add_filter( 'body_class', array( $this, 'body_class'), 10, 1 );
         add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 10, 1 );
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
-        // add_filter( 'post_type_link', array( $this, 'permalink' ), 10, 4 );
         add_filter( 'write_your_story', array( $this, 'write_your_story' ), 10, 2 );
         
         // Frontend meta tags and Yoast SEO Filters

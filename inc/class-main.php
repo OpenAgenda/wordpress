@@ -25,32 +25,26 @@ class Main {
             'openagenda_filter_active' => array(
                 'label'     => _x( 'Active filters', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_active',
-                // 'script'    => 'assets/js/filters/oaActiveFilters.min.js',
             ),
             'openagenda_filter_choice' => array(
                 'label'     => _x( 'Choice', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_choice',
-                // 'script'    => 'assets/js/filters/cibulTagsWidget.min.js',
             ),
             'openagenda_filter_calendar' => array(
                 'label'     => _x( 'Calendar', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_calendar',
-                // 'script'    => 'assets/js/filters/cibulCalendarWidget.min.js',
             ),
             'openagenda_filter_map' => array(
                 'label'     => _x( 'Map', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_map',
-                // 'script'    => 'assets/js/filters/cibulMapWidget.min.js',
             ),
             'openagenda_filter_relative' => array(
                 'label'     => _x( 'Upcoming', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_relative',
-                // 'script'    => 'assets/js/filters/oaRelativeWidget.min.js',
             ),
             'openagenda_filter_search' => array(
                 'label'     => _x( 'Search', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_search',
-                // 'script'    => 'assets/js/filters/cibulSearchWidget.min.js',
             ),
         );
     }
@@ -165,20 +159,8 @@ class Main {
         wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style' . $css_suffix, array(), OPENAGENDA_VERSION );
         wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array(), OPENAGENDA_VERSION, true );
         wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), OPENAGENDA_VERSION );
-        wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/react-filters.min.js', array( 'openagenda-fontawesome' ), OPENAGENDA_VERSION, true );
-        // wp_register_script( 'openagenda-controllers', OPENAGENDA_URL . 'assets/js/filters/cibulControllers.min.js', array(), OPENAGENDA_VERSION, true );
+        wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), OPENAGENDA_VERSION, true );
         
-        // Register filters style and scripts
-        // $filters = $this->get_available_filters();
-        // foreach ( $filters as $slug => $data ) {
-        //     if( ! empty( $data['script'] ) ){
-        //         wp_register_script( sanitize_title( $slug ), esc_url( OPENAGENDA_URL . $data['script'] ) , array( 'openagenda-main' ), OPENAGENDA_VERSION, true );
-        //     }
-        // }
-
-        // Preview widget JS
-        // wp_register_script( 'oa-preview-widget', OPENAGENDA_URL . 'assets/js/filters/oaPreviewWidget.min.js', array( 'openagenda-controllers' ), OPENAGENDA_VERSION, true );
-
         // Register map dependencies
         wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
         wp_register_script( 'oa-leaflet', OPENAGENDA_URL . 'assets/js/leaflet.min.js', array(), OPENAGENDA_VERSION, true );
@@ -194,7 +176,6 @@ class Main {
         if( is_singular( 'oa-calendar' ) ){
             wp_enqueue_script( 'openagenda-main' );
             wp_enqueue_script( 'openagenda-filters' );
-            // wp_enqueue_script( 'openagenda-controllers' );
             $baseData = array(
                 'nonce'       => wp_create_nonce( 'update_events' ),
                 'postId'      => get_the_ID(),
@@ -208,7 +189,6 @@ class Main {
                 'errorNotice' => \openagenda_get_update_notice_html(),
                 'isSingle'    => \openagenda_is_single(),
                 'locale'      => \openagenda_get_locale(),
-                // 'messages'    => array()
             ) ) );       
         }
     }

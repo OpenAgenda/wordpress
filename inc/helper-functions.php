@@ -297,7 +297,7 @@ function openagenda_is_archive(){
 function openagenda_get_shortcode_attributes( $array, $id = '' ){
     $atts = array();
     if( ! empty( $id ) ){
-        $atts[] = sprintf('id="%s"', sanitize_text_field( $id ) );
+        $atts[] = sprintf('id="%s"', esc_attr( $id ) );
     }
     $atts = array_merge( $atts, array_map( function( $key, $value ){
         return sprintf( '%s="%s"', $key, sanitize_text_field( $value ) );
@@ -476,6 +476,15 @@ function openagenda_reset(){
         $openagenda        = $openagenda_backup;
         $openagenda_backup = null;
     }
+}
+
+/**
+ * Clears transient when settings are saved.
+ */
+function openagenda_clear_transient(){
+    global $wpdb;
+    $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_oa%'" );
+    $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_oa%'" );
 }
 
 

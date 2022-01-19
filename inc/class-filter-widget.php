@@ -36,32 +36,7 @@ class Filter_Widget extends Openagenda_Widget {
                     'type'        => 'checkbox',
                     'default'     => false
                 ),
-                // 'map_longitude' => array(
-                //     'name'        => 'map_longitude',
-                //     'label'       => __( 'Default longitude:', 'openagenda' ),
-                //     'class'       => 'widefat',
-                // ),
-                // 'map_latitude' => array(
-                //     'name'        => 'map_latitude',
-                //     'label'       => __( 'Default latitude:', 'openagenda' ),
-                //     'class'       => 'widefat',
-                // ),
-                // 'map_zoom' => array(
-                //     'name'        => 'map_zoom',
-                //     'label'       => __( 'Map default zoom:', 'openagenda' ),
-                //     'type'        => 'number',
-                //     'class'       => 'tiny-text',
-                //     'default'     => 12
-                // ),
             ),
-            // 'openagenda_filter_search' => array(
-                // 'placeholder'     => array(
-                //     'name'        => 'placeholder',
-                //     'label'       => __( 'Placeholder text:', 'openagenda' ),
-                //     'class'       => 'widefat',
-                //     'default'     => __( 'Search events', 'openagenda' )
-                // ),
-            // ),
             'openagenda_filter_choice' => array(
                 'field' => array(
                     'name'        => 'field',
@@ -81,7 +56,7 @@ class Filter_Widget extends Openagenda_Widget {
                 ),
                 'additional_field' => array(
                     'name'        => 'additional_field',
-                    'label'       => __( 'Additional field name:', 'openagenda' ),
+                    'label'       => __( 'Additional field name: ', 'openagenda' ),
                     'class'       => 'openagenda-filter-choice-additional-field widefat',
                     'default'     => '',
                     'description' => sprintf(
@@ -163,20 +138,7 @@ class Filter_Widget extends Openagenda_Widget {
 
         $additional_settings = $this->get_additional_settings();
         if( ! empty( $additional_settings ) ){
-            // foreach ( $additional_settings[$instance['filter']] as $field_id => $field ) {
-            //     // $hide_field = ! empty( $instance['field'] ) && 'additional_field' !== $instance['field'];
-
-            //     $field = wp_parse_args( $field, array(
-            //         'description' => '',
-            //         'type'        => 'text',
-            //         'class'       => '',
-            //         'default'     => '',
-            //         // 'hide_field'  => $hide_field,
-            //     ) );
-            //     echo $this->additional_setting_field( $field, $instance );
-            // }
             foreach ( $additional_settings as $filter => $fields ) {
-                // $hide_field = ! empty( $instance['field'] ) && 'additional_field' !== $instance['field'];
                 printf( '<div data-filter="%1$s" class="openagenda-additional-settings %1$s-additional-settings">', esc_attr( $filter ));
                 foreach ( $fields as $field_id => $field ) {
                     $field = wp_parse_args( $field, array(
@@ -223,17 +185,6 @@ class Filter_Widget extends Openagenda_Widget {
                     'placeholder' => ! empty( $new_instance['placeholder'] ) ? sanitize_text_field( $new_instance['placeholder'] ) : '',
                 );
                 break;
-            // case 'openagenda_filter_tags':
-            //     $tags_string = '';
-            //     if( ! empty( $new_instance['tags'] ) ){
-            //         $tags_array  = array_map( function( $tag ){ return sanitize_title( trim( $tag ) ); }, explode( ',', sanitize_textarea_field( $new_instance['tags'] ) ) );
-            //         $tags_string = join( ',', $tags_array );
-            //     }
-            //     $additional_settings = array( 
-            //         'tags'      => ! empty( $tags_string ) ? $tags_string : '',
-            //         'tag_group' => ! empty( $new_instance['tag_group'] ) ? sanitize_text_field( $new_instance['tag_group'] ) : '',
-            //     );
-            //     break;
             case 'openagenda_filter_choice':
                 $additional_settings = array(
                     'field'            => ! empty( $new_instance['field'] ) ? sanitize_text_field( $new_instance['field'] ) : '',
