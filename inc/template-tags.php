@@ -95,7 +95,7 @@ function openagenda_get_field( $field, $uid = false ){
             break;
         default:
             $end_value = array_reduce( explode( '.', $field ), function( $array, $field ) use ( $locale ) {
-                if( openagenda_is_i18n_field( $field ) && is_array( $array[$field] ) ){
+                if( openagenda_is_i18n_field( $field ) && isset( $array[$field] ) && is_array( $array[$field] ) ){
                     if( array_key_exists( $locale, $array[$field] ) ){
                         return ! empty( $array[$field][$locale] ) ? openagenda_maybe_parse_field( $field, $array[$field][$locale] ) : '';
                     } else {

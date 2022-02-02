@@ -17,11 +17,17 @@ if (oaData) {
         onFilterChange: async (values, aggregations, filtersRef, _form) => {
             eventContainer.insertAdjacentHTML('afterbegin', oaData.overlayHtml);
             try {
-                const result = await oa.getEvents(values, aggregations);
-                if (result.success && result.html) {
-                    oa.updateHTML(eventContainer, result.html);
-                    filtersRef.updateLocation(values);
-                    filtersRef.updateFiltersAndWidgets(values, result);
+                if( oaData.isSingle && oaData.listUrl ){
+                    if( values.context ) delete values.context;
+                    const url = `${oaData.listUrl}?${Qs.stringify(values)}`;
+                    window.location.href = url;
+                } else {
+                    const result = await oa.getEvents(values, aggregations);
+                    if (result.success && result.html) {
+                        oa.updateHTML(eventContainer, result.html);
+                        filtersRef.updateLocation(values);
+                        filtersRef.updateFiltersAndWidgets(values, result); 
+                    }
                 }
             } catch (e) {
                 console.log('onFilterChange error: ', e);

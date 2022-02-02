@@ -110,7 +110,7 @@ class Main {
     public function wp_head(){
         $customizer_settings = get_option( 'openagenda_customizer' );
         $main_color = isset( $customizer_settings['main_color'] ) ? $customizer_settings['main_color'] : '#41acdd';
-        $oa_styles = '.oa-icon{width: 24px; height: 24px;}.oa-icon-refresh{animation: rotate 1s linear infinite;}@keyframes rotate{to{transform: rotateZ(360deg)}}';
+        $oa_styles  = '.oa-icon{width: 24px; height: 24px;}.oa-icon-refresh{animation: rotate 1s linear infinite;}@keyframes rotate{to{transform: rotateZ(360deg)}}';
         
         if( $main_color ){
             $oa_styles .= sprintf( ':root{--oa-main-color: %s }', sanitize_hex_color( $main_color ));
@@ -121,7 +121,7 @@ class Main {
 
 
     /**
-     * Register the filter widget
+     * Register the filter and preview widgets
      */
     public function register_widgets(){
         require_once OPENAGENDA_PATH . 'inc/class-openagenda-widget.php';
@@ -157,7 +157,8 @@ class Main {
 
         // Register main styles and scripts
         wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style' . $css_suffix, array(), OPENAGENDA_VERSION );
-        wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array(), OPENAGENDA_VERSION, true );
+        wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'openagenda-qs' ), OPENAGENDA_VERSION, true );
+        wp_register_script( 'openagenda-qs', OPENAGENDA_URL . 'assets/js/qs.min.js', array(), OPENAGENDA_VERSION, true );
         wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), OPENAGENDA_VERSION );
         wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), OPENAGENDA_VERSION, true );
         
@@ -188,6 +189,7 @@ class Main {
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
                 'isSingle'    => \openagenda_is_single(),
+                'listUrl'     => \openagenda_get_permalink(),
                 'locale'      => \openagenda_get_locale(),
             ) ) );       
         }
