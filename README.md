@@ -32,7 +32,7 @@ All data related to your API key or calendars can be found on [https://openagend
 
 ![The simple settings page allow you to enter in your API key and tweak various settings.](assets/screenshots/screenshot-2.png)
 
-The settings are divided on two tabs: General and Integrations.
+The settings are divided into two tabs: General and Integrations.
 
 ### General settings
 
@@ -134,7 +134,7 @@ Displays a search field. It takes the following parameters :
 Displays next events. It takes the following parameters : 
 
  * `uid` : UID of the calendar you wish to preview.
- * `limit` : Number of events to display.
+ * `size` : Number of events to display.
  
 ## Customization
 
