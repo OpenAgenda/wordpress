@@ -158,9 +158,10 @@ class Shortcodes implements Hookable {
         $uid = $openagenda->get_uid();
 
         $defaults = array(
-            'id'    => 'choice',
-            'field' => '',
+            'id'        => 'choice',
+            'field'     => '',
             'additional_field' => '',
+            'page_size' => 10
         );
         $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_choice' );
 
@@ -169,7 +170,7 @@ class Shortcodes implements Hookable {
             $params = array(
                 'type'     => 'choice',
                 'name'     => sanitize_text_field( $atts['field'] ),
-                'pageSize' => 10,
+                'pageSize' => (int) $atts['page_size'],
             );
             if( 'additional_field' === $atts['field'] && ! empty( $atts['additional_field'] ) ){
                 $params['name']        = sanitize_text_field( $atts['additional_field'] );
@@ -336,13 +337,16 @@ class Shortcodes implements Hookable {
         if( ! $openagenda ) return '';
         $uid = $openagenda->get_uid();
 
-        $defaults = array( 'id' => 'search' );
-        $atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
+        $defaults = array( 
+            'id'          => 'search',
+            'placeholder' => '',
+        );
+        $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
 
         $params = array(
             'type'        => 'search',
             'name'        => 'search',
-            'placeholder' => ''
+            'placeholder' => $atts['placeholder']
         );
 
         $filter = sprintf( 

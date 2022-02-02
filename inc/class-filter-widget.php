@@ -37,6 +37,14 @@ class Filter_Widget extends Openagenda_Widget {
                     'default'     => false
                 ),
             ),
+            'openagenda_filter_search' => array(
+                'placeholder' => array(
+                    'name'        => 'placeholder',
+                    'label'       => __( 'Placeholder:', 'openagenda' ),
+                    'class'       => 'widefat',
+                    'default'     => '',
+                ),
+            ),
             'openagenda_filter_choice' => array(
                 'field' => array(
                     'name'        => 'field',
@@ -62,6 +70,13 @@ class Filter_Widget extends Openagenda_Widget {
                     'description' => sprintf(
                         __( 'You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )', 'openagenda' )
                     ),
+                ),
+                'page_size' => array(
+                    'name'    => 'page_size',
+                    'type'    => 'number',
+                    'label'   => __( 'Number of options to display at once: ', 'openagenda' ),
+                    'class'   => 'openagenda-filter-choice-pagesize widefat',
+                    'default' => 10,
                 ),
             ), 
         );
@@ -146,7 +161,6 @@ class Filter_Widget extends Openagenda_Widget {
                         'type'        => 'text',
                         'class'       => '',
                         'default'     => '',
-                        // 'hide_field'  => $hide_field,
                     ) );
                     echo $this->additional_setting_field( $field, $instance );
                 }
@@ -189,6 +203,7 @@ class Filter_Widget extends Openagenda_Widget {
                 $additional_settings = array(
                     'field'            => ! empty( $new_instance['field'] ) ? sanitize_text_field( $new_instance['field'] ) : '',
                     'additional_field' => ! empty( $new_instance['additional_field'] ) ? sanitize_text_field( $new_instance['additional_field'] ) : '',
+                    'page_size'        => ! empty( $new_instance['page_size'] ) ? (int) $new_instance['page_size'] : 10,
                 );
                 break;
             default:
