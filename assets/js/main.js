@@ -25,6 +25,8 @@ if (oaData) {
                     const result = await oa.getEvents(values, aggregations);
                     if (result.success && result.html) {
                         oa.updateHTML(eventContainer, result.html);
+                        const url = `${oaData.listUrl}`;
+                        history.pushState(null, document.title, url);
                         filtersRef.updateLocation(values);
                         filtersRef.updateFiltersAndWidgets(values, result); 
                     }

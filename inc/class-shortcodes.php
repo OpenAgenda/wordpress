@@ -66,8 +66,7 @@ class Shortcodes implements Hookable {
         ), $atts, $tag );
         
         if( ! empty( get_query_var( 'oa-slug' ) ) ){
-            $atts['oaq']['slug']   = sanitize_title( get_query_var( 'oa-slug' ) );
-            $atts['oaq']['passed'] = '1';
+            $atts['slug']   = sanitize_title( get_query_var( 'oa-slug' ) );
         }
 
         if( empty( $atts['uid'] ) ){

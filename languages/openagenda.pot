@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-02T11:27:28+01:00\n"
+"POT-Creation-Date: 2022-02-14T10:19:13+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: openagenda\n"
@@ -210,67 +210,75 @@ msgid "Automatically update map on scroll ?"
 msgstr ""
 
 #: inc/class-filter-widget.php:43
-msgid "Choose field: "
-msgstr ""
-
-#: inc/class-filter-widget.php:46
-msgid "Choose a field to display"
-msgstr ""
-
-#: inc/class-filter-widget.php:48
-msgid "Cities"
-msgstr ""
-
-#: inc/class-filter-widget.php:49
-msgid "Keywords"
-msgstr ""
-
-#: inc/class-filter-widget.php:50
-msgid "Admin Level 3"
+msgid "Placeholder:"
 msgstr ""
 
 #: inc/class-filter-widget.php:51
-msgid "Departments"
-msgstr ""
-
-#: inc/class-filter-widget.php:52
-msgid "Regions"
-msgstr ""
-
-#: inc/class-filter-widget.php:53
-msgid "Attendance Mode"
+msgid "Choose field: "
 msgstr ""
 
 #: inc/class-filter-widget.php:54
-msgid "Additional field"
+msgid "Choose a field to display"
+msgstr ""
+
+#: inc/class-filter-widget.php:56
+msgid "Cities"
+msgstr ""
+
+#: inc/class-filter-widget.php:57
+msgid "Keywords"
+msgstr ""
+
+#: inc/class-filter-widget.php:58
+msgid "Admin Level 3"
 msgstr ""
 
 #: inc/class-filter-widget.php:59
+msgid "Departments"
+msgstr ""
+
+#: inc/class-filter-widget.php:60
+msgid "Regions"
+msgstr ""
+
+#: inc/class-filter-widget.php:61
+msgid "Attendance Mode"
+msgstr ""
+
+#: inc/class-filter-widget.php:62
+msgid "Additional field"
+msgstr ""
+
+#: inc/class-filter-widget.php:67
 msgid "Additional field name: "
 msgstr ""
 
-#: inc/class-filter-widget.php:63
+#: inc/class-filter-widget.php:71
 msgid "You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )"
 msgstr ""
 
-#: inc/class-filter-widget.php:71
+#: inc/class-filter-widget.php:77
+msgid "Number of options to display at once: "
+msgstr ""
+
+#: inc/class-filter-widget.php:86
 msgid "Openagenda Filter"
 msgstr ""
 
-#: inc/class-filter-widget.php:73
+#: inc/class-filter-widget.php:88
 msgid "Displays a filter widget."
 msgstr ""
 
-#: inc/class-filter-widget.php:125
+#: inc/class-filter-widget.php:140
 #: inc/class-preview-widget.php:75
 msgid "Title :"
 msgstr ""
 
-#: inc/class-filter-widget.php:129
+#: inc/class-filter-widget.php:144
 msgid "Filter to display :"
 msgstr ""
 
-#: inc/class-filter-widget.php:131
+#: inc/class-filter-widget.php:146
 msgid "Choose filter"
 msgstr ""
 
@@ -468,21 +476,21 @@ msgstr ""
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
-#: inc/class-shortcodes.php:74
+#: inc/class-shortcodes.php:73
 msgid "Please provide a valid calendar UID to display in the calendar settings."
 msgstr ""
 
-#: inc/class-shortcodes.php:129
+#: inc/class-shortcodes.php:128
 msgctxt "Total filter message when no events found"
 msgid "No event found"
 msgstr ""
 
-#: inc/class-shortcodes.php:130
+#: inc/class-shortcodes.php:129
 msgctxt "Total filter message when 1 event found. Keep {total} placeholder."
 msgid "{total} event"
 msgstr ""
 
-#: inc/class-shortcodes.php:131
+#: inc/class-shortcodes.php:130
 msgctxt "Total filter message when multiple event found. Keep {total} placeholder."
 msgid "{total} events"
 msgstr ""
