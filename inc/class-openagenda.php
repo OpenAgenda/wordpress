@@ -124,6 +124,11 @@ class Openagenda {
      * Is the query for a single event ?
      */
     protected $is_single = false;
+
+    /**
+     * Is the query to preview another agenda ?
+     */
+    protected $is_preview = false;
     
     /**
      * Whether to use caching.
@@ -304,6 +309,16 @@ class Openagenda {
         return apply_filters( 'openagenda_is_single', $this->is_single, $this->uid );
     }
 
+    
+    /**
+     * Returns whether we're previewing another agenda
+     * 
+     * @return  bool  $is_preview
+     */
+    public function is_preview(){
+        return apply_filters( 'openagenda_is_preview', $this->is_preview, $this->uid );
+    }
+
 
     /**
      * Retrieve the longDescription field format
@@ -391,8 +406,6 @@ class Openagenda {
      * Parse query arguments
      */
     public function parse_args( $args = array() ){
-        
-        // Parse instance args
         $defaults = $this->get_default_params();
         if ( 'markdown' !== $this->get_longDescription_format() ){
             $defaults['longDescriptionFormat'] = $this->get_longDescription_format();
@@ -404,9 +417,11 @@ class Openagenda {
         $this->page        = ! empty ( $args['page'] ) ? (int) $args['page'] : 1;
         $this->size        = $this->is_single() ? 1 : (int) $args['size'];
         $this->offset      = ( $this->page - 1 ) * $this->size;
+        $this->is_preview  = ! empty( $args['id'] ) && 'preview' === $args['id'];
         if( $this->page > 1 )    $args['from'] = (int) $this->offset;
         if( $this->is_single() ) $args['size'] = 1;
         unset( $args['page'] );
+        unset( $args['id'] );
 
         $this->params  = $this->extract_params( $args );
         $this->filters = $this->extract_filters( $args );

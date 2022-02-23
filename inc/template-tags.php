@@ -49,7 +49,7 @@ function openagenda_get_field( $field, $uid = false ){
     $value  = '';
     switch ( $field ) {
         case 'permalink':
-            $calendar_permalink = openagenda_get_permalink();
+            $calendar_permalink = openagenda_get_permalink( $openagenda->get_uid() );
             $slug  = sanitize_title( $event['slug'] );
             $value = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $calendar_permalink );            
             break;
@@ -743,7 +743,7 @@ function openagenda_get_permalink( $uid = false ){
     $permalink = false;
 
     if( $openagenda && ! $uid ) $uid = $openagenda->get_uid();
-    if( is_singular( 'oa-calendar' ) ) $permalink = get_permalink();
+    if( is_singular( 'oa-calendar' ) && ! $openagenda->is_preview() ) $permalink = get_permalink();
     
     if( ! $permalink && $uid ) {
         $posts = get_posts( array(
