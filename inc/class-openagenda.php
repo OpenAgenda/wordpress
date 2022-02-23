@@ -156,7 +156,7 @@ class Openagenda {
         $this->use_context  = (bool) $use_context;
 
         $this->args         = $this->parse_args( $args );
-        $this->raw_response = $this->request( $this->args );
+        $this->raw_response = $this->request( $this->get_args() );
         $this->json         = $this->parse_response();
 
         if( $this->is_single() ){
@@ -387,7 +387,10 @@ class Openagenda {
         
         // Remove slug and context from params
         unset( $filters['context'] );
-        if( $slug ) unset( $filters['slug'] );
+        if( $slug ) {
+            unset( $filters['slug'] );
+            $params['detailed'] = 1;
+        }
 
         // Add key query var
         $url = add_query_arg( 'key', $this->get_api_key(), $url );
@@ -656,7 +659,7 @@ class Openagenda {
     public function get_default_params(){
         $defaults = array( 
             'agendaUid' => '', 
-            'detailed'  => 1, 
+            'detailed'  => '', 
             'size'      => 20, 
             'after'     => '', 
             'from'      => '', 

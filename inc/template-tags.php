@@ -63,6 +63,7 @@ function openagenda_get_field( $field, $uid = false ){
             
             if( 'last-timing' === $field ){
                 $value = ! empty( $timings ) ? openagenda_format_timing( $timings[count( $timings ) - 1], $datetimezone ) : array();
+                if( empty ( $value ) ) $value = ! empty( $event['lastTiming'] ) ? openagenda_format_timing( $event['lastTiming'] ): array();
                 break;
             }
 
@@ -80,6 +81,7 @@ function openagenda_get_field( $field, $uid = false ){
 
             if( 'next-timing' === $field ){
                 $value = ! empty( $next_timings ) ? openagenda_format_timing( $next_timings[0], $datetimezone ) : array();
+                if( empty( $value ) ) $value = ! empty( $event['nextTiming'] ) ? openagenda_format_timing( $event['nextTiming'] ): array();
                 break;
             }
 
