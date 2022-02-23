@@ -656,7 +656,7 @@ class Openagenda {
     public function get_default_params(){
         $defaults = array( 
             'agendaUid' => '', 
-            'detailed'  => '', 
+            'detailed'  => 1, 
             'size'      => 20, 
             'after'     => '', 
             'from'      => '', 
