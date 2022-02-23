@@ -19,6 +19,7 @@ class Shortcodes implements Hookable {
             'openagenda_filter_active'    => array( $this, 'openagenda_filter_active' ),
             'openagenda_filter_total'     => array( $this, 'openagenda_filter_total' ),
             'openagenda_filter_choice'    => array( $this, 'openagenda_filter_choice' ),
+            'openagenda_filter_tags'      => array( $this, 'openagenda_filter_tags' ),
             'openagenda_filter_calendar'  => array( $this, 'openagenda_filter_calendar' ),
             'openagenda_filter_map'       => array( $this, 'openagenda_filter_map' ),
             'openagenda_filter_preview'   => array( $this, 'openagenda_filter_preview' ),
@@ -185,6 +186,26 @@ class Shortcodes implements Hookable {
         }
 
         return apply_filters( 'openagenda_filter_choice', $filter, $uid, $atts );
+    }
+
+    /**
+     * Callback function to display former tags filter.
+     * Displays a choice widget with keywords param
+     * 
+     * @param   array   $atts     Array of attributes passed to the shortcode
+     * @param   string  $content  Content if enclosing shortcode. Defaults to null.
+     * @param   string  $tag      Name of the shortcode
+     * @return  string  $html     HTML to display.
+     */
+    public function openagenda_filter_tags( $atts = array(), $content = null, $tag = 'openagenda_filter_tags' ){
+        $defaults = array(
+            'id'        => 'choice',
+            'field'     => 'keyword',
+            'additional_field' => '',
+            'page_size' => 10
+        );
+        $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_tags' );
+        return $this->openagenda_filter_choice( $atts );
     }
 
 
