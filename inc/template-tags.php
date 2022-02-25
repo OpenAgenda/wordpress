@@ -590,7 +590,7 @@ function openagenda_event_attendance_mode( $uid = false, $echo = true ){
     $is_online       = ( 2 === $attendance_mode ) || ( 3 === $attendance_mode );
 
     $labels = apply_filters( 'openagenda_attendance_mode_labels', array(
-        1 => __( 'Offline', 'openagenda' ),
+        1 => __( 'On site', 'openagenda' ),
         2 => __( 'Online', 'openagenda' ),
         3 => __( 'Mixed', 'openagenda' ),
     ) );
@@ -981,6 +981,7 @@ function openagenda_favorite_badge( $uid = false, $echo = true ){
 
     $icon_active   = openagenda_icon( 'star', false );
     $icon_inactive = openagenda_icon( 'star-empty', false );
+    /* translators: %s: event title */ 
     $text = sprintf( __( 'Add %s to favorites.', 'openagenda' ), openagenda_get_field( 'title', $uid ) );
 
     $html = sprintf( 

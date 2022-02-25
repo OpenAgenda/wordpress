@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 5.9
-Stable tag: 2.0.0
+Tested up to: 5.9.1
+Stable tag: 2.1.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -174,6 +174,11 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.1.0 =
+* Added Favorite feature.
+* Fixed various handlers for changed reponse keys.
+* Modified [openagenda_filter_tags] shortcode to use [openagenda_filter_choice] instead
+
 = 2.0.0 =
 * Major API calls refactor: fetches events using API calls instead of JSON export
 * Major filter widget refactor: uses new React filters 
@@ -205,6 +210,11 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.1.0 =
+* Added Favorite feature.
+* Fixed various handlers for changed reponse keys.
+* Modified [openagenda_filter_tags] shortcode to use [openagenda_filter_choice] instead
 
 = 2.0.0 =
 * Major API calls refactor: fetches events using API calls instead of JSON export
