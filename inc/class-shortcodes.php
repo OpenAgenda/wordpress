@@ -167,7 +167,8 @@ class Shortcodes implements Hookable {
 
         $filter = '';
         if( ! empty( $atts['field'] ) ){
-            $params = array(
+            $inner_html = '';
+            $params     = array(
                 'type'     => 'choice',
                 'name'     => sanitize_text_field( $atts['field'] ),
                 'pageSize' => (int) $atts['page_size'],
@@ -181,8 +182,24 @@ class Shortcodes implements Hookable {
                     'size'  => 2000
                 );
             }
+            if( 'favorites' === $atts['field'] ){
+                $params['type']      = 'favorites';
+                $params['agendaUid'] = $uid;
+                $params['activeFilterLabel'] = __( 'Favorites', 'openagenda' );
+                $params['exclusive'] = true;
+                $inner_html          = sprintf( 
+                    '<div class="checkbox inactive">
+                        <label class="oa" for="%1$s">
+                            <input id="%1$s" name="%1$s" type="checkbox">
+                            %2$s
+                        </label>
+                    </div>',
+                    esc_attr( 'favorites-' . $uid ),
+                    esc_html__( 'Favorites', 'openagenda' )
+                ); 
+            }
 
-            $filter = sprintf( '<div class="oa-widget oa-choice-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( json_encode( $params ) ) );
+            $filter = sprintf( '<div class="oa-widget oa-choice-widget" data-oa-filter="%s" data-oa-filter-params="%s">%s</div>', esc_attr( $atts['id'] ), esc_attr( json_encode( $params ) ), $inner_html );
         }
 
         return apply_filters( 'openagenda_filter_choice', $filter, $uid, $atts );

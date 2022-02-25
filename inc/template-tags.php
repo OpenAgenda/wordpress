@@ -183,6 +183,11 @@ function openagenda_maybe_parse_field( $field, $value ){
 
 /**
  * Returns the permalink to the current event, with or without context
+ * 
+ * @param   string  $uid          Uid of the event.
+ * @param   bool    $echo         Whether to display url or not
+ * @param   bool    $use_context  Whether to append context to link or not
+ * @return  string  $permalink
  */
 function openagenda_event_permalink( $uid = false, $echo = true, $use_context = true ){
     global $openagenda;
@@ -208,7 +213,7 @@ function openagenda_event_permalink( $uid = false, $echo = true, $use_context = 
  * @param   string  $uid   UID of the event to get image from.
  * @return  string  $html  The corresponding <img> tag
  */
-function openagenda_get_event_image( $size = '', $uid = '' ){
+function openagenda_get_event_image( $size = '', $uid = false ){
     $event = openagenda_get_event( $uid );
     $html  = '';
     $image_url = '';
@@ -952,6 +957,51 @@ function openagenda_get_previous_event_link(){
 function openagenda_get_next_event_link(){
     return openagenda_get_adjacent_event_link( 'next' );
 }
+
+
+/**
+ * Displays a favorite badge to add to favorites
+ * 
+ * 
+ * @param  string  $uid   UID of the event.
+ * @param  bool    $echo  Whether to echo or just return the html
+ */
+function openagenda_favorite_badge( $uid = false, $echo = true ){
+    global $openagenda;
+    $agenda_uid = $openagenda->get_uid();
+    $event      = openagenda_get_event( $uid );
+    if( ! $event ) return false;
+    if( ! $uid ) $uid = $event['uid'];
+
+    $params = array(
+        'name'      => 'favorite',
+        'eventUid'  => $uid,
+        'agendaUid' => $agenda_uid,
+    );
+
+    $icon_active   = openagenda_icon( 'star', false );
+    $icon_inactive = openagenda_icon( 'star-empty', false );
+    $text = sprintf( __( 'Add %s to favorites.', 'openagenda' ), openagenda_get_field( 'title', $uid ) );
+
+    $html = sprintf( 
+        '<button class="oa-event-favorite-badge" data-oa-widget="%s" data-oa-widget-params="%s">
+            <span class="screen-reader-text">%s</span>
+            <span class="active-icon">%s</span>
+            <span class="inactive-icon">%s</span>
+        </button>',
+        esc_attr( 'favorite-' . $uid ),
+        esc_attr( json_encode( $params ) ),
+        esc_html( $text ),
+        $icon_active,
+        $icon_inactive
+    );
+
+    $html = apply_filters( 'openagenda_event_favorite_badge', $html, $uid, $agenda_uid, $icon_active, $icon_inactive, $text );
+    if( $echo ) echo $html;
+    return $html;
+}
+
+
 
 
 /**

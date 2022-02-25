@@ -1185,4 +1185,32 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   font-size: smaller;
 }
 
+/*********************************
+ * Favorite widget and filter
+ *********************************/
+button.oa-event-favorite-badge {
+  background: transparent;
+  border: none;
+  line-height: 1;
+  padding: 0;
+}
+button.oa-event-favorite-badge:hover, button.oa-event-favorite-badge:focus {
+  background: transparent;
+}
+button.oa-event-favorite-badge:focus {
+  outline: 1px dotted;
+}
+button.oa-event-favorite-badge .inactive-icon {
+  display: inline-block;
+}
+button.oa-event-favorite-badge .active-icon {
+  display: none;
+}
+button.oa-event-favorite-badge.active .active-icon {
+  display: inline-block;
+}
+button.oa-event-favorite-badge.active .inactive-icon {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -19,6 +19,7 @@
                 <a class="oa-event-permalink" href="<?php openagenda_event_permalink(); ?>">
                     <?php openagenda_field( 'title' ); ?>
                 </a>
+                <?php openagenda_favorite_badge(); ?>
             </h2>
             <div class="oa-metas">
                 <p class="oa-meta oa-event-timing">

@@ -4,6 +4,7 @@ if (oaData) {
     eventContainer.insertAdjacentHTML('afterbegin', '<div class="oa-notice-wrapper"></div>');
     window.oa = {
         res: oaData.res,
+        agendaUid: oaData.agendaUid,
         locale: oaData.locale,
         query: window.location.search,
         onLoad: async (values, aggregations, filtersRef, _form) => {

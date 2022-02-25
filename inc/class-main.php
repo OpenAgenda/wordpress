@@ -158,13 +158,13 @@ class Main {
         // Register main styles and scripts
         wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style' . $css_suffix, array(), OPENAGENDA_VERSION );
         wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'openagenda-qs' ), OPENAGENDA_VERSION, true );
-        wp_register_script( 'openagenda-qs', OPENAGENDA_URL . 'assets/js/qs.min.js', array(), OPENAGENDA_VERSION, true );
-        wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), OPENAGENDA_VERSION );
-        wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), OPENAGENDA_VERSION, true );
+        wp_register_script( 'openagenda-qs', OPENAGENDA_URL . 'assets/js/qs.min.js', array(), '6.10.3', true );
+        wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), '5.15.4' );
+        wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '2.6.3', true );
         
         // Register map dependencies
         wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
-        wp_register_script( 'oa-leaflet', OPENAGENDA_URL . 'assets/js/leaflet.min.js', array(), OPENAGENDA_VERSION, true );
+        wp_register_script( 'oa-leaflet', OPENAGENDA_URL . 'assets/js/leaflet.min.js', array(), '1.3.4', true );
         wp_register_script( 'oa-event-map', OPENAGENDA_URL . 'assets/js/event-map' . $js_suffix, array( 'jquery', 'oa-leaflet' ), OPENAGENDA_VERSION, true );
         
         // Timings calendar JS
@@ -177,10 +177,13 @@ class Main {
         if( is_singular( 'oa-calendar' ) ){
             wp_enqueue_script( 'openagenda-main' );
             wp_enqueue_script( 'openagenda-filters' );
+            $agenda_uid = get_post_meta( get_the_ID(), 'oa-calendar-uid', true );
+            $view       = get_post_meta( get_the_ID(), 'oa-calendar-view', true );
             $baseData = array(
+                'agendaUid'   => $agenda_uid ? sanitize_text_field( $agenda_uid ) : false,
                 'nonce'       => wp_create_nonce( 'update_events' ),
                 'postId'      => get_the_ID(),
-                'view'        => get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ) : 'list',
+                'view'        => $view ? sanitize_title( $view ) : 'list',
                 'action'      => 'update_events'
             ); 
             wp_localize_script( 'openagenda-main', 'oaData', array_merge( $baseData, array(

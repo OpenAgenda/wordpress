@@ -53,6 +53,7 @@ class Filter_Widget extends Openagenda_Widget {
                     'class'       => 'openagenda-filter-choice-field widefat',
                     'option_none' => __( 'Choose a field to display', 'openagenda' ),
                     'options' => array(
+                        'favorites'        => __( 'Favorites', 'openagenda' ),
                         'city'             => __( 'Cities', 'openagenda' ),
                         'keyword'          => __( 'Keywords', 'openagenda' ),
                         'adminLevel3'      => __( 'Admin Level 3', 'openagenda' ),

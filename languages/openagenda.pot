@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-14T10:19:13+01:00\n"
+"POT-Creation-Date: 2022-02-25T15:32:43+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: openagenda\n"
@@ -192,8 +192,8 @@ msgstr ""
 
 #: inc/class-filter-widget.php:22
 #: inc/class-settings.php:216
-#: inc/class-shortcodes.php:232
-#: inc/template-tags.php:424
+#: inc/class-shortcodes.php:270
+#: inc/template-tags.php:431
 msgid "OpenStreetMap contributors"
 msgstr ""
 
@@ -222,63 +222,69 @@ msgid "Choose a field to display"
 msgstr ""
 
 #: inc/class-filter-widget.php:56
-msgid "Cities"
+#: inc/class-shortcodes.php:188
+#: inc/class-shortcodes.php:198
+msgid "Favorites"
 msgstr ""
 
 #: inc/class-filter-widget.php:57
-msgid "Keywords"
+msgid "Cities"
 msgstr ""
 
 #: inc/class-filter-widget.php:58
-msgid "Admin Level 3"
+msgid "Keywords"
 msgstr ""
 
 #: inc/class-filter-widget.php:59
-msgid "Departments"
+msgid "Admin Level 3"
 msgstr ""
 
 #: inc/class-filter-widget.php:60
-msgid "Regions"
+msgid "Departments"
 msgstr ""
 
 #: inc/class-filter-widget.php:61
-msgid "Attendance Mode"
+msgid "Regions"
 msgstr ""
 
 #: inc/class-filter-widget.php:62
+msgid "Attendance Mode"
+msgstr ""
+
+#: inc/class-filter-widget.php:63
 msgid "Additional field"
 msgstr ""
 
-#: inc/class-filter-widget.php:67
+#: inc/class-filter-widget.php:68
 msgid "Additional field name: "
 msgstr ""
 
-#: inc/class-filter-widget.php:71
+#: inc/class-filter-widget.php:72
 msgid "You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )"
 msgstr ""
 
-#: inc/class-filter-widget.php:77
+#: inc/class-filter-widget.php:78
 msgid "Number of options to display at once: "
 msgstr ""
 
-#: inc/class-filter-widget.php:86
+#: inc/class-filter-widget.php:87
 msgid "Openagenda Filter"
 msgstr ""
 
-#: inc/class-filter-widget.php:88
+#: inc/class-filter-widget.php:89
 msgid "Displays a filter widget."
 msgstr ""
 
-#: inc/class-filter-widget.php:140
+#: inc/class-filter-widget.php:141
 #: inc/class-preview-widget.php:75
 msgid "Title :"
 msgstr ""
 
-#: inc/class-filter-widget.php:144
+#: inc/class-filter-widget.php:145
 msgid "Filter to display :"
 msgstr ""
 
-#: inc/class-filter-widget.php:146
+#: inc/class-filter-widget.php:147
 msgid "Choose filter"
 msgstr ""
 
@@ -357,19 +363,19 @@ msgstr ""
 msgid "New field"
 msgstr ""
 
-#: inc/class-openagenda.php:323
+#: inc/class-openagenda.php:338
 msgid "XLSX"
 msgstr ""
 
-#: inc/class-openagenda.php:324
+#: inc/class-openagenda.php:339
 msgid "JSON"
 msgstr ""
 
-#: inc/class-openagenda.php:325
+#: inc/class-openagenda.php:340
 msgid "RSS"
 msgstr ""
 
-#: inc/class-openagenda.php:450
+#: inc/class-openagenda.php:468
 msgid "There was an error parsing the JSON."
 msgstr ""
 
@@ -476,26 +482,26 @@ msgstr ""
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
-#: inc/class-shortcodes.php:73
+#: inc/class-shortcodes.php:74
 msgid "Please provide a valid calendar UID to display in the calendar settings."
 msgstr ""
 
-#: inc/class-shortcodes.php:128
+#: inc/class-shortcodes.php:129
 msgctxt "Total filter message when no events found"
 msgid "No event found"
 msgstr ""
 
-#: inc/class-shortcodes.php:129
+#: inc/class-shortcodes.php:130
 msgctxt "Total filter message when 1 event found. Keep {total} placeholder."
 msgid "{total} event"
 msgstr ""
 
-#: inc/class-shortcodes.php:130
+#: inc/class-shortcodes.php:131
 msgctxt "Total filter message when multiple event found. Keep {total} placeholder."
 msgid "{total} events"
 msgstr ""
 
-#: inc/class-shortcodes.php:240
+#: inc/class-shortcodes.php:278
 msgid "Search while moving the map"
 msgstr ""
 
@@ -516,114 +522,118 @@ msgstr ""
 msgid "Accessible to people suffering from visual impairments."
 msgstr ""
 
-#: inc/helper-functions.php:344
+#: inc/helper-functions.php:346
 msgid "Fetching events... Please wait a moment."
 msgstr ""
 
-#: inc/helper-functions.php:356
+#: inc/helper-functions.php:358
 msgid "There was an error updating the events. Pleaser refresh the page and try again."
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:388
+#: inc/helper-functions.php:390
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:390
+#: inc/helper-functions.php:392
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
 
-#: inc/template-tags.php:284
+#: inc/template-tags.php:291
 msgid "No timing available"
 msgstr ""
 
-#: inc/template-tags.php:344
+#: inc/template-tags.php:351
 msgid "View previous month"
 msgstr ""
 
-#: inc/template-tags.php:347
+#: inc/template-tags.php:354
 msgid "View next month"
 msgstr ""
 
 #. translators: %d: number of upcoming events
-#: inc/template-tags.php:395
+#: inc/template-tags.php:402
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of upcoming events
-#: inc/template-tags.php:395
+#: inc/template-tags.php:402
 msgid "No upcoming event."
 msgstr ""
 
 #. translators: %d: number of passed events
-#: inc/template-tags.php:398
+#: inc/template-tags.php:405
 msgid "%d passed event."
 msgid_plural "%d passed events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of passed events
-#: inc/template-tags.php:398
+#: inc/template-tags.php:405
 msgid "No passed event."
 msgstr ""
 
-#: inc/template-tags.php:460
+#: inc/template-tags.php:467
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/template-tags.php:465
+#: inc/template-tags.php:472
 msgid "Share on Twitter"
 msgstr ""
 
-#: inc/template-tags.php:473
+#: inc/template-tags.php:480
 msgid "Share on Linkedin"
 msgstr ""
 
-#: inc/template-tags.php:503
+#: inc/template-tags.php:510
 msgid "Share :"
 msgstr ""
 
-#: inc/template-tags.php:586
+#: inc/template-tags.php:593
 msgid "Offline"
 msgstr ""
 
-#: inc/template-tags.php:587
+#: inc/template-tags.php:594
 msgid "Online"
 msgstr ""
 
-#: inc/template-tags.php:588
+#: inc/template-tags.php:595
 msgid "Mixed"
 msgstr ""
 
-#: inc/template-tags.php:592
+#: inc/template-tags.php:599
 msgid "Access the event"
 msgstr ""
 
-#: inc/template-tags.php:655
+#: inc/template-tags.php:662
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:656
+#: inc/template-tags.php:663
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:795
+#: inc/template-tags.php:802
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:879
+#: inc/template-tags.php:886
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
-#: inc/template-tags.php:880
+#: inc/template-tags.php:887
 msgctxt "event navigation"
 msgid "Previous event"
+msgstr ""
+
+#: inc/template-tags.php:984
+msgid "Add %s to favorites."
 msgstr ""
 
 #: openagenda.php:120
