@@ -88,7 +88,7 @@ Displays the active filters. It takes no parameters.
 
 Displays a list of choices, depending on the field chosen. It takes the following parameters : 
 
- * `field`: the slug of the choice field you want to display (e.g. "cities", "keywords", "departments", etc... ).
+ * `field`: the slug of the choice field you want to display (e.g. "cities", "keywords", "departments", "favorites", etc... ).
  * `additional_field`: Any custom field you have setup in your OpenAgenda administration. Only works when 'Additional Field' is the chosen field.
  * `page_size`: Number of options to display before the 'More options' button.
 

@@ -10,7 +10,12 @@
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
     <div class="oa-event-wrapper">
         <header class="oa-event-header">
-            <h2 class="oa-event-title"><?php openagenda_field( 'title' ); ?></h2>
+            <h2 class="oa-event-title">
+                <?php 
+                    openagenda_field( 'title' );
+                    openagenda_favorite_badge();
+                ?>
+            </h2>
             <div class="oa-metas">
                 <?php if( $timing = openagenda_event_timing( 'date', false, false ) ) : ?>
                     <p class="oa-meta oa-event-timing">
