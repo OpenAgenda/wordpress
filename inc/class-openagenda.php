@@ -521,16 +521,6 @@ class Openagenda {
         return $should_serve_cache;
     }
 
-
-    /**
-     * Flushes cache
-     */
-    public function openagenda_flush_cache(){
-        global $wpdb;
-        $wpdb->query( "DELETE FROM `$wpdb->options` WHERE `option_name` LIKE ('_transient_oa_%')" );
-        $wpdb->query( "DELETE FROM `$wpdb->options` WHERE `option_name` LIKE ('_transient_timeout_oa_%')" );
-    }
-
     
     /**
      * Resets the index

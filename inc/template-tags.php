@@ -207,16 +207,47 @@ function openagenda_event_permalink( $uid = false, $echo = true, $use_context = 
 
 
 /**
- * Retrieves or displays the current event thumbnail
+ * Retrieves the current event thumbnail HTML
  * 
  * @param   string  $size  Size slug for the image
  * @param   string  $uid   UID of the event to get image from.
  * @return  string  $html  The corresponding <img> tag
  */
 function openagenda_get_event_image( $size = '', $uid = false ){
-    $event = openagenda_get_event( $uid );
-    $html  = '';
-    $image_url = '';
+    
+    $html       = '';
+    $image_data = openagenda_get_event_image_data( $size, $uid );
+    $image_url  = ! empty( $image_data['url'] ) ? $image_data['url'] : '';
+    $dimensions = ! empty( $image_data['dimensions'] ) ? $image_data['dimensions'] : array();
+    
+    if( $image_url ){
+        $width      = ! empty( $dimensions['width'] ) ? sprintf( 'width="%s"', esc_attr( $dimensions['width'] ) )  : '';
+        $height     = ! empty( $dimensions['height'] ) ? sprintf( 'height="%s"', esc_attr( $dimensions['height'] ) )  : '';
+        $html = sprintf( 
+            '<img src="%s" %s %s alt="%s" />', 
+            esc_url( $image_url ),
+            $width,
+            $height,
+            esc_attr( openagenda_get_field( 'title', $uid ) )
+        );
+    }
+
+    $html = apply_filters( 'openagenda_event_image', $html, $uid, $size );
+    return $html;
+}
+
+
+/**
+ * Retrieves the current event image url and dimensions
+ * 
+ * @param   string  $size  Size slug for the image
+ * @param   string  $uid   UID of the event to get image from.
+ * @return  string  $html  The corresponding <img> tag
+ */
+function openagenda_get_event_image_data( $size = '', $uid = false ){
+    $event      = openagenda_get_event( $uid );
+    $image_url  = '';
+    $dimensions = openagenda_get_image_dimensions( $size );
     
     if( ! empty( $event['image'] ) ){
         $filename   = $event['image']['filename'];
@@ -237,19 +268,12 @@ function openagenda_get_event_image( $size = '', $uid = false ){
         $dimensions = openagenda_get_image_dimensions( $size );
     }
 
-    if( $image_url ){
-        $width      = ! empty( $dimensions['width'] ) ? sprintf( 'width="%s"', esc_attr( $dimensions['width'] ) )  : '';
-        $height     = ! empty( $dimensions['height'] ) ? sprintf( 'height="%s"', esc_attr( $dimensions['height'] ) )  : '';
-        $html = sprintf( 
-            '<img src="%s" %s %s alt="%s" />', 
-            esc_url( $image_url ),
-            $width,
-            $height,
-            esc_attr( openagenda_get_field( 'title', $uid ) )
-        );
-    }
-    $html = apply_filters( 'openagenda_event_image', $html, $uid, $size );
-    return $html;
+    $data = array(
+        'url'        => $image_url,
+        'dimensions' => $dimensions
+    ); 
+
+    return apply_filters( 'openagenda_event_image_data', $data, $uid, $size );
 }
 
 

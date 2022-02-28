@@ -121,13 +121,13 @@ function openagenda_image_sizes(){
  * @param   string  $size        Open Agenda image size.
  * @return  array   $dimensions  Width and height of the image.
  */
-function openagenda_get_image_dimensions( $size = 'thumbnail' ){
+function openagenda_get_image_dimensions( $size = '' ){
     $sizes = openagenda_image_sizes();
     
-    // Default to thumbnail size.
+    // Default to full size.
     $dimensions = array(
-        'width'  => 200,
-        'height' => 200,
+        'width'  => '',
+        'height' => '',
     );
 
     // Regular size string is passed
