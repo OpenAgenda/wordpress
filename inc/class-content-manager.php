@@ -66,7 +66,6 @@ class Content_Manager implements Hookable {
         add_filter( 'body_class', array( $this, 'body_class'), 10, 1 );
         add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 10, 1 );
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
-        // add_filter( 'post_type_link', array( $this, 'permalink' ), 10, 4 );
         add_filter( 'write_your_story', array( $this, 'write_your_story' ), 10, 2 );
         
         // Frontend meta tags and Yoast SEO Filters
@@ -299,8 +298,9 @@ class Content_Manager implements Hookable {
         );
         
         if( $openagenda->is_single() ){
-            $event       = openagenda_get_event();
-            $image_url   = ! empty( $event['image'] ) ? $event['image'] : false;
+            $event          = openagenda_get_event();
+            $image_filename = ! empty( $event['image']['filename'] ) ? empty( $event['image']['filename'] ) : '';
+            $image_url      = ! empty( $image_filename ) && ! empty( $event['image']['base'] ) ? trailingslashit( $event['image']['base'] ) . $image_filename : false;
             if( ! empty( $description = \openagenda_get_field( 'description', false ) ) ) {
                 $metas['description']         = $description;
                 $metas['twitter:description'] = $description;
@@ -343,9 +343,10 @@ class Content_Manager implements Hookable {
         if( $openagenda->is_single() ){
             $properties['og:url'] = esc_url( \openagenda_get_field( 'permalink', false ) ) ;
 
-            $event       = openagenda_get_event();
-            $image_url   = ! empty( $event['image'] ) ? $event['image'] : false;
-            $description = ! empty( \openagenda_get_field( 'description', false ) ) ? \openagenda_get_field( 'description', false ) : false;
+            $event          = openagenda_get_event();
+            $image_filename = ! empty( $event['image']['filename'] ) ? empty( $event['image']['filename'] ) : '';
+            $image_url      = ! empty( $image_filename ) && ! empty( $event['image']['base'] ) ? trailingslashit( $event['image']['base'] ) . $image_filename : false;
+            $description    = ! empty( \openagenda_get_field( 'description', false ) ) ? \openagenda_get_field( 'description', false ) : false;
             if( $description ){
                 $properties['og:description'] = wp_strip_all_tags( $description );
             }

@@ -112,6 +112,33 @@ class Openagenda_Widget extends \WP_Widget {
                     checked( $value, true, false )
                 );
                 break;
+            case 'select';
+                $options = ''; 
+                if ( ! empty( $field['options'] ) ){
+                    foreach ( $field['options'] as $option_value => $option_label ) {
+                        $options .= sprintf( 
+                            '<option value="%1$s"%3$s>%2$s</option>', 
+                            esc_attr( $option_value ), 
+                            esc_html( $option_label ),
+                            selected( $value, $option_value, false )
+                        );
+                    }
+                }
+
+                $html = sprintf(
+                    '<label for="%1$s">%3$s</label>
+                    <select id="%1$s" name="%2$s" class="%4$s">
+                        <option value="">%5$s</option>
+                        %6$s
+                    </select>',
+                    esc_attr( $this->get_field_id( $field['name'] ) ),
+                    esc_attr( $this->get_field_name( $field['name'] ) ),
+                    esc_html( $field['label'] ),
+                    esc_attr( $field['class'] ),
+                    esc_html( $field['option_none'] ),
+                    $options
+                );
+            break;
             default:
                 $description = ! empty( $field['description'] ) ? sprintf( '<em><span class="description">%s</span></em>', wp_kses_post( $field['description'] ) ) : '';    
                 $html = sprintf( 
@@ -126,7 +153,7 @@ class Openagenda_Widget extends \WP_Widget {
                     esc_attr( $field['type'] ),
                     esc_attr( $field['class'] ),
                     esc_attr( $value ),
-                    $description
+                    $description,
                 );
                 break;
         }

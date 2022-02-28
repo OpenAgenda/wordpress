@@ -106,10 +106,7 @@ function openagenda_image_sizes(){
             'width'  => 200,
             'height' => 200,
         ),
-        'image' => array(
-            'width' => 600,
-        ),
-        'originalImage' => array(
+        'full' => array(
             'width'  => '',
             'height' => '',
         ),
@@ -124,13 +121,13 @@ function openagenda_image_sizes(){
  * @param   string  $size        Open Agenda image size.
  * @return  array   $dimensions  Width and height of the image.
  */
-function openagenda_get_image_dimensions( $size = 'thumbnail' ){
+function openagenda_get_image_dimensions( $size = '' ){
     $sizes = openagenda_image_sizes();
     
-    // Default to thumbnail size.
+    // Default to full size.
     $dimensions = array(
-        'width'  => 200,
-        'height' => 200,
+        'width'  => '',
+        'height' => '',
     );
 
     // Regular size string is passed
@@ -175,7 +172,7 @@ function openagenda_get_cloudimage_image_url( $url, $args ){
  * @return  array  Array of i18n fields
  */
 function openagenda_i18n_fields(){
-    $i18n = array( 'title', 'description', 'longDescription', 'html', 'access', 'range', 'conditions', 'keywords' );
+    $i18n = array( 'title', 'description', 'longDescription', 'html', 'access', 'range','dateRange', 'conditions', 'keywords' );
     return apply_filters( 'openagenda_i18n_fields', $i18n );
 }
 
@@ -243,6 +240,8 @@ function openagenda_icons(){
         'phone'    => '<svg class="oa-icon oa-icon-phone" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"/><g><path d="M10 1H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zM8.5 14h-1c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h1c.3 0 .5.2.5.5s-.2.5-.5.5zm2.5-2H5V3h6v9z"/></g></svg>',
         'previous' => '<svg class="oa-icon oa-icon-previous" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"/><g><path d="M13 7H6.4l2.3-2.3-1.4-1.4L2.6 8l4.7 4.7 1.4-1.4L6.4 9H13"/></g></svg>',
         'refresh'  => '<svg class="oa-icon oa-icon-refresh" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"/><g><path d="M3.8 3.8C2.7 4.9 2 6.3 2 8c0 3 2.2 5.4 5 5.9v-2.1c-1.7-.4-3-2-3-3.9 0-1.1.5-2.1 1.2-2.8L7 7V2H2l1.8 1.8zM14 8c0-3-2.2-5.4-5-5.9v2.1c1.7.4 3 2 3 3.9 0 1.1-.5 2.1-1.2 2.8L9.1 9.1 9 9v5h5l-1.8-1.8C13.3 11.1 14 9.7 14 8z"/></g></svg>',
+        'star'     => '<svg class="oa-icon oa-icon-star" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"/><g><path d="M8 1.3l2 4.6 5 .5-3.7 3.4 1 4.9L8 12.2l-4.3 2.5 1-4.9L1 6.4l5-.5"/></g></svg>',
+        'star-empty' => '<svg class="oa-icon oa-icon-star-empty" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"/><g><path d="M8 5l.7 1.5.3.8.9.1 1.6.2-1.2 1.1-.7.5.2.8.3 1.6-1.4-.8-.7-.4-.7.4-1.4.8.3-1.6.2-.8-.7-.5-1.2-1.1 1.6-.2.9-.1.4-.8L8 5m0-3.7L6 5.9l-5 .5 3.7 3.3-1 4.9L8 12.2l4.3 2.5-1-4.9L15 6.4l-5-.5-2-4.6z"/></g></svg>',
         'time'     => '<svg class="oa-icon oa-icon-time" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"/><g><path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm2.5 9.5L7.2 8.3V4h1.5v3.7l2.8 2.8-1 1z"/></g></svg>',
         'twitter'  => '<svg class="oa-icon oa-icon-twitter" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"/><g><path d="M22.23 5.924a8.212 8.212 0 01-2.357.646 4.115 4.115 0 001.804-2.27 8.221 8.221 0 01-2.606.996 4.103 4.103 0 00-6.991 3.742 11.647 11.647 0 01-8.457-4.287 4.087 4.087 0 00-.556 2.063 4.1 4.1 0 001.825 3.415 4.09 4.09 0 01-1.859-.513v.052a4.104 4.104 0 003.292 4.023 4.099 4.099 0 01-1.853.07 4.11 4.11 0 003.833 2.85 8.236 8.236 0 01-5.096 1.756 8.33 8.33 0 01-.979-.057 11.617 11.617 0 006.29 1.843c7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.531a8.298 8.298 0 002.047-2.123z"/></g></svg>',
     );
@@ -297,10 +296,14 @@ function openagenda_is_archive(){
  * @param   array   $array  Associative array you wish to turn to shortcode attributes
  * @return  string  $atts   Converted shortcode attributes
  */
-function openagenda_get_shortcode_attributes( $array ){
-    $atts = array_map( function( $key, $value ){
+function openagenda_get_shortcode_attributes( $array, $id = '' ){
+    $atts = array();
+    if( ! empty( $id ) ){
+        $atts[] = sprintf('id="%s"', esc_attr( $id ) );
+    }
+    $atts = array_merge( $atts, array_map( function( $key, $value ){
         return sprintf( '%s="%s"', $key, sanitize_text_field( $value ) );
-    }, array_keys( $array ), array_values( $array ) );
+    }, array_keys( $array ), array_values( $array ) )) ;
     return join( ' ', $atts );
 }
 
@@ -366,7 +369,7 @@ function openagenda_get_update_notice_html(){
  * @return  array         $timing        Timing with additionnal formatted data  
  */
 function openagenda_format_timing( $timing, $datetimezone = null ){
-    $start_timestamp = strtotime( $timing['start'] );
+    $start_timestamp = strtotime( $timing['begin'] );
     $end_timestamp   = strtotime( $timing['end'] );
 
     $timing['start_date_label'] = wp_date( get_option( 'date_format' ), $start_timestamp, $datetimezone ) ;
@@ -381,8 +384,8 @@ function openagenda_format_timing( $timing, $datetimezone = null ){
     $timing['end_time_label']   = wp_date( get_option( 'time_format' ), $end_timestamp, $datetimezone ) ;
 
     $now       = time();
-    $time_diff = human_time_diff( $now, strtotime( $timing['start'] ) );
-    $timing['relative_label'] = strtotime( $timing['start'] ) >= $now
+    $time_diff = human_time_diff( $now, strtotime( $timing['begin'] ) );
+    $timing['relative_label'] = strtotime( $timing['begin'] ) >= $now
         /* translators: %s : next event relative timing */
         ? sprintf( _x( 'In %s', 'next event timing', 'openagenda' ), esc_html( $time_diff ) )
         /* translators: %s : last event relative timing */
@@ -475,6 +478,15 @@ function openagenda_reset(){
         $openagenda        = $openagenda_backup;
         $openagenda_backup = null;
     }
+}
+
+/**
+ * Clears transient when settings are saved.
+ */
+function openagenda_clear_transient(){
+    global $wpdb;
+    $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_oa%'" );
+    $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_oa%'" );
 }
 
 

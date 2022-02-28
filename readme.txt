@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 5.8.2
-Stable tag: 1.1.1
+Tested up to: 5.9.1
+Stable tag: 2.1.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,13 +24,15 @@ Your events are automatically inserted after your content. If you wish to contro
 
 ## Settings
 
-### General settings
-
 General settings can be found under the *Calendar > Settings* entry in the admin menu.
 
 All data related to your API key or calendars can be found on https://openagenda.com.
 
-The main settings page provides the following settings : 
+The settings are divided into two tabs: General and Integrations.
+
+### General settings
+
+The General settings page provides the following settings : 
 
  * *Open Agenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
@@ -52,7 +54,7 @@ The *Integrations* tab allows you to fine tune settings for various third party 
 
  * *CloudImage API key* : If you wish to use CloudImage to serve your images, enter your API key here.
 
- ### Permalinks settings
+### Permalinks settings
 
 In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
 
@@ -82,12 +84,15 @@ However, if you need to insert static content after your list of events, you can
 
 Displays the active filters. It takes no parameters.
 
-**`[openagenda_filter_tags]`**
+**`[openagenda_filter_choice]`**
 
-Displays a list of tags. It takes the following parameters : 
+Displays a list of choices, depending on the field chosen. It takes the following parameters : 
 
- * `tag_group`: the slug of a tag group you want to display.
- * `tags`: A comma-seperated list of tags you want to display.
+ * `field`: the slug of the choice field you want to display (e.g. "cities", "keywords", "departments", etc... ).
+ * `additional_field`: Any custom field you have setup in your OpenAgenda administration. Only works when 'Additional Field' is the chosen field.
+ * `page_size`: Number of options to display before the 'More options' button.
+
+You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema)
 
 **`[openagenda_filter_calendar]`**
 
@@ -99,20 +104,17 @@ Displays an interactive map to locate and search events. It takes the following 
 
  * `map_tiles_link` : Map tiles link to use. Defaults to `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
  * `map_auto` : Whether to automatically update map on scroll. 
- * `map_longitude` : Default longitude
- * `map_latitude` : Default latitude
- * `map_zoom` : Default zoom level. Defaults to 12. Used in conjunction with `map_latitude` and `map_longitude`.
 
 **`[openagenda_filter_preview]`**
 
 Displays next events. It takes the following parameters : 
 
  * `uid` : UID of the calendar you wish to preview.
- * `limit` : Number of events to display.
+ * `size` : Number of events to display.
 
 **`[openagenda_filter_relative]`**
 
-Filters events in the near future. It takes no parameters.
+Allows to filters past or upcoming events. It takes no parameters.
 
 **`[openagenda_filter_search]`**
 
@@ -172,6 +174,15 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.1.0 =
+* Added Favorite feature.
+* Fixed various handlers for changed reponse keys.
+* Modified [openagenda_filter_tags] shortcode to use [openagenda_filter_choice] instead
+
+= 2.0.0 =
+* Major API calls refactor: fetches events using API calls instead of JSON export
+* Major filter widget refactor: uses new React filters 
+
 = 1.1.1 =
 * Fixed canonical url in <meta> tag
 * Added compatibility with Yoast SEO meta tags
@@ -199,6 +210,15 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.1.0 =
+* Added Favorite feature.
+* Fixed various handlers for changed reponse keys.
+* Modified [openagenda_filter_tags] shortcode to use [openagenda_filter_choice] instead
+
+= 2.0.0 =
+* Major API calls refactor: fetches events using API calls instead of JSON export
+* Major filter widget refactor: uses new React filters 
 
 = 1.1.1 =
 * Fixed canonical url in <meta> tag

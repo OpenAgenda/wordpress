@@ -299,10 +299,6 @@ class Metaboxes implements Hookable {
         update_post_meta( $post_ID, 'oa-calendar-content-on-archive', $content_on_archive );
         update_post_meta( $post_ID, 'oa-calendar-content-on-single', $content_on_single );
 
-        if( $update ){
-            $openagenda = new Openagenda( get_post_meta( $post_ID, 'oa-calendar-uid', true ), array( 'limit' => 1 ) );
-            $openagenda->openagenda_flush_cache();
-        }
-
+        if( $update ) openagenda_clear_transient();
     }
 }

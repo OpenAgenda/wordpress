@@ -11,34 +11,32 @@
     <div class="oa-event-wrapper">
         <header class="oa-event-header">
             <div class="oa-event-thumbnail">
-                <a class="oa-event-permalink" href="<?php openagenda_event_permalink( false, true, true ); ?>">
-                    <?php openagenda_event_image( 'image' ); ?>
+                <a class="oa-event-permalink" href="<?php openagenda_event_permalink(); ?>">
+                    <?php openagenda_event_image(); ?>
                 </a>
             </div>
             <h2 class="oa-event-title">
-                <a class="oa-event-permalink" href="<?php openagenda_event_permalink( false, true, true ); ?>">
+                <a class="oa-event-permalink" href="<?php openagenda_event_permalink(); ?>">
                     <?php openagenda_field( 'title' ); ?>
                 </a>
+                <?php openagenda_favorite_badge(); ?>
             </h2>
             <div class="oa-metas">
-                <p class="oa-meta oa-event-timing">
-                    <?php 
-                        openagenda_icon( 'time' );
-                        openagenda_event_timing( 'relative' ); 
-                    ?>
-                </p>
-                <p class="oa-meta oa-event-range">
-                    <?php
-                        openagenda_icon( 'month' );
-                        openagenda_field( 'range' );
-                    ?>
-                </p>
-                <p class="oa-meta oa-event-attendance">
-                    <?php
-                        openagenda_icon( 'link' );
-                        openagenda_event_attendance_mode();
-                    ?>
-                </p>
+                <?php if( $timing = openagenda_event_timing( 'relative', false, false ) ) : ?>
+                    <p class="oa-meta oa-event-timing">
+                        <?php openagenda_icon( 'time' ); echo wp_kses_post( $timing ) ?>
+                    </p>
+                <?php endif; ?>
+                <?php if( $dateRange = openagenda_get_field( 'dateRange' ) ) : ?>
+                    <p class="oa-meta oa-event-range">
+                        <?php openagenda_icon( 'month' ); echo wp_kses_post( $dateRange ) ?>
+                    </p>
+                <?php endif; ?>
+                <?php if( $attendance = openagenda_event_attendance_mode( false, false ) ) : ?>
+                    <p class="oa-meta oa-event-attendance">
+                        <?php openagenda_icon( 'link' ); echo wp_kses_post( $attendance ) ?>
+                    </p>
+                <?php endif; ?>
             </div>
         </header>
         <p class="oa-event-short-description"><?php openagenda_field( 'description' ); ?></p>

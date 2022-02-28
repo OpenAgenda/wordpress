@@ -9,6 +9,7 @@
  */
 ?>
 <header class="<?php echo esc_attr( $class );?>">
-    <div data-container-id="oa-events-total"><?php \openagenda_get_events_total_html(); ?></div>
+    <!-- <div data-container-id="oa-events-total"><?php // \openagenda_get_events_total_html(); ?></div> -->
+    <?php echo do_shortcode( '[openagenda_filter_total]' )?>
     <?php echo do_shortcode( '[openagenda_filter_active]' )?>
 </header>

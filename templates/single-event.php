@@ -12,25 +12,23 @@
         <header class="oa-event-header">
             <h2 class="oa-event-title"><?php openagenda_field( 'title' ); ?></h2>
             <div class="oa-metas">
-                <p class="oa-meta oa-event-timing">
-                    <?php 
-                        openagenda_icon( 'time' );
-                        openagenda_event_timing(); 
-                    ?>
-                </p>
-                <p class="oa-meta oa-event-range">
-                    <?php
-                        openagenda_icon( 'month' );
-                        openagenda_field( 'range' );
-                    ?>
-                </p>
+                <?php if( $timing = openagenda_event_timing( 'date', false, false ) ) : ?>
+                    <p class="oa-meta oa-event-timing">
+                        <?php openagenda_icon( 'time' ); echo wp_kses_post( $timing ) ?>
+                    </p>
+                <?php endif; ?>
+                <?php if( $dateRange = openagenda_get_field( 'dateRange' ) ) : ?>
+                    <p class="oa-meta oa-event-range">
+                        <?php openagenda_icon( 'month' ); echo wp_kses_post( $dateRange ) ?>
+                    </p>
+                <?php endif; ?>
                 <div class="oa-event-share"><?php openagenda_event_share_buttons(); ?></div>
             </div>
             <p class="oa-entry-description"><?php openagenda_field( 'description' ); ?></p>
-            <div class="oa-event-thumbnail"><?php openagenda_event_image( 'image' ); ?></div>
+            <div class="oa-event-thumbnail"><?php openagenda_event_image(); ?></div>
         </header>
         <div class="oa-event-timings"><?php openagenda_event_timings(); ?></div>
-        <div class="oa-event-details"><?php openagenda_field( 'html' ); ?></div>
+        <div class="oa-event-details"><?php openagenda_field( 'longDescription' ); ?></div>
 
         <?php if( ! empty( $access_link = openagenda_get_field( 'onlineAccessLink' ) ) ) : ?>
             <div class="oa-event-access-link">

@@ -31,7 +31,7 @@ class Ajax_Handler {
         global $openagenda;
         check_ajax_referer( 'update_events', 'nonce' );
 
-        $post_id = isset( $_POST['postId'] ) ? (int) $_POST['postId'] : false;
+        $post_id = isset( $_REQUEST['postId'] ) ? (int) $_REQUEST['postId'] : false;
         if( ! $post_id ){
             wp_send_json_error( new \WP_Error( 'missing-postid', __( 'No post ID was provided.', 'openagenda' ) ) );
             exit;
@@ -43,34 +43,36 @@ class Ajax_Handler {
             exit;
         }
         
-        $query = isset( $_POST['query'] ) ? $this->sanitize_query( $_POST['query'] ) : false;
-
-        $args = array(
-            'limit' => get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
-            'page'  => 1,
+        $query = array();
+        $view  = get_post_meta( $post_id, 'oa-calendar-view', true );
+        $args  = array(
+            'size' => get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
+            'page' => 1,
         );
 
-        $updatedUrl = get_permalink( $post_id );
-        if( $query ){
-            $args['oaq'] = $query;
-            $updatedUrl  = add_query_arg( 'oaq', $query, $updatedUrl );
-            $updatedPath = wp_parse_url( $updatedUrl, PHP_URL_PATH ) . '?' . wp_parse_url( $updatedUrl, PHP_URL_QUERY ); 
+        // Read POST query param
+        if( isset( $_POST['query'] ) ){
+            $query = json_decode( stripslashes( html_entity_decode( $_POST['query'] ) ), true );
         }
 
-        $view = sanitize_title( $_POST['view'] );
+        // Read GET query param
+        if( ! empty( $_GET ) ){
+            $query = array_filter( $_GET, function( $value, $key ){
+                return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view' ) );
+            }, ARRAY_FILTER_USE_BOTH );
+        }
 
-        $openagenda = new Openagenda( $uid, $args, false );
-        $response    = array(
-            'totalPages'  => (int) $openagenda->get_total_pages(),
-            'total'       => (int) $openagenda->get_total(),
-            'totalHtml'   => \openagenda_get_events_total_html( false ),
-            'updatedUrl'  => esc_url( $updatedUrl ),
-            'updatedPath' => $updatedPath,
-            'source'      => sanitize_key( $openagenda->source ),
+        if( $query ){
+            $args = array_merge( $args, $query );
+        }
+
+        $openagenda = new Openagenda( $uid, $args, false, true );
+        $response   = array_merge( $openagenda->get_json(), array(
+            'source'      => sanitize_key( $openagenda->get_source() ),
             'html'        => \openagenda_get_events_html( $view ),
-        );
-        
-        wp_send_json_success( $response );
+        ) );
+
+        echo wp_send_json( $response );
         wp_die();
     }
 
@@ -95,40 +97,40 @@ class Ajax_Handler {
             wp_safe_redirect( $referer );
             exit;
         }
-        
-        // Read context
+                
+        // Read referer event
         $event_offset = isset( $context['event_offset'] ) ? (int) $context['event_offset'] : null;
-        $filters      = isset( $context['oaq'] ) ? $this->sanitize_query( $context['oaq'] ): null;
-        
         if( null === $event_offset ) {
             wp_safe_redirect( $referer );
             exit;
         }
-        
+
         // Prepare another query to fetch adjacent event
-        $offset = 'next' === $direction ? $event_offset + 1 : $event_offset - 1;
-        if ( 0 >= $offset ) $offset = 0;
+        $params  = $context['params'];
+        $filters = $context['filters'];
+        $from = 'next' === $direction ? (int) $event_offset + 1 : (int) $event_offset - 1;
+        if ( 0 >= $from ) $from = 0;
         
         $args = array(
-            'offset' => $offset,
-            'limit'  => 1,
-        );
-        if ( ! empty( $filters ) ) {
-            $args['oaq'] = $filters;
-        }
-        
+            'from' => $from,
+            'size' => 1,
+            'longDescriptionFormat' => ! empty( $params['longDescriptionFormat'] ) ? $params['longDescriptionFormat'] : 'markdown',
+        );       
+
         // Fetch the event
-        $openagenda = new Openagenda( $uid, $args, false, false );
+        $openagenda = new Openagenda( $uid, array_merge( $args, $filters ), false, false );
         $event      = $openagenda->get_current_event();
         
         if( ! empty( $event ) ){
             $event_permalink = openagenda_get_field( 'permalink' );
             
             // Update context
-            $context['event_offset'] = $offset;
+            $context['event_offset']   = (int) $from;
+            $context['page']           = (int) ceil( ( $from + 1 ) / (int) $context['params']['size'] );
+            $context['params']['from'] = ( $context['page'] - 1 ) * $context['params']['size'];
+
             $encoded_context = openagenda_encode_context( $context );
             $event_permalink = add_query_arg( 'context', $encoded_context, $event_permalink );
-            
             wp_safe_redirect( $event_permalink );
             exit;
         }

@@ -54,13 +54,13 @@ class Settings implements Hookable {
             ),
             'openstreetmap' => array(
                 'id'       => 'openagenda_openstreetmap_settings',
-                'title'    => __( 'OpenStreetMap settings', 'openagenda' ),
+                'title'    => __( 'OpenStreetMap', 'openagenda' ),
                 'callback' => '',
                 'page'     => 'openagenda',
             ),
             'cloudimage' => array(
                 'id'       => 'openagenda_cloudimage_settings',
-                'title'    => __( 'CloudImage settings', 'openagenda' ),
+                'title'    => __( 'CloudImage', 'openagenda' ),
                 'callback' => '',
                 'page'     => 'openagenda',
             ),
@@ -373,6 +373,7 @@ class Settings implements Hookable {
             'openagenda_delete_content_on_uninstall' => isset( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false,
             'openagenda_delete_options_on_uninstall' => isset( $settings['openagenda_delete_options_on_uninstall'] ) ? (bool) $settings['openagenda_delete_options_on_uninstall'] : false,
         );
+        openagenda_clear_transient();
         return $new_settings;
     }
 
