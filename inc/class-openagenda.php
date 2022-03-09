@@ -363,7 +363,7 @@ class Openagenda {
     public function get_api_url( $slug = false ){
         $base_api_url = sprintf( '%s/agendas/%s/events', $this->base_api_url, $this->uid );
         if ( $this->is_single() && $slug ) {
-            $base_api_url = sprintf( '%s/agendas/%s/events/slug/%s', $this->base_api_url, $this->uid, sanitize_title( $slug ) );
+            $base_api_url = sprintf( '%s/agendas/%s/events/slug/%s', $this->base_api_url, $this->uid, sanitize_text_field( $slug ) );
         }
         return $base_api_url;
     }
