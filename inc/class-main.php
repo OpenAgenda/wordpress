@@ -217,9 +217,9 @@ class Main {
             // Parse URL structure
             $uid  = get_post_meta( get_the_ID(), 'oa-calendar-uid', true );
             $args = array(
-                'size'   => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
-                'page'   => ! empty( get_query_var( 'oa-page' ) ) ? sanitize_title( get_query_var( 'oa-page' ) ) : 1,
-                'slug'   => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_title( get_query_var( 'oa-slug' ) ) : '',
+                'size' => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
+                'page' => ! empty( get_query_var( 'oa-page' ) ) ? sanitize_title( get_query_var( 'oa-page' ) ) : 1,
+                'slug' => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_text_field( get_query_var( 'oa-slug' ) ) : '',
             );
 
             // Merge filters

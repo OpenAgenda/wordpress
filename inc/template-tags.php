@@ -50,7 +50,7 @@ function openagenda_get_field( $field, $uid = false ){
     switch ( $field ) {
         case 'permalink':
             $calendar_permalink = openagenda_get_permalink( $openagenda->get_uid() );
-            $slug  = sanitize_title( $event['slug'] );
+            $slug  = sanitize_text_field( $event['slug'] );
             $value = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $calendar_permalink );            
             break;
         case 'timings':
