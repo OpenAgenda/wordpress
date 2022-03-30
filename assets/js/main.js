@@ -42,9 +42,7 @@ if (oaData) {
             formData.append('postId', oaData.postId);
             formData.append('action', oaData.action);
             formData.append('view', oaData.view);
-
-            values.aggregations = aggregations;
-            formData.append('query', JSON.stringify(values));
+            formData.append('query', JSON.stringify({...values, aggregations}));
 
             const result = await fetch(oaData.ajaxUrl, {
                 method: "POST",
