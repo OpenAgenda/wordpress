@@ -98,11 +98,7 @@ function openagenda_get_field( $field, $uid = false ){
         default:
             $end_value = array_reduce( explode( '.', $field ), function( $array, $field ) use ( $locale ) {
                 if( openagenda_is_i18n_field( $field ) && isset( $array[$field] ) && is_array( $array[$field] ) ){
-                    if( array_key_exists( $locale, $array[$field] ) ){
-                        return ! empty( $array[$field][$locale] ) ? openagenda_maybe_parse_field( $field, $array[$field][$locale] ) : '';
-                    } else {
-                        return ! empty( array_values( $array[$field] )[0] ) ? array_values( $array[$field] )[0] : '';
-                    }
+                    return openagenda_maybe_parse_field( $field, openagenda_get_i18n_value( $array[$field] ) );
                 }
                 return ! empty( $array[$field] ) ? $array[$field] : ''; 
             }, $event );
@@ -177,6 +173,29 @@ function openagenda_maybe_parse_field( $field, $value ){
             $value = $Parsedown->text($value);
         }
     }
+    return $value;
+}
+
+
+/**
+ * Returns the value corresponding to the locale
+ * 
+ * @param  array  $i18n_field  Array of locale => label
+ * @return  string  $value  Value corresponding to the current locale, or first available value, or empty.
+ */
+function openagenda_get_i18n_value( $i18n_field ){
+    $locale = openagenda_get_locale();
+    $value  = '';
+    
+    if( is_string( $i18n_field ) ) $value = $i18n_field;
+    if( is_array( $i18n_field ) ){
+        if( array_key_exists( $locale, $i18n_field ) ){
+            $value = ! empty( $i18n_field[$locale] ) ? $i18n_field[$locale] : '';
+        } else {
+            $value = ! empty( array_values( $i18n_field )[0] ) ? array_values( $i18n_field )[0] : '';
+        }
+    }
+
     return $value;
 }
 
@@ -611,23 +630,56 @@ function openagenda_event_attendance_mode( $uid = false, $echo = true ){
 
     $attendance_mode = openagenda_get_field( 'attendanceMode', $uid );
     $access_url      = openagenda_get_field( 'onlineAccessLink', $uid );
-    $is_online       = ( 2 === $attendance_mode ) || ( 3 === $attendance_mode );
-
-    $labels = apply_filters( 'openagenda_attendance_mode_labels', array(
+    $locale          = openagenda_get_locale();
+    $default_labels  = apply_filters( 'openagenda_attendance_mode_labels', array(
         1 => __( 'On site', 'openagenda' ),
         2 => __( 'Online', 'openagenda' ),
         3 => __( 'Mixed', 'openagenda' ),
     ) );
 
-    $label = array_key_exists( $attendance_mode, $labels ) ? $labels[$attendance_mode] : $labels[1];
+    if( is_array( $attendance_mode ) ){
+        $labels = ! empty( $attendance_mode['label'] ) ? $attendance_mode['label'] : array();
+        $label  = openagenda_get_i18n_value( $labels );
+    } else {
+        $label = array_key_exists( $attendance_mode, $default_labels ) ? $default_labels[$attendance_mode] : $default_labels[1];
+    }
+
     $link  = ! empty( $access_url ) ? sprintf( '<span class="oa-seperator">|</span><a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( $access_url ), esc_html__( 'Access the event', 'openagenda' ) ) : '';
     $html  = sprintf( '%s%s', esc_html( $label ), $link );
-
-    $html = apply_filters( 'openagenda_event_attendance_mode', $html, $uid );
+    $html  = apply_filters( 'openagenda_event_attendance_mode', $html, $uid );
     if ( $echo ) echo $html;
     return $html;
 }
 
+
+/**
+ * Displays or return an event additional field links
+ * 
+ * @param  string  $field  Additional field to display
+ * @param  string  $uid   UID of the event.
+ * @param  bool    $echo  Whether to echo or just return the html
+ */
+function openagenda_event_additional_field( $field, $uid = false, $echo = true ){
+    global $openagenda;
+    $event = openagenda_get_event( $uid );
+    if( ! $uid ) $uid = $event['uid'];
+
+    $values = openagenda_get_field( $field, $uid );
+    $links  = array();
+    foreach ( $values as $value ) {
+        $id     = ! empty( $value['id'] ) ? (int) $value['id'] : 0;
+        $labels = ! empty( $value['label'] ) ? $value['label'] : array();
+        $label  = openagenda_get_i18n_value( $labels );
+        if( $id && $label ){
+            $links[] = sprintf( '<a href="%s">%s</a>', add_query_arg( sanitize_title( $field ), $id, openagenda_get_permalink() ), $label );
+        }
+    }
+
+    $html = ! empty( $links ) ? join( ', ', $links ) : '';
+    $html = apply_filters( 'openagenda_event_additional_field', $html, $field, $uid );
+    if ( $echo ) echo $html;
+    return $html;
+}
 
 
 /**

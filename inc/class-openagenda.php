@@ -648,12 +648,13 @@ class Openagenda {
      */
     public function get_default_params(){
         $defaults = array( 
-            'agendaUid' => '', 
-            'detailed'  => '', 
-            'size'      => 20, 
-            'after'     => '', 
-            'from'      => '', 
+            'agendaUid'     => '', 
+            'detailed'      => '', 
+            'size'          => 20, 
+            'after'         => '', 
+            'from'          => '', 
             'longDescriptionFormat' => '',
+            'includeLabels' => true,
         );
         return apply_filters( 'openagenda_api_default_params', $defaults );
     }

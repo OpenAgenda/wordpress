@@ -240,6 +240,12 @@ Displays or returns the button to add an event to favorites. Favorites can be fi
 
 The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_favorite_badge', $html, $uid, $agenda_uid, $icon_active, $icon_inactive, $text )`.
 
+#### `openagenda_event_additional_field( $field, $uid = false, $echo = true )`
+
+Displays or retrieves links corresponding to an additional field values, using labels corresponding to current locale.
+
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_additional_field', $html, $field, $uid' )`.
+
 #### `openagenda_event_share_buttons( $uid = false, $echo = true )`
 
 Displays or returns the HTML for the event share buttons. By default, Twitter, Facebook and Linkedin share links are provided. To add your own, use the following filter : `apply_filters( 'openagenda_sharers', $sharers, $uid, $event )`.
