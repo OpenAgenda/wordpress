@@ -665,6 +665,9 @@ function openagenda_event_additional_field( $field, $uid = false, $echo = true )
     if( ! $uid ) $uid = $event['uid'];
 
     $values = openagenda_get_field( $field, $uid );
+    // If we have a single value and not an array of values, make it an array
+    if( isset( $values['id'] ) ) $values = array( $values );
+    
     $links  = array();
     foreach ( $values as $value ) {
         $id     = ! empty( $value['id'] ) ? (int) $value['id'] : 0;

@@ -170,11 +170,11 @@ The file `inc/template-tags.php` contains functions used in templates to display
 
 Here is a quick rundown of the main functions you will need when customizing the templates.
 
-#### `openagenda_get_event( $uid = false )`
+#### `openagenda_get_event( $event_uid = false )`
 
 Returns the event corresponding to the passed in UID or the current event in the event loop if not provided. Note that the function doesn't query the main [openagenda.com](https://openagenda.com) site, but looks in the events already queried on page load. So it will return `false` if no events can be found with the provided UID within the page's events.
 
-#### `openagenda_get_field( $field, $uid = false )`
+#### `openagenda_get_field( $field, $event_uid = false )`
 
 This functions returns the value corresponding to the field passed in for the event corresponding to the given UID, or for the current event in the event loop if no UID was provided.
 
@@ -184,9 +184,9 @@ For multilingual fields, the value corresponding to the current locale is return
 
 **If you need the raw value from the JSON event, this function is the one to use.**
 
-Returned value are passed through the following filter : `apply_filters( 'openagenda_field', $value, $field, $uid );`
+Returned value are passed through the following filter : `apply_filters( 'openagenda_field', $value, $field, $event_uid );`
 
-#### `openagenda_field( $field, $uid = false )`
+#### `openagenda_field( $field, $event_uid = false )`
 
 Like `openagenda_get_field( $field, $uid = false )`, but escapes and echoes the field value.
 
@@ -194,13 +194,13 @@ Like `openagenda_get_field( $field, $uid = false )`, but escapes and echoes the 
 
 This function is used internally by `openagenda_field()` to escape the field value properly, depending on the field type.
 
-#### `openagenda_event_permalink( $uid = false, $echo = true, $use_context = false )`
+#### `openagenda_event_permalink( $event_uid = false, $echo = true, $use_context = false )`
 
 Returns or echoes an event permalink, corresponding to the UID passed in or the current event in the event loop. The `use_context` param is used on event list views to append a string representing the page and current list filters.
 
-The returned value is passed through the following filter : `apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context )`.
+The returned value is passed through the following filter : `apply_filters( 'openagenda_event_permalink', $permalink, $event_uid, $use_context )`.
 
-#### `openagenda_get_event_image( $size = '', $uid = '' )`
+#### `openagenda_get_event_image( $size = '', $event_uid = '' )`
 
 Returns the HTML used to display an event image. Default size is 700px wide. `thumbnail` size is 200px by 200px by default. `full` size corresponds to original uploaded image size.
 
@@ -208,47 +208,47 @@ If you use the CloudImage integration, this function also accepts an array of Cl
 
 Using this requires you to signup for an account at [https://cloudimage.io](https://cloudimage.io), and fill in the corresponding API key setting in the *Integrations* settings of the plugin. Documentation for the accepted arguments can be found at [https://docs.cloudimage.io/go/cloudimage-documentation-v7/](https://docs.cloudimage.io/go/cloudimage-documentation-v7/)
 
-The returned HTML is passed through the following filter : `apply_filters( 'openagenda_event_image', $html, $uid, $size )`.
+The returned HTML is passed through the following filter : `apply_filters( 'openagenda_event_image', $html, $event_uid, $size )`.
 
-#### `openagenda_event_image( $size = '', $uid = '' )`
+#### `openagenda_event_image( $size = '', $event_uid = '' )`
 
 Echoes an event image.
 
-#### `openagenda_event_timing( $display = 'date', $uid = false, $echo = true )`
+#### `openagenda_event_timing( $display = 'date', $event_uid = false, $echo = true )`
 
-Displays the next or last timing for a given event, in the format corresponding to the `$display` parameter. If no `$uid` is provided, it defaults to the current event.
+Displays the next or last timing for a given event, in the format corresponding to the `$display` parameter. If no `$event_uid` is provided, it defaults to the current event.
 
 `$display` accepts `date` (default), or `relative`. If `relative` the next or last event timing is displayed in a human readable time difference from now (e.g. 'In two weeks', '2 hours ago'). Else, its date is displayed.
 
-The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_timing', $html, $uid, $display )`.
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_timing', $html, $event_uid, $display )`.
 
-#### `openagenda_event_timings( $uid = false, $echo = true )`
+#### `openagenda_event_timings( $event_uid = false, $echo = true )`
 
 Displays a formatted list of all timings for an event.
 
-The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_timings', $html, $uid, $months )`.
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_timings', $html, $event_uid, $months )`.
 
-#### `openagenda_event_map( $uid = false, $echo = true )`
+#### `openagenda_event_map( $event_uid = false, $echo = true )`
 
 Displays or returns the HTML for the map corresponding to the location of the given event.
 
-The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_map_html', $html, $uid )`.
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_map_html', $html, $event_uid )`.
 
-#### `openagenda_favorite_badge( $uid = false, $echo = true )`
+#### `openagenda_favorite_badge( $event_uid = false, $echo = true )`
 
 Displays or returns the button to add an event to favorites. Favorites can be filtered on the front end using the Openagenda filter widget.
 
-The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_favorite_badge', $html, $uid, $agenda_uid, $icon_active, $icon_inactive, $text )`.
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_favorite_badge', $html, $event_uid, $agenda_uid, $icon_active, $icon_inactive, $text )`.
 
-#### `openagenda_event_additional_field( $field, $uid = false, $echo = true )`
+#### `openagenda_event_additional_field( $field, $event_uid = false, $echo = true )`
 
-Displays or retrieves links corresponding to an additional field values, using labels corresponding to current locale.
+Displays or retrieves links corresponding to an additional field values, using labels corresponding to current locale. If no `$event_uid` is provided, it defaults to the current event.
 
-The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_additional_field', $html, $field, $uid' )`.
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_additional_field', $html, $field, $event_uid' )`.
 
-#### `openagenda_event_share_buttons( $uid = false, $echo = true )`
+#### `openagenda_event_share_buttons( $event_uid = false, $echo = true )`
 
-Displays or returns the HTML for the event share buttons. By default, Twitter, Facebook and Linkedin share links are provided. To add your own, use the following filter : `apply_filters( 'openagenda_sharers', $sharers, $uid, $event )`.
+Displays or returns the HTML for the event share buttons. By default, Twitter, Facebook and Linkedin share links are provided. To add your own, use the following filter : `apply_filters( 'openagenda_sharers', $sharers, $event_uid, $event )`.
 
 The HTML returned is passed through the following filter : `apply_filters( 'openagenda_sharers_html', $html, $uid, $event )`.
 
@@ -266,21 +266,21 @@ $args = array(
 );
 ```
 
-The arguments can be filtered using the following filter : `apply_filters( 'openagenda_page_links_args', $args, $uid )`. 
+The arguments can be filtered using the following filter : `apply_filters( 'openagenda_page_links_args', $args, $agenda_uid )`. 
 
-The final HTML can be filtered using the following filter : `apply_filters( 'openagenda_page_links', $links, $uid )`.
+The final HTML can be filtered using the following filter : `apply_filters( 'openagenda_page_links', $links, $agenda_uid )`.
 
-#### `openagenda_get_permalink( $uid = false )`
+#### `openagenda_get_permalink( $agenda_uid = false )`
 
 Returns the permalink to the calendar corresponding to the UID given. Defaults to the current calendar on calendar pages.
 
-The permalink can be filtrered using the following filter : `apply_filters( 'openagenda_permalink', $permalink, $uid )`.
+The permalink can be filtrered using the following filter : `apply_filters( 'openagenda_permalink', $permalink, $agenda_uid )`.
 
-#### `openagenda_exports( $uid = false, $echo = true )`
+#### `openagenda_exports( $agenda_uid = false, $echo = true )`
 
 Displays exports links for the calendar corresponding to the given UID. Defaults to current calendar. 
 
-The returned HTML passes throught the following filter : `apply_filters( 'openagenda_exports_html', $html, $uid )`.
+The returned HTML passes throught the following filter : `apply_filters( 'openagenda_exports_html', $html, $agenda_uid )`.
 
 #### `openagenda_filter( $filter, $args = array() )`
 
@@ -294,7 +294,7 @@ Displays or returns HTML corresponding to the event navigation on single event p
 
 The HTML returned goes through the following filter : `apply_filters( 'openagenda_event_navigation', $html, $previous_link, $next_link )`.
 
-#### `openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )`
+#### `openagenda_get_adjacent_event_link( $direction = 'next', $event_uid = false )`
 
 Used by `openagenda_navigation()`.
 
@@ -302,7 +302,7 @@ Returns link **used to fetch** the adjacent event link. Since content is fetched
 
 A little processing is necessary under the hood to get the actual link to the next or previous event, so this function returns the link to an admin-post action instead, where the magic happens.
 
-The returned HTML is passed through the following filter : `apply_filters( 'openagenda_adjacent_event_link', $html, $uid, $direction )`.
+The returned HTML is passed through the following filter : `apply_filters( 'openagenda_adjacent_event_link', $html, $event_uid, $direction )`.
 
 #### `openagenda_get_back_link()`
 
