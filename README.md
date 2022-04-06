@@ -58,7 +58,7 @@ The *Integrations* tab allows you to fine tune settings for various third party 
 
  * *CloudImage API key* : If you wish to use CloudImage to serve your images, enter your API key here.
 
- ### Permalinks settings
+### Permalinks settings
 
 In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
 
@@ -347,3 +347,76 @@ Returns `true` on a event list page.
 #### `openagenda_format_timing( $timing, $datetimezone = null )`
 
 Given an entry on the event `timings` field in the JSON data, this function wil return an array with formatted dates and times, based on a passed in PHP DateTimezone, or the site's timezone.
+
+### Filter reference
+
+These WordPress hooks are provided to allow developpers more control over the plugin's behavior. 
+
+Remember that filters are used to modify a certain value passed as the first argument to the associated callback function, so that function **should always return the first argument they get**.
+
+#### `openagenda_api_default_params`
+
+Allows to modify default API parameters for all agendas. The callback takes the following parameters : 
+
+* array  `$defaults`  Default parameters
+
+**Basic example**
+
+```php
+add_filter( 'openagenda_api_default_params', 'my_prefix_openagenda_default_params', 10, 1 );
+/**
+ * Always get detailed events, even on list views
+ * 
+ * @param   array   $defaults    Default parameters
+ * @return  array   $defaults    Modified parameters
+ */
+function my_prefix_openagenda_default_params( $defaults ){
+    $defaults['detailed'] = 1;
+    return $defaults;
+}
+```
+
+#### `openagenda_params`
+
+Allows to modify OpenAgenda request basic parameters. The callback takes the following parameters :
+
+* array   `$params`      Request parameters
+* string  `$agenda_uid`  Agenda UID
+
+#### `openagenda_filters`
+
+Allows to modify OpenAgenda request filters. The callback takes the following parameters :
+
+* array   `$filters`     Request filters
+* string  `$agenda_uid`  Agenda UID
+
+**Basic example**
+
+```php
+add_filter( 'openagenda_filters', 'my_prefix_openagenda_filters', 10, 2 );
+/**
+ * Only display upcoming events on agenda 123
+ *  
+ * @param   array   $filters     Request filters
+ * @param   string  $agenda_uid  Agenda UID
+ * @return  array   $filters     Modified request filters
+ */
+function my_prefix_openagenda_filters( $filters, $agenda_uid ){
+    if( '123' === $agenda_uid ){
+        $filters['relative'][] = 'upcoming';
+    }
+    return $filters;
+}
+```
+
+#### `openagenda_request_url`
+
+Allows to modify OpenAgenda request url. The URL is determined from request parameters.
+
+The callback takes the following parameters :
+
+* array   `$url`         Request URL
+* string  `$agenda_uid`  Agenda UID
+* array   `$args`        Request arguments
+* bool    `$export`      Is the URL for an export request ?
+
