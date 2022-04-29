@@ -213,13 +213,13 @@ class Main {
     public function init_calendar(){
         global $openagenda;     
         if( is_singular( 'oa-calendar' ) ){
-    
-            // Parse URL structure
-            $uid  = get_post_meta( get_the_ID(), 'oa-calendar-uid', true );
-            $args = array(
-                'size' => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
-                'page' => ! empty( get_query_var( 'oa-page' ) ) ? sanitize_title( get_query_var( 'oa-page' ) ) : 1,
-                'slug' => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_text_field( get_query_var( 'oa-slug' ) ) : '',
+            $uid       = get_post_meta( get_the_ID(), 'oa-calendar-uid', true );
+            $page_size = get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
+            $args      = array(
+                'size'      => $page_size,
+                'page_size' => $page_size,
+                'page'      => ! empty( get_query_var( 'oa-page' ) ) ? sanitize_title( get_query_var( 'oa-page' ) ) : 1,
+                'slug'      => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_text_field( get_query_var( 'oa-slug' ) ) : '',
             );
 
             // Merge filters

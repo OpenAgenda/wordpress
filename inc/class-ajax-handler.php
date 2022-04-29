@@ -6,11 +6,18 @@ namespace Openagenda;
  * Handles all Ajax requests.
  */
 class Ajax_Handler {
+    
+    /**
+     * Debug
+     */
+    protected $debug = false;
 
     /**
      * Constructor
      */
-    public function __construct(){}
+    public function __construct(){
+        $this->debug = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG;
+    }
 
     /**
      * Registers hooks
@@ -43,11 +50,13 @@ class Ajax_Handler {
             exit;
         }
         
-        $query = array();
-        $view  = get_post_meta( $post_id, 'oa-calendar-view', true );
-        $args  = array(
-            'size' => get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
-            'page' => 1,
+        $query     = array();
+        $view      = get_post_meta( $post_id, 'oa-calendar-view', true );
+        $page_size = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
+        $args      = array(
+            'size'      => $page_size,
+            'page_size' => $page_size,
+            'page'      => 1,
         );
 
         // Read POST query param

@@ -91,6 +91,11 @@ class Openagenda {
     protected $errors = null;
 
     /**
+     * Debug
+     */
+    protected $debug = false;
+
+    /**
      * Parsed JSON response
      */
     protected $json = null;
@@ -151,7 +156,8 @@ class Openagenda {
         $this->uid      = $uid;
         $this->api_key  = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
         $this->include_embedded = ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true; 
-        
+        $this->debug    = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG;
+
         $this->use_cache    = (bool) $use_cache;
         $this->use_context  = (bool) $use_context;
 
@@ -169,7 +175,8 @@ class Openagenda {
         
         $this->event        = ! empty( $this->get_events() ) ? $this->get_events()[0] : null;
         $this->count        = count( $this->get_events() );
-        $this->total_pages  = (int) ceil( $this->total / $this->size );
+        $page_size          = ! empty( $args['page_size'] ) ? (int) $args['page_size'] : (int) get_option( 'posts_per_page' );
+        $this->total_pages  = (int) ceil( $this->total / $page_size );
 
         $this->set_context();
         $this->maybe_cache();
@@ -413,7 +420,7 @@ class Openagenda {
         if ( 'markdown' !== $this->get_longDescription_format() ){
             $defaults['longDescriptionFormat'] = $this->get_longDescription_format();
         }
-        $args = array_filter( wp_parse_args( $args, $defaults ) );
+        $args = array_filter( wp_parse_args( $args, $defaults ), function( $value ){ return '' !== $value; } );
 
         $this->is_single   = ! empty( $args['slug'] );
         $this->is_archive  = ! $this->is_single;
@@ -423,6 +430,7 @@ class Openagenda {
         $this->is_preview  = ! empty( $args['id'] ) && 'preview' === $args['id'];
         if( $this->page > 1 )    $args['from'] = (int) $this->offset;
         if( $this->is_single() ) $args['size'] = 1;
+        unset( $args['page_size'] );
         unset( $args['page'] );
         unset( $args['id'] );
 
@@ -448,10 +456,12 @@ class Openagenda {
         } else {
             $response     = wp_safe_remote_get( $this->get_request_url() );
             $this->source = 'request';
+            if( $this->debug ) error_log( sprintf( 'Openagenda request URL : %s', esc_url( $this->get_request_url() ) ) );
         }
 
         if( is_wp_error( $response ) ){
             $this->errors[] = $response;
+            if( $this->debug ) error_log( sprintf( 'Openagenda request error : %s', sanitize_text_field( $response->get_error_message() ) ) );
         }
 
         return $response;
