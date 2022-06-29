@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 5.9.3
-Stable tag: 2.1.4
+Tested up to: 6.0
+Stable tag: 2.1.5
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -174,6 +174,10 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.1.5 =
+* Fixed : Fixed <title> tag on single event when using WordPress SEO.
+* Fixed : Fixed image <meta> properties.
+
 = 2.1.4 =
 * Fixed : Bug with ajax requests when size argument is 0.
 
@@ -222,6 +226,10 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.1.5 =
+* Fixed : Fixed <title> tag on single event when using WordPress SEO.
+* Fixed : Fixed image <meta> properties.
 
 = 2.1.4 =
 * Fixed : Bug with ajax requests when size argument is 0.

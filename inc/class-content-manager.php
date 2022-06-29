@@ -61,7 +61,6 @@ class Content_Manager implements Hookable {
     public function register_hooks(){
         add_action( 'init', array( $this, 'register_post_types' ), 10 );
         add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
-        add_action( 'wp', array( $this, 'register_title' ), 100 );
         add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
         add_filter( 'body_class', array( $this, 'body_class'), 10, 1 );
         add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 10, 1 );
@@ -73,7 +72,7 @@ class Content_Manager implements Hookable {
             add_filter( 'get_canonical_url', array( $this, 'canonical_url' ), 10, 1 );
             add_filter( 'get_shortlink', array( $this, 'get_shortlink' ), 10, 4 );
             add_filter( 'wpseo_canonical', array( $this, 'canonical_url' ), 10, 1 ); 
-            add_filter( 'wpseo_title', array( $this, 'yoast_seo_title' ), 10, 2 );
+            add_filter( 'wpseo_replacements', array( $this, 'wpseo_replacements' ), 10, 2 );
             add_filter( 'wpseo_metadesc', array( $this, 'yoast_seo_metadata' ), 10, 1 );
             add_filter( 'wpseo_twitter_description', array( $this, 'yoast_seo_metadata' ), 10, 1 );
             add_filter( 'wpseo_twitter_image', array( $this, 'yoast_seo_metadata' ), 10, 1 );
@@ -260,14 +259,6 @@ class Content_Manager implements Hookable {
 
 
     /**
-     * Stores the title to avoid nested loops on filters
-     */
-    public function register_title(){
-        $this->title = wp_get_document_title();
-    }
-
-
-    /**
      * Filters the title parts of the document.
      * 
      * @param   array  $parts  Array of title elements
@@ -289,17 +280,18 @@ class Content_Manager implements Hookable {
     public function get_default_meta(){
         global $post;
         global $openagenda;
-        
+        $title = wp_get_document_title();
+
         $metas = array( 
-            'title'         => $this->title,
+            'title'         => $title,
             'twitter:site'  => get_bloginfo( 'name' ),
             'twitter:card'  => 'summary_large_image',
-            'twitter:title' => $this->title,
+            'twitter:title' => $title,
         );
         
         if( $openagenda->is_single() ){
             $event          = openagenda_get_event();
-            $image_filename = ! empty( $event['image']['filename'] ) ? empty( $event['image']['filename'] ) : '';
+            $image_filename = ! empty( $event['image']['filename'] ) ? $event['image']['filename'] : '';
             $image_url      = ! empty( $image_filename ) && ! empty( $event['image']['base'] ) ? trailingslashit( $event['image']['base'] ) . $image_filename : false;
             if( ! empty( $description = \openagenda_get_field( 'description', false ) ) ) {
                 $metas['description']         = $description;
@@ -332,19 +324,20 @@ class Content_Manager implements Hookable {
     public function get_default_properties(){
         global $post;
         global $openagenda;
+        $title = wp_get_document_title();
 
         $properties = array(
             'og:locale'      => get_locale(),
             'og:site_name'   => get_bloginfo( 'name' ),
             'og:type'        => 'article',
-            'og:title'       => $this->title,
+            'og:title'       => $title,
         );
         
         if( $openagenda->is_single() ){
             $properties['og:url'] = esc_url( \openagenda_get_field( 'permalink', false ) ) ;
 
             $event          = openagenda_get_event();
-            $image_filename = ! empty( $event['image']['filename'] ) ? empty( $event['image']['filename'] ) : '';
+            $image_filename = ! empty( $event['image']['filename'] ) ? $event['image']['filename'] : '';
             $image_url      = ! empty( $image_filename ) && ! empty( $event['image']['base'] ) ? trailingslashit( $event['image']['base'] ) . $image_filename : false;
             $description    = ! empty( \openagenda_get_field( 'description', false ) ) ? \openagenda_get_field( 'description', false ) : false;
             if( $description ){
@@ -370,17 +363,17 @@ class Content_Manager implements Hookable {
 
 
     /**
-     * Filters Yoast SEO title on single event pages
+     * Filters Yoast SEO replacements on single event pages
      * 
-     * @param   string  $value  Value of the title
-     * @param   Indexable_Presentation  $presentation  The presentation of an indexable
-     * @return  string  $value  
+     * @param   array   $replacements  Replacements
+     * @param   object  $args
+     * @return  array   $replacements  
      */
-    public function yoast_seo_title( $value, $presentation ){
+    function wpseo_replacements( $replacements, $args ){
         if( is_singular( 'oa-calendar' ) && \openagenda_is_single() ){
-            $value = ! empty( $this->title ) ? strip_tags( $this->title ) : $value;
+            $replacements['%%title%%'] = strip_tags( \openagenda_get_field( 'title', false, false ) );
         }
-        return $value;
+        return $replacements;
     }
 
 

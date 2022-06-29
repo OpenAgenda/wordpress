@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda 2.1.3\n"
+"Project-Id-Version: OpenAgenda 2.1.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
+"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-03-30T13:44:35+02:00\n"
+"POT-Creation-Date: 2022-06-29T10:44:17+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: openagenda\n"
@@ -65,16 +65,16 @@ msgstr ""
 msgid "CloudImage settings"
 msgstr ""
 
-#: inc/class-ajax-handler.php:36
+#: inc/class-ajax-handler.php:43
 msgid "No post ID was provided."
 msgstr ""
 
-#: inc/class-ajax-handler.php:42
+#: inc/class-ajax-handler.php:49
 msgid "The post ID provided does not refer to a calendar."
 msgstr ""
 
 #: inc/class-content-manager.php:18
-#: inc/class-content-manager.php:123
+#: inc/class-content-manager.php:122
 #: inc/class-settings.php:415
 msgid "calendar"
 msgstr ""
@@ -170,7 +170,7 @@ msgctxt "Screen reader text for the items list heading on the post type listing 
 msgid "Calendars list"
 msgstr ""
 
-#: inc/class-content-manager.php:218
+#: inc/class-content-manager.php:217
 msgid "Please provide a calendar UID in this calendar's settings box first."
 msgstr ""
 
@@ -363,19 +363,19 @@ msgstr ""
 msgid "New field"
 msgstr ""
 
-#: inc/class-openagenda.php:338
+#: inc/class-openagenda.php:345
 msgid "XLSX"
 msgstr ""
 
-#: inc/class-openagenda.php:339
+#: inc/class-openagenda.php:346
 msgid "JSON"
 msgstr ""
 
-#: inc/class-openagenda.php:340
+#: inc/class-openagenda.php:347
 msgid "RSS"
 msgstr ""
 
-#: inc/class-openagenda.php:468
+#: inc/class-openagenda.php:478
 msgid "There was an error parsing the JSON."
 msgstr ""
 
@@ -610,30 +610,30 @@ msgstr ""
 msgid "Access the event"
 msgstr ""
 
-#: inc/template-tags.php:738
+#: inc/template-tags.php:741
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:739
+#: inc/template-tags.php:742
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:878
+#: inc/template-tags.php:881
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:962
+#: inc/template-tags.php:965
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
-#: inc/template-tags.php:963
+#: inc/template-tags.php:966
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
 
 #. translators: %s: event title
-#: inc/template-tags.php:1061
+#: inc/template-tags.php:1064
 msgid "Add %s to favorites."
 msgstr ""
 
