@@ -128,7 +128,7 @@ class Shortcodes implements Hookable {
             '{total, plural, =0 {%s} one {%s} other {%s}}',
             _x( 'No event found', 'Total filter message when no events found', 'openagenda' ),
             _x( '{total} event', 'Total filter message when 1 event found. Keep {total} placeholder.', 'openagenda' ),
-            _x( '{total} events', 'Total filter message when multiple event found. Keep {total} placeholder.', 'openagenda' ),
+            _x( '{total} events', 'Total filter message when multiple event found. Keep {total} placeholder.', 'openagenda' )
         );
 
         $params = array(

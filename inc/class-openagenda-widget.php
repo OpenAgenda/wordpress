@@ -153,7 +153,7 @@ class Openagenda_Widget extends \WP_Widget {
                     esc_attr( $field['type'] ),
                     esc_attr( $field['class'] ),
                     esc_attr( $value ),
-                    $description,
+                    $description
                 );
                 break;
         }
