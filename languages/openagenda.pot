@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda 2.1.5\n"
+"Project-Id-Version: OpenAgenda 2.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
 "Last-Translator: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
 "Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-29T10:44:17+02:00\n"
+"POT-Creation-Date: 2022-07-06T15:24:53+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: openagenda\n"
@@ -232,59 +232,63 @@ msgid "Cities"
 msgstr ""
 
 #: inc/class-filter-widget.php:58
-msgid "Keywords"
+msgid "Districts"
 msgstr ""
 
 #: inc/class-filter-widget.php:59
-msgid "Admin Level 3"
+msgid "Keywords"
 msgstr ""
 
 #: inc/class-filter-widget.php:60
-msgid "Departments"
+msgid "Admin Level 3"
 msgstr ""
 
 #: inc/class-filter-widget.php:61
-msgid "Regions"
+msgid "Departments"
 msgstr ""
 
 #: inc/class-filter-widget.php:62
-msgid "Attendance Mode"
+msgid "Regions"
 msgstr ""
 
 #: inc/class-filter-widget.php:63
+msgid "Attendance Mode"
+msgstr ""
+
+#: inc/class-filter-widget.php:64
 msgid "Additional field"
 msgstr ""
 
-#: inc/class-filter-widget.php:68
+#: inc/class-filter-widget.php:69
 msgid "Additional field name: "
 msgstr ""
 
-#: inc/class-filter-widget.php:72
+#: inc/class-filter-widget.php:73
 msgid "You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )"
 msgstr ""
 
-#: inc/class-filter-widget.php:78
+#: inc/class-filter-widget.php:79
 msgid "Number of options to display at once: "
 msgstr ""
 
-#: inc/class-filter-widget.php:87
+#: inc/class-filter-widget.php:88
 msgid "Openagenda Filter"
 msgstr ""
 
-#: inc/class-filter-widget.php:89
+#: inc/class-filter-widget.php:90
 msgid "Displays a filter widget."
 msgstr ""
 
-#: inc/class-filter-widget.php:141
+#: inc/class-filter-widget.php:142
 #: inc/class-preview-widget.php:75
 msgid "Title :"
 msgstr ""
 
-#: inc/class-filter-widget.php:145
+#: inc/class-filter-widget.php:146
 msgid "Filter to display :"
 msgstr ""
 
-#: inc/class-filter-widget.php:147
+#: inc/class-filter-widget.php:148
 msgid "Choose filter"
 msgstr ""
 

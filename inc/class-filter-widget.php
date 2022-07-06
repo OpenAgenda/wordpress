@@ -55,6 +55,7 @@ class Filter_Widget extends Openagenda_Widget {
                     'options' => array(
                         'favorites'        => __( 'Favorites', 'openagenda' ),
                         'city'             => __( 'Cities', 'openagenda' ),
+                        'district'         => __( 'Districts', 'openagenda' ),
                         'keyword'          => __( 'Keywords', 'openagenda' ),
                         'adminLevel3'      => __( 'Admin Level 3', 'openagenda' ),
                         'department'       => __( 'Departments', 'openagenda' ),
