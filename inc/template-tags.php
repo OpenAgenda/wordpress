@@ -381,7 +381,7 @@ function openagenda_event_timings( $uid = false, $echo = true ){
     if( $timings ){
         $html .= '<ul class="oa-months">';
         foreach ( $months as $number => $month ) {
-            $class = true === $month['current'] ? 'oa-current' : 'oa-hidden';
+            $class = true === $month['nearest'] ? 'oa-current' : 'oa-hidden';
             $html .= sprintf( 
                 '<li class="oa-month %s">
                     <div class="oa-month-header">

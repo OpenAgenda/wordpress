@@ -374,6 +374,7 @@ function openagenda_format_timing( $timing, $datetimezone = null ){
 
     $timing['start_date_label'] = wp_date( get_option( 'date_format' ), $start_timestamp, $datetimezone ) ;
     $timing['start_time_label'] = wp_date( get_option( 'time_format' ), $start_timestamp, $datetimezone ) ;
+    $timing['start_year']       = wp_date( 'Y', $start_timestamp, $datetimezone ) ;
     $timing['start_month']      = wp_date( 'm', $start_timestamp, $datetimezone ) ;
     $timing['start_month_label']= wp_date( 'F Y', $start_timestamp, $datetimezone ) ;
     $timing['start_week']       = wp_date( 'W', $start_timestamp, $datetimezone ) ;
@@ -394,6 +395,22 @@ function openagenda_format_timing( $timing, $datetimezone = null ){
     return $timing;
 }
 
+  
+/**
+ * Checks whether a given month is nearer in the future than a given reference month
+ * 
+ * @param   string  $month  Month to test (format Y-m)
+ * @param   string  $ref    Reference month
+ * @param   string  $today  This month.
+ * @return  bool  
+ */
+function openagenda_is_month_nearer( $month, $ref, $today ){
+    if ( ! $ref ) return true;
+    if ( $ref < $today ) return $month > $ref;
+    if ( $ref > $today ) return ( $month >= $today ) && ( $month < $ref ) ;
+    return false;
+}
+
 
 /**
  * Format and group event timings by month and week
@@ -402,29 +419,37 @@ function openagenda_format_timing( $timing, $datetimezone = null ){
  * @return  array  $months
  */
 function openagenda_group_timings( $timings ){
-    $today    = new DateTime();
-    $months   = array();
-    $current_month = false;
-    $current_week  = false;
+    $today         = new DateTime();
+	$today_month   = $today->format( 'Y-m' );
+    $months        = array();
+    $month_cursor  = false;
+    $week_cursor   = false;
+    $nearest_month = false;
 
     foreach ( $timings as $timing ) {
-        if( $current_month !== $timing['start_month'] ){
-            $current_month = $timing['start_month'];
-            $months[$current_month] = array(
+        $timing_month_year = $timing['start_year'] . '-' . $timing['start_month'];
+
+        if ( $month_cursor !== $timing_month_year ) {
+            $month_cursor = $timing_month_year;
+            $months[$month_cursor] = array(
                 'label'   => $timing['start_month_label'],
-                'current' => $timing['start_month'] === $today->format( 'm' ),
+                'nearest' => false
             );
+            if ( openagenda_is_month_nearer( $month_cursor, $nearest_month, $today_month ) ) $nearest_month = $month_cursor;
         }
-        if( $current_week !== $timing['start_week'] ){
-            $current_week = $timing['start_week'];
-            $months[$current_month]['weeks'][$current_week] = array(
+
+        if( $week_cursor !== $timing['start_week'] ){
+            $week_cursor = $timing['start_week'];
+            $months[$month_cursor]['weeks'][$week_cursor] = array(
                 'label'   => $timing['start_week_label'],
                 'current' => $timing['start_week'] === $today->format( 'W' ),
             );
         }
-        $months[$current_month]['weeks'][$current_week]['timings'][] = $timing;
+
+        $months[$month_cursor]['weeks'][$week_cursor]['timings'][] = $timing;
     }
 
+    if ( $nearest_month ) $months[$nearest_month]['nearest'] = true;
     return $months;
 }
 
