@@ -1,3 +1,4 @@
 node_modules
 svn
 .idea
+package-lock.json

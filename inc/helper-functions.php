@@ -516,6 +516,25 @@ function openagenda_clear_transient(){
 
 
 /**
+ * Parses and returns pre-filters
+ * 
+ * @param   string  $agenda_uid  Agenda UID to pre-filter
+ * @return  array   $filters     Filters to apply to initial request
+ */
+function openagenda_get_pre_filters( $agenda_uid = false ){
+    if( ! $agenda_uid ) $agenda_uid = get_the_ID();
+    $filters_url = get_post_meta( $agenda_uid, 'oa-calendar-filters', true );
+    $filters     = array();
+    if ( filter_var( $filters_url, FILTER_VALIDATE_URL ) !== false ) {
+        $query = parse_url( urldecode( $filters_url ), PHP_URL_QUERY );
+        $query = str_replace( 'q.', '', $query );
+        if( ! empty( $query ) ) parse_str( $query, $filters );
+    } 
+    return apply_filters( 'openagenda_pre_filters', $filters, $agenda_uid );
+}
+
+
+/**
  * Temporary fix for older installs.
  */
 if( ! function_exists( 'wp_date' ) ){

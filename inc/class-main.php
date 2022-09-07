@@ -222,6 +222,11 @@ class Main {
                 'slug'      => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_text_field( get_query_var( 'oa-slug' ) ) : '',
             );
 
+            // Merge default filters
+            if( ! empty( $filters = openagenda_get_pre_filters() ) ){
+                $args = array_merge( $args, $filters );
+            }
+
             // Merge filters
             if( ! empty( $_GET ) ){
                 $args = array_merge( $args, $_GET );

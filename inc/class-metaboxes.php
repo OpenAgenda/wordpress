@@ -75,6 +75,13 @@ class Metaboxes implements Hookable {
                 'label'       => __( 'Display editor content on single event views.', 'openagenda' ),
                 'default'     => 'no',
             ),
+            'oa-calendar-filters' => array(
+                'metabox'     => 'oa-calendar-settings',
+                'type'        => 'text',
+                'label'       => __( 'Default filters (advanced)', 'openagenda' ),
+                'default'     => '',
+                'description' => __( 'Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed.', 'openagenda' ),
+            ),
         );
     }
 
@@ -204,7 +211,7 @@ class Metaboxes implements Hookable {
                         </div>
                         <?php 
                             if( ! empty( $args['description'] ) ) {
-                                printf( '<p>%s</p>', wp_kses_post( $args['description'] ) );
+                                printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
                             }
                         ?>
                     </div>
@@ -249,7 +256,7 @@ class Metaboxes implements Hookable {
                         </div>
                         <?php 
                             if( ! empty( $args['description'] ) ) {
-                                printf( '<p>%s</p>', wp_kses_post( $args['description'] ) );
+                                printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
                             }
                         ?>
                     </div>
@@ -282,7 +289,7 @@ class Metaboxes implements Hookable {
             return;
         }
 
-        if( ! empty( $_POST['oa-calendar-uid'] ) ){
+        if( isset( $_POST['oa-calendar-uid'] ) ){
             update_post_meta( $post_ID, 'oa-calendar-uid', sanitize_text_field( $_POST['oa-calendar-uid'] ) );
         }
 
@@ -292,6 +299,10 @@ class Metaboxes implements Hookable {
 
         if( ! empty( $_POST['oa-calendar-view'] ) && in_array( $_POST['oa-calendar-view'], array( 'list', 'grid' ) ) ){
             update_post_meta( $post_ID, 'oa-calendar-view', sanitize_title( $_POST['oa-calendar-view'] ) );
+        }
+
+        if( isset( $_POST['oa-calendar-filters'] ) ){
+            update_post_meta( $post_ID, 'oa-calendar-filters', esc_url_raw( $_POST['oa-calendar-filters'] ) );
         }
 
         $content_on_archive = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';

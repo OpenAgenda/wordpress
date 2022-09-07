@@ -44,7 +44,7 @@ class Ajax_Handler {
             exit;
         }
         
-        $uid  = get_post_meta( $post_id, 'oa-calendar-uid', true );
+        $uid = get_post_meta( $post_id, 'oa-calendar-uid', true );
         if( ! $uid ){
             wp_send_json_error( new \WP_Error( 'wrong-calendar-id', __( 'The post ID provided does not refer to a calendar.', 'openagenda' ) ) );
             exit;
@@ -58,6 +58,11 @@ class Ajax_Handler {
             'page_size' => $page_size,
             'page'      => 1,
         );
+
+        // Merge default filters
+        if( ! empty( $filters = openagenda_get_pre_filters( $post_id ) ) ){
+            $args = array_merge( $args, $filters );
+        }
 
         // Read POST query param
         if( isset( $_POST['query'] ) ){

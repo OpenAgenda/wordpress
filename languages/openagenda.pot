@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda 2.2\n"
+"Project-Id-Version: OpenAgenda 2.3.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
-"Last-Translator: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
-"Language-Team: Vincent Dubroeucq <vincent@vincentdubroeucq.com>\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-06T15:24:53+02:00\n"
+"POT-Creation-Date: 2022-09-07T10:18:57+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: openagenda\n"
@@ -358,12 +358,20 @@ msgstr ""
 msgid "Display editor content on single event views."
 msgstr ""
 
+#: inc/class-metaboxes.php:81
+msgid "Default filters (advanced)"
+msgstr ""
+
+#: inc/class-metaboxes.php:83
+msgid "Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed."
+msgstr ""
+
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:146
+#: inc/class-metaboxes.php:153
 msgid "Please provide your account API key in <a href=\"%s\">the plugin settings</a>."
 msgstr ""
 
-#: inc/class-metaboxes.php:169
+#: inc/class-metaboxes.php:176
 msgid "New field"
 msgstr ""
 
@@ -535,13 +543,13 @@ msgid "There was an error updating the events. Pleaser refresh the page and try 
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:390
+#: inc/helper-functions.php:391
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:392
+#: inc/helper-functions.php:393
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
