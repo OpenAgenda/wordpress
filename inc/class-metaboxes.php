@@ -75,6 +75,12 @@ class Metaboxes implements Hookable {
                 'label'       => __( 'Display editor content on single event views.', 'openagenda' ),
                 'default'     => 'no',
             ),
+            'oa-calendar-exclude' => array(
+                'metabox'     => 'oa-calendar-settings',
+                'type'        => 'checkbox',
+                'label'       => __( 'Only display current and upcoming events. Past events can be displayed using the calendar widget.', 'openagenda' ),
+                'default'     => 'yes',
+            ),
             'oa-calendar-filters' => array(
                 'metabox'     => 'oa-calendar-settings',
                 'type'        => 'text',
@@ -305,10 +311,12 @@ class Metaboxes implements Hookable {
             update_post_meta( $post_ID, 'oa-calendar-filters', esc_url_raw( $_POST['oa-calendar-filters'] ) );
         }
 
-        $content_on_archive = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';
-        $content_on_single  = isset( $_POST['oa-calendar-content-on-single'] ) ? 'yes' : 'no';
+        $content_on_archive  = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';
+        $content_on_single   = isset( $_POST['oa-calendar-content-on-single'] ) ? 'yes' : 'no';
+        $exclude_past_events = isset( $_POST['oa-calendar-exclude'] ) ? 'yes' : 'no';
         update_post_meta( $post_ID, 'oa-calendar-content-on-archive', $content_on_archive );
         update_post_meta( $post_ID, 'oa-calendar-content-on-single', $content_on_single );
+        update_post_meta( $post_ID, 'oa-calendar-exclude', $exclude_past_events );
 
         if( $update ) openagenda_clear_transient();
     }

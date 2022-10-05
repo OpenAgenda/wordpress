@@ -59,11 +59,6 @@ class Ajax_Handler {
             'page'      => 1,
         );
 
-        // Merge default filters
-        if( ! empty( $filters = openagenda_get_pre_filters( $post_id ) ) ){
-            $args = array_merge( $args, $filters );
-        }
-
         // Read POST query param
         if( isset( $_POST['query'] ) ){
             $query = json_decode( stripslashes( html_entity_decode( $_POST['query'] ) ), true );
@@ -78,6 +73,11 @@ class Ajax_Handler {
 
         if( $query ){
             $args = array_merge( $args, $query );
+        }
+
+        // Merge default filters
+        if( ! empty( $prefilters = openagenda_get_pre_filters( $post_id, $query ) ) ){
+            $args = array_merge( $prefilters, $args );
         }
 
         $openagenda = new Openagenda( $uid, $args, false, true );
