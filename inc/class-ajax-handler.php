@@ -77,7 +77,7 @@ class Ajax_Handler {
 
         // Merge default filters
         if( ! empty( $prefilters = openagenda_get_pre_filters( $post_id, $query ) ) ){
-            $args = array_merge( $prefilters, $args );
+            $args = array_merge( $args, $prefilters );
         }
 
         $openagenda = new Openagenda( $uid, $args, false, true );

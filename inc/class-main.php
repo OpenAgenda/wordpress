@@ -229,7 +229,7 @@ class Main {
 
             // Merge default filters
             if( ! empty( $prefilters = openagenda_get_pre_filters( false, $args ) ) ){
-                $args = array_merge( $prefilters, $args );
+                $args = array_merge( $args, $prefilters );
             }
 
             if( $uid ){

@@ -527,17 +527,17 @@ function openagenda_get_pre_filters( $agenda_uid = false, $filters = [] ){
     $exclude_past_events = get_post_meta( $agenda_uid, 'oa-calendar-exclude', true );
 
     $prefilters = array();
+
+    if( 'yes' === $exclude_past_events ){
+        if( ! isset( $filters['timings'] ) && ! isset( $filters['relative'] ) ){
+            $prefilters['relative'] = ['current', 'upcoming'];
+        }
+    }
+
     if ( filter_var( $filters_url, FILTER_VALIDATE_URL ) !== false ) {
         $query = parse_url( urldecode( $filters_url ), PHP_URL_QUERY );
         $query = str_replace( 'q.', '', $query );
         if( ! empty( $query ) ) parse_str( $query, $prefilters );
-    }
-
-    if( 'yes' === $exclude_past_events ){
-        $all_filters = array_merge( $prefilters, $filters );
-        if( ! isset( $all_filters['timings'] ) && ! isset( $all_filters['relative'] ) ){
-            $prefilters['relative'] = ['current', 'upcoming'];
-        }
     }
 
     return apply_filters( 'openagenda_pre_filters', $prefilters, $agenda_uid );
