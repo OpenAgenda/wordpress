@@ -79,7 +79,7 @@ class Metaboxes implements Hookable {
                 'metabox'     => 'oa-calendar-settings',
                 'type'        => 'checkbox',
                 'label'       => __( 'Only display current and upcoming events. Past events can be displayed using the calendar widget.', 'openagenda' ),
-                'default'     => 'yes',
+                'default'     => 'no',
             ),
             'oa-calendar-filters' => array(
                 'metabox'     => 'oa-calendar-settings',
@@ -183,12 +183,13 @@ class Metaboxes implements Hookable {
             'default'     => '',
             'description' => '',
         ) );
-
+        
+        if( 'oa-calendar-exclude' === $name && empty( get_post_meta( $post->ID, 'oa-calendar-uid', true ) ) ) $args['default'] = 'yes';
         $field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];  
 
         switch ( $args['type'] ) {
             case 'checkbox':
-                $checked = 'yes' === $field_value;
+                $checked         = 'yes' === $field_value;
                 $container_class = use_block_editor_for_post( $post ) ? 'components-checkbox-control__input-container' : '';
                 $input_class     = use_block_editor_for_post( $post ) ? 'components-checkbox-control__input' : '';
                 ?>
