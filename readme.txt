@@ -2,7 +2,7 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.0
+Tested up to: 6.1.1
 Stable tag: 2.4.0
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -111,6 +111,7 @@ Displays next events. It takes the following parameters :
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
+ * `filters` : Query string representing filters to apply to the request.
 
 **`[openagenda_filter_relative]`**
 
@@ -174,6 +175,10 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.4.0 =
+* Feature : Added setting to exclude past events.
+* Feature : Added pre-filters setting to Preview widget
+
 = 2.3.0 =
 * Added support for default filters.
 
@@ -235,6 +240,10 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.4.0 =
+* Feature : Added setting to exclude past events.
+* Feature : Added pre-filters setting to Preview widget
 
 = 2.3.0 =
 * Added support for default filters.

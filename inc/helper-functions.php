@@ -302,7 +302,7 @@ function openagenda_get_shortcode_attributes( $array, $id = '' ){
         $atts[] = sprintf('id="%s"', esc_attr( $id ) );
     }
     $atts = array_merge( $atts, array_map( function( $key, $value ){
-        return sprintf( '%s="%s"', $key, sanitize_text_field( $value ) );
+        return sprintf( '%s="%s"', $key, 'filters' !== $key ? sanitize_text_field( $value ) : $value );
     }, array_keys( $array ), array_values( $array ) )) ;
     return join( ' ', $atts );
 }
@@ -527,17 +527,17 @@ function openagenda_get_pre_filters( $agenda_uid = false, $filters = [] ){
     $exclude_past_events = get_post_meta( $agenda_uid, 'oa-calendar-exclude', true );
 
     $prefilters = array();
+    
+    if ( filter_var( $filters_url, FILTER_VALIDATE_URL ) !== false ) {
+        $query = parse_url( urldecode( $filters_url ), PHP_URL_QUERY );
+        $query = str_replace( 'q.', '', $query );
+        if( ! empty( $query ) ) parse_str( $query, $prefilters );
+    }
 
     if( 'yes' === $exclude_past_events ){
         if( ! isset( $filters['timings'] ) && ! isset( $filters['relative'] ) ){
             $prefilters['relative'] = ['current', 'upcoming'];
         }
-    }
-
-    if ( filter_var( $filters_url, FILTER_VALIDATE_URL ) !== false ) {
-        $query = parse_url( urldecode( $filters_url ), PHP_URL_QUERY );
-        $query = str_replace( 'q.', '', $query );
-        if( ! empty( $query ) ) parse_str( $query, $prefilters );
     }
 
     return apply_filters( 'openagenda_pre_filters', $prefilters, $agenda_uid );

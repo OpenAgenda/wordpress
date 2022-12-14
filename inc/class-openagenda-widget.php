@@ -141,17 +141,19 @@ class Openagenda_Widget extends \WP_Widget {
             break;
             default:
                 $description = ! empty( $field['description'] ) ? sprintf( '<em><span class="description">%s</span></em>', wp_kses_post( $field['description'] ) ) : '';    
+                $placeholder = ! empty( $field['placeholder'] ) ? sprintf( 'placeholder="%s"', esc_attr( $field['placeholder'] ) ) : '';
                 $html = sprintf( 
                     '<p>
                         <label for="%1$s">%3$s</label>
-                        <input type="%4$s" class="%5$s" id="%1$s" name="%2$s" value="%6$s">
-                        %7$s
+                        <input type="%4$s" id="%1$s" class="%5$s" name="%2$s" %6$s value="%7$s">
+                        %8$s
                     </p>',
                     esc_attr( $this->get_field_id( $field['name'] ) ),
                     esc_attr( $this->get_field_name( $field['name'] ) ),
                     esc_html( $field['label'] ),
                     esc_attr( $field['type'] ),
                     esc_attr( $field['class'] ),
+                    $placeholder,
                     esc_attr( $value ),
                     $description
                 );

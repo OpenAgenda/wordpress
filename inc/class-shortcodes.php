@@ -313,15 +313,24 @@ class Shortcodes implements Hookable {
         global $openagenda;
 
         $defaults = array(
-            'id'    => 'preview',
-            'uid'   => '',
-            'size'  => 3,
+            'id'      => 'preview',
+            'uid'     => '',
+            'size'    => 3,
+            'filters' => ''
         );
         $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
         
         $uid = $atts['uid'];
         unset( $atts['uid'] );
         $atts['size'] = (int) $atts['size'];
+
+        // Parse filters
+        $filters = [];
+        parse_str( trim( str_replace( 'q.', '', urldecode( $atts['filters'] ) ), '?' ), $filters );
+        if( $filters ){
+            $atts = array_merge( $atts, $filters );
+            unset( $atts['filters'] );
+        }
 
         // If we're on a events page, backup the main events.
         openagenda_save();

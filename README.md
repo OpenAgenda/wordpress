@@ -135,6 +135,7 @@ Displays next events. It takes the following parameters :
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
+ * `filters` : Query string representing filters to apply to the request.
  
 ## Customization
 

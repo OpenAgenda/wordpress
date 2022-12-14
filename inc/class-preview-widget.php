@@ -25,6 +25,15 @@ class Preview_Widget extends Openagenda_Widget {
                 'class'       => 'widefat',
                 'default'     => 3
             ),
+            'filters' => array(
+                'name'        => 'filters',
+                'type'        => 'text',
+                'label'       => __( 'Default filters (advanced)', 'openagenda' ),
+                'class'       => 'widefat',
+                'placeholder' => '?relative[]=upcoming',
+                'default'     => '',
+                'description' => __( 'Use a query string representing a filtered query. Only events corresponding to these filters will be displayed.', 'openagenda' ),
+            ),
         );
         parent::__construct( 
             'openagenda-preview-widget', 
@@ -52,6 +61,9 @@ class Preview_Widget extends Openagenda_Widget {
         if ( ! empty( $instance['title'] ) ) {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
         }
+
+        // Encode filters to avoid brackets issues with do_shortcode()
+        $instance['filters'] = ! empty( $instance['filters'] ) ? urlencode( $instance['filters'] ) : '';
 
         $shortcode = 'openagenda_filter_preview';
         $atts      = openagenda_get_shortcode_attributes( $instance );
@@ -105,9 +117,10 @@ class Preview_Widget extends Openagenda_Widget {
      */
 	public function update( $new_instance, $old_instance ) {
         $instance = array(
-            'title'  => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
-            'uid'    => ! empty( $new_instance['uid'] ) ? sanitize_text_field( $new_instance['uid'] ) : '',
-            'size'   => ! empty( $new_instance['size'] ) ? (int) $new_instance['size'] : 3,
+            'title'   => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
+            'uid'     => ! empty( $new_instance['uid'] ) ? sanitize_text_field( $new_instance['uid'] ) : '',
+            'size'    => ! empty( $new_instance['size'] ) ? (int) $new_instance['size'] : 3,
+            'filters' => ! empty( $new_instance['filters'] ) ? urldecode( $new_instance['filters'] ) : '',
         );
         return $instance;
     }
