@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-05T13:36:39+02:00\n"
+"POT-Creation-Date: 2022-12-14T10:18:00+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: openagenda\n"
@@ -280,7 +280,7 @@ msgid "Displays a filter widget."
 msgstr ""
 
 #: inc/class-filter-widget.php:142
-#: inc/class-preview-widget.php:75
+#: inc/class-preview-widget.php:87
 msgid "Title :"
 msgstr ""
 
@@ -363,6 +363,7 @@ msgid "Only display current and upcoming events. Past events can be displayed us
 msgstr ""
 
 #: inc/class-metaboxes.php:87
+#: inc/class-preview-widget.php:31
 msgid "Default filters (advanced)"
 msgstr ""
 
@@ -399,15 +400,19 @@ msgstr ""
 msgid "Number of events to display&nbsp;:"
 msgstr ""
 
-#: inc/class-preview-widget.php:31
+#: inc/class-preview-widget.php:35
+msgid "Use a query string representing a filtered query. Only events corresponding to these filters will be displayed."
+msgstr ""
+
+#: inc/class-preview-widget.php:40
 msgid "Openagenda Preview"
 msgstr ""
 
-#: inc/class-preview-widget.php:33
+#: inc/class-preview-widget.php:42
 msgid "Displays a calendar preview widget."
 msgstr ""
 
-#: inc/class-preview-widget.php:79
+#: inc/class-preview-widget.php:91
 msgid "Agenda UID :"
 msgstr ""
 
