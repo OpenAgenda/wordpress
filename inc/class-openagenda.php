@@ -274,6 +274,14 @@ class Openagenda {
 
 
     /**
+     * Returns the raw response.
+     */
+    public function get_raw_response(){
+        return $this->raw_response;
+    }
+
+
+    /**
      * Returns the JSON reponse.
      */
     public function get_json(){

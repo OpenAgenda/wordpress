@@ -187,6 +187,24 @@ class Metaboxes implements Hookable {
         if( 'oa-calendar-exclude' === $name && empty( get_post_meta( $post->ID, 'oa-calendar-uid', true ) ) ) $args['default'] = 'yes';
         $field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];  
 
+        if( 'oa-calendar-uid' == $name ){
+            $openagenda = new Openagenda( $field_value, array( 'size' => 1 ), false, false );
+            $response   = $openagenda->get_raw_response();
+            $message    = '';
+            if( ! is_wp_error( $response ) ){
+                $response_code = $response['response']['code'];
+                switch ( $response_code ) {
+                    case 404:
+                        $message = __( 'Agenda could not be found. Please double check your agenda UID.', 'openagenda' );
+                        break;
+                    case 403:
+                        $message = sprintf( __( 'The request could not be authenticated. Please double check API key in <a href="%s">your general settings.</a>', 'openagenda' ), esc_url( menu_page_url( 'openagenda', false ) ) );
+                        break;
+                }
+            }
+            if( ! empty( $message ) ) $args['message'] = $message;
+        }
+
         switch ( $args['type'] ) {
             case 'checkbox':
                 $checked         = 'yes' === $field_value;
@@ -262,9 +280,8 @@ class Metaboxes implements Hookable {
                             <input id="<?php echo esc_attr( $name ); ?>" name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $args['type'] ); ?>" class="components-text-control__input" value="<?php echo esc_attr( $field_value ); ?>" />
                         </div>
                         <?php 
-                            if( ! empty( $args['description'] ) ) {
-                                printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
-                            }
+                            if( ! empty( $args['message'] ) ) printf( '<p class="description" style="color:red;">%s</p>', wp_kses_post( $message ) );
+                            if( ! empty( $args['description'] ) ) printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
                         ?>
                     </div>
                 <?php
