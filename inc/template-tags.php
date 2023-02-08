@@ -60,10 +60,16 @@ function openagenda_get_field( $field, $uid = false ){
             $timezone     = ! empty( $event['location'] ) && ! empty( $event['location']['timezone'] ) ? $event['location']['timezone'] : null;
             $datetimezone = $timezone ? new DateTimeZone( $timezone ) : null;
             $timings      = ! empty( $event['timings'] ) ? $event['timings'] : array();
+            $next_timing  = ! empty( $event['nextTiming'] ) ? $event['nextTiming'] : ''; 
+            $last_timing  = ! empty( $event['lastTiming'] ) ? $event['lastTiming'] : ''; 
             
             if( 'last-timing' === $field ){
-                $value = ! empty( $timings ) ? openagenda_format_timing( $timings[count( $timings ) - 1], $datetimezone ) : array();
-                if( empty ( $value ) ) $value = ! empty( $event['lastTiming'] ) ? openagenda_format_timing( $event['lastTiming'] ): array();
+                $value = ! empty( $last_timing ) ? openagenda_format_timing( $last_timing ): array();
+                break;
+            }
+
+            if( 'next-timing' === $field ){
+                $value = ! empty( $next_timing ) ? openagenda_format_timing( $next_timing ): array();
                 break;
             }
 
@@ -74,21 +80,14 @@ function openagenda_get_field( $field, $uid = false ){
                 break;
             }
 
-            // If we're working with next timings, filter the timings array.
-            $next_timings = array_values( array_filter( $timings, function( $timing ) {
-                return strtotime( $timing['begin'] ) >= time(); 
-            } ) );
-
-            if( 'next-timing' === $field ){
-                $value = ! empty( $next_timings ) ? openagenda_format_timing( $next_timings[0], $datetimezone ) : array();
-                if( empty( $value ) ) $value = ! empty( $event['nextTiming'] ) ? openagenda_format_timing( $event['nextTiming'] ): array();
-                break;
-            }
-
             if( 'next-timings' === $field ){
+                // If we're working with next timings, filter the timings array.
+                $next_timings = array_values( array_filter( $timings, function( $timing ) use( $next_timing ) {
+                    return $timing['begin'] >= $next_timing['begin']; 
+                } ) );
                 $value = array_map( function( $timing ) use ( $datetimezone ) {
                     return openagenda_format_timing( $timing, $datetimezone );
-                }, $next_timings );;
+                }, $next_timings );
                 break;
             }
             break;
@@ -1082,6 +1081,35 @@ function openagenda_favorite_badge( $uid = false, $echo = true ){
 }
 
 
+/**
+ * Retrieves the Event Rich Snippet object
+ * 
+ * @param   string  $uid     UID of the event.
+ * @return  string  $schema  JSON encoded schema object
+ */
+function openagenda_get_event_schema( $uid = false ){
+    $event       = openagenda_get_event( $uid );
+    $permalink   = openagenda_event_permalink( $uid, false, false );
+    $image_data  = openagenda_get_event_image_data( '', $uid );
+    $image_url   = ! empty( $image_data['url'] ) ? $image_data['url'] : '';
+    $next_timing = openagenda_get_field( 'next-timing', $uid );
+    $duration    = date_diff(date_create( $next_timing['end'] ), date_create( $next_timing['begin']) , true );
+    $schema      = array(
+        '@id'         => $permalink,
+        '@context'    => 'https://schema.org',
+        '@type'       => 'Event',
+        'name'        => openagenda_get_field( 'title', $uid ),
+        'description' => openagenda_get_field( 'description', $uid ),
+        'url'         => $permalink,
+        'image'       => $image_url,
+        'startDate'   => $next_timing['begin'],
+        'endDate'     => $next_timing['end'],
+        'duration'    => $duration->format('c'),
+    //   eventAttendanceMode: getEventAttendanceMode(event.attendanceMode),
+    //   eventStatus: getEventStatus(event.status),
+    );
+    return json_encode( $schema );
+}
 
 
 /**

@@ -3,7 +3,7 @@ Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, open agenda, agenda, calendar, event, events
 Requires at least: 5.0
 Tested up to: 6.1.1
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -175,6 +175,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.4.1 =
+* Fixed : Removed date offset when filtering timings.
+
 = 2.4.0 =
 * Feature : Added setting to exclude past events.
 * Feature : Added pre-filters setting to Preview widget
@@ -240,6 +243,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.4.1 =
+* Fixed : Removed date offset when filtering timings.
 
 = 2.4.0 =
 * Feature : Added setting to exclude past events.
