@@ -1,6 +1,6 @@
 {
   "name": "openagenda",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Display your OpenAgenda data on your WordPress site",
   "main": "assets/js/main.js",
   "devDependencies": {
