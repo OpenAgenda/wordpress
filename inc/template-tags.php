@@ -61,15 +61,14 @@ function openagenda_get_field( $field, $uid = false ){
             $datetimezone = $timezone ? new DateTimeZone( $timezone ) : null;
             $timings      = ! empty( $event['timings'] ) ? $event['timings'] : array();
             $next_timing  = ! empty( $event['nextTiming'] ) ? $event['nextTiming'] : ''; 
-            $last_timing  = ! empty( $event['lastTiming'] ) ? $event['lastTiming'] : ''; 
-            
+            $last_timing  = ! empty( $event['lastTiming'] ) ? $event['lastTiming'] : '';
+            $today        = date_create( 'today midnight', $datetimezone )->format( 'c' );
+
             if( 'last-timing' === $field ){
                 $value = ! empty( $last_timing ) ? openagenda_format_timing( $last_timing ): array();
-                break;
-            }
-
-            if( 'next-timing' === $field ){
-                $value = ! empty( $next_timing ) ? openagenda_format_timing( $next_timing ): array();
+                if( empty( $value ) && ! empty( $timings ) ){
+                    $value = openagenda_format_timing( $timings[count( $timings ) - 1], $datetimezone );
+                }
                 break;
             }
 
@@ -80,11 +79,23 @@ function openagenda_get_field( $field, $uid = false ){
                 break;
             }
 
-            if( 'next-timings' === $field ){
-                // If we're working with next timings, filter the timings array.
-                $next_timings = array_values( array_filter( $timings, function( $timing ) use( $next_timing ) {
+            // If we're working with next timings, filter the timings array.
+            $next_timings = array_values( array_filter( $timings, function( $timing ) use( $next_timing, $today ) {
+                if( ! empty( $next_timing ) ){
                     return $timing['begin'] >= $next_timing['begin']; 
-                } ) );
+                }
+                return $timing['begin'] >= $today; 
+            } ) );
+            
+            if( 'next-timing' === $field ){
+                $value = ! empty( $next_timing ) ? openagenda_format_timing( $next_timing ): array();
+                if( empty( $value ) && ! empty( $next_timings ) ){
+                    $value = openagenda_format_timing( $next_timings[0], $datetimezone );
+                }
+                break;
+            }
+
+            if( 'next-timings' === $field ){
                 $value = array_map( function( $timing ) use ( $datetimezone ) {
                     return openagenda_format_timing( $timing, $datetimezone );
                 }, $next_timings );
