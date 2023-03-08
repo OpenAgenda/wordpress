@@ -1122,7 +1122,7 @@ function openagenda_language_switcher( $uid = false, $echo = true ){
     if( ! empty( $all_languages ) ){
         $links = '';
         foreach ( $all_languages as $lang ) {
-            $url    = add_query_arg( 'lang', sanitize_key( $lang ), $base_url );
+            $url    = add_query_arg( 'oa-lang', sanitize_key( $lang ), $base_url );
             $links .= sprintf( '<li class="oa-language-link %s"><a hreflang="%s" href="%s">%s</a></li>', $lang === $current_locale ? 'active' : '', esc_attr( $lang ), esc_url( $url ), esc_html( $lang ) );
         }
         $html = sprintf( '<div class="oa-language-switcher"><ul class="oa-languages">%s</ul></div>', $links );

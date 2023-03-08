@@ -50,19 +50,19 @@ function openagenda_get_locale(){
     $current_locale = get_locale();
     $locale         = substr( $current_locale, 0, 2 );
 
-    if( ! empty( $_GET['lang'] ) ){
-        $locale = sanitize_key( $_GET['lang'] );
+    if( ! empty( $_GET['oa-lang'] ) ){
+        $locale = sanitize_key( $_GET['oa-lang'] );
     }
 
     if( ! empty( $_POST['query'] ) ){
         $query = json_decode( stripslashes( html_entity_decode( $_POST['query'] ) ), true );
-        if( null !== $query && ! empty( $query['lang'] ) ){
-            $locale = sanitize_key( $query['lang'] );
+        if( null !== $query && ! empty( $query['oa-lang'] ) ){
+            $locale = sanitize_key( $query['oa-lang'] );
         }
     }
 
-    if( ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['lang'] ) ){
-        $locale = sanitize_key( $context['filters']['lang'] );
+    if( ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ){
+        $locale = sanitize_key( $context['filters']['oa-lang'] );
     }
         
     return apply_filters( 'openagenda_locale', $locale );
