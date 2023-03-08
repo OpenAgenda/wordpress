@@ -198,6 +198,7 @@ class Metaboxes implements Hookable {
                         $message = __( 'Agenda could not be found. Please double check your agenda UID.', 'openagenda' );
                         break;
                     case 403:
+                        /* translators: %s: settings page url */ 
                         $message = sprintf( __( 'The request could not be authenticated. Please double check API key in <a href="%s">your general settings.</a>', 'openagenda' ), esc_url( menu_page_url( 'openagenda', false ) ) );
                         break;
                 }
@@ -314,7 +315,9 @@ class Metaboxes implements Hookable {
         }
 
         if( isset( $_POST['oa-calendar-uid'] ) ){
-            update_post_meta( $post_ID, 'oa-calendar-uid', sanitize_text_field( $_POST['oa-calendar-uid'] ) );
+            $agenda_uid = sanitize_text_field( $_POST['oa-calendar-uid'] );
+            update_post_meta( $post_ID, 'oa-calendar-uid', $agenda_uid );
+            $this->save_agenda_settings( $agenda_uid, $post_ID );
         }
 
         if( ! empty( $_POST['oa-calendar-per-page'] ) ){
@@ -337,5 +340,38 @@ class Metaboxes implements Hookable {
         update_post_meta( $post_ID, 'oa-calendar-exclude', $exclude_past_events );
 
         if( $update ) openagenda_clear_transient();
+    }
+
+
+    /**
+     * Gets an agenda schema
+     * 
+     * @param  string  $agenda_uid  Agenda to fetch settings for
+     * 
+     */
+    public function save_agenda_settings( $agenda_uid, $post_id ){
+        $settings = get_option( 'openagenda_general_settings' );
+        $api_key  = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
+        $base_url = 'https://api.openagenda.com/v2/agendas/';
+    
+        $agenda_settings = array();
+        $url      = add_query_arg( 'key', $api_key, sprintf( $base_url . '%s', $agenda_uid ) );
+        $response = wp_safe_remote_get( $url );
+        if( ! is_wp_error( $response ) ){
+            $body    = wp_remote_retrieve_body( $response );
+            $decoded = json_decode( $body, true );
+            if( null !== $decoded ){
+                $agenda_settings = $decoded;
+            }
+        }    
+
+        // Save agenda settings
+        if( ! empty( $agenda_settings ) ){
+            $all_languages = isset( $agenda_settings['summary']['languages'] ) ? array_keys( $agenda_settings['summary']['languages'] ) : array();
+            update_post_meta( $post_id, 'oa-calendar-languages', $all_languages );
+            update_post_meta( $post_id, 'oa-calendar-settings', $agenda_settings );
+        }
+
+        return $agenda_settings;
     }
 }
