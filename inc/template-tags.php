@@ -202,7 +202,7 @@ function openagenda_get_i18n_value( $i18n_field ){
         if( array_key_exists( $locale, $i18n_field ) ){
             $value = ! empty( $i18n_field[$locale] ) ? $i18n_field[$locale] : '';
         } else {
-            $value = ! empty( array_values( $i18n_field )[0] ) ? array_values( $i18n_field )[0] : '';
+            $value = ! empty( $i18n_field['en'] ) ? $i18n_field['en'] : array_values( $i18n_field )[0];
         }
     }
 
