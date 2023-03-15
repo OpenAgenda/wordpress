@@ -49,7 +49,7 @@ function openagenda_get_field( $field, $uid = false ){
     $value  = '';
     switch ( $field ) {
         case 'permalink':
-            $calendar_permalink = openagenda_get_permalink( $openagenda->get_uid() );
+            $calendar_permalink = openagenda_get_permalink();
             $slug  = sanitize_text_field( $event['slug'] );
             $value = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $calendar_permalink );            
             break;
@@ -839,7 +839,7 @@ function openagenda_get_permalink( $uid = false ){
     $permalink = false;
 
     if( $openagenda && ! $uid ) $uid = $openagenda->get_uid();
-    if( is_singular( 'oa-calendar' ) && ! $openagenda->is_preview() ) $permalink = get_permalink();
+    if( 'oa-calendar' === get_post_type() && ! $openagenda->is_preview() ) $permalink = get_permalink();
     
     if( ! $permalink && $uid ) {
         $posts = get_posts( array(
@@ -1109,7 +1109,7 @@ function openagenda_language_switcher( $uid = false, $echo = true ){
         $all_languages = array_unique( array_keys( $event['title'] ) );
     } else {
         if( ! $uid ) $uid = $openagenda->get_uid();
-        $base_url      = openagenda_get_permalink( $uid );
+        $base_url      = openagenda_get_permalink();
         $all_languages = get_post_meta( get_the_ID(), 'oa-calendar-languages', true );
         if( ! empty( $filters = $openagenda->get_filters() ) ){
             $base_url = add_query_arg( $filters, $base_url );

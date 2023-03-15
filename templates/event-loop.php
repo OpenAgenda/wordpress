@@ -21,6 +21,7 @@ if( $openagenda->have_events() ) : ?>
             } else {
                 openagenda_navigation();
             }
+            openagenda_language_switcher();
         ?>
     </div>
     <div class="<?php echo esc_attr( $class ); ?>">
