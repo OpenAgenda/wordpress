@@ -329,6 +329,8 @@ The available languages list is passed through the following filter : `apply_fil
 
 The returned HTML is passed through the following filter : `apply_filters( 'openagenda_language_switcher', $html, $uid );`.
 
+**Note:** This functions just overrides the language of the content displayed by the plugin. It does not modify the current locale of the site. For complete multi-language functionality, you should use a WordPress plugin like Polylang.
+
 #### `openagenda_get_image_dimensions( $size = 'thumbnail' )`
 
 Returns an array of dimensions for images of a given size.
