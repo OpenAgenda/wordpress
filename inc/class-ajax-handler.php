@@ -36,6 +36,7 @@ class Ajax_Handler {
      */
     public function update_events(){
         global $openagenda;
+        global $post;
         check_ajax_referer( 'update_events', 'nonce' );
 
         $post_id = isset( $_REQUEST['postId'] ) ? (int) $_REQUEST['postId'] : false;
@@ -43,6 +44,10 @@ class Ajax_Handler {
             wp_send_json_error( new \WP_Error( 'missing-postid', __( 'No post ID was provided.', 'openagenda' ) ) );
             exit;
         }
+
+        // Setup $post global to allow for basic template tags to work
+        $post = get_post( $post_id );
+        setup_postdata( $post );
         
         $uid = get_post_meta( $post_id, 'oa-calendar-uid', true );
         if( ! $uid ){

@@ -317,9 +317,19 @@ Returns the path to a template. Looks for the template first in the `openagenda/
 
 #### `openagenda_get_locale()`
 
-Returns the current openagenda locale code, if supported. Else defaults to 'en'.
+Returns the current Openagenda locale code. Defaults to current WordPress locale. The locale is passed through the following filter : `apply_filters( 'openagenda_locale', $locale )`.
 
-Supported locales can be added using this filter : `apply_filters( 'openagenda_supported_locales', $locales )`.
+#### `openagenda_language_switcher( $uid = false, $echo = true )`
+
+Displays a simple language switcher. On list views, languages available throughout the entire agenda are displayed. On event views, only languages available for this specific event are displayed.
+
+Also, on list views, if used, the `$uid` parameter must correspond to the calendar uid. On single event views, it must correspond to the event uid.
+
+The available languages list is passed through the following filter : `apply_filters( 'openagenda_switcher_languages', $languages, $uid );`.
+
+The returned HTML is passed through the following filter : `apply_filters( 'openagenda_language_switcher', $html, $uid );`.
+
+**Note:** This functions just overrides the language of the content displayed by the plugin. It does not modify the current locale of the site. For complete multi-language functionality, you should use a WordPress plugin like Polylang.
 
 #### `openagenda_get_image_dimensions( $size = 'thumbnail' )`
 

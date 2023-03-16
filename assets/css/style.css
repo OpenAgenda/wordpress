@@ -54,9 +54,9 @@ p.oa-meta {
  * Pagination
  **************/
 ul.oa-pagination {
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
   margin: 1rem 0;
 }
 
@@ -102,6 +102,26 @@ ul.oa-pagination {
 
 .oa-nav-link-disabled {
   opacity: 0.5;
+}
+
+/*********************
+ * Language switcher
+ *********************/
+.oa-languages {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 1rem 0;
+}
+
+.oa-language-link {
+  text-transform: uppercase;
+  padding: 0.5rem;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+.oa-language-link.active {
+  border-bottom: 2px solid var(--oa-main-color, #41acdd);
 }
 
 /*****************************

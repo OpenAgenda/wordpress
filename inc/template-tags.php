@@ -49,7 +49,7 @@ function openagenda_get_field( $field, $uid = false ){
     $value  = '';
     switch ( $field ) {
         case 'permalink':
-            $calendar_permalink = openagenda_get_permalink( $openagenda->get_uid() );
+            $calendar_permalink = openagenda_get_permalink();
             $slug  = sanitize_text_field( $event['slug'] );
             $value = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $calendar_permalink );            
             break;
@@ -190,8 +190,8 @@ function openagenda_maybe_parse_field( $field, $value ){
 /**
  * Returns the value corresponding to the locale
  * 
- * @param  array  $i18n_field  Array of locale => label
- * @return  string  $value  Value corresponding to the current locale, or first available value, or empty.
+ * @param   array   $i18n_field  Array of locale => label
+ * @return  string  $value       Value corresponding to the current locale, or first available value, or empty.
  */
 function openagenda_get_i18n_value( $i18n_field ){
     $locale = openagenda_get_locale();
@@ -202,7 +202,7 @@ function openagenda_get_i18n_value( $i18n_field ){
         if( array_key_exists( $locale, $i18n_field ) ){
             $value = ! empty( $i18n_field[$locale] ) ? $i18n_field[$locale] : '';
         } else {
-            $value = ! empty( array_values( $i18n_field )[0] ) ? array_values( $i18n_field )[0] : '';
+            $value = ! empty( $i18n_field['en'] ) ? $i18n_field['en'] : array_values( $i18n_field )[0];
         }
     }
 
@@ -839,7 +839,7 @@ function openagenda_get_permalink( $uid = false ){
     $permalink = false;
 
     if( $openagenda && ! $uid ) $uid = $openagenda->get_uid();
-    if( is_singular( 'oa-calendar' ) && ! $openagenda->is_preview() ) $permalink = get_permalink();
+    if( 'oa-calendar' === get_post_type() && ! $openagenda->is_preview() ) $permalink = get_permalink();
     
     if( ! $permalink && $uid ) {
         $posts = get_posts( array(
@@ -1051,7 +1051,6 @@ function openagenda_get_next_event_link(){
 /**
  * Displays a favorite badge to add to favorites
  * 
- * 
  * @param  string  $uid   UID of the event.
  * @param  bool    $echo  Whether to echo or just return the html
  */
@@ -1087,6 +1086,49 @@ function openagenda_favorite_badge( $uid = false, $echo = true ){
     );
 
     $html = apply_filters( 'openagenda_event_favorite_badge', $html, $uid, $agenda_uid, $icon_active, $icon_inactive, $text );
+    if( $echo ) echo $html;
+    return $html;
+}
+
+
+/**
+ * Displays the language switcher
+ * 
+ * @param   string  $uid   UID of the event or agenda, depending on page type.
+ * @param   bool    $echo  Whether to echo or just return the html
+ * @return  string  $html  Language switcher HTML
+ */
+function openagenda_language_switcher( $uid = false, $echo = true ){
+    global $openagenda;
+     
+    if( openagenda_is_single() ){
+        $event = openagenda_get_event( $uid );
+        if( ! $event ) return false;
+        if( ! $uid ) $uid = $event['uid'];
+        $base_url      = openagenda_event_permalink( $uid, false, false );
+        $all_languages = array_unique( array_keys( $event['title'] ) );
+    } else {
+        if( ! $uid ) $uid = $openagenda->get_uid();
+        $base_url      = openagenda_get_permalink();
+        $all_languages = get_post_meta( get_the_ID(), 'oa-calendar-languages', true );
+        if( ! empty( $filters = $openagenda->get_filters() ) ){
+            $base_url = add_query_arg( $filters, $base_url );
+        }
+    }
+
+    $all_languages  = apply_filters( 'openagenda_switcher_languages', $all_languages, $uid );
+    $current_locale = openagenda_get_locale();
+    $html = '';
+    if( ! empty( $all_languages ) ){
+        $links = '';
+        foreach ( $all_languages as $lang ) {
+            $url    = add_query_arg( 'oa-lang', sanitize_key( $lang ), $base_url );
+            $links .= sprintf( '<li class="oa-language-link %s"><a hreflang="%s" href="%s">%s</a></li>', $lang === $current_locale ? 'active' : '', esc_attr( $lang ), esc_url( $url ), esc_html( $lang ) );
+        }
+        $html = sprintf( '<div class="oa-language-switcher"><ul class="oa-languages">%s</ul></div>', $links );
+    }
+
+    $html = apply_filters( 'openagenda_language_switcher', $html, $uid );
     if( $echo ) echo $html;
     return $html;
 }

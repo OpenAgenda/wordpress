@@ -46,52 +46,26 @@ function openagenda_should_enqueue_styles() {
  * @return  string  $locale  Locale code used by Open Agenda
  */ 
 function openagenda_get_locale(){
+    global $openagenda;
     $current_locale = get_locale();
-    $oa_locales     = openagenda_supported_locales();
-    
-    $locale = 'en';
-    if( array_key_exists( $current_locale, $oa_locales ) ){
-        $locale = sanitize_key( $oa_locales[$current_locale] ); 
+    $locale         = substr( $current_locale, 0, 2 );
+
+    if( ! empty( $_GET['oa-lang'] ) ){
+        $locale = sanitize_key( $_GET['oa-lang'] );
     }
+
+    if( ! empty( $_POST['query'] ) ){
+        $query = json_decode( stripslashes( html_entity_decode( $_POST['query'] ) ), true );
+        if( null !== $query && ! empty( $query['oa-lang'] ) ){
+            $locale = sanitize_key( $query['oa-lang'] );
+        }
+    }
+
+    if( ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ){
+        $locale = sanitize_key( $context['filters']['oa-lang'] );
+    }
+        
     return apply_filters( 'openagenda_locale', $locale );
-}
-
-
-/**
- * Gets the locales currently supported by Open Agenda.
- * 
- * @return  array  $locales  Array of WP locale code => Open Agenda locale code
- */
-function openagenda_supported_locales(){
-    $locales = array(
-        'de_DE' => 'de',
-        'de_DE_formal' => 'de',
-        'de_CH' => 'de',
-        'de_CH_informal' => 'de',
-        'de_AT' => 'de',
-        'en_US' => 'en',
-        'en_AU' => 'en',
-        'en_CA' => 'en',
-        'en_ZA' => 'en',
-        'en_NZ' => 'en',
-        'en_GB' => 'en',
-        'es_ES' => 'es',
-        'es_CO' => 'es',
-        'es_MX' => 'es',
-        'es_VE' => 'es',
-        'es_EC' => 'es',
-        'es_AR' => 'es',
-        'es_CL' => 'es',
-        'es_PE' => 'es',
-        'es_PR' => 'es',
-        'es_UY' => 'es',
-        'es_GT' => 'es',
-        'fr_FR' => 'fr',
-        'fr_BE' => 'fr',
-        'fr_CA' => 'fr',
-        'it_IT' => 'it'
-    );
-    return apply_filters( 'openagenda_supported_locales', $locales );
 }
 
 
