@@ -438,11 +438,11 @@ class Openagenda {
         $this->is_preview  = ! empty( $args['id'] ) && 'preview' === $args['id'];
         if( $this->page > 1 )    $args['from'] = (int) $this->offset;
         if( $this->is_single() ) $args['size'] = 1;
+        if( isset( $args['search'] ) ) $args['search'] = stripslashes( $args['search'] );
         unset( $args['page_size'] );
         unset( $args['page'] );
         unset( $args['id'] );
 
-        $args = array_map( 'stripslashes', $args );
         $this->params  = $this->extract_params( $args );
         $this->filters = $this->extract_filters( $args );
         return $args;
