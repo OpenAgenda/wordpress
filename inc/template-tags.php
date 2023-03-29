@@ -198,7 +198,7 @@ function openagenda_get_i18n_value( $i18n_field ){
     $value  = '';
     
     if( is_string( $i18n_field ) ) $value = $i18n_field;
-    if( is_array( $i18n_field ) ){
+    if( is_array( $i18n_field ) && ! empty( $i18n_field ) ){
         if( array_key_exists( $locale, $i18n_field ) ){
             $value = ! empty( $i18n_field[$locale] ) ? $i18n_field[$locale] : '';
         } else {

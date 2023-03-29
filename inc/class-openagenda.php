@@ -442,6 +442,7 @@ class Openagenda {
         unset( $args['page'] );
         unset( $args['id'] );
 
+        $args = array_map( 'stripslashes', $args );
         $this->params  = $this->extract_params( $args );
         $this->filters = $this->extract_filters( $args );
         return $args;
@@ -464,7 +465,7 @@ class Openagenda {
         } else {
             $response     = wp_safe_remote_get( $this->get_request_url() );
             $this->source = 'request';
-            if( $this->debug ) error_log( sprintf( 'Openagenda request URL : %s', esc_url( $this->get_request_url() ) ) );
+            if( $this->debug ) error_log( sprintf( 'Openagenda request URL : %s', $this->get_request_url() ) );
         }
 
         if( is_wp_error( $response ) ){
