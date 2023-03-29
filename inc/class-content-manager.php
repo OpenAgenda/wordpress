@@ -189,6 +189,7 @@ class Content_Manager implements Hookable {
      */
     public function the_content( $content ){
         if( ! is_singular( 'oa-calendar' ) ) return $content;
+        if( ! is_main_query() || ! in_the_loop() ) return $content;
             
         $display_content = openagenda_is_archive() ? get_post_meta( get_the_ID(), 'oa-calendar-content-on-archive', true ) : get_post_meta( get_the_ID(), 'oa-calendar-content-on-single', true );
         $filters         = openagenda_is_archive() ? openagenda_filter( 'active', array(), false ) : '';
