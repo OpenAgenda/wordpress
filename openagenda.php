@@ -3,14 +3,14 @@
 Plugin Name: OpenAgenda
 Plugin URI:  https://wordpress.org/plugins/openagenda/
 Description: Display your OpenAgenda data on your WordPress site.
-Version:     2.5.0
+Version:     2.6.0
 Author:      OpenAgenda
 Author URI:  https://openagenda.com/
 Text Domain: openagenda
 Domain Path: /languages
 License:     GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Requires PHP: 7.0
+Requires PHP: 7.1
 Requires at least: 5.0
 Tested up to: 6.1.1
 
@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || die();
 
 define( 'OPENAGENDA_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OPENAGENDA_URL', plugin_dir_url( __FILE__ ) );
-define( 'OPENAGENDA_VERSION', '2.5.0' );
+define( 'OPENAGENDA_VERSION', '2.6.0' );
 
 
 add_action( 'plugins_loaded', 'openagenda_load_textdomain' );

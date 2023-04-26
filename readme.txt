@@ -175,6 +175,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.6.0 =
+* Feature : Added a event rich snippets in head tag
+
 = 2.5.0 =
 * Feature : Added a basic language switcher
 
@@ -249,6 +252,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.6.0 =
+* Feature : Added a event rich snippets in head tag
 
 = 2.5.0 =
 * Feature : Added a basic language switcher
