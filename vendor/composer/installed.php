@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '705c015822305c0de1ab6f68d6ff6e9c0335ce6c',
+        'reference' => '64cac52615d6437eac8fbe52edc007f94c09ce3b',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '705c015822305c0de1ab6f68d6ff6e9c0335ce6c',
+            'reference' => '64cac52615d6437eac8fbe52edc007f94c09ce3b',
             'dev_requirement' => false,
         ),
         'dallgoot/yaml' => array(

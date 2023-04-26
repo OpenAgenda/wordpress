@@ -42,3 +42,5 @@ node_modules
 .phpunit.result.cache
 svn
 postcss.config.js
+assets/screenshots
+assets/banner
