@@ -1135,37 +1135,6 @@ function openagenda_language_switcher( $uid = false, $echo = true ){
 
 
 /**
- * Retrieves the Event Rich Snippet object
- * 
- * @param   string  $uid     UID of the event.
- * @return  string  $schema  JSON encoded schema object
- */
-function openagenda_get_event_schema( $uid = false ){
-    $event       = openagenda_get_event( $uid );
-    $permalink   = openagenda_event_permalink( $uid, false, false );
-    $image_data  = openagenda_get_event_image_data( '', $uid );
-    $image_url   = ! empty( $image_data['url'] ) ? $image_data['url'] : '';
-    $next_timing = openagenda_get_field( 'next-timing', $uid );
-    $duration    = date_diff(date_create( $next_timing['end'] ), date_create( $next_timing['begin']) , true );
-    $schema      = array(
-        '@id'         => $permalink,
-        '@context'    => 'https://schema.org',
-        '@type'       => 'Event',
-        'name'        => openagenda_get_field( 'title', $uid ),
-        'description' => openagenda_get_field( 'description', $uid ),
-        'url'         => $permalink,
-        'image'       => $image_url,
-        'startDate'   => $next_timing['begin'],
-        'endDate'     => $next_timing['end'],
-        'duration'    => $duration->format('c'),
-    //   eventAttendanceMode: getEventAttendanceMode(event.attendanceMode),
-    //   eventStatus: getEventStatus(event.status),
-    );
-    return json_encode( $schema );
-}
-
-
-/**
  * Displays the Copy to Clipboard modal
  */
 function openagenda_share_modal(){

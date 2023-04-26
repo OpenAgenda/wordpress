@@ -62,6 +62,7 @@ class Content_Manager implements Hookable {
         add_action( 'init', array( $this, 'register_post_types' ), 10 );
         add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
         add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
+        add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
         add_filter( 'body_class', array( $this, 'body_class'), 10, 1 );
         add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 10, 1 );
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
@@ -254,6 +255,19 @@ class Content_Manager implements Hookable {
             }
             foreach ( $this->get_default_properties() as $name => $content ) {
                 printf( '<meta property="%s" content="%s">', esc_attr( $name ), esc_attr( $content ) );
+            }
+        }
+    }
+
+    /**
+     * Prints <script> tag with Rich Snippet data for the event on single event pages
+     */
+    public function print_schema(){
+        global $openagenda;
+        if( $openagenda && is_singular( 'oa-calendar' ) && $openagenda->is_single() ){
+            $schema = openagenda_get_event_schema();
+            if( ! empty( $schema ) ) {
+                printf( '<script id="oa-event-schema" type="application/ld+json">%s</script>', json_encode( $schema ) );
             }
         }
     }

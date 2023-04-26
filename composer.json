@@ -1,5 +1,13 @@
 {
     "require": {
-        "erusev/parsedown": "^1.7"
-    }
+        "php": "^7.2.5 || ^8.0",
+        "erusev/parsedown": "^1.7",
+        "openagenda/sdk-php": "dev-richsnippets"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/vincedubroeucq/sdk-php-fork"
+        }
+    ]
 }

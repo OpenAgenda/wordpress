@@ -2,3 +2,5 @@ node_modules
 svn
 .idea
 package-lock.json
+composer.lock
+vendor

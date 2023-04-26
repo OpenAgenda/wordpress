@@ -519,6 +519,27 @@ function openagenda_get_pre_filters( $agenda_uid = false, $filters = [] ){
 
 
 /**
+ * Retrieves the Event Rich Snippet object
+ * 
+ * @param   string  $uid     UID of the event.
+ * @return  string  $schema  JSON encoded schema object
+ */
+function openagenda_get_event_schema( $uid = false ){
+    global $openagenda;
+    if( ! $openagenda || ! openagenda_is_single() ) return [];
+    
+    $api_key = $openagenda->get_api_key();
+    $client  = new \OpenAgendaSdk\OpenAgendaSdk( $api_key );
+    
+    $event     = openagenda_get_event( $uid );
+    $permalink = openagenda_event_permalink( $uid, false, false );
+    $locale    = openagenda_get_locale();
+    $schema    = $client->getEventRichSnippet( $event, $permalink, $locale );
+    return apply_filters( 'openagenda_event_schema', $schema, $event );
+}
+
+
+/**
  * Temporary fix for older installs.
  */
 if( ! function_exists( 'wp_date' ) ){
