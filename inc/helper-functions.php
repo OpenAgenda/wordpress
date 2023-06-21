@@ -54,13 +54,6 @@ function openagenda_get_locale(){
         $locale = sanitize_key( $_GET['oa-lang'] );
     }
 
-    if( ! empty( $_POST['query'] ) ){
-        $query = json_decode( stripslashes( html_entity_decode( $_POST['query'] ) ), true );
-        if( null !== $query && ! empty( $query['oa-lang'] ) ){
-            $locale = sanitize_key( $query['oa-lang'] );
-        }
-    }
-
     if( ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ){
         $locale = sanitize_key( $context['filters']['oa-lang'] );
     }

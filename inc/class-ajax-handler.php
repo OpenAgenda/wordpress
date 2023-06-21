@@ -37,7 +37,6 @@ class Ajax_Handler {
     public function update_events(){
         global $openagenda;
         global $post;
-        check_ajax_referer( 'update_events', 'nonce' );
 
         $post_id = isset( $_REQUEST['postId'] ) ? (int) $_REQUEST['postId'] : false;
         if( ! $post_id ){
@@ -45,16 +44,17 @@ class Ajax_Handler {
             exit;
         }
 
-        // Setup $post global to allow for basic template tags to work
-        $post = get_post( $post_id );
-        setup_postdata( $post );
-        
         $uid = get_post_meta( $post_id, 'oa-calendar-uid', true );
         if( ! $uid ){
             wp_send_json_error( new \WP_Error( 'wrong-calendar-id', __( 'The post ID provided does not refer to a calendar.', 'openagenda' ) ) );
             exit;
         }
+
+        // Setup $post global to allow for basic template tags to work
+        $post = get_post( $post_id );
+        setup_postdata( $post );
         
+        // Build query params
         $query     = array();
         $view      = get_post_meta( $post_id, 'oa-calendar-view', true );
         $page_size = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
@@ -64,19 +64,11 @@ class Ajax_Handler {
             'page'      => 1,
         );
 
-        // Read POST query param
-        if( isset( $_POST['query'] ) ){
-            $query = json_decode( stripslashes( html_entity_decode( $_POST['query'] ) ), true );
-        }
-
         // Read GET query param
         if( ! empty( $_GET ) ){
             $query = array_filter( $_GET, function( $value, $key ){
                 return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view' ) );
             }, ARRAY_FILTER_USE_BOTH );
-        }
-
-        if( $query ){
             $args = array_merge( $args, $query );
         }
 
@@ -85,6 +77,7 @@ class Ajax_Handler {
             $args = array_merge( $args, $prefilters );
         }
 
+        // Send response
         $openagenda = new OpenAgenda( $uid, $args, false, true );
         $response   = array_merge( $openagenda->get_json(), array(
             'source'      => sanitize_key( $openagenda->get_source() ),
