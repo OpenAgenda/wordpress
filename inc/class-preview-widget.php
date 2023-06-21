@@ -1,9 +1,9 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
  * Class for our filter widget.
  */
-class Preview_Widget extends Openagenda_Widget {
+class Preview_Widget extends OpenAgenda_Widget {
 
     /**
      * Constructor
@@ -37,7 +37,7 @@ class Preview_Widget extends Openagenda_Widget {
         );
         parent::__construct( 
             'openagenda-preview-widget', 
-            __( 'Openagenda Preview', 'openagenda' ),
+            __( 'OpenAgenda Preview', 'openagenda' ),
             array( 
                 'description'                 => __( 'Displays a calendar preview widget.', 'openagenda' ),
                 'customize_selective_refresh' => true,

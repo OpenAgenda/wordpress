@@ -1,4 +1,4 @@
-# Openagenda WordPress Plugin
+# OpenAgenda WordPress Plugin
 
 This WordPress plugin allows you to embed any calendar hosted on [https://openagenda.com](https://openagenda.com) on your WordPress site.
 
@@ -20,7 +20,7 @@ Upon activation, the plugin creates a new post type named *Calendars*. Just crea
 
 You can leave the content area for this calendar empty, as it will be populated automatically with your events.
 
-![Just create a new calendar post, and provide the Open Agenda calendar UID in the *Calendar settings* metabox.](assets/screenshots/screenshot-3.png)
+![Just create a new calendar post, and provide the OpenAgenda calendar UID in the *Calendar settings* metabox.](assets/screenshots/screenshot-3.png)
 
 Your events are automatically inserted after your content. If you wish to control where your events will be listed, just use the shortcode `[openagenda]` in your content.
 
@@ -38,10 +38,10 @@ The settings are divided into two tabs: General and Integrations.
 
 The General settings tab provides the following settings : 
 
- * *Open Agenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
+ * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
- * *Cache duration* : For performance reasons, basic requests to Openagenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
+ * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
  * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
 
@@ -70,7 +70,7 @@ In the *Customizer*, a new panel is available to house various display settings.
 
 ## How to get my calendar UID ?
 
-The UID of the calendar you wish to display can be found directly on your calendar page on [Openagenda](https://openagenda.com). Go to the site, and click *Look for an agenda*. Then use search box to find your calendar.
+The UID of the calendar you wish to display can be found directly on your calendar page on [OpenAgenda](https://openagenda.com). Go to the site, and click *Look for an agenda*. Then use search box to find your calendar.
 
 ![Your UID is just under the widgets in the sidebar](assets/screenshots/screenshot-4.png)
 
@@ -237,7 +237,7 @@ The HTML returned is passed through the following filter : `apply_filters( 'open
 
 #### `openagenda_favorite_badge( $event_uid = false, $echo = true )`
 
-Displays or returns the button to add an event to favorites. Favorites can be filtered on the front end using the Openagenda filter widget.
+Displays or returns the button to add an event to favorites. Favorites can be filtered on the front end using the OpenAgenda filter widget.
 
 The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_favorite_badge', $html, $event_uid, $agenda_uid, $icon_active, $icon_inactive, $text )`.
 
@@ -317,7 +317,7 @@ Returns the path to a template. Looks for the template first in the `openagenda/
 
 #### `openagenda_get_locale()`
 
-Returns the current Openagenda locale code. Defaults to current WordPress locale. The locale is passed through the following filter : `apply_filters( 'openagenda_locale', $locale )`.
+Returns the current OpenAgenda locale code. Defaults to current WordPress locale. The locale is passed through the following filter : `apply_filters( 'openagenda_locale', $locale )`.
 
 #### `openagenda_language_switcher( $uid = false, $echo = true )`
 

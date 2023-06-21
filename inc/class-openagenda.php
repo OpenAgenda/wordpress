@@ -1,9 +1,9 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
- * Class for handling request to Openagenda API.
+ * Class for handling request to OpenAgenda API.
  */
-class Openagenda {
+class OpenAgenda {
 
     /**
      * Base API URL
@@ -465,12 +465,12 @@ class Openagenda {
         } else {
             $response     = wp_safe_remote_get( $this->get_request_url() );
             $this->source = 'request';
-            if( $this->debug ) error_log( sprintf( 'Openagenda request URL : %s', $this->get_request_url() ) );
+            if( $this->debug ) error_log( sprintf( 'OpenAgenda request URL : %s', $this->get_request_url() ) );
         }
 
         if( is_wp_error( $response ) ){
             $this->errors[] = $response;
-            if( $this->debug ) error_log( sprintf( 'Openagenda request error : %s', sanitize_text_field( $response->get_error_message() ) ) );
+            if( $this->debug ) error_log( sprintf( 'OpenAgenda request error : %s', sanitize_text_field( $response->get_error_message() ) ) );
         }
 
         return $response;

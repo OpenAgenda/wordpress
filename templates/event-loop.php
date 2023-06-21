@@ -10,7 +10,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Openagenda
+ * @package OpenAgenda
  */
 if( $openagenda->have_events() ) : ?>
     <div class="oa-controls oa-controls-top">

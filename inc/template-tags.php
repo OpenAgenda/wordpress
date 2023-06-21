@@ -2,7 +2,7 @@
 /**
  * Template tags to display events information
  *
- * @package Openagenda
+ * @package OpenAgenda
  */
 
 

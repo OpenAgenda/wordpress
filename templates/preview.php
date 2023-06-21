@@ -5,7 +5,7 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @var     $atts       Shortcode attributes
- * @package Openagenda
+ * @package OpenAgenda
  */
 ?>
 <div class="oa-preview-event oa-preview-card">

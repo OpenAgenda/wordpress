@@ -3,7 +3,7 @@
 Plugin Name: OpenAgenda
 Plugin URI:  https://wordpress.org/plugins/openagenda/
 Description: Display your OpenAgenda data on your WordPress site.
-Version:     2.6.0
+Version:     2.6.1
 Author:      OpenAgenda
 Author URI:  https://openagenda.com/
 Text Domain: openagenda
@@ -12,7 +12,7 @@ License:     GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.3.5
 Requires at least: 5.0
-Tested up to: 6.2
+Tested up to: 6.2.2
 
 OpenAgenda is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || die();
 
 define( 'OPENAGENDA_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OPENAGENDA_URL', plugin_dir_url( __FILE__ ) );
-define( 'OPENAGENDA_VERSION', '2.6.0' );
+define( 'OPENAGENDA_VERSION', '2.6.1' );
 
 
 add_action( 'plugins_loaded', 'openagenda_load_textdomain' );
@@ -51,7 +51,7 @@ register_activation_hook( __FILE__, 'openagenda_activation' );
 function openagenda_activation(){
     require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
     require_once OPENAGENDA_PATH . 'inc/class-content-manager.php';
-    $manager = new Openagenda\Content_Manager();
+    $manager = new OpenAgenda\Content_Manager();
     $manager->register_post_types();
     $manager->register_rewrite_rules();
     flush_rewrite_rules();
@@ -129,6 +129,6 @@ add_action( 'plugins_loaded', 'openagenda_init' );
  */ 
 function openagenda_init(){
     require_once OPENAGENDA_PATH . 'inc/class-main.php';
-    $oa_main = new Openagenda\Main();
+    $oa_main = new OpenAgenda\Main();
     $oa_main->init();
 }

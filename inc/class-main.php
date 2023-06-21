@@ -1,5 +1,5 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
  * Core class.
  * 
@@ -233,7 +233,7 @@ class Main {
             }
 
             if( $uid ){
-                $openagenda = new Openagenda( $uid, $args );
+                $openagenda = new OpenAgenda( $uid, $args );
             }
         }
     }

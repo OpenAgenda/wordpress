@@ -1,5 +1,5 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
  * Customizer Settings Manager class
  * 

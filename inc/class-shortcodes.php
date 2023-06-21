@@ -1,5 +1,5 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
  * Class for handling shortcodes content.
  */
@@ -60,22 +60,28 @@ class Shortcodes implements Hookable {
         global $openagenda;
 
         // Parse shortcode attributes
-        $atts = shortcode_atts( array(
-            'uid'    => get_post_meta( get_the_ID(), 'oa-calendar-uid', true ),
-            'view'   => get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( get_the_ID(), 'oa-calendar-view', true ) ) : 'list',
-            'size'   => get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
+        $post_id = get_the_ID();
+        $atts    = shortcode_atts( array(
+            'uid'  => get_post_meta( $post_id, 'oa-calendar-uid', true ),
+            'view' => get_post_meta( $post_id, 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( $post_id, 'oa-calendar-view', true ) ) : 'list',
+            'size' => get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
         ), $atts, $tag );
         
         if( ! empty( get_query_var( 'oa-slug' ) ) ){
-            $atts['slug']   = sanitize_title( get_query_var( 'oa-slug' ) );
+            $atts['slug'] = sanitize_title( get_query_var( 'oa-slug' ) );
         }
 
         if( empty( $atts['uid'] ) ){
             return sprintf( '<p>%s</p>', __( 'Please provide a valid calendar UID to display in the calendar settings.', 'openagenda' ) );
         }
+
+        if( ! is_singular( 'oa-calendar' ) ){
+            return sprintf( '<p>%s</p>', __( 'This page is not an agenda page. Events may not display as expected.', 'openagenda' ) );
+        }
         
         if( ! $openagenda ){
-            $openagenda = new Openagenda( $atts['uid'], $atts );
+            $args = array_filter( $atts, function( $att, $key ) { return ! in_array( $key, array( 'uid', 'view' ) ); }, ARRAY_FILTER_USE_BOTH );
+            $openagenda = new OpenAgenda( $atts['uid'], $args );
         }
 
         $list_header = \openagenda_is_archive() ? \openagenda_get_list_header_html( $atts['view'] ) : '';
@@ -334,7 +340,7 @@ class Shortcodes implements Hookable {
 
         // If we're on a events page, backup the main events.
         openagenda_save();
-        $openagenda = new Openagenda( $uid, $atts, false, false );
+        $openagenda = new OpenAgenda( $uid, $atts, false, false );
         ob_start();
         include openagenda_get_template( 'preview-loop' );
         $filter = ob_get_clean();

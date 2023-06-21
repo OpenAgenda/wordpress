@@ -1,5 +1,5 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
  * Class for handling admin settings page.
  */

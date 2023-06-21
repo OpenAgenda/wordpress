@@ -1,9 +1,9 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
  * Class for our filter widget.
  */
-class Openagenda_Widget extends \WP_Widget {
+class OpenAgenda_Widget extends \WP_Widget {
     
     /**
      * Array of additional settings

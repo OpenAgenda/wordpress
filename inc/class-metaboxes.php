@@ -1,5 +1,5 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
  * Class for handling individual calendar settings on calendar edit page.
  */
@@ -188,7 +188,7 @@ class Metaboxes implements Hookable {
         $field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];  
 
         if( 'oa-calendar-uid' == $name ){
-            $openagenda = new Openagenda( $field_value, array( 'size' => 1 ), false, false );
+            $openagenda = new OpenAgenda( $field_value, array( 'size' => 1 ), false, false );
             $response   = $openagenda->get_raw_response();
             $message    = '';
             if( ! is_wp_error( $response ) ){

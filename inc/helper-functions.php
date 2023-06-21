@@ -2,7 +2,7 @@
 /**
  * Helper functions
  *
- * @package Openagenda
+ * @package OpenAgenda
  */
 
 
@@ -43,7 +43,7 @@ function openagenda_should_enqueue_styles() {
 /**
  * Gets the correct locale code to parse the event.
  * 
- * @return  string  $locale  Locale code used by Open Agenda
+ * @return  string  $locale  Locale code used by OpenAgenda
  */ 
 function openagenda_get_locale(){
     global $openagenda;
@@ -92,7 +92,7 @@ function openagenda_image_sizes(){
 /**
  * Returns the dimensions for a given image size name.
  * 
- * @param   string  $size        Open Agenda image size.
+ * @param   string  $size        OpenAgenda image size.
  * @return  array   $dimensions  Width and height of the image.
  */
 function openagenda_get_image_dimensions( $size = '' ){
@@ -526,7 +526,7 @@ function openagenda_get_pre_filters( $agenda_uid = false, $filters = [] ){
  */
 function openagenda_get_event_schema( $uid = false ){
     global $openagenda;
-    if( ! $openagenda || ! openagenda_is_single() ) return [];
+    if( ! $openagenda ) return [];
     
     $api_key = $openagenda->get_api_key();
     $client  = new \OpenAgendaSdk\OpenAgendaSdk( $api_key );
@@ -534,7 +534,7 @@ function openagenda_get_event_schema( $uid = false ){
     $event     = openagenda_get_event( $uid );
     $permalink = openagenda_event_permalink( $uid, false, false );
     $locale    = openagenda_get_locale();
-    $schema    = $client->getEventRichSnippet( $event, $permalink, $locale );
+    $schema    = ! empty( $event ) ? $client->getEventRichSnippet( $event, $permalink, $locale ) : [];
     return apply_filters( 'openagenda_event_schema', $schema, $event );
 }
 

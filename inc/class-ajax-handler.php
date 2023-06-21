@@ -1,5 +1,5 @@
 <?php
-namespace Openagenda;
+namespace OpenAgenda;
 /**
  * Ajax Handler
  * 
@@ -85,7 +85,7 @@ class Ajax_Handler {
             $args = array_merge( $args, $prefilters );
         }
 
-        $openagenda = new Openagenda( $uid, $args, false, true );
+        $openagenda = new OpenAgenda( $uid, $args, false, true );
         $response   = array_merge( $openagenda->get_json(), array(
             'source'      => sanitize_key( $openagenda->get_source() ),
             'html'        => \openagenda_get_events_html( $view ),
@@ -137,7 +137,7 @@ class Ajax_Handler {
         );       
 
         // Fetch the event
-        $openagenda = new Openagenda( $uid, array_merge( $args, $filters ), false, false );
+        $openagenda = new OpenAgenda( $uid, array_merge( $args, $filters ), false, false );
         $event      = $openagenda->get_current_event();
         
         if( ! empty( $event ) ){

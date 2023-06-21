@@ -272,7 +272,7 @@ msgid "Number of options to display at once: "
 msgstr ""
 
 #: inc/class-filter-widget.php:88
-msgid "Openagenda Filter"
+msgid "OpenAgenda Filter"
 msgstr ""
 
 #: inc/class-filter-widget.php:90
@@ -414,7 +414,7 @@ msgid "Use a query string representing a filtered query. Only events correspondi
 msgstr ""
 
 #: inc/class-preview-widget.php:40
-msgid "Openagenda Preview"
+msgid "OpenAgenda Preview"
 msgstr ""
 
 #: inc/class-preview-widget.php:42

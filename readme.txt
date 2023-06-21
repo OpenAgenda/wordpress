@@ -1,9 +1,9 @@
-=== Openagenda ===
+=== OpenAgenda ===
 Contributors: openagenda, vincentdubroeucq
-Tags: openagenda, open agenda, agenda, calendar, event, events
+Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.2
-Stable tag: 2.6.0
+Tested up to: 6.2.2
+Stable tag: 2.6.1
 Requires PHP: 7.3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -34,11 +34,11 @@ The settings are divided into two tabs: General and Integrations.
 
 The General settings page provides the following settings : 
 
- * *Open Agenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
+ * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
- * *Cache duration* : For performance reasons, basic requests to Openagenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
- * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
+ * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
+ * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your calendars on uninstall.
  * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
 
 ### Integrations settings
@@ -131,11 +131,11 @@ Just create a folder named `openagenda/` in your theme, then copy and paste the 
 
 The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. Feel free to define your own in your theme.
 
-The plugin also provides many hooks to allow you to customize the html output or other various data. The hooks documentation is in writing for now !
+The plugin also provides many hooks to allow you to customize the html output or other various data.
 
 ## Usage of third party services and copyright information
 
-This plugin displays data hosted and provided by [https://openagenda.com](https://openagenda.com). By using this plugin, you accept and agree with OpenAgenda's [terms and conditions](https://openagenda.zendesk.com/hc/fr/articles/201753991) and [privacy policy](https://openagenda.zendesk.com/hc/fr/articles/360003182014). Please make sure to read them before using this plugin. Also, using this plugin does NOT require an account at [https://openagenda.com](https://openagenda.com), though it is recommended to have one.
+This plugin displays data hosted and provided by [https://openagenda.com](https://openagenda.com). By using this plugin, you accept and agree with OpenAgenda's [terms and conditions](https://openagenda.zendesk.com/hc/fr/articles/201753991) and [privacy policy](https://openagenda.zendesk.com/hc/fr/articles/360003182014). Please make sure to read them before using this plugin. Also, using this plugin DOES require an account at [https://openagenda.com](https://openagenda.com), and an API key.
 
 By default, maps displayed by this plugin use data from [https://openstreetmap.org/](https://openstreetmap.org/) and uses the [leaflet JS library](https://leafletjs.com/). By using this plugin, you accept and agree with OpenStreeMap's [terms of use](https://wiki.osmfoundation.org/wiki/Terms_of_Use), [acceptable use policy](https://wiki.openstreetmap.org/wiki/Acceptable_Use_Policy) and [privacy policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy) 
 
@@ -167,7 +167,7 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 1. A new *Calendars* menu entry is created, allowing you to manage your calendars and settings.
 2. The simple settings page allow you to enter in your API key and tweak various settings.
-3. Just create a new calendar post, and provide the Openagenda calendar UID in the *Calendar settings* metabox.
+3. Just create a new calendar post, and provide the OpenAgenda calendar UID in the *Calendar settings* metabox.
 4. Find your Calendar UID on the openagenda.com site, just under the sidebar.
 5. You can use convenient filter widgets to add filtering functionnality to your calendars.
 6. In the *Customizer*, a new panel is available to house various display settings.
@@ -192,7 +192,7 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Feature : Added pre-filters setting to Preview widget
 
 = 2.3.0 =
-* Added support for default filters.
+* Feature : Added support for default filters.
 
 = 2.2.1 =
 * Fixed : Wrong current month displayed in timings.
@@ -279,52 +279,52 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Feature : Added support for Districts in filters.
 
 = 2.1.5 =
-* Fixed : Fixed <title> tag on single event when using WordPress SEO.
-* Fixed : Fixed image <meta> properties.
+* Fixed : Fixed `<title>` tag on single event when using WordPress SEO.
+* Fixed : Fixed image `<meta>` properties.
 
 = 2.1.4 =
-* Fixed : Bug with ajax requests when size argument is 0.
+* Fixed : Bug with ajax requests when `size` argument is 0.
 
 = 2.1.3 =
-* Added support for multilingual additional fields
+* Feature : Added support for multilingual additional fields
 
 = 2.1.2 =
-* Minor bug fix
+* Fixed : Minor bug fix
 
 = 2.1.1 =
-* Fixed slug sanitization
+* Fixed :  slug sanitization
 
 = 2.1.0 =
-* Added Favorite feature.
-* Fixed various handlers for changed reponse keys.
-* Modified [openagenda_filter_tags] shortcode to use [openagenda_filter_choice] instead
+* Feature : Added Favorite feature.
+* Fixed : Fixed various handlers for changed reponse keys.
+* Fixed : Modified [openagenda_filter_tags] shortcode to use [openagenda_filter_choice] instead
 
 = 2.0.0 =
-* Major API calls refactor: fetches events using API calls instead of JSON export
-* Major filter widget refactor: uses new React filters 
+* Feature : Major API calls refactor: fetches events using API calls instead of JSON export
+* Feature : Major filter widget refactor: uses new React filters 
 
 = 1.1.1 =
-* Fixed canonical url in <meta> tag
-* Added compatibility with Yoast SEO meta tags
+* Fixed : Fixed canonical url in <meta> tag
+* Feature : Added compatibility with Yoast SEO meta tags
 
 = 1.1.0 =
-* Added "Integrations" settings tab
-* Added integration with CloudImage
-* Preview widget templates are overridable in the child theme.
-* Bug fix : Passed events can be displayed on single event view.
+* Feature : Added "Integrations" settings tab
+* Feature : Added integration with CloudImage
+* Feature : Preview widget templates are overridable in the child theme.
+* Fixed : Passed events can be displayed on single event view.
 
 = 1.0.1 =
-* Bug fix on `openagenda_get_field()` function, when called with 'image' and 'thumbnail' parameter.
+* Fixed : Bug fix on `openagenda_get_field()` function, when called with 'image' and 'thumbnail' parameter.
 
 = 1.0.0 =
-* Fixed location template.
-* Added event count and active filters on top of the list view.
-* Added online access link display for online events.
-* Fix for viewing single passed event.
+* Fixed : Fixed location template.
+* Feature : Added event count and active filters on top of the list view.
+* Feature : Added online access link display for online events.
+* Fixed : Fix for viewing single passed event.
 
 = 0.2 =
-* Added icons.
-* Minor CSS fixes
+* Feature : Added icons.
+* Fixed : Minor CSS fixes
 
 = 0.1 =
 * Initial release

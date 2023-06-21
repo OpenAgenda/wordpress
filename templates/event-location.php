@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Openagenda
+ * @package OpenAgenda
  */
 
 if( empty( openagenda_get_field( 'location' ) ) || empty( openagenda_get_field( 'location.uid' ) ) ) return;

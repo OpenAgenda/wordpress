@@ -5,7 +5,7 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @var     $atts        Shortcode attributes
- * @package Openagenda
+ * @package OpenAgenda
  */
 if( $openagenda->have_events()) : $openagenda->reset_index(); ?>
     <div class="oa-preview">
