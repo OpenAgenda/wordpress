@@ -59,8 +59,6 @@ class Admin_Pages implements Hookable {
             $main_page['callback'],
             $main_page['position']
         );
-
-        // add_action( 'load-' . $hook, array( $this, "setup_${hook}_screen" ) );
     }
 
 

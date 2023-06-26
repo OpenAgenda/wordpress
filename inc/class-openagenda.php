@@ -119,6 +119,11 @@ class OpenAgenda {
      * Whether to allow for rich embeded content.
      */
     protected $include_embedded = true;
+    
+    /**
+     * Whether to include usage stats in requests.
+     */
+    protected $include_usage = true;
 
     /**
      * Is the query for a list of events ?
@@ -155,6 +160,7 @@ class OpenAgenda {
         $settings       = get_option( 'openagenda_general_settings' );
         $this->uid      = $uid;
         $this->api_key  = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
+        $this->include_usage    = ! empty( $settings ) && isset( $settings['openagenda_allow_usage_stats_collection'] ) ? (bool) $settings['openagenda_allow_usage_stats_collection'] : true; 
         $this->include_embedded = ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true; 
         $this->debug    = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG;
 
@@ -425,10 +431,7 @@ class OpenAgenda {
      */
     public function parse_args( $args = array() ){
         $defaults = $this->get_default_params();
-        if ( 'markdown' !== $this->get_longDescription_format() ){
-            $defaults['longDescriptionFormat'] = $this->get_longDescription_format();
-        }
-        $args = array_filter( wp_parse_args( $args, $defaults ), function( $value ){ return '' !== $value; } );
+        $args     = array_filter( wp_parse_args( $args, $defaults ), function( $value ){ return '' !== $value; } );
 
         $this->is_single   = ! empty( $args['slug'] );
         $this->is_archive  = ! $this->is_single;
@@ -672,9 +675,13 @@ class OpenAgenda {
             'size'          => 20, 
             'after'         => '', 
             'from'          => '', 
-            'longDescriptionFormat' => '',
+            'longDescriptionFormat' => $this->get_longDescription_format(),
             'includeLabels' => true,
         );
+        if( $this->include_usage ){
+            $defaults['cms']  = 'wp';
+            $defaults['host'] = get_home_url();
+        }
         return apply_filters( 'openagenda_api_default_params', $defaults );
     }
 }

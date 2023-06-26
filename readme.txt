@@ -40,6 +40,7 @@ The General settings page provides the following settings :
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your calendars on uninstall.
  * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
+ * *Allow OpenAgenda to collect usage stats ?* : controls whether you want to send CMS used and site URL to Openagenda, for statistic purposes.
 
 ### Integrations settings
 
@@ -176,7 +177,8 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 == Changelog ==
 
 = 2.6.1 =
-* Fixed : Rich snippets triggering erros on some events.
+* Fixed   : Rich snippets triggering erros on some events.
+* Feature : Added optional CMS and site url tracking option.
 
 = 2.6.0 =
 * Feature : Added a event rich snippets in head tag
@@ -257,7 +259,8 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 == Upgrade Notice ==
 
 = 2.6.1 =
-* Fixed : Rich snippets triggering erros on some events.
+* Fixed   : Rich snippets triggering erros on some events.
+* Feature : Added optional CMS and site url tracking option.
 
 = 2.6.0 =
 * Feature : Added a event rich snippets in head tag
