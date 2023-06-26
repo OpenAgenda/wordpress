@@ -36,18 +36,14 @@ if (oaData) {
                 console.log('onFilterChange error: ', e);
             }
         },
-        getEvents: async (values, aggregations = []) => {
-            const formData = new FormData();
-            formData.append('nonce', oaData.nonce);
-            formData.append('postId', oaData.postId);
-            formData.append('action', oaData.action);
-            formData.append('view', oaData.view);
-            formData.append('query', JSON.stringify({...values, aggregations}));
-
-            const result = await fetch(oaData.ajaxUrl, {
-                method: "POST",
-                body: formData
-            }).then(response => response.json());
+        getEvents: async (values, aggregations = []) => {            
+            const args = {
+                postId: oaData.postId,
+                action: oaData.action,
+                view: oaData.view,
+            }
+            const url = `${oaData.ajaxUrl}?${Qs.stringify({...args, ...values, aggregations })}`;
+            const result = await fetch(url).then(response => response.json());
             return result;
         },
         updateHTML(element, html) {

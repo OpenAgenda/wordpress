@@ -44,6 +44,7 @@ The General settings tab provides the following settings :
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
  * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
+ * *Allow OpenAgenda to collect usage stats ?* : controls whether you want to send CMS used and site URL to Openagenda, for statistic purposes.
 
 ### Integrations settings
 

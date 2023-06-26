@@ -177,18 +177,18 @@ class Main {
         if( is_singular( 'oa-calendar' ) ){
             wp_enqueue_script( 'openagenda-main' );
             wp_enqueue_script( 'openagenda-filters' );
-            $agenda_uid = get_post_meta( get_the_ID(), 'oa-calendar-uid', true );
-            $view       = get_post_meta( get_the_ID(), 'oa-calendar-view', true );
-            $baseData = array(
+            $post_id     = get_the_ID();
+            $agenda_uid  = get_post_meta( $post_id, 'oa-calendar-uid', true );
+            $view        = get_post_meta( $post_id, 'oa-calendar-view', true );
+            $ajax_params = array(
                 'agendaUid'   => $agenda_uid ? sanitize_text_field( $agenda_uid ) : false,
-                'nonce'       => wp_create_nonce( 'update_events' ),
-                'postId'      => get_the_ID(),
+                'postId'      => $post_id,
                 'view'        => $view ? sanitize_title( $view ) : 'list',
                 'action'      => 'update_events'
-            ); 
-            wp_localize_script( 'openagenda-main', 'oaData', array_merge( $baseData, array(
+            );
+            wp_localize_script( 'openagenda-main', 'oaData', array_merge( $ajax_params, array(
                 'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
-                'res'         => add_query_arg( $baseData, admin_url( 'admin-ajax.php' ) ),
+                'res'         => add_query_arg( $ajax_params, admin_url( 'admin-ajax.php' ) ),
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
                 'isSingle'    => \openagenda_is_single(),

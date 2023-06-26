@@ -77,8 +77,6 @@ class Settings implements Hookable {
                     'option_name' => 'openagenda_general_settings',
                     'label_for'   => 'openagenda_api_key',
                     'type'        => 'password',
-                    'placeholder' => '',
-                    'default'     => '',
                     'description' => sprintf(
                         /* translators: %s: openagenda site url */ 
                         __( 'Your API key can be found in your <a href="%s">OpenAgenda account</a>.', 'openagenda' ),
@@ -97,7 +95,6 @@ class Settings implements Hookable {
                     'option_name' => 'openagenda_general_settings',
                     'label_for'   => 'openagenda_include_embeds',
                     'type'        => 'checkbox',
-                    'placeholder' => '',
                     'default'     => true,
                     'description' => sprintf( __( 'Allow for embedded content in the event\'s content.', 'openagenda' ), 'https://openagenda.com' ),
                     'help-text'   => sprintf( __( 'By default, embedded content like Youtube players will be filtered, and will not appear on the frontend. Checking this option will disable filtering.', 'openagenda' ) ),
@@ -114,7 +111,6 @@ class Settings implements Hookable {
                     'option_name' => 'openagenda_general_settings',
                     'label_for'   => 'openagenda_include_styles',
                     'type'        => 'checkbox',
-                    'placeholder' => '',
                     'default'     => true,
                     'description' => __( 'Load default styling.', 'openagenda' ),
                 ),
@@ -130,7 +126,6 @@ class Settings implements Hookable {
                     'option_name' => 'openagenda_general_settings',
                     'label_for'   => 'openagenda_cache_duration',
                     'type'        => 'number',
-                    'placeholder' => '',
                     'default'     => (int) ( HOUR_IN_SECONDS / 2 ),
                     'description' => __( 'Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored', 'openagenda' ),
                 ),
@@ -146,7 +141,6 @@ class Settings implements Hookable {
                     'option_name' => 'openagenda_general_settings',
                     'label_for'   => 'openagenda_delete_content_on_uninstall',
                     'type'        => 'checkbox',
-                    'placeholder' => '',
                     'default'     => false,
                     'description' => __( 'Delete all posts of type "Calendar" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin.', 'openagenda' ),
                 ),
@@ -162,9 +156,23 @@ class Settings implements Hookable {
                     'option_name' => 'openagenda_general_settings',
                     'label_for'   => 'openagenda_delete_options_on_uninstall',
                     'type'        => 'checkbox',
-                    'placeholder' => '',
                     'default'     => false,
                     'description' => __( 'Delete all of this plugin\'s settings permanently when I uninstall the plugin.', 'openagenda' ),
+                ),
+            ),
+            'allow-usage-stats-collection' => array(
+                'id'       => 'openagenda_allow_usage_stats_collection',
+                'title'    => __( 'Allow OpenAgenda to collect usage stats ?', 'openagenda' ),
+                'callback' => array( $this, 'checkbox_field_markup' ),
+                'page'     => 'openagenda',
+                'section'  => 'openagenda_general_settings',
+                'args'     => array( 
+                    'id'          => 'openagenda_allow_usage_stats_collection',
+                    'option_name' => 'openagenda_general_settings',
+                    'label_for'   => 'openagenda_allow_usage_stats_collection',
+                    'type'        => 'checkbox',
+                    'default'     => true,
+                    'description' => __( 'Allow OpenAgenda to collect plugin usage information for statistics purposes. The following information is collected : CMS used and site URL.', 'openagenda' ),
                 ),
             ),
             'calendar-prefix' => array(
@@ -196,8 +204,6 @@ class Settings implements Hookable {
                     'id'          => 'openagenda_map_tiles_link',
                     'option_name' => 'openagenda_integrations_settings',
                     'label_for'   => 'openagenda_map_tiles_link',
-                    'type'        => 'text',
-                    'placeholder' => '',
                     'default'     => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 ),
             ),
@@ -211,8 +217,6 @@ class Settings implements Hookable {
                     'id'          => 'openagenda_map_tiles_attribution_link',
                     'option_name' => 'openagenda_integrations_settings',
                     'label_for'   => 'openagenda_map_tiles_attribution_link',
-                    'type'        => 'text',
-                    'placeholder' => '',
                     'default'     => sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) ),
                 ),
             ),
@@ -227,8 +231,6 @@ class Settings implements Hookable {
                     'option_name' => 'openagenda_integrations_settings',
                     'label_for'   => 'openagenda_cloudimage_api_key',
                     'type'        => 'password',
-                    'placeholder' => '',
-                    'default'     => '',
                     'description' => sprintf(
                         /* translators: %s: openagenda site url */ 
                         __( 'Your API key can be found in your <a href="%s">CloudImage account</a>.', 'openagenda' ),
@@ -328,8 +330,7 @@ class Settings implements Hookable {
     public function checkbox_field_markup( $args ){
 
         $args = wp_parse_args( $args, array(
-            'type'        => 'text',
-            'placeholder' => '',
+            'type'        => 'checkbox',
             'default'     => '',
             'description' => '',
         ) );
@@ -347,14 +348,12 @@ class Settings implements Hookable {
                     id="<?php echo esc_attr( $field_id ); ?>" 
                     name="<?php echo esc_attr( $field_name ); ?>" 
                     class="regular-text"
-                    placeholder="<?php echo esc_attr( $args['placeholder']); ?>"
                     <?php checked( $value ) ?>
                 >
                 <?php if( ! empty( $args['description'] ) ) printf( '<span>%s</span>', wp_kses_post( $args['description'] ) ); ?>
             </label>
             <?php if( ! empty( $args['help-text']) ) printf( '<p class="description">%s</p>', wp_kses_post( $args['help-text'] ) ); ?>
         <?php
-        
     }
 
 
@@ -370,8 +369,9 @@ class Settings implements Hookable {
             'openagenda_cache_duration' => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] :  (int) ( HOUR_IN_SECONDS / 2 ),
             'openagenda_include_embeds' => isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : false,
             'openagenda_include_styles' => isset( $settings['openagenda_include_styles'] ) ? (bool) $settings['openagenda_include_styles'] : false,
-            'openagenda_delete_content_on_uninstall' => isset( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false,
-            'openagenda_delete_options_on_uninstall' => isset( $settings['openagenda_delete_options_on_uninstall'] ) ? (bool) $settings['openagenda_delete_options_on_uninstall'] : false,
+            'openagenda_delete_content_on_uninstall'  => isset( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false,
+            'openagenda_delete_options_on_uninstall'  => isset( $settings['openagenda_delete_options_on_uninstall'] ) ? (bool) $settings['openagenda_delete_options_on_uninstall'] : false,
+            'openagenda_allow_usage_stats_collection' => isset( $settings['openagenda_allow_usage_stats_collection'] ) ? (bool) $settings['openagenda_allow_usage_stats_collection'] : false,
         );
         openagenda_clear_transient();
         return $new_settings;
