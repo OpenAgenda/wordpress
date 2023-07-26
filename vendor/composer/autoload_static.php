@@ -4,11 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit68927d0beed63fc37d2b9fb2b79a00da
+class ComposerStaticInit7a7e2ccb6743c16c4a16086774eb645e
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
@@ -71,54 +70,15 @@ class ComposerStaticInit68927d0beed63fc37d2b9fb2b79a00da
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Dallgoot\\Yaml' => __DIR__ . '/..' . '/dallgoot/yaml/sources/Yaml.php',
-        'Dallgoot\\Yaml\\Builder' => __DIR__ . '/..' . '/dallgoot/yaml/sources/Builder.php',
-        'Dallgoot\\Yaml\\Compact' => __DIR__ . '/..' . '/dallgoot/yaml/sources/types/Compact.php',
-        'Dallgoot\\Yaml\\Dumper' => __DIR__ . '/..' . '/dallgoot/yaml/sources/Dumper.php',
-        'Dallgoot\\Yaml\\DumperHandlers' => __DIR__ . '/..' . '/dallgoot/yaml/sources/DumperHandlers.php',
-        'Dallgoot\\Yaml\\Loader' => __DIR__ . '/..' . '/dallgoot/yaml/sources/Loader.php',
-        'Dallgoot\\Yaml\\NodeFactory' => __DIR__ . '/..' . '/dallgoot/yaml/sources/NodeFactory.php',
-        'Dallgoot\\Yaml\\NodeList' => __DIR__ . '/..' . '/dallgoot/yaml/sources/NodeList.php',
-        'Dallgoot\\Yaml\\Nodes\\Actions' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/abstract/Actions.php',
-        'Dallgoot\\Yaml\\Nodes\\Anchor' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Anchor.php',
-        'Dallgoot\\Yaml\\Nodes\\Blank' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Blank.php',
-        'Dallgoot\\Yaml\\Nodes\\Comment' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Comment.php',
-        'Dallgoot\\Yaml\\Nodes\\CompactMapping' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/CompactMapping.php',
-        'Dallgoot\\Yaml\\Nodes\\CompactSequence' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/CompactSequence.php',
-        'Dallgoot\\Yaml\\Nodes\\Directive' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Directive.php',
-        'Dallgoot\\Yaml\\Nodes\\DocEnd' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/DocEnd.php',
-        'Dallgoot\\Yaml\\Nodes\\DocStart' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/DocStart.php',
-        'Dallgoot\\Yaml\\Nodes\\Item' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Item.php',
-        'Dallgoot\\Yaml\\Nodes\\JSON' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/JSON.php',
-        'Dallgoot\\Yaml\\Nodes\\Key' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Key.php',
-        'Dallgoot\\Yaml\\Nodes\\Literal' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Literal.php',
-        'Dallgoot\\Yaml\\Nodes\\LiteralFolded' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/LiteralFolded.php',
-        'Dallgoot\\Yaml\\Nodes\\Literals' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/abstract/Literals.php',
-        'Dallgoot\\Yaml\\Nodes\\NodeGeneric' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/abstract/NodeGeneric.php',
-        'Dallgoot\\Yaml\\Nodes\\Partial' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Partial.php',
-        'Dallgoot\\Yaml\\Nodes\\Quoted' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Quoted.php',
-        'Dallgoot\\Yaml\\Nodes\\Root' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Root.php',
-        'Dallgoot\\Yaml\\Nodes\\Scalar' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Scalar.php',
-        'Dallgoot\\Yaml\\Nodes\\SetKey' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/SetKey.php',
-        'Dallgoot\\Yaml\\Nodes\\SetValue' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/SetValue.php',
-        'Dallgoot\\Yaml\\Nodes\\Tag' => __DIR__ . '/..' . '/dallgoot/yaml/sources/nodes/Tag.php',
-        'Dallgoot\\Yaml\\Regex' => __DIR__ . '/..' . '/dallgoot/yaml/sources/Regex.php',
-        'Dallgoot\\Yaml\\TagFactory' => __DIR__ . '/..' . '/dallgoot/yaml/sources/tag/TagFactory.php',
-        'Dallgoot\\Yaml\\Tag\\CoreSchema' => __DIR__ . '/..' . '/dallgoot/yaml/sources/tag/CoreSchema.php',
-        'Dallgoot\\Yaml\\Tag\\SchemaInterface' => __DIR__ . '/..' . '/dallgoot/yaml/sources/tag/SchemaInterface.php',
-        'Dallgoot\\Yaml\\Tag\\SymfonySchema' => __DIR__ . '/..' . '/dallgoot/yaml/sources/tag/SymfonySchema.php',
-        'Dallgoot\\Yaml\\Tagged' => __DIR__ . '/..' . '/dallgoot/yaml/sources/types/Tagged.php',
-        'Dallgoot\\Yaml\\YamlObject' => __DIR__ . '/..' . '/dallgoot/yaml/sources/types/YamlObject.php',
-        'Dallgoot\\Yaml\\YamlProperties' => __DIR__ . '/..' . '/dallgoot/yaml/sources/YamlProperties.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit68927d0beed63fc37d2b9fb2b79a00da::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit68927d0beed63fc37d2b9fb2b79a00da::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit68927d0beed63fc37d2b9fb2b79a00da::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit68927d0beed63fc37d2b9fb2b79a00da::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7a7e2ccb6743c16c4a16086774eb645e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7a7e2ccb6743c16c4a16086774eb645e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit7a7e2ccb6743c16c4a16086774eb645e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit7a7e2ccb6743c16c4a16086774eb645e::$classMap;
 
         }, null, ClassLoader::class);
     }

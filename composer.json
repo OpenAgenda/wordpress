@@ -2,12 +2,12 @@
     "require": {
         "php": "^7.2.5 || ^8.0",
         "erusev/parsedown": "^1.7",
-        "openagenda/sdk-php": "dev-richsnippets"
+        "openagenda/sdk-php": "dev-master"
     },
     "repositories": [
         {
             "type": "git",
-            "url": "https://github.com/vincedubroeucq/sdk-php-fork"
+            "url": "https://github.com/OpenAgenda/sdk-php"
         }
     ]
 }
