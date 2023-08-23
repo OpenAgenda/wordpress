@@ -533,6 +533,44 @@ function openagenda_get_event_schema( $uid = false ){
 
 
 /**
+ * Retrieves default calendar post ID
+ * 
+ * @return  $post_id  Default agenda id.
+ */
+function openagenda_get_default_calendar_id(){
+    $args = array(
+        'post_type'      => 'oa-calendar',
+        'posts_per_page' => 1,
+        'fields'         => 'ids',
+        'meta_query' => array(
+            array(
+                'key'     => '_oa_main_calendar',
+                'value'   => 1,
+            ),
+        ),
+    );
+    if( function_exists( 'pll_current_language' ) ){
+        $args['lang'] = sanitize_title( pll_current_language() );
+    }
+    $post_ids = get_posts( $args );
+    $post_id  = ! empty( $post_ids ) ? $post_ids[0] : false;
+    return apply_filters( 'openagenda_default_calendar_id', $post_id );
+}
+
+
+/**
+ * Retrieves default calendar UID
+ * 
+ * @return  $uid  Default calendar uid.
+ */
+function openagenda_get_default_calendar_uid(){
+    $post_id = openagenda_get_default_calendar_id();
+    $uid     = get_post_meta( $post_id, 'oa-calendar-uid', true );
+    return apply_filters( 'openagenda_default_calendar_uid', $uid );
+}
+
+
+/**
  * Temporary fix for older installs.
  */
 if( ! function_exists( 'wp_date' ) ){

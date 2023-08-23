@@ -366,7 +366,7 @@ class Settings implements Hookable {
     public function sanitize_general_settings( $settings ){
         $new_settings = array(
             'openagenda_api_key'        => ! empty( $settings['openagenda_api_key'] ) ? sanitize_text_field( $settings['openagenda_api_key'] ) : '',
-            'openagenda_cache_duration' => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] :  (int) ( HOUR_IN_SECONDS / 2 ),
+            'openagenda_cache_duration' => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] : (int) ( HOUR_IN_SECONDS / 2 ),
             'openagenda_include_embeds' => isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : false,
             'openagenda_include_styles' => isset( $settings['openagenda_include_styles'] ) ? (bool) $settings['openagenda_include_styles'] : false,
             'openagenda_delete_content_on_uninstall'  => isset( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false,

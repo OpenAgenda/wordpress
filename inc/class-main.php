@@ -213,8 +213,9 @@ class Main {
     public function init_calendar(){
         global $openagenda;     
         if( is_singular( 'oa-calendar' ) ){
-            $uid       = get_post_meta( get_the_ID(), 'oa-calendar-uid', true );
-            $page_size = get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) ? (int) get_post_meta( get_the_ID(), 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
+            $post_id   = get_the_ID();
+            $uid       = get_post_meta( $post_id, 'oa-calendar-uid', true );
+            $page_size = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
             $args      = array(
                 'size'      => $page_size,
                 'page_size' => $page_size,

@@ -46,7 +46,7 @@ if (oaData) {
             const result = await fetch(url).then(response => response.json());
             return result;
         },
-        updateHTML(element, html) {
+        updateHTML: (element, html) => {
             element.innerHTML = html;
         }
     };
