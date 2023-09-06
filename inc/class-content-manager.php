@@ -49,7 +49,8 @@ class Content_Manager implements Hookable {
                 'has_archive'   => false,
                 'menu_position' => 5,
                 'rewrite'       => array(
-                    'slug' => sanitize_title( $rewrite_base ),
+                    'slug'       => sanitize_title( $rewrite_base ),
+                    'with_front' => false,
                 ),
             ),
         );
@@ -265,10 +266,7 @@ class Content_Manager implements Hookable {
     public function print_schema(){
         global $openagenda;
         if( $openagenda && is_singular( 'oa-calendar' ) && $openagenda->is_single() ){
-            $schema = openagenda_get_event_schema();
-            if( ! empty( $schema ) ) {
-                printf( '<script id="oa-event-schema" type="application/ld+json">%s</script>', json_encode( $schema ) );
-            }
+            openagenda_event_schema();
         }
     }
 

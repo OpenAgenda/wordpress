@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.2.2
-Stable tag: 2.6.1
+Tested up to: 6.3.1
+Stable tag: 2.7.0
 Requires PHP: 7.3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -176,6 +176,10 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.7.0 =
+* Fixed   : Basic post URL front no longer used
+* Feature : Added Rich snippets to event list view.
+
 = 2.6.1 =
 * Fixed   : Rich snippets triggering erros on some events.
 * Feature : Added optional CMS and site url tracking option.
@@ -257,6 +261,10 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.7.0 =
+* Fixed   : Basic post URL front no longer used
+* Feature : Added Rich snippets to event list view.
 
 = 2.6.1 =
 * Fixed   : Rich snippets triggering erros on some events.

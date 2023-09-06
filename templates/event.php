@@ -40,5 +40,6 @@
             </div>
         </header>
         <p class="oa-event-short-description"><?php openagenda_field( 'description' ); ?></p>
+        <?php openagenda_event_schema(); ?>
     </div>
 </article>

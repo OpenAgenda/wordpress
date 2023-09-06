@@ -1135,6 +1135,25 @@ function openagenda_language_switcher( $uid = false, $echo = true ){
 
 
 /**
+ * Prints event schema for a given event.
+ * Defaults to current event in the loop.
+ * 
+ * @param   int     $uid
+ * @return  string  $schema
+ */
+function openagenda_event_schema( $uid = false ){
+    global $openagenda;
+    if( $openagenda && is_singular( 'oa-calendar' ) ){
+        if( ! $uid ) $uid = openagenda_get_field( 'uid' );
+        $schema = openagenda_get_event_schema( $uid );
+        if( ! empty( $schema ) ) {
+            printf( '<script id="oa-event-schema-%s" type="application/ld+json">%s</script>', (int) $uid, json_encode( $schema ) );
+        }
+    }
+}
+
+
+/**
  * Displays the Copy to Clipboard modal
  */
 function openagenda_share_modal(){
