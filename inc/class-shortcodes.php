@@ -16,6 +16,7 @@ class Shortcodes implements Hookable {
     public function __construct(){
         $this->shortcodes = array(
             'openagenda'                  => array( $this, 'openagenda' ),
+            'openagenda_preview'          => array( $this, 'openagenda_filter_preview' ),
             'openagenda_filter_active'    => array( $this, 'openagenda_filter_active' ),
             'openagenda_filter_total'     => array( $this, 'openagenda_filter_total' ),
             'openagenda_filter_choice'    => array( $this, 'openagenda_filter_choice' ),

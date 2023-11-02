@@ -151,10 +151,10 @@ function openagenda_esc_field( $value, $field ){
             break;
         case 'title':
         case 'description':
-        case 'longDescription':
             $value = wp_kses_post( $value );
             break;
-        case 'html': 
+        case 'longDescription':
+        case 'html':
             if ( ! $openagenda->include_embedded() ) {
                 $value = wp_kses_post( $value );
             }
