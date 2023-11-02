@@ -1,6 +1,6 @@
 {
     "require": {
-        "php": "^7.2.5 || ^8.0",
+        "php": "^7.4.1 || ^8.0",
         "erusev/parsedown": "^1.7",
         "openagenda/sdk-php": "dev-master"
     },
