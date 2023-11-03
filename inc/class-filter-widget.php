@@ -80,6 +80,16 @@ class Filter_Widget extends OpenAgenda_Widget {
                     'class'   => 'openagenda-filter-choice-pagesize widefat',
                     'default' => 10,
                 ),
+                'sort' => array(
+                    'name'        => 'sort',
+                    'label'       => __( 'Options sorting', 'openagenda' ),
+                    'type'        => 'select',
+                    'class'       => 'openagenda-filter-choice-sort widefat',
+                    'option_none' => __( 'By value', 'openagenda' ),
+                    'options' => array(
+                        'alphabetical' => __( 'Alphabetical', 'openagenda' ),
+                    )
+                ),
             ), 
         );
 
@@ -206,6 +216,7 @@ class Filter_Widget extends OpenAgenda_Widget {
                     'field'            => ! empty( $new_instance['field'] ) ? sanitize_text_field( $new_instance['field'] ) : '',
                     'additional_field' => ! empty( $new_instance['additional_field'] ) ? sanitize_text_field( $new_instance['additional_field'] ) : '',
                     'page_size'        => ! empty( $new_instance['page_size'] ) ? (int) $new_instance['page_size'] : 10,
+                    'sort'             => ! empty( $new_instance['sort'] ) ? sanitize_text_field( $new_instance['sort'] ) : '',
                 );
                 break;
             default:

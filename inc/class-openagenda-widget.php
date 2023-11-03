@@ -126,11 +126,11 @@ class OpenAgenda_Widget extends \WP_Widget {
                 }
 
                 $html = sprintf(
-                    '<label for="%1$s">%3$s</label>
+                    '<p><label for="%1$s">%3$s</label>
                     <select id="%1$s" name="%2$s" class="%4$s">
                         <option value="">%5$s</option>
                         %6$s
-                    </select>',
+                    </select></p>',
                     esc_attr( $this->get_field_id( $field['name'] ) ),
                     esc_attr( $this->get_field_name( $field['name'] ) ),
                     esc_html( $field['label'] ),

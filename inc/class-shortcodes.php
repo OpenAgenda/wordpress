@@ -168,7 +168,8 @@ class Shortcodes implements Hookable {
             'id'        => 'choice',
             'field'     => '',
             'additional_field' => '',
-            'page_size' => 10
+            'page_size' => 10,
+            'sort'      => '',
         );
         $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_choice' );
 
@@ -179,6 +180,7 @@ class Shortcodes implements Hookable {
                 'type'     => 'choice',
                 'name'     => sanitize_text_field( $atts['field'] ),
                 'pageSize' => (int) $atts['page_size'],
+                'sort'     => sanitize_text_field( $atts['sort'] )
             );
             if( 'additional_field' === $atts['field'] && ! empty( $atts['additional_field'] ) ){
                 $params['name']        = sanitize_text_field( $atts['additional_field'] );
