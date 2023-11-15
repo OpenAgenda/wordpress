@@ -2,7 +2,7 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.3.2
+Tested up to: 6.4.1
 Stable tag: 2.8.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
@@ -175,6 +175,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 7. Enjoy !
 
 == Changelog ==
+
+= 2.8.0 =
+* Feature : Added sort parameter to choice filter
 
 = 2.7.0 =
 * Fixed   : Basic post URL front no longer used

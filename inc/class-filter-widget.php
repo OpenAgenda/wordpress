@@ -82,12 +82,12 @@ class Filter_Widget extends OpenAgenda_Widget {
                 ),
                 'sort' => array(
                     'name'        => 'sort',
-                    'label'       => __( 'Options sorting', 'openagenda' ),
+                    'label'       => __( 'Sort options by ', 'openagenda' ),
                     'type'        => 'select',
                     'class'       => 'openagenda-filter-choice-sort widefat',
-                    'option_none' => __( 'By value', 'openagenda' ),
+                    'option_none' => __( 'Decreasing count', 'openagenda' ),
                     'options' => array(
-                        'alphabetical' => __( 'Alphabetical', 'openagenda' ),
+                        'alphabetical' => __( 'Alphabetical order', 'openagenda' ),
                     )
                 ),
             ), 
