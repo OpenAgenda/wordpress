@@ -413,13 +413,10 @@ class OpenAgenda {
             $params['detailed'] = 1;
         }
 
-        // Add key query var
-        $url = add_query_arg( 'key', $this->get_api_key(), $url );
-
         // Add params and filters
         $string = http_build_query( array_merge( $params, $filters ) );
         if( ! empty( $string ) ){
-            $url .= sprintf( '&%s', $string );
+            $url .= sprintf( '?%s', $string );
         }
 
         return apply_filters( 'openagenda_request_url', $url, $this->uid, $args, $export );
@@ -432,7 +429,6 @@ class OpenAgenda {
     public function parse_args( $args = array() ){
         $defaults = $this->get_default_params();
         $args     = array_filter( wp_parse_args( $args, $defaults ), function( $value ){ return '' !== $value; } );
-
         $this->is_single   = ! empty( $args['slug'] );
         $this->is_archive  = ! $this->is_single;
         $this->page        = ! empty ( $args['page'] ) ? (int) $args['page'] : 1;
@@ -466,7 +462,12 @@ class OpenAgenda {
             $response     = $cache;
             $this->source = 'cache';
         } else {
-            $response     = wp_safe_remote_get( $this->get_request_url() );
+            $args = apply_filters( 'openagenda_remote_request_args', array(
+                'headers' => array(
+                    'Key' => $this->get_api_key(),
+                ),
+            ) );
+            $response     = wp_safe_remote_get( $this->get_request_url(), $args );
             $this->source = 'request';
             if( $this->debug ) error_log( sprintf( 'OpenAgenda request URL : %s', $this->get_request_url() ) );
         }
