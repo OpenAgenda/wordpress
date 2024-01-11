@@ -21,6 +21,11 @@ $oa-dark: #333;
 	--oa-main-color: #{$oa-blue};
 }
 
+img {
+	max-width: 100%;
+	height: auto;
+}
+
 /*****************************
  * Screen reader text helper
  *****************************/
@@ -262,7 +267,6 @@ div[data-container-id="oa-wrapper"]{
 .oa-notice {
 	padding: 1rem;
 	margin-bottom: 1rem;
-
 	p {
 		margin: 0;
 	}
@@ -537,7 +541,6 @@ div[data-container-id="oa-wrapper"]{
 	cursor: default;
 }
 
-
 .rdrMonthAndYearWrapper {
 	box-sizing: inherit;
 	display: -webkit-flex;
@@ -720,7 +723,6 @@ div[data-container-id="oa-wrapper"]{
 }
 
 // THEME
-
 .rdrCalendarWrapper {
 	color: #000000;
 	font-size: 12px;
@@ -1165,7 +1167,6 @@ div[data-container-id="oa-wrapper"]{
 }
 
 // OA Tweaks
-
 .rdrMonthName {
 	display: none;
 }
@@ -1200,7 +1201,6 @@ div[data-container-id="oa-wrapper"]{
 		}
 	}
 }
-
 
 /*********************************
  * Active filters widget

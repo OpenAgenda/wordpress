@@ -2,6 +2,11 @@
   --oa-main-color: #41acdd;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /*****************************
  * Screen reader text helper
  *****************************/
