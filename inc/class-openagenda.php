@@ -682,6 +682,7 @@ class OpenAgenda {
         if( $this->include_usage ){
             $defaults['cms']  = 'wp';
             $defaults['host'] = get_home_url();
+            $defaults['uses_site_editor'] = function_exists( 'wp_is_block_theme' ) && wp_is_block_theme();
         }
         return apply_filters( 'openagenda_api_default_params', $defaults );
     }
