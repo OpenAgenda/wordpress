@@ -100,7 +100,7 @@ class OpenAgenda_Widget extends \WP_Widget {
                 );
                 break;
             case 'checkbox':
-                $description = ! empty( $field['description'] ) ? sprintf( '(<em>%s</em>)', wp_kses_post( $field['description'] ) ) : ''; 
+                $description = ! empty( $field['description'] ) ? sprintf( '<span class="description"><em>(%s)</em></span>', wp_kses_post( $field['description'] ) ) : ''; 
                 $html = sprintf(
                     '<p>
                         <input type="checkbox" id="%1$s" name="%2$s" class="%4$s" %5$s>
