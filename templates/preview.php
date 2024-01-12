@@ -7,14 +7,16 @@
  * @var     $atts       Shortcode attributes
  * @package OpenAgenda
  */
+$permalink = openagenda_event_permalink( false, false, false, $atts['links'] === 'oa' );
+$additional_attributes = $atts['links'] === 'oa' ? 'target="_blank" rel="noopener noreferer"' : '';
 ?>
 <div class="oa-preview-event oa-preview-card">
     <div class="oa-card">
-        <a class="oa-card-image-link" href="<?php openagenda_event_permalink( false, true, false ); ?>">
+        <a class="oa-card-image-link" href="<?php echo $permalink; ?>" <?php echo $additional_attributes; ?>>
             <?php openagenda_event_image(); ?>
         </a>
         <div class="oa-card-body">
-            <a class="oa-card-link" href="<?php openagenda_event_permalink( false, true, false ) ?>">
+            <a class="oa-card-link" href="<?php echo $permalink; ?>" <?php echo $additional_attributes; ?>>
                 <strong><?php openagenda_field( 'title' ); ?></strong>
             </a>
             <ul class="oa-card-metas oa-list-unstyled">

@@ -53,6 +53,9 @@ function openagenda_get_field( $field, $uid = false ){
             $slug  = sanitize_text_field( $event['slug'] );
             $value = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', urlencode( $slug ), $calendar_permalink );            
             break;
+        case 'external-permalink':
+            $value = sprintf( 'https://openagenda.com/agendas/%s/events/%s?from=wp', $openagenda->get_uid(), $uid );
+            break;
         case 'timings':
         case 'next-timings':
         case 'next-timing':
@@ -216,20 +219,25 @@ function openagenda_get_i18n_value( $i18n_field ){
  * @param   string  $uid          Uid of the event.
  * @param   bool    $echo         Whether to display url or not
  * @param   bool    $use_context  Whether to append context to link or not
+ * @param   bool    $external     Whether to link locally or to https://openagenda.com
  * @return  string  $permalink
  */
-function openagenda_event_permalink( $uid = false, $echo = true, $use_context = true ){
+function openagenda_event_permalink( $uid = false, $echo = true, $use_context = true, $external = false ){
     global $openagenda;
 
-    $permalink = openagenda_get_field( 'permalink', $uid );
-    if( $openagenda->is_archive() && $openagenda->use_context() && $use_context ){
-        $context = $openagenda->get_context();
-        $context['event_offset'] = $openagenda->get_event_offset();
-        $encoded_context = openagenda_encode_context( $context );
-        $permalink = add_query_arg( 'context', $encoded_context, $permalink ); 
+    if( $external ){
+        $permalink = openagenda_get_field( 'external-permalink', $uid );
+    } else {
+        $permalink = openagenda_get_field( 'permalink', $uid );
+        if( $openagenda->is_archive() && $openagenda->use_context() && $use_context ){
+            $context = $openagenda->get_context();
+            $context['event_offset'] = $openagenda->get_event_offset();
+            $encoded_context = openagenda_encode_context( $context );
+            $permalink = add_query_arg( 'context', $encoded_context, $permalink ); 
+        }
     }
 
-    $permalink = apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context );
+    $permalink = apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context, $external = false );
     if( $echo ) echo openagenda_esc_field( $permalink, 'permalink' );
     return $permalink;
 }
@@ -243,7 +251,6 @@ function openagenda_event_permalink( $uid = false, $echo = true, $use_context = 
  * @return  string  $html  The corresponding <img> tag
  */
 function openagenda_get_event_image( $size = '', $uid = false ){
-    
     $html       = '';
     $image_data = openagenda_get_event_image_data( $size, $uid );
     $image_url  = ! empty( $image_data['url'] ) ? $image_data['url'] : '';
@@ -288,7 +295,7 @@ function openagenda_get_event_image_data( $size = '', $uid = false ){
                 $dimensions = $variant[0]['size'];
             }
         }
-        $image_url = trailingslashit( $event['image']['base'] ) . $filename;
+        $image_url = $filename ? trailingslashit( $event['image']['base'] ) . $filename : '';
     }
 
     if( is_array( $size ) ){

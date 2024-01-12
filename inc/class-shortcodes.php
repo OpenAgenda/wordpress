@@ -325,7 +325,8 @@ class Shortcodes implements Hookable {
             'id'      => 'preview',
             'uid'     => '',
             'size'    => 3,
-            'filters' => ''
+            'filters' => '',
+            'links'   => '',
         );
         $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
         
