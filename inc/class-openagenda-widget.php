@@ -100,16 +100,19 @@ class OpenAgenda_Widget extends \WP_Widget {
                 );
                 break;
             case 'checkbox':
+                $description = ! empty( $field['description'] ) ? sprintf( '(<em>%s</em>)', wp_kses_post( $field['description'] ) ) : ''; 
                 $html = sprintf(
                     '<p>
                         <input type="checkbox" id="%1$s" name="%2$s" class="%4$s" %5$s>
                         <label for="%1$s">%3$s</label>
+                        %6$s
                     </p>',
                     esc_attr( $this->get_field_id( $field['name'] ) ),
                     esc_attr( $this->get_field_name( $field['name'] ) ),
                     esc_html( $field['label'] ),
                     esc_attr( $field['class'] ),
-                    checked( $value, true, false )
+                    checked( $value, true, false ),
+                    $description
                 );
                 break;
             case 'select';
