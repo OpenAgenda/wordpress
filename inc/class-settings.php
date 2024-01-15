@@ -172,7 +172,7 @@ class Settings implements Hookable {
                     'label_for'   => 'openagenda_allow_usage_stats_collection',
                     'type'        => 'checkbox',
                     'default'     => true,
-                    'description' => __( 'Allow OpenAgenda to collect plugin usage information for statistics purposes. The following information is collected : CMS used and site URL.', 'openagenda' ),
+                    'description' => __( 'Allow OpenAgenda to collect plugin usage information for statistics purposes. The following information is collected : CMS used, site URL and whether site editor is used or not.', 'openagenda' ),
                 ),
             ),
             'calendar-prefix' => array(
