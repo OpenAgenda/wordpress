@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda 2.8.1\n"
+"Project-Id-Version: OpenAgenda 2.9.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-12T09:09:41+01:00\n"
+"POT-Creation-Date: 2024-01-15T09:16:54+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: openagenda\n"
@@ -430,7 +430,7 @@ msgid "Use external links"
 msgstr ""
 
 #: inc/class-preview-widget.php:43
-msgid "Check to make event permalinks point to event pages on https://openagenda instead of local pages."
+msgid "Check to make event permalinks point to event pages on https://openagenda.com instead of local pages."
 msgstr ""
 
 #: inc/class-preview-widget.php:48
