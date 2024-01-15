@@ -40,7 +40,7 @@ class Preview_Widget extends OpenAgenda_Widget {
                 'label'       => __( 'Use external links', 'openagenda' ),
                 'class'       => 'widefat',
                 'default'     => false,
-                'description' => __( 'Check to make event permalinks point to event pages on https://openagenda instead of local pages.', 'openagenda' ),
+                'description' => __( 'Check to make event permalinks point to event pages on https://openagenda.com instead of local pages.', 'openagenda' ),
             ),
         );
         parent::__construct( 

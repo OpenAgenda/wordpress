@@ -130,14 +130,15 @@ Displays a search field. It takes the following parameters :
 
  * `placeholder` : text field placeholder.
 
-**`[openagenda_filter_preview]`**
+**`[openagenda_preview]`**
 
 Displays next events. It takes the following parameters : 
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
  * `filters` : Query string representing filters to apply to the request.
- 
+ * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
+
 ## Customization
 
 Templates for the list of events and individual events can be customized in your theme.
@@ -196,9 +197,11 @@ Like `openagenda_get_field( $field, $uid = false )`, but escapes and echoes the 
 
 This function is used internally by `openagenda_field()` to escape the field value properly, depending on the field type.
 
-#### `openagenda_event_permalink( $event_uid = false, $echo = true, $use_context = false )`
+#### `openagenda_event_permalink( $event_uid = false, $echo = true, $use_context = false, $external = false )`
 
 Returns or echoes an event permalink, corresponding to the UID passed in or the current event in the event loop. The `use_context` param is used on event list views to append a string representing the page and current list filters.
+
+If `$external` is set to `true`, permalink will point to event page on https://openagenda.com instead.
 
 The returned value is passed through the following filter : `apply_filters( 'openagenda_event_permalink', $permalink, $event_uid, $use_context )`.
 

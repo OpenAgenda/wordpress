@@ -3,7 +3,7 @@ Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
 Tested up to: 6.4.2
-Stable tag: 2.8.1
+Stable tag: 2.9.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -106,13 +106,14 @@ Displays an interactive map to locate and search events. It takes the following 
  * `map_tiles_link` : Map tiles link to use. Defaults to `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
  * `map_auto` : Whether to automatically update map on scroll. 
 
-**`[openagenda_filter_preview]`**
+**`[openagenda_preview]`**
 
-Displays next events. It takes the following parameters : 
+Displays a preview of any calendar. It takes the following parameters : 
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
  * `filters` : Query string representing filters to apply to the request.
+ * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
 
 **`[openagenda_filter_relative]`**
 
@@ -176,8 +177,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
-= 2.8.1 =
+= 2.9.0 =
 * Feature : Move API key to request headers
+* Feature : Added `links` parameter to allow for external linking in preview.
 
 = 2.8.0 =
 * Feature : Added sort parameter to choice filter
