@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-20T11:37:30+01:00\n"
+"POT-Creation-Date: 2024-03-20T12:41:52+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: openagenda\n"
@@ -192,7 +192,7 @@ msgstr ""
 
 #: inc/class-filter-widget.php:22
 #: inc/class-settings.php:220
-#: inc/class-shortcodes.php:297
+#: inc/class-shortcodes.php:319
 #: inc/template-tags.php:491
 msgid "OpenStreetMap contributors"
 msgstr ""
@@ -218,117 +218,123 @@ msgid "Display defined ranges shortcuts ?"
 msgstr ""
 
 #: inc/class-filter-widget.php:57
+#: inc/class-filter-widget.php:72
 msgid "Ranges to display: "
 msgstr ""
 
 #: inc/class-filter-widget.php:61
+#: inc/class-filter-widget.php:76
 msgid "Today"
 msgstr ""
 
 #: inc/class-filter-widget.php:62
+#: inc/class-filter-widget.php:77
 msgid "Tomorrow"
 msgstr ""
 
 #: inc/class-filter-widget.php:63
+#: inc/class-filter-widget.php:78
 msgid "This week end"
 msgstr ""
 
 #: inc/class-filter-widget.php:64
+#: inc/class-filter-widget.php:79
 msgid "This week"
 msgstr ""
 
 #: inc/class-filter-widget.php:65
+#: inc/class-filter-widget.php:80
 msgid "This month"
 msgstr ""
 
-#: inc/class-filter-widget.php:72
+#: inc/class-filter-widget.php:87
 msgid "Choose field: "
 msgstr ""
 
-#: inc/class-filter-widget.php:75
+#: inc/class-filter-widget.php:90
 msgid "Choose a field to display"
 msgstr ""
 
-#: inc/class-filter-widget.php:77
-#: inc/class-shortcodes.php:197
-#: inc/class-shortcodes.php:207
+#: inc/class-filter-widget.php:92
+#: inc/class-shortcodes.php:198
+#: inc/class-shortcodes.php:208
 msgid "Favorites"
 msgstr ""
 
-#: inc/class-filter-widget.php:78
+#: inc/class-filter-widget.php:93
 msgid "Cities"
 msgstr ""
 
-#: inc/class-filter-widget.php:79
+#: inc/class-filter-widget.php:94
 msgid "Districts"
 msgstr ""
 
-#: inc/class-filter-widget.php:80
+#: inc/class-filter-widget.php:95
 msgid "Keywords"
 msgstr ""
 
-#: inc/class-filter-widget.php:81
+#: inc/class-filter-widget.php:96
 msgid "Admin Level 3"
 msgstr ""
 
-#: inc/class-filter-widget.php:82
+#: inc/class-filter-widget.php:97
 msgid "Departments"
 msgstr ""
 
-#: inc/class-filter-widget.php:83
+#: inc/class-filter-widget.php:98
 msgid "Regions"
 msgstr ""
 
-#: inc/class-filter-widget.php:84
+#: inc/class-filter-widget.php:99
 msgid "Attendance Mode"
 msgstr ""
 
-#: inc/class-filter-widget.php:85
+#: inc/class-filter-widget.php:100
 msgid "Additional field"
 msgstr ""
 
-#: inc/class-filter-widget.php:90
+#: inc/class-filter-widget.php:105
 msgid "Additional field name: "
 msgstr ""
 
-#: inc/class-filter-widget.php:94
+#: inc/class-filter-widget.php:109
 msgid "You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )"
 msgstr ""
 
-#: inc/class-filter-widget.php:100
+#: inc/class-filter-widget.php:115
 msgid "Number of options to display at once: "
 msgstr ""
 
-#: inc/class-filter-widget.php:106
+#: inc/class-filter-widget.php:121
 msgid "Sort options by "
 msgstr ""
 
-#: inc/class-filter-widget.php:109
+#: inc/class-filter-widget.php:124
 msgid "Decreasing count"
 msgstr ""
 
-#: inc/class-filter-widget.php:111
+#: inc/class-filter-widget.php:126
 msgid "Alphabetical order"
 msgstr ""
 
-#: inc/class-filter-widget.php:119
+#: inc/class-filter-widget.php:134
 msgid "OpenAgenda Filter"
 msgstr ""
 
-#: inc/class-filter-widget.php:121
+#: inc/class-filter-widget.php:136
 msgid "Displays a filter widget."
 msgstr ""
 
-#: inc/class-filter-widget.php:173
+#: inc/class-filter-widget.php:188
 #: inc/class-preview-widget.php:96
 msgid "Title :"
 msgstr ""
 
-#: inc/class-filter-widget.php:177
+#: inc/class-filter-widget.php:192
 msgid "Filter to display :"
 msgstr ""
 
-#: inc/class-filter-widget.php:179
+#: inc/class-filter-widget.php:194
 msgid "Choose filter"
 msgstr ""
 
@@ -349,15 +355,20 @@ msgstr ""
 
 #: inc/class-main.php:38
 msgctxt "Filter name"
-msgid "Map"
+msgid "Defined Ranges"
 msgstr ""
 
 #: inc/class-main.php:42
 msgctxt "Filter name"
-msgid "Upcoming"
+msgid "Map"
 msgstr ""
 
 #: inc/class-main.php:46
+msgctxt "Filter name"
+msgid "Upcoming"
+msgstr ""
+
+#: inc/class-main.php:50
 msgctxt "Filter name"
 msgid "Search"
 msgstr ""
@@ -568,30 +579,30 @@ msgstr ""
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
-#: inc/class-shortcodes.php:76
+#: inc/class-shortcodes.php:77
 msgid "Please provide a valid calendar UID to display in the calendar settings."
 msgstr ""
 
-#: inc/class-shortcodes.php:80
+#: inc/class-shortcodes.php:81
 msgid "This page is not an agenda page. Events may not display as expected."
 msgstr ""
 
-#: inc/class-shortcodes.php:136
+#: inc/class-shortcodes.php:137
 msgctxt "Total filter message when no events found"
 msgid "No event found"
 msgstr ""
 
-#: inc/class-shortcodes.php:137
+#: inc/class-shortcodes.php:138
 msgctxt "Total filter message when 1 event found. Keep {total} placeholder."
 msgid "{total} event"
 msgstr ""
 
-#: inc/class-shortcodes.php:138
+#: inc/class-shortcodes.php:139
 msgctxt "Total filter message when multiple event found. Keep {total} placeholder."
 msgid "{total} events"
 msgstr ""
 
-#: inc/class-shortcodes.php:305
+#: inc/class-shortcodes.php:327
 msgid "Search while moving the map"
 msgstr ""
 

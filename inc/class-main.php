@@ -34,6 +34,10 @@ class Main {
                 'label'     => _x( 'Calendar', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_calendar',
             ),         
+            'openagenda_filter_ranges' => array(
+                'label'     => _x( 'Defined Ranges', 'Filter name', 'openagenda' ),
+                'shortcode' => 'openagenda_filter_ranges',
+            ),         
             'openagenda_filter_map' => array(
                 'label'     => _x( 'Map', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_map',
