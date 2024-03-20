@@ -4,3 +4,4 @@ svn
 package-lock.json
 composer.lock
 vendor
+variables.txt
