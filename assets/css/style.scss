@@ -278,9 +278,9 @@ div[data-container-id="oa-wrapper"]{
 }
 
 
-/***************************
- * Active Filters (legacy)
- ***************************/
+// /***************************
+//  * Active Filters (legacy)
+//  ***************************/
 // .active-filters {
 // 	li a {
 // 		padding: 5px;
@@ -296,9 +296,9 @@ div[data-container-id="oa-wrapper"]{
 // 	}
 // }
 
-/************************
- * Tags Filter (legacy)
- ***********************/
+// /************************
+//  * Tags Filter (legacy)
+//  ***********************/
 // .cbpgtg .tags {
 //     margin: 0;
 //     padding: 0;
@@ -330,9 +330,9 @@ div[data-container-id="oa-wrapper"]{
 // }
 
 
-/****************************
- * Calendar Filter (legacy)
- ***************************/
+// /****************************
+//  * Calendar Filter (legacy)
+//  ***************************/
 // .ccal {
 // 	background-color: $oa-gray-lighter;
 // 	* {
@@ -439,9 +439,9 @@ div[data-container-id="oa-wrapper"]{
 // 	}
 // }
 
-/***********************
- * Map Filter (legacy)
- ***********************/
+// /***********************
+//  * Map Filter (legacy)
+//  ***********************/
 // .cbpgmp {
 // 	.map-sync {
 // 		align-items: center;
@@ -733,7 +733,7 @@ div[data-container-id="oa-wrapper"]{
 	margin: 0.833em;
 }
 
-.rdrDateDisplayItem {
+.rdrDateDisplayItem  {
 	border-radius: 4px;
 	background-color: rgb(255, 255, 255);
 	box-shadow: 0 1px 2px 0 rgba(35, 57, 66, 0.21);
@@ -936,7 +936,7 @@ div[data-container-id="oa-wrapper"]{
 .rdrInRange,
 .rdrStartEdge,
 .rdrEndEdge {
-	background: currentColor;
+	background: var(--oa-main-color, $oa-blue);
 	position: absolute;
 	top: 5px;
 	left: 0;
@@ -1045,25 +1045,39 @@ div[data-container-id="oa-wrapper"]{
 .rdrDefinedRangesWrapper {
 	font-size: 12px;
 	width: 226px;
-	border-right: solid 1px #eff2f7;
-	//background: #fff;
+	// border-right: solid 1px #eff2f7;
 }
 
 .rdrDefinedRangesWrapper .rdrStaticRangeSelected {
-	color: currentColor;
+	color: var(--oa-main-color, $oa-blue) ! important;
 	font-weight: 600;
+	border-color: var(--oa-main-color, $oa-blue);
 }
 
-.rdrStaticRange {
-	border: 0;
+button.rdrStaticRange {
+	background: #fff;
+	box-shadow: 0 1px 2px 0 rgba(35, 57, 66, 0.21);
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: inherit;
 	cursor: pointer;
 	display: block;
+	margin-bottom: 8px;
 	outline: 0;
 	padding: 0;
-	background: #fff;
-	border-radius: 4px;
 }
 
+.widget {
+	button.rdrStaticRange {
+		padding: 0;
+		&:hover,
+		&:focus {
+			background: #fff;
+			border-color: var(--oa-main-color, $oa-blue);
+		}
+	}
+}
+ 
 .rdrStaticRange + .rdrStaticRange {
 	margin-left: 8px;
 }
@@ -1074,11 +1088,14 @@ div[data-container-id="oa-wrapper"]{
 }
 
 .rdrStaticRangeLabel {
+	color: inherit;
 	display: block;
-	outline: 0;
+	font-weight: normal;
 	line-height: 18px;
+	outline: 0;
 	padding: 5px;
 	text-align: left;
+	text-transform: none;
 }
 
 .rdrInputRanges {

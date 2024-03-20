@@ -278,18 +278,6 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   border-left: 3px solid #B91C1C;
 }
 
-/***************************
- * Active Filters (legacy)
- ***************************/
-/************************
- * Tags Filter (legacy)
- ***********************/
-/****************************
- * Calendar Filter (legacy)
- ***************************/
-/***********************
- * Map Filter (legacy)
- ***********************/
 .event-map {
   height: 300px;
 }
@@ -780,7 +768,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .rdrInRange,
 .rdrStartEdge,
 .rdrEndEdge {
-  background: currentColor;
+  background: var(--oa-main-color, #41acdd);
   position: absolute;
   top: 5px;
   left: 0;
@@ -889,22 +877,33 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .rdrDefinedRangesWrapper {
   font-size: 12px;
   width: 226px;
-  border-right: solid 1px #eff2f7;
 }
 
 .rdrDefinedRangesWrapper .rdrStaticRangeSelected {
-  color: currentColor;
+  color: var(--oa-main-color, #41acdd) !important;
   font-weight: 600;
+  border-color: var(--oa-main-color, #41acdd);
 }
 
-.rdrStaticRange {
-  border: 0;
+button.rdrStaticRange {
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(35, 57, 66, 0.21);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: inherit;
   cursor: pointer;
   display: block;
+  margin-bottom: 8px;
   outline: 0;
   padding: 0;
+}
+
+.widget button.rdrStaticRange {
+  padding: 0;
+}
+.widget button.rdrStaticRange:hover, .widget button.rdrStaticRange:focus {
   background: #fff;
-  border-radius: 4px;
+  border-color: var(--oa-main-color, #41acdd);
 }
 
 .rdrStaticRange + .rdrStaticRange {
@@ -917,11 +916,14 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 
 .rdrStaticRangeLabel {
+  color: inherit;
   display: block;
-  outline: 0;
+  font-weight: normal;
   line-height: 18px;
+  outline: 0;
   padding: 5px;
   text-align: left;
+  text-transform: none;
 }
 
 .rdrInputRanges {

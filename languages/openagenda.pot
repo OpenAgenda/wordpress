@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-20T08:53:46+01:00\n"
+"POT-Creation-Date: 2024-03-20T11:37:30+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: openagenda\n"
@@ -192,7 +192,7 @@ msgstr ""
 
 #: inc/class-filter-widget.php:22
 #: inc/class-settings.php:220
-#: inc/class-shortcodes.php:279
+#: inc/class-shortcodes.php:297
 #: inc/template-tags.php:491
 msgid "OpenStreetMap contributors"
 msgstr ""
@@ -214,93 +214,121 @@ msgid "Placeholder:"
 msgstr ""
 
 #: inc/class-filter-widget.php:51
+msgid "Display defined ranges shortcuts ?"
+msgstr ""
+
+#: inc/class-filter-widget.php:57
+msgid "Ranges to display: "
+msgstr ""
+
+#: inc/class-filter-widget.php:61
+msgid "Today"
+msgstr ""
+
+#: inc/class-filter-widget.php:62
+msgid "Tomorrow"
+msgstr ""
+
+#: inc/class-filter-widget.php:63
+msgid "This week end"
+msgstr ""
+
+#: inc/class-filter-widget.php:64
+msgid "This week"
+msgstr ""
+
+#: inc/class-filter-widget.php:65
+msgid "This month"
+msgstr ""
+
+#: inc/class-filter-widget.php:72
 msgid "Choose field: "
 msgstr ""
 
-#: inc/class-filter-widget.php:54
+#: inc/class-filter-widget.php:75
 msgid "Choose a field to display"
 msgstr ""
 
-#: inc/class-filter-widget.php:56
+#: inc/class-filter-widget.php:77
 #: inc/class-shortcodes.php:197
 #: inc/class-shortcodes.php:207
 msgid "Favorites"
 msgstr ""
 
-#: inc/class-filter-widget.php:57
+#: inc/class-filter-widget.php:78
 msgid "Cities"
 msgstr ""
 
-#: inc/class-filter-widget.php:58
+#: inc/class-filter-widget.php:79
 msgid "Districts"
 msgstr ""
 
-#: inc/class-filter-widget.php:59
+#: inc/class-filter-widget.php:80
 msgid "Keywords"
 msgstr ""
 
-#: inc/class-filter-widget.php:60
+#: inc/class-filter-widget.php:81
 msgid "Admin Level 3"
 msgstr ""
 
-#: inc/class-filter-widget.php:61
+#: inc/class-filter-widget.php:82
 msgid "Departments"
 msgstr ""
 
-#: inc/class-filter-widget.php:62
+#: inc/class-filter-widget.php:83
 msgid "Regions"
 msgstr ""
 
-#: inc/class-filter-widget.php:63
+#: inc/class-filter-widget.php:84
 msgid "Attendance Mode"
 msgstr ""
 
-#: inc/class-filter-widget.php:64
+#: inc/class-filter-widget.php:85
 msgid "Additional field"
 msgstr ""
 
-#: inc/class-filter-widget.php:69
+#: inc/class-filter-widget.php:90
 msgid "Additional field name: "
 msgstr ""
 
-#: inc/class-filter-widget.php:73
+#: inc/class-filter-widget.php:94
 msgid "You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )"
 msgstr ""
 
-#: inc/class-filter-widget.php:79
+#: inc/class-filter-widget.php:100
 msgid "Number of options to display at once: "
 msgstr ""
 
-#: inc/class-filter-widget.php:85
+#: inc/class-filter-widget.php:106
 msgid "Sort options by "
 msgstr ""
 
-#: inc/class-filter-widget.php:88
+#: inc/class-filter-widget.php:109
 msgid "Decreasing count"
 msgstr ""
 
-#: inc/class-filter-widget.php:90
+#: inc/class-filter-widget.php:111
 msgid "Alphabetical order"
 msgstr ""
 
-#: inc/class-filter-widget.php:98
+#: inc/class-filter-widget.php:119
 msgid "OpenAgenda Filter"
 msgstr ""
 
-#: inc/class-filter-widget.php:100
+#: inc/class-filter-widget.php:121
 msgid "Displays a filter widget."
 msgstr ""
 
-#: inc/class-filter-widget.php:152
+#: inc/class-filter-widget.php:173
 #: inc/class-preview-widget.php:96
 msgid "Title :"
 msgstr ""
 
-#: inc/class-filter-widget.php:156
+#: inc/class-filter-widget.php:177
 msgid "Filter to display :"
 msgstr ""
 
-#: inc/class-filter-widget.php:158
+#: inc/class-filter-widget.php:179
 msgid "Choose filter"
 msgstr ""
 
@@ -563,7 +591,7 @@ msgctxt "Total filter message when multiple event found. Keep {total} placeholde
 msgid "{total} events"
 msgstr ""
 
-#: inc/class-shortcodes.php:287
+#: inc/class-shortcodes.php:305
 msgid "Search while moving the map"
 msgstr ""
 
@@ -584,22 +612,22 @@ msgstr ""
 msgid "Accessible to people suffering from visual impairments."
 msgstr ""
 
-#: inc/helper-functions.php:313
+#: inc/helper-functions.php:314
 msgid "Fetching events... Please wait a moment."
 msgstr ""
 
-#: inc/helper-functions.php:325
+#: inc/helper-functions.php:326
 msgid "There was an error updating the events. Pleaser refresh the page and try again."
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:358
+#: inc/helper-functions.php:359
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:360
+#: inc/helper-functions.php:361
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""

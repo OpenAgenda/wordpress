@@ -248,7 +248,11 @@ class Shortcodes implements Hookable {
         if( ! $openagenda ) return '';
         $uid =  $openagenda->get_uid();
 
-        $defaults = array( 'id' => 'date-range' );
+        $defaults = array( 
+            'id'             => 'date-range', 
+            'display_ranges' => false,
+            'static_ranges'   => []
+        );
         $atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_calendar' );
 
         $params = array(
@@ -256,7 +260,21 @@ class Shortcodes implements Hookable {
             'name' => 'timings',
         );
 
-        $filter = sprintf( '<div class="oa-widget oa-calendar-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( json_encode( $params ) ) );
+        $range_filter = '';
+        if( (bool) $atts['display_ranges'] ){
+            $ranges_params = array(
+                'type' => 'definedRange',
+                'name' => 'timings',
+            );
+            $ranges = ! empty( $atts['static_ranges'] ) ? explode( ',', $atts['static_ranges'] ) : array();
+            if( ! empty( $ranges ) ) $ranges_params['staticRanges'] = $ranges;
+            $range_filter = sprintf( 
+                '<div class="oa-widget oa-ranges-widget" data-oa-filter="date-ranges" data-oa-filter-params="%s"></div>', 
+                esc_attr( json_encode( $ranges_params ) )
+            );
+        }
+
+        $filter = sprintf( '<div class="oa-widget oa-calendar-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>%s', esc_attr( $atts['id'] ), esc_attr( json_encode( $params ) ), $range_filter );
         return apply_filters( 'openagenda_filter_calendar', $filter, $uid, $atts );
     }
 

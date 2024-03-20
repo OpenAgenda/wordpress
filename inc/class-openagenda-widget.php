@@ -115,6 +115,32 @@ class OpenAgenda_Widget extends \WP_Widget {
                     $description
                 );
                 break;
+            case 'multi-checkbox':
+                $description = ! empty( $field['description'] ) ? sprintf( '<label class="">%s</label>', wp_kses_post( $field['description'] ) ) : ''; 
+                $options = '';
+                if ( ! empty( $field['options'] ) ){
+                    foreach ( $field['options'] as $option_value => $option_label ) {
+                        $checked = in_array( $option_value, $value ) ? 'checked=checked' : ''; 
+                        $options .= sprintf(
+                            '<span>
+                                <input type="checkbox" id="%1$s" name="%2$s[]" class="%4$s" value="%5$s" %6$s>
+                                <label for="%1$s">%3$s</label>
+                            </span>',
+                            esc_attr( sprintf( '%s-%s', $this->get_field_id( $field['name'] ), $option_value ) ),
+                            esc_attr( $this->get_field_name( $field['name'] ) ),
+                            esc_html( $option_label ),
+                            esc_attr( $field['class'] ),
+                            esc_attr( $option_value ),
+                            $checked,
+                        );
+                    }
+                }
+                $html = sprintf(
+                    '<p>%s<div style="display:flex; align-items:center; flex-wrap:wrap; gap:12px;">%s</div></p>',
+                    $description,
+                    $options
+                );
+                break;
             case 'select';
                 $options = ''; 
                 if ( ! empty( $field['options'] ) ){

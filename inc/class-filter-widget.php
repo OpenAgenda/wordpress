@@ -45,6 +45,27 @@ class Filter_Widget extends OpenAgenda_Widget {
                     'default'     => '',
                 ),
             ),
+            'openagenda_filter_calendar' => array(
+                'display_ranges' => array(
+                    'name'        => 'display_ranges',
+                    'label'       => __( 'Display defined ranges shortcuts ?', 'openagenda' ),
+                    'default'     => false,
+                    'type'        => 'checkbox',
+                ),
+                'static_ranges' => array (
+                    'name'        => 'static_ranges',
+                    'description' => __( 'Ranges to display: ', 'openagenda' ),
+                    'default'     => ['today', 'tomorrow', 'thisWeekend', 'currentWeek', 'currentMonth'],
+                    'type'        => 'multi-checkbox',
+                    'options'     => array(
+                        'today'        => __( 'Today', 'openagenda' ), 
+                        'tomorrow'     => __( 'Tomorrow', 'openagenda' ),
+                        'thisWeekend'  => __( 'This week end', 'openagenda' ), 
+                        'currentWeek'  => __( 'This week', 'openagenda' ), 
+                        'currentMonth' => __( 'This month', 'openagenda' ), 
+                    )
+                ),
+            ),
             'openagenda_filter_choice' => array(
                 'field' => array(
                     'name'        => 'field',
@@ -209,6 +230,14 @@ class Filter_Widget extends OpenAgenda_Widget {
             case 'openagenda_filter_search':
                 $additional_settings = array( 
                     'placeholder' => ! empty( $new_instance['placeholder'] ) ? sanitize_text_field( $new_instance['placeholder'] ) : '',
+                );
+                break;
+            case 'openagenda_filter_calendar':
+                $additional_settings = array( 
+                    'display_ranges' => isset( $new_instance['display_ranges'] ) ? (bool) $new_instance['display_ranges'] : false,
+                    'static_ranges'   => ! empty( $new_instance['static_ranges'] ) ? array_map( function( $range ){
+                        return sanitize_text_field( $range );
+                    }, $new_instance['static_ranges'] ) : array()
                 );
                 break;
             case 'openagenda_filter_choice':

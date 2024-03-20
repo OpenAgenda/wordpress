@@ -33,7 +33,7 @@ class Main {
             'openagenda_filter_calendar' => array(
                 'label'     => _x( 'Calendar', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_calendar',
-            ),
+            ),         
             'openagenda_filter_map' => array(
                 'label'     => _x( 'Map', 'Filter name', 'openagenda' ),
                 'shortcode' => 'openagenda_filter_map',

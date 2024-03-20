@@ -269,6 +269,7 @@ function openagenda_get_shortcode_attributes( $array, $id = '' ){
         $atts[] = sprintf('id="%s"', esc_attr( $id ) );
     }
     $atts = array_merge( $atts, array_map( function( $key, $value ){
+        if( is_array( $value ) ) $value = join( ',',$value );
         return sprintf( '%s="%s"', $key, 'filters' !== $key ? sanitize_text_field( $value ) : $value );
     }, array_keys( $array ), array_values( $array ) )) ;
     return join( ' ', $atts );
