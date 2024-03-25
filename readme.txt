@@ -65,6 +65,10 @@ In the *Customizer*, a new panel is available to house various display settings.
 
 ![A single section in the customizer houses your display settings.](assets/screenshots/screenshot-6.png)
 
+If you add Openagenda Filter widgets via the customizer, **the preview will not display them immediately**. That's simply because filters are initialized on page load and the customizer preview is not always fully refreshed when a setting is changed.
+
+Simply publish your settings and refresh the page, or open your agenda page in another tab. Your filter should work just fine. 
+
 ## Filter widget and shortcodes
 
 To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additionnal settings in the widgets admin.

@@ -69,6 +69,10 @@ In the *Customizer*, a new panel is available to house various display settings.
 
 ![A single section in the customizer houses your display settings.](assets/screenshots/screenshot-6.png)
 
+If you add Openagenda Filter widgets via the customizer, **the preview will not display them immediately**. That's simply because filters are initialized on page load and the customizer preview is not always fully refreshed when a setting is changed.
+
+Simply publish your settings and refresh the page, or open your agenda page in another tab. Your filter should work just fine. 
+
 ## How to get my calendar UID ?
 
 The UID of the calendar you wish to display can be found directly on your calendar page on [OpenAgenda](https://openagenda.com). Go to the site, and click *Look for an agenda*. Then use search box to find your calendar.

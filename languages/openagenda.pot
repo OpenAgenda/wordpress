@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-20T12:41:52+01:00\n"
+"POT-Creation-Date: 2024-03-25T10:49:13+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: openagenda\n"
@@ -623,22 +623,22 @@ msgstr ""
 msgid "Accessible to people suffering from visual impairments."
 msgstr ""
 
-#: inc/helper-functions.php:314
+#: inc/helper-functions.php:316
 msgid "Fetching events... Please wait a moment."
 msgstr ""
 
-#: inc/helper-functions.php:326
+#: inc/helper-functions.php:328
 msgid "There was an error updating the events. Pleaser refresh the page and try again."
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:359
+#: inc/helper-functions.php:361
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:361
+#: inc/helper-functions.php:363
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
@@ -684,7 +684,7 @@ msgid "Share on Facebook"
 msgstr ""
 
 #: inc/template-tags.php:532
-msgid "Share on Twitter"
+msgid "Share on X"
 msgstr ""
 
 #: inc/template-tags.php:540
