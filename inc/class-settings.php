@@ -303,7 +303,7 @@ class Settings implements Hookable {
         
         $option_name = sanitize_title( $args['option_name'] );
         $field_id    = sanitize_title( $args['id'] );
-        $field_name  = "${option_name}[${field_id}]";
+        $field_name  = "{$option_name}[{$field_id}]";
         $settings    = get_option( $args['option_name'] );
         $default     = ! empty( $args['default'] ) ? $args['default'] : '';
         $value       = ! empty( $settings ) && isset( $settings[$field_id] ) ? $settings[$field_id] : $default;
@@ -337,7 +337,7 @@ class Settings implements Hookable {
         
         $option_name = sanitize_title( $args['option_name'] );
         $field_id    = sanitize_title( $args['id'] );
-        $field_name  = "${option_name}[${field_id}]";
+        $field_name  = "{$option_name}[{$field_id}]";
         $settings    = get_option( $args['option_name'] );
         $default     = ! empty( $args['default'] ) ? $args['default'] : '';
         $value       = ! empty( $settings ) && isset( $settings[$field_id] ) ? $settings[$field_id] : $default;

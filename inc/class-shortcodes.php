@@ -22,6 +22,7 @@ class Shortcodes implements Hookable {
             'openagenda_filter_choice'    => array( $this, 'openagenda_filter_choice' ),
             'openagenda_filter_tags'      => array( $this, 'openagenda_filter_tags' ),
             'openagenda_filter_calendar'  => array( $this, 'openagenda_filter_calendar' ),
+            'openagenda_filter_ranges'    => array( $this, 'openagenda_filter_ranges' ),
             'openagenda_filter_map'       => array( $this, 'openagenda_filter_map' ),
             'openagenda_filter_preview'   => array( $this, 'openagenda_filter_preview' ),
             'openagenda_filter_relative'  => array( $this, 'openagenda_filter_relative' ),
@@ -248,16 +249,55 @@ class Shortcodes implements Hookable {
         if( ! $openagenda ) return '';
         $uid =  $openagenda->get_uid();
 
-        $defaults = array( 'id' => 'date-range' );
-        $atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_calendar' );
+        $defaults = array( 
+            'id'             => 'date-range', 
+            'display_ranges' => false,
+            'ranges'         => array()
+        );
+        $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_calendar' );
 
         $params = array(
             'type' => 'dateRange',
             'name' => 'timings',
         );
 
-        $filter = sprintf( '<div class="oa-widget oa-calendar-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( json_encode( $params ) ) );
+        $ranges_filter = (bool) $atts['display_ranges'] ? $this->openagenda_filter_ranges( array( 'static_ranges' => $atts['ranges'] ) ) : '';
+        
+        $filter = sprintf( '<div class="oa-widget oa-calendar-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>%s', esc_attr( $atts['id'] ), esc_attr( json_encode( $params ) ), $ranges_filter );
         return apply_filters( 'openagenda_filter_calendar', $filter, $uid, $atts );
+    }
+
+    /**
+     * Callback function to display Defined Ranges.
+     * 
+     * @param   array   $atts     Array of attributes passed to the shortcode
+     * @param   string  $content  Content if enclosing shortcode. Defaults to null.
+     * @param   string  $tag      Name of the shortcode
+     * @return  string  $html     HTML to display.
+     */
+    public function openagenda_filter_ranges( $atts = array(), $content = null, $tag = 'openagenda_filter_ranges' ){
+        global $openagenda;
+        if( ! $openagenda ) return '';
+        $uid =  $openagenda->get_uid();
+
+        $defaults = array( 
+            'id' => 'defined-ranges',
+            'static_ranges' => array(),
+        );
+        $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_ranges' );
+
+        $params = array(
+            'type' => 'definedRange',
+            'name' => 'timings',
+        );
+
+        $ranges = ! empty( $atts['static_ranges'] ) ? explode( ',', $atts['static_ranges'] ) : array();
+        if( ! empty( $ranges ) ) {
+            $params['staticRanges'] = $ranges;
+        }
+
+        $filter = sprintf( '<div class="oa-widget oa-ranges-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( json_encode( $params ) ) );
+        return apply_filters( 'openagenda_filter_ranges', $filter, $uid, $atts );
     }
 
 

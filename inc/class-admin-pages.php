@@ -128,7 +128,7 @@ class Admin_Pages implements Hookable {
                 <?php endif; ?>
 
                 <div class="tab-content">
-                    <?php do_action( "openagenda_admin_page_${current_tab}_tab_content" ); ?>
+                    <?php do_action( "openagenda_admin_page_{$current_tab}_tab_content" ); ?>
                 </div>
             </div>
         <?php

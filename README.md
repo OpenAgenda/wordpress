@@ -69,6 +69,10 @@ In the *Customizer*, a new panel is available to house various display settings.
 
 ![A single section in the customizer houses your display settings.](assets/screenshots/screenshot-6.png)
 
+If you add Openagenda Filter widgets via the customizer, **the preview will not display them immediately**. That's simply because filters are initialized on page load and the customizer preview is not always fully refreshed when a setting is changed.
+
+Simply publish your settings and refresh the page, or open your agenda page in another tab. Your filter should work just fine. 
+
 ## How to get my calendar UID ?
 
 The UID of the calendar you wish to display can be found directly on your calendar page on [OpenAgenda](https://openagenda.com). Go to the site, and click *Look for an agenda*. Then use search box to find your calendar.
@@ -136,7 +140,7 @@ Displays next events. It takes the following parameters :
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
- * `filters` : Query string representing filters to apply to the request.
+ * `filters` : Query string representing filters to apply to the request. **To ensure it works properly and avoid breaking the shortcode, you should urlencode the query string**. You can do so via a simple tool like [https://www.urlencoder.org/fr/](https://www.urlencoder.org/fr/)
  * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
 
 ## Customization

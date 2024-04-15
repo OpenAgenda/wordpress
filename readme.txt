@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.4.2
-Stable tag: 2.9.0
+Tested up to: 6.5.2
+Stable tag: 2.10.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -65,6 +65,10 @@ In the *Customizer*, a new panel is available to house various display settings.
 
 ![A single section in the customizer houses your display settings.](assets/screenshots/screenshot-6.png)
 
+If you add Openagenda Filter widgets via the customizer, **the preview will not display them immediately**. That's simply because filters are initialized on page load and the customizer preview is not always fully refreshed when a setting is changed.
+
+Simply publish your settings and refresh the page, or open your agenda page in another tab. Your filter should work just fine. 
+
 ## Filter widget and shortcodes
 
 To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additionnal settings in the widgets admin.
@@ -112,7 +116,7 @@ Displays a preview of any calendar. It takes the following parameters :
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
- * `filters` : Query string representing filters to apply to the request.
+ * `filters` : Query string representing filters to apply to the request. **To ensure it works properly and avoid breaking the shortcode, you should urlencode the query string**. You can do so via a simple tool like [https://www.urlencoder.org/fr/](https://www.urlencoder.org/fr/)
  * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
 
 **`[openagenda_filter_relative]`**
@@ -176,6 +180,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 7. Enjoy !
 
 == Changelog ==
+
+= 2.10.0 =
+* Feature : Added defined range filter
 
 = 2.9.0 =
 * Feature : Move API key to request headers

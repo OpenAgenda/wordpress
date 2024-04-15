@@ -1,5 +1,6 @@
 :root {
   --oa-main-color: #41acdd;
+  --oa-secondary-color: #413a42;
 }
 
 img {
@@ -275,158 +276,6 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .oa-notice-error {
   background-color: #FEF2F2;
   border-left: 3px solid #B91C1C;
-}
-
-/***************************
- * Active Filters (legacy)
- ***************************/
-.active-filters li a {
-  padding: 5px;
-  line-height: 1;
-  text-decoration: none;
-  opacity: 0.8;
-}
-.active-filters li a:hover, .active-filters li a:focus {
-  cursor: pointer;
-  opacity: 1;
-  text-decoration: none;
-}
-
-/************************
- * Tags Filter (legacy)
- ***********************/
-.cbpgtg .tags {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-}
-.cbpgtg .tags li {
-  padding: 5px;
-}
-.cbpgtg .tags .no-current-match {
-  opacity: 0.5;
-}
-.cbpgtg .tags a:hover {
-  cursor: pointer;
-}
-.cbpgtg .tags .selected {
-  font-weight: bold;
-}
-.cbpgtg .tags .selected a {
-  color: var(--oa-main-color, #41acdd);
-  text-decoration: none;
-}
-.cbpgtg .tags .count {
-  margin-left: 4px;
-}
-
-/****************************
- * Calendar Filter (legacy)
- ***************************/
-.ccal {
-  background-color: #eee;
-}
-.ccal * {
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-.ccal ul {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.ccal ul.calweekdays li,
-.ccal .calbody ul li {
-  border: 2px solid #eee;
-  cursor: pointer;
-  color: gray;
-  display: inline-block;
-  line-height: 25px;
-  text-align: center;
-  transition: color 0.1s;
-  width: 14.2857142857%;
-}
-.ccal ul.calweekdays li:hover,
-.ccal .calbody ul li:hover {
-  color: #41acdd;
-  color: var(--oa-main-color, #41acdd);
-}
-.ccal ul.calweekdays li.today,
-.ccal .calbody ul li.today {
-  font-weight: bold;
-  color: #41acdd;
-  color: var(--oa-main-color, #41acdd);
-}
-.ccal .calbody,
-.ccal .calhead {
-  box-sizing: border-box;
-}
-.ccal .calbody li:hover {
-  box-shadow: 0 0 0 1px #41acdd inset;
-  box-shadow: 0 0 0 1px var(--oa-main-color, #41acdd) inset;
-}
-.ccal .calprev, .ccal .calnext {
-  opacity: 0.2;
-}
-.ccal .calweekdays li {
-  cursor: auto;
-}
-.ccal .calweekdays li:hover {
-  color: gray;
-}
-.ccal .calmonthnav {
-  background: #eee;
-  border-bottom: 1px solid silver;
-  line-height: 46px;
-  padding: 5px;
-}
-.ccal .calmonthnav .calprevmonth,
-.ccal .calmonthnav .calmonth,
-.ccal .calmonthnav .calnextmonth {
-  margin: 0;
-}
-.ccal .hasdates {
-  background: #fff;
-}
-.ccal .selected {
-  background: #41acdd;
-  background: var(--oa-main-color, #41acdd);
-  border-radius: 0;
-}
-.ccal .selected span {
-  color: #fff;
-}
-.ccal .selected:hover {
-  color: #fff;
-  opacity: 0.9;
-}
-.ccal .preselected {
-  background: #41acdd;
-  background: var(--oa-main-color, #41acdd);
-  opacity: 0.8;
-}
-.ccal .preselected span {
-  color: #fff;
-}
-
-/***********************
- * Map Filter (legacy)
- ***********************/
-.cbpgmp .map-sync {
-  align-items: center;
-  display: flex;
-  flex-direction: row-reverse;
-}
-.cbpgmp label {
-  margin: 0;
 }
 
 .event-map {
@@ -777,7 +626,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 
 .rdrMonthPicker:hover,
 .rdrYearPicker:hover {
-  border: 1px solid #41acdd;
+  border: 1px solid var(--oa-main-color, #41acdd);
 }
 
 .rdrNextPrevButton {
@@ -792,7 +641,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 
 .rdrNextPrevButton:hover {
-  border-color: #41acdd;
+  border-color: var(--oa-main-color, #41acdd);
 }
 
 .rdrNextPrevButton i {
@@ -898,7 +747,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   width: 18px;
   height: 2px;
   border-radius: 2px;
-  background: #41acdd;
+  background: var(--oa-main-color, #41acdd);
 }
 
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span:after,
@@ -919,7 +768,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .rdrInRange,
 .rdrStartEdge,
 .rdrEndEdge {
-  background: currentColor;
+  background: var(--oa-main-color, #41acdd);
   position: absolute;
   top: 5px;
   left: 0;
@@ -928,7 +777,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 
 .rdrSelected {
-  background: #41acdd;
+  background: var(--oa-main-color, #41acdd);
   left: 2px;
   right: 2px;
 }
@@ -997,7 +846,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   right: 0px;
   bottom: 3px;
   pointer-events: none;
-  border: 0px solid #41acdd;
+  border: 0px solid var(--oa-main-color, #41acdd);
   z-index: 1;
 }
 
@@ -1028,22 +877,33 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .rdrDefinedRangesWrapper {
   font-size: 12px;
   width: 226px;
-  border-right: solid 1px #eff2f7;
 }
 
 .rdrDefinedRangesWrapper .rdrStaticRangeSelected {
-  color: currentColor;
+  color: var(--oa-main-color, #41acdd) !important;
   font-weight: 600;
+  border-color: var(--oa-main-color, #41acdd);
 }
 
-.rdrStaticRange {
-  border: 0;
+button.rdrStaticRange {
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(35, 57, 66, 0.21);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: inherit;
   cursor: pointer;
   display: block;
+  margin-bottom: 8px;
   outline: 0;
   padding: 0;
+}
+
+.widget button.rdrStaticRange {
+  padding: 0;
+}
+.widget button.rdrStaticRange:hover, .widget button.rdrStaticRange:focus {
   background: #fff;
-  border-radius: 4px;
+  border-color: var(--oa-main-color, #41acdd);
 }
 
 .rdrStaticRange + .rdrStaticRange {
@@ -1056,11 +916,14 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 
 .rdrStaticRangeLabel {
+  color: inherit;
   display: block;
-  outline: 0;
+  font-weight: normal;
   line-height: 18px;
+  outline: 0;
   padding: 5px;
   text-align: left;
+  text-transform: none;
 }
 
 .rdrInputRanges {
@@ -1086,7 +949,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 
 .rdrInputRangeInput:focus,
 .rdrInputRangeInput:hover {
-  border-color: #41acdd;
+  border-color: var(--oa-main-color, #41acdd);
   outline: 0;
   color: #333;
 }
@@ -1178,7 +1041,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .rdrNoSelection .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span:after,
 .rdrNoSelection .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span:after,
 .rdrNoSelection .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span:after {
-  background: #41acdd;
+  background: var(--oa-main-color, #41acdd);
 }
 
 /*********************************

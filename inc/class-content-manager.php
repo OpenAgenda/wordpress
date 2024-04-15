@@ -122,8 +122,8 @@ class Content_Manager implements Hookable {
         if( ! empty( get_option( 'permalink_structure' ) ) ){
             $rewrite_settings = get_option( 'openagenda_permalinks_settings' );
             $rewrite_base     = ! empty( $rewrite_settings ) && ! empty ( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] :  __( 'calendar', 'openagenda' ); 
-            add_rewrite_rule( "${rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]', 'top' );
-            add_rewrite_rule( "${rewrite_base}/([^/]+)/([^&]+)?", 'index.php?oa-calendar=$matches[1]&oa-slug=$matches[2]', 'top' );
+            add_rewrite_rule( "{$rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]', 'top' );
+            add_rewrite_rule( "{$rewrite_base}/([^/]+)/([^&]+)?", 'index.php?oa-calendar=$matches[1]&oa-slug=$matches[2]', 'top' );
         }
     }
 

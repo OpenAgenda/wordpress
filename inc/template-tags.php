@@ -529,8 +529,8 @@ function openagenda_event_share_buttons( $uid = false, $echo = true ){
             'url'   => add_query_arg( 'u', urlencode( $event_permalink ), 'https://facebook.com/sharer.php' ),
         ),
         'twitter' => array(
-            'label' => __( 'Share on Twitter', 'openagenda' ),
-            'icon'  => openagenda_icon( 'twitter', false ),
+            'label' => __( 'Share on X', 'openagenda' ),
+            'icon'  => openagenda_icon( 'x', false ),
             'url'   => add_query_arg( array(
                 'url'  => urlencode( $event_permalink ),
                 'text' => urlencode( openagenda_get_field( 'title', $uid ) ),

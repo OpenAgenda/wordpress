@@ -1,26 +1,19 @@
 {
   "name": "openagenda",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "Display your OpenAgenda data on your WordPress site",
   "main": "assets/js/main.js",
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
-    "cssnano": "^6.0.1",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0",
-    "terser": "^5.24.0",
-    "terser-dir": "^1.0.9"
+    "terser": "^5.24.0"
   },
   "scripts": {
-    "start": "npm run sass:watch",
-    "build": "npm run sass && npm run postcss && npm run terser && npm run make-pot",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "sass:watch": "sass --watch assets/css/style.scss:assets/css/style.css",
-    "sass": "sass assets/css/style.scss:assets/css/style.css",
-    "postcss": "postcss assets/css/style.css -o assets/css/style.min.css & postcss assets/css/leaflet.css -o assets/css/leaflet.min.css",
+    "start": "sass --watch assets/css/style.scss:assets/css/style.css",
+    "build": "npm run sass && npm run terser && npm run make-pot",
+    "sass": "sass assets/css/style.scss:assets/css/style.css && sass --style=compressed assets/css/style.scss:assets/css/style.min.css",
     "terser": "terser assets/js/customizer.js -o assets/js/customizer.min.js & terser assets/js/event-map.js -o assets/js/event-map.min.js & terser assets/js/main.js -o assets/js/main.min.js & terser assets/js/timings.js -o assets/js/timings.min.js & terser assets/js/widgets.js -o assets/js/widgets.min.js",
     "make-pot": "wp i18n make-pot . languages/openagenda.pot --exclude=\"node_modules, svn, js\" ",
-    "archive": "wp dist-archive ./ --plugin-dirname=openagenda"
+    "archive": "wp dist-archive ./ --plugin-dirname=openagenda",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
