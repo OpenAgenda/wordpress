@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.4.2
-Stable tag: 2.9.0
+Tested up to: 6.5.2
+Stable tag: 2.10.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 7. Enjoy !
 
 == Changelog ==
+
+= 2.10.0 =
+* Feature : Added defined range filter
 
 = 2.9.0 =
 * Feature : Move API key to request headers
