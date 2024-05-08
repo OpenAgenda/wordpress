@@ -1185,3 +1185,19 @@ function openagenda_share_modal(){
     </div>
     <?php
 }
+
+/**
+ * Returns events, given an Agenda uid.
+ *
+ * @param  int  $uid  Uid of the agenda to look for.
+ */
+function openagenda_get_events( $uid ){
+	$openagenda = new OpenAgenda\OpenAgenda( $uid );
+
+	$events = $openagenda->get_events();
+
+    if ( ! empty( $events ) ){
+	    return $events;
+    }
+
+}
