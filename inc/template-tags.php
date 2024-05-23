@@ -260,7 +260,12 @@ function openagenda_event_permalink( $uid = false, $echo = true, $use_context = 
 function openagenda_get_event_image( $size = '', $uid = false ){
     $html       = '';
     $image_data = openagenda_get_event_image_data( $size, $uid );
-    $image_url  = ! empty( $image_data['url'] ) ? $image_data['url'] : '';
+
+    $settings    = get_option( 'openagenda_general_settings' );
+    $default_id  = ! empty( $settings['openagenda_default_event_image'] ) ? $settings['openagenda_default_event_image'] : 0;
+    $default_url = ! empty( $default_id ) ? wp_get_attachment_image_url( $default_id, $size ) : '';
+
+    $image_url  = ! empty( $image_data['url'] ) ? $image_data['url'] : $default_url;
     $dimensions = ! empty( $image_data['dimensions'] ) ? $image_data['dimensions'] : array();
     
     if( $image_url ){

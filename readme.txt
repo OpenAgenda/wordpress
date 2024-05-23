@@ -182,8 +182,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 == Changelog ==
 
 = 2.11.0 =
-* Fixed: Calendar filter now uses the site's date format setting
-* Fixed: Added a few guard clauses to prevent unexpected fatal errors
+* Fixed   : Calendar filter now uses the site's date format setting
+* Fixed   : Added a few guard clauses to prevent unexpected fatal errors
+* Feature : Added default event image setting 
 
 = 2.10.0 =
 * Feature : Added defined range filter

@@ -39,6 +39,7 @@ node_modules
 *.sql
 *.tar.gz
 *.zip
+*.map
 .phpunit.result.cache
 svn
 postcss.config.js

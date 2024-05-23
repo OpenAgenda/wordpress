@@ -42,6 +42,7 @@ The General settings tab provides the following settings :
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
+ * *Default event image* : Choose an image to use in case events do not have one.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
  * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
  * *Allow OpenAgenda to collect usage stats ?* : controls whether you want to send CMS used and site URL to OpenAgenda, for statistic purposes.

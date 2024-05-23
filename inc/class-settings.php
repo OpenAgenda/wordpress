@@ -130,6 +130,23 @@ class Settings implements Hookable {
                     'description' => __( 'Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored', 'openagenda' ),
                 ),
             ),
+            'default-event-image' => array(
+                'id'       => 'openagenda_default_event_image',
+                'title'    => __( 'Default event image', 'openagenda' ),
+                'callback' => array( $this, 'media_upload_field_markup' ),
+                'page'     => 'openagenda',
+                'section'  => 'openagenda_general_settings',
+                'args'     => array( 
+                    'id'           => 'openagenda_default_event_image',
+                    'option_name'  => 'openagenda_general_settings',
+                    'label_for'    => 'openagenda_default_event_image',
+                    'add_label'    => __( 'Add default image', 'openagenda' ),
+                    'update_label' => __( 'Update default image', 'openagenda' ),
+                    'remove_label' => __( 'Remove default image', 'openagenda' ),
+                    'type'         => 'button',
+                    'default'      => 0,
+                ),
+            ),
             'delete-calendars-on-uninstall' => array(
                 'id'       => 'openagenda_delete_content_on_uninstall',
                 'title'    => __( 'Delete all calendar content on uninstall ?', 'openagenda' ),
@@ -318,7 +335,65 @@ class Settings implements Hookable {
             >
             <?php if( ! empty( $args['description'] ) ) printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) ); ?>
         <?php
+    }
+
+    /**
+     * Displays a media button uploader field
+     * 
+     * @param  array  $args  Arguments passed to corresponding add_settings_field() call
+     */
+    public function media_upload_field_markup( $args ){
+
+        $args = wp_parse_args( $args, array(
+            'type'        => 'hidden',
+            'placeholder' => '',
+            'default'     => '',
+            'description' => '',
+        ) );
         
+        $option_name = sanitize_title( $args['option_name'] );
+        $field_id    = sanitize_title( $args['id'] );
+        $field_name  = "{$option_name}[{$field_id}]";
+        $settings    = get_option( $args['option_name'] );
+        $default     = ! empty( $args['default'] ) ? $args['default'] : '';
+        $value       = ! empty( $settings ) && isset( $settings[$field_id] ) ? (int) $settings[$field_id] : (int) $default;
+        $label       = empty( $value ) ? $args['add_label'] : $args['update_label'];
+
+        wp_enqueue_media();
+	    wp_enqueue_script( 'openagenda-media-uploader' );
+        
+        ?>
+            <div class="media-upload-field">
+                <div class="media-field-preview">
+                    <?php if( ! empty( $value ) ) echo wp_get_attachment_image( $value, 'thumbnail' ); ?>
+                </div>
+
+                <button
+                    type="button"
+                    class="button media-upload-button"
+                    data-update="<?php echo esc_attr( $args['update_label'] ); ?>"
+                    data-value="<?php echo esc_attr( $value ); ?>"
+                >
+                    <?php echo esc_html( $label ); ?>
+                </button>
+
+                <button
+                    type="button"
+                    class="<?php printf( 'button media-remove-button %s', $value ? '' : 'hidden' ) ?>"
+                >
+                    <?php echo esc_html( $args['remove_label'] ); ?>
+                </button>
+
+                <input 
+                    type="hidden" 
+                    id="<?php echo esc_attr( $field_id ); ?>" 
+                    name="<?php echo esc_attr( $field_name ); ?>" 
+                    class="media-input-field"
+                    value="<?php echo esc_attr( $value );?>"
+                >
+                <?php if( ! empty( $args['description'] ) ) printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) ); ?>
+            </div>
+        <?php
     }
 
 
@@ -369,6 +444,7 @@ class Settings implements Hookable {
             'openagenda_cache_duration' => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] : (int) ( HOUR_IN_SECONDS / 2 ),
             'openagenda_include_embeds' => isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : false,
             'openagenda_include_styles' => isset( $settings['openagenda_include_styles'] ) ? (bool) $settings['openagenda_include_styles'] : false,
+            'openagenda_default_event_image' => !empty( $settings['openagenda_default_event_image'] ) ? (int) $settings['openagenda_default_event_image'] : 0,
             'openagenda_delete_content_on_uninstall'  => isset( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false,
             'openagenda_delete_options_on_uninstall'  => isset( $settings['openagenda_delete_options_on_uninstall'] ) ? (bool) $settings['openagenda_delete_options_on_uninstall'] : false,
             'openagenda_allow_usage_stats_collection' => isset( $settings['openagenda_allow_usage_stats_collection'] ) ? (bool) $settings['openagenda_allow_usage_stats_collection'] : false,
