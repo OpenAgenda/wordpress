@@ -54,7 +54,7 @@ function openagenda_get_locale(){
         $locale = sanitize_key( $_GET['oa-lang'] );
     }
 
-    if( ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ){
+    if( $openagenda && ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ){
         $locale = sanitize_key( $context['filters']['oa-lang'] );
     }
         
@@ -244,6 +244,8 @@ function openagenda_icon( $slug, $echo = true ){
  */
 function openagenda_is_single(){
     global $openagenda;
+    if( ! $openagenda ) return false;
+
     return $openagenda->is_single();
 }
 
@@ -255,6 +257,8 @@ function openagenda_is_single(){
  */
 function openagenda_is_archive(){
     global $openagenda;
+    if( ! $openagenda ) return false;
+
     return $openagenda->is_archive();
 }
 
@@ -285,6 +289,8 @@ function openagenda_get_shortcode_attributes( $array, $id = '' ){
  */
 function openagenda_get_events_html( $view = 'list' ){
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     ob_start();
     $openagenda->reset_index(); // Make sure we're at the start of the loop
     $template = $openagenda->is_single() ? 'single-event' : 'event'; 
@@ -299,6 +305,8 @@ function openagenda_get_events_html( $view = 'list' ){
  */
 function openagenda_get_list_header_html( $view = 'list' ){
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     ob_start();
     $class = sprintf( 'oa-event-%s-header', sanitize_title( $view ) );
     include openagenda_get_template( 'list-header' );

@@ -183,6 +183,7 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 = 2.11.0 =
 * Fixed: Calendar filter now uses the site's date format setting
+* Fixed: Added a few guard clauses to prevent unexpected fatal errors
 
 = 2.10.0 =
 * Feature : Added defined range filter
