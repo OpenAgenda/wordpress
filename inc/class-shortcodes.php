@@ -257,8 +257,10 @@ class Shortcodes implements Hookable {
         $atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_calendar' );
 
         $params = array(
-            'type' => 'dateRange',
-            'name' => 'timings',
+            'type'       => 'dateRange',
+            'name'       => 'timings',
+            'dateFormat' => get_option( 'date_format' ),
+            'dateFormatStyle' => 'php',
         );
 
         $ranges_filter = (bool) $atts['display_ranges'] ? $this->openagenda_filter_ranges( array( 'static_ranges' => $atts['ranges'] ) ) : '';

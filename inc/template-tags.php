@@ -607,7 +607,7 @@ function openagenda_event_registration_methods( $uid = false, $echo = true ){
                     break;
                 case 'phone':
                     $icon   = openagenda_icon( 'phone', false );
-                    $prefix = '';
+                    $prefix = 'tel://';
                     $value  = sanitize_text_field( $method['value'] );
                     break;
                 default:
