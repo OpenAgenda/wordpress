@@ -115,7 +115,10 @@ You can find the list of available additional fields in the Forms section of you
 
 **`[openagenda_filter_calendar]`**
 
-Displays a calendar. It takes no parameters.
+Displays a calendar. It takes the following parameters :
+
+ * `display_ranges` : Whether display the defined ranges, just like the `[openagenda_filter_ranges]` filter. 
+ * `ranges` : Ranges to display : comma-separated list containing one or more of the following options: `today`,`tomorrow`,`thisWeekend`,`currentWeek`,`currentMonth`. 
 
 **`[openagenda_filter_map]`**
 
@@ -123,6 +126,12 @@ Displays an interactive map to locate and search events. It takes the following 
 
  * `map_tiles_link` : Lien tiles link to use. Defaults to `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
  * `map_auto` : Whether to automatically update map on scroll. 
+
+**`[openagenda_filter_ranges]`**
+
+Displays buttons to quickly filter events based on pre-defined date ranges. It takes the following parameters :
+
+ * `static_ranges` : Ranges to display : comma-separated list containing one or more of the following options: `today`,`tomorrow`,`thisWeekend`,`currentWeek`,`currentMonth`. 
 
 **`[openagenda_filter_relative]`**
 
@@ -242,6 +251,12 @@ The HTML returned is passed through the following filter : `apply_filters( 'open
 Displays or returns the HTML for the map corresponding to the location of the given event.
 
 The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_map_html', $html, $event_uid )`.
+
+#### `openagenda_event_registration_methods( $event_uid = false, $echo = true )`
+
+Displays a list of registration methods for the event.
+
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_registration_methods', $html, $event_uid )`.
 
 #### `openagenda_favorite_badge( $event_uid = false, $echo = true )`
 
