@@ -61,13 +61,13 @@ class Ajax_Handler {
         $args      = array(
             'size'      => $page_size,
             'page_size' => $page_size,
-            'page'      => 1,
+            'page'      => isset( $_GET['page'] ) ? (int) $_GET['page'] : 1,
         );
 
         // Read GET query param
         if( ! empty( $_GET ) ){
             $query = array_filter( $_GET, function( $value, $key ){
-                return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view' ) );
+                return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view', 'page', 'isLoadingMore' ) );
             }, ARRAY_FILTER_USE_BOTH );
             $args = array_merge( $args, $query );
         }
@@ -78,10 +78,19 @@ class Ajax_Handler {
         }
 
         // Send response
-        $openagenda = new OpenAgenda( $uid, $args, false, true );
+        $options = [
+            'cache'   => false, 
+            'context' => true,
+            'infinite_scroll' => get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes',
+        ];
+
+        $with_controls = ! $options['infinite_scroll'];
+        $isLoadingMore = ! empty( $_GET['isLoadingMore'] ) ? (bool) $_GET['isLoadingMore'] : false;
+
+        $openagenda = new OpenAgenda( $uid, $args, $options );
         $response   = array_merge( $openagenda->get_json(), array(
             'source'      => sanitize_key( $openagenda->get_source() ),
-            'html'        => \openagenda_get_events_html( $view ),
+            'html'        => $isLoadingMore ? \openagenda_get_events_loop_html() : \openagenda_get_events_html( $view, $with_controls ),
         ) );
 
         echo wp_send_json( $response );
@@ -130,7 +139,7 @@ class Ajax_Handler {
         );       
 
         // Fetch the event
-        $openagenda = new OpenAgenda( $uid, array_merge( $args, $filters ), false, false );
+        $openagenda = new OpenAgenda( $uid, array_merge( $args, $filters ), [ 'cache' => false, 'context' => false ] );
         $event      = $openagenda->get_current_event();
         
         if( ! empty( $event ) ){

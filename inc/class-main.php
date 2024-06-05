@@ -188,6 +188,7 @@ class Main {
             $post_id     = get_the_ID();
             $agenda_uid  = get_post_meta( $post_id, 'oa-calendar-uid', true );
             $view        = get_post_meta( $post_id, 'oa-calendar-view', true );
+            $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
             $ajax_params = array(
                 'agendaUid'   => $agenda_uid ? sanitize_text_field( $agenda_uid ) : false,
                 'postId'      => $post_id,
@@ -199,9 +200,11 @@ class Main {
                 'res'         => add_query_arg( $ajax_params, admin_url( 'admin-ajax.php' ) ),
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
+                'infiniteScroll' => $infinite_scroll,
                 'isSingle'    => \openagenda_is_single(),
                 'listUrl'     => \openagenda_get_permalink(),
                 'locale'      => \openagenda_get_locale(),
+                'page'        => ! empty( get_query_var( 'oa-page' ) ) ? (int) get_query_var( 'oa-page' ) : 1,
             ) ) );       
         }
     }
@@ -224,11 +227,17 @@ class Main {
             $post_id   = get_the_ID();
             $uid       = get_post_meta( $post_id, 'oa-calendar-uid', true );
             $page_size = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
+            $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
+            
             $args      = array(
                 'size'      => $page_size,
                 'page_size' => $page_size,
-                'page'      => ! empty( get_query_var( 'oa-page' ) ) ? sanitize_title( get_query_var( 'oa-page' ) ) : 1,
+                'page'      => ! empty( get_query_var( 'oa-page' ) ) ? (int) get_query_var( 'oa-page' ) : 1,
                 'slug'      => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_text_field( get_query_var( 'oa-slug' ) ) : '',
+            );
+            
+            $options = array(
+                'infinite_scroll' => $infinite_scroll,
             );
 
             // Merge filters in URL
@@ -242,7 +251,7 @@ class Main {
             }
 
             if( $uid ){
-                $openagenda = new OpenAgenda( $uid, $args );
+                $openagenda = new OpenAgenda( $uid, $args, $options );
             }
         }
     }

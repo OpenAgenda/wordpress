@@ -67,6 +67,7 @@ class Shortcodes implements Hookable {
             'uid'  => get_post_meta( $post_id, 'oa-calendar-uid', true ),
             'view' => get_post_meta( $post_id, 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( $post_id, 'oa-calendar-view', true ) ) : 'list',
             'size' => get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
+            'infinite_scroll' => get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes',
         ), $atts, $tag );
         
         if( ! empty( get_query_var( 'oa-slug' ) ) ){
@@ -82,12 +83,12 @@ class Shortcodes implements Hookable {
         }
         
         if( ! $openagenda ){
-            $args = array_filter( $atts, function( $att, $key ) { return ! in_array( $key, array( 'uid', 'view' ) ); }, ARRAY_FILTER_USE_BOTH );
-            $openagenda = new OpenAgenda( $atts['uid'], $args );
+            $args = array_filter( $atts, function( $att, $key ) { return ! in_array( $key, array( 'uid', 'view', 'infinite_scroll' ) ); }, ARRAY_FILTER_USE_BOTH );
+            $openagenda = new OpenAgenda( $atts['uid'], $args, [ 'infinite_scroll' => $atts['infinite_scroll'] ] );
         }
 
         $list_header = \openagenda_is_archive() ? \openagenda_get_list_header_html( $atts['view'] ) : '';
-        $event_html  = \openagenda_get_events_html( $atts['view'] );
+        $event_html  = \openagenda_get_events_html( $atts['view'], ! $atts['infinite_scroll'] );
 
         return sprintf( '%s<div data-container-id="oa-wrapper">%s</div>', $list_header, $event_html );
     }
@@ -386,7 +387,7 @@ class Shortcodes implements Hookable {
 
         // If we're on a events page, backup the main events.
         openagenda_save();
-        $openagenda = new OpenAgenda( $uid, $atts, false, false );
+        $openagenda = new OpenAgenda( $uid, $atts, [ 'cache'=> false, 'context'=> false ] );
         ob_start();
         include openagenda_get_template( 'preview-loop' );
         $filter = ob_get_clean();

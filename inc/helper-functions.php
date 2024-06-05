@@ -285,9 +285,11 @@ function openagenda_get_shortcode_attributes( $array, $id = '' ){
 /**
  * Returns the HTML content of the content area.
  * 
+ * @param   string  $view  Accepts 'list' or 'grid'
+ * @param   bool    $with_controls  Whether to display pagination on archive.
  * @return  string  $html  Template HTML.
  */
-function openagenda_get_events_html( $view = 'list' ){
+function openagenda_get_events_html( $view = 'list', $with_controls = true ){
     global $openagenda;
     if( ! $openagenda ) return '';
 
@@ -295,7 +297,28 @@ function openagenda_get_events_html( $view = 'list' ){
     $openagenda->reset_index(); // Make sure we're at the start of the loop
     $template = $openagenda->is_single() ? 'single-event' : 'event'; 
     $class    = $openagenda->is_single() ? 'oa-event' : sprintf( 'oa-event-%s', sanitize_title( $view ) );
+    if( $openagenda->is_single() ){
+        $with_controls = true;
+    }
     include openagenda_get_template( 'event-loop' );
+    return ob_get_clean();
+}
+
+/**
+ * Returns the HTML content of the events loop only.
+ * 
+ * @return  string  $html  Events HTML.
+ */
+function openagenda_get_events_loop_html(){
+    global $openagenda;
+    if( ! $openagenda ) return '';
+
+    ob_start();
+    $openagenda->reset_index(); // Make sure we're at the start of the loop
+    $template = $openagenda->is_single() ? 'single-event' : 'event'; 
+    while( $openagenda->have_events() ) : $openagenda->the_event();
+        include openagenda_get_template( $template );
+    endwhile;
     return ob_get_clean();
 }
 
