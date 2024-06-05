@@ -2,7 +2,6 @@
 if (oaData) {
     const oaWrapper = document.querySelector('[data-container-id="oa-wrapper"]');
     oaWrapper.insertAdjacentHTML('afterbegin', '<div class="oa-notice-wrapper"></div>');
-
     window.oa = {
         res: oaData.res,
         agendaUid: oaData.agendaUid,
@@ -24,8 +23,8 @@ if (oaData) {
         },
         setupLoadMore: () => {
             const eventsWrapper = document.querySelector('[data-container-id="oa-events"],.oa-event-grid,.oa-event-list');
-            if (eventsWrapper && oaData.infiniteScroll) {
-                eventsWrapper.insertAdjacentHTML('afterend', '<button onclick="oa.onLoadMore()">Click me</button>');
+            if (eventsWrapper && oaData.infiniteScroll && oaData.loadMoreButtonHtml) {
+                eventsWrapper.insertAdjacentHTML('afterend', oaData.loadMoreButtonHtml);
             }
         },
         onFilterChange: async (values, aggregations, filtersRef, _form) => {
