@@ -1195,30 +1195,3 @@ function openagenda_load_more_button( $echo = true ){
     if( $echo ) echo $html;
     return $html;
 }
-
-
-/**
- * Displays the Copy to Clipboard modal
- */
-function openagenda_share_modal(){
-    ?>
-    <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Intégrer cette sélection dans votre site</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                <input class="js_share form-control" type="text" value="" disabled/>
-                <button data-copy-share data-copy-label="Copier" data-copied-label="Copié!" data-copied-class="btn btn-success" data-copy-class="btn btn-outline-secondary" type="button"></button>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <?php
-}
