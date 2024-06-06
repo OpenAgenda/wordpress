@@ -81,12 +81,12 @@ class Metaboxes implements Hookable {
                 'label'       => __( 'Only display current and upcoming events. Past events can be displayed using the calendar widget.', 'openagenda' ),
                 'default'     => 'no',
             ),
-            'oa-calendar-infinite-scroll' => array(
-                'metabox'     => 'oa-calendar-settings',
-                'type'        => 'checkbox',
-                'label'       => __( 'Display a Load More button to dynamically load more events.', 'openagenda' ),
-                'default'     => 'no',
-            ),
+            // 'oa-calendar-infinite-scroll' => array(
+            //     'metabox'     => 'oa-calendar-settings',
+            //     'type'        => 'checkbox',
+            //     'label'       => __( 'Display a Load More button to dynamically load more events.', 'openagenda' ),
+            //     'default'     => 'no',
+            // ),
             'oa-calendar-filters' => array(
                 'metabox'     => 'oa-calendar-settings',
                 'type'        => 'text',

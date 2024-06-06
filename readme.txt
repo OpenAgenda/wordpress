@@ -2,7 +2,7 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.5.3
+Tested up to: 6.5.4
 Stable tag: 2.11.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
@@ -184,6 +184,8 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 = 2.11.0 =
 * Fixed   : Calendar filter now uses the site's date format setting
 * Fixed   : Added a few guard clauses to prevent unexpected fatal errors
+* Fixed   : Added tel prefix to contact links
+* Fixed   : Added ii value for accessibility field
 * Feature : Added default event image setting 
 
 = 2.10.0 =

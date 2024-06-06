@@ -188,7 +188,8 @@ class Main {
             $post_id     = get_the_ID();
             $agenda_uid  = get_post_meta( $post_id, 'oa-calendar-uid', true );
             $view        = get_post_meta( $post_id, 'oa-calendar-view', true );
-            $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
+            // $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
+            $infinite_scroll = false;
             $ajax_params = array(
                 'agendaUid'   => $agenda_uid ? sanitize_text_field( $agenda_uid ) : false,
                 'postId'      => $post_id,
