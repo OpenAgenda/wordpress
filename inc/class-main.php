@@ -145,6 +145,10 @@ class Main {
     public function register_admin_scripts( $hook ){
         $css_suffix = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.css' : '.min.css';
         $js_suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.js' : '.min.js';
+        
+        wp_register_style( 'openagenda-admin', OPENAGENDA_URL . 'assets/css/admin' . $css_suffix, [], OPENAGENDA_VERSION );
+        wp_register_script( 'openagenda-media-uploader', OPENAGENDA_URL . 'assets/js/media-uploader' . $js_suffix, [], OPENAGENDA_VERSION, true );
+        
         if ( 'widgets.php' === $hook ) {
             wp_enqueue_script( 'openagenda-widgets', OPENAGENDA_URL . 'assets/js/widgets' . $js_suffix, array( 'jquery' ), OPENAGENDA_VERSION, true );
         }
@@ -164,7 +168,7 @@ class Main {
         wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'openagenda-qs' ), OPENAGENDA_VERSION, true );
         wp_register_script( 'openagenda-qs', OPENAGENDA_URL . 'assets/js/qs.min.js', array(), '6.10.3', true );
         wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), '5.15.4' );
-        wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '2.10.3', true );
+        wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '2.10.5', true );
         
         // Register map dependencies
         wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
@@ -184,6 +188,8 @@ class Main {
             $post_id     = get_the_ID();
             $agenda_uid  = get_post_meta( $post_id, 'oa-calendar-uid', true );
             $view        = get_post_meta( $post_id, 'oa-calendar-view', true );
+            // $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
+            $infinite_scroll = false;
             $ajax_params = array(
                 'agendaUid'   => $agenda_uid ? sanitize_text_field( $agenda_uid ) : false,
                 'postId'      => $post_id,
@@ -195,9 +201,12 @@ class Main {
                 'res'         => add_query_arg( $ajax_params, admin_url( 'admin-ajax.php' ) ),
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
+                'loadMoreButtonHtml' => \openagenda_load_more_button( false ),
+                'infiniteScroll' => $infinite_scroll,
                 'isSingle'    => \openagenda_is_single(),
                 'listUrl'     => \openagenda_get_permalink(),
                 'locale'      => \openagenda_get_locale(),
+                'page'        => ! empty( get_query_var( 'oa-page' ) ) ? (int) get_query_var( 'oa-page' ) : 1,
             ) ) );       
         }
     }
@@ -220,11 +229,17 @@ class Main {
             $post_id   = get_the_ID();
             $uid       = get_post_meta( $post_id, 'oa-calendar-uid', true );
             $page_size = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
+            $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
+            
             $args      = array(
                 'size'      => $page_size,
                 'page_size' => $page_size,
-                'page'      => ! empty( get_query_var( 'oa-page' ) ) ? sanitize_title( get_query_var( 'oa-page' ) ) : 1,
+                'page'      => ! empty( get_query_var( 'oa-page' ) ) ? (int) get_query_var( 'oa-page' ) : 1,
                 'slug'      => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_text_field( get_query_var( 'oa-slug' ) ) : '',
+            );
+            
+            $options = array(
+                'infinite_scroll' => $infinite_scroll,
             );
 
             // Merge filters in URL
@@ -238,7 +253,7 @@ class Main {
             }
 
             if( $uid ){
-                $openagenda = new OpenAgenda( $uid, $args );
+                $openagenda = new OpenAgenda( $uid, $args, $options );
             }
         }
     }

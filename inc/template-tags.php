@@ -8,13 +8,15 @@
 
 /**
  * Returns an event, given a uid.
- * Gets the event from the ones already loaded in the  $openagenda global.
+ * Gets the event from the ones already loaded in the $openagenda global.
  * Defaults to the current event in the loop
  * 
  * @param  int  $uid  Uid of the event to look for.  
  */
 function openagenda_get_event( $uid = false ){
     global $openagenda;
+    if( ! $openagenda ) return [];
+
     // Default to current event in the loop.
     $event = $openagenda->get_current_event();
 
@@ -41,6 +43,8 @@ function openagenda_get_event( $uid = false ){
  */
 function openagenda_get_field( $field, $uid = false ){
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     $event = openagenda_get_event( $uid );
     if( ! $event ) return false;
     if( ! $uid ) $uid = $event['uid'];
@@ -144,7 +148,8 @@ function openagenda_field( $field, $uid = false ){
  * @param  string  $field  Field key to provide context  
  */
 function openagenda_esc_field( $value, $field ){
-    global $openagenda;    
+    global $openagenda;
+
     switch ( $field ) {
         case 'permalink':
             $value = esc_url( $value );
@@ -158,7 +163,7 @@ function openagenda_esc_field( $value, $field ){
             break;
         case 'longDescription':
         case 'html':
-            if ( ! $openagenda->include_embedded() ) {
+            if ( $openagenda && ! $openagenda->get_option( 'include_embeds' ) ) {
                 $value = wp_kses_post( $value );
             }
             break;
@@ -179,6 +184,8 @@ function openagenda_esc_field( $value, $field ){
  */
 function openagenda_maybe_parse_field( $field, $value ){
     global $openagenda;
+    if( ! $openagenda ) return $value;
+
     if( 'longDescription' === $field ){
         $format = $openagenda->get_longDescription_format();
         if( 'markdown' === $format ){
@@ -229,7 +236,7 @@ function openagenda_event_permalink( $uid = false, $echo = true, $use_context = 
         $permalink = openagenda_get_field( 'external-permalink', $uid );
     } else {
         $permalink = openagenda_get_field( 'permalink', $uid );
-        if( $openagenda->is_archive() && $openagenda->use_context() && $use_context ){
+        if( $openagenda && $openagenda->is_archive() && $openagenda->use_context() && $use_context ){
             $context = $openagenda->get_context();
             $context['event_offset'] = $openagenda->get_event_offset();
             $encoded_context = openagenda_encode_context( $context );
@@ -253,7 +260,12 @@ function openagenda_event_permalink( $uid = false, $echo = true, $use_context = 
 function openagenda_get_event_image( $size = '', $uid = false ){
     $html       = '';
     $image_data = openagenda_get_event_image_data( $size, $uid );
-    $image_url  = ! empty( $image_data['url'] ) ? $image_data['url'] : '';
+
+    $settings    = get_option( 'openagenda_general_settings' );
+    $default_id  = ! empty( $settings['openagenda_default_event_image'] ) ? $settings['openagenda_default_event_image'] : 0;
+    $default_url = ! empty( $default_id ) ? wp_get_attachment_image_url( $default_id, $size ) : '';
+
+    $image_url  = ! empty( $image_data['url'] ) ? $image_data['url'] : $default_url;
     $dimensions = ! empty( $image_data['dimensions'] ) ? $image_data['dimensions'] : array();
     
     if( $image_url ){
@@ -333,7 +345,6 @@ function openagenda_event_image( $size = '', $uid = '' ){
  * @param  bool    $echo      Whether to echo or just return the html
  */
 function openagenda_event_timing( $display = 'date', $uid = false, $echo = true ){
-    global $openagenda;
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
@@ -387,7 +398,6 @@ function openagenda_event_timing( $display = 'date', $uid = false, $echo = true 
  * @param  bool    $echo  Whether to echo or just return the html
  */
 function openagenda_event_timings( $uid = false, $echo = true ){
-    global $openagenda;
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
@@ -454,6 +464,8 @@ function openagenda_event_timings( $uid = false, $echo = true ){
  */
 function openagenda_get_events_total_html( $echo = true ){
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     $total  = (int) $openagenda->get_total();
     $args   = $openagenda->get_args();
     $passed = ! empty( $args['oaq'] ) && ! empty( $args['oaq']['passed'] ) && $args['oaq']['passed'];
@@ -479,7 +491,6 @@ function openagenda_get_events_total_html( $echo = true ){
  * @param  bool    $echo  Whether to echo or just return the html
  */
 function openagenda_event_map( $uid = false, $echo = true ){
-    global $openagenda;
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
@@ -516,7 +527,6 @@ function openagenda_event_map( $uid = false, $echo = true ){
  * @param  bool    $echo  Whether to echo or just return the html
  */
 function openagenda_event_share_buttons( $uid = false, $echo = true ){
-    global $openagenda;
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
@@ -585,7 +595,6 @@ function openagenda_event_share_buttons( $uid = false, $echo = true ){
  * @param  bool    $echo  Whether to echo or just return the html
  */
 function openagenda_event_registration_methods( $uid = false, $echo = true ){
-    global $openagenda;
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
@@ -607,7 +616,7 @@ function openagenda_event_registration_methods( $uid = false, $echo = true ){
                     break;
                 case 'phone':
                     $icon   = openagenda_icon( 'phone', false );
-                    $prefix = '';
+                    $prefix = 'tel://';
                     $value  = sanitize_text_field( $method['value'] );
                     break;
                 default:
@@ -641,7 +650,6 @@ function openagenda_event_registration_methods( $uid = false, $echo = true ){
  * @param  bool    $echo  Whether to echo or just return the html
  */
 function openagenda_event_attendance_mode( $uid = false, $echo = true ){
-    global $openagenda;
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
@@ -677,7 +685,6 @@ function openagenda_event_attendance_mode( $uid = false, $echo = true ){
  * @param  bool    $echo  Whether to echo or just return the html
  */
 function openagenda_event_additional_field( $field, $uid = false, $echo = true ){
-    global $openagenda;
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
@@ -744,6 +751,8 @@ function openagenda_pagination( $args = array() ){
  */
 function openagenda_get_page_links( $args = array() ){
     global $openagenda;
+    if( ! $openagenda ) return [];
+
     $total_pages  =  $openagenda->get_total_pages();
     $current_page =  $openagenda->get_current_page();
 
@@ -811,7 +820,8 @@ function openagenda_get_page_links( $args = array() ){
  * @return  string  $permalink  Permalink to the page
  */
 function openagenda_get_page_permalink( $page = 1, $filters = null ){
-    global $openagenda;    
+    global $openagenda;
+    if( ! $openagenda ) return '';  
     
     if( ! empty( get_option( 'permalink_structure' ) ) ){
         $permalink = sprintf( '%spage/%d', trailingslashit( openagenda_get_permalink() ), (int) $page );
@@ -843,8 +853,9 @@ function openagenda_get_page_permalink( $page = 1, $filters = null ){
  */
 function openagenda_get_permalink( $uid = false ){
     global $openagenda;
+    if( ! $openagenda ) return '';
+    
     $permalink = false;
-
     if( $openagenda && ! $uid ) $uid = $openagenda->get_uid();
     if( 'oa-calendar' === get_post_type() && ! $openagenda->is_preview() ) $permalink = get_permalink();
     
@@ -873,6 +884,8 @@ function openagenda_get_permalink( $uid = false ){
  */
 function openagenda_exports( $uid = false, $echo = true ) {
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     if( ! $uid ) $uid = $openagenda->get_uid();
 
     $formats = $openagenda->get_exports_formats();
@@ -927,7 +940,7 @@ function openagenda_filter( $filter, $args = array(), $echo = true ){
  */
 function openagenda_navigation( $echo = true ){
     global $openagenda;
-    if( ! $openagenda->is_single() ) return;
+    if( !$openagenda || ! $openagenda->is_single() ) return;
         
     $previous_link = openagenda_get_previous_event_link();
     $next_link     = openagenda_get_next_event_link();
@@ -960,7 +973,7 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
     global $openagenda;
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
-    if( ! $openagenda->is_single() ) return false;
+    if( ! $openagenda || ! $openagenda->is_single() ) return false;
     
     $encoded_context = isset( $_GET['context'] ) ? $_GET['context'] : false;
     $context         = openagenda_decode_context( $encoded_context );
@@ -1007,6 +1020,8 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
  */
 function openagenda_get_back_link(){
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     $context = openagenda_decode_context();
     
     $html      = '';
@@ -1063,6 +1078,8 @@ function openagenda_get_next_event_link(){
  */
 function openagenda_favorite_badge( $uid = false, $echo = true ){
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     $agenda_uid = $openagenda->get_uid();
     $event      = openagenda_get_event( $uid );
     if( ! $event ) return false;
@@ -1107,6 +1124,7 @@ function openagenda_favorite_badge( $uid = false, $echo = true ){
  */
 function openagenda_language_switcher( $uid = false, $echo = true ){
     global $openagenda;
+    if( ! $openagenda ) return '';
      
     if( openagenda_is_single() ){
         $event = openagenda_get_event( $uid );
@@ -1161,27 +1179,19 @@ function openagenda_event_schema( $uid = false ){
 
 
 /**
- * Displays the Copy to Clipboard modal
+ * Displays the Load more button
+ * 
+ * @param   bool    $echo  Whether to echo or just return the html
+ * @return  string  $html  Button HTML
  */
-function openagenda_share_modal(){
-    ?>
-    <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Intégrer cette sélection dans votre site</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                <input class="js_share form-control" type="text" value="" disabled/>
-                <button data-copy-share data-copy-label="Copier" data-copied-label="Copié!" data-copied-class="btn btn-success" data-copy-class="btn btn-outline-secondary" type="button"></button>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <?php
+function openagenda_load_more_button( $echo = true ){
+    global $openagenda;
+    if( ! $openagenda || ! openagenda_is_archive() ) return '';
+    if( ! $openagenda->uses_infinite_scroll() ) return '';
+    $uid = $openagenda->get_uid();
+
+    $html = sprintf( '<button type="button" id="openagenda-load-more" class="openagenda-button openagenda-load-more" onclick="oa.onLoadMore()">%s</button>', __( 'Load more events', 'openagenda' ) );
+    $html = apply_filters( 'openagenda_load_more_button', $html, $uid );
+    if( $echo ) echo $html;
+    return $html;
 }

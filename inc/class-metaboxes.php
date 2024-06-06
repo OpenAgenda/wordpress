@@ -81,6 +81,12 @@ class Metaboxes implements Hookable {
                 'label'       => __( 'Only display current and upcoming events. Past events can be displayed using the calendar widget.', 'openagenda' ),
                 'default'     => 'no',
             ),
+            // 'oa-calendar-infinite-scroll' => array(
+            //     'metabox'     => 'oa-calendar-settings',
+            //     'type'        => 'checkbox',
+            //     'label'       => __( 'Display a Load More button to dynamically load more events.', 'openagenda' ),
+            //     'default'     => 'no',
+            // ),
             'oa-calendar-filters' => array(
                 'metabox'     => 'oa-calendar-settings',
                 'type'        => 'text',
@@ -188,7 +194,7 @@ class Metaboxes implements Hookable {
         $field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];  
 
         if( 'oa-calendar-uid' == $name ){
-            $openagenda = new OpenAgenda( $field_value, array( 'size' => 1 ), false, false );
+            $openagenda = new OpenAgenda( $field_value, array( 'size' => 1 ), [ 'cache' => false, 'context' => false ] );
             $response   = $openagenda->get_raw_response();
             $message    = '';
             if( ! is_wp_error( $response ) ){
@@ -335,9 +341,11 @@ class Metaboxes implements Hookable {
         $content_on_archive  = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';
         $content_on_single   = isset( $_POST['oa-calendar-content-on-single'] ) ? 'yes' : 'no';
         $exclude_past_events = isset( $_POST['oa-calendar-exclude'] ) ? 'yes' : 'no';
+        $infinite_scroll     = isset( $_POST['oa-calendar-infinite-scroll'] ) ? 'yes' : 'no';
         update_post_meta( $post_ID, 'oa-calendar-content-on-archive', $content_on_archive );
         update_post_meta( $post_ID, 'oa-calendar-content-on-single', $content_on_single );
         update_post_meta( $post_ID, 'oa-calendar-exclude', $exclude_past_events );
+        update_post_meta( $post_ID, 'oa-calendar-infinite-scroll', $infinite_scroll );
 
         if( $update ) openagenda_clear_transient();
     }

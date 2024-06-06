@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.5.2
-Stable tag: 2.10.0
+Tested up to: 6.5.4
+Stable tag: 2.11.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -181,6 +181,13 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.11.0 =
+* Fixed   : Calendar filter now uses the site's date format setting
+* Fixed   : Added a few guard clauses to prevent unexpected fatal errors
+* Fixed   : Added tel prefix to contact links
+* Fixed   : Added ii value for accessibility field
+* Feature : Added default event image setting 
+
 = 2.10.0 =
 * Feature : Added defined range filter
 
@@ -190,92 +197,6 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 = 2.8.0 =
 * Feature : Added sort parameter to choice filter
-
-= 2.7.0 =
-* Fixed   : Basic post URL front no longer used
-* Feature : Added Rich snippets to event list view.
-
-= 2.6.1 =
-* Fixed   : Rich snippets triggering erros on some events.
-* Feature : Added optional CMS and site url tracking option.
-
-= 2.6.0 =
-* Feature : Added a event rich snippets in head tag
-
-= 2.5.0 =
-* Feature : Added a basic language switcher
-
-= 2.4.2 =
-* Fixed : Next timings calculation
-
-= 2.4.1 =
-* Fixed : Removed date offset when filtering timings.
-
-= 2.4.0 =
-* Feature : Added setting to exclude past events.
-* Feature : Added pre-filters setting to Preview widget
-
-= 2.3.0 =
-* Feature : Added support for default filters.
-
-= 2.2.1 =
-* Fixed : Wrong current month displayed in timings.
-
-= 2.2.0 =
-* Feature : Added support for Districts in filters.
-
-= 2.1.5 =
-* Fixed : Fixed <title> tag on single event when using WordPress SEO.
-* Fixed : Fixed image <meta> properties.
-
-= 2.1.4 =
-* Fixed : Bug with ajax requests when size argument is 0.
-
-= 2.1.3 =
-* Feature : Added support for multilingual additional fields
-
-= 2.1.2 =
-* Fixed : Minor bug fix
-
-= 2.1.1 =
-* Fixed : slug sanitization
-
-= 2.1.0 =
-* Feature : Added Favorite feature.
-* Fixed : Fixed various handlers for changed reponse keys.
-* Fixed : Modified [openagenda_filter_tags] shortcode to use [openagenda_filter_choice] instead
-
-= 2.0.0 =
-* Feature : Major API calls refactor: fetches events using API calls instead of JSON export
-* Feature : Major filter widget refactor: uses new React filters 
-
-= 1.1.1 =
-* Fixed : canonical url in <meta> tag
-* Feature : Added compatibility with Yoast SEO meta tags
-
-= 1.1.0 =
-* Feature : Added "Integrations" settings tab
-* Feature : Added integration with CloudImage
-* Feature : Preview widget templates are overridable in the child theme.
-* Fixed : Passed events can be displayed on single event view.
-
-= 1.0.1 =
-* Fixed : Bug fix on `openagenda_get_field()` function, when called with 'image' and 'thumbnail' parameter.
-
-= 1.0.0 =
-* Fixed : location template.
-* Feature : Added event count and active filters on top of the list view.
-* Feature : Added online access link display for online events.
-* Fixed : Fix for viewing single passed event.
-
-= 0.2 =
-* Feature : Added icons.
-* Fixed : Minor CSS fixes
-
-= 0.1 =
-* Initial release
-
-== Upgrade Notice ==
 
 = 2.7.0 =
 * Fixed   : Basic post URL front no longer used

@@ -36,6 +36,11 @@ class OpenAgenda {
     protected $args = array();
     
     /**
+     * Agenda options 
+     */
+    protected $options = array();
+    
+    /**
      * Query params 
      */
     protected $params = array();
@@ -116,16 +121,6 @@ class OpenAgenda {
     protected $context = null;
 
     /**
-     * Whether to allow for rich embeded content.
-     */
-    protected $include_embedded = true;
-    
-    /**
-     * Whether to include usage stats in requests.
-     */
-    protected $include_usage = true;
-
-    /**
      * Is the query for a list of events ?
      */
     protected $is_archive = true;
@@ -139,16 +134,6 @@ class OpenAgenda {
      * Is the query to preview another agenda ?
      */
     protected $is_preview = false;
-    
-    /**
-     * Whether to use caching.
-     */
-    protected $use_cache = true;
-    
-    /**
-     * Whether the query should set the context cookie.
-     */
-    protected $use_context = true;
 
     /**
      * Constructor
@@ -156,17 +141,13 @@ class OpenAgenda {
      * @param  int    $uid   UID of the calendar
      * @param  array  $args  Array of arguments
      */
-    public function __construct( $uid, $args = array(), $use_cache = true, $use_context = true ){
+    public function __construct( $uid, $args = array(), $options = [], $use_context = true ){
         $settings       = get_option( 'openagenda_general_settings' );
         $this->uid      = $uid;
         $this->api_key  = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
-        $this->include_usage    = ! empty( $settings ) && isset( $settings['openagenda_allow_usage_stats_collection'] ) ? (bool) $settings['openagenda_allow_usage_stats_collection'] : true; 
-        $this->include_embedded = ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true; 
         $this->debug    = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG;
 
-        $this->use_cache    = (bool) $use_cache;
-        $this->use_context  = (bool) $use_context;
-
+        $this->options      = $this->parse_options( $options, $use_context );
         $this->args         = $this->parse_args( $args );
         $this->raw_response = $this->request( $this->get_args() );
         $this->json         = $this->parse_response();
@@ -262,6 +243,27 @@ class OpenAgenda {
 
 
     /**
+     * Returns options
+     */
+    public function get_options(){
+        return apply_filters( 'openagenda_options', $this->options, $this->uid );
+    }
+
+
+    /**
+     * Returns an option value
+     * 
+     * @param   string  $key 
+     * @return  mixed  $value
+     */
+    public function get_option( $key ){
+        $options = $this->get_options();
+        $option = ! empty( $options[$key] ) ? $options[$key] : false;
+        return $option;
+    }
+
+
+    /**
      * Returns events
      * 
      * @param  array  $args  Query arguments passed to the JSON export query  
@@ -306,8 +308,16 @@ class OpenAgenda {
     /**
      * Returns whether to allow for embedded content.
      */
-    public function include_embedded(){
-        return apply_filters( 'openagenda_include_embedded', $this->include_embedded, $this->uid );
+    public function include_embeds(){
+        return apply_filters( 'openagenda_include_embeds', $this->get_option( 'include_embeds' ), $this->uid );
+    }
+
+
+    /**
+     * Returns whether infinite scroll should be used
+     */
+    public function uses_infinite_scroll(){
+        return apply_filters( 'openagenda_infinite_scroll', $this->get_option( 'infinite_scroll' ), $this->uid );
     }
 
 
@@ -345,7 +355,7 @@ class OpenAgenda {
      * Retrieve the longDescription field format
      */
     public function get_longDescription_format(){
-        return $this->include_embedded ? 'HTMLWithEmbeds' : 'markdown';
+        return $this->get_option( 'include_embeds' ) ? 'HTMLWithEmbeds' : 'markdown';
     }
 
 
@@ -422,6 +432,36 @@ class OpenAgenda {
         return apply_filters( 'openagenda_request_url', $url, $this->uid, $args, $export );
     }
 
+
+    /**
+     * Parses options
+     * 
+     * @param   array  $options      If boolean, then a deprecated constructor is used.
+     * @param   bool   $use_context  If provided, then a deprecated constructor is used
+     * @return  array  $options
+     */
+    public function parse_options( $options = [], $use_context = true ){
+        $settings = get_option( 'openagenda_general_settings' );
+        
+        $defaults = [
+            'cache'            => true,
+            'context'          => true,
+            'infinite_scroll'  => false,
+            'include_usage'    => ! empty( $settings ) && isset( $settings['openagenda_allow_usage_stats_collection'] ) ? (bool) $settings['openagenda_allow_usage_stats_collection'] : true,
+            'include_embeds'   => ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true,
+        ];
+
+        // Check deprecated call to class constructor
+        if( is_bool( $options ) ){
+            $options = [
+                'cache'   => (bool) $options,
+                'context' => (bool) $use_context,
+            ];
+        }
+
+        $options = wp_parse_args( $options, $defaults );
+        return $options;
+    }
 
     /**
      * Parse query arguments
@@ -526,7 +566,7 @@ class OpenAgenda {
     public function should_cache(){
         if( defined( 'DOING_AJAX' ) && DOING_AJAX ) return false;
         if( $this->total_pages === 0 ) return false;
-        if( ! $this->use_cache ) return false;
+        if( ! $this->get_option( 'use_cache' ) ) return false;
         $should_cache = empty( $this->get_filters() ) || $this->is_single();
         return $should_cache;
     }
@@ -539,7 +579,7 @@ class OpenAgenda {
      */
     public function should_serve_cache(){
         if( defined( 'DOING_AJAX' ) && DOING_AJAX ) return false;
-        if( ! $this->use_cache ) return false;
+        if( ! $this->get_option( 'use_cache' ) ) return false;
         $should_serve_cache = empty( $this->get_filters() ) || $this->is_single();
         return $should_serve_cache;
     }
@@ -594,7 +634,7 @@ class OpenAgenda {
      * Returns whether this instance uses context
      */
     public function use_context(){
-        return (bool) $this->use_context;
+        return (bool) $this->get_option( 'context' );
     }
 
 
@@ -602,7 +642,7 @@ class OpenAgenda {
      * Gets the navigation context
      */
     function get_context(){
-        if( ! $this->use_context ) return false;
+        if( ! $this->get_option( 'context' ) ) return false;
         $context = ! empty( $this->context ) ? $this->context : false;
         return $context;            
     }
@@ -612,7 +652,7 @@ class OpenAgenda {
      * Sets the navigation context
      */
     function set_context(){
-        if( ! $this->use_context ) return;
+        if( ! $this->get_option( 'context' ) ) return;
         if( $this->is_archive() ){
             $args = $this->get_args();
             $params  = $this->get_params();
@@ -679,7 +719,7 @@ class OpenAgenda {
             'longDescriptionFormat' => $this->get_longDescription_format(),
             'includeLabels' => true,
         );
-        if( $this->include_usage ){
+        if( $this->get_option( 'include_usage' ) ){
             $defaults['cms']  = 'wp';
             $defaults['host'] = get_home_url();
             $defaults['uses_site_editor'] = function_exists( 'wp_is_block_theme' ) && wp_is_block_theme();

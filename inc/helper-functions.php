@@ -54,7 +54,7 @@ function openagenda_get_locale(){
         $locale = sanitize_key( $_GET['oa-lang'] );
     }
 
-    if( ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ){
+    if( $openagenda && ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ){
         $locale = sanitize_key( $context['filters']['oa-lang'] );
     }
         
@@ -184,6 +184,7 @@ function openagenda_accessibility_codes(){
         'hi'  => __( 'Accessible to people suffering from hearing impairments.', 'openagenda' ),
         'vi'  => __( 'Accessible to people suffering from visual impairments.', 'openagenda' ),
         'mei' => __( 'Accessible to people suffering from mental disabilities.', 'openagenda' ),
+        'ii'  => __( 'Accessible to people suffering from intellectual disabilities.', 'openagenda' ),
     );
     return apply_filters( 'openagenda_accessibility_codes', $codes );
 }
@@ -212,7 +213,6 @@ function openagenda_icons(){
         'time'     => '<svg class="oa-icon oa-icon-time" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"/><g><path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm2.5 9.5L7.2 8.3V4h1.5v3.7l2.8 2.8-1 1z"/></g></svg>',
         'twitter'  => '<svg class="oa-icon oa-icon-twitter" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"/><g><path d="M22.23 5.924a8.212 8.212 0 01-2.357.646 4.115 4.115 0 001.804-2.27 8.221 8.221 0 01-2.606.996 4.103 4.103 0 00-6.991 3.742 11.647 11.647 0 01-8.457-4.287 4.087 4.087 0 00-.556 2.063 4.1 4.1 0 001.825 3.415 4.09 4.09 0 01-1.859-.513v.052a4.104 4.104 0 003.292 4.023 4.099 4.099 0 01-1.853.07 4.11 4.11 0 003.833 2.85 8.236 8.236 0 01-5.096 1.756 8.33 8.33 0 01-.979-.057 11.617 11.617 0 006.29 1.843c7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.531a8.298 8.298 0 002.047-2.123z"/></g></svg>',
         'x'        => '<svg class="oa-icon oa-icon-x" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"/><g><path d="M13.982 10.622L20.54 3h-1.554l-5.693 6.618L8.745 3H3.5l6.876 10.007L3.5 21h1.554l6.012-6.989L15.868 21h5.245l-7.131-10.378zm-2.128 2.474l-.697-.997-5.543-7.93H8l4.474 6.4.697.996 5.815 8.318h-2.387l-4.745-6.787z"/></g></svg>',
-    
     );
     return apply_filters( 'openagenda_icons', $icons );
 }
@@ -244,6 +244,8 @@ function openagenda_icon( $slug, $echo = true ){
  */
 function openagenda_is_single(){
     global $openagenda;
+    if( ! $openagenda ) return false;
+
     return $openagenda->is_single();
 }
 
@@ -255,6 +257,8 @@ function openagenda_is_single(){
  */
 function openagenda_is_archive(){
     global $openagenda;
+    if( ! $openagenda ) return false;
+
     return $openagenda->is_archive();
 }
 
@@ -281,15 +285,40 @@ function openagenda_get_shortcode_attributes( $array, $id = '' ){
 /**
  * Returns the HTML content of the content area.
  * 
+ * @param   string  $view  Accepts 'list' or 'grid'
+ * @param   bool    $with_controls  Whether to display pagination on archive.
  * @return  string  $html  Template HTML.
  */
-function openagenda_get_events_html( $view = 'list' ){
+function openagenda_get_events_html( $view = 'list', $with_controls = true ){
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     ob_start();
     $openagenda->reset_index(); // Make sure we're at the start of the loop
     $template = $openagenda->is_single() ? 'single-event' : 'event'; 
     $class    = $openagenda->is_single() ? 'oa-event' : sprintf( 'oa-event-%s', sanitize_title( $view ) );
+    if( $openagenda->is_single() ){
+        $with_controls = true;
+    }
     include openagenda_get_template( 'event-loop' );
+    return ob_get_clean();
+}
+
+/**
+ * Returns the HTML content of the events loop only.
+ * 
+ * @return  string  $html  Events HTML.
+ */
+function openagenda_get_events_loop_html(){
+    global $openagenda;
+    if( ! $openagenda ) return '';
+
+    ob_start();
+    $openagenda->reset_index(); // Make sure we're at the start of the loop
+    $template = $openagenda->is_single() ? 'single-event' : 'event'; 
+    while( $openagenda->have_events() ) : $openagenda->the_event();
+        include openagenda_get_template( $template );
+    endwhile;
     return ob_get_clean();
 }
 
@@ -299,6 +328,8 @@ function openagenda_get_events_html( $view = 'list' ){
  */
 function openagenda_get_list_header_html( $view = 'list' ){
     global $openagenda;
+    if( ! $openagenda ) return '';
+
     ob_start();
     $class = sprintf( 'oa-event-%s-header', sanitize_title( $view ) );
     include openagenda_get_template( 'list-header' );

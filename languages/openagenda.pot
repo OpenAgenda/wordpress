@@ -2,32 +2,36 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda 2.10.0\n"
+"Project-Id-Version: OpenAgenda 2.11.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-15T09:16:06+02:00\n"
+"POT-Creation-Date: 2024-06-06T09:05:52+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.9.0\n"
+"X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: openagenda\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
+#: openagenda.php
 msgid "OpenAgenda"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: openagenda.php
 msgid "https://wordpress.org/plugins/openagenda/"
 msgstr ""
 
 #. Description of the plugin
+#: openagenda.php
 msgid "Display your OpenAgenda data on your WordPress site."
 msgstr ""
 
 #. Author URI of the plugin
+#: openagenda.php
 msgid "https://openagenda.com/"
 msgstr ""
 
@@ -48,20 +52,20 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
-#: inc/class-admin-pages.php:143
+#: inc/class-admin-pages.php:144
 #: inc/class-settings.php:51
 msgid "General settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:159
+#: inc/class-admin-pages.php:160
 msgid "Integrations settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:162
+#: inc/class-admin-pages.php:163
 msgid "OpenStreetMap settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:166
+#: inc/class-admin-pages.php:167
 msgid "CloudImage settings"
 msgstr ""
 
@@ -75,7 +79,7 @@ msgstr ""
 
 #: inc/class-content-manager.php:18
 #: inc/class-content-manager.php:124
-#: inc/class-settings.php:415
+#: inc/class-settings.php:491
 msgid "calendar"
 msgstr ""
 
@@ -191,9 +195,9 @@ msgid "OpenAgenda main color"
 msgstr ""
 
 #: inc/class-filter-widget.php:22
-#: inc/class-settings.php:220
-#: inc/class-shortcodes.php:319
-#: inc/template-tags.php:491
+#: inc/class-settings.php:237
+#: inc/class-shortcodes.php:322
+#: inc/template-tags.php:502
 msgid "OpenStreetMap contributors"
 msgstr ""
 
@@ -256,8 +260,8 @@ msgid "Choose a field to display"
 msgstr ""
 
 #: inc/class-filter-widget.php:92
-#: inc/class-shortcodes.php:198
-#: inc/class-shortcodes.php:208
+#: inc/class-shortcodes.php:199
+#: inc/class-shortcodes.php:209
 msgid "Favorites"
 msgstr ""
 
@@ -413,46 +417,46 @@ msgstr ""
 msgid "Only display current and upcoming events. Past events can be displayed using the calendar widget."
 msgstr ""
 
-#: inc/class-metaboxes.php:87
+#: inc/class-metaboxes.php:93
 #: inc/class-preview-widget.php:31
 msgid "Default filters (advanced)"
 msgstr ""
 
-#: inc/class-metaboxes.php:89
+#: inc/class-metaboxes.php:95
 msgid "Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed."
 msgstr ""
 
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:159
+#: inc/class-metaboxes.php:165
 msgid "Please provide your account API key in <a href=\"%s\">the plugin settings</a>."
 msgstr ""
 
-#: inc/class-metaboxes.php:182
+#: inc/class-metaboxes.php:188
 msgid "New field"
 msgstr ""
 
-#: inc/class-metaboxes.php:198
+#: inc/class-metaboxes.php:204
 msgid "Agenda could not be found. Please double check your agenda UID."
 msgstr ""
 
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:202
+#: inc/class-metaboxes.php:208
 msgid "The request could not be authenticated. Please double check API key in <a href=\"%s\">your general settings.</a>"
 msgstr ""
 
-#: inc/class-openagenda.php:359
+#: inc/class-openagenda.php:369
 msgid "XLSX"
 msgstr ""
 
-#: inc/class-openagenda.php:360
+#: inc/class-openagenda.php:370
 msgid "JSON"
 msgstr ""
 
-#: inc/class-openagenda.php:361
+#: inc/class-openagenda.php:371
 msgid "RSS"
 msgstr ""
 
-#: inc/class-openagenda.php:491
+#: inc/class-openagenda.php:531
 msgid "There was an error parsing the JSON."
 msgstr ""
 
@@ -530,79 +534,95 @@ msgid "Requests responses are temporarily stored for performance reasons. This s
 msgstr ""
 
 #: inc/class-settings.php:135
-msgid "Delete all calendar content on uninstall ?"
+msgid "Default event image"
+msgstr ""
+
+#: inc/class-settings.php:143
+msgid "Add default image"
+msgstr ""
+
+#: inc/class-settings.php:144
+msgid "Update default image"
 msgstr ""
 
 #: inc/class-settings.php:145
+msgid "Remove default image"
+msgstr ""
+
+#: inc/class-settings.php:152
+msgid "Delete all calendar content on uninstall ?"
+msgstr ""
+
+#: inc/class-settings.php:162
 msgid "Delete all posts of type \"Calendar\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
 msgstr ""
 
-#: inc/class-settings.php:150
+#: inc/class-settings.php:167
 msgid "Delete all options on uninstall ?"
 msgstr ""
 
-#: inc/class-settings.php:160
+#: inc/class-settings.php:177
 msgid "Delete all of this plugin's settings permanently when I uninstall the plugin."
 msgstr ""
 
-#: inc/class-settings.php:165
+#: inc/class-settings.php:182
 msgid "Allow OpenAgenda to collect usage stats ?"
 msgstr ""
 
-#: inc/class-settings.php:175
+#: inc/class-settings.php:192
 msgid "Allow OpenAgenda to collect plugin usage information for statistics purposes. The following information is collected : CMS used, site URL and whether site editor is used or not."
 msgstr ""
 
-#: inc/class-settings.php:180
+#: inc/class-settings.php:197
 msgid "Calendar base"
 msgstr ""
 
 #. translators: %s : home url
-#: inc/class-settings.php:192
+#: inc/class-settings.php:209
 msgid "You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>."
 msgstr ""
 
-#: inc/class-settings.php:199
+#: inc/class-settings.php:216
 msgid "Default map tiles link"
 msgstr ""
 
-#: inc/class-settings.php:212
+#: inc/class-settings.php:229
 msgid "Default map tiles attribution link"
 msgstr ""
 
-#: inc/class-settings.php:225
+#: inc/class-settings.php:242
 msgid "CloudImage API key"
 msgstr ""
 
 #. translators: %s: openagenda site url
-#: inc/class-settings.php:236
+#: inc/class-settings.php:253
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
-#: inc/class-shortcodes.php:77
+#: inc/class-shortcodes.php:78
 msgid "Please provide a valid calendar UID to display in the calendar settings."
 msgstr ""
 
-#: inc/class-shortcodes.php:81
+#: inc/class-shortcodes.php:82
 msgid "This page is not an agenda page. Events may not display as expected."
 msgstr ""
 
-#: inc/class-shortcodes.php:137
+#: inc/class-shortcodes.php:138
 msgctxt "Total filter message when no events found"
 msgid "No event found"
 msgstr ""
 
-#: inc/class-shortcodes.php:138
+#: inc/class-shortcodes.php:139
 msgctxt "Total filter message when 1 event found. Keep {total} placeholder."
 msgid "{total} event"
 msgstr ""
 
-#: inc/class-shortcodes.php:139
+#: inc/class-shortcodes.php:140
 msgctxt "Total filter message when multiple event found. Keep {total} placeholder."
 msgid "{total} events"
 msgstr ""
 
-#: inc/class-shortcodes.php:327
+#: inc/class-shortcodes.php:330
 msgid "Search while moving the map"
 msgstr ""
 
@@ -623,126 +643,134 @@ msgstr ""
 msgid "Accessible to people suffering from visual impairments."
 msgstr ""
 
-#: inc/helper-functions.php:316
+#: inc/helper-functions.php:187
+msgid "Accessible to people suffering from intellectual disabilities."
+msgstr ""
+
+#: inc/helper-functions.php:347
 msgid "Fetching events... Please wait a moment."
 msgstr ""
 
-#: inc/helper-functions.php:328
+#: inc/helper-functions.php:359
 msgid "There was an error updating the events. Pleaser refresh the page and try again."
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:361
+#: inc/helper-functions.php:392
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:363
+#: inc/helper-functions.php:394
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
 
-#: inc/template-tags.php:351
+#: inc/template-tags.php:362
 msgid "No timing available"
 msgstr ""
 
-#: inc/template-tags.php:411
+#: inc/template-tags.php:421
 msgid "View previous month"
 msgstr ""
 
-#: inc/template-tags.php:414
+#: inc/template-tags.php:424
 msgid "View next month"
 msgstr ""
 
 #. translators: %d: number of upcoming events
-#: inc/template-tags.php:462
+#: inc/template-tags.php:474
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of upcoming events
-#: inc/template-tags.php:462
+#: inc/template-tags.php:474
 msgid "No upcoming event."
 msgstr ""
 
 #. translators: %d: number of passed events
-#: inc/template-tags.php:465
+#: inc/template-tags.php:477
 msgid "%d passed event."
 msgid_plural "%d passed events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of passed events
-#: inc/template-tags.php:465
+#: inc/template-tags.php:477
 msgid "No passed event."
 msgstr ""
 
-#: inc/template-tags.php:527
+#: inc/template-tags.php:537
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/template-tags.php:532
+#: inc/template-tags.php:542
 msgid "Share on X"
 msgstr ""
 
-#: inc/template-tags.php:540
+#: inc/template-tags.php:550
 msgid "Share on Linkedin"
 msgstr ""
 
-#: inc/template-tags.php:570
+#: inc/template-tags.php:580
 msgid "Share :"
 msgstr ""
 
-#: inc/template-tags.php:652
+#: inc/template-tags.php:660
 msgid "On site"
 msgstr ""
 
-#: inc/template-tags.php:653
+#: inc/template-tags.php:661
 msgid "Online"
 msgstr ""
 
-#: inc/template-tags.php:654
+#: inc/template-tags.php:662
 msgid "Mixed"
 msgstr ""
 
-#: inc/template-tags.php:664
+#: inc/template-tags.php:672
 msgid "Access the event"
 msgstr ""
 
-#: inc/template-tags.php:758
+#: inc/template-tags.php:767
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:759
+#: inc/template-tags.php:768
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:898
+#: inc/template-tags.php:911
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:982
+#: inc/template-tags.php:995
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
-#: inc/template-tags.php:983
+#: inc/template-tags.php:996
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
 
 #. translators: %s: event title
-#: inc/template-tags.php:1080
+#: inc/template-tags.php:1097
 msgid "Add %s to favorites."
+msgstr ""
+
+#: inc/template-tags.php:1193
+msgid "Load more events"
 msgstr ""
 
 #: openagenda.php:120
 msgid "Documentation"
 msgstr ""
 
-#: templates/event-loop.php:40
+#: templates/event-loop.php:44
 msgid "Sorry, we could not find any event."
 msgstr ""
 
