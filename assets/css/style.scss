@@ -20,6 +20,7 @@ $oa-dark: #333;
 :root {
 	--oa-main-color: #{$oa-blue};
 	--oa-secondary-color: #{$oa-black};
+	scroll-behavior: smooth;
 }
 
 img {

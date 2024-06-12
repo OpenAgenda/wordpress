@@ -1,6 +1,7 @@
 :root {
   --oa-main-color: #41acdd;
   --oa-secondary-color: #413a42;
+  scroll-behavior: smooth;
 }
 
 img {

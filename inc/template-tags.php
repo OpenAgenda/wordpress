@@ -819,7 +819,7 @@ function openagenda_get_page_links( $args = array() ){
  * @param   int     $page       Page to get link for.
  * @return  string  $permalink  Permalink to the page
  */
-function openagenda_get_page_permalink( $page = 1, $filters = null ){
+function openagenda_get_page_permalink( $page = 1, $filters = null, $fragment = null ){
     global $openagenda;
     if( ! $openagenda ) return '';  
     
@@ -839,6 +839,10 @@ function openagenda_get_page_permalink( $page = 1, $filters = null ){
     
     if( ! empty( $filters ) ){
         $permalink = add_query_arg( $filters, $permalink );
+    }
+    
+    if( ! empty( $fragment ) ){
+        $permalink .= sprintf('#%s', $fragment );
     }
 
     return apply_filters( 'openagenda_page_permalink', $permalink,  $openagenda->get_uid(), $page );
@@ -1027,6 +1031,7 @@ function openagenda_get_back_link(){
     $html      = '';
     $page_link = '';
     $page      = 1;
+    $fragment  = '';
     
     if( $context ){
         $filters = ! empty( $context['filters'] ) ? $context['filters'] : array();
@@ -1036,6 +1041,7 @@ function openagenda_get_back_link(){
         $page    = ! empty( $context['page'] ) ? (int) $context['page'] : 1;
         $event_offset = ! empty( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
         $event_number = $event_offset + 1;
+        $fragment = sprintf( 'event-%s', openagenda_get_field('uid') );
 
         // Force return to page 1 when using infinite scroll
         if( $openagenda->uses_infinite_scroll() ) {
@@ -1043,7 +1049,7 @@ function openagenda_get_back_link(){
             $page = 1;
         }
 
-        $page_link = openagenda_get_page_permalink( $page, $filters );
+        $page_link = openagenda_get_page_permalink( $page, $filters, $fragment );
         if( $page_link ){
             $html = sprintf( 
                 '<a class="oa-nav-link oa-back-link" href="%s">%s<span>%d / %d</span></a>',
