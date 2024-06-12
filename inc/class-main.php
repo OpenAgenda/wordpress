@@ -188,8 +188,8 @@ class Main {
             $post_id     = get_the_ID();
             $agenda_uid  = get_post_meta( $post_id, 'oa-calendar-uid', true );
             $view        = get_post_meta( $post_id, 'oa-calendar-view', true );
-            // $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
-            $infinite_scroll = false;
+            $page_size   = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
+            $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
             $ajax_params = array(
                 'agendaUid'   => $agenda_uid ? sanitize_text_field( $agenda_uid ) : false,
                 'postId'      => $post_id,
@@ -207,6 +207,7 @@ class Main {
                 'listUrl'     => \openagenda_get_permalink(),
                 'locale'      => \openagenda_get_locale(),
                 'page'        => ! empty( get_query_var( 'oa-page' ) ) ? (int) get_query_var( 'oa-page' ) : 1,
+                'size'        => $page_size,
             ) ) );       
         }
     }
@@ -231,7 +232,7 @@ class Main {
             $page_size = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
             $infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
             
-            $args      = array(
+            $args = array(
                 'size'      => $page_size,
                 'page_size' => $page_size,
                 'page'      => ! empty( get_query_var( 'oa-page' ) ) ? (int) get_query_var( 'oa-page' ) : 1,
@@ -241,6 +242,12 @@ class Main {
             $options = array(
                 'infinite_scroll' => $infinite_scroll,
             );
+
+            // If using infinite scroll, archive page number will always be 1.
+            if( $infinite_scroll ){
+                $args['size'] *= $args['page']; 
+                $args['page'] = 1;
+            }
 
             // Merge filters in URL
             if( ! empty( $_GET ) ){

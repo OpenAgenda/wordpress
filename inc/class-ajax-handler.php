@@ -67,7 +67,7 @@ class Ajax_Handler {
         // Read GET query param
         if( ! empty( $_GET ) ){
             $query = array_filter( $_GET, function( $value, $key ){
-                return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view', 'page', 'isLoadingMore' ) );
+                return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view', 'isLoadingMore' ) );
             }, ARRAY_FILTER_USE_BOTH );
             $args = array_merge( $args, $query );
         }

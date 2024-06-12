@@ -1037,6 +1037,12 @@ function openagenda_get_back_link(){
         $event_offset = ! empty( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
         $event_number = $event_offset + 1;
 
+        // Force return to page 1 when using infinite scroll
+        if( $openagenda->uses_infinite_scroll() ) {
+            $filters['oa-page'] = $page;
+            $page = 1;
+        }
+
         $page_link = openagenda_get_page_permalink( $page, $filters );
         if( $page_link ){
             $html = sprintf( 

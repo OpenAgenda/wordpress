@@ -2,12 +2,14 @@
 if (oaData) {
     const oaWrapper = document.querySelector('[data-container-id="oa-wrapper"]');
     oaWrapper.insertAdjacentHTML('afterbegin', '<div class="oa-notice-wrapper"></div>');
+    console.log('Initial Data:', oaData);
     window.oa = {
         res: oaData.res,
         agendaUid: oaData.agendaUid,
         locale: oaData.locale,
         query: window.location.search,
         page: parseInt(oaData.page) || 1,
+        size: parseInt(oaData.size),
         values: {},
         aggregations: {},
         onLoad: async (values, aggregations, filtersRef, _form) => {
@@ -70,8 +72,10 @@ if (oaData) {
                 action: oaData.action,
                 view: oaData.view,
                 page: parseInt(window.oa.page),
+                size: parseInt(window.oa.size),
                 ...additionnal_args
             }
+            console.log('Request arguments', args);
             const url = `${oaData.ajaxUrl}?${Qs.stringify({ ...args, ...values, aggregations })}`;
             const result = await fetch(url).then(response => response.json());
             return result;
