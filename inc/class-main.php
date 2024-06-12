@@ -201,7 +201,6 @@ class Main {
                 'res'         => add_query_arg( $ajax_params, admin_url( 'admin-ajax.php' ) ),
                 'overlayHtml' => \openagenda_get_update_overlay_html(),
                 'errorNotice' => \openagenda_get_update_notice_html(),
-                'loadMoreButtonHtml' => \openagenda_load_more_button( false ),
                 'infiniteScroll' => $infinite_scroll,
                 'isSingle'    => \openagenda_is_single(),
                 'listUrl'     => \openagenda_get_permalink(),

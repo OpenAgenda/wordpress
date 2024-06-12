@@ -1189,21 +1189,3 @@ function openagenda_event_schema( $uid = false ){
     }
 }
 
-
-/**
- * Displays the Load more button
- * 
- * @param   bool    $echo  Whether to echo or just return the html
- * @return  string  $html  Button HTML
- */
-function openagenda_load_more_button( $echo = true ){
-    global $openagenda;
-    if( ! $openagenda || ! openagenda_is_archive() ) return '';
-    if( ! $openagenda->uses_infinite_scroll() ) return '';
-    $uid = $openagenda->get_uid();
-
-    $html = sprintf( '<button type="button" id="openagenda-load-more" class="openagenda-button openagenda-load-more" onclick="oa.onLoadMore()">%s</button>', __( 'Load more events', 'openagenda' ) );
-    $html = apply_filters( 'openagenda_load_more_button', $html, $uid );
-    if( $echo ) echo $html;
-    return $html;
-}
