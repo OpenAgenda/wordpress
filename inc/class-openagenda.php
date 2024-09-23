@@ -149,7 +149,7 @@ class OpenAgenda {
 
         $this->options      = $this->parse_options( $options, $use_context );
         $this->args         = $this->parse_args( $args );
-        $this->raw_response = $this->request( $this->get_args() );
+        $this->raw_response = $this->request();
         $this->json         = $this->parse_response();
 
         if( $this->is_single() ){
@@ -491,8 +491,8 @@ class OpenAgenda {
     /**
      * Performs the actual request
      * 
-     * @param  string  $uid  Calendar UID to get events for
      * @param  array   $args
+     * @return         $response
      */
     public function request( $args = array() ){
         

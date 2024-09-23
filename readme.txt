@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.5.4
-Stable tag: 2.11.0
+Tested up to: 6.6.2
+Stable tag: 2.12.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 7. Enjoy !
 
 == Changelog ==
+
+= 2.12.0 =
+* Feature : Added infinite scroll functionnality for agendas
 
 = 2.11.0 =
 * Fixed   : Calendar filter now uses the site's date format setting

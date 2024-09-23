@@ -331,7 +331,7 @@ function openagenda_get_list_header_html( $view = 'list' ){
     if( ! $openagenda ) return '';
 
     ob_start();
-    $class = sprintf( 'oa-event-%s-header', sanitize_title( $view ) );
+    $class = sprintf( 'oa-events-header oa-event-%s-header', sanitize_title( $view ) );
     include openagenda_get_template( 'list-header' );
     return ob_get_clean();
 }

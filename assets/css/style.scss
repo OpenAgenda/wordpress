@@ -20,6 +20,7 @@ $oa-dark: #333;
 :root {
 	--oa-main-color: #{$oa-blue};
 	--oa-secondary-color: #{$oa-black};
+	scroll-behavior: smooth;
 }
 
 img {
@@ -45,6 +46,11 @@ img {
 /**************
  * Events
  **************/
+
+.oa-events-header {
+	margin: 1rem 0;
+}
+
 .oa-event-grid {
 	display: grid;
 	grid-gap: 2rem;
