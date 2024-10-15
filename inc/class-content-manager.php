@@ -68,7 +68,9 @@ class Content_Manager implements Hookable {
         add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 10, 1 );
         add_filter( 'the_content', array( $this, 'the_content' ), 10, 2 );
         add_filter( 'write_your_story', array( $this, 'write_your_story' ), 10, 2 );
-        
+        add_filter( 'get_pages', array( $this, 'get_front_pages' ), 10, 2 );
+        add_action( 'pre_get_posts', array( $this, 'allow_calendars_front_page' ) );
+
         // Frontend meta tags and Yoast SEO Filters
         if( ! is_admin() ) {
             add_filter( 'get_canonical_url', array( $this, 'canonical_url' ), 10, 1 );
@@ -429,5 +431,40 @@ class Content_Manager implements Hookable {
             } 
         }
         return $value;
+    }
+
+     /**
+     * Adds OpenAgenda calendars to list of available front end options.
+     * 
+     * @param   WP_Post[]  $pages
+     * @param   array      $args
+     * @return  WP_Post[]  $pages
+     */
+    function get_front_pages( $pages, $args ){
+        if( is_admin() && function_exists( 'get_current_screen' ) ){
+            $screen = get_current_screen();
+            if( $screen && 'options-reading' === $screen->id ){
+                if( isset( $args['name'] ) && 'page_on_front' == $args['name'] ){
+                    $calendars = get_posts( array( 'post_type' => 'oa-calendar', 'numberposts' => -1 ) );
+                    $pages     = array_merge( $pages, $calendars );
+                }
+            }
+        }
+        return $pages;
+    }
+
+    /**
+     * Allows for calendars on the front page
+     * 
+     * @param  WP_Query  $query  
+     */
+    function allow_calendars_front_page( $query ) {
+        if ( $query->is_main_query() ) {
+            $post_type = $query->get( 'post_type' );
+            $page_id   = $query->get( 'page_id' );
+            if ( empty( $post_type ) && ! empty( $page_id ) ) {
+                $query->set( 'post_type', array( 'page', 'oa-calendar') );
+            }
+        }
     }
 }
