@@ -79,8 +79,9 @@ class Settings implements Hookable {
                     'type'        => 'password',
                     'description' => sprintf(
                         /* translators: %s: openagenda site url */ 
-                        __( 'Your API key can be found in your <a href="%s">OpenAgenda account</a>.', 'openagenda' ),
-                         'https://openagenda.com' 
+                        __( 'Your API key can be found in your <a href="%s" target="_blank">OpenAgenda account</a>. Check out the <a href="%s" target="_blank">documentation</a>.', 'openagenda' ),
+                         'https://openagenda.com/settings/apiKey',
+                         'https://doc.openagenda.com/fr/article/cles-dacces-11lapqz/',
                     ),
                 ),
             ),
