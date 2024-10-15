@@ -38,7 +38,7 @@ The settings are divided into two tabs: General and Integrations.
 
 The General settings tab provides the following settings : 
 
- * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
+ * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com/settings/apiKey](https://openagenda.com/settings/apiKey)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
@@ -63,6 +63,10 @@ The *Integrations* tab allows you to fine tune settings for various third party 
 ### Permalinks settings
 
 In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
+
+In the *Settings > Reading* section, you can set a calendar page as your front page. Note that it will still use the default calendar template provided by the plugin and the default front page template provided by your theme.
+
+![You can set a calendar as your front page.](assets/screenshots/screenshot-8.png)
 
 ### Customizer settings
 

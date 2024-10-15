@@ -59,6 +59,8 @@ The *Integrations* tab allows you to fine tune settings for various third party 
 
 In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
 
+In the *Settings > Reading* section, you can set a calendar page as your front page. Note that it will still use the default calendar template provided by the plugin and the default front page template provided by your theme.
+
 ### Customizer settings
 
 In the *Customizer*, a new panel is available to house various display settings. For now only a main color setting is available.
