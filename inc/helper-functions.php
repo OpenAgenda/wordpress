@@ -605,6 +605,75 @@ function openagenda_get_default_calendar_uid(){
 
 
 /**
+ * Gets a calendar settings and schema
+ * 
+ * @param   int  $post_id  Calendar post id.
+ * @return  array  $settings  Calendar settings an schema.
+ */
+function openagenda_get_calendar_settings( $post_id = null ){
+    global $openagenda;
+    if( ! $post_id ){
+        $post_id = get_the_ID();
+    }
+
+    $settings = [];
+    if( 'oa-calendar' === get_post_type( $post_id ) ){
+        $settings = get_post_meta( $post_id, 'oa-calendar-settings', true );
+    }
+    
+    if( empty( $settings ) && $openagenda ){
+        $settings = $openagenda->get_settings();
+    }
+
+    return $settings;
+}
+
+
+/**
+ * Gets a calendar fields schema
+ * 
+ * @param   string  $type   Type of fields you need schema for. Default 'all'.
+ * @param   int    $post_id   Calendar post id.
+ * @return  array  $schema  Fields schema.
+ */
+function openagenda_get_calendar_fields_schema( $type = 'all', $post_id = null ){
+    $agenda_settings = openagenda_get_calendar_settings( $post_id );
+    $schema = $agenda_settings['schema']['fields'] ?? [];
+    switch ( $type ) {
+        case 'standard':
+        case 'additional':
+            $schema = array_filter( $schema, function($f) use($type) {
+                return $type === 'standard' 
+                ? ! empty( $f['schemaType'] ) && $f['schemaType'] === 'event' 
+                : ! empty( $f['schemaType'] ) && $f['schemaType'] !== 'event';
+            });
+            $schema = array_values( array_filter( $schema, function( $f ) {
+                return ( empty( $f['type'] ) || $f['type'] !== 'section' ) && ( empty( $f['fieldtype'] ) || $f['fieldtype'] !== 'abstract' );
+            } ) );
+            break;
+    }
+    return $schema;
+}
+
+
+/**
+ * Gets a single field schema
+ * 
+ * @param   string  $field   Field name.
+ * @param   int    $post_id   Calendar post id.
+ * @return  array  $settings  Calendar settings an schema.
+ */
+function openagenda_get_field_schema( $field, $post_id = null ){
+    $schema = openagenda_get_calendar_fields_schema( 'all', $post_id );
+    $field_schema = array_values( array_filter( $schema, function($f) use($field) {
+        return ! empty( $f['field'] ) && $f['field'] === $field;
+    }) );
+    $field_schema = ! empty( $field_schema ) && is_array( $field_schema ) ? $field_schema[0] : [];
+    return $field_schema;
+}
+
+
+/**
  * Temporary fix for older installs.
  */
 if( ! function_exists( 'wp_date' ) ){

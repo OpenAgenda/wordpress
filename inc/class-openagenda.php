@@ -41,6 +41,11 @@ class OpenAgenda {
     protected $options = array();
     
     /**
+     * Agenda settings and schema 
+     */
+    protected $settings = array();
+    
+    /**
      * Query params 
      */
     protected $params = array();
@@ -725,5 +730,26 @@ class OpenAgenda {
             $defaults['uses_site_editor'] = function_exists( 'wp_is_block_theme' ) && wp_is_block_theme();
         }
         return apply_filters( 'openagenda_api_default_params', $defaults );
+    }
+
+
+    /**
+     * Returns agenda settings and schema
+     * 
+     * @return  array  $settings;
+     */
+    public function get_settings(){
+        if( ! $this->settings ){        
+            $url      = add_query_arg( 'key', $this->api_key, sprintf( 'https://api.openagenda.com/v2/agendas/%s', $this->uid ) );
+            $response = wp_safe_remote_get( $url );
+            if( ! is_wp_error( $response ) ){
+                $body    = wp_remote_retrieve_body( $response );
+                $decoded = json_decode( $body, true );
+                if( null !== $decoded ){
+                    $this->settings = $decoded;
+                }
+            }
+        }
+        return $this->settings;
     }
 }

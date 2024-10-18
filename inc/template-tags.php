@@ -176,6 +176,144 @@ function openagenda_esc_field( $value, $field ){
 
 
 /**
+ * Returns an event additional field value.
+ * 
+ * @param   string  $field  Slug of the field to fetch.
+ * @param   string  $uid    UID of the event to fetch field for. Defaults to current event.
+ * @return  string  $value  Field value.
+ */
+function openagenda_get_additional_field( $field, $uid = false ){
+    global $openagenda;
+    if( ! $openagenda ) return '';
+
+    $event = openagenda_get_event( $uid );
+    if( ! $event ) return '';
+    if( ! $uid ) $uid = $event['uid'];
+    
+    $field_schema = openagenda_get_field_schema( $field );
+
+    $raw_value = $event[$field] ?? '';
+    $value  = '';
+    if( $field_schema ){
+        switch ( $field_schema['fieldType'] ) {
+            // case 'pass':
+            // case 'stream':
+            case 'boolean':
+                $value = ! empty( $raw_value ) ? __( 'Yes', 'openagenda' ) : __( 'No', 'openagenda' );
+                break;
+            case 'image':
+            case 'file':
+                $store = $field_schema['store'] ?? [ 'type' => 's3', 'bucket' => 'cibul' ];
+                $filename = $raw_value['filename'] ?? '';
+                $link = sprintf( 'https://%s.s3.amazonaws.com/%s', $store['bucket'], $filename );
+                $alt = $raw_value['originalName'] ?? '';
+                
+                $value = 'image' === $field_schema['fieldType']
+                ? sprintf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $link ), esc_attr( $alt )  )
+                : sprintf( '<a href="%s" target="_blank" />%s</a>', esc_url( $link ), esc_html( $alt )  );
+                break;
+            case 'link':
+                $value = esc_url( $raw_value );
+                break;
+            case 'integer':
+                $value = (int) $raw_value;
+                break;
+            case 'email':
+                $value = sanitize_email( $raw_value );
+                break;
+            case 'markdown':
+                $parsedown = new Parsedown();
+                $value = $parsedown->text( $raw_value );
+                break;
+            case 'date':
+                $timezone     = ! empty( $event['location'] ) && ! empty( $event['location']['timezone'] ) ? $event['location']['timezone'] : null;
+                $datetimezone = $timezone ? new DateTimeZone( $timezone ) : null;
+                $value = wp_date( get_option( 'date_format' ), $raw_value, $datetimezone );
+                break;
+            case 'multilingual':
+                $value = openagenda_get_i18n_value( $raw_value );
+                break;
+            case 'textarea':
+                $value = wpautop( $raw_value );
+                break;
+            case 'radio':
+            case 'select':
+                $raw_value = array( $raw_value ); 
+            case 'choice':
+            case 'radio':
+            case 'select':
+            case 'multiselect':
+            case 'checkbox':
+                $values = is_array( $raw_value ) ? array_map( function( $v ){
+                    return is_array( $v ) && ! empty( $v['label'] ) ? openagenda_get_i18n_value( $v['label'] ) : '';
+                }, $raw_value ) : [];
+                $value = join(', ', $values );
+                break;
+            default:
+                $value = wp_kses_post( $raw_value );
+                break;
+        }
+    }
+    return apply_filters( 'openagenda_additional_field', $value, $field, $field_schema, $uid );
+}
+
+/**
+ * Returns additional fields to display on default template.
+ * 
+ * @param   int       $post_id  Calendar post id.
+ * @return  string[]  $fields   Additional fields names.
+ */
+function openagenda_get_additional_fields_template_fields( $post_id = null ){
+    $fields = array_values( array_filter( array_map( function( $f ){
+        return $f['field'] ?? '';
+    }, openagenda_get_calendar_fields_schema( 'additional', $post_id ) ) ) );
+    return apply_filters( 'openagenda_additional_fields_template_fields', $fields, $post_id );
+}
+
+
+/**
+ * Returns an event field label from schema.
+ * 
+ * @param   string  $field    Slug of the field to fetch.
+ * @param   int     $post_id  Calendar post id.
+ * @return  string  $label    Field label. 
+ */
+function openagenda_get_field_label( $field, $post_id = null ){    
+    $field_schema = openagenda_get_field_schema( $field, $post_id );
+    $label = ! empty( $field_schema['label'] ) ? openagenda_get_i18n_value( $field_schema['label'] ) : '';
+    return apply_filters( 'openagenda_field_label', $label, $field, $field_schema, $post_id );
+}
+
+
+/**
+ *  Escapes and echoes an additional field
+ * 
+ * @param   string  $field  Slug of the field to fetch.
+ * @param   string  $uid    UID of the event to fetch field for. Defaults to current event.
+ */
+function openagenda_additional_field( $field, $uid = false ){
+    $value = openagenda_get_additional_field( $field, $uid );
+    if( ! empty( $value ) ){
+        echo wp_kses_post( $value );
+    }
+}
+
+
+/**
+ *  Escapes and echoes a field label
+ * 
+ * @param   string  $field  Slug of the field to fetch.
+ * @param   int     $post_id  Calendar post id.
+ */
+function openagenda_field_label( $field, $post_id = null ){
+    $value = openagenda_get_field_label( $field, $post_id );
+    if( ! empty( $value ) ){
+        echo esc_html( $value );
+    }
+}
+
+
+/**
  * Maybe parse markdown field if needed
  * 
  * @param   string  $field  Field key
@@ -272,7 +410,7 @@ function openagenda_get_event_image( $size = '', $uid = false ){
         $width      = ! empty( $dimensions['width'] ) ? sprintf( 'width="%s"', esc_attr( $dimensions['width'] ) )  : '';
         $height     = ! empty( $dimensions['height'] ) ? sprintf( 'height="%s"', esc_attr( $dimensions['height'] ) )  : '';
         $html = sprintf( 
-            '<img src="%s" %s %s alt="%s" />', 
+            '<img src="%s" %s %s alt="%s" loading="lazy" />', 
             esc_url( $image_url ),
             $width,
             $height,

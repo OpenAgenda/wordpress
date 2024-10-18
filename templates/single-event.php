@@ -50,6 +50,7 @@
             </div>
         <?php endif; ?>
         
+        <?php include openagenda_get_template( 'event-additional-fields' ); ?>
         <?php include openagenda_get_template( 'event-location' ); ?>
     </div>
 </article>
