@@ -220,6 +220,7 @@ class Metaboxes implements Hookable {
                 ?>
                     <div class="components-base-control">
                         <div class="components-base-control__field">
+                            <?php echo '<style>:root{--checkbox-input-size:20px;}</style>'; ?>
                             <span class="<?php echo $container_class; ?>">
                                 <?php 
                                     if( use_block_editor_for_post( $post ) ){
