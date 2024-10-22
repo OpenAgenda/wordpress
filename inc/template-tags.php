@@ -816,13 +816,13 @@ function openagenda_event_attendance_mode( $uid = false, $echo = true ){
 
 
 /**
- * Displays or return an event additional field links
+ * Displays or return links to pre-filtered calendar pages, using an additional field
  * 
- * @param  string  $field  Additional field to display
+ * @param  string  $field  Additional field to use to build links
  * @param  string  $uid   UID of the event.
  * @param  bool    $echo  Whether to echo or just return the html
  */
-function openagenda_event_additional_field( $field, $uid = false, $echo = true ){
+function openagenda_event_links( $field, $uid = false, $echo = true ){
     $event = openagenda_get_event( $uid );
     if( ! $uid ) $uid = $event['uid'];
 
@@ -841,6 +841,22 @@ function openagenda_event_additional_field( $field, $uid = false, $echo = true )
     }
 
     $html = ! empty( $links ) ? join( ', ', $links ) : '';
+    $html = apply_filters( 'openagenda_event_links', $html, $field, $uid );
+    if ( $echo ) echo $html;
+    return $html;
+}
+
+
+/**
+ * Displays or return an event additional field links
+ * Wrapper for openagenda_event_additional_field()
+ * 
+ * @param  string  $field  Additional field to display
+ * @param  string  $uid   UID of the event.
+ * @param  bool    $echo  Whether to echo or just return the html
+ */
+function openagenda_event_additional_field( $field, $uid = false, $echo = true ){
+    $html = openagenda_event_links( $field, $uid, false );
     $html = apply_filters( 'openagenda_event_additional_field', $html, $field, $uid );
     if ( $echo ) echo $html;
     return $html;

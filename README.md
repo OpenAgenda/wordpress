@@ -215,6 +215,26 @@ Like `openagenda_get_field( $field, $uid = false )`, but escapes and echoes the 
 
 This function is used internally by `openagenda_field()` to escape the field value properly, depending on the field type.
 
+#### `openagenda_get_additional_field( $field, $uid = false )`
+
+Retrieves the value of an additional field (a non-standard field). `openagenda_get_field()` also allows you to retrieve the raw value of an additional  field, but `openagenda_get_additional_field()` formats it for display.
+
+Returned value are passed through the following filter : `apply_filters( 'openagenda_additional_field', $value, $field, $field_schema, $uid );`
+
+#### `openagenda_additional_field( $field, $uid = false )`
+
+Like `openagenda_get_additional_field( $field, $uid = false )`, but escapes and echoes the field value.
+
+#### `openagenda_get_field_label( $field, $post_id = null )`
+
+Retrieves a form field label, as it is set up in your agenda on https://openagenda.com.
+
+Returned value are passed through the following filter : `apply_filters( 'openagenda_field_label', $label, $field, $field_schema, $post_id );`
+
+#### `openagenda_field_label( $field, $post_id = null )`
+
+Like `openagenda_get_field_label( $field, $uid = false )`, but escapes and echoes the label value.
+
 #### `openagenda_event_permalink( $event_uid = false, $echo = true, $use_context = false, $external = false )`
 
 Returns or echoes an event permalink, corresponding to the UID passed in or the current event in the event loop. The `use_context` param is used on event list views to append a string representing the page and current list filters.
@@ -269,11 +289,11 @@ Displays or returns the button to add an event to favorites. Favorites can be fi
 
 The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_favorite_badge', $html, $event_uid, $agenda_uid, $icon_active, $icon_inactive, $text )`.
 
-#### `openagenda_event_additional_field( $field, $event_uid = false, $echo = true )`
+#### `openagenda_event_links( $field, $event_uid = false, $echo = true )`
 
 Displays or retrieves links corresponding to an additional field values, using labels corresponding to current locale. If no `$event_uid` is provided, it defaults to the current event.
 
-The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_additional_field', $html, $field, $event_uid' )`.
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_links', $html, $field, $event_uid' )`.
 
 #### `openagenda_event_share_buttons( $event_uid = false, $echo = true )`
 
@@ -454,8 +474,16 @@ Allows to modify OpenAgenda request url. The URL is determined from request para
 
 The callback takes the following parameters :
 
-* array   `$url`         Request URL
+* string  `$url`         Request URL
 * string  `$agenda_uid`  Agenda UID
 * array   `$args`        Request arguments
 * bool    `$export`      Is the URL for an export request ?
 
+#### `openagenda_additional_fields_template_fields`
+
+Allows to control which fields are displayed in the default template for additional fields.
+
+The callback takes the following parameters :
+
+* array   `$fields`      All additional fields slugs
+* int     `$post_id`     Calendar post id
