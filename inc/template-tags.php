@@ -192,65 +192,65 @@ function openagenda_get_additional_field( $field, $uid = false ){
     
     $field_schema = openagenda_get_field_schema( $field );
 
-    $raw_value = $event[$field] ?? '';
-    $value  = '';
+    $value = $event[$field] ?? '';
     if( $field_schema ){
         switch ( $field_schema['fieldType'] ) {
-            // case 'pass':
-            // case 'stream':
+            case 'stream':
+            case 'events':
+                $value = '';
+                break;
             case 'boolean':
-                $value = ! empty( $raw_value ) ? __( 'Yes', 'openagenda' ) : __( 'No', 'openagenda' );
+                $value = ! empty( $value ) ? __( 'Yes', 'openagenda' ) : __( 'No', 'openagenda' );
                 break;
             case 'image':
             case 'file':
                 $store = $field_schema['store'] ?? [ 'type' => 's3', 'bucket' => 'cibul' ];
-                $filename = $raw_value['filename'] ?? '';
+                $filename = $value['filename'] ?? '';
                 $link = sprintf( 'https://%s.s3.amazonaws.com/%s', $store['bucket'], $filename );
-                $alt = $raw_value['originalName'] ?? '';
-                
+                $alt = $value['originalName'] ?? '';
                 $value = 'image' === $field_schema['fieldType']
                 ? sprintf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $link ), esc_attr( $alt )  )
                 : sprintf( '<a href="%s" target="_blank" />%s</a>', esc_url( $link ), esc_html( $alt )  );
                 break;
             case 'link':
-                $value = esc_url( $raw_value );
+                $value = esc_url( $value );
                 break;
             case 'integer':
-                $value = (int) $raw_value;
+                $value = (int) $value;
                 break;
             case 'email':
-                $value = sanitize_email( $raw_value );
+                $value = sanitize_email( $value );
                 break;
             case 'markdown':
                 $parsedown = new Parsedown();
-                $value = $parsedown->text( $raw_value );
+                $value = $parsedown->text( $value );
                 break;
             case 'date':
                 $timezone     = ! empty( $event['location'] ) && ! empty( $event['location']['timezone'] ) ? $event['location']['timezone'] : null;
                 $datetimezone = $timezone ? new DateTimeZone( $timezone ) : null;
-                $value = wp_date( get_option( 'date_format' ), $raw_value, $datetimezone );
+                $value = wp_date( get_option( 'date_format' ), $value, $datetimezone );
                 break;
             case 'multilingual':
-                $value = openagenda_get_i18n_value( $raw_value );
+                $value = openagenda_get_i18n_value( $value );
                 break;
             case 'textarea':
-                $value = wpautop( $raw_value );
+                $value = wpautop( $value );
                 break;
             case 'radio':
             case 'select':
-                $raw_value = array( $raw_value ); 
+                $value = array( $value ); 
             case 'choice':
             case 'radio':
             case 'select':
             case 'multiselect':
             case 'checkbox':
-                $values = is_array( $raw_value ) ? array_map( function( $v ){
+                $values = is_array( $value ) ? array_map( function( $v ){
                     return is_array( $v ) && ! empty( $v['label'] ) ? openagenda_get_i18n_value( $v['label'] ) : '';
-                }, $raw_value ) : [];
+                }, $value ) : [];
                 $value = join(', ', $values );
                 break;
             default:
-                $value = wp_kses_post( $raw_value );
+                $value = is_string( $value ) ? wp_kses_post( $value ) : '';
                 break;
         }
     }
