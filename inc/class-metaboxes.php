@@ -85,7 +85,7 @@ class Metaboxes implements Hookable {
 			'oa-calendar-infinite-scroll'    => array(
 				'metabox' => 'oa-calendar-settings',
 				'type'    => 'checkbox',
-				'label'   => __( 'Display a Load More button to dynamically load more events.', 'openagenda' ),
+				'label'   => __( 'Activate infinite scroll functionnality to dynamically load more events.', 'openagenda' ),
 				'default' => 'no',
 			),
 			'oa-calendar-filters'            => array(
