@@ -159,13 +159,28 @@ Displays next events. It takes the following parameters :
 
 ## Customization
 
-Templates for the list of events and individual events can be customized in your theme.
+Templates for the list of events and individual events can be customized in your child theme.
 
-Just create a folder named `openagenda/` in your theme, then copy and paste the template you wish to override located in the plugin's `templates/` folder.
+If you're not already using a child theme, it is recommended to create one.
 
-The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. Feel free to define your own in your theme.
+[https://developer.wordpress.org/themes/advanced-topics/child-themes/](https://developer.wordpress.org/themes/advanced-topics/child-themes/)
 
-The plugin also provides many hooks to allow you to customize the html output or other various data. The hooks documentation is in writing for now !
+Just create a folder named `openagenda/` in your child theme, then copy and paste the template you wish to override from the plugin's `templates/` folder.
+
+Here is a list of templates you can find in the plugin's `templates/` folder : 
+
+* `event-loop.php` : main wrapper for list view and single event view. Displays exports button and pagination at the top and bottom. 
+* `list-header.php` : contains the total number of events and active filters display.
+* `event.php` : template used to display the event information on list views.
+* `single-event.php` : template used to display the event information on single event views.
+* `event-location.php` : template used to display the location information on single event views.
+* `event-additional-fields.php` : template used to the list of additional fields on single event views.
+* `preview-loop.php` : main wrapper for the preview widget and shortcode.
+* `preview-event.php` : template used to display events in the preview widget.
+
+The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. These basic functions are documented below. Feel free to define your own in your theme.
+
+The plugin also provides many hooks to allow you to customize the html output or other various data. Some hooks are documented below.
 
 ## Usage of third party services and copyright information
 

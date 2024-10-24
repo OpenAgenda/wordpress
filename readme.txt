@@ -38,6 +38,7 @@ The General settings page provides the following settings :
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
+ * *Default event image* : Choose an image to use in case events do not have one.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your calendars on uninstall.
  * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
  * *Allow OpenAgenda to collect usage stats ?* : controls whether you want to send CMS used and site URL to OpenAgenda, for statistic purposes.
@@ -133,9 +134,24 @@ Displays a search field. It takes the following parameters :
 
 ## Customization
 
-Templates for the list of events and individual events can be customized in your theme.
+Templates for the list of events and individual events can be customized in your child theme.
 
-Just create a folder named `openagenda/` in your theme, then copy and paste the template you wish to override located in the plugin's `templates/` folder.
+If you're not already using a child theme, it is recommended to create one.
+
+[https://developer.wordpress.org/themes/advanced-topics/child-themes/](https://developer.wordpress.org/themes/advanced-topics/child-themes/)
+
+Just create a folder named `openagenda/` in your child theme, then copy and paste the template you wish to override from the plugin's `templates/` folder.
+
+Here is a list of templates you can find in the plugin's `templates/` folder : 
+
+* `event-loop.php` : main wrapper for list view and single event view. Displays exports button and pagination at the top and bottom. 
+* `list-header.php` : contains the total number of events and active filters display.
+* `event.php` : template used to display the event information on list views.
+* `single-event.php` : template used to display the event information on single event views.
+* `event-location.php` : template used to display the location information on single event views.
+* `event-additional-fields.php` : template used to the list of additional fields on single event views.
+* `preview-loop.php` : main wrapper for the preview widget and shortcode.
+* `preview-event.php` : template used to display events in the preview widget.
 
 The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. Feel free to define your own in your theme.
 
@@ -182,6 +198,10 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 7. Enjoy !
 
 == Changelog ==
+
+= 2.13.0 =
+* Fixed   : Updated checkboxes styles on calendar edit page.
+* Feature : Added template for displaying all additional fields on single event views.
 
 = 2.12.0 =
 * Feature : Added infinite scroll functionnality for agendas
