@@ -197,6 +197,7 @@ function openagenda_get_additional_field( $field, $uid = false ){
         switch ( $field_schema['fieldType'] ) {
             case 'stream':
             case 'events':
+            case 'pass':
                 $value = '';
                 break;
             case 'boolean':
