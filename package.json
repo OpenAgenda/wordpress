@@ -12,6 +12,8 @@
     "sass": "sass assets/css/style.scss:assets/css/style.css && sass --style=compressed assets/css/style.scss:assets/css/style.min.css && sass assets/css/admin.scss:assets/css/admin.css && sass --style=compressed assets/css/admin.scss:assets/css/admin.min.css",
     "terser": "terser assets/js/customizer.js -o assets/js/customizer.min.js & terser assets/js/event-map.js -o assets/js/event-map.min.js & terser assets/js/main.js -o assets/js/main.min.js & terser assets/js/media-uploader.js -o assets/js/media-uploader.min.js & terser assets/js/timings.js -o assets/js/timings.min.js & terser assets/js/widgets.js -o assets/js/widgets.min.js",
     "make-pot": "wp i18n make-pot . languages/openagenda.pot --exclude=\"node_modules, svn, js\" ",
+    "phpcs": "./vendor/bin/phpcs .",
+    "phpcbf": "./vendor/bin/phpcbf .",
     "archive": "wp dist-archive ./ --plugin-dirname=openagenda",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

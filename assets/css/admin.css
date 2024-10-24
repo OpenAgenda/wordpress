@@ -1,15 +1,15 @@
 .button.media-remove-button {
-  color: #b32d2e;
-  text-decoration: none;
-  border-color: transparent;
-  box-shadow: none;
-  background: 0 0;
+	color: #b32d2e;
+	text-decoration: none;
+	border-color: transparent;
+	box-shadow: none;
+	background: 0 0;
 }
 .button.media-remove-button:hover, .button.media-remove-button:focus {
-  background: #b32d2e;
-  color: #fff;
-  border-color: #b32d2e;
-  box-shadow: 0 0 0 1px #b32d2e;
+	background: #b32d2e;
+	color: #fff;
+	border-color: #b32d2e;
+	box-shadow: 0 0 0 1px #b32d2e;
 }
 
 /*# sourceMappingURL=admin.css.map */
