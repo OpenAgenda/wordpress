@@ -74,13 +74,13 @@ class Settings implements Hookable {
 				'page'     => 'openagenda',
 				'section'  => 'openagenda_general_settings',
 				'args'     => array(
-					'id'          => 'openagenda_api_key',
-					'option_name' => 'openagenda_general_settings',
-					'label_for'   => 'openagenda_api_key',
-					'type'        => 'password',
-					'show_password' => true,
+					'id'                    => 'openagenda_api_key',
+					'option_name'           => 'openagenda_general_settings',
+					'label_for'             => 'openagenda_api_key',
+					'type'                  => 'password',
+					'show_password'         => true,
 					'show_password_message' => __( 'Show API key', 'openagenda' ),
-					'description' => sprintf(
+					'description'           => sprintf(
 						/* translators: %1$s: Openagenda settings page url, %2$s Documentation url */
 						__( 'Your API key can be found in your <a href="%1$s" target="_blank">OpenAgenda account</a>. Check out the <a href="%2$s" target="_blank">documentation</a>.', 'openagenda' ),
 						'https://openagenda.com/settings/apiKey',
@@ -341,12 +341,12 @@ class Settings implements Hookable {
 				value="<?php echo esc_attr( $value ); ?>"
 			>
 			<?php
-			if( 'password' === $args['type'] && $args['show_password'] ){
-				printf( 
+			if ( 'password' === $args['type'] && $args['show_password'] ) {
+				printf(
 					'<p class="password-toggle"><input type="checkbox" id="%1$s" data-input="%2$s" /><label for="%1$s">%3$s</label></p>',
 					esc_attr( "${field_id}-show-password" ),
 					esc_attr( $field_id ),
-				 	$args['show_password_message'] ?? __( 'Show password', 'openagenda' )
+					$args['show_password_message'] ?? __( 'Show password', 'openagenda' )
 				);
 			}
 			if ( ! empty( $args['description'] ) ) {

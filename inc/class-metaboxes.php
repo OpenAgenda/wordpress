@@ -96,13 +96,13 @@ class Metaboxes implements Hookable {
 				'description' => __( 'Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed.', 'openagenda' ),
 			),
 			'oa-calendar-api-key'            => array(
-				'metabox'     => 'oa-calendar-settings',
-				'type'        => 'password',
-				'label'       => __( 'API key (advanced)', 'openagenda' ),
-				'default'     => '',
-				'show_password' => true,
+				'metabox'               => 'oa-calendar-settings',
+				'type'                  => 'password',
+				'label'                 => __( 'API key (advanced)', 'openagenda' ),
+				'default'               => '',
+				'show_password'         => true,
 				'show_password_message' => __( 'Show API key', 'openagenda' ),
-				'description' => __( 'Fill this field only if you want to make API calls with a API key different from the general settings.', 'openagenda' ),
+				'description'           => __( 'Fill this field only if you want to make API calls with a API key different from the general settings.', 'openagenda' ),
 			),
 		);
 	}
@@ -318,8 +318,8 @@ class Metaboxes implements Hookable {
 						if ( ! empty( $args['message'] ) ) {
 							printf( '<p class="description" style="color:red;">%s</p>', wp_kses_post( $message ) );
 						}
-						if( 'password' === $args['type'] && $args['show_password'] ){
-							printf( 
+						if ( 'password' === $args['type'] && $args['show_password'] ) {
+							printf(
 								'<p class="password-toggle">
 									<input type="checkbox" id="%1$s" data-input="%2$s" />
 									<label for="%1$s">%3$s</label>

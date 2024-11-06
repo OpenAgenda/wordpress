@@ -413,7 +413,7 @@ class Shortcodes implements Hookable {
 			'links'   => '',
 			'api_key' => '',
 		);
-		$atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
+		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
 
 		// Parse args and filters
 		$args = array(

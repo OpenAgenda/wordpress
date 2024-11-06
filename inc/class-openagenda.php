@@ -153,8 +153,8 @@ class OpenAgenda {
 		$this->api_key = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
 		$this->debug   = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG;
 
-		$this->options      = $this->parse_options( $options, $use_context );
-		if( ! empty( $this->get_option( 'api_key' ) ) ){
+		$this->options = $this->parse_options( $options, $use_context );
+		if ( ! empty( $this->get_option( 'api_key' ) ) ) {
 			$this->api_key = $this->get_option( 'api_key' );
 		}
 

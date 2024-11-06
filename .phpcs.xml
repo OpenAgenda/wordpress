@@ -20,6 +20,7 @@
 	<exclude-pattern>/node_modules/*</exclude-pattern>
 
 	<!-- Exclude minified Javascript files. -->
+	<exclude-pattern>/assets/*</exclude-pattern>
 	<exclude-pattern>*.min.js</exclude-pattern>
 
 	<!-- Strip the filepaths down to the relevant bit. -->

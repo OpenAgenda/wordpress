@@ -143,11 +143,14 @@ class Ajax_Handler {
 			$from = 0;
 		}
 
-		$args = array_merge( array(
-			'from'                  => $from,
-			'size'                  => 1,
-			'longDescriptionFormat' => ! empty( $params['longDescriptionFormat'] ) ? $params['longDescriptionFormat'] : 'markdown',
-		), $filters );
+		$args = array_merge(
+			array(
+				'from'                  => $from,
+				'size'                  => 1,
+				'longDescriptionFormat' => ! empty( $params['longDescriptionFormat'] ) ? $params['longDescriptionFormat'] : 'markdown',
+			),
+			$filters
+		);
 
 		$options = array(
 			'cache'           => false,

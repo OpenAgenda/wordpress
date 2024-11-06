@@ -553,7 +553,7 @@ function openagenda_clear_transient() {
 /**
  * Parses and returns pre-filters
  *
- * @param   string  $post_id  Agenda ID to pre-filter
+ * @param   string $post_id  Agenda ID to pre-filter
  * @return  array   $filters  Filters to apply to initial request
  */
 function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
