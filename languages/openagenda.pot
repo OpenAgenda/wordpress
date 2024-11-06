@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-24T09:46:51+00:00\n"
+"POT-Creation-Date: 2024-11-06T09:59:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: openagenda\n"
@@ -52,20 +52,20 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
-#: inc/class-admin-pages.php:146
+#: inc/class-admin-pages.php:147
 #: inc/class-settings.php:52
 msgid "General settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:162
+#: inc/class-admin-pages.php:163
 msgid "Integrations settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:165
+#: inc/class-admin-pages.php:166
 msgid "OpenStreetMap settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:169
+#: inc/class-admin-pages.php:170
 msgid "CloudImage settings"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgstr ""
 
 #: inc/class-content-manager.php:19
 #: inc/class-content-manager.php:127
-#: inc/class-settings.php:517
+#: inc/class-settings.php:527
 msgid "calendar"
 msgstr ""
 
@@ -195,7 +195,7 @@ msgid "OpenAgenda main color"
 msgstr ""
 
 #: inc/class-filter-widget.php:23
-#: inc/class-settings.php:239
+#: inc/class-settings.php:241
 #: inc/class-shortcodes.php:345
 #: inc/template-tags.php:713
 msgid "OpenStreetMap contributors"
@@ -439,12 +439,12 @@ msgstr ""
 msgid "New field"
 msgstr ""
 
-#: inc/class-metaboxes.php:217
+#: inc/class-metaboxes.php:216
 msgid "Agenda could not be found. Please double check your agenda UID."
 msgstr ""
 
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:221
+#: inc/class-metaboxes.php:220
 msgid "The request could not be authenticated. Please double check API key in <a href=\"%s\">your general settings.</a>"
 msgstr ""
 
@@ -504,103 +504,111 @@ msgstr ""
 msgid "OpenAgenda API key"
 msgstr ""
 
+#: inc/class-settings.php:82
+msgid "Show API key"
+msgstr ""
+
 #. translators: %1$s: Openagenda settings page url, %2$s Documentation url
-#: inc/class-settings.php:83
+#: inc/class-settings.php:85
 msgid "Your API key can be found in your <a href=\"%1$s\" target=\"_blank\">OpenAgenda account</a>. Check out the <a href=\"%2$s\" target=\"_blank\">documentation</a>."
 msgstr ""
 
-#: inc/class-settings.php:91
+#: inc/class-settings.php:93
 msgid "Allow embedded content."
 msgstr ""
 
-#: inc/class-settings.php:101
+#: inc/class-settings.php:103
 msgid "Allow for embedded content in the event's content."
 msgstr ""
 
-#: inc/class-settings.php:102
+#: inc/class-settings.php:104
 msgid "By default, embedded content like Youtube players will be filtered, and will not appear on the frontend. Checking this option will disable filtering."
 msgstr ""
 
-#: inc/class-settings.php:107
+#: inc/class-settings.php:109
 msgid "Load default stylesheets."
 msgstr ""
 
-#: inc/class-settings.php:117
+#: inc/class-settings.php:119
 msgid "Load default styling."
 msgstr ""
 
-#: inc/class-settings.php:122
+#: inc/class-settings.php:124
 msgid "Cache duration"
 msgstr ""
 
-#: inc/class-settings.php:132
+#: inc/class-settings.php:134
 msgid "Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored"
 msgstr ""
 
-#: inc/class-settings.php:137
+#: inc/class-settings.php:139
 msgid "Default event image"
 msgstr ""
 
-#: inc/class-settings.php:145
+#: inc/class-settings.php:147
 msgid "Add default image"
 msgstr ""
 
-#: inc/class-settings.php:146
+#: inc/class-settings.php:148
 msgid "Update default image"
 msgstr ""
 
-#: inc/class-settings.php:147
+#: inc/class-settings.php:149
 msgid "Remove default image"
 msgstr ""
 
-#: inc/class-settings.php:154
+#: inc/class-settings.php:156
 msgid "Delete all calendar content on uninstall ?"
 msgstr ""
 
-#: inc/class-settings.php:164
+#: inc/class-settings.php:166
 msgid "Delete all posts of type \"Calendar\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
 msgstr ""
 
-#: inc/class-settings.php:169
+#: inc/class-settings.php:171
 msgid "Delete all options on uninstall ?"
 msgstr ""
 
-#: inc/class-settings.php:179
+#: inc/class-settings.php:181
 msgid "Delete all of this plugin's settings permanently when I uninstall the plugin."
 msgstr ""
 
-#: inc/class-settings.php:184
+#: inc/class-settings.php:186
 msgid "Allow OpenAgenda to collect usage stats ?"
 msgstr ""
 
-#: inc/class-settings.php:194
+#: inc/class-settings.php:196
 msgid "Allow OpenAgenda to collect plugin usage information for statistics purposes. The following information is collected : CMS used, site URL and whether site editor is used or not."
 msgstr ""
 
-#: inc/class-settings.php:199
+#: inc/class-settings.php:201
 msgid "Calendar base"
 msgstr ""
 
 #. translators: %s : home url
-#: inc/class-settings.php:211
+#: inc/class-settings.php:213
 msgid "You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>."
 msgstr ""
 
-#: inc/class-settings.php:218
+#: inc/class-settings.php:220
 msgid "Default map tiles link"
 msgstr ""
 
-#: inc/class-settings.php:231
+#: inc/class-settings.php:233
 msgid "Default map tiles attribution link"
 msgstr ""
 
-#: inc/class-settings.php:244
+#: inc/class-settings.php:246
 msgid "CloudImage API key"
 msgstr ""
 
 #. translators: %s: openagenda site url
-#: inc/class-settings.php:255
+#: inc/class-settings.php:257
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
+msgstr ""
+
+#: inc/class-settings.php:349
+msgid "Show password"
 msgstr ""
 
 #: inc/class-shortcodes.php:83
