@@ -95,6 +95,15 @@ class Metaboxes implements Hookable {
 				'default'     => '',
 				'description' => __( 'Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed.', 'openagenda' ),
 			),
+			'oa-calendar-api-key'            => array(
+				'metabox'     => 'oa-calendar-settings',
+				'type'        => 'password',
+				'label'       => __( 'API key (advanced)', 'openagenda' ),
+				'default'     => '',
+				'show_password' => true,
+				'show_password_message' => __( 'Show API key', 'openagenda' ),
+				'description' => __( 'Fill this field only if you want to make API calls with a API key different from the general settings.', 'openagenda' ),
+			),
 		);
 	}
 
@@ -205,6 +214,7 @@ class Metaboxes implements Hookable {
 				array(
 					'cache'   => false,
 					'context' => false,
+					'api_key' => get_post_meta( $post->ID, 'oa-calendar-api-key', true ),
 				)
 			);
 			$response   = $openagenda->get_raw_response();
@@ -308,6 +318,17 @@ class Metaboxes implements Hookable {
 						if ( ! empty( $args['message'] ) ) {
 							printf( '<p class="description" style="color:red;">%s</p>', wp_kses_post( $message ) );
 						}
+						if( 'password' === $args['type'] && $args['show_password'] ){
+							printf( 
+								'<p class="password-toggle">
+									<input type="checkbox" id="%1$s" data-input="%2$s" />
+									<label for="%1$s">%3$s</label>
+								</p>',
+								esc_attr( "${name}-show-password" ),
+								esc_attr( $name ),
+								$args['show_password_message'] ?? __( 'Show password', 'openagenda' )
+							);
+						}
 						if ( ! empty( $args['description'] ) ) {
 							printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
 						}
@@ -358,6 +379,10 @@ class Metaboxes implements Hookable {
 
 		if ( isset( $_POST['oa-calendar-filters'] ) ) {
 			update_post_meta( $post_ID, 'oa-calendar-filters', esc_url_raw( $_POST['oa-calendar-filters'] ) );
+		}
+
+		if ( isset( $_POST['oa-calendar-api-key'] ) ) {
+			update_post_meta( $post_ID, 'oa-calendar-api-key', sanitize_text_field( $_POST['oa-calendar-api-key'] ) );
 		}
 
 		$content_on_archive  = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';

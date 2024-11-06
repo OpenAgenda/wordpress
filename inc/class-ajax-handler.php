@@ -87,6 +87,7 @@ class Ajax_Handler {
 			'cache'           => false,
 			'context'         => true,
 			'infinite_scroll' => get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes',
+			'api_key'         => get_post_meta( $post_id, 'oa-calendar-api-key', true ),
 		);
 
 		$with_controls = ! $options['infinite_scroll'];
@@ -142,21 +143,21 @@ class Ajax_Handler {
 			$from = 0;
 		}
 
-		$args = array(
+		$args = array_merge( array(
 			'from'                  => $from,
 			'size'                  => 1,
 			'longDescriptionFormat' => ! empty( $params['longDescriptionFormat'] ) ? $params['longDescriptionFormat'] : 'markdown',
+		), $filters );
+
+		$options = array(
+			'cache'           => false,
+			'context'         => false,
+			'infinite_scroll' => get_post_meta( get_the_ID(), 'oa-calendar-infinite-scroll', true ) === 'yes',
+			'api_key'         => get_post_meta( get_the_ID(), 'oa-calendar-api-key', true ),
 		);
 
 		// Fetch the event
-		$openagenda = new OpenAgenda(
-			$uid,
-			array_merge( $args, $filters ),
-			array(
-				'cache'   => false,
-				'context' => false,
-			)
-		);
+		$openagenda = new OpenAgenda( $uid, $args, $options );
 		$event      = $openagenda->get_current_event();
 
 		if ( ! empty( $event ) ) {

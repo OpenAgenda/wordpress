@@ -70,14 +70,11 @@ class Shortcodes implements Hookable {
 				'view'            => get_post_meta( $post_id, 'oa-calendar-view', true ) ? sanitize_title( get_post_meta( $post_id, 'oa-calendar-view', true ) ) : 'list',
 				'size'            => get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' ),
 				'infinite_scroll' => get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes',
+				'api_key'         => get_post_meta( $post_id, 'oa-calendar-api-key', true ),
 			),
 			$atts,
 			$tag
 		);
-
-		if ( ! empty( get_query_var( 'oa-slug' ) ) ) {
-			$atts['slug'] = sanitize_title( get_query_var( 'oa-slug' ) );
-		}
 
 		if ( empty( $atts['uid'] ) ) {
 			return sprintf( '<p>%s</p>', __( 'Please provide a valid calendar UID to display in the calendar settings.', 'openagenda' ) );
@@ -88,14 +85,35 @@ class Shortcodes implements Hookable {
 		}
 
 		if ( ! $openagenda ) {
-			$args       = array_filter(
-				$atts,
-				function ( $att, $key ) {
-					return ! in_array( $key, array( 'uid', 'view', 'infinite_scroll' ) );
-				},
-				ARRAY_FILTER_USE_BOTH
+			$args = array(
+				'size'      => (int) $atts['size'],
+				'page_size' => (int) $atts['size'],
+				'page'      => ! empty( get_query_var( 'oa-page' ) ) ? (int) get_query_var( 'oa-page' ) : 1,
+				'slug'      => ! empty( get_query_var( 'oa-slug' ) ) ? sanitize_text_field( get_query_var( 'oa-slug' ) ) : '',
 			);
-			$openagenda = new OpenAgenda( $atts['uid'], $args, array( 'infinite_scroll' => $atts['infinite_scroll'] ) );
+
+			// If using infinite scroll, archive page number will always be 1.
+			if ( $atts['infinite_scroll'] ) {
+				$args['size'] *= $args['page'];
+				$args['page']  = 1;
+			}
+
+			// Merge filters in URL
+			if ( ! empty( $_GET ) ) {
+				$args = array_merge( $args, $_GET );
+			}
+
+			// Merge default filters
+			if ( ! empty( $prefilters = openagenda_get_pre_filters( $post_id, $args ) ) ) {
+				$args = array_merge( $args, $prefilters );
+			}
+
+			$options = array(
+				'infinite_scroll' => $atts['infinite_scroll'],
+				'api_key'         => $atts['api_key'],
+			);
+
+			$openagenda = new OpenAgenda( $atts['uid'], $args, $options );
 		}
 
 		$list_header = \openagenda_is_archive() ? \openagenda_get_list_header_html( $atts['view'] ) : '';
@@ -393,31 +411,31 @@ class Shortcodes implements Hookable {
 			'size'    => 3,
 			'filters' => '',
 			'links'   => '',
+			'api_key' => '',
 		);
-		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
+		$atts = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
 
-		$uid = $atts['uid'];
-		unset( $atts['uid'] );
-		$atts['size'] = (int) $atts['size'];
+		// Parse args and filters
+		$args = array(
+			'size' => (int) $atts['size'],
+		);
 
-		// Parse filters
 		$filters = array();
 		parse_str( trim( str_replace( 'q.', '', urldecode( $atts['filters'] ) ), '?' ), $filters );
 		if ( $filters ) {
-			$atts = array_merge( $atts, $filters );
-			unset( $atts['filters'] );
+			$args = array_merge( $args, $filters );
 		}
+
+		// Parse options
+		$options = array(
+			'cache'   => false,
+			'context' => false,
+			'api_key' => $atts['api_key'],
+		);
 
 		// If we're on a events page, backup the main events.
 		openagenda_save();
-		$openagenda = new OpenAgenda(
-			$uid,
-			$atts,
-			array(
-				'cache'   => false,
-				'context' => false,
-			)
-		);
+		$openagenda = new OpenAgenda( $atts['uid'], $args, $options );
 		ob_start();
 		include openagenda_get_template( 'preview-loop' );
 		$filter = ob_get_clean();

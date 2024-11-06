@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-06T09:59:32+00:00\n"
+"POT-Creation-Date: 2024-11-06T12:59:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: openagenda\n"
@@ -52,20 +52,20 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
-#: inc/class-admin-pages.php:147
+#: inc/class-admin-pages.php:146
 #: inc/class-settings.php:52
 msgid "General settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:163
+#: inc/class-admin-pages.php:162
 msgid "Integrations settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:166
+#: inc/class-admin-pages.php:165
 msgid "OpenStreetMap settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:170
+#: inc/class-admin-pages.php:169
 msgid "CloudImage settings"
 msgstr ""
 
@@ -196,7 +196,7 @@ msgstr ""
 
 #: inc/class-filter-widget.php:23
 #: inc/class-settings.php:241
-#: inc/class-shortcodes.php:345
+#: inc/class-shortcodes.php:363
 #: inc/template-tags.php:713
 msgid "OpenStreetMap contributors"
 msgstr ""
@@ -260,8 +260,8 @@ msgid "Choose a field to display"
 msgstr ""
 
 #: inc/class-filter-widget.php:93
-#: inc/class-shortcodes.php:216
-#: inc/class-shortcodes.php:226
+#: inc/class-shortcodes.php:234
+#: inc/class-shortcodes.php:244
 msgid "Favorites"
 msgstr ""
 
@@ -430,37 +430,55 @@ msgstr ""
 msgid "Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed."
 msgstr ""
 
+#: inc/class-metaboxes.php:101
+msgid "API key (advanced)"
+msgstr ""
+
+#: inc/class-metaboxes.php:104
+#: inc/class-settings.php:82
+msgid "Show API key"
+msgstr ""
+
+#: inc/class-metaboxes.php:105
+msgid "Fill this field only if you want to make API calls with a API key different from the general settings."
+msgstr ""
+
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:166
+#: inc/class-metaboxes.php:175
 msgid "Please provide your account API key in <a href=\"%s\">the plugin settings</a>."
 msgstr ""
 
-#: inc/class-metaboxes.php:191
+#: inc/class-metaboxes.php:200
 msgid "New field"
 msgstr ""
 
-#: inc/class-metaboxes.php:216
+#: inc/class-metaboxes.php:226
 msgid "Agenda could not be found. Please double check your agenda UID."
 msgstr ""
 
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:220
+#: inc/class-metaboxes.php:230
 msgid "The request could not be authenticated. Please double check API key in <a href=\"%s\">your general settings.</a>"
 msgstr ""
 
-#: inc/class-openagenda.php:375
+#: inc/class-metaboxes.php:329
+#: inc/class-settings.php:349
+msgid "Show password"
+msgstr ""
+
+#: inc/class-openagenda.php:379
 msgid "XLSX"
 msgstr ""
 
-#: inc/class-openagenda.php:376
+#: inc/class-openagenda.php:380
 msgid "JSON"
 msgstr ""
 
-#: inc/class-openagenda.php:377
+#: inc/class-openagenda.php:381
 msgid "RSS"
 msgstr ""
 
-#: inc/class-openagenda.php:555
+#: inc/class-openagenda.php:560
 msgid "There was an error parsing the JSON."
 msgstr ""
 
@@ -502,10 +520,6 @@ msgstr ""
 
 #: inc/class-settings.php:72
 msgid "OpenAgenda API key"
-msgstr ""
-
-#: inc/class-settings.php:82
-msgid "Show API key"
 msgstr ""
 
 #. translators: %1$s: Openagenda settings page url, %2$s Documentation url
@@ -607,34 +621,30 @@ msgstr ""
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
-#: inc/class-settings.php:349
-msgid "Show password"
-msgstr ""
-
-#: inc/class-shortcodes.php:83
+#: inc/class-shortcodes.php:80
 msgid "Please provide a valid calendar UID to display in the calendar settings."
 msgstr ""
 
-#: inc/class-shortcodes.php:87
+#: inc/class-shortcodes.php:84
 msgid "This page is not an agenda page. Events may not display as expected."
 msgstr ""
 
-#: inc/class-shortcodes.php:153
+#: inc/class-shortcodes.php:171
 msgctxt "Total filter message when no events found"
 msgid "No event found"
 msgstr ""
 
-#: inc/class-shortcodes.php:154
+#: inc/class-shortcodes.php:172
 msgctxt "Total filter message when 1 event found. Keep {total} placeholder."
 msgid "{total} event"
 msgstr ""
 
-#: inc/class-shortcodes.php:155
+#: inc/class-shortcodes.php:173
 msgctxt "Total filter message when multiple event found. Keep {total} placeholder."
 msgid "{total} events"
 msgstr ""
 
-#: inc/class-shortcodes.php:353
+#: inc/class-shortcodes.php:371
 msgid "Search while moving the map"
 msgstr ""
 

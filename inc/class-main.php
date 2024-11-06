@@ -148,7 +148,7 @@ class Main {
 		$js_suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.js' : '.min.js';
 
 		wp_register_style( 'openagenda-admin', OPENAGENDA_URL . 'assets/css/admin' . $css_suffix, array(), OPENAGENDA_VERSION );
-		wp_register_script( 'openagenda-admin', OPENAGENDA_URL . 'assets/js/admin' . $js_suffix, array(), OPENAGENDA_VERSION );
+		wp_enqueue_script( 'openagenda-admin', OPENAGENDA_URL . 'assets/js/admin' . $js_suffix, array(), OPENAGENDA_VERSION );
 		wp_register_script( 'openagenda-media-uploader', OPENAGENDA_URL . 'assets/js/media-uploader' . $js_suffix, array(), OPENAGENDA_VERSION, true );
 
 		if ( 'widgets.php' === $hook ) {
@@ -239,6 +239,7 @@ class Main {
 			$uid             = get_post_meta( $post_id, 'oa-calendar-uid', true );
 			$page_size       = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
 			$infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
+			$api_key         = get_post_meta( $post_id, 'oa-calendar-api-key', true );
 
 			$args = array(
 				'size'      => $page_size,
@@ -249,6 +250,7 @@ class Main {
 
 			$options = array(
 				'infinite_scroll' => $infinite_scroll,
+				'api_key'         => $api_key,
 			);
 
 			// If using infinite scroll, archive page number will always be 1.

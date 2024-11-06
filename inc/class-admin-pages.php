@@ -114,7 +114,6 @@ class Admin_Pages implements Hookable {
 		$current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : 'general';
 		$base_url    = $this->get_menu_page_url();
 		wp_enqueue_style( 'openagenda-admin' );
-		wp_enqueue_script( 'openagenda-admin' );
 		?>
 			<div class="wrap">
 				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>

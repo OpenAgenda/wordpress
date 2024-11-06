@@ -553,15 +553,15 @@ function openagenda_clear_transient() {
 /**
  * Parses and returns pre-filters
  *
- * @param   string $agenda_uid  Agenda UID to pre-filter
- * @return  array   $filters     Filters to apply to initial request
+ * @param   string  $post_id  Agenda ID to pre-filter
+ * @return  array   $filters  Filters to apply to initial request
  */
-function openagenda_get_pre_filters( $agenda_uid = false, $filters = array() ) {
-	if ( ! $agenda_uid ) {
-		$agenda_uid = get_the_ID();
+function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
 	}
-	$filters_url         = get_post_meta( $agenda_uid, 'oa-calendar-filters', true );
-	$exclude_past_events = get_post_meta( $agenda_uid, 'oa-calendar-exclude', true );
+	$filters_url         = get_post_meta( $post_id, 'oa-calendar-filters', true );
+	$exclude_past_events = get_post_meta( $post_id, 'oa-calendar-exclude', true );
 
 	$prefilters = array();
 
@@ -579,7 +579,7 @@ function openagenda_get_pre_filters( $agenda_uid = false, $filters = array() ) {
 		}
 	}
 
-	return apply_filters( 'openagenda_pre_filters', $prefilters, $agenda_uid );
+	return apply_filters( 'openagenda_pre_filters', $prefilters, $post_id );
 }
 
 

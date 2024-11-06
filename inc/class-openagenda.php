@@ -154,6 +154,10 @@ class OpenAgenda {
 		$this->debug   = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG;
 
 		$this->options      = $this->parse_options( $options, $use_context );
+		if( ! empty( $this->get_option( 'api_key' ) ) ){
+			$this->api_key = $this->get_option( 'api_key' );
+		}
+
 		$this->args         = $this->parse_args( $args );
 		$this->raw_response = $this->request();
 		$this->json         = $this->parse_response();
@@ -455,6 +459,7 @@ class OpenAgenda {
 			'infinite_scroll' => false,
 			'include_usage'   => ! empty( $settings ) && isset( $settings['openagenda_allow_usage_stats_collection'] ) ? (bool) $settings['openagenda_allow_usage_stats_collection'] : true,
 			'include_embeds'  => ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true,
+			'api_key'         => '',
 		);
 
 		// Check deprecated call to class constructor
