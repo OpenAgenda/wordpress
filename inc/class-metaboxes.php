@@ -62,7 +62,7 @@ class Metaboxes implements Hookable {
 					'default'     => '',
 					'description' => sprintf(
 						'<a href="%s" class="components-external-link" target="_blank" rel="external noopener noreferrer">%s</a>',
-						'https://github.com/OpenAgenda/wordpress#howtogetagendauid',
+						'https://doc.openagenda.com/fr/article/trouver-le-lien-et-lidentifiant-de-mon-evenement-de-mon-agenda-27xykn/',
 						__( 'How to find my calendar UID ?', 'openagenda' )
 					),
 				),
