@@ -116,6 +116,7 @@ class Main {
 		wp_register_script( 'openagenda-media-uploader', OPENAGENDA_URL . 'assets/js/media-uploader' . $js_suffix, array(), OPENAGENDA_VERSION, true );
 
 		if ( 'widgets.php' === $hook ) {
+			wp_enqueue_style( 'openagenda-admin' );
 			wp_enqueue_script( 'openagenda-widgets', OPENAGENDA_URL . 'assets/js/widgets' . $js_suffix, array( 'jquery' ), OPENAGENDA_VERSION, true );
 		}
 	}

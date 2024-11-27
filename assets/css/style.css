@@ -40,7 +40,7 @@ img {
 
 .oa-event-grid {
   display: grid;
-  grid-gap: 2rem;
+  grid-gap: 4rem;
 }
 @media screen and (min-width: 768px) {
   .oa-event-grid {
@@ -302,7 +302,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
  * Preview Widget
  *********************/
 .oa-preview-card {
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .oa-card {
@@ -321,8 +321,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   max-width: 150px;
   max-height: 150px;
 }
-
-.oa-card-img {
+.oa-card-image-link img {
   display: block;
   object-fit: cover;
   object-position: center;
@@ -343,6 +342,32 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
   padding: 0;
   margin: 0;
   line-height: 1.2;
+}
+.oa-list-unstyled li {
+  margin: 0;
+}
+
+.oa-preview.grid .oa-preview-events {
+  display: grid;
+  grid-gap: 4rem;
+}
+@media screen and (min-width: 768px) {
+  .oa-preview.grid .oa-preview-events {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+.oa-preview.grid .oa-card {
+  display: block;
+}
+.oa-preview.grid .oa-card-link {
+  margin: 0.5rem 0;
+}
+.oa-preview.grid .oa-card-body {
+  padding: 0;
+}
+.oa-preview.grid .oa-card-image-link {
+  max-width: none;
+  max-height: none;
 }
 
 /*********************************

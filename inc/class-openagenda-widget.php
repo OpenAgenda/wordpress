@@ -169,6 +169,33 @@ class OpenAgenda_Widget extends \WP_Widget {
 					$options
 				);
 			break;
+			case 'radio';
+				$options = '';
+				if ( ! empty( $field['options'] ) ) {
+					foreach ( $field['options'] as $option => $data ) {
+						$option_value = $data['value'] ?? '';
+						$option_label = $data['label'] ?? '';
+						$id = sprintf( '%s-%s', $this->get_field_id( $field['name'] ), $option_value );
+						$options .= sprintf(
+							'<span><input type="radio" id="%1$s" name="%2$s" value="%3$s"%5$s><label for="%1$s">%4$s</label></span><br />',
+							esc_attr( $id ),
+							esc_attr( $this->get_field_name( $field['name'] ) ),
+							esc_attr( $option_value ),
+							esc_html( $option_label ),
+							checked( $value, $option_value, false )
+						);
+					}
+				}
+
+				$html = sprintf(
+					'<fieldset>
+						<legend>%1$s</legend>
+						%2$s
+					</fieldset>',
+					esc_html( $field['label'] ),
+					$options
+				);
+				break;
 			default:
 				$description = ! empty( $field['description'] ) ? sprintf( '<em><span class="description">%s</span></em>', wp_kses_post( $field['description'] ) ) : '';
 				$placeholder = ! empty( $field['placeholder'] ) ? sprintf( 'placeholder="%s"', esc_attr( $field['placeholder'] ) ) : '';

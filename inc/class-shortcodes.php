@@ -409,6 +409,7 @@ class Shortcodes implements Hookable {
 			'id'      => 'preview',
 			'uid'     => '',
 			'size'    => 3,
+			'view'    => 'list',
 			'filters' => '',
 			'links'   => '',
 			'api_key' => '',

@@ -26,6 +26,23 @@ class Preview_Widget extends OpenAgenda_Widget {
 				'class'   => 'widefat',
 				'default' => 3,
 			),
+			'view'    => array(
+				'name'    => 'view',
+				'type'    => 'radio',
+				'label'   => __( 'Display setting', 'openagenda' ),
+				'default' => 'list',
+				'class'   => 'widefat',
+				'options' => array(
+					'list' => array(
+						'label' => __( 'Display as list', 'openagenda' ),
+						'value' => 'list',
+					),
+					'grid' => array(
+						'label' => __( 'Display as grid', 'openagenda' ),
+						'value' => 'grid',
+					),
+				),
+			),
 			'filters' => array(
 				'name'        => 'filters',
 				'type'        => 'text',
@@ -133,6 +150,7 @@ class Preview_Widget extends OpenAgenda_Widget {
 			'title'   => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
 			'uid'     => ! empty( $new_instance['uid'] ) ? sanitize_text_field( $new_instance['uid'] ) : '',
 			'size'    => ! empty( $new_instance['size'] ) ? (int) $new_instance['size'] : 3,
+			'view'    => ! empty( $new_instance['view'] ) ? sanitize_title( $new_instance['view'] ) : 'list',
 			'filters' => ! empty( $new_instance['filters'] ) ? urldecode( $new_instance['filters'] ) : '',
 			'links'   => ! empty( $new_instance['links'] ),
 		);

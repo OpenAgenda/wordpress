@@ -60,7 +60,7 @@ img {
 
 .oa-event-grid {
 	display: grid;
-	grid-gap: 2rem;
+	grid-gap: 4rem;
 
 	@media screen and (min-width: 768px) {
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -337,7 +337,7 @@ div[data-container-id="oa-wrapper"] {
  * Preview Widget
  *********************/
 .oa-preview-card {
-	margin-bottom: .5rem;
+	margin-bottom: 2rem;
 }
 
 .oa-card {
@@ -354,14 +354,14 @@ div[data-container-id="oa-wrapper"] {
 	flex-shrink: 0;
 	max-width: 150px;
 	max-height: 150px;
-}
 
-.oa-card-img {
-	display: block;
-	object-fit: cover;
-	object-position: center;
-	width: 100%;
-	height: 100%;
+	img {
+		display: block;
+		object-fit: cover;
+		object-position: center;
+		width: 100%;
+		height: 100%;
+	}
 }
 
 .oa-card-body {
@@ -376,7 +376,39 @@ div[data-container-id="oa-wrapper"] {
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	line-height: 1.2
+	line-height: 1.2;
+
+	li {
+		margin: 0;
+	}
+}
+
+.oa-preview.grid {
+	.oa-preview-events {
+		display: grid;
+		grid-gap: 4rem;
+
+		@media screen and (min-width: 768px) {
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		}
+	}
+
+	.oa-card {
+		display: block;
+	}
+
+	.oa-card-link {
+		margin: .5rem 0;
+	}
+
+	.oa-card-body {
+		padding: 0;
+	}
+
+	.oa-card-image-link {
+		max-width: none;
+		max-height: none;
+	}
 }
 
 /*********************************

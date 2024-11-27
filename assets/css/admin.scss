@@ -13,3 +13,14 @@
         box-shadow: 0 0 0 1px #b32d2e;
     }
 }
+
+.widget {
+    fieldset {
+        line-height: 1.5;
+        margin: 1em 0;
+
+        legend {
+            margin-bottom: .25em;
+        }
+    }
+}

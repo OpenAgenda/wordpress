@@ -7,9 +7,10 @@
  * @var     $atts        Shortcode attributes
  * @package OpenAgenda
  */
+$view = $atts['view'] ?? 'list';
 if ( $openagenda->have_events() ) :
 	$openagenda->reset_index(); ?>
-	<div class="oa-preview">
+	<div class="oa-preview <?php echo esc_attr( $view ); ?>">
 		<div class="oa-preview-events">
 			<?php
 			while ( $openagenda->have_events() ) :
