@@ -17,25 +17,6 @@ class Admin_Pages implements Hookable {
 	protected $tabs = array();
 
 	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->main_page = array(
-			'parent_slug' => 'edit.php?post_type=oa-calendar',
-			'page_title'  => __( 'OpenAgenda Settings', 'openagenda' ),
-			'menu_title'  => __( 'Settings', 'openagenda' ),
-			'capability'  => 'manage_options',
-			'menu_slug'   => 'openagenda',
-			'position'    => 100,
-			'callback'    => array( $this, 'settings_page_markup' ),
-		);
-		$this->tabs      = array(
-			'general'      => __( 'General', 'openagenda' ),
-			'integrations' => __( 'Integrations', 'openagenda' ),
-		);
-	}
-
-	/**
 	 * Registers hooks
 	 */
 	public function register_hooks() {
@@ -69,6 +50,17 @@ class Admin_Pages implements Hookable {
 	 * @return  array  Main page arguments
 	 */
 	public function get_main_page() {
+		if( empty( $this->main_page ) ){
+			$this->main_page = array(
+				'parent_slug' => 'edit.php?post_type=oa-calendar',
+				'page_title'  => __( 'OpenAgenda Settings', 'openagenda' ),
+				'menu_title'  => __( 'Settings', 'openagenda' ),
+				'capability'  => 'manage_options',
+				'menu_slug'   => 'openagenda',
+				'position'    => 100,
+				'callback'    => array( $this, 'settings_page_markup' ),
+			);
+		}
 		return apply_filters( 'openagenda_main_admin_page', $this->main_page );
 	}
 
@@ -79,6 +71,12 @@ class Admin_Pages implements Hookable {
 	 * @return  array  Main page arguments
 	 */
 	public function get_tabs() {
+		if( empty( $this->tabs ) ){
+			$this->tabs = array(
+				'general'      => __( 'General', 'openagenda' ),
+				'integrations' => __( 'Integrations', 'openagenda' ),
+			);
+		}
 		return apply_filters( 'openagenda_admin_page_tabs', $this->tabs );
 	}
 

@@ -19,42 +19,6 @@ class Main {
 	private $available_filters = array();
 
 	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->available_filters = array(
-			'openagenda_filter_active'   => array(
-				'label'     => _x( 'Active filters', 'Filter name', 'openagenda' ),
-				'shortcode' => 'openagenda_filter_active',
-			),
-			'openagenda_filter_choice'   => array(
-				'label'     => _x( 'Choice', 'Filter name', 'openagenda' ),
-				'shortcode' => 'openagenda_filter_choice',
-			),
-			'openagenda_filter_calendar' => array(
-				'label'     => _x( 'Calendar', 'Filter name', 'openagenda' ),
-				'shortcode' => 'openagenda_filter_calendar',
-			),
-			'openagenda_filter_ranges'   => array(
-				'label'     => _x( 'Defined Ranges', 'Filter name', 'openagenda' ),
-				'shortcode' => 'openagenda_filter_ranges',
-			),
-			'openagenda_filter_map'      => array(
-				'label'     => _x( 'Map', 'Filter name', 'openagenda' ),
-				'shortcode' => 'openagenda_filter_map',
-			),
-			'openagenda_filter_relative' => array(
-				'label'     => _x( 'Upcoming', 'Filter name', 'openagenda' ),
-				'shortcode' => 'openagenda_filter_relative',
-			),
-			'openagenda_filter_search'   => array(
-				'label'     => _x( 'Search', 'Filter name', 'openagenda' ),
-				'shortcode' => 'openagenda_filter_search',
-			),
-		);
-	}
-
-	/**
 	 * Loads required files.
 	 */
 	public function init() {
@@ -225,6 +189,38 @@ class Main {
 	 * Returns array of available filters
 	 */
 	public function get_available_filters() {
+		if( empty( $this->available_filters ) ){
+			$this->available_filters = array(
+				'openagenda_filter_active'   => array(
+					'label'     => _x( 'Active filters', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_active',
+				),
+				'openagenda_filter_choice'   => array(
+					'label'     => _x( 'Choice', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_choice',
+				),
+				'openagenda_filter_calendar' => array(
+					'label'     => _x( 'Calendar', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_calendar',
+				),
+				'openagenda_filter_ranges'   => array(
+					'label'     => _x( 'Defined Ranges', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_ranges',
+				),
+				'openagenda_filter_map'      => array(
+					'label'     => _x( 'Map', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_map',
+				),
+				'openagenda_filter_relative' => array(
+					'label'     => _x( 'Upcoming', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_relative',
+				),
+				'openagenda_filter_search'   => array(
+					'label'     => _x( 'Search', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_search',
+				),
+			);
+		}
 		return apply_filters( 'openagenda_available_filters', $this->available_filters );
 	}
 

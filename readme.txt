@@ -200,6 +200,7 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 == Changelog ==
 
 = 2.13.0 =
+* Fixed   : Moved translations loading to init.
 * Fixed   : Updated checkboxes styles on calendar edit page.
 * Feature : Added template for displaying all additional fields on single event views.
 

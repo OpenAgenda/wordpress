@@ -23,36 +23,6 @@ class Customizer_Settings implements Hookable {
 	 */
 	protected $settings = array();
 
-
-	/**
-	 * Class constructor
-	 */
-	public function __construct() {
-		$this->panels   = array(
-			'oa_customizer' => array(
-				'title'       => __( 'Calendars', 'openagenda' ),
-				'description' => __( 'Manage calendars display settings here.', 'openagenda' ),
-			),
-		);
-		$this->sections = array(
-			'oa_colors' => array(
-				'title' => __( 'Colors', 'openagenda' ),
-			),
-		);
-		$this->settings = array(
-			'openagenda_customizer[main_color]' => array(
-				'default'           => '#41acdd',
-				'sanitize_callback' => 'sanitize_hex_color',
-				'transport'         => 'postMessage',
-				'control'           => array(
-					'type'    => 'color',
-					'label'   => __( 'OpenAgenda main color', 'openagenda' ),
-					'section' => 'oa_colors',
-				),
-			),
-		);
-	}
-
 	/**
 	 * Register all the hooks
 	 */
@@ -74,6 +44,14 @@ class Customizer_Settings implements Hookable {
 	 * Returns all customizer panels
 	 */
 	public function get_panels() {
+		if( empty( $this->panels ) ){
+			$this->panels = array(
+				'oa_customizer' => array(
+					'title'       => __( 'Calendars', 'openagenda' ),
+					'description' => __( 'Manage calendars display settings here.', 'openagenda' ),
+				),
+			);
+		}
 		return apply_filters( 'openagenda_customizer_panels', $this->panels );
 	}
 
@@ -82,6 +60,13 @@ class Customizer_Settings implements Hookable {
 	 * Returns all customizer sections
 	 */
 	public function get_sections() {
+		if( empty( $this->sections ) ){
+			$this->sections = array(
+				'oa_colors' => array(
+					'title' => __( 'Colors', 'openagenda' ),
+				),
+			);
+		}
 		return apply_filters( 'openagenda_customizer_sections', $this->sections );
 	}
 
@@ -90,6 +75,20 @@ class Customizer_Settings implements Hookable {
 	 * Returns all customizer settings
 	 */
 	public function get_settings() {
+		if( empty( $this->settings ) ){
+			$this->settings = array(
+				'openagenda_customizer[main_color]' => array(
+					'default'           => '#41acdd',
+					'sanitize_callback' => 'sanitize_hex_color',
+					'transport'         => 'postMessage',
+					'control'           => array(
+						'type'    => 'color',
+						'label'   => __( 'OpenAgenda main color', 'openagenda' ),
+						'section' => 'oa_colors',
+					),
+				),
+			);
+		}
 		return apply_filters( 'openagenda_customizer_settings', $this->settings );
 	}
 

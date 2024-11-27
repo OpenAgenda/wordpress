@@ -16,99 +16,6 @@ class Metaboxes implements Hookable {
 	protected $fields = array();
 
 	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->metaboxes = array(
-			'oa-calendar-settings' => array(
-				'id'            => 'oa-calendar-settings',
-				'title'         => __( 'Calendar settings', 'openagenda' ),
-				'callback'      => array( $this, 'calendar_settings_markup' ),
-				'screen'        => 'oa-calendar',
-				'context'       => 'side',
-				'priority'      => 'default',
-				'callback_args' => array(),
-			),
-		);
-		$this->fields    = array(
-			'oa-calendar-uid'                => array(
-				'metabox'     => 'oa-calendar-settings',
-				'type'        => 'text',
-				'label'       => __( 'Calendar UID', 'openagenda' ),
-				'default'     => '',
-				'description' => sprintf(
-					'<a href="%s" class="components-external-link" target="_blank" rel="external noopener noreferrer">%s</a>',
-					'https://github.com/OpenAgenda/wordpress#howtogetagendauid',
-					__( 'How to find my calendar UID ?', 'openagenda' )
-				),
-			),
-			'oa-calendar-per-page'           => array(
-				'metabox' => 'oa-calendar-settings',
-				'type'    => 'number',
-				'label'   => __( 'Events per page', 'openagenda' ),
-				'default' => (int) get_option( 'posts_per_page' ),
-			),
-			'oa-calendar-view'               => array(
-				'metabox' => 'oa-calendar-settings',
-				'type'    => 'radio',
-				'label'   => __( 'Display setting', 'openagenda' ),
-				'default' => 'list',
-				'choices' => array(
-					'list' => array(
-						'label' => __( 'Display as list', 'openagenda' ),
-						'value' => 'list',
-					),
-					'grid' => array(
-						'label' => __( 'Display as grid', 'openagenda' ),
-						'value' => 'grid',
-					),
-				),
-			),
-			'oa-calendar-content-on-archive' => array(
-				'metabox' => 'oa-calendar-settings',
-				'type'    => 'checkbox',
-				'label'   => __( 'Display editor content on list view.', 'openagenda' ),
-				'default' => 'yes',
-			),
-			'oa-calendar-content-on-single'  => array(
-				'metabox' => 'oa-calendar-settings',
-				'type'    => 'checkbox',
-				'label'   => __( 'Display editor content on single event views.', 'openagenda' ),
-				'default' => 'no',
-			),
-			'oa-calendar-exclude'            => array(
-				'metabox' => 'oa-calendar-settings',
-				'type'    => 'checkbox',
-				'label'   => __( 'Only display current and upcoming events. Past events can be displayed using the calendar widget.', 'openagenda' ),
-				'default' => 'no',
-			),
-			'oa-calendar-infinite-scroll'    => array(
-				'metabox' => 'oa-calendar-settings',
-				'type'    => 'checkbox',
-				'label'   => __( 'Activate infinite scroll functionnality to dynamically load more events.', 'openagenda' ),
-				'default' => 'no',
-			),
-			'oa-calendar-filters'            => array(
-				'metabox'     => 'oa-calendar-settings',
-				'type'        => 'text',
-				'label'       => __( 'Default filters (advanced)', 'openagenda' ),
-				'default'     => '',
-				'description' => __( 'Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed.', 'openagenda' ),
-			),
-			'oa-calendar-api-key'            => array(
-				'metabox'               => 'oa-calendar-settings',
-				'type'                  => 'password',
-				'label'                 => __( 'API key (advanced)', 'openagenda' ),
-				'default'               => '',
-				'show_password'         => true,
-				'show_password_message' => __( 'Show API key', 'openagenda' ),
-				'description'           => __( 'Fill this field only if you want to make API calls with a API key different from the general settings.', 'openagenda' ),
-			),
-		);
-	}
-
-
-	/**
 	 * Registers hooks
 	 */
 	public function register_hooks() {
@@ -123,6 +30,19 @@ class Metaboxes implements Hookable {
 	 * @return  array  Main page arguments
 	 */
 	public function get_metaboxes() {
+		if( empty( $this->metaboxes ) ){
+			$this->metaboxes = array(
+				'oa-calendar-settings' => array(
+					'id'            => 'oa-calendar-settings',
+					'title'         => __( 'Calendar settings', 'openagenda' ),
+					'callback'      => array( $this, 'calendar_settings_markup' ),
+					'screen'        => 'oa-calendar',
+					'context'       => 'side',
+					'priority'      => 'default',
+					'callback_args' => array(),
+				),
+			);
+		}
 		return apply_filters( 'openagenda_metaboxes', $this->metaboxes );
 	}
 
@@ -133,6 +53,83 @@ class Metaboxes implements Hookable {
 	 * @return  array  Fields array : 'name' => $args
 	 */
 	public function get_fields() {
+		if( empty( $this->fields ) ){
+			$this->fields = array(
+				'oa-calendar-uid'                => array(
+					'metabox'     => 'oa-calendar-settings',
+					'type'        => 'text',
+					'label'       => __( 'Calendar UID', 'openagenda' ),
+					'default'     => '',
+					'description' => sprintf(
+						'<a href="%s" class="components-external-link" target="_blank" rel="external noopener noreferrer">%s</a>',
+						'https://github.com/OpenAgenda/wordpress#howtogetagendauid',
+						__( 'How to find my calendar UID ?', 'openagenda' )
+					),
+				),
+				'oa-calendar-per-page'           => array(
+					'metabox' => 'oa-calendar-settings',
+					'type'    => 'number',
+					'label'   => __( 'Events per page', 'openagenda' ),
+					'default' => (int) get_option( 'posts_per_page' ),
+				),
+				'oa-calendar-view'               => array(
+					'metabox' => 'oa-calendar-settings',
+					'type'    => 'radio',
+					'label'   => __( 'Display setting', 'openagenda' ),
+					'default' => 'list',
+					'choices' => array(
+						'list' => array(
+							'label' => __( 'Display as list', 'openagenda' ),
+							'value' => 'list',
+						),
+						'grid' => array(
+							'label' => __( 'Display as grid', 'openagenda' ),
+							'value' => 'grid',
+						),
+					),
+				),
+				'oa-calendar-content-on-archive' => array(
+					'metabox' => 'oa-calendar-settings',
+					'type'    => 'checkbox',
+					'label'   => __( 'Display editor content on list view.', 'openagenda' ),
+					'default' => 'yes',
+				),
+				'oa-calendar-content-on-single'  => array(
+					'metabox' => 'oa-calendar-settings',
+					'type'    => 'checkbox',
+					'label'   => __( 'Display editor content on single event views.', 'openagenda' ),
+					'default' => 'no',
+				),
+				'oa-calendar-exclude'            => array(
+					'metabox' => 'oa-calendar-settings',
+					'type'    => 'checkbox',
+					'label'   => __( 'Only display current and upcoming events. Past events can be displayed using the calendar widget.', 'openagenda' ),
+					'default' => 'no',
+				),
+				'oa-calendar-infinite-scroll'    => array(
+					'metabox' => 'oa-calendar-settings',
+					'type'    => 'checkbox',
+					'label'   => __( 'Activate infinite scroll functionnality to dynamically load more events.', 'openagenda' ),
+					'default' => 'no',
+				),
+				'oa-calendar-filters'            => array(
+					'metabox'     => 'oa-calendar-settings',
+					'type'        => 'text',
+					'label'       => __( 'Default filters (advanced)', 'openagenda' ),
+					'default'     => '',
+					'description' => __( 'Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed.', 'openagenda' ),
+				),
+				'oa-calendar-api-key'            => array(
+					'metabox'               => 'oa-calendar-settings',
+					'type'                  => 'password',
+					'label'                 => __( 'API key (advanced)', 'openagenda' ),
+					'default'               => '',
+					'show_password'         => true,
+					'show_password_message' => __( 'Show API key', 'openagenda' ),
+					'description'           => __( 'Fill this field only if you want to make API calls with a API key different from the general settings.', 'openagenda' ),
+				),
+			);
+		}
 		return apply_filters( 'openagenda_fields', $this->fields );
 	}
 

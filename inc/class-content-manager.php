@@ -12,52 +12,6 @@ class Content_Manager implements Hookable {
 	protected $post_types;
 
 	/**
-	 * Class constructor
-	 */
-	public function __construct() {
-		$rewrite_settings = get_option( 'openagenda_permalinks_settings' );
-		$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
-
-		$this->post_types = array(
-			'oa-calendar' => array(
-				'labels'        => array(
-					'name'                  => _x( 'Calendars', 'Post type general name', 'openagenda' ),
-					'singular_name'         => _x( 'Calendar', 'Post type singular name', 'openagenda' ),
-					'menu_name'             => _x( 'Calendars', 'Admin Menu text', 'openagenda' ),
-					'name_admin_bar'        => _x( 'Calendar', 'Add New on Toolbar', 'openagenda' ),
-					'add_new_item'          => __( 'Add New Calendar', 'openagenda' ),
-					'new_item'              => __( 'New Calendar', 'openagenda' ),
-					'edit_item'             => __( 'Edit Calendar', 'openagenda' ),
-					'view_item'             => __( 'View Calendar', 'openagenda' ),
-					'all_items'             => __( 'All Calendars', 'openagenda' ),
-					'search_items'          => __( 'Search Calendars', 'openagenda' ),
-					'parent_item_colon'     => __( 'Parent Calendars:', 'openagenda' ),
-					'not_found'             => __( 'No Calendars found.', 'openagenda' ),
-					'not_found_in_trash'    => __( 'No Calendars found in Trash.', 'openagenda' ),
-					'featured_image'        => _x( 'Calendar Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'openagenda' ),
-					'archives'              => _x( 'Calendar archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'openagenda' ),
-					'insert_into_item'      => _x( 'Insert into Calendar', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'openagenda' ),
-					'uploaded_to_this_item' => _x( 'Uploaded to this Calendar', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'openagenda' ),
-					'filter_items_list'     => _x( 'Filter Calendars list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'openagenda' ),
-					'items_list_navigation' => _x( 'Calendars list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'openagenda' ),
-					'items_list'            => _x( 'Calendars list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'openagenda' ),
-				),
-				'hierarchical'  => true,
-				'public'        => true,
-				'show_in_rest'  => true,
-				'menu_icon'     => 'dashicons-book',
-				'supports'      => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
-				'has_archive'   => false,
-				'menu_position' => 5,
-				'rewrite'       => array(
-					'slug'       => sanitize_title( $rewrite_base ),
-					'with_front' => false,
-				),
-			),
-		);
-	}
-
-	/**
 	 * Register all the hooks
 	 */
 	public function register_hooks() {
@@ -107,6 +61,48 @@ class Content_Manager implements Hookable {
 	 * @return  array  $post_types
 	 */
 	public function get_post_types() {
+		if( empty( $this->post_types ) ){
+			$rewrite_settings = get_option( 'openagenda_permalinks_settings' );
+			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
+
+			$this->post_types = array(
+				'oa-calendar' => array(
+					'labels'        => array(
+						'name'                  => _x( 'Calendars', 'Post type general name', 'openagenda' ),
+						'singular_name'         => _x( 'Calendar', 'Post type singular name', 'openagenda' ),
+						'menu_name'             => _x( 'Calendars', 'Admin Menu text', 'openagenda' ),
+						'name_admin_bar'        => _x( 'Calendar', 'Add New on Toolbar', 'openagenda' ),
+						'add_new_item'          => __( 'Add New Calendar', 'openagenda' ),
+						'new_item'              => __( 'New Calendar', 'openagenda' ),
+						'edit_item'             => __( 'Edit Calendar', 'openagenda' ),
+						'view_item'             => __( 'View Calendar', 'openagenda' ),
+						'all_items'             => __( 'All Calendars', 'openagenda' ),
+						'search_items'          => __( 'Search Calendars', 'openagenda' ),
+						'parent_item_colon'     => __( 'Parent Calendars:', 'openagenda' ),
+						'not_found'             => __( 'No Calendars found.', 'openagenda' ),
+						'not_found_in_trash'    => __( 'No Calendars found in Trash.', 'openagenda' ),
+						'featured_image'        => _x( 'Calendar Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'openagenda' ),
+						'archives'              => _x( 'Calendar archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'openagenda' ),
+						'insert_into_item'      => _x( 'Insert into Calendar', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'openagenda' ),
+						'uploaded_to_this_item' => _x( 'Uploaded to this Calendar', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'openagenda' ),
+						'filter_items_list'     => _x( 'Filter Calendars list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'openagenda' ),
+						'items_list_navigation' => _x( 'Calendars list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'openagenda' ),
+						'items_list'            => _x( 'Calendars list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'openagenda' ),
+					),
+					'hierarchical'  => true,
+					'public'        => true,
+					'show_in_rest'  => true,
+					'menu_icon'     => 'dashicons-book',
+					'supports'      => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+					'has_archive'   => false,
+					'menu_position' => 5,
+					'rewrite'       => array(
+						'slug'       => sanitize_title( $rewrite_base ),
+						'with_front' => false,
+					),
+				),
+			);
+		}
 		return apply_filters( 'openagenda_post_types', $this->post_types );
 	}
 

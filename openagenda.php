@@ -35,7 +35,7 @@ define( 'OPENAGENDA_URL', plugin_dir_url( __FILE__ ) );
 define( 'OPENAGENDA_VERSION', '2.13.0' );
 
 
-add_action( 'plugins_loaded', 'openagenda_load_textdomain' );
+add_action( 'init', 'openagenda_load_textdomain' );
 /**
  * Load translations
  */

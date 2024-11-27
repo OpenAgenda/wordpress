@@ -24,244 +24,6 @@ class Settings implements Hookable {
 	 */
 	protected $fields = array();
 
-
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->settings = array(
-			'general'      => array(
-				'option_group'      => 'openagenda_general_settings',
-				'option_name'       => 'openagenda_general_settings',
-				'sanitize_callback' => array( $this, 'sanitize_general_settings' ),
-			),
-			'integrations' => array(
-				'option_group'      => 'openagenda_integrations_settings',
-				'option_name'       => 'openagenda_integrations_settings',
-				'sanitize_callback' => array( $this, 'sanitize_integrations_settings' ),
-			),
-			'permalinks'   => array(
-				'option_group'      => 'permalink',
-				'option_name'       => 'openagenda_permalinks_settings',
-				'sanitize_callback' => array( $this, 'sanitize_permalinks_settings' ),
-			),
-		);
-		$this->sections = array(
-			'general'       => array(
-				'id'       => 'openagenda_general_settings',
-				'title'    => __( 'General settings', 'openagenda' ),
-				'callback' => '',
-				'page'     => 'openagenda',
-			),
-			'openstreetmap' => array(
-				'id'       => 'openagenda_openstreetmap_settings',
-				'title'    => __( 'OpenStreetMap', 'openagenda' ),
-				'callback' => '',
-				'page'     => 'openagenda',
-			),
-			'cloudimage'    => array(
-				'id'       => 'openagenda_cloudimage_settings',
-				'title'    => __( 'CloudImage', 'openagenda' ),
-				'callback' => '',
-				'page'     => 'openagenda',
-			),
-		);
-		$this->fields   = array(
-			'api-key'                       => array(
-				'id'       => 'openagenda_api_key',
-				'title'    => __( 'OpenAgenda API key', 'openagenda' ),
-				'callback' => array( $this, 'input_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_general_settings',
-				'args'     => array(
-					'id'                    => 'openagenda_api_key',
-					'option_name'           => 'openagenda_general_settings',
-					'label_for'             => 'openagenda_api_key',
-					'type'                  => 'password',
-					'show_password'         => true,
-					'show_password_message' => __( 'Show API key', 'openagenda' ),
-					'description'           => sprintf(
-						/* translators: %1$s: Openagenda settings page url, %2$s Documentation url */
-						__( 'Your API key can be found in your <a href="%1$s" target="_blank">OpenAgenda account</a>. Check out the <a href="%2$s" target="_blank">documentation</a>.', 'openagenda' ),
-						'https://openagenda.com/settings/apiKey',
-						'https://doc.openagenda.com/fr/article/cles-dacces-11lapqz/',
-					),
-				),
-			),
-			'include-embeds'                => array(
-				'id'       => 'openagenda_include_embeds',
-				'title'    => __( 'Allow embedded content.', 'openagenda' ),
-				'callback' => array( $this, 'checkbox_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_general_settings',
-				'args'     => array(
-					'id'          => 'openagenda_include_embeds',
-					'option_name' => 'openagenda_general_settings',
-					'label_for'   => 'openagenda_include_embeds',
-					'type'        => 'checkbox',
-					'default'     => true,
-					'description' => sprintf( __( 'Allow for embedded content in the event\'s content.', 'openagenda' ), 'https://openagenda.com' ),
-					'help-text'   => sprintf( __( 'By default, embedded content like Youtube players will be filtered, and will not appear on the frontend. Checking this option will disable filtering.', 'openagenda' ) ),
-				),
-			),
-			'include-styles'                => array(
-				'id'       => 'openagenda_include_styles',
-				'title'    => __( 'Load default stylesheets.', 'openagenda' ),
-				'callback' => array( $this, 'checkbox_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_general_settings',
-				'args'     => array(
-					'id'          => 'openagenda_include_styles',
-					'option_name' => 'openagenda_general_settings',
-					'label_for'   => 'openagenda_include_styles',
-					'type'        => 'checkbox',
-					'default'     => true,
-					'description' => __( 'Load default styling.', 'openagenda' ),
-				),
-			),
-			'cache-duration'                => array(
-				'id'       => 'openagenda_cache_duration',
-				'title'    => __( 'Cache duration', 'openagenda' ),
-				'callback' => array( $this, 'input_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_general_settings',
-				'args'     => array(
-					'id'          => 'openagenda_cache_duration',
-					'option_name' => 'openagenda_general_settings',
-					'label_for'   => 'openagenda_cache_duration',
-					'type'        => 'number',
-					'default'     => (int) ( HOUR_IN_SECONDS / 2 ),
-					'description' => __( 'Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored', 'openagenda' ),
-				),
-			),
-			'default-event-image'           => array(
-				'id'       => 'openagenda_default_event_image',
-				'title'    => __( 'Default event image', 'openagenda' ),
-				'callback' => array( $this, 'media_upload_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_general_settings',
-				'args'     => array(
-					'id'           => 'openagenda_default_event_image',
-					'option_name'  => 'openagenda_general_settings',
-					'label_for'    => 'openagenda_default_event_image',
-					'add_label'    => __( 'Add default image', 'openagenda' ),
-					'update_label' => __( 'Update default image', 'openagenda' ),
-					'remove_label' => __( 'Remove default image', 'openagenda' ),
-					'type'         => 'button',
-					'default'      => 0,
-				),
-			),
-			'delete-calendars-on-uninstall' => array(
-				'id'       => 'openagenda_delete_content_on_uninstall',
-				'title'    => __( 'Delete all calendar content on uninstall ?', 'openagenda' ),
-				'callback' => array( $this, 'checkbox_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_general_settings',
-				'args'     => array(
-					'id'          => 'openagenda_delete_content_on_uninstall',
-					'option_name' => 'openagenda_general_settings',
-					'label_for'   => 'openagenda_delete_content_on_uninstall',
-					'type'        => 'checkbox',
-					'default'     => false,
-					'description' => __( 'Delete all posts of type "Calendar" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin.', 'openagenda' ),
-				),
-			),
-			'delete-options-on-uninstall'   => array(
-				'id'       => 'openagenda_delete_options_on_uninstall',
-				'title'    => __( 'Delete all options on uninstall ?', 'openagenda' ),
-				'callback' => array( $this, 'checkbox_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_general_settings',
-				'args'     => array(
-					'id'          => 'openagenda_delete_options_on_uninstall',
-					'option_name' => 'openagenda_general_settings',
-					'label_for'   => 'openagenda_delete_options_on_uninstall',
-					'type'        => 'checkbox',
-					'default'     => false,
-					'description' => __( 'Delete all of this plugin\'s settings permanently when I uninstall the plugin.', 'openagenda' ),
-				),
-			),
-			'allow-usage-stats-collection'  => array(
-				'id'       => 'openagenda_allow_usage_stats_collection',
-				'title'    => __( 'Allow OpenAgenda to collect usage stats ?', 'openagenda' ),
-				'callback' => array( $this, 'checkbox_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_general_settings',
-				'args'     => array(
-					'id'          => 'openagenda_allow_usage_stats_collection',
-					'option_name' => 'openagenda_general_settings',
-					'label_for'   => 'openagenda_allow_usage_stats_collection',
-					'type'        => 'checkbox',
-					'default'     => true,
-					'description' => __( 'Allow OpenAgenda to collect plugin usage information for statistics purposes. The following information is collected : CMS used, site URL and whether site editor is used or not.', 'openagenda' ),
-				),
-			),
-			'calendar-prefix'               => array(
-				'id'       => 'openagenda_calendar_base',
-				'title'    => __( 'Calendar base', 'openagenda' ),
-				'callback' => array( $this, 'input_field_markup' ),
-				'page'     => 'permalink',
-				'section'  => 'optional',
-				'args'     => array(
-					'id'          => 'openagenda_calendar_base',
-					'option_name' => 'openagenda_permalinks_settings',
-					'label_for'   => 'openagenda_calendar_base',
-					'type'        => 'text',
-					'default'     => 'calendar',
-					'description' => sprintf(
-						/* translators: %s : home url */
-						__( 'You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>.', 'openagenda' ),
-						esc_url( get_home_url() )
-					),
-				),
-			),
-			'map-tiles-link'                => array(
-				'id'       => 'openagenda_map_tiles_link',
-				'title'    => __( 'Default map tiles link', 'openagenda' ),
-				'callback' => array( $this, 'input_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_openstreetmap_settings',
-				'args'     => array(
-					'id'          => 'openagenda_map_tiles_link',
-					'option_name' => 'openagenda_integrations_settings',
-					'label_for'   => 'openagenda_map_tiles_link',
-					'default'     => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-				),
-			),
-			'map-tiles-attribution-link'    => array(
-				'id'       => 'openagenda_map_tiles_attribution_link',
-				'title'    => __( 'Default map tiles attribution link', 'openagenda' ),
-				'callback' => array( $this, 'input_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_openstreetmap_settings',
-				'args'     => array(
-					'id'          => 'openagenda_map_tiles_attribution_link',
-					'option_name' => 'openagenda_integrations_settings',
-					'label_for'   => 'openagenda_map_tiles_attribution_link',
-					'default'     => sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) ),
-				),
-			),
-			'cloudimage-api-key'            => array(
-				'id'       => 'openagenda_cloudimage_api_key',
-				'title'    => __( 'CloudImage API key', 'openagenda' ),
-				'callback' => array( $this, 'input_field_markup' ),
-				'page'     => 'openagenda',
-				'section'  => 'openagenda_cloudimage_settings',
-				'args'     => array(
-					'id'          => 'openagenda_cloudimage_api_key',
-					'option_name' => 'openagenda_integrations_settings',
-					'label_for'   => 'openagenda_cloudimage_api_key',
-					'type'        => 'password',
-					'description' => sprintf(
-						/* translators: %s: openagenda site url */
-						__( 'Your API key can be found in your <a href="%s">CloudImage account</a>.', 'openagenda' ),
-						'https://www.cloudimage.io/'
-					),
-				),
-			),
-		);
-	}
-
 	/**
 	 * Registers hooks
 	 */
@@ -274,6 +36,25 @@ class Settings implements Hookable {
 	 * Returns the array of settings to register
 	 */
 	public function get_settings() {
+		if( empty( $this->settings ) ){
+			$this->settings = array(
+				'general'      => array(
+					'option_group'      => 'openagenda_general_settings',
+					'option_name'       => 'openagenda_general_settings',
+					'sanitize_callback' => array( $this, 'sanitize_general_settings' ),
+				),
+				'integrations' => array(
+					'option_group'      => 'openagenda_integrations_settings',
+					'option_name'       => 'openagenda_integrations_settings',
+					'sanitize_callback' => array( $this, 'sanitize_integrations_settings' ),
+				),
+				'permalinks'   => array(
+					'option_group'      => 'permalink',
+					'option_name'       => 'openagenda_permalinks_settings',
+					'sanitize_callback' => array( $this, 'sanitize_permalinks_settings' ),
+				),
+			);
+		}
 		return apply_filters( 'openagenda_settings', $this->settings );
 	}
 
@@ -281,6 +62,28 @@ class Settings implements Hookable {
 	 * Returns the array of settings sections to register
 	 */
 	public function get_sections() {
+		if( empty( $this->sections ) ){
+			$this->sections = array(
+				'general'       => array(
+					'id'       => 'openagenda_general_settings',
+					'title'    => __( 'General settings', 'openagenda' ),
+					'callback' => '',
+					'page'     => 'openagenda',
+				),
+				'openstreetmap' => array(
+					'id'       => 'openagenda_openstreetmap_settings',
+					'title'    => __( 'OpenStreetMap', 'openagenda' ),
+					'callback' => '',
+					'page'     => 'openagenda',
+				),
+				'cloudimage'    => array(
+					'id'       => 'openagenda_cloudimage_settings',
+					'title'    => __( 'CloudImage', 'openagenda' ),
+					'callback' => '',
+					'page'     => 'openagenda',
+				),
+			);
+		}
 		return apply_filters( 'openagenda_settings_sections', $this->sections );
 	}
 
@@ -288,6 +91,202 @@ class Settings implements Hookable {
 	 * Returns the array of settings fields to register
 	 */
 	public function get_fields() {
+		if( empty( $this->fields ) ){
+			$this->fields = array(
+				'api-key'                       => array(
+					'id'       => 'openagenda_api_key',
+					'title'    => __( 'OpenAgenda API key', 'openagenda' ),
+					'callback' => array( $this, 'input_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'                    => 'openagenda_api_key',
+						'option_name'           => 'openagenda_general_settings',
+						'label_for'             => 'openagenda_api_key',
+						'type'                  => 'password',
+						'show_password'         => true,
+						'show_password_message' => __( 'Show API key', 'openagenda' ),
+						'description'           => sprintf(
+							/* translators: %1$s: Openagenda settings page url, %2$s Documentation url */
+							__( 'Your API key can be found in your <a href="%1$s" target="_blank">OpenAgenda account</a>. Check out the <a href="%2$s" target="_blank">documentation</a>.', 'openagenda' ),
+							'https://openagenda.com/settings/apiKey',
+							'https://doc.openagenda.com/fr/article/cles-dacces-11lapqz/',
+						),
+					),
+				),
+				'include-embeds'                => array(
+					'id'       => 'openagenda_include_embeds',
+					'title'    => __( 'Allow embedded content.', 'openagenda' ),
+					'callback' => array( $this, 'checkbox_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'          => 'openagenda_include_embeds',
+						'option_name' => 'openagenda_general_settings',
+						'label_for'   => 'openagenda_include_embeds',
+						'type'        => 'checkbox',
+						'default'     => true,
+						'description' => sprintf( __( 'Allow for embedded content in the event\'s content.', 'openagenda' ), 'https://openagenda.com' ),
+						'help-text'   => sprintf( __( 'By default, embedded content like Youtube players will be filtered, and will not appear on the frontend. Checking this option will disable filtering.', 'openagenda' ) ),
+					),
+				),
+				'include-styles'                => array(
+					'id'       => 'openagenda_include_styles',
+					'title'    => __( 'Load default stylesheets.', 'openagenda' ),
+					'callback' => array( $this, 'checkbox_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'          => 'openagenda_include_styles',
+						'option_name' => 'openagenda_general_settings',
+						'label_for'   => 'openagenda_include_styles',
+						'type'        => 'checkbox',
+						'default'     => true,
+						'description' => __( 'Load default styling.', 'openagenda' ),
+					),
+				),
+				'cache-duration'                => array(
+					'id'       => 'openagenda_cache_duration',
+					'title'    => __( 'Cache duration', 'openagenda' ),
+					'callback' => array( $this, 'input_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'          => 'openagenda_cache_duration',
+						'option_name' => 'openagenda_general_settings',
+						'label_for'   => 'openagenda_cache_duration',
+						'type'        => 'number',
+						'default'     => (int) ( HOUR_IN_SECONDS / 2 ),
+						'description' => __( 'Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored', 'openagenda' ),
+					),
+				),
+				'default-event-image'           => array(
+					'id'       => 'openagenda_default_event_image',
+					'title'    => __( 'Default event image', 'openagenda' ),
+					'callback' => array( $this, 'media_upload_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'           => 'openagenda_default_event_image',
+						'option_name'  => 'openagenda_general_settings',
+						'label_for'    => 'openagenda_default_event_image',
+						'add_label'    => __( 'Add default image', 'openagenda' ),
+						'update_label' => __( 'Update default image', 'openagenda' ),
+						'remove_label' => __( 'Remove default image', 'openagenda' ),
+						'type'         => 'button',
+						'default'      => 0,
+					),
+				),
+				'delete-calendars-on-uninstall' => array(
+					'id'       => 'openagenda_delete_content_on_uninstall',
+					'title'    => __( 'Delete all calendar content on uninstall ?', 'openagenda' ),
+					'callback' => array( $this, 'checkbox_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'          => 'openagenda_delete_content_on_uninstall',
+						'option_name' => 'openagenda_general_settings',
+						'label_for'   => 'openagenda_delete_content_on_uninstall',
+						'type'        => 'checkbox',
+						'default'     => false,
+						'description' => __( 'Delete all posts of type "Calendar" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin.', 'openagenda' ),
+					),
+				),
+				'delete-options-on-uninstall'   => array(
+					'id'       => 'openagenda_delete_options_on_uninstall',
+					'title'    => __( 'Delete all options on uninstall ?', 'openagenda' ),
+					'callback' => array( $this, 'checkbox_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'          => 'openagenda_delete_options_on_uninstall',
+						'option_name' => 'openagenda_general_settings',
+						'label_for'   => 'openagenda_delete_options_on_uninstall',
+						'type'        => 'checkbox',
+						'default'     => false,
+						'description' => __( 'Delete all of this plugin\'s settings permanently when I uninstall the plugin.', 'openagenda' ),
+					),
+				),
+				'allow-usage-stats-collection'  => array(
+					'id'       => 'openagenda_allow_usage_stats_collection',
+					'title'    => __( 'Allow OpenAgenda to collect usage stats ?', 'openagenda' ),
+					'callback' => array( $this, 'checkbox_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'          => 'openagenda_allow_usage_stats_collection',
+						'option_name' => 'openagenda_general_settings',
+						'label_for'   => 'openagenda_allow_usage_stats_collection',
+						'type'        => 'checkbox',
+						'default'     => true,
+						'description' => __( 'Allow OpenAgenda to collect plugin usage information for statistics purposes. The following information is collected : CMS used, site URL and whether site editor is used or not.', 'openagenda' ),
+					),
+				),
+				'calendar-prefix'               => array(
+					'id'       => 'openagenda_calendar_base',
+					'title'    => __( 'Calendar base', 'openagenda' ),
+					'callback' => array( $this, 'input_field_markup' ),
+					'page'     => 'permalink',
+					'section'  => 'optional',
+					'args'     => array(
+						'id'          => 'openagenda_calendar_base',
+						'option_name' => 'openagenda_permalinks_settings',
+						'label_for'   => 'openagenda_calendar_base',
+						'type'        => 'text',
+						'default'     => 'calendar',
+						'description' => sprintf(
+							/* translators: %s : home url */
+							__( 'You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>.', 'openagenda' ),
+							esc_url( get_home_url() )
+						),
+					),
+				),
+				'map-tiles-link'                => array(
+					'id'       => 'openagenda_map_tiles_link',
+					'title'    => __( 'Default map tiles link', 'openagenda' ),
+					'callback' => array( $this, 'input_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_openstreetmap_settings',
+					'args'     => array(
+						'id'          => 'openagenda_map_tiles_link',
+						'option_name' => 'openagenda_integrations_settings',
+						'label_for'   => 'openagenda_map_tiles_link',
+						'default'     => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+					),
+				),
+				'map-tiles-attribution-link'    => array(
+					'id'       => 'openagenda_map_tiles_attribution_link',
+					'title'    => __( 'Default map tiles attribution link', 'openagenda' ),
+					'callback' => array( $this, 'input_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_openstreetmap_settings',
+					'args'     => array(
+						'id'          => 'openagenda_map_tiles_attribution_link',
+						'option_name' => 'openagenda_integrations_settings',
+						'label_for'   => 'openagenda_map_tiles_attribution_link',
+						'default'     => sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) ),
+					),
+				),
+				'cloudimage-api-key'            => array(
+					'id'       => 'openagenda_cloudimage_api_key',
+					'title'    => __( 'CloudImage API key', 'openagenda' ),
+					'callback' => array( $this, 'input_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_cloudimage_settings',
+					'args'     => array(
+						'id'          => 'openagenda_cloudimage_api_key',
+						'option_name' => 'openagenda_integrations_settings',
+						'label_for'   => 'openagenda_cloudimage_api_key',
+						'type'        => 'password',
+						'description' => sprintf(
+							/* translators: %s: openagenda site url */
+							__( 'Your API key can be found in your <a href="%s">CloudImage account</a>.', 'openagenda' ),
+							'https://www.cloudimage.io/'
+						),
+					),
+				),
+			);
+		}
 		return apply_filters( 'openagenda_settings_fields', $this->fields );
 	}
 
