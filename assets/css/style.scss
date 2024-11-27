@@ -389,6 +389,10 @@ div[data-container-id="oa-wrapper"] {
 		}
 	}
 
+	.oa-preview-card {
+		margin-bottom: 0;
+	}
+
 	.oa-card {
 		display: block;
 	}
@@ -404,6 +408,7 @@ div[data-container-id="oa-wrapper"] {
 	.oa-card-image-link {
 		max-width: none;
 		max-height: none;
+		height: 300px;
 	}
 }
 

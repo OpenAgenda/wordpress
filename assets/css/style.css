@@ -352,6 +352,9 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }
+.oa-preview.grid .oa-preview-card {
+  margin-bottom: 0;
+}
 .oa-preview.grid .oa-card {
   display: block;
 }
@@ -364,6 +367,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .oa-preview.grid .oa-card-image-link {
   max-width: none;
   max-height: none;
+  height: 300px;
 }
 
 /*********************************
