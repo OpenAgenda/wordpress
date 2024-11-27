@@ -36,7 +36,7 @@ class Settings implements Hookable {
 	 * Returns the array of settings to register
 	 */
 	public function get_settings() {
-		if( empty( $this->settings ) ){
+		if ( empty( $this->settings ) ) {
 			$this->settings = array(
 				'general'      => array(
 					'option_group'      => 'openagenda_general_settings',
@@ -62,7 +62,7 @@ class Settings implements Hookable {
 	 * Returns the array of settings sections to register
 	 */
 	public function get_sections() {
-		if( empty( $this->sections ) ){
+		if ( empty( $this->sections ) ) {
 			$this->sections = array(
 				'general'       => array(
 					'id'       => 'openagenda_general_settings',
@@ -91,7 +91,7 @@ class Settings implements Hookable {
 	 * Returns the array of settings fields to register
 	 */
 	public function get_fields() {
-		if( empty( $this->fields ) ){
+		if ( empty( $this->fields ) ) {
 			$this->fields = array(
 				'api-key'                       => array(
 					'id'       => 'openagenda_api_key',

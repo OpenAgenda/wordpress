@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-27T09:36:16+00:00\n"
+"POT-Creation-Date: 2024-11-27T14:31:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: openagenda\n"
@@ -752,46 +752,47 @@ msgstr ""
 msgid "Share :"
 msgstr ""
 
-#: inc/template-tags.php:892
-msgid "On site"
-msgstr ""
-
-#: inc/template-tags.php:893
-msgid "Online"
-msgstr ""
-
-#: inc/template-tags.php:894
-msgid "Mixed"
-msgstr ""
-
-#: inc/template-tags.php:905
+#: inc/template-tags.php:890
 msgid "Access the event"
 msgstr ""
 
-#: inc/template-tags.php:1031
+#: inc/template-tags.php:916
+msgid "On site"
+msgstr ""
+
+#: inc/template-tags.php:917
+#: templates/event.php:18
+msgid "Online"
+msgstr ""
+
+#: inc/template-tags.php:918
+msgid "Mixed"
+msgstr ""
+
+#: inc/template-tags.php:1050
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:1032
+#: inc/template-tags.php:1051
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:1192
+#: inc/template-tags.php:1211
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:1291
+#: inc/template-tags.php:1310
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
-#: inc/template-tags.php:1292
+#: inc/template-tags.php:1311
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
 
 #. translators: %s: event title
-#: inc/template-tags.php:1409
+#: inc/template-tags.php:1428
 msgid "Add %s to favorites."
 msgstr ""
 

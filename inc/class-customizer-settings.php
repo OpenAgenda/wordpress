@@ -44,7 +44,7 @@ class Customizer_Settings implements Hookable {
 	 * Returns all customizer panels
 	 */
 	public function get_panels() {
-		if( empty( $this->panels ) ){
+		if ( empty( $this->panels ) ) {
 			$this->panels = array(
 				'oa_customizer' => array(
 					'title'       => __( 'Calendars', 'openagenda' ),
@@ -60,7 +60,7 @@ class Customizer_Settings implements Hookable {
 	 * Returns all customizer sections
 	 */
 	public function get_sections() {
-		if( empty( $this->sections ) ){
+		if ( empty( $this->sections ) ) {
 			$this->sections = array(
 				'oa_colors' => array(
 					'title' => __( 'Colors', 'openagenda' ),
@@ -75,7 +75,7 @@ class Customizer_Settings implements Hookable {
 	 * Returns all customizer settings
 	 */
 	public function get_settings() {
-		if( empty( $this->settings ) ){
+		if ( empty( $this->settings ) ) {
 			$this->settings = array(
 				'openagenda_customizer[main_color]' => array(
 					'default'           => '#41acdd',

@@ -47,7 +47,7 @@ function openagenda_should_enqueue_styles() {
  */
 function openagenda_get_locale() {
 	global $openagenda;
-	$current_locale = get_locale();
+	$current_locale = get_user_locale();
 	$locale         = substr( $current_locale, 0, 2 );
 
 	if ( ! empty( $_GET['oa-lang'] ) ) {

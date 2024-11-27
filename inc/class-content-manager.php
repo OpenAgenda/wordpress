@@ -61,7 +61,7 @@ class Content_Manager implements Hookable {
 	 * @return  array  $post_types
 	 */
 	public function get_post_types() {
-		if( empty( $this->post_types ) ){
+		if ( empty( $this->post_types ) ) {
 			$rewrite_settings = get_option( 'openagenda_permalinks_settings' );
 			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
 

@@ -50,7 +50,7 @@ class Admin_Pages implements Hookable {
 	 * @return  array  Main page arguments
 	 */
 	public function get_main_page() {
-		if( empty( $this->main_page ) ){
+		if ( empty( $this->main_page ) ) {
 			$this->main_page = array(
 				'parent_slug' => 'edit.php?post_type=oa-calendar',
 				'page_title'  => __( 'OpenAgenda Settings', 'openagenda' ),
@@ -71,7 +71,7 @@ class Admin_Pages implements Hookable {
 	 * @return  array  Main page arguments
 	 */
 	public function get_tabs() {
-		if( empty( $this->tabs ) ){
+		if ( empty( $this->tabs ) ) {
 			$this->tabs = array(
 				'general'      => __( 'General', 'openagenda' ),
 				'integrations' => __( 'Integrations', 'openagenda' ),

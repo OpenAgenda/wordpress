@@ -190,7 +190,7 @@ class Main {
 	 * Returns array of available filters
 	 */
 	public function get_available_filters() {
-		if( empty( $this->available_filters ) ){
+		if ( empty( $this->available_filters ) ) {
 			$this->available_filters = array(
 				'openagenda_filter_active'   => array(
 					'label'     => _x( 'Active filters', 'Filter name', 'openagenda' ),

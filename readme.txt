@@ -202,7 +202,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 = 2.13.0 =
 * Fixed   : Moved translations loading to init.
 * Fixed   : Updated checkboxes styles on calendar edit page.
+* Feature : Added support for grid or list view for Preview widget.
 * Feature : Added template for displaying all additional fields on single event views.
+* Improvement : Streamlined default list view template. Minor css fixes.
 
 = 2.12.0 =
 * Feature : Added infinite scroll functionnality for agendas

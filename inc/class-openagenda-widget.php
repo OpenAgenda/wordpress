@@ -175,8 +175,8 @@ class OpenAgenda_Widget extends \WP_Widget {
 					foreach ( $field['options'] as $option => $data ) {
 						$option_value = $data['value'] ?? '';
 						$option_label = $data['label'] ?? '';
-						$id = sprintf( '%s-%s', $this->get_field_id( $field['name'] ), $option_value );
-						$options .= sprintf(
+						$id           = sprintf( '%s-%s', $this->get_field_id( $field['name'] ), $option_value );
+						$options     .= sprintf(
 							'<span><input type="radio" id="%1$s" name="%2$s" value="%3$s"%5$s><label for="%1$s">%4$s</label></span><br />',
 							esc_attr( $id ),
 							esc_attr( $this->get_field_name( $field['name'] ) ),

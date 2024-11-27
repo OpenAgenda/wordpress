@@ -30,7 +30,7 @@ class Metaboxes implements Hookable {
 	 * @return  array  Main page arguments
 	 */
 	public function get_metaboxes() {
-		if( empty( $this->metaboxes ) ){
+		if ( empty( $this->metaboxes ) ) {
 			$this->metaboxes = array(
 				'oa-calendar-settings' => array(
 					'id'            => 'oa-calendar-settings',
@@ -53,7 +53,7 @@ class Metaboxes implements Hookable {
 	 * @return  array  Fields array : 'name' => $args
 	 */
 	public function get_fields() {
-		if( empty( $this->fields ) ){
+		if ( empty( $this->fields ) ) {
 			$this->fields = array(
 				'oa-calendar-uid'                => array(
 					'metabox'     => 'oa-calendar-settings',

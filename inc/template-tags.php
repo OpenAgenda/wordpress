@@ -871,6 +871,7 @@ function openagenda_event_registration_methods( $uid = false, $echo = true ) {
 	return $html;
 }
 
+
 /**
  * Displays the attendance mode of the event, as well as a link if online
  *
@@ -883,9 +884,32 @@ function openagenda_event_attendance_mode( $uid = false, $echo = true ) {
 		$uid = $event['uid'];
 	}
 
+	$label      = openagenda_get_attendance_mode_label( $uid );
+	$access_url = openagenda_get_field( 'onlineAccessLink', $uid );
+
+	$link = ! empty( $access_url ) ? sprintf( '<span class="oa-seperator">|</span><a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( $access_url ), esc_html__( 'Access the event', 'openagenda' ) ) : '';
+	$html = sprintf( '%s%s', esc_html( $label ), $link );
+	$html = apply_filters( 'openagenda_event_attendance_mode', $html, $uid );
+	if ( $echo ) {
+		echo $html;
+	}
+	return $html;
+}
+
+
+/**
+ * Gets the attendance mode label
+ *
+ * @param  string $uid   UID of the event.
+ * @param  bool   $echo  Whether to echo or just return the html
+ */
+function openagenda_get_attendance_mode_label( $uid = false ) {
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
 	$attendance_mode = openagenda_get_field( 'attendanceMode', $uid );
-	$access_url      = openagenda_get_field( 'onlineAccessLink', $uid );
-	$locale          = openagenda_get_locale();
 	$default_labels  = apply_filters(
 		'openagenda_attendance_mode_labels',
 		array(
@@ -902,14 +926,9 @@ function openagenda_event_attendance_mode( $uid = false, $echo = true ) {
 		$label = array_key_exists( $attendance_mode, $default_labels ) ? $default_labels[ $attendance_mode ] : $default_labels[1];
 	}
 
-	$link = ! empty( $access_url ) ? sprintf( '<span class="oa-seperator">|</span><a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( $access_url ), esc_html__( 'Access the event', 'openagenda' ) ) : '';
-	$html = sprintf( '%s%s', esc_html( $label ), $link );
-	$html = apply_filters( 'openagenda_event_attendance_mode', $html, $uid );
-	if ( $echo ) {
-		echo $html;
-	}
-	return $html;
+	return apply_filters( 'openagenda_event_attendance_mode_label', $label, $uid );
 }
+
 
 
 /**
