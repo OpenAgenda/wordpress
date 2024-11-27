@@ -321,7 +321,7 @@ class Metaboxes implements Hookable {
 									<input type="checkbox" id="%1$s" data-input="%2$s" />
 									<label for="%1$s">%3$s</label>
 								</p>',
-								esc_attr( "${name}-show-password" ),
+								esc_attr( "{$name}-show-password" ),
 								esc_attr( $name ),
 								$args['show_password_message'] ?? __( 'Show password', 'openagenda' )
 							);

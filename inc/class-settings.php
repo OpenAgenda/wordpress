@@ -343,7 +343,7 @@ class Settings implements Hookable {
 			if ( 'password' === $args['type'] && $args['show_password'] ) {
 				printf(
 					'<p class="password-toggle"><input type="checkbox" id="%1$s" data-input="%2$s" /><label for="%1$s">%3$s</label></p>',
-					esc_attr( "${field_id}-show-password" ),
+					esc_attr( "{$field_id}-show-password" ),
 					esc_attr( $field_id ),
 					$args['show_password_message'] ?? __( 'Show password', 'openagenda' )
 				);
