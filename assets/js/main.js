@@ -63,12 +63,10 @@ if (oaData) {
             }
         },
         onIntersect: (entries, observer) => {
-            entries.forEach(entry => {
+            entries.forEach(async entry => {
                 if (!entry.isIntersecting) return;
-                requestIdleCallback(async () => {
-                    const loaded = await oa.loadMore();
-                    if (loaded) oa.setupObserver();
-                });
+                const loaded = await oa.loadMore();
+                if (loaded) oa.setupObserver();
             });
         },
         loadMore: async () => {
