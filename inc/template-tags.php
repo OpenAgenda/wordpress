@@ -241,10 +241,10 @@ function openagenda_get_additional_field( $field, $uid = false ) {
 			case 'file':
 				$store    = $field_schema['store'] ?? array(
 					'type'   => 's3',
-					'bucket' => 'cibul',
+					'bucket' => 'main',
 				);
 				$filename = $value['filename'] ?? '';
-				$link     = sprintf( 'https://%s.s3.amazonaws.com/%s', $store['bucket'], $filename );
+				$link     = sprintf( 'https://02034510ef5d488190e4cf17d19a788b.s3.pub1.infomaniak.cloud/%s/%s', $store['bucket'], $filename );
 				$alt      = $value['originalName'] ?? '';
 				$value    = 'image' === $field_schema['fieldType']
 				? sprintf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $link ), esc_attr( $alt ) )
