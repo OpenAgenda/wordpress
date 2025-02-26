@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.6.2
-Stable tag: 2.13.0
+Tested up to: 6.7.2
+Stable tag: 2.13.1
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -198,6 +198,9 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 7. Enjoy !
 
 == Changelog ==
+
+= 2.13.1 =
+* Fixed   : Fixed external links not working on previews
 
 = 2.13.0 =
 * Fixed   : Moved translations loading to init.
