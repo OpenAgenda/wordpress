@@ -1,4 +1,10 @@
 <?php
+/**
+ * Class handling content types, taxonomies, and custom fields.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Class for our filter widget.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

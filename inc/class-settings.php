@@ -1,4 +1,12 @@
 <?php
+/**
+ * Settings Manager class
+ *
+ * Responsible for registering settings.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

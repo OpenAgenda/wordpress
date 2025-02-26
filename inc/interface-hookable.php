@@ -1,4 +1,10 @@
 <?php
+/**
+ * Interface for hookable services
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

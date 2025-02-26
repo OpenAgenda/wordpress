@@ -6,11 +6,11 @@
  *
  * @package OpenAgenda
  */
-$location         = openagenda_get_field( 'location' );
-$attendance_field = openagenda_get_field( 'attendanceMode' );
-$attendance_mode  = is_array( $attendance_field ) && isset( $attendance_field['id'] ) ? (int) $attendance_field['id'] : (int) $attendance_field;
-$external         = isset( $atts ) ? isset( $atts['links'] ) && $atts['links'] === 'oa' : false;
-$permalink        = openagenda_event_permalink( false, false, true, $external );
+$location              = openagenda_get_field( 'location' );
+$attendance_field      = openagenda_get_field( 'attendanceMode' );
+$attendance_mode       = is_array( $attendance_field ) && isset( $attendance_field['id'] ) ? (int) $attendance_field['id'] : (int) $attendance_field;
+$external              = isset( $atts ) ? isset( $atts['links'] ) && $atts['links'] === 'oa' : false;
+$permalink             = openagenda_event_permalink( false, false, true, $external );
 $additional_attributes = $external ? 'target="_blank" rel="noopener noreferer"' : '';
 
 switch ( $attendance_mode ) {

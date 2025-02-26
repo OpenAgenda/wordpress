@@ -1,4 +1,12 @@
 <?php
+/**
+ * Ajax Handler
+ *
+ * Handles all Ajax requests.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

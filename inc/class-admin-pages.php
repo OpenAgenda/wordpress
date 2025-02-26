@@ -1,4 +1,10 @@
 <?php
+/**
+ * Class for handling admin settings page.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**
