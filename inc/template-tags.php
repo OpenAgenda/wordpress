@@ -434,7 +434,7 @@ function openagenda_event_permalink( $uid = false, $echo = true, $use_context = 
 		}
 	}
 
-	$permalink = apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context, $external = false );
+	$permalink = apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context, $external );
 	if ( $echo ) {
 		echo openagenda_esc_field( $permalink, 'permalink' );
 	}

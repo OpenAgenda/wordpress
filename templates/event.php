@@ -9,6 +9,9 @@
 $location         = openagenda_get_field( 'location' );
 $attendance_field = openagenda_get_field( 'attendanceMode' );
 $attendance_mode  = is_array( $attendance_field ) && isset( $attendance_field['id'] ) ? (int) $attendance_field['id'] : (int) $attendance_field;
+$external         = isset( $atts ) ? isset( $atts['links'] ) && $atts['links'] === 'oa' : false;
+$permalink        = openagenda_event_permalink( false, false, true, $external );
+$additional_attributes = $external ? 'target="_blank" rel="noopener noreferer"' : '';
 
 switch ( $attendance_mode ) {
 	case '2': // Online
@@ -26,13 +29,13 @@ switch ( $attendance_mode ) {
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-list-item">
 	<div class="oa-event-wrapper">
 		<div class="oa-event-thumbnail">
-			<a class="oa-event-permalink" href="<?php openagenda_event_permalink(); ?>">
+			<a class="oa-event-permalink" href="<?php echo esc_url( $permalink ); ?>" <?php echo $additional_attributes; ?>>
 				<?php openagenda_event_image(); ?>
 			</a>
 		</div>
 
 		<h2 class="oa-event-title">
-			<a class="oa-event-permalink" href="<?php openagenda_event_permalink(); ?>">
+			<a class="oa-event-permalink" href="<?php echo esc_url( $permalink ); ?>" <?php echo $additional_attributes; ?>>
 				<?php openagenda_field( 'title' ); ?>
 			</a>
 			<?php openagenda_favorite_badge(); ?>
