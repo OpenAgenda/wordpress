@@ -37,7 +37,6 @@ if (oaData) {
                     const result = await oa.getEvents(values, aggregations);
                     if (result.success && result.html) {
                         oa.updateHTML(oaWrapper, result.html);
-                        // oa.setupLoadMoreButton();
                         oa.setupObserver();
                         const url = `${oaData.listUrl}`;
                         history.pushState(null, document.title, url);
