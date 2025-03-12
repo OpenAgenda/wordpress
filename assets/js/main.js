@@ -2,7 +2,6 @@
 if (oaData) {
     const oaWrapper = document.querySelector('[data-container-id="oa-wrapper"]');
     oaWrapper.insertAdjacentHTML('afterbegin', '<div class="oa-notice-wrapper"></div>');
-    console.log('Initial Data:', oaData);
     window.oa = {
         res: oaData.res,
         agendaUid: oaData.agendaUid,
@@ -64,12 +63,10 @@ if (oaData) {
             }
         },
         onIntersect: (entries, observer) => {
-            entries.forEach(entry => {
+            entries.forEach(async entry => {
                 if (!entry.isIntersecting) return;
-                requestIdleCallback(async () => {
-                    const loaded = await oa.loadMore();
-                    if (loaded) oa.setupObserver();
-                });
+                const loaded = await oa.loadMore();
+                if (loaded) oa.setupObserver();
             });
         },
         loadMore: async () => {
@@ -95,7 +92,6 @@ if (oaData) {
                 size: parseInt(window.oa.size),
                 ...additionnal_args
             }
-            console.log('Request arguments', args);
             const url = `${oaData.ajaxUrl}?${Qs.stringify({ ...args, ...values, aggregations })}`;
             const result = await fetch(url).then(response => response.json());
             return result;

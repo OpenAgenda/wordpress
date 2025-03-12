@@ -38,7 +38,7 @@ The settings are divided into two tabs: General and Integrations.
 
 The General settings tab provides the following settings : 
 
- * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
+ * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com/settings/apiKey](https://openagenda.com/settings/apiKey)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
@@ -63,6 +63,10 @@ The *Integrations* tab allows you to fine tune settings for various third party 
 ### Permalinks settings
 
 In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
+
+In the *Settings > Reading* section, you can set a calendar page as your front page. Note that it will still use the default calendar template provided by the plugin and the default front page template provided by your theme.
+
+![You can set a calendar as your front page.](assets/screenshots/screenshot-8.png)
 
 ### Customizer settings
 
@@ -150,18 +154,34 @@ Displays next events. It takes the following parameters :
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
+ * `view` : Accepts 'list' or 'grid'.
  * `filters` : Query string representing filters to apply to the request. **To ensure it works properly and avoid breaking the shortcode, you should urlencode the query string**. You can do so via a simple tool like [https://www.urlencoder.org/fr/](https://www.urlencoder.org/fr/)
  * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
 
 ## Customization
 
-Templates for the list of events and individual events can be customized in your theme.
+Templates for the list of events and individual events can be customized in your child theme.
 
-Just create a folder named `openagenda/` in your theme, then copy and paste the template you wish to override located in the plugin's `templates/` folder.
+If you're not already using a child theme, it is recommended to create one.
 
-The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. Feel free to define your own in your theme.
+[https://developer.wordpress.org/themes/advanced-topics/child-themes/](https://developer.wordpress.org/themes/advanced-topics/child-themes/)
 
-The plugin also provides many hooks to allow you to customize the html output or other various data. The hooks documentation is in writing for now !
+Just create a folder named `openagenda/` in your child theme, then copy and paste the template you wish to override from the plugin's `templates/` folder.
+
+Here is a list of templates you can find in the plugin's `templates/` folder : 
+
+* `event-loop.php` : main wrapper for list view and single event view. Displays exports button and pagination at the top and bottom. 
+* `list-header.php` : contains the total number of events and active filters display.
+* `event.php` : template used to display the event information on list views.
+* `single-event.php` : template used to display the event information on single event views.
+* `event-location.php` : template used to display the location information on single event views.
+* `event-additional-fields.php` : template used to the list of additional fields on single event views.
+* `preview-loop.php` : main wrapper for the preview widget and shortcode.
+* `preview-event.php` : template used to display events in the preview widget.
+
+The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. These basic functions are documented below. Feel free to define your own in your theme.
+
+The plugin also provides many hooks to allow you to customize the html output or other various data. Some hooks are documented below.
 
 ## Usage of third party services and copyright information
 
@@ -210,6 +230,26 @@ Like `openagenda_get_field( $field, $uid = false )`, but escapes and echoes the 
 #### `openagenda_esc_field( $value, $field )`
 
 This function is used internally by `openagenda_field()` to escape the field value properly, depending on the field type.
+
+#### `openagenda_get_additional_field( $field, $uid = false )`
+
+Retrieves the value of an additional field (a non-standard field). `openagenda_get_field()` also allows you to retrieve the raw value of an additional  field, but `openagenda_get_additional_field()` formats it for display.
+
+Returned value are passed through the following filter : `apply_filters( 'openagenda_additional_field', $value, $field, $field_schema, $uid );`
+
+#### `openagenda_additional_field( $field, $uid = false )`
+
+Like `openagenda_get_additional_field( $field, $uid = false )`, but escapes and echoes the field value.
+
+#### `openagenda_get_field_label( $field, $post_id = null )`
+
+Retrieves a form field label, as it is set up in your agenda on https://openagenda.com.
+
+Returned value are passed through the following filter : `apply_filters( 'openagenda_field_label', $label, $field, $field_schema, $post_id );`
+
+#### `openagenda_field_label( $field, $post_id = null )`
+
+Like `openagenda_get_field_label( $field, $uid = false )`, but escapes and echoes the label value.
 
 #### `openagenda_event_permalink( $event_uid = false, $echo = true, $use_context = false, $external = false )`
 
@@ -265,11 +305,11 @@ Displays or returns the button to add an event to favorites. Favorites can be fi
 
 The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_favorite_badge', $html, $event_uid, $agenda_uid, $icon_active, $icon_inactive, $text )`.
 
-#### `openagenda_event_additional_field( $field, $event_uid = false, $echo = true )`
+#### `openagenda_event_links( $field, $event_uid = false, $echo = true )`
 
 Displays or retrieves links corresponding to an additional field values, using labels corresponding to current locale. If no `$event_uid` is provided, it defaults to the current event.
 
-The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_additional_field', $html, $field, $event_uid' )`.
+The HTML returned is passed through the following filter : `apply_filters( 'openagenda_event_links', $html, $field, $event_uid' )`.
 
 #### `openagenda_event_share_buttons( $event_uid = false, $echo = true )`
 
@@ -450,8 +490,16 @@ Allows to modify OpenAgenda request url. The URL is determined from request para
 
 The callback takes the following parameters :
 
-* array   `$url`         Request URL
+* string  `$url`         Request URL
 * string  `$agenda_uid`  Agenda UID
 * array   `$args`        Request arguments
 * bool    `$export`      Is the URL for an export request ?
 
+#### `openagenda_additional_fields_template_fields`
+
+Allows to control which fields are displayed in the default template for additional fields.
+
+The callback takes the following parameters :
+
+* array   `$fields`      All additional fields slugs
+* int     `$post_id`     Calendar post id
