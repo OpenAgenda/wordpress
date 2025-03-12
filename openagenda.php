@@ -3,7 +3,7 @@
 Plugin Name: OpenAgenda
 Plugin URI:  https://wordpress.org/plugins/openagenda/
 Description: Display your OpenAgenda data on your WordPress site.
-Version:     2.13.1
+Version:     2.14.0
 Author:      OpenAgenda
 Author URI:  https://openagenda.com/
 Text Domain: openagenda
@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || die();
 
 define( 'OPENAGENDA_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OPENAGENDA_URL', plugin_dir_url( __FILE__ ) );
-define( 'OPENAGENDA_VERSION', '2.13.1' );
+define( 'OPENAGENDA_VERSION', '2.14.0' );
 
 
 add_action( 'init', 'openagenda_load_textdomain' );
