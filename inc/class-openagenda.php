@@ -115,7 +115,7 @@ class OpenAgenda {
 	/**
 	 * Parsed JSON response
 	 */
-	protected $json = null;
+	protected $json = array();
 
 	/**
 	 * Queried events
@@ -309,7 +309,7 @@ class OpenAgenda {
 	 * Returns the JSON reponse.
 	 */
 	public function get_json() {
-		return $this->json;
+		return ! empty( $this->json ) ? $this->json : array();
 	}
 
 
@@ -563,6 +563,7 @@ class OpenAgenda {
 		$body = wp_remote_retrieve_body( $this->raw_response );
 		$json = json_decode( $body, true );
 		if ( null === $json ) {
+			$json = array();
 			$this->errors[] = new \WP_Error( 'parsing-error', __( 'There was an error parsing the JSON.', 'openagenda' ), $body );
 		}
 		return $json;
