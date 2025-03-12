@@ -16,13 +16,15 @@
  * @return  string  $located  The path to the template file if found.
  */
 function openagenda_get_template( $slug ) {
-	$located = '';
-
+  $located = '';
+	$stylesheet_path = get_stylesheet_directory();
+	$template_path   = get_template_directory();
 	$template_name = sanitize_file_name( "{$slug}.php" );
-	if ( file_exists( STYLESHEETPATH . '/openagenda/' . $template_name ) ) {
-		$located = STYLESHEETPATH . '/openagenda/' . $template_name;
-	} elseif ( file_exists( TEMPLATEPATH . '/openagenda/' . $template_name ) ) {
-		$located = TEMPLATEPATH . '/openagenda/' . $template_name;
+
+	if ( file_exists( $stylesheet_path . '/openagenda/' . $template_name ) ) {
+		$located = $stylesheet_path . '/openagenda/' . $template_name;
+	} elseif ( file_exists( $template_path . '/openagenda/' . $template_name ) ) {
+		$located = $template_path . '/openagenda/' . $template_name;
 	} elseif ( file_exists( OPENAGENDA_PATH . 'templates/' . $template_name ) ) {
 		$located = OPENAGENDA_PATH . 'templates/' . $template_name;
 	}
