@@ -945,6 +945,10 @@ function openagenda_event_links( $field, $uid = false, $echo = true ) {
 	}
 
 	$values = openagenda_get_field( $field, $uid );
+	if ( empty( $values ) ) {
+		$values = array();
+	}
+	
 	// If we have a single value and not an array of values, make it an array
 	if ( isset( $values['id'] ) ) {
 		$values = array( $values );
