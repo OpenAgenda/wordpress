@@ -1,4 +1,10 @@
 <?php
+/**
+ * Class for handling request to OpenAgenda API.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

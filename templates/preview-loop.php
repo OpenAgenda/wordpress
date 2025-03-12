@@ -7,8 +7,8 @@
  * @var     $atts        Shortcode attributes
  * @package OpenAgenda
  */
-$view = $atts['view'] ?? 'list';
-$template = ! empty( openagenda_get_template( 'preview' ) ) ? openagenda_get_template( 'preview' ) : openagenda_get_template( 'event' ); 
+$view     = $atts['view'] ?? 'list';
+$template = ! empty( openagenda_get_template( 'preview' ) ) ? openagenda_get_template( 'preview' ) : openagenda_get_template( 'event' );
 
 if ( $openagenda->have_events() ) :
 	$openagenda->reset_index(); ?>

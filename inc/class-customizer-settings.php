@@ -1,4 +1,12 @@
 <?php
+/**
+ * Customizer Settings Manager class
+ *
+ * Responsible for registering customizer settings.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

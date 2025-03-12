@@ -1,4 +1,10 @@
 <?php
+/**
+ * Class for handling shortcodes content.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

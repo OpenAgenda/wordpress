@@ -1,4 +1,12 @@
 <?php
+/**
+ * Core class.
+ *
+ * Loads main files and register hooks.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**

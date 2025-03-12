@@ -1,4 +1,10 @@
 <?php
+/**
+ * Class for handling individual calendar settings on calendar edit page.
+ *
+ * @package Openagenda
+ */
+
 namespace OpenAgenda;
 
 /**
