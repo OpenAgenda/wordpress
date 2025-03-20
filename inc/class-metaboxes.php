@@ -94,6 +94,38 @@ class Metaboxes implements Hookable {
 						),
 					),
 				),
+				'oa-calendar-sort' => array(
+					'metabox' => 'oa-calendar-settings',
+					'type'    => 'select',
+					'label'   => __( 'Default event sort', 'openagenda' ),
+					'default' => 'lastTimingWithFeatured.asc',
+					'choices' => array(
+						'lastTimingWithFeatured.asc' => array(
+							'label' => __( 'Featured first, followed by ascending last occurrence (default)', 'openagenda' ),
+							'value' => 'lastTimingWithFeatured.asc',
+						),
+						'timingsWithFeatured.asc' => array(
+							'label' => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
+							'value' => 'timingsWithFeatured.asc',
+						),
+						'lastTiming.asc' => array(
+							'label' => __( 'Ascending last occurrence', 'openagenda' ),
+							'value' => 'lastTiming.asc',
+						),
+						'timings.asc' => array(
+							'label' => __( 'Ascending upcoming occurrence', 'openagenda' ),
+							'value' => 'timings.asc',
+						),
+						'updatedAt.desc' => array(
+							'label' => __( 'Descending update date', 'openagenda' ),
+							'value' => 'updatedAt.desc',
+						),
+						'updatedAt.asc' => array(
+							'label' => __( 'Ascending update date', 'openagenda' ),
+							'value' => 'updatedAt.asc',
+						),
+					),
+				),
 				'oa-calendar-content-on-archive' => array(
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'checkbox',
@@ -310,6 +342,26 @@ class Metaboxes implements Hookable {
 					</div>
 				<?php
 				break;
+			case 'select':
+				?>
+					<div class="components-base-control">
+						<div class="components-base-control__field">
+							<label for="<?php echo esc_attr( $name ); ?>" class="components-base-control__label" style="display: block; margin-bottom: 8px"><?php echo esc_html( $args['label'] ); ?></label>
+							<?php if ( ! empty( $args['description'] ) ) {
+									printf( '<p>%s</p>', wp_kses_post( $args['description'] ) );
+								}
+							?>
+							<select id="<?php echo esc_attr( $name ); ?>" name="<?php echo esc_attr( $name ); ?>" class="components-select-control__input">
+								<?php foreach ( $args['choices'] as $key => $choice ) : $selected = selected( $field_value, $choice['value'], false ); ?>
+									<option value="<?php echo esc_attr( $choice['value'] ); ?>" <?php echo $selected; ?>>
+										<?php echo esc_html( $choice['label'] ); ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+				<?php
+				break;
 			default:
 				?>
 					<div class="components-base-control">
@@ -376,8 +428,12 @@ class Metaboxes implements Hookable {
 			update_post_meta( $post_ID, 'oa-calendar-per-page', (int) $_POST['oa-calendar-per-page'] );
 		}
 
-		if ( ! empty( $_POST['oa-calendar-view'] ) && in_array( $_POST['oa-calendar-view'], array( 'list', 'grid' ) ) ) {
+		if ( ! empty( $_POST['oa-calendar-view'] ) && in_array( $_POST['oa-calendar-view'], array( 'list', 'grid' ), true ) ) {
 			update_post_meta( $post_ID, 'oa-calendar-view', sanitize_title( $_POST['oa-calendar-view'] ) );
+		}
+
+		if ( ! empty( $_POST['oa-calendar-sort'] ) && in_array( $_POST['oa-calendar-sort'], array( 'timingsWithFeatured.asc', 'timings.asc', 'lastTimingWithFeatured.asc', 'lastTiming.asc', 'updatedAt.desc', 'updatedAt.asc' ), true ) ) {
+			update_post_meta( $post_ID, 'oa-calendar-sort', $_POST['oa-calendar-sort'] );	
 		}
 
 		if ( isset( $_POST['oa-calendar-filters'] ) ) {
