@@ -99,6 +99,11 @@ class Metaboxes implements Hookable {
 					'type'    => 'select',
 					'label'   => __( 'Default event sort', 'openagenda' ),
 					'default' => 'lastTimingWithFeatured.asc',
+					'description' => sprintf(
+						'<a href="%s" class="components-external-link" target="_blank" rel="external noopener noreferrer">%s</a>',
+						'https://doc.openagenda.com/fr/article/tri-chronologique-des-evenements-1c2ae66/?bust=1742462648610',
+						__( 'Learn more about sort', 'openagenda' )
+					),
 					'choices' => array(
 						'lastTimingWithFeatured.asc' => array(
 							'label' => __( 'Featured first, followed by ascending last occurrence (default)', 'openagenda' ),
@@ -318,11 +323,6 @@ class Metaboxes implements Hookable {
 							<fieldset class="components-radio-control__inputs">
 								<legend class="components-radio-control__legend"><?php echo esc_html( $args['label'] ); ?></legend>
 								<?php
-								if ( ! empty( $args['description'] ) ) {
-									printf( '<p>%s</p>', wp_kses_post( $args['description'] ) );
-								}
-								?>
-								<?php
 								foreach ( $args['choices'] as $key => $choice ) :
 									$field_id = sprintf( '%s-%s', $name, $choice['value'] );
 									?>
@@ -338,6 +338,11 @@ class Metaboxes implements Hookable {
 									</div>
 								<?php endforeach; ?>
 							</fieldset>
+							<?php
+								if ( ! empty( $args['description'] ) ) {
+									printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
+								}
+							?>
 						</div>
 					</div>
 				<?php
@@ -347,10 +352,6 @@ class Metaboxes implements Hookable {
 					<div class="components-base-control">
 						<div class="components-base-control__field">
 							<label for="<?php echo esc_attr( $name ); ?>" class="components-base-control__label" style="display: block; margin-bottom: 8px"><?php echo esc_html( $args['label'] ); ?></label>
-							<?php if ( ! empty( $args['description'] ) ) {
-									printf( '<p>%s</p>', wp_kses_post( $args['description'] ) );
-								}
-							?>
 							<select id="<?php echo esc_attr( $name ); ?>" name="<?php echo esc_attr( $name ); ?>" class="components-select-control__input">
 								<?php foreach ( $args['choices'] as $key => $choice ) : $selected = selected( $field_value, $choice['value'], false ); ?>
 									<option value="<?php echo esc_attr( $choice['value'] ); ?>" <?php echo $selected; ?>>
@@ -358,6 +359,11 @@ class Metaboxes implements Hookable {
 									</option>
 								<?php endforeach; ?>
 							</select>
+							<?php 
+								if ( ! empty( $args['description'] ) ) {
+									printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
+								}
+							?>
 						</div>
 					</div>
 				<?php
