@@ -50,7 +50,7 @@ if (oaData) {
         },
         setupObserver: () => {
             const eventsWrapper = document.querySelector('[data-container-id="oa-events"],.oa-event-grid,.oa-event-list');
-            if (eventsWrapper && oaData.infiniteScroll) {
+            if (eventsWrapper && oaData.infiniteScroll && !oaData.isSingle) {
                 if (oa.observer !== null) {
                     oa.observer.unobserve(oa.observed);
                     oa.observer = null;
