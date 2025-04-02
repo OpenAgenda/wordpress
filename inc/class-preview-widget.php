@@ -57,11 +57,11 @@ class Preview_Widget extends OpenAgenda_Widget {
 				'class'   => 'widefat',
 				'options' => array(
 					'lastTimingWithFeatured.asc' => __( 'Featured first, followed by ascending last occurrence (default)', 'openagenda' ),
-					'timingsWithFeatured.asc' => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
-					'lastTiming.asc' => __( 'Ascending last occurrence', 'openagenda' ),
-					'timings.asc' => __( 'Ascending upcoming occurrence', 'openagenda' ),
-					'updatedAt.desc' =>  __( 'Descending update date', 'openagenda' ),
-					'updatedAt.asc' => __( 'Ascending update date', 'openagenda' ),
+					'timingsWithFeatured.asc'    => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
+					'lastTiming.asc'             => __( 'Ascending last occurrence', 'openagenda' ),
+					'timings.asc'                => __( 'Ascending upcoming occurrence', 'openagenda' ),
+					'updatedAt.desc'             => __( 'Descending update date', 'openagenda' ),
+					'updatedAt.asc'              => __( 'Ascending update date', 'openagenda' ),
 				),
 			),
 			'filters' => array(

@@ -94,38 +94,38 @@ class Metaboxes implements Hookable {
 						),
 					),
 				),
-				'oa-calendar-sort' => array(
-					'metabox' => 'oa-calendar-settings',
-					'type'    => 'select',
-					'label'   => __( 'Default event sort', 'openagenda' ),
-					'default' => 'lastTimingWithFeatured.asc',
+				'oa-calendar-sort'               => array(
+					'metabox'     => 'oa-calendar-settings',
+					'type'        => 'select',
+					'label'       => __( 'Default event sort', 'openagenda' ),
+					'default'     => 'lastTimingWithFeatured.asc',
 					'description' => sprintf(
 						'<a href="%s" class="components-external-link" target="_blank" rel="external noopener noreferrer">%s</a>',
 						'https://doc.openagenda.com/fr/article/tri-chronologique-des-evenements-1c2ae66/?bust=1742462648610',
 						__( 'Learn more about sort', 'openagenda' )
 					),
-					'choices' => array(
+					'choices'     => array(
 						'lastTimingWithFeatured.asc' => array(
 							'label' => __( 'Featured first, followed by ascending last occurrence (default)', 'openagenda' ),
 							'value' => 'lastTimingWithFeatured.asc',
 						),
-						'timingsWithFeatured.asc' => array(
+						'timingsWithFeatured.asc'    => array(
 							'label' => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
 							'value' => 'timingsWithFeatured.asc',
 						),
-						'lastTiming.asc' => array(
+						'lastTiming.asc'             => array(
 							'label' => __( 'Ascending last occurrence', 'openagenda' ),
 							'value' => 'lastTiming.asc',
 						),
-						'timings.asc' => array(
+						'timings.asc'                => array(
 							'label' => __( 'Ascending upcoming occurrence', 'openagenda' ),
 							'value' => 'timings.asc',
 						),
-						'updatedAt.desc' => array(
+						'updatedAt.desc'             => array(
 							'label' => __( 'Descending update date', 'openagenda' ),
 							'value' => 'updatedAt.desc',
 						),
-						'updatedAt.asc' => array(
+						'updatedAt.asc'              => array(
 							'label' => __( 'Ascending update date', 'openagenda' ),
 							'value' => 'updatedAt.asc',
 						),
@@ -339,9 +339,9 @@ class Metaboxes implements Hookable {
 								<?php endforeach; ?>
 							</fieldset>
 							<?php
-								if ( ! empty( $args['description'] ) ) {
-									printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
-								}
+							if ( ! empty( $args['description'] ) ) {
+								printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
+							}
 							?>
 						</div>
 					</div>
@@ -353,16 +353,19 @@ class Metaboxes implements Hookable {
 						<div class="components-base-control__field">
 							<label for="<?php echo esc_attr( $name ); ?>" class="components-base-control__label" style="display: block; margin-bottom: 8px"><?php echo esc_html( $args['label'] ); ?></label>
 							<select id="<?php echo esc_attr( $name ); ?>" name="<?php echo esc_attr( $name ); ?>" class="components-select-control__input">
-								<?php foreach ( $args['choices'] as $key => $choice ) : $selected = selected( $field_value, $choice['value'], false ); ?>
+								<?php
+								foreach ( $args['choices'] as $key => $choice ) :
+									$selected = selected( $field_value, $choice['value'], false );
+									?>
 									<option value="<?php echo esc_attr( $choice['value'] ); ?>" <?php echo $selected; ?>>
 										<?php echo esc_html( $choice['label'] ); ?>
 									</option>
 								<?php endforeach; ?>
 							</select>
-							<?php 
-								if ( ! empty( $args['description'] ) ) {
-									printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
-								}
+							<?php
+							if ( ! empty( $args['description'] ) ) {
+								printf( '<p class="description">%s</p>', wp_kses_post( $args['description'] ) );
+							}
 							?>
 						</div>
 					</div>
@@ -439,7 +442,7 @@ class Metaboxes implements Hookable {
 		}
 
 		if ( ! empty( $_POST['oa-calendar-sort'] ) && in_array( $_POST['oa-calendar-sort'], array( 'timingsWithFeatured.asc', 'timings.asc', 'lastTimingWithFeatured.asc', 'lastTiming.asc', 'updatedAt.desc', 'updatedAt.asc' ), true ) ) {
-			update_post_meta( $post_ID, 'oa-calendar-sort', $_POST['oa-calendar-sort'] );	
+			update_post_meta( $post_ID, 'oa-calendar-sort', $_POST['oa-calendar-sort'] );
 		}
 
 		if ( isset( $_POST['oa-calendar-filters'] ) ) {

@@ -151,7 +151,7 @@ class OpenAgenda_Widget extends \WP_Widget {
 			case 'select';
 				$options = '';
 				if ( ! empty( $field['options'] ) ) {
-					if( ! empty( $field['option_none']  ) ){
+					if ( ! empty( $field['option_none'] ) ) {
 						$options .= sprintf( '<option value="">%s</option>', esc_html( $field['option_none'] ) );
 					}
 					foreach ( $field['options'] as $option_value => $option_label ) {

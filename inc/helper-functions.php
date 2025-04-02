@@ -16,10 +16,10 @@
  * @return  string  $located  The path to the template file if found.
  */
 function openagenda_get_template( $slug ) {
-  $located = '';
+	$located         = '';
 	$stylesheet_path = get_stylesheet_directory();
 	$template_path   = get_template_directory();
-	$template_name = sanitize_file_name( "{$slug}.php" );
+	$template_name   = sanitize_file_name( "{$slug}.php" );
 
 	if ( file_exists( $stylesheet_path . '/openagenda/' . $template_name ) ) {
 		$located = $stylesheet_path . '/openagenda/' . $template_name;
@@ -582,7 +582,7 @@ function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
 		}
 	}
 
-	if( ! empty( $sort ) && ! isset( $filters['sort'] ) ){
+	if ( ! empty( $sort ) && ! isset( $filters['sort'] ) ) {
 		$prefilters['sort'] = $sort;
 	}
 

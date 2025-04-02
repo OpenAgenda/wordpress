@@ -563,7 +563,7 @@ class OpenAgenda {
 		$body = wp_remote_retrieve_body( $this->raw_response );
 		$json = json_decode( $body, true );
 		if ( null === $json ) {
-			$json = array();
+			$json           = array();
 			$this->errors[] = new \WP_Error( 'parsing-error', __( 'There was an error parsing the JSON.', 'openagenda' ), $body );
 		}
 		return $json;
