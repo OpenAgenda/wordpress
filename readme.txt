@@ -203,6 +203,7 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 = 2.14.0 =
 * Feature : Added sort parameter to calendars
 * Fix     : Minor code corrections to prevent PHP warnings
+* Improvement : Updated React Filters JS
 
 = 2.13.1 =
 * Fixed   : Fixed external links not working on previews
