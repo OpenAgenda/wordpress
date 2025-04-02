@@ -570,7 +570,7 @@ function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
 
 	if ( filter_var( $filters_url, FILTER_VALIDATE_URL ) !== false ) {
 		$query = parse_url( urldecode( $filters_url ), PHP_URL_QUERY );
-		$query = str_replace( 'q.', '', $query );
+		$query = ! empty( $query ) ? str_replace( 'q.', '', $query ) : '';
 		if ( ! empty( $query ) ) {
 			parse_str( $query, $prefilters );
 		}
