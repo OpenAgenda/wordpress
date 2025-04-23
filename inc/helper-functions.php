@@ -16,10 +16,10 @@
  * @return  string  $located  The path to the template file if found.
  */
 function openagenda_get_template( $slug ) {
-  $located = '';
+	$located         = '';
 	$stylesheet_path = get_stylesheet_directory();
 	$template_path   = get_template_directory();
-	$template_name = sanitize_file_name( "{$slug}.php" );
+	$template_name   = sanitize_file_name( "{$slug}.php" );
 
 	if ( file_exists( $stylesheet_path . '/openagenda/' . $template_name ) ) {
 		$located = $stylesheet_path . '/openagenda/' . $template_name;
@@ -564,12 +564,13 @@ function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
 	}
 	$filters_url         = get_post_meta( $post_id, 'oa-calendar-filters', true );
 	$exclude_past_events = get_post_meta( $post_id, 'oa-calendar-exclude', true );
+	$sort                = get_post_meta( $post_id, 'oa-calendar-sort', true );
 
 	$prefilters = array();
 
 	if ( filter_var( $filters_url, FILTER_VALIDATE_URL ) !== false ) {
 		$query = parse_url( urldecode( $filters_url ), PHP_URL_QUERY );
-		$query = str_replace( 'q.', '', $query );
+		$query = ! empty( $query ) ? str_replace( 'q.', '', $query ) : '';
 		if ( ! empty( $query ) ) {
 			parse_str( $query, $prefilters );
 		}
@@ -579,6 +580,10 @@ function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
 		if ( ! isset( $filters['timings'] ) && ! isset( $filters['relative'] ) ) {
 			$prefilters['relative'] = array( 'current', 'upcoming' );
 		}
+	}
+
+	if ( ! empty( $sort ) && ! isset( $filters['sort'] ) ) {
+		$prefilters['sort'] = $sort;
 	}
 
 	return apply_filters( 'openagenda_pre_filters', $prefilters, $post_id );

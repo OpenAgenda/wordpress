@@ -49,6 +49,21 @@ class Preview_Widget extends OpenAgenda_Widget {
 					),
 				),
 			),
+			'sort'    => array(
+				'name'    => 'sort',
+				'type'    => 'select',
+				'label'   => __( 'Default event sort', 'openagenda' ),
+				'default' => 'lastTimingWithFeatured.asc',
+				'class'   => 'widefat',
+				'options' => array(
+					'lastTimingWithFeatured.asc' => __( 'Featured first, followed by ascending last occurrence (default)', 'openagenda' ),
+					'timingsWithFeatured.asc'    => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
+					'lastTiming.asc'             => __( 'Ascending last occurrence', 'openagenda' ),
+					'timings.asc'                => __( 'Ascending upcoming occurrence', 'openagenda' ),
+					'updatedAt.desc'             => __( 'Descending update date', 'openagenda' ),
+					'updatedAt.asc'              => __( 'Ascending update date', 'openagenda' ),
+				),
+			),
 			'filters' => array(
 				'name'        => 'filters',
 				'type'        => 'text',
@@ -157,6 +172,7 @@ class Preview_Widget extends OpenAgenda_Widget {
 			'uid'     => ! empty( $new_instance['uid'] ) ? sanitize_text_field( $new_instance['uid'] ) : '',
 			'size'    => ! empty( $new_instance['size'] ) ? (int) $new_instance['size'] : 3,
 			'view'    => ! empty( $new_instance['view'] ) ? sanitize_title( $new_instance['view'] ) : 'list',
+			'sort'    => ! empty( $new_instance['sort'] ) ? sanitize_text_field( $new_instance['sort'] ) : 'timingsWithFeatured.asc',
 			'filters' => ! empty( $new_instance['filters'] ) ? urldecode( $new_instance['filters'] ) : '',
 			'links'   => ! empty( $new_instance['links'] ),
 		);

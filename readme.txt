@@ -3,7 +3,7 @@ Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
 Tested up to: 6.7.2
-Stable tag: 2.13.1
+Stable tag: 2.14.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -119,6 +119,7 @@ Displays a preview of any calendar. It takes the following parameters :
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
+ * `sort` : Event sort option. Accepts `lastTimingWithFeatured.asc`, `timingsWithFeatured.asc`, `lastTiming.asc`, `timings.asc`, `updatedAt.asc` or `updatedAt.desc`. 
  * `filters` : Query string representing filters to apply to the request. **To ensure it works properly and avoid breaking the shortcode, you should urlencode the query string**. You can do so via a simple tool like [https://www.urlencoder.org/fr/](https://www.urlencoder.org/fr/)
  * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
 
@@ -198,6 +199,11 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 7. Enjoy !
 
 == Changelog ==
+
+= 2.14.0 =
+* Feature : Added sort parameter to calendars
+* Fix     : Minor code corrections to prevent PHP warnings
+* Improvement : Updated React Filters JS
 
 = 2.13.1 =
 * Fixed   : Fixed external links not working on previews

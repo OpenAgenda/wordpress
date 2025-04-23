@@ -20,4 +20,8 @@
   margin-bottom: 0.25em;
 }
 
+.wp-core-ui select {
+  box-sizing: border-box;
+}
+
 /*# sourceMappingURL=admin.css.map */

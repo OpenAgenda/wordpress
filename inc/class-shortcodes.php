@@ -417,6 +417,7 @@ class Shortcodes implements Hookable {
 			'size'    => 3,
 			'view'    => 'list',
 			'filters' => '',
+			'sort'    => 'lastTimingWithFeatured.asc',
 			'links'   => '',
 			'api_key' => '',
 		);
@@ -425,6 +426,7 @@ class Shortcodes implements Hookable {
 		// Parse args and filters
 		$args = array(
 			'size' => (int) $atts['size'],
+			'sort' => $atts['sort'],
 		);
 
 		$filters = array();

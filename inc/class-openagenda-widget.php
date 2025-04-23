@@ -151,6 +151,9 @@ class OpenAgenda_Widget extends \WP_Widget {
 			case 'select';
 				$options = '';
 				if ( ! empty( $field['options'] ) ) {
+					if ( ! empty( $field['option_none'] ) ) {
+						$options .= sprintf( '<option value="">%s</option>', esc_html( $field['option_none'] ) );
+					}
 					foreach ( $field['options'] as $option_value => $option_label ) {
 						$options .= sprintf(
 							'<option value="%1$s"%3$s>%2$s</option>',
@@ -164,14 +167,12 @@ class OpenAgenda_Widget extends \WP_Widget {
 				$html = sprintf(
 					'<p><label for="%1$s">%3$s</label>
                     <select id="%1$s" name="%2$s" class="%4$s">
-                        <option value="">%5$s</option>
-                        %6$s
-                    </select></p>',
+					%5$s
+					</select></p>',
 					esc_attr( $this->get_field_id( $field['name'] ) ),
 					esc_attr( $this->get_field_name( $field['name'] ) ),
 					esc_html( $field['label'] ),
 					esc_attr( $field['class'] ),
-					esc_html( $field['option_none'] ),
 					$options
 				);
 			break;

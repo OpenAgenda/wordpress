@@ -119,12 +119,11 @@ class Main {
 		$css_suffix = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.css' : '.min.css';
 		$js_suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.js' : '.min.js';
 
-		wp_register_style( 'openagenda-admin', OPENAGENDA_URL . 'assets/css/admin' . $css_suffix, array(), OPENAGENDA_VERSION );
+		wp_enqueue_style( 'openagenda-admin', OPENAGENDA_URL . 'assets/css/admin' . $css_suffix, array(), OPENAGENDA_VERSION );
 		wp_enqueue_script( 'openagenda-admin', OPENAGENDA_URL . 'assets/js/admin' . $js_suffix, array(), OPENAGENDA_VERSION );
 		wp_register_script( 'openagenda-media-uploader', OPENAGENDA_URL . 'assets/js/media-uploader' . $js_suffix, array(), OPENAGENDA_VERSION, true );
 
 		if ( 'widgets.php' === $hook ) {
-			wp_enqueue_style( 'openagenda-admin' );
 			wp_enqueue_script( 'openagenda-widgets', OPENAGENDA_URL . 'assets/js/widgets' . $js_suffix, array( 'jquery' ), OPENAGENDA_VERSION, true );
 		}
 	}
@@ -143,7 +142,7 @@ class Main {
 		wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'openagenda-qs' ), OPENAGENDA_VERSION, true );
 		wp_register_script( 'openagenda-qs', OPENAGENDA_URL . 'assets/js/qs.min.js', array(), '6.10.3', true );
 		wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), '5.15.4' );
-		wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '2.10.5', true );
+		wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '2.12.6', true );
 
 		// Register map dependencies
 		wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
