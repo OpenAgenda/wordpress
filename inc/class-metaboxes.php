@@ -101,7 +101,7 @@ class Metaboxes implements Hookable {
 					'default'     => 'lastTimingWithFeatured.asc',
 					'description' => sprintf(
 						'<a href="%s" class="components-external-link" target="_blank" rel="external noopener noreferrer">%s</a>',
-						'https://doc.openagenda.com/fr/article/tri-chronologique-des-evenements-1c2ae66/?bust=1742462648610',
+						'https://doc.openagenda.com/fr/article/tri-des-evenements-1c2ae66/',
 						__( 'Learn more about sort', 'openagenda' )
 					),
 					'choices'     => array(
