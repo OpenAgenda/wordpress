@@ -5,7 +5,7 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package OpenAgenda
- * @version 3.0.0
+ * @version 2.14.0
  */
 $location              = openagenda_get_field( 'location' );
 $attendance_field      = openagenda_get_field( 'attendanceMode' );

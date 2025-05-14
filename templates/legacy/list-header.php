@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  * @package OpenAgenda
- * @version 3.0.0
+ * @version 2.14.0
  */
 ?>
 <header class="<?php echo esc_attr( $class ); ?>">
