@@ -8,25 +8,31 @@
 
 /**
  * Returns the path to a template file.
- * Looks first if the file exists in the `open-agenda/` folder in the child theme,
- * then in the parent's theme `open-agenda/` folder,
+ * Looks first if the file exists in the `openagenda/` folder in the child theme,
+ * then in the parent's theme `openagenda/` folder,
  * finally in the default plugin's template directory
  *
  * @param   string $slug     The template we're looking for
  * @return  string  $located  The path to the template file if found.
  */
 function openagenda_get_template( $slug ) {
-	$located         = '';
-	$stylesheet_path = get_stylesheet_directory();
-	$template_path   = get_template_directory();
-	$template_name   = sanitize_file_name( "{$slug}.php" );
+	$located              = '';
+	$stylesheet_path      = get_stylesheet_directory();
+	$template_path        = get_template_directory();
+	$template_name        = sanitize_file_name( "{$slug}.php" );
+	$use_legacy_templates = openagenda_use_legacy_templates();
 
 	if ( file_exists( $stylesheet_path . '/openagenda/' . $template_name ) ) {
 		$located = $stylesheet_path . '/openagenda/' . $template_name;
 	} elseif ( file_exists( $template_path . '/openagenda/' . $template_name ) ) {
 		$located = $template_path . '/openagenda/' . $template_name;
-	} elseif ( file_exists( OPENAGENDA_PATH . 'templates/' . $template_name ) ) {
-		$located = OPENAGENDA_PATH . 'templates/' . $template_name;
+	} else {
+		if ( file_exists( OPENAGENDA_PATH . 'templates/' . $template_name ) ) {
+			$located = OPENAGENDA_PATH . 'templates/' . $template_name;
+		}
+		if ( $use_legacy_templates && file_exists( OPENAGENDA_PATH . 'templates/legacy/' . $template_name ) ) {
+			$located = OPENAGENDA_PATH . 'templates/legacy/' . $template_name;
+		}
 	}
 
 	return str_replace( '..', '', $located );
@@ -34,11 +40,24 @@ function openagenda_get_template( $slug ) {
 
 
 /**
+ * Returns whether legacy templates should be used.
+ *
+ * @return  bool  $use_legacy_templates  Option value.
+ */
+function openagenda_use_legacy_templates() {
+	$settings = get_option( 'openagenda_general_settings' );
+	return ! empty( $settings ) && (bool) $settings['openagenda_use_legacy_templates'];
+}
+
+
+/**
  * Returns whether basic styles should be loaded on the front end.
+ *
+ * @return  bool  $include_styles  Option value.
  */
 function openagenda_should_enqueue_styles() {
 	$settings = get_option( 'openagenda_general_settings' );
-	return ! empty( $settings ) && $settings['openagenda_include_styles'];
+	return ! empty( $settings ) && (bool) $settings['openagenda_include_styles'];
 }
 
 
