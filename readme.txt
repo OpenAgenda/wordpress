@@ -3,7 +3,7 @@ Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
 Tested up to: 6.7.2
-Stable tag: 2.14.0
+Stable tag: 3.0.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
