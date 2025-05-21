@@ -7,6 +7,8 @@
 :root {
 	scroll-behavior: smooth;
 	--oa-main-color: #{map.get($colors, primary-500)};
+	--oa-main-color-lighter: #{map.get($colors, primary-300)};
+	--oa-main-color-darker: #{map.get($colors, primary-700)};
 	@include css_variables('oa', $colors );
 	@include css_variables('oa-spacing', $spacings );
 	@include css_variables('oa-text', $fontSizes );
@@ -70,7 +72,7 @@
 		z-index: 10;
 
 		.oa-event-featured-badge-wrapper {
-			--gradient-from: var(--oa-primary-500) 32px;
+			--gradient-from: var(--oa-main-color) 32px;
 			background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
 			height: 100%;
 			padding: 2px;
@@ -88,8 +90,6 @@
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	}
 }
-
-
 
 /*******************
  * Pagination
@@ -116,11 +116,10 @@ ul.oa-pagination {
 
 		a:hover,
 		a:focus {
-			color: var(--oa-primary-500);
+			color: var(--oa-main-color);
 		}
 	}
 }
-
 
 /**************
  * Navigation
@@ -128,35 +127,33 @@ ul.oa-pagination {
 .oa-event-navigation {
 	align-items: center;
 	display: flex;
-	justify-content: space-between;
+	justify-content: end;
 	flex-wrap: wrap;
-	margin: 1rem 0;
+	margin: var(--oa-spacing-4) 0;
 }
 
 .oa-nav-link {
 	align-items: center;
 	box-shadow: none;
+	color: var(--oa-main-color);
 	display: inline-flex;
 	line-height: 1;
-	text-decoration: none;
-	padding: .25rem;
+	padding: var(--oa-spacing-2);
+
+	&:hover,
+	&:focus {
+		color: var(--oa-main-color-darker);
+		fill: var(--oa-main-color-darker);
+	}
 }
 
-.oa-next-link {
-	.oa-icon {
-		margin-left: 4px;
-	}
+.oa-back-link {
+	margin-right: auto;
 }
 
 .oa-previous-link,
-.oa-back-link {
-	.oa-icon {
-		margin-right: 4px;
-	}
-}
-
-.oa-nav-link-disabled {
-	opacity: .5;
+.oa-next-link {
+	text-decoration: none;
 }
 
 /*********************
