@@ -7,9 +7,9 @@
  * @package OpenAgenda
  * @version 3.0.0
  */
-$dateRange = openagenda_get_field( 'dateRange' );
+$dateRange            = openagenda_get_field( 'dateRange' );
 $registration_methods = openagenda_get_field( 'registration' );
-$conditions = openagenda_get_field( 'conditions' );
+$conditions           = openagenda_get_field( 'conditions' );
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
 	<div class="oa-event-wrapper">

@@ -438,9 +438,9 @@ class Shortcodes implements Hookable {
 		// Parse options
 		$options = array(
 			'is_preview' => true,
-			'cache'   => false,
-			'context' => false,
-			'api_key' => $atts['api_key'],
+			'cache'      => false,
+			'context'    => false,
+			'api_key'    => $atts['api_key'],
 		);
 
 		// If we're on a events page, backup the main events.

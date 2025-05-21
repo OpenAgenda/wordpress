@@ -247,7 +247,7 @@ class Metaboxes implements Hookable {
 			$args['default'] = 'yes';
 		}
 		$field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];
-		if ( 'oa-calendar-uid' == $name && ! empty( $field_value ) ) {
+		if ( 'oa-calendar-uid' === $name && ! empty( $field_value ) ) {
 			$openagenda = new OpenAgenda(
 				$field_value,
 				array( 'size' => 1 ),

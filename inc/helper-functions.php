@@ -688,7 +688,7 @@ function openagenda_get_default_calendar_uid() {
 function openagenda_get_calendar_settings( $post_id = null ) {
 	global $openagenda;
 
-	if( ! $openagenda ){
+	if ( ! $openagenda ) {
 		return false;
 	}
 

@@ -71,12 +71,12 @@ function openagenda_get_field( $field, $uid = false ) {
 			break;
 		case 'external-permalink':
 			$agenda_settings = openagenda_get_calendar_settings();
-			$agenda_slug     =  ! empty( $agenda_settings['slug'] ) ? sanitize_title( $agenda_settings['slug'] ) : false;
-			$event_slug      =  ! empty( $event['slug'] ) ? sanitize_title( $event['slug'] ) : false;
-			if( $agenda_slug && $event_slug ){
-				$value = sprintf( 'https://openagenda.com/%s/events/%s', $agenda_slug, $event_slug ); 
+			$agenda_slug     = ! empty( $agenda_settings['slug'] ) ? sanitize_title( $agenda_settings['slug'] ) : false;
+			$event_slug      = ! empty( $event['slug'] ) ? sanitize_title( $event['slug'] ) : false;
+			if ( $agenda_slug && $event_slug ) {
+				$value = sprintf( 'https://openagenda.com/%s/events/%s', $agenda_slug, $event_slug );
 			} else {
-				$value = sprintf( 'https://openagenda.com/agendas/%s/events/%s?from=wp', $openagenda->get_uid(), $uid ); 
+				$value = sprintf( 'https://openagenda.com/agendas/%s/events/%s?from=wp', $openagenda->get_uid(), $uid );
 			}
 			break;
 		case 'timings':
@@ -829,7 +829,7 @@ function openagenda_event_share_button( $uid = false, $display = true ) {
 		$uid = $event['uid'];
 	}
 
-	$html = '';
+	$html      = '';
 	$permalink = openagenda_get_field( 'external-permalink', $uid );
 	$share_url = add_query_arg( 'sharemodal', 1, $permalink );
 
