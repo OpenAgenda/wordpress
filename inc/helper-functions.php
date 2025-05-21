@@ -5,14 +5,13 @@
  * @package OpenAgenda
  */
 
-
 /**
  * Returns the path to a template file.
  * Looks first if the file exists in the `openagenda/` folder in the child theme,
  * then in the parent's theme `openagenda/` folder,
  * finally in the default plugin's template directory
  *
- * @param   string $slug     The template we're looking for
+ * @param   string $slug     The template we're looking for.
  * @return  string  $located  The path to the template file if found.
  */
 function openagenda_get_template( $slug ) {
@@ -75,7 +74,8 @@ function openagenda_get_locale() {
 		$locale = sanitize_key( $_GET['oa-lang'] );
 	}
 
-	if ( $openagenda && ! empty( $context = $openagenda->get_context() ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ) {
+	$context = $openagenda->get_context();
+	if ( $openagenda && ! empty( $context ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ) {
 		$locale = sanitize_key( $context['filters']['oa-lang'] );
 	}
 
@@ -118,7 +118,7 @@ function openagenda_get_image_dimensions( $size = '' ) {
 		'height' => '',
 	);
 
-	// Regular size string is passed
+	// Regular size string is passed.
 	if ( is_string( $size ) && array_key_exists( $size, $sizes ) ) {
 		$dimensions = $sizes[ $size ];
 	}
@@ -174,7 +174,7 @@ function openagenda_i18n_fields() {
  * @return  bool            Is the field an i18n field ?
  */
 function openagenda_is_i18n_field( $field ) {
-	$is_i18n = in_array( $field, openagenda_i18n_fields() );
+	$is_i18n = in_array( $field, openagenda_i18n_fields(), true );
 	return apply_filters( 'openagenda_is_i18n_field', $is_i18n, $field );
 }
 
@@ -182,7 +182,7 @@ function openagenda_is_i18n_field( $field ) {
 /**
  * Returns a label for a given accessibility code.
  *
- * @param   string $code  Accessibility code
+ * @param   string $code  Accessibility code.
  * @return  string  $label  Corresponding label.
  */
 function openagenda_accessibility_label( $code ) {
@@ -245,18 +245,18 @@ function openagenda_icons() {
 /**
  * Echoes or returns an svg icon.
  *
- * @param   string $slug  Slug of the icon to retrieve
- * @param   bool   $echo  Whether to return or echo it
- * @return  string  $icon  SVG icon
+ * @param   string $slug  Slug of the icon to retrieve.
+ * @param   bool   $display  Whether to return or echo it.
+ * @return  string  $icon  SVG icon.
  */
-function openagenda_icon( $slug, $echo = true ) {
+function openagenda_icon( $slug, $display = true ) {
 	$icon  = '';
 	$icons = openagenda_icons();
 	if ( array_key_exists( $slug, $icons ) ) {
 		$icon = $icons[ $slug ];
 	}
 	$icon = apply_filters( 'openagenda_icon', $icon, $slug );
-	if ( $echo ) {
+	if ( $display ) {
 		echo $icon;
 	}
 	return $icon;
@@ -296,10 +296,11 @@ function openagenda_is_archive() {
 /**
  * Stringifies an associative array to use in a shortcode.
  *
- * @param   array $array  Associative array you wish to turn to shortcode attributes
- * @return  string  $atts   Converted shortcode attributes
+ * @param   array  $attributes  Associative array you wish to turn to shortcode attributes.
+ * @param   string $id  Optional ID attribute to add.
+ * @return  string  $atts   Converted shortcode attributes.
  */
-function openagenda_get_shortcode_attributes( $array, $id = '' ) {
+function openagenda_get_shortcode_attributes( $attributes, $id = '' ) {
 	$atts = array();
 	if ( ! empty( $id ) ) {
 		$atts[] = sprintf( 'id="%s"', esc_attr( $id ) );
@@ -313,8 +314,8 @@ function openagenda_get_shortcode_attributes( $array, $id = '' ) {
 				}
 				return sprintf( '%s="%s"', $key, 'filters' !== $key ? sanitize_text_field( $value ) : $value );
 			},
-			array_keys( $array ),
-			array_values( $array )
+			array_keys( $attributes ),
+			array_values( $attributes )
 		)
 	);
 	return join( ' ', $atts );
@@ -324,7 +325,7 @@ function openagenda_get_shortcode_attributes( $array, $id = '' ) {
 /**
  * Returns the HTML content of the content area.
  *
- * @param   string $view  Accepts 'list' or 'grid'
+ * @param   string $view  Accepts 'list' or 'grid'.
  * @param   bool   $with_controls  Whether to display pagination on archive.
  * @return  string  $html  Template HTML.
  */
@@ -335,7 +336,7 @@ function openagenda_get_events_html( $view = 'list', $with_controls = true ) {
 	}
 
 	ob_start();
-	$openagenda->reset_index(); // Make sure we're at the start of the loop
+	$openagenda->reset_index(); // Make sure we're at the start of the loop.
 	$template = $openagenda->is_single() ? 'single-event' : 'event';
 	$class    = $openagenda->is_single() ? 'oa-event' : sprintf( 'oa-event-%s', sanitize_title( $view ) );
 	if ( $openagenda->is_single() ) {
@@ -357,7 +358,7 @@ function openagenda_get_events_loop_html() {
 	}
 
 	ob_start();
-	$openagenda->reset_index(); // Make sure we're at the start of the loop
+	$openagenda->reset_index(); // Make sure we're at the start of the loop.
 	$template = $openagenda->is_single() ? 'single-event' : 'event';
 	while ( $openagenda->have_events() ) :
 		$openagenda->the_event();
@@ -368,7 +369,10 @@ function openagenda_get_events_loop_html() {
 
 
 /**
- * Returns the list header HTML, consisting of a filter widget and total number of events
+ * Returns the list header HTML, consisting of a filter widget and total number of events.
+ *
+ * @param  string $view  'list' or 'grid'.
+ * @return  string  $html  HTML.
  */
 function openagenda_get_list_header_html( $view = 'list' ) {
 	global $openagenda;
@@ -411,9 +415,9 @@ function openagenda_get_update_notice_html() {
 /**
  * Formats a given timing for display
  *
- * @param   array        $timing        Timing from the JSON event data
- * @param   DateTimeZone $datetimezone  Timezone to use
- * @return  array         $timing        Timing with additionnal formatted data
+ * @param   array        $timing        Timing from the JSON event data.
+ * @param   DateTimeZone $datetimezone  Timezone to use.
+ * @return  array         $timing        Timing with additionnal formatted data.
  */
 function openagenda_format_timing( $timing, $datetimezone = null ) {
 	$start_timestamp = strtotime( $timing['begin'] );
@@ -446,8 +450,8 @@ function openagenda_format_timing( $timing, $datetimezone = null ) {
 /**
  * Checks whether a given month is nearer in the future than a given reference month
  *
- * @param   string $month  Month to test (format Y-m)
- * @param   string $ref    Reference month
+ * @param   string $month  Month to test (format Y-m).
+ * @param   string $ref    Reference month.
  * @param   string $today  This month.
  * @return  bool
  */
@@ -530,11 +534,11 @@ function openagenda_decode_context( $context_string = null ) {
 /**
  * Encodes the context data into a string.
  *
- * @param   array $context_array    Context data
- * @return  string  $encoded_context  Bas64 encode
+ * @param   array $context_array    Context data.
+ * @return  string  $encoded_context  Bas64 encode.
  */
 function openagenda_encode_context( $context_array ) {
-	return base64_encode( json_encode( $context_array ) );
+	return base64_encode( wp_json_encode( $context_array ) );
 }
 
 
@@ -575,8 +579,9 @@ function openagenda_clear_transient() {
 /**
  * Parses and returns pre-filters
  *
- * @param   string $post_id  Agenda ID to pre-filter
- * @return  array   $filters  Filters to apply to initial request
+ * @param   string $post_id  Agenda ID to pre-filter.
+ * @param  array  $filters  Filters to apply to initial request.
+ * @return  array   $filters  Filters to apply to initial request.
  */
 function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
 	if ( ! $post_id ) {
@@ -589,7 +594,7 @@ function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
 	$prefilters = array();
 
 	if ( filter_var( $filters_url, FILTER_VALIDATE_URL ) !== false ) {
-		$query = parse_url( urldecode( $filters_url ), PHP_URL_QUERY );
+		$query = wp_parse_url( urldecode( $filters_url ), PHP_URL_QUERY );
 		$query = ! empty( $query ) ? str_replace( 'q.', '', $query ) : '';
 		if ( ! empty( $query ) ) {
 			parse_str( $query, $prefilters );
@@ -712,16 +717,16 @@ function openagenda_get_calendar_fields_schema( $type = 'all', $post_id = null )
 			$schema = array_filter(
 				$schema,
 				function ( $f ) use ( $type ) {
-					return $type === 'standard'
-					? ! empty( $f['schemaType'] ) && $f['schemaType'] === 'event'
-					: ! empty( $f['schemaType'] ) && $f['schemaType'] !== 'event';
+					return 'standard' === $type
+					? ! empty( $f['schemaType'] ) && 'event' === $f['schemaType']
+					: ! empty( $f['schemaType'] ) && 'event' !== $f['schemaType'];
 				}
 			);
 			$schema = array_values(
 				array_filter(
 					$schema,
 					function ( $f ) {
-						return ( empty( $f['type'] ) || $f['type'] !== 'section' ) && ( empty( $f['fieldtype'] ) || $f['fieldtype'] !== 'abstract' );
+						return ( empty( $f['type'] ) || 'section' !== $f['type'] ) && ( empty( $f['fieldtype'] ) || 'abstract' !== $f['fieldtype'] );
 					}
 				)
 			);

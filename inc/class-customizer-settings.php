@@ -18,16 +18,22 @@ class Customizer_Settings implements Hookable {
 
 	/**
 	 * Array of panels to register
+	 *
+	 * @var  array  $panels
 	 */
 	protected $panels = array();
 
 	/**
 	 * Array of sections to register
+	 *
+	 * @var  array  $sections
 	 */
 	protected $sections = array();
 
 	/**
 	 * Array of settings to register
+	 *
+	 * @var  array  $settings
 	 */
 	protected $settings = array();
 
@@ -43,7 +49,7 @@ class Customizer_Settings implements Hookable {
 	/**
 	 * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
 	 */
-	function customize_preview_js() {
+	public function customize_preview_js() {
 		wp_enqueue_script( 'oa-customizer', OPENAGENDA_URL . 'assets/js/customizer.js', array( 'customize-preview' ), OPENAGENDA_VERSION, true );
 	}
 
@@ -103,10 +109,12 @@ class Customizer_Settings implements Hookable {
 
 	/**
 	 * Register all the customizer settings
+	 *
+	 * @param  WP_Customize_Manager $wp_customize  Customizer instance.
 	 */
 	public function customize_register( $wp_customize ) {
 
-		// Register all panels
+		// Register all panels.
 		$panels = $this->get_panels();
 		foreach ( $panels as $id => $args ) {
 			$args = wp_parse_args(
@@ -118,7 +126,7 @@ class Customizer_Settings implements Hookable {
 			$wp_customize->add_panel( $id, $args );
 		}
 
-		// Register all sections
+		// Register all sections.
 		$sections = $this->get_sections();
 		foreach ( $sections as $id => $args ) {
 			$args = wp_parse_args(
@@ -131,7 +139,7 @@ class Customizer_Settings implements Hookable {
 			$wp_customize->add_section( $id, $args );
 		}
 
-		// Register settings and controls
+		// Register settings and controls.
 		$settings = $this->get_settings();
 		foreach ( $settings as $id => $args ) {
 			$args = wp_parse_args(
@@ -145,10 +153,10 @@ class Customizer_Settings implements Hookable {
 			);
 			$wp_customize->add_setting( $id, $args );
 
-			// By default, for standard controls pass in the setting id to add_control() method
+			// By default, for standard controls pass in the setting id to add_control() method.
 			$id_or_control = $id;
 
-			// For custom controls, check the type and pass in the relevant WP Customize Custom Control if needed
+			// For custom controls, check the type and pass in the relevant WP Customize Custom Control if needed.
 			if ( ! empty( $args['control']['type'] ) ) {
 				switch ( $args['control']['type'] ) {
 					case 'color':

@@ -13,6 +13,7 @@ add_filter( 'openagenda_event_navigation', 'openagenda_event_navigation_legacy_h
  *
  * @param  string $html  Original HTML.
  * @param  string $previous_link  Previous link HTML.
+ * @param  string $next_link  Next link HTML.
  * @param  string $back_link  List link HTML.
  * @return  string  $html
  */

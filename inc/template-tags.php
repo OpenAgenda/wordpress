@@ -1071,7 +1071,7 @@ function openagenda_get_page_links( $args = array() ) {
 	}
 
 	for ( $i = 1; $i <= $total_pages; $i++ ) {
-		if ( $i <= $args['end_size'] || ( $current_page - $args['mid_size'] ) <= $i && $i <= ( $current_page + $args['mid_size'] ) || $i > ( $total_pages - $args['end_size'] ) ) {
+		if ( ( $i <= $args['end_size'] ) || ( ( $current_page - $args['mid_size'] ) <= $i && $i <= ( $current_page + $args['mid_size'] ) ) || ( $i > ( $total_pages - $args['end_size'] ) ) ) {
 			$links[] = array(
 				'label'  => sprintf( $args['label_format'], $i ),
 				'url'    => openagenda_get_page_permalink( $i ),

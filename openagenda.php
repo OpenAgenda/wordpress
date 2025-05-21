@@ -1,32 +1,35 @@
 <?php
-/*
-Plugin Name: OpenAgenda
-Plugin URI:  https://wordpress.org/plugins/openagenda/
-Description: Display your OpenAgenda data on your WordPress site.
-Version:     3.0.0
-Author:      OpenAgenda
-Author URI:  https://openagenda.com/
-Text Domain: openagenda
-Domain Path: /languages
-License:     GPL v2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Requires PHP: 7.4.1
-Requires at least: 5.0
-Tested up to: 6.7.2
-
-OpenAgenda is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-any later version.
-
-OpenAgenda is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with OpenAgenda. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
-*/
+/**
+ * Plugin Name: OpenAgenda
+ * Plugin URI:  https://wordpress.org/plugins/openagenda/
+ * Description: Display your OpenAgenda data on your WordPress site.
+ * Version:     3.0.0
+ * Author:      OpenAgenda
+ * Author URI:  https://openagenda.com/
+ * Text Domain: openagenda
+ * Domain Path: /languages
+ * License:     GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Requires PHP: 7.4.1
+ * Requires at least: 5.0
+ * Tested up to: 6.7.2
+ *
+ * @package OpenAgenda
+ * @version 3.0.0
+ *
+ * OpenAgenda is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * any later version.
+ *
+ * OpenAgenda is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with OpenAgenda. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
+ */
 
 defined( 'ABSPATH' ) || die();
 
@@ -104,11 +107,11 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'openagenda_pl
 /**
  * Adds plugin action links
  *
- * @param   array  $actions  Available actions
- * @param   string $file  Plugin file
- * @param   array  $data  $plugin data
- * @param   string $context  Context
- * @return  array   $actions
+ * @param   array  $actions  Available actions.
+ * @param   string $file  Plugin file.
+ * @param   array  $data  $plugin data.
+ * @param   string $context  Context.
+ * @return  array   $actions Actions.
  */
 function openagenda_plugin_action_links( $actions, $file, $data, $context ) {
 	$actions['settings']      = sprintf(
