@@ -43,6 +43,7 @@ class Main {
 		require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
 		require_once OPENAGENDA_PATH . 'inc/helper-functions.php';
 		require_once OPENAGENDA_PATH . 'inc/template-tags.php';
+		require_once OPENAGENDA_PATH . 'inc/template-filters.php';
 		require_once OPENAGENDA_PATH . 'inc/class-content-manager.php';
 		require_once OPENAGENDA_PATH . 'inc/class-openagenda.php';
 		require_once OPENAGENDA_PATH . 'inc/class-customizer-settings.php';
