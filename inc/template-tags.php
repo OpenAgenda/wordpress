@@ -70,7 +70,14 @@ function openagenda_get_field( $field, $uid = false ) {
 			$value              = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', rawurlencode( $slug ), $calendar_permalink );
 			break;
 		case 'external-permalink':
-			$value = sprintf( 'https://openagenda.com/agendas/%s/events/%s?from=wp', $openagenda->get_uid(), $uid );
+			$agenda_settings = openagenda_get_calendar_settings();
+			$agenda_slug     =  ! empty( $agenda_settings['slug'] ) ? sanitize_title( $agenda_settings['slug'] ) : false;
+			$event_slug      =  ! empty( $event['slug'] ) ? sanitize_title( $event['slug'] ) : false;
+			if( $agenda_slug && $event_slug ){
+				$value = sprintf( 'https://openagenda.com/%s/events/%s', $agenda_slug, $event_slug ); 
+			} else {
+				$value = sprintf( 'https://openagenda.com/agendas/%s/events/%s?from=wp', $openagenda->get_uid(), $uid ); 
+			}
 			break;
 		case 'timings':
 		case 'next-timings':
@@ -809,6 +816,37 @@ function openagenda_event_share_buttons( $uid = false, $display = true ) {
 	return $html;
 }
 
+
+/**
+ * Displays or returns unique share button.
+ *
+ * @param  string $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ */
+function openagenda_event_share_button( $uid = false, $display = true ) {
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$html = '';
+	$permalink = openagenda_get_field( 'external-permalink', $uid );
+	$share_url = add_query_arg( 'sharemodal', 1, $permalink );
+
+	if ( ! empty( $share_url ) ) {
+		$html = sprintf(
+			'<a role="button" class="oa-share-button oa-button" href="%s" rel="noopener noreferrer" target="_blank">%s</a>',
+			esc_url( $share_url ),
+			esc_html__( 'Share', 'openagenda' ),
+		);
+	}
+
+	$html = apply_filters( 'openagenda_sharer_button_html', $html, $uid, $event );
+	if ( $display ) {
+		echo $html;
+	}
+	return $html;
+}
 
 /**
  * Displays a list of registration methods for the event

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-21T12:54:18+00:00\n"
+"POT-Creation-Date: 2025-05-21T15:31:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -197,7 +197,7 @@ msgstr ""
 #: inc/class-filter-widget.php:23
 #: inc/class-settings.php:291
 #: inc/class-shortcodes.php:369
-#: inc/template-tags.php:714
+#: inc/template-tags.php:721
 msgid "OpenStreetMap contributors"
 msgstr ""
 
@@ -508,19 +508,19 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
-#: inc/class-openagenda.php:439
+#: inc/class-openagenda.php:440
 msgid "XLSX"
 msgstr ""
 
-#: inc/class-openagenda.php:440
+#: inc/class-openagenda.php:441
 msgid "JSON"
 msgstr ""
 
-#: inc/class-openagenda.php:441
+#: inc/class-openagenda.php:442
 msgid "RSS"
 msgstr ""
 
-#: inc/class-openagenda.php:625
+#: inc/class-openagenda.php:626
 msgid "There was an error parsing the JSON."
 msgstr ""
 
@@ -723,134 +723,138 @@ msgstr ""
 msgid "Accessible to people suffering from intellectual disabilities."
 msgstr ""
 
-#: inc/helper-functions.php:397
+#: inc/helper-functions.php:400
 msgid "Fetching events... Please wait a moment."
 msgstr ""
 
-#: inc/helper-functions.php:409
+#: inc/helper-functions.php:412
 msgid "There was an error updating the events. Pleaser refresh the page and try again."
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:442
+#: inc/helper-functions.php:445
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:444
+#: inc/helper-functions.php:447
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
 
 #: inc/template-filters.php:65
-#: inc/template-tags.php:1322
+#: inc/template-tags.php:1360
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
 #: inc/template-filters.php:66
-#: inc/template-tags.php:1323
+#: inc/template-tags.php:1361
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
 
-#: inc/template-tags.php:237
+#: inc/template-tags.php:244
 msgid "Yes"
 msgstr ""
 
-#: inc/template-tags.php:237
+#: inc/template-tags.php:244
 msgid "No"
 msgstr ""
 
-#: inc/template-tags.php:563
+#: inc/template-tags.php:570
 msgid "No timing available"
 msgstr ""
 
-#: inc/template-tags.php:626
+#: inc/template-tags.php:633
 msgid "View previous month"
 msgstr ""
 
-#: inc/template-tags.php:629
+#: inc/template-tags.php:636
 msgid "View next month"
 msgstr ""
 
 #. translators: %d: number of upcoming events
-#: inc/template-tags.php:682
+#: inc/template-tags.php:689
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of upcoming events
-#: inc/template-tags.php:682
+#: inc/template-tags.php:689
 msgid "No upcoming event."
 msgstr ""
 
 #. translators: %d: number of passed events
-#: inc/template-tags.php:685
+#: inc/template-tags.php:692
 msgid "%d passed event."
 msgid_plural "%d passed events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of passed events
-#: inc/template-tags.php:685
+#: inc/template-tags.php:692
 msgid "No passed event."
 msgstr ""
 
-#: inc/template-tags.php:751
+#: inc/template-tags.php:758
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/template-tags.php:756
+#: inc/template-tags.php:763
 msgid "Share on X"
 msgstr ""
 
-#: inc/template-tags.php:767
+#: inc/template-tags.php:774
 msgid "Share on Linkedin"
 msgstr ""
 
-#: inc/template-tags.php:800
+#: inc/template-tags.php:807
 msgid "Share :"
 msgstr ""
 
-#: inc/template-tags.php:891
+#: inc/template-tags.php:840
+msgid "Share"
+msgstr ""
+
+#: inc/template-tags.php:929
 msgid "Access the event"
 msgstr ""
 
-#: inc/template-tags.php:917
+#: inc/template-tags.php:955
 msgid "On site"
 msgstr ""
 
-#: inc/template-tags.php:918
+#: inc/template-tags.php:956
 #: templates/event.php:22
 #: templates/legacy/event.php:22
 msgid "Online"
 msgstr ""
 
-#: inc/template-tags.php:919
+#: inc/template-tags.php:957
 msgid "Mixed"
 msgstr ""
 
-#: inc/template-tags.php:1055
+#: inc/template-tags.php:1093
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:1056
+#: inc/template-tags.php:1094
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:1218
+#: inc/template-tags.php:1256
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:1372
+#: inc/template-tags.php:1410
 msgid "Back to list"
 msgstr ""
 
 #. translators: %s: event title
-#: inc/template-tags.php:1428
+#: inc/template-tags.php:1466
 msgid "Add %s to favorites."
 msgstr ""
 
@@ -864,11 +868,15 @@ msgid "Sorry, we could not find any event."
 msgstr ""
 
 #: templates/legacy/single-event.php:47
-#: templates/single-event.php:47
+#: templates/single-event.php:64
 msgid "Access the online event: "
 msgstr ""
 
 #: templates/legacy/single-event.php:54
-#: templates/single-event.php:54
+#: templates/single-event.php:52
 msgid "Registration: "
+msgstr ""
+
+#: templates/single-event.php:42
+msgid "Conditions: "
 msgstr ""

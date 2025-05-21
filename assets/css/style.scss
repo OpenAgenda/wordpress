@@ -206,20 +206,77 @@ ul.oa-sharers-links {
 /*******************
  * Event data
  *******************/
+.oa-event-title {
+	margin-top: 0;
+	margin-bottom: var(--oa-spacing-4);
+}
+
 .oa-event-timings {
-	margin: 1rem 0;
+	margin: var(--oa-spacing-4) 0;
+}
+
+.oa-event-description {
+	color: var(--oa-gray-900);
+	margin-bottom: var(--oa-spacing-4);
 }
 
 .oa-meta,
-.oa-card-meta,
 .oa-registration-method-wrapper {
 	align-items: center;
-	display: flex;
+	color: var(--oa-gray-900);
+	column-gap: var(--oa-spacing-4);
+	display: grid;
+	font-size: var(--oa-text-3);
+	grid-template-columns: 2rem 1fr;
+	place-items: center start;
+	row-gap: var(--oa-spacing-1);
 
 	.oa-icon {
-		margin-right: 5px;
+		fill: var(--oa-gray-400);
+		height: 32px;
+		width: 32px;
 	}
 }
+
+.oa-meta {
+	margin-bottom: var(--oa-spacing-4);
+}
+
+.oa-meta-label {
+	font-size: var(--oa-text-4);
+}
+
+.oa-registration-methods {
+	list-style: none;
+	padding: 0;
+	grid-column: 2;
+	flex-basis: 100%;
+}
+
+.oa-conditions-value {
+	grid-column: 2;
+}
+
+.oa-button {
+	border: 1px solid var(--oa-main-color);
+	border-radius: 4px;
+	color: var(--oa-main-color);
+	padding: var(--oa-spacing-2);
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		border-color: var(--oa-main-color-darker);
+		color: var(--oa-main-color-darker);
+	}
+}
+
+
+
+
+
+
+
 
 .oa-timing {
 	display: flex;
@@ -1247,7 +1304,7 @@ img {
 	border-width: 0;
 }
 
-@include helper('color', 'oa', $colors );
-@include helper('font-size', 'oa-text', $fontSizes );
+// @include helper('color', 'oa', $colors );
+// @include helper('font-size', 'oa-text', $fontSizes );
 // @include spacing-helper('padding', 'oa', $spacings );
 // @include spacing-helper('margin', 'oa', $spacings );

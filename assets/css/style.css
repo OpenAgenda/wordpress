@@ -256,20 +256,67 @@ ul.oa-sharers-links {
 /*******************
  * Event data
  *******************/
+.oa-event-title {
+  margin-top: 0;
+  margin-bottom: var(--oa-spacing-4);
+}
+
 .oa-event-timings {
-  margin: 1rem 0;
+  margin: var(--oa-spacing-4) 0;
+}
+
+.oa-event-description {
+  color: var(--oa-gray-900);
+  margin-bottom: var(--oa-spacing-4);
 }
 
 .oa-meta,
-.oa-card-meta,
 .oa-registration-method-wrapper {
   align-items: center;
-  display: flex;
+  color: var(--oa-gray-900);
+  column-gap: var(--oa-spacing-4);
+  display: grid;
+  font-size: var(--oa-text-3);
+  grid-template-columns: 2rem 1fr;
+  place-items: center start;
+  row-gap: var(--oa-spacing-1);
 }
 .oa-meta .oa-icon,
-.oa-card-meta .oa-icon,
 .oa-registration-method-wrapper .oa-icon {
-  margin-right: 5px;
+  fill: var(--oa-gray-400);
+  height: 32px;
+  width: 32px;
+}
+
+.oa-meta {
+  margin-bottom: var(--oa-spacing-4);
+}
+
+.oa-meta-label {
+  font-size: var(--oa-text-4);
+}
+
+.oa-registration-methods {
+  list-style: none;
+  padding: 0;
+  grid-column: 2;
+  flex-basis: 100%;
+}
+
+.oa-conditions-value {
+  grid-column: 2;
+}
+
+.oa-button {
+  border: 1px solid var(--oa-main-color);
+  border-radius: 4px;
+  color: var(--oa-main-color);
+  padding: var(--oa-spacing-2);
+  text-decoration: none;
+}
+.oa-button:hover, .oa-button:focus {
+  border-color: var(--oa-main-color-darker);
+  color: var(--oa-main-color-darker);
 }
 
 .oa-timing {
@@ -1245,222 +1292,6 @@ img {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-
-.oa-primary-50 {
-  color: var(--oa-primary-50);
-}
-
-.oa-primary-100 {
-  color: var(--oa-primary-100);
-}
-
-.oa-primary-200 {
-  color: var(--oa-primary-200);
-}
-
-.oa-primary-300 {
-  color: var(--oa-primary-300);
-}
-
-.oa-primary-400 {
-  color: var(--oa-primary-400);
-}
-
-.oa-primary-500 {
-  color: var(--oa-primary-500);
-}
-
-.oa-primary-600 {
-  color: var(--oa-primary-600);
-}
-
-.oa-primary-700 {
-  color: var(--oa-primary-700);
-}
-
-.oa-primary-800 {
-  color: var(--oa-primary-800);
-}
-
-.oa-primary-900 {
-  color: var(--oa-primary-900);
-}
-
-.oa-gray-10 {
-  color: var(--oa-gray-10);
-}
-
-.oa-gray-50 {
-  color: var(--oa-gray-50);
-}
-
-.oa-gray-100 {
-  color: var(--oa-gray-100);
-}
-
-.oa-gray-200 {
-  color: var(--oa-gray-200);
-}
-
-.oa-gray-300 {
-  color: var(--oa-gray-300);
-}
-
-.oa-gray-400 {
-  color: var(--oa-gray-400);
-}
-
-.oa-gray-500 {
-  color: var(--oa-gray-500);
-}
-
-.oa-gray-600 {
-  color: var(--oa-gray-600);
-}
-
-.oa-gray-700 {
-  color: var(--oa-gray-700);
-}
-
-.oa-gray-800 {
-  color: var(--oa-gray-800);
-}
-
-.oa-gray-900 {
-  color: var(--oa-gray-900);
-}
-
-.oa-warning-100 {
-  color: var(--oa-warning-100);
-}
-
-.oa-warning-200 {
-  color: var(--oa-warning-200);
-}
-
-.oa-warning-300 {
-  color: var(--oa-warning-300);
-}
-
-.oa-warning-400 {
-  color: var(--oa-warning-400);
-}
-
-.oa-warning-500 {
-  color: var(--oa-warning-500);
-}
-
-.oa-warning-600 {
-  color: var(--oa-warning-600);
-}
-
-.oa-warning-700 {
-  color: var(--oa-warning-700);
-}
-
-.oa-warning-800 {
-  color: var(--oa-warning-800);
-}
-
-.oa-warning-900 {
-  color: var(--oa-warning-900);
-}
-
-.oa-danger-50 {
-  color: var(--oa-danger-50);
-}
-
-.oa-danger-100 {
-  color: var(--oa-danger-100);
-}
-
-.oa-danger-200 {
-  color: var(--oa-danger-200);
-}
-
-.oa-danger-300 {
-  color: var(--oa-danger-300);
-}
-
-.oa-danger-400 {
-  color: var(--oa-danger-400);
-}
-
-.oa-danger-500 {
-  color: var(--oa-danger-500);
-}
-
-.oa-danger-600 {
-  color: var(--oa-danger-600);
-}
-
-.oa-danger-700 {
-  color: var(--oa-danger-700);
-}
-
-.oa-danger-800 {
-  color: var(--oa-danger-800);
-}
-
-.oa-danger-900 {
-  color: var(--oa-danger-900);
-}
-
-.oa-state-refused {
-  color: var(--oa-state-refused);
-}
-
-.oa-state-toControl {
-  color: var(--oa-state-toControl);
-}
-
-.oa-state-controlled {
-  color: var(--oa-state-controlled);
-}
-
-.oa-state-published {
-  color: var(--oa-state-published);
-}
-
-.oa-text-0 {
-  font-size: var(--oa-text-0);
-}
-
-.oa-text-1 {
-  font-size: var(--oa-text-1);
-}
-
-.oa-text-2 {
-  font-size: var(--oa-text-2);
-}
-
-.oa-text-3 {
-  font-size: var(--oa-text-3);
-}
-
-.oa-text-4 {
-  font-size: var(--oa-text-4);
-}
-
-.oa-text-5 {
-  font-size: var(--oa-text-5);
-}
-
-.oa-text-6 {
-  font-size: var(--oa-text-6);
-}
-
-.oa-text-7 {
-  font-size: var(--oa-text-7);
-}
-
-.oa-text-8 {
-  font-size: var(--oa-text-8);
-}
-
-.oa-text-9 {
-  font-size: var(--oa-text-9);
 }
 
 /*# sourceMappingURL=style.css.map */
