@@ -417,6 +417,7 @@ class OpenAgenda {
 	 * @return  bool  $is_preview
 	 */
 	public function is_preview() {
+		$this->is_preview = $this->get_option( 'is_preview' );
 		return apply_filters( 'openagenda_is_preview', $this->is_preview, $this->uid );
 	}
 
@@ -515,6 +516,7 @@ class OpenAgenda {
 		$settings = get_option( 'openagenda_general_settings' );
 
 		$defaults = array(
+			'is_preview'      => false,
 			'cache'           => true,
 			'context'         => true,
 			'infinite_scroll' => false,
@@ -554,7 +556,6 @@ class OpenAgenda {
 		$this->page       = ! empty( $args['page'] ) ? (int) $args['page'] : 1;
 		$this->size       = $this->is_single() ? 1 : (int) $args['size'];
 		$this->offset     = ( $this->page - 1 ) * $this->size;
-		$this->is_preview = ! empty( $args['id'] ) && 'preview' === $args['id'];
 		if ( $this->page > 1 ) {
 			$args['from'] = (int) $this->offset;
 		}
