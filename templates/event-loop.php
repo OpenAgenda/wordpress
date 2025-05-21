@@ -16,16 +16,9 @@
  * @version 3.0.0
  */
 if ( $openagenda->have_events() ) : ?>
-	<?php if ( $with_controls ) : ?>
+	<?php if ( $openagenda->is_single() ) : ?>
 		<div class="oa-controls oa-controls-top">
-			<?php
-			if ( $openagenda->is_archive() ) {
-				openagenda_exports();
-				openagenda_pagination();
-			} else {
-				openagenda_navigation();
-			}
-			?>
+			<?php openagenda_navigation(); ?>
 		</div>
 	<?php endif; ?>
 	<div data-container-id="oa-events" class="<?php echo esc_attr( $class ); ?>">

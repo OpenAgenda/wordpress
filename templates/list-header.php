@@ -10,6 +10,9 @@
  */
 ?>
 <header class="<?php echo esc_attr( $class ); ?>">
-	<?php echo do_shortcode( '[openagenda_filter_total]' ); ?>
-	<?php echo do_shortcode( '[openagenda_filter_active]' ); ?>
+	<?php
+		openagenda_filters();
+		echo do_shortcode( '[openagenda_filter_total]' );
+		echo do_shortcode( '[openagenda_filter_active]' );
+	?>
 </header>

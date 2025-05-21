@@ -1,126 +1,110 @@
 @use "sass:math";
-@use "sass:map";
 
-@import 'variables';
-@import 'mixins';
+$oa-blue: #41acdd;
+$oa-black: #413a42;
+$oa-dark-purple: #413a42;
+$oa-white: #fff;
+$oa-silver: silver;
+$oa-gray: gray;
+$oa-gray-lightish: #bbb;
+$oa-gray-light: #ccc;
+$oa-gray-lighter: #eee;
+$oa-gray-lightest: #fafafa;
+$oa-red: #da4453;
+$oa-green: #5cb85c;
+$oa-yellow: rgba(240, 194, 12, 0.6);
+$oa-orange: #ff813d;
+$oa-warning: #f6bb42;
+$oa-dark: #333;
 
 :root {
+	--oa-main-color: #{$oa-blue};
+	--oa-secondary-color: #{$oa-black};
 	scroll-behavior: smooth;
-	--oa-main-color: #{map.get($colors, primary-500)};
-	@include css_variables('oa', $colors );
-	@include css_variables('oa-spacing', $spacings );
-	@include css_variables('oa-text', $fontSizes );
 }
 
-/*************************
- * Events lists and grid
- *************************/
-.oa-event-list,
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/*****************************
+ * Screen reader text helper
+ *****************************/
+.oa-sr-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+/*****************************
+ * Helpers
+ *****************************/
+.block {
+	display: block;
+}
+
+/**************
+ * Events
+ **************/
+.oa-events-header {
+	margin: 1rem 0;
+}
+
 .oa-event-grid {
 	display: grid;
-	grid-gap: var(--oa-spacing-7);
+	grid-gap: 4rem;
 
-	.oa-event {
-		border: 1px solid var(--oa-gray-400);
-		position: relative;
-	}
-
-	.oa-event-thumbnail {
-		height: 170px;
-
-		img {
-			object-fit: cover;
-			height: 100%;
-			width: 100%;
-		}
-	}
-
-	.oa-event-details {
-		display: flex;
-		flex-direction: column;
-		font-size: var(--oa-text-4);
-		gap: var(--oa-spacing-2);
-		padding: var(--oa-spacing-5);
-	}
-
-	.oa-event-title {
-		color: var(--oa-gray-900);
-		font-size: inherit;
-		margin-top: 0;
-	}
-
-	.oa-event-short-description {
-		color: var(--oa-gray-700);
-	}
-
-	.oa-event-location {
-		color: var(--oa-gray-700);
-		font-size: var(--oa-text-3);
-	}
-
-	.oa-event-featured-badge {
-		--gradient-from: white 36px;
-		--gradient-to: transparent 0;
-		background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
-		height: 52px;
-		position: absolute;
-		top: 0px;
-		left: 0px;
-		width: 52px;
-		z-index: 10;
-
-		.oa-event-featured-badge-wrapper {
-			--gradient-from: var(--oa-primary-500) 32px;
-			background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
-			height: 100%;
-			padding: 2px;
-			width: 100%;
-		}
-
-		.oa-icon {
-			fill: white;
-		}
-	}
-}
-
-.oa-event-grid {
 	@media screen and (min-width: 768px) {
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+		.oa-list-item {
+			padding: 1rem;
+		}
 	}
 }
 
+.oa-event-list {
+	.oa-list-item {
+		margin-bottom: 4rem;
+	}
+}
 
+.oa-event-title {
+	margin-top: 0;
+}
 
-/*******************
+.oa-event-thumbnail {
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+/**************
  * Pagination
- *******************/
+ **************/
 ul.oa-pagination {
 	display: flex;
 	flex-wrap: wrap;
-	font-size: var(--oa-text-4);
-	justify-content: end;
 	list-style: none;
-	margin: var(--oa-spacing-4) 0;
-	padding: 0;
-
-	.oa-page {
-		margin: 0;
-
-		a,
-		span {
-			display: inline-block;
-			line-height: 1;
-			padding: var(--oa-spacing-2);
-			color: var(--oa-gray-700);
-		}
-
-		a:hover,
-		a:focus {
-			color: var(--oa-primary-500);
-		}
-	}
+	margin: 1rem 0;
 }
 
+.oa-page {
+	margin: 0;
+}
+
+.oa-page a,
+.oa-page span {
+	display: inline-block;
+	line-height: 1;
+	padding: .5rem;
+}
 
 /**************
  * Navigation
@@ -176,7 +160,7 @@ ul.oa-pagination {
 	border-bottom: 2px solid transparent;
 
 	&.active {
-		border-bottom: 2px solid var(--oa-main-color);
+		border-bottom: 2px solid var(--oa-main-color, $oa-blue);
 	}
 }
 
@@ -592,7 +576,7 @@ div[data-container-id="oa-wrapper"] {
 }
 
 .rdrDayNumber span {
-	color: #{map.get($colors, primary-500)};
+	color: $oa-black;
 }
 
 .rdrDayDisabled {
@@ -725,7 +709,7 @@ div[data-container-id="oa-wrapper"] {
 
 .rdrMonthPicker:hover,
 .rdrYearPicker:hover {
-	border: 1px solid var(--oa-main-color);
+	border: 1px solid var(--oa-main-color, $oa-blue);
 }
 
 .rdrNextPrevButton {
@@ -740,7 +724,7 @@ div[data-container-id="oa-wrapper"] {
 }
 
 .rdrNextPrevButton:hover {
-	border-color: var(--oa-main-color);
+	border-color: var(--oa-main-color, $oa-blue);
 }
 
 .rdrNextPrevButton i {
@@ -805,7 +789,7 @@ div[data-container-id="oa-wrapper"] {
 	line-height: 3em;
 	height: 3em;
 	text-align: center;
-	color: #{map.get($colors, grey-900)};
+	color: $oa-black;
 }
 
 .rdrDay.rdrDayPassive {
@@ -846,7 +830,7 @@ div[data-container-id="oa-wrapper"] {
 	width: 18px;
 	height: 2px;
 	border-radius: 2px;
-	background: var(--oa-main-color);
+	background: var(--oa-main-color, $oa-blue);
 }
 
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span:after,
@@ -867,7 +851,7 @@ div[data-container-id="oa-wrapper"] {
 .rdrInRange,
 .rdrStartEdge,
 .rdrEndEdge {
-	background: var(--oa-main-color);
+	background: var(--oa-main-color, $oa-blue);
 	position: absolute;
 	top: 5px;
 	left: 0;
@@ -876,7 +860,7 @@ div[data-container-id="oa-wrapper"] {
 }
 
 .rdrSelected {
-	background: var(--oa-main-color);
+	background: var(--oa-main-color, $oa-blue);
 	left: 2px;
 	right: 2px;
 }
@@ -945,7 +929,7 @@ div[data-container-id="oa-wrapper"] {
 	right: 0px;
 	bottom: 3px;
 	pointer-events: none;
-	border: 0px solid var(--oa-main-color);
+	border: 0px solid var(--oa-main-color, $oa-blue);
 	z-index: 1;
 }
 
@@ -980,9 +964,9 @@ div[data-container-id="oa-wrapper"] {
 }
 
 .rdrDefinedRangesWrapper .rdrStaticRangeSelected {
-	color: var(--oa-main-color) ! important;
+	color: var(--oa-main-color, $oa-blue) ! important;
 	font-weight: 600;
-	border-color: var(--oa-main-color);
+	border-color: var(--oa-main-color, $oa-blue);
 }
 
 button.rdrStaticRange {
@@ -1005,7 +989,7 @@ button.rdrStaticRange {
 		&:hover,
 		&:focus {
 			background: #fff;
-			border-color: var(--oa-main-color);
+			border-color: var(--oa-main-color, $oa-blue);
 		}
 	}
 }
@@ -1053,7 +1037,7 @@ button.rdrStaticRange {
 
 .rdrInputRangeInput:focus,
 .rdrInputRangeInput:hover {
-	border-color: var(--oa-main-color);
+	border-color: var(--oa-main-color, $oa-blue);
 	outline: 0;
 	color: #333;
 }
@@ -1146,10 +1130,10 @@ button.rdrStaticRange {
 	.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
 	.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
 	.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
-		color: #{map.get($colors, grey-900)};
+		color: $oa-black;
 
 		&:after {
-			background: var(--oa-main-color);
+			background: var(--oa-main-color, $oa-blue);
 		}
 	}
 }
@@ -1162,11 +1146,11 @@ button.rdrStaticRange {
 		background: transparent;
 		border: none;
 		padding: 2px 4px;
-		color: #{map.get($colors, danger-500)};
+		color: $oa-red;
 
 		&:hover,
 		&:focus {
-			background: #{map.get($colors, danger-500)};
+			background: $oa-red;
 			color: white;
 		}
 	}
@@ -1225,32 +1209,3 @@ button.oa-event-favorite-badge {
 		}
 	}
 }
-
-/*****************************
- * Helpers
- *****************************/
-img {
-	max-width: 100%;
-	height: auto;
-}
-
-.block {
-	display: block;
-}
-
-.oa-sr-text {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border-width: 0;
-}
-
-@include helper('color', 'oa', $colors );
-@include helper('font-size', 'oa-text', $fontSizes );
-// @include spacing-helper('padding', 'oa', $spacings );
-// @include spacing-helper('margin', 'oa', $spacings );

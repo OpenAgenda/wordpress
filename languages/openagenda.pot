@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenAgenda 2.14.0\n"
+"Project-Id-Version: OpenAgenda 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openagenda\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-02T10:14:05+00:00\n"
+"POT-Creation-Date: 2025-05-21T09:04:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -79,7 +79,7 @@ msgstr ""
 
 #: inc/class-content-manager.php:72
 #: inc/class-content-manager.php:129
-#: inc/class-settings.php:534
+#: inc/class-settings.php:551
 msgid "calendar"
 msgstr ""
 
@@ -195,7 +195,7 @@ msgid "OpenAgenda main color"
 msgstr ""
 
 #: inc/class-filter-widget.php:29
-#: inc/class-settings.php:275
+#: inc/class-settings.php:291
 #: inc/class-shortcodes.php:369
 #: inc/template-tags.php:714
 msgid "OpenStreetMap contributors"
@@ -342,37 +342,37 @@ msgstr ""
 msgid "Choose filter"
 msgstr ""
 
-#: inc/class-main.php:203
+#: inc/class-main.php:208
 msgctxt "Filter name"
 msgid "Active filters"
 msgstr ""
 
-#: inc/class-main.php:207
+#: inc/class-main.php:212
 msgctxt "Filter name"
 msgid "Choice"
 msgstr ""
 
-#: inc/class-main.php:211
+#: inc/class-main.php:216
 msgctxt "Filter name"
 msgid "Calendar"
 msgstr ""
 
-#: inc/class-main.php:215
+#: inc/class-main.php:220
 msgctxt "Filter name"
 msgid "Defined Ranges"
 msgstr ""
 
-#: inc/class-main.php:219
+#: inc/class-main.php:224
 msgctxt "Filter name"
 msgid "Map"
 msgstr ""
 
-#: inc/class-main.php:223
+#: inc/class-main.php:228
 msgctxt "Filter name"
 msgid "Upcoming"
 msgstr ""
 
-#: inc/class-main.php:227
+#: inc/class-main.php:232
 msgctxt "Filter name"
 msgid "Search"
 msgstr ""
@@ -504,7 +504,7 @@ msgid "The request could not be authenticated. Please double check API key in <a
 msgstr ""
 
 #: inc/class-metaboxes.php:393
-#: inc/class-settings.php:356
+#: inc/class-settings.php:372
 msgid "Show password"
 msgstr ""
 
@@ -590,76 +590,88 @@ msgid "Load default styling."
 msgstr ""
 
 #: inc/class-settings.php:158
-msgid "Cache duration"
+msgid "Legacy templates."
 msgstr ""
 
 #: inc/class-settings.php:168
+msgid "Use legacy templates."
+msgstr ""
+
+#: inc/class-settings.php:169
+msgid "Templates have been updated with version 3.0.0. If you are experiencing display problems and want to use older templates instead of the new ones, check this option."
+msgstr ""
+
+#: inc/class-settings.php:174
+msgid "Cache duration"
+msgstr ""
+
+#: inc/class-settings.php:184
 msgid "Requests responses are temporarily stored for performance reasons. This setting controls the number of seconds basic requests responses are stored"
 msgstr ""
 
-#: inc/class-settings.php:173
+#: inc/class-settings.php:189
 msgid "Default event image"
 msgstr ""
 
-#: inc/class-settings.php:181
+#: inc/class-settings.php:197
 msgid "Add default image"
 msgstr ""
 
-#: inc/class-settings.php:182
+#: inc/class-settings.php:198
 msgid "Update default image"
 msgstr ""
 
-#: inc/class-settings.php:183
+#: inc/class-settings.php:199
 msgid "Remove default image"
 msgstr ""
 
-#: inc/class-settings.php:190
+#: inc/class-settings.php:206
 msgid "Delete all calendar content on uninstall ?"
 msgstr ""
 
-#: inc/class-settings.php:200
+#: inc/class-settings.php:216
 msgid "Delete all posts of type \"Calendar\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
 msgstr ""
 
-#: inc/class-settings.php:205
+#: inc/class-settings.php:221
 msgid "Delete all options on uninstall ?"
 msgstr ""
 
-#: inc/class-settings.php:215
+#: inc/class-settings.php:231
 msgid "Delete all of this plugin's settings permanently when I uninstall the plugin."
 msgstr ""
 
-#: inc/class-settings.php:220
+#: inc/class-settings.php:236
 msgid "Allow OpenAgenda to collect usage stats ?"
 msgstr ""
 
-#: inc/class-settings.php:230
+#: inc/class-settings.php:246
 msgid "Allow OpenAgenda to collect plugin usage information for statistics purposes. The following information is collected : CMS used, site URL and whether site editor is used or not."
 msgstr ""
 
-#: inc/class-settings.php:235
+#: inc/class-settings.php:251
 msgid "Calendar base"
 msgstr ""
 
 #. translators: %s : home url
-#: inc/class-settings.php:247
+#: inc/class-settings.php:263
 msgid "You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>."
 msgstr ""
 
-#: inc/class-settings.php:254
+#: inc/class-settings.php:270
 msgid "Default map tiles link"
 msgstr ""
 
-#: inc/class-settings.php:267
+#: inc/class-settings.php:283
 msgid "Default map tiles attribution link"
 msgstr ""
 
-#: inc/class-settings.php:280
+#: inc/class-settings.php:296
 msgid "CloudImage API key"
 msgstr ""
 
 #. translators: %s: openagenda site url
-#: inc/class-settings.php:291
+#: inc/class-settings.php:307
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
@@ -690,43 +702,43 @@ msgstr ""
 msgid "Search while moving the map"
 msgstr ""
 
-#: inc/helper-functions.php:186
+#: inc/helper-functions.php:205
 msgid "Accessible to people suffering from motor disabilities."
 msgstr ""
 
-#: inc/helper-functions.php:187
-#: inc/helper-functions.php:190
+#: inc/helper-functions.php:206
+#: inc/helper-functions.php:209
 msgid "Accessible to people suffering from mental disabilities."
 msgstr ""
 
-#: inc/helper-functions.php:188
+#: inc/helper-functions.php:207
 msgid "Accessible to people suffering from hearing impairments."
 msgstr ""
 
-#: inc/helper-functions.php:189
+#: inc/helper-functions.php:208
 msgid "Accessible to people suffering from visual impairments."
 msgstr ""
 
-#: inc/helper-functions.php:191
+#: inc/helper-functions.php:210
 msgid "Accessible to people suffering from intellectual disabilities."
 msgstr ""
 
-#: inc/helper-functions.php:373
+#: inc/helper-functions.php:393
 msgid "Fetching events... Please wait a moment."
 msgstr ""
 
-#: inc/helper-functions.php:385
+#: inc/helper-functions.php:405
 msgid "There was an error updating the events. Pleaser refresh the page and try again."
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/helper-functions.php:418
+#: inc/helper-functions.php:438
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/helper-functions.php:420
+#: inc/helper-functions.php:440
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
@@ -800,7 +812,8 @@ msgid "On site"
 msgstr ""
 
 #: inc/template-tags.php:918
-#: templates/event.php:21
+#: templates/event.php:22
+#: templates/legacy/event.php:22
 msgid "Online"
 msgstr ""
 
@@ -839,14 +852,17 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: templates/event-loop.php:45
+#: templates/event-loop.php:39
+#: templates/legacy/event-loop.php:46
 msgid "Sorry, we could not find any event."
 msgstr ""
 
-#: templates/single-event.php:46
+#: templates/legacy/single-event.php:47
+#: templates/single-event.php:47
 msgid "Access the online event: "
 msgstr ""
 
-#: templates/single-event.php:53
+#: templates/legacy/single-event.php:54
+#: templates/single-event.php:54
 msgid "Registration: "
 msgstr ""

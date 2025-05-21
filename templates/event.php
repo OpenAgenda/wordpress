@@ -25,36 +25,38 @@ switch ( $attendance_mode ) {
 		$location_label = ! empty( $location ) ? sprintf( '%s, %s', esc_html( $location['name'] ?? '' ), esc_html( $location['city'] ?? '' ) ) : '';
 		break;
 }
-
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-list-item">
 	<div class="oa-event-wrapper">
+		<?php openagenda_featured_badge(); ?>
+
 		<div class="oa-event-thumbnail">
 			<a class="oa-event-permalink" href="<?php echo esc_url( $permalink ); ?>" <?php echo $additional_attributes; ?>>
 				<?php openagenda_event_image(); ?>
 			</a>
 		</div>
 
-		<h2 class="oa-event-title">
-			<a class="oa-event-permalink" href="<?php echo esc_url( $permalink ); ?>" <?php echo $additional_attributes; ?>>
-				<?php openagenda_field( 'title' ); ?>
-			</a>
-			<?php openagenda_favorite_badge(); ?>
-		</h2>
+		<div class="oa-event-details">
+			<?php if ( $dateRange = openagenda_get_field( 'dateRange' ) ) : ?>
+				<p class="oa-event-range">
+					<strong><?php echo wp_kses_post( $dateRange ); ?></strong>
+				</p>
+			<?php endif; ?>
 
-		<?php if ( $dateRange = openagenda_get_field( 'dateRange' ) ) : ?>
-			<p class="oa-event-range">
-				<strong><?php echo wp_kses_post( $dateRange ); ?></strong>
-			</p>
-		<?php endif; ?>
-		
-		<p class="oa-event-short-description"><?php openagenda_field( 'description' ); ?></p>
+			<h2 class="oa-event-title">
+				<a class="oa-event-permalink" href="<?php echo esc_url( $permalink ); ?>" <?php echo $additional_attributes; ?>>
+					<?php openagenda_field( 'title' ); ?>
+				</a>
+			</h2>
 			
-		<?php if ( $location_label ) : ?>
-			<p class="oa-event-location">
-				<small><?php echo wp_kses_post( $location_label ); ?></small>
-			</p>
-		<?php endif; ?>
+			<p class="oa-event-short-description"><?php openagenda_field( 'description' ); ?></p>
+				
+			<?php if ( $location_label ) : ?>
+				<p class="oa-event-location">
+					<?php echo wp_kses_post( $location_label ); ?>
+				</p>
+			<?php endif; ?>
+		</div>
 		
 		<?php openagenda_event_schema(); ?>
 	</div>

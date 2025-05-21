@@ -1,0 +1,47 @@
+@mixin css_variables($prefix, $map) {
+    @each $key, $value in $map {
+        --#{$prefix}-#{$key} : #{$value};
+    }
+}
+
+@mixin helper($property, $prefix, $map) {
+    @each $key, $value in $map {
+        .#{$prefix}-#{$key} {
+            #{$property}: var(--#{$prefix}-#{$key});
+        }
+    }
+}
+
+@mixin spacing-helper($property, $prefix, $map) {
+    @each $key, $value in $map {
+        .#{$prefix}-p-#{$key} {
+            #{$property}: var(--#{$prefix}-spacing-#{$key});
+        }
+
+        .#{$prefix}-pb-#{$key} {
+            #{$property}-bottom: var(--#{$prefix}-spacing-#{$key});
+        }
+
+        .#{$prefix}-pt-#{$key} {
+            #{$property}-top: var(--#{$prefix}-spacing-#{$key});
+        }
+
+        .#{$prefix}-pl-#{$key} {
+            #{$property}-left: var(--#{$prefix}-spacing-#{$key});
+        }
+
+        .#{$prefix}-pr-#{$key} {
+            #{$property}-right: var(--#{$prefix}-spacing-#{$key});
+        }
+
+        .#{$prefix}-px-#{$key} {
+            #{$property}-left: var(--#{$prefix}-spacing-#{$key});
+            #{$property}-right: var(--#{$prefix}-spacing-#{$key});
+        }
+
+        .#{$prefix}-py-#{$key} {
+            #{$property}-top: var(--#{$prefix}-spacing-#{$key});
+            #{$property}-bottom: var(--#{$prefix}-spacing-#{$key});
+        }
+    }
+}

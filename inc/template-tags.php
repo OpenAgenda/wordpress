@@ -1461,6 +1461,27 @@ function openagenda_favorite_badge( $uid = false, $display = true ) {
 
 
 /**
+ * Displays a featured badge
+ *
+ * @param  string $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ */
+function openagenda_featured_badge( $uid = false, $display = true ) {
+
+	$html = '';
+	if ( openagenda_get_field( 'featured', $uid ) ) {
+		$html = sprintf( '<div class="oa-event-featured-badge"><div class="oa-event-featured-badge-wrapper">%s</div></div>', openagenda_icon( 'pinned', false ) );
+	}
+
+	$html = apply_filters( 'openagenda_event_featured_badge', $html, $uid );
+	if ( $display ) {
+		echo $html;
+	}
+	return $html;
+}
+
+
+/**
  * Displays the language switcher
  *
  * @param   string $uid   UID of the event or agenda, depending on page type.
@@ -1532,5 +1553,12 @@ function openagenda_event_schema( $uid = false ) {
 			printf( '<script id="oa-event-schema-%s" type="application/ld+json">%s</script>', (int) $uid, wp_json_encode( $schema ) );
 		}
 	}
+}
+
+/**
+ * Displays filters
+ */
+function openagenda_filters() {
+	echo '<p>Filters here</p>';
 }
 
