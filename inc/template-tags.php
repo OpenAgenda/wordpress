@@ -142,6 +142,12 @@ function openagenda_get_field( $field, $uid = false ) {
 		case 'range':
 			return openagenda_get_field( 'dateRange' );
 			break;
+		case 'keywords-list':
+			$values = openagenda_get_field( 'keywords' );
+			$value  = ! empty( $values ) ?  join( ', ', array_map( function( $keyword ){
+				return ucfirst( trim( $keyword ) );
+			}, $values ) ) : '';
+			break;
 		default:
 			$end_value = array_reduce(
 				explode( '.', $field ),
