@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-28T13:55:00+00:00\n"
+"POT-Creation-Date: 2025-05-28T14:17:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -77,104 +77,104 @@ msgstr ""
 msgid "The post ID provided does not refer to a calendar."
 msgstr ""
 
-#: inc/class-content-manager.php:72
-#: inc/class-content-manager.php:129
+#: inc/class-content-manager.php:74
+#: inc/class-content-manager.php:131
 #: inc/class-settings.php:551
 msgid "calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:77
+#: inc/class-content-manager.php:79
 msgctxt "Post type general name"
 msgid "Calendars"
 msgstr ""
 
-#: inc/class-content-manager.php:78
+#: inc/class-content-manager.php:80
 msgctxt "Post type singular name"
 msgid "Calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:79
+#: inc/class-content-manager.php:81
 msgctxt "Admin Menu text"
 msgid "Calendars"
 msgstr ""
 
-#: inc/class-content-manager.php:80
+#: inc/class-content-manager.php:82
 msgctxt "Add New on Toolbar"
 msgid "Calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:81
+#: inc/class-content-manager.php:83
 msgid "Add New Calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:82
+#: inc/class-content-manager.php:84
 msgid "New Calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:83
+#: inc/class-content-manager.php:85
 msgid "Edit Calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:84
+#: inc/class-content-manager.php:86
 msgid "View Calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:85
+#: inc/class-content-manager.php:87
 msgid "All Calendars"
 msgstr ""
 
-#: inc/class-content-manager.php:86
+#: inc/class-content-manager.php:88
 msgid "Search Calendars"
 msgstr ""
 
-#: inc/class-content-manager.php:87
+#: inc/class-content-manager.php:89
 msgid "Parent Calendars:"
 msgstr ""
 
-#: inc/class-content-manager.php:88
+#: inc/class-content-manager.php:90
 msgid "No Calendars found."
 msgstr ""
 
-#: inc/class-content-manager.php:89
+#: inc/class-content-manager.php:91
 msgid "No Calendars found in Trash."
 msgstr ""
 
-#: inc/class-content-manager.php:90
+#: inc/class-content-manager.php:92
 msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
 msgid "Calendar Cover Image"
 msgstr ""
 
-#: inc/class-content-manager.php:91
+#: inc/class-content-manager.php:93
 msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
 msgid "Calendar archives"
 msgstr ""
 
-#: inc/class-content-manager.php:92
+#: inc/class-content-manager.php:94
 msgctxt "Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4"
 msgid "Insert into Calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:93
+#: inc/class-content-manager.php:95
 msgctxt "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4"
 msgid "Uploaded to this Calendar"
 msgstr ""
 
-#: inc/class-content-manager.php:94
+#: inc/class-content-manager.php:96
 msgctxt "Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
 msgid "Filter Calendars list"
 msgstr ""
 
-#: inc/class-content-manager.php:95
+#: inc/class-content-manager.php:97
 msgctxt "Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
 msgid "Calendars list navigation"
 msgstr ""
 
-#: inc/class-content-manager.php:96
+#: inc/class-content-manager.php:98
 msgctxt "Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4"
 msgid "Calendars list"
 msgstr ""
 
-#: inc/class-content-manager.php:227
+#: inc/class-content-manager.php:236
 msgid "Please provide a calendar UID in this calendar's settings box first."
 msgstr ""
 

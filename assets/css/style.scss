@@ -78,24 +78,6 @@
 	}
 }
 
-.oa-event-keywords {
-	color: var(--oa-gray-700);
-	font-size: var(--oa-text-3);
-	margin-bottom: var(--oa-spacing-4);
-}
-
-.oa-event-additional-fields {
-	margin: var(--oa-spacing-7) 0;
-	gap: var(--oa-spacing-4);
-	font-size: var(--oa-text-3);
-
-	.oa-label {
-		display: block;
-		font-size: var(--oa-text-3);
-		color: var(--oa-gray-900);
-	}
-}
-
 /*************************
  * Events lists and grid
  *************************/
@@ -268,6 +250,72 @@ ul.oa-pagination {
 	}
 }
 
+.oa-event-keywords {
+	color: var(--oa-gray-700);
+	font-size: var(--oa-text-3);
+	margin-bottom: var(--oa-spacing-4);
+}
+
+.oa-event-additional-fields {
+	margin: var(--oa-spacing-7) 0;
+	gap: var(--oa-spacing-4);
+	font-size: var(--oa-text-3);
+
+	.oa-label {
+		display: block;
+		font-size: var(--oa-text-3);
+		color: var(--oa-gray-900);
+	}
+}
+
+/***********
+ * Timings
+ ***********/
+.oa-event-timings {
+	margin: var(--oa-spacing-4) 0;
+}
+
+.oa-timing {
+	display: flex;
+}
+
+.oa-seperator,
+.oa-timing-seperator {
+	margin: 0 var(--oa-spacing-1);
+}
+
+.oa-timing-times {
+	margin-left: auto;
+}
+
+ul.oa-months {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+li.oa-month {
+	list-style: none;
+
+	&.oa-hidden {
+		display: none;
+	}
+}
+
+.oa-month-header {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	border-top: 1px solid var(--oa-gray-300);
+	border-bottom: 1px solid var(--oa-gray-300);
+	padding: var(--oa-spacing-1) 0;
+}
+
+ul.oa-week {
+	margin-top: .75rem;
+	list-style: none;
+	padding: 0;
+}
 
 
 /************************************
@@ -319,49 +367,6 @@ ul.oa-sharers-links {
 	display: inline-flex;
 	padding: .25rem;
 	margin-left: 8px;
-}
-
-.oa-event-timings {
-	margin: var(--oa-spacing-4) 0;
-}
-
-.oa-timing {
-	display: flex;
-}
-
-.oa-seperator,
-.oa-timing-seperator {
-	margin: 0 5px;
-}
-
-.oa-timing-times {
-	margin-left: auto;
-}
-
-ul.oa-months {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-li.oa-month {
-	list-style: none;
-
-	&.oa-hidden {
-		display: none;
-	}
-}
-
-.oa-month-header {
-	align-items: center;
-	display: flex;
-	justify-content: space-between;
-}
-
-ul.oa-week {
-	margin-top: .75rem;
-	list-style: none;
-	padding: 0;
 }
 
 button.oa-button {
