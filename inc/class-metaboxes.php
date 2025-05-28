@@ -246,33 +246,13 @@ class Metaboxes implements Hookable {
 		if ( 'oa-calendar-exclude' === $name && empty( get_post_meta( $post->ID, 'oa-calendar-uid', true ) ) ) {
 			$args['default'] = 'yes';
 		}
+		
 		$field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];
+		
 		if ( 'oa-calendar-uid' === $name && ! empty( $field_value ) ) {
-			$openagenda = new OpenAgenda(
-				$field_value,
-				array( 'size' => 1 ),
-				array(
-					'cache'   => false,
-					'context' => false,
-					'api_key' => get_post_meta( $post->ID, 'oa-calendar-api-key', true ),
-				)
-			);
-			$response   = $openagenda->get_raw_response();
-			$message    = '';
-			if ( ! is_wp_error( $response ) ) {
-				$response_code = $response['response']['code'];
-				switch ( $response_code ) {
-					case 404:
-						$message = __( 'Agenda could not be found. Please double check your agenda UID.', 'openagenda' );
-						break;
-					case 403:
-						/* translators: %s: settings page url */
-						$message = sprintf( __( 'The request could not be authenticated. Please double check API key in <a href="%s">your general settings.</a>', 'openagenda' ), esc_url( menu_page_url( 'openagenda', false ) ) );
-						break;
-				}
-			}
-			if ( ! empty( $message ) ) {
-				$args['message'] = $message;
+			$valid = $this->validate_agenda( $field_value, $post->ID );
+			if ( ! empty( $valid['message'] ) ) {
+				$args['message'] = $valid['message'];
 			}
 		}
 
@@ -380,7 +360,7 @@ class Metaboxes implements Hookable {
 						</div>
 						<?php
 						if ( ! empty( $args['message'] ) ) {
-							printf( '<p class="description" style="color:red;">%s</p>', wp_kses_post( $message ) );
+							printf( '<p class="description" style="color:red;">%s</p>', wp_kses_post( $args['message'] ) );
 						}
 						if ( 'password' === $args['type'] && $args['show_password'] ) {
 							printf(
@@ -465,6 +445,45 @@ class Metaboxes implements Hookable {
 		if ( $update ) {
 			openagenda_clear_transient();
 		}
+	}
+
+
+	/**
+	 * Checks a UID is correct and point to an actual agenda.
+	 * 
+	 * @param  string  $uid  Agenda uid to test.
+	 * @param  int     $post_id  Post ID.
+	 * @return  array  $valid  Validity and error message.
+	 */
+	public function validate_agenda( $uid, $post_id ){
+		$openagenda = new OpenAgenda(
+			$uid,
+			array( 'size' => 1 ),
+			array(
+				'cache'   => false,
+				'context' => false,
+				'api_key' => get_post_meta( $post_id, 'oa-calendar-api-key', true ),
+			)
+		);
+
+		$response   = $openagenda->get_raw_response();
+		$message    = '';
+		if ( ! is_wp_error( $response ) ) {
+			$response_code = $response['response']['code'];
+			switch ( $response_code ) {
+				case 404:
+					$message = __( 'Agenda could not be found. Please double check your agenda UID.', 'openagenda' );
+					break;
+				case 403:
+					/* translators: %s: settings page url */
+					$message = sprintf( __( 'The request could not be authenticated. Please double check API key in <a href="%s">your general settings.</a>', 'openagenda' ), esc_url( menu_page_url( 'openagenda', false ) ) );
+					break;
+			}
+		}
+		return array(
+			'valid'   => is_wp_error( $response ),
+			'message' => $message,
+		);
 	}
 
 
