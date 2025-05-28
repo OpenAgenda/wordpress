@@ -16,14 +16,14 @@ $additional_fields = openagenda_get_additional_fields_template_fields();
 			if ( $value ) {
 				$label = openagenda_get_field_label( $field );
 				?>
-						<p class="oa-event-<?php echo esc_attr( $field ); ?>">
-							<strong class="oa-event-<?php echo esc_attr( $field ); ?>-label block">
+						<div class="oa-event-additional-field oa-event-<?php echo esc_attr( $field ); ?>">
+							<strong class="oa-label oa-event-<?php echo esc_attr( $field ); ?>-label">
 							<?php echo esc_html( $label ); ?>
 							</strong>
-							<span class="oa-event-<?php echo esc_attr( $field ); ?>-value block">
+							<div class="oa-event-<?php echo esc_attr( $field ); ?>-value">
 							<?php echo wp_kses_post( $value ); ?>
-							</span>
-						</p>
+							</div>
+						</div>
 					<?php
 			}
 		}
