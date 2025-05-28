@@ -246,9 +246,9 @@ class Metaboxes implements Hookable {
 		if ( 'oa-calendar-exclude' === $name && empty( get_post_meta( $post->ID, 'oa-calendar-uid', true ) ) ) {
 			$args['default'] = 'yes';
 		}
-		
+
 		$field_value = get_post_meta( $post->ID, $name, true ) ? get_post_meta( $post->ID, $name, true ) : $args['default'];
-		
+
 		if ( 'oa-calendar-uid' === $name && ! empty( $field_value ) ) {
 			$valid = $this->validate_agenda( $field_value, $post->ID );
 			if ( ! empty( $valid['message'] ) ) {
@@ -450,12 +450,12 @@ class Metaboxes implements Hookable {
 
 	/**
 	 * Checks a UID is correct and point to an actual agenda.
-	 * 
-	 * @param  string  $uid  Agenda uid to test.
-	 * @param  int     $post_id  Post ID.
+	 *
+	 * @param  string $uid  Agenda uid to test.
+	 * @param  int    $post_id  Post ID.
 	 * @return  array  $valid  Validity and error message.
 	 */
-	public function validate_agenda( $uid, $post_id ){
+	public function validate_agenda( $uid, $post_id ) {
 		$openagenda = new OpenAgenda(
 			$uid,
 			array( 'size' => 1 ),
@@ -466,8 +466,8 @@ class Metaboxes implements Hookable {
 			)
 		);
 
-		$response   = $openagenda->get_raw_response();
-		$message    = '';
+		$response = $openagenda->get_raw_response();
+		$message  = '';
 		if ( ! is_wp_error( $response ) ) {
 			$response_code = $response['response']['code'];
 			switch ( $response_code ) {

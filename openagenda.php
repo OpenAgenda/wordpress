@@ -107,13 +107,10 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'openagenda_pl
 /**
  * Adds plugin action links
  *
- * @param   array  $actions  Available actions.
- * @param   string $file  Plugin file.
- * @param   array  $data  $plugin data.
- * @param   string $context  Context.
+ * @param   array $actions  Available actions.
  * @return  array   $actions Actions.
  */
-function openagenda_plugin_action_links( $actions, $file, $data, $context ) {
+function openagenda_plugin_action_links( $actions ) {
 	$actions['settings']      = sprintf(
 		'<a href="%s">%s</a>',
 		esc_url( menu_page_url( 'openagenda', false ) ),

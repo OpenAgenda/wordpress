@@ -144,9 +144,15 @@ function openagenda_get_field( $field, $uid = false ) {
 			break;
 		case 'keywords-list':
 			$values = openagenda_get_field( 'keywords' );
-			$value  = ! empty( $values ) ?  join( ', ', array_map( function( $keyword ){
-				return ucfirst( trim( $keyword ) );
-			}, $values ) ) : '';
+			$value  = ! empty( $values ) ? join(
+				', ',
+				array_map(
+					function ( $keyword ) {
+						return ucfirst( trim( $keyword ) );
+					},
+					$values
+				)
+			) : '';
 			break;
 		default:
 			$end_value = array_reduce(
