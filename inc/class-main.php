@@ -155,11 +155,8 @@ class Main {
 		wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings' . $js_suffix, array(), OPENAGENDA_VERSION, true );
 
 		if ( openagenda_should_enqueue_styles() ) {
-			if ( openagenda_use_legacy_templates() ) {
-				wp_enqueue_style( 'openagenda-legacy' );
-			} else {
-				wp_enqueue_style( 'openagenda-main' );
-			}
+			$stylesheet = openagenda_use_legacy_templates() ? 'openagenda-legacy' : 'openagenda-main';
+			wp_enqueue_style( $stylesheet );
 		}
 
 		if ( is_singular( 'oa-calendar' ) ) {
