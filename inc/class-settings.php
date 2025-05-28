@@ -19,16 +19,22 @@ class Settings implements Hookable {
 	/**
 	 * Settings groups to register.
 	 * Basically one for each settings tab.
+	 *
+	 * @var  array  $settings
 	 */
 	protected $settings = array();
 
 	/**
 	 * Settings sections to register.
+	 *
+	 * @var  array  $sections
 	 */
 	protected $sections = array();
 
 	/**
 	 * Settings fields to register.
+	 *
+	 * @var array  $fields
 	 */
 	protected $fields = array();
 
@@ -334,7 +340,7 @@ class Settings implements Hookable {
 	/**
 	 * Displays a <input> field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call
+	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
 	 */
 	public function input_field_markup( $args ) {
 
@@ -369,7 +375,7 @@ class Settings implements Hookable {
 					'<p class="password-toggle"><input type="checkbox" id="%1$s" data-input="%2$s" /><label for="%1$s">%3$s</label></p>',
 					esc_attr( "{$field_id}-show-password" ),
 					esc_attr( $field_id ),
-					$args['show_password_message'] ?? __( 'Show password', 'openagenda' )
+					! empty( $args['show_password_message'] ) ? esc_html( $args['show_password_message'] ) : esc_html__( 'Show password', 'openagenda' )
 				);
 			}
 			if ( ! empty( $args['description'] ) ) {
@@ -381,7 +387,7 @@ class Settings implements Hookable {
 	/**
 	 * Displays a media button uploader field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call
+	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
 	 */
 	public function media_upload_field_markup( $args ) {
 
@@ -450,7 +456,7 @@ class Settings implements Hookable {
 	/**
 	 * Displays a <input type="checkbox"> field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call
+	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
 	 */
 	public function checkbox_field_markup( $args ) {
 
@@ -494,7 +500,7 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes general settings
 	 *
-	 * @param   array $settings  Settings value to sanitize
+	 * @param   array $settings  Settings value to sanitize.
 	 * @return  array  $settings
 	 */
 	public function sanitize_general_settings( $settings ) {
@@ -517,7 +523,7 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes integrations settings
 	 *
-	 * @param   array $settings  Settings value to sanitize
+	 * @param   array $settings  Settings value to sanitize.
 	 * @return  array  $settings
 	 */
 	public function sanitize_integrations_settings( $settings ) {
@@ -533,7 +539,7 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes permalinks settings
 	 *
-	 * @param   array $settings  Settings value to sanitize
+	 * @param   array $settings  Settings value to sanitize.
 	 * @return  array  $settings
 	 */
 	public function sanitize_permalinks_settings( $settings ) {
@@ -544,7 +550,7 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes and saves permalinks settings
 	 */
-	public function save_permalinks_settings( $settings ) {
+	public function save_permalinks_settings() {
 		if ( isset( $_POST['openagenda_permalinks_settings'] ) ) {
 			check_admin_referer( 'update-permalink' );
 			$settings = array(
