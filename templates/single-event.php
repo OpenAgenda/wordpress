@@ -42,7 +42,7 @@ $access_link          = openagenda_get_field( 'onlineAccessLink' );
 				<div class="oa-event-conditions">
 					<?php
 						openagenda_icon( 'info' );
-						printf( '<strong class="oa-label oa-conditions-label">%s</strong>', esc_html__( 'Conditions: ', 'openagenda' ) );
+						printf( '<strong class="oa-label oa-conditions-label">%s</strong>', esc_html__( 'Conditions', 'openagenda' ) );
 						printf( '<div class="oa-conditions-value">%s</div>', esc_html( $conditions ) );
 					?>
 				</div>
@@ -52,7 +52,7 @@ $access_link          = openagenda_get_field( 'onlineAccessLink' );
 				<div class="oa-event-registration">
 					<?php
 						openagenda_icon( 'document' );
-						printf( '<strong class="oa-label oa-registration-label">%s</strong>', esc_html__( 'Registration: ', 'openagenda' ) );
+						printf( '<strong class="oa-label oa-registration-label">%s</strong>', esc_html__( 'Registration', 'openagenda' ) );
 						openagenda_event_registration_methods();
 					?>
 				</div>

@@ -87,7 +87,6 @@ strong {
  *************************/
 .oa-event-title {
   color: var(--oa-gray-900);
-  font-weight: bold;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -104,8 +103,9 @@ strong {
 }
 
 .oa-label {
-  font-size: var(--oa-text-4);
   color: var(--oa-gray-700);
+  font-size: var(--oa-text-4);
+  margin-bottom: var(--oa-spacing-1);
 }
 
 .oa-button {
@@ -143,6 +143,7 @@ strong {
 .oa-event-list .oa-event-title,
 .oa-event-grid .oa-event-title {
   font-size: inherit;
+  font-weight: bold;
 }
 .oa-event-list .oa-event,
 .oa-event-grid .oa-event {
@@ -274,10 +275,12 @@ ul.oa-pagination .oa-page a:focus {
 .oa-single-event .oa-event-title {
   margin-top: 0;
   margin-bottom: var(--oa-spacing-4);
+  font-weight: normal;
 }
 .oa-single-event .oa-event-description {
   color: var(--oa-gray-900);
   margin-bottom: var(--oa-spacing-4);
+  font-size: var(--oa-text-6);
 }
 .oa-single-event .oa-event-details > div,
 .oa-single-event .oa-registration-method-wrapper {
@@ -303,6 +306,7 @@ ul.oa-pagination .oa-page a:focus {
   margin-bottom: var(--oa-spacing-4);
 }
 .oa-single-event .oa-event-longDescription {
+  font-size: var(--oa-text-4);
   margin-bottom: var(--oa-spacing-4);
 }
 .oa-single-event .oa-registration-methods {
@@ -315,30 +319,31 @@ ul.oa-pagination .oa-page a:focus {
 .oa-single-event .oa-conditions-value {
   grid-column: 2;
 }
-
-.oa-event-keywords {
+.oa-single-event .oa-event-keywords {
   color: var(--oa-gray-700);
   font-size: var(--oa-text-3);
   margin-bottom: var(--oa-spacing-4);
 }
-
-.oa-event-additional-fields,
-.oa-event-location {
+.oa-single-event .oa-event-additional-fields,
+.oa-single-event .oa-event-location {
   margin: var(--oa-spacing-7) 0;
   gap: var(--oa-spacing-4);
-  font-size: var(--oa-text-3);
 }
-.oa-event-additional-fields .oa-label,
-.oa-event-location .oa-label {
+.oa-single-event .oa-event-additional-fields .oa-label,
+.oa-single-event .oa-event-location .oa-label {
   display: block;
   font-size: var(--oa-text-3);
   color: var(--oa-gray-900);
+}
+.oa-single-event .oa-event-additional-fields {
+  font-size: var(--oa-text-3);
 }
 
 /***********
  * Timings
  ***********/
 .oa-event-timings {
+  font-size: var(--oa-text-4);
   margin: var(--oa-spacing-4) 0;
 }
 
@@ -374,7 +379,10 @@ li.oa-month.oa-hidden {
   border-top: 1px solid var(--oa-gray-300);
   display: flex;
   justify-content: space-between;
-  padding: var(--oa-spacing-1) 0;
+  padding: var(--oa-spacing-2) 0;
+}
+.oa-month-header .oa-month-label {
+  font-weight: bold;
 }
 
 ul.oa-week {
@@ -386,6 +394,14 @@ ul.oa-week {
 /*******************
  * Location styles
  *******************/
+.oa-event-location {
+  font-size: var(--oa-text-4);
+}
+
+.oa-event-location-title {
+  font-size: var(--oa-text-7);
+}
+
 .oa-event-location-address {
   column-gap: var(--oa-spacing-2);
   display: flex;
@@ -418,7 +434,9 @@ ul.oa-week {
 }
 
 .oa-event-location-links ul {
-  margin-top: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 /************************************
