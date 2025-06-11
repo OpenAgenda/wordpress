@@ -12,6 +12,7 @@ $registration_methods = openagenda_get_field( 'registration' );
 $conditions           = openagenda_get_field( 'conditions' );
 $keywords             = openagenda_get_field( 'keywords' );
 $access_link          = openagenda_get_field( 'onlineAccessLink' );
+$credits              = openagenda_get_field( 'imageCredits' );
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
 	<div class="oa-event-wrapper">
@@ -61,9 +62,14 @@ $access_link          = openagenda_get_field( 'onlineAccessLink' );
 			<?php endif; ?>
 		</div>
 
-		<div class="oa-event-thumbnail">
-			<?php openagenda_event_image(); ?>
-		</div>
+		<figure class="oa-event-thumbnail">
+			<?php
+				openagenda_event_image();
+			if ( ! empty( $credits ) ) {
+				printf( '<figcaption class="oa-image-credits">%s</figcaption>', esc_html( $credits ) );
+			}
+			?>
+		</figure>
 		
 		<div class="oa-event-longDescription">
 			<?php openagenda_field( 'longDescription' ); ?>

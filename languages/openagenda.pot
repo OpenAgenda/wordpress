@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-04T14:23:17+00:00\n"
+"POT-Creation-Date: 2025-06-11T12:54:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -197,7 +197,7 @@ msgstr ""
 #: inc/class-filter-widget.php:23
 #: inc/class-settings.php:297
 #: inc/class-shortcodes.php:372
-#: inc/template-tags.php:734
+#: inc/template-tags.php:768
 msgid "OpenStreetMap contributors"
 msgstr ""
 
@@ -744,13 +744,13 @@ msgid "%s ago"
 msgstr ""
 
 #: inc/template-filters.php:65
-#: inc/template-tags.php:1373
+#: inc/template-tags.php:1443
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
 #: inc/template-filters.php:66
-#: inc/template-tags.php:1374
+#: inc/template-tags.php:1444
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
@@ -763,98 +763,122 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: inc/template-tags.php:583
+#: inc/template-tags.php:617
 msgid "No timing available"
 msgstr ""
 
-#: inc/template-tags.php:646
+#: inc/template-tags.php:680
 msgid "View previous month"
 msgstr ""
 
-#: inc/template-tags.php:649
+#: inc/template-tags.php:683
 msgid "View next month"
 msgstr ""
 
 #. translators: %d: number of upcoming events
-#: inc/template-tags.php:702
+#: inc/template-tags.php:736
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of upcoming events
-#: inc/template-tags.php:702
+#: inc/template-tags.php:736
 msgid "No upcoming event."
 msgstr ""
 
 #. translators: %d: number of passed events
-#: inc/template-tags.php:705
+#: inc/template-tags.php:739
 msgid "%d passed event."
 msgid_plural "%d passed events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of passed events
-#: inc/template-tags.php:705
+#: inc/template-tags.php:739
 msgid "No passed event."
 msgstr ""
 
-#: inc/template-tags.php:771
+#: inc/template-tags.php:805
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/template-tags.php:776
+#: inc/template-tags.php:810
 msgid "Share on X"
 msgstr ""
 
-#: inc/template-tags.php:787
+#: inc/template-tags.php:821
 msgid "Share on Linkedin"
 msgstr ""
 
-#: inc/template-tags.php:820
+#: inc/template-tags.php:854
 msgid "Share :"
 msgstr ""
 
-#: inc/template-tags.php:853
+#: inc/template-tags.php:887
 msgid "Share"
 msgstr ""
 
-#: inc/template-tags.php:942
+#: inc/template-tags.php:976
 msgid "Access the event"
 msgstr ""
 
-#: inc/template-tags.php:968
+#: inc/template-tags.php:1002
 msgid "On site"
 msgstr ""
 
-#: inc/template-tags.php:969
+#: inc/template-tags.php:1003
 #: templates/event.php:22
 #: templates/legacy/event.php:22
 msgid "Online"
 msgstr ""
 
-#: inc/template-tags.php:970
+#: inc/template-tags.php:1004
 msgid "Mixed"
 msgstr ""
 
-#: inc/template-tags.php:1106
+#: inc/template-tags.php:1036
+msgid "Scheduled"
+msgstr ""
+
+#: inc/template-tags.php:1037
+msgid "Rescheduled"
+msgstr ""
+
+#: inc/template-tags.php:1038
+msgid "Switched to online"
+msgstr ""
+
+#: inc/template-tags.php:1039
+msgid "Postponed"
+msgstr ""
+
+#: inc/template-tags.php:1040
+msgid "Sold out"
+msgstr ""
+
+#: inc/template-tags.php:1041
+msgid "Cancelled"
+msgstr ""
+
+#: inc/template-tags.php:1176
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:1107
+#: inc/template-tags.php:1177
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:1269
+#: inc/template-tags.php:1339
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:1423
+#: inc/template-tags.php:1493
 msgid "Back to list"
 msgstr ""
 
 #. translators: %s: event title
-#: inc/template-tags.php:1479
+#: inc/template-tags.php:1549
 msgid "Add %s to favorites."
 msgstr ""
 
@@ -862,16 +886,20 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: templates/event-location.php:35
+#: templates/event-location.php:32
 msgid "About the location"
 msgstr ""
 
-#: templates/event-location.php:52
-msgid "Access: "
+#: templates/event-location.php:57
+msgid "Access"
 msgstr ""
 
-#: templates/event-location.php:89
-msgid "Additionnal links: "
+#: templates/event-location.php:73
+msgid "Contact information"
+msgstr ""
+
+#: templates/event-location.php:103
+msgid "Additionnal links"
 msgstr ""
 
 #: templates/event-loop.php:39
@@ -880,15 +908,18 @@ msgid "Sorry, we could not find any event."
 msgstr ""
 
 #: templates/legacy/single-event.php:47
-#: templates/single-event.php:73
+#: templates/single-event.php:86
 msgid "Access the online event: "
 msgstr ""
 
 #: templates/legacy/single-event.php:54
-#: templates/single-event.php:55
 msgid "Registration: "
 msgstr ""
 
-#: templates/single-event.php:45
-msgid "Conditions: "
+#: templates/single-event.php:48
+msgid "Conditions"
+msgstr ""
+
+#: templates/single-event.php:58
+msgid "Registration"
 msgstr ""

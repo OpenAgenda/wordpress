@@ -263,6 +263,17 @@ ul.oa-pagination {
 		}
 	}
 
+	.oa-event-thumbnail,
+	.oa-event-location-image {
+		text-align: center;
+
+		figcaption {
+			color: var(--oa-gray-500);
+			font-size: var(--oa-text-3);
+			text-align: right;
+		}
+	}
+
 	.oa-event-longDescription {
 		font-size: var(--oa-text-4);
 

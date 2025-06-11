@@ -306,6 +306,16 @@ ul.oa-pagination .oa-page a:focus {
   height: 32px;
   width: 32px;
 }
+.oa-single-event .oa-event-thumbnail,
+.oa-single-event .oa-event-location-image {
+  text-align: center;
+}
+.oa-single-event .oa-event-thumbnail figcaption,
+.oa-single-event .oa-event-location-image figcaption {
+  color: var(--oa-gray-500);
+  font-size: var(--oa-text-3);
+  text-align: right;
+}
 .oa-single-event .oa-event-longDescription {
   font-size: var(--oa-text-4);
 }

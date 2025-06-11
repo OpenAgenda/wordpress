@@ -559,22 +559,22 @@ function openagenda_event_image( $size = '', $uid = '' ) {
 /**
  * Displays an event location image
  *
- * @param   string  $uid   UID of the event to get location image from.
- * @param   bool    $display   Whether to echo or just return the html.
+ * @param   string $uid   UID of the event to get location image from.
+ * @param   bool   $display   Whether to echo or just return the html.
  * @return  string  $html  The corresponding <img> tag.
  */
-function openagenda_event_location_image( $uid = false, $display = true ){
+function openagenda_event_location_image( $uid = false, $display = true ) {
 	$event = openagenda_get_event( $uid );
 	if ( ! $uid ) {
 		$uid = $event['uid'];
 	}
 
-	$html = '';
+	$html      = '';
 	$image_url = openagenda_get_field( 'location.image' ) ?? '';
-	if( ! filter_var($image_url, FILTER_VALIDATE_URL ) ){
+	if ( ! filter_var( $image_url, FILTER_VALIDATE_URL ) ) {
 		$image_url = sprintf( 'https://cdn.openagenda.com/main/%s', $image_url );
 	}
-	if( $image_url ){
+	if ( $image_url ) {
 		$html = sprintf(
 			'<img src="%s" alt="%s" loading="lazy" />',
 			esc_url( $image_url ),
@@ -1018,19 +1018,19 @@ function openagenda_get_attendance_mode_label( $uid = false ) {
 
 /**
  * Returns status label
- * 
- * @param  string  $uid   UID of the event.
+ *
+ * @param  string $uid   UID of the event.
  * @param  bool   $display  Whether to echo or just return the html.
  * @return  string $label  Label of the attendance mode.
  */
-function openagenda_event_status_label( $uid = false, $display = true ){
+function openagenda_event_status_label( $uid = false, $display = true ) {
 	$event = openagenda_get_event( $uid );
 	if ( ! $uid ) {
 		$uid = $event['uid'];
 	}
 
-	$status = openagenda_get_field( 'status' ) ?? [];
-	$default_labels  = apply_filters(
+	$status         = openagenda_get_field( 'status' ) ?? array();
+	$default_labels = apply_filters(
 		'openagenda_status_labels',
 		array(
 			1 => __( 'Scheduled', 'openagenda' ),
