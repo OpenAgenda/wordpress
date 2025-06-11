@@ -70,13 +70,29 @@
   --oa-text-9: 3rem;
 }
 
+/*****************************
+ * Theme fixes
+ *****************************/
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+strong {
+  font-weight: bold;
+}
+
 /*************************
  * Events styles
  *************************/
 .oa-event-title {
   color: var(--oa-gray-900);
+  font-weight: bold;
   margin-top: 0;
   margin-bottom: 0;
+}
+.oa-event-title a {
+  text-decoration: none;
 }
 
 .oa-event-details,
@@ -138,6 +154,10 @@
   display: grid;
   grid-gap: var(--oa-spacing-7);
 }
+.oa-event-list .oa-event-range,
+.oa-event-grid .oa-event-range {
+  color: var(--oa-gray-900);
+}
 .oa-event-list .oa-event-title,
 .oa-event-grid .oa-event-title {
   font-size: inherit;
@@ -173,9 +193,9 @@
   font-size: var(--oa-text-3);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 700px) {
   .oa-event-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
   }
 }
 
@@ -1361,10 +1381,6 @@ button.oa-event-favorite-badge.active .inactive-icon {
 img {
   max-width: 100%;
   height: auto;
-}
-
-.block {
-  display: block;
 }
 
 .oa-sr-text {

@@ -14,13 +14,30 @@
 	@include css_variables('oa-text', $fontSizes );
 }
 
+/*****************************
+ * Theme fixes
+ *****************************/
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+strong {
+	font-weight: bold;
+}
+
 /*************************
  * Events styles
  *************************/
 .oa-event-title {
 	color: var(--oa-gray-900);
+	font-weight: bold;
 	margin-top: 0;
 	margin-bottom: 0;
+
+	a {
+		text-decoration: none;
+	}
 }
 
 .oa-event-details,
@@ -86,6 +103,10 @@
 	display: grid;
 	grid-gap: var(--oa-spacing-7);
 
+	.oa-event-range {
+		color: var(--oa-gray-900);
+	}
+
 	.oa-event-title {
 		font-size: inherit;
 	}
@@ -122,8 +143,8 @@
 }
 
 .oa-event-grid {
-	@media screen and (min-width: 768px) {
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	@media screen and (min-width: 700px) {
+		grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
 	}
 }
 
@@ -1381,10 +1402,6 @@ button.oa-event-favorite-badge {
 img {
 	max-width: 100%;
 	height: auto;
-}
-
-.block {
-	display: block;
 }
 
 .oa-sr-text {
