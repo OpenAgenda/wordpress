@@ -24,13 +24,18 @@ $website = openagenda_get_field('location.website');
 $phone = openagenda_get_field('location.phone');
 $email = openagenda_get_field('location.email');
 
-$image = openagenda_get_field('location.image');
 $links = openagenda_get_field('location.links');
 ?>
 <div class="oa-event-location">
-	<h2 class="oa-event-location-title"><?php esc_html_e( 'About the location', 'openagenda' ); ?></h2>
-	<strong class="oa-event-location-name"><?php openagenda_field( 'location.name' ); ?></strong>
+	<h2 class="oa-event-location-title">
+		<?php esc_html_e( 'About the location', 'openagenda' ); ?>
+	</h2>
+	
 	<address class="oa-event-location-address">
+		<strong class="oa-event-location-name">
+			<?php openagenda_field( 'location.name' ); ?>
+		</strong>
+		
 		<?php
 			printf( '<a class="oa-event-location-address-link" href="%s" target="_blank" rel="noopener noreferer">%s</a>', esc_url( $url ), $address );
 			if( ! empty( $city ) ){
@@ -41,18 +46,24 @@ $links = openagenda_get_field('location.links');
 			}
 		?>
 	</address>
-	<p class="oa-event-location-description"><?php openagenda_field( 'location.description' ); ?></p>
+
+	<p class="oa-event-location-description">
+		<?php openagenda_field( 'location.description' ); ?>
+	</p>
 
 	<p class="oa-event-location-access">
 		<?php 
-		printf( '<strong class="oa-label oa-event-location-access-label">%s</strong>', esc_html__( 'Access: ', 'openagenda' ) );
+		printf( '<strong class="oa-label oa-event-location-access-label">%s</strong>', esc_html__( 'Access', 'openagenda' ) );
 		openagenda_field( 'location.access' ); 
 		?>
 	</p>
 
-	<p>LOCATION IMAGE HERE</p>
+	<div class="oa-event-location-image">
+		<?php openagenda_event_location_image(); ?>
+	</div>
 
 	<div class="oa-event-location-contact">
+		<?php printf( '<strong class="oa-label oa-event-location-contact-label">%s</strong>', esc_html__( 'Contact information', 'openagenda' ) ); ?>
 		<?php if ( ! empty( $website ) ): ?>
 			<div class="oa-event-location-website">
 				<?php 
@@ -82,7 +93,7 @@ $links = openagenda_get_field('location.links');
 	<?php if( ! empty( $links ) ): ?>
 		<div class="oa-event-location-links">
 			<?php 
-				printf( '<strong class="oa-label oa-event-location-links-label">%s</strong>', esc_html__( 'Additionnal links: ', 'openagenda' ) );
+				printf( '<strong class="oa-label oa-event-location-links-label">%s</strong>', esc_html__( 'Additionnal links', 'openagenda' ) );
 				echo '<ul>';
 				foreach ($links as $link) {
 					printf( '<li><a class="oa-event-location-link" href="%s">%s</a></li>', esc_url( $link ), esc_html( $link ) ); 
@@ -93,5 +104,7 @@ $links = openagenda_get_field('location.links');
 		</div>
 	<?php endif; ?>
 
-	<figure class="oa-event-location-map"><?php openagenda_event_map(); ?></figure>
+	<figure class="oa-event-location-map">
+		<?php openagenda_event_map(); ?>
+	</figure>
 </div>

@@ -19,7 +19,9 @@ $access_link          = openagenda_get_field( 'onlineAccessLink' );
 			<?php openagenda_field( 'title' ); ?>
 		</h2>
 		
-		<p class="oa-event-description"><?php openagenda_field( 'description' ); ?></p>
+		<p class="oa-event-description">
+			<?php openagenda_field( 'description' ); ?>
+		</p>
 		
 		<div class="oa-event-details">
 			<div class="oa-event-share-button">
@@ -59,8 +61,13 @@ $access_link          = openagenda_get_field( 'onlineAccessLink' );
 			<?php endif; ?>
 		</div>
 
-		<div class="oa-event-thumbnail"><?php openagenda_event_image(); ?></div>
-		<div class="oa-event-longDescription"><?php openagenda_field( 'longDescription' ); ?></div>
+		<div class="oa-event-thumbnail">
+			<?php openagenda_event_image(); ?>
+		</div>
+		
+		<div class="oa-event-longDescription">
+			<?php openagenda_field( 'longDescription' ); ?>
+		</div>
 			
 		<?php if ( ! empty( $keywords ) ) : ?>
 			<div class="oa-event-keywords">
@@ -75,7 +82,11 @@ $access_link          = openagenda_get_field( 'onlineAccessLink' );
 		<?php endif; ?>
 		
 		<?php require openagenda_get_template( 'event-additional-fields' ); ?>
-		<div class="oa-event-timings"><?php openagenda_event_timings(); ?></div>
+
+		<div class="oa-event-timings">
+			<?php openagenda_event_timings(); ?>
+		</div>
+
 		<?php require openagenda_get_template( 'event-location' ); ?>
 	</div>
 </article>

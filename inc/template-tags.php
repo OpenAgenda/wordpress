@@ -557,6 +557,40 @@ function openagenda_event_image( $size = '', $uid = '' ) {
 
 
 /**
+ * Displays an event location image
+ *
+ * @param   string  $uid   UID of the event to get location image from.
+ * @param   bool    $display   Whether to echo or just return the html.
+ * @return  string  $html  The corresponding <img> tag.
+ */
+function openagenda_event_location_image( $uid = false, $display = true ){
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$html = '';
+	$image_url = openagenda_get_field( 'location.image' ) ?? '';
+	if( ! filter_var($image_url, FILTER_VALIDATE_URL ) ){
+		$image_url = sprintf( 'https://cdn.openagenda.com/main/%s', $image_url );
+	}
+	if( $image_url ){
+		$html = sprintf(
+			'<img src="%s" alt="%s" loading="lazy" />',
+			esc_url( $image_url ),
+			esc_attr( openagenda_get_field( 'location.name', $uid ) ?? '' )
+		);
+	}
+
+	$html = apply_filters( 'openagenda_event_location_image', $html, $uid, $image_url );
+	if ( $display ) {
+		echo wp_kses_post( $html );
+	}
+	return $html;
+}
+
+
+/**
  * Displays next and last timings for a event.
  *
  * @param  string $format   Accepts 'relative' or 'date'.

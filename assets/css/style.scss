@@ -29,14 +29,9 @@ strong {
 /*************************
  * Events styles
  *************************/
-.oa-event-title {
-	color: var(--oa-gray-900);
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
 .oa-event-details,
-.oa-event-additional-fields {
+.oa-event-additional-fields,
+.oa-event-location {
 	display: flex;
 	flex-direction: column;
 	gap: var(--oa-spacing-2);
@@ -44,6 +39,11 @@ strong {
 	&>* {
 		margin: 0;
 	}
+}
+
+.oa-event-title {
+	color: var(--oa-gray-900);
+	margin: 0;
 }
 
 .oa-label {
@@ -108,7 +108,6 @@ strong {
 
 	.oa-event-thumbnail {
 		height: 170px;
-		margin-bottom: 0;
 
 		img {
 			object-fit: cover;
@@ -211,8 +210,10 @@ ul.oa-pagination {
 }
 
 .oa-back-link {
-	padding: 0;
+	font-size: var(--oa-text-3);
 	margin-right: auto;
+	padding: 0;
+	text-decoration: none;
 }
 
 .oa-previous-link,
@@ -224,15 +225,23 @@ ul.oa-pagination {
  * Single event styles
  ***********************/
 .oa-single-event {
+
+	.oa-event-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: var(--oa-spacing-4);
+
+		&>* {
+			margin: 0;
+		}
+	}
+
 	.oa-event-title {
-		margin-top: 0;
-		margin-bottom: var(--oa-spacing-4);
 		font-weight: normal;
 	}
 
 	.oa-event-description {
 		color: var(--oa-gray-900);
-		margin-bottom: var(--oa-spacing-4);
 		font-size: var(--oa-text-6);
 	}
 
@@ -254,17 +263,13 @@ ul.oa-pagination {
 		}
 	}
 
-	.oa-event-details {
-		margin-bottom: var(--oa-spacing-4);
-	}
-
-	.oa-event-thumbnail {
-		margin-bottom: var(--oa-spacing-4);
-	}
-
 	.oa-event-longDescription {
 		font-size: var(--oa-text-4);
-		margin-bottom: var(--oa-spacing-4);
+
+		p {
+			margin-top: 0;
+			margin-bottom: var(--oa-spacing-4);
+		}
 	}
 
 	.oa-registration-methods {
@@ -282,12 +287,11 @@ ul.oa-pagination {
 	.oa-event-keywords {
 		color: var(--oa-gray-700);
 		font-size: var(--oa-text-3);
-		margin-bottom: var(--oa-spacing-4);
 	}
 
 	.oa-event-additional-fields,
 	.oa-event-location {
-		margin: var(--oa-spacing-7) 0;
+		margin-bottom: var(--oa-spacing-7);
 		gap: var(--oa-spacing-4);
 
 		.oa-label {
@@ -300,6 +304,10 @@ ul.oa-pagination {
 	.oa-event-additional-fields {
 		font-size: var(--oa-text-3);
 	}
+
+	.oa-event-timings {
+		margin-bottom: var(--oa-spacing-7);
+	}
 }
 
 /***********
@@ -307,7 +315,6 @@ ul.oa-pagination {
  ***********/
 .oa-event-timings {
 	font-size: var(--oa-text-4);
-	margin: var(--oa-spacing-4) 0;
 }
 
 .oa-timing {
@@ -356,7 +363,6 @@ ul.oa-week {
 	padding: 0;
 }
 
-
 /*******************
  * Location styles
  *******************/
@@ -381,11 +387,6 @@ ul.oa-week {
 	.oa-event-location-region {
 		color: var(--oa-gray-700);
 	}
-}
-
-.oa-event-location-contact,
-.oa-event-location-links {
-	margin-bottom: var(--oa-spacing-4);
 }
 
 .oa-event-location-website,

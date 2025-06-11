@@ -45,7 +45,9 @@ switch ( $attendance_mode ) {
 				<?php openagenda_field( 'title' ); ?>
 			</h2>
 			
-			<p class="oa-event-description"><?php openagenda_field( 'description' ); ?></p>
+			<p class="oa-event-description">
+				<?php openagenda_field( 'description' ); ?>
+			</p>
 				
 			<?php if ( $location_label ) : ?>
 				<p class="oa-event-location-label">
