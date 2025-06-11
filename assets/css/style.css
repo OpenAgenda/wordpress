@@ -71,7 +71,7 @@
 }
 
 /*****************************
- * Theme fixes
+ * Theme fixes and helpers
  *****************************/
 img {
   max-width: 100%;
@@ -82,19 +82,33 @@ strong {
   font-weight: bold;
 }
 
+.oa-sr-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /*************************
  * Events styles
  *************************/
 .oa-event-details,
 .oa-event-additional-fields,
-.oa-event-location {
+.oa-event-location,
+.oa-default-filters {
   display: flex;
   flex-direction: column;
   gap: var(--oa-spacing-2);
 }
 .oa-event-details > *,
 .oa-event-additional-fields > *,
-.oa-event-location > * {
+.oa-event-location > *,
+.oa-default-filters > * {
   margin: 0;
 }
 
@@ -449,6 +463,82 @@ ul.oa-week {
   list-style: none;
 }
 
+/*********************************
+ * Filters dropdown
+ *********************************/
+.oa-default-filters {
+  gap: var(--oa-spacing-4);
+  margin-bottom: var(--oa-spacing-4);
+}
+
+.oa-widget-details {
+  border: 1px solid var(--oa-gray-300);
+  color: var(--oa-gray-700);
+  cursor: pointer;
+  font-size: var(--oa-text-3);
+  padding: var(--oa-spacing-2);
+}
+.oa-widget-details .oa-widget-summary + * {
+  margin-top: 1rem;
+}
+
+/*********************************
+ * Active filters widget
+ *********************************/
+.oa-active-filters-widget button.btn {
+  background: transparent;
+  border: none;
+  padding: 2px 4px;
+  color: #e53e3e;
+}
+.oa-active-filters-widget button.btn:hover, .oa-active-filters-widget button.btn:focus {
+  background: #e53e3e;
+  color: white;
+}
+
+/*********************************
+ * Search widget
+ *********************************/
+.oa-search-widget .input-group {
+  display: flex;
+}
+
+/*********************************
+ * Choice widget
+ *********************************/
+.oa-filter-total {
+  margin-left: 8px;
+  font-size: smaller;
+}
+
+/*********************************
+ * Favorite widget and filter
+ *********************************/
+button.oa-event-favorite-badge {
+  background: transparent;
+  border: none;
+  line-height: 1;
+  padding: 0;
+}
+button.oa-event-favorite-badge:hover, button.oa-event-favorite-badge:focus {
+  background: transparent;
+}
+button.oa-event-favorite-badge:focus {
+  outline: 1px dotted;
+}
+button.oa-event-favorite-badge .inactive-icon {
+  display: inline-block;
+}
+button.oa-event-favorite-badge .active-icon {
+  display: none;
+}
+button.oa-event-favorite-badge.active .active-icon {
+  display: inline-block;
+}
+button.oa-event-favorite-badge.active .inactive-icon {
+  display: none;
+}
+
 /************************************
  * Styles below are not yet updated
  ************************************/
@@ -568,82 +658,6 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 }
 
 .map-container .leaflet-container {
-  height: 300px;
-}
-
-/*********************
- * Preview Widget
- *********************/
-.oa-preview-card {
-  margin-bottom: 2rem;
-}
-
-.oa-card {
-  display: flex;
-  flex-wrap: wrap;
-}
-@media (min-width: 576px) {
-  .oa-card {
-    flex-wrap: nowrap;
-  }
-}
-
-.oa-card-image-link {
-  display: block;
-  flex-shrink: 0;
-  max-width: 150px;
-  max-height: 150px;
-}
-.oa-card-image-link img {
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  width: 100%;
-  height: 100%;
-}
-
-.oa-card-body {
-  padding: 0.5rem 1rem;
-}
-
-.oa-card-link {
-  margin-bottom: 0.5rem;
-}
-
-.oa-list-unstyled {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  line-height: 1.2;
-}
-.oa-list-unstyled li {
-  margin: 0;
-}
-
-.oa-preview.grid .oa-preview-events {
-  display: grid;
-  grid-gap: 4rem;
-}
-@media screen and (min-width: 768px) {
-  .oa-preview.grid .oa-preview-events {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-}
-.oa-preview.grid .oa-preview-card {
-  margin-bottom: 0;
-}
-.oa-preview.grid .oa-card {
-  display: block;
-}
-.oa-preview.grid .oa-card-link {
-  margin: 0.5rem 0;
-}
-.oa-preview.grid .oa-card-body {
-  padding: 0;
-}
-.oa-preview.grid .oa-card-image-link {
-  max-width: none;
-  max-height: none;
   height: 300px;
 }
 
@@ -1352,83 +1366,6 @@ button.rdrStaticRange {
 .rdrNoSelection .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span:after,
 .rdrNoSelection .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span:after {
   background: var(--oa-main-color);
-}
-
-/*********************************
- * Active filters widget
- *********************************/
-.oa-active-filters-widget button.btn {
-  background: transparent;
-  border: none;
-  padding: 2px 4px;
-  color: #e53e3e;
-}
-.oa-active-filters-widget button.btn:hover, .oa-active-filters-widget button.btn:focus {
-  background: #e53e3e;
-  color: white;
-}
-
-/*********************************
- * Search widget
- *********************************/
-.oa-search-widget .input-group {
-  display: flex;
-}
-
-/*********************************
- * Choice widget
- *********************************/
-.oa-filter-total {
-  margin-left: 8px;
-  font-size: smaller;
-}
-
-/*********************************
- * Favorite widget and filter
- *********************************/
-button.oa-event-favorite-badge {
-  background: transparent;
-  border: none;
-  line-height: 1;
-  padding: 0;
-}
-button.oa-event-favorite-badge:hover, button.oa-event-favorite-badge:focus {
-  background: transparent;
-}
-button.oa-event-favorite-badge:focus {
-  outline: 1px dotted;
-}
-button.oa-event-favorite-badge .inactive-icon {
-  display: inline-block;
-}
-button.oa-event-favorite-badge .active-icon {
-  display: none;
-}
-button.oa-event-favorite-badge.active .active-icon {
-  display: inline-block;
-}
-button.oa-event-favorite-badge.active .inactive-icon {
-  display: none;
-}
-
-/*****************************
- * Helpers
- *****************************/
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.oa-sr-text {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1664,10 +1664,3 @@ function openagenda_event_schema( $uid = false ) {
 	}
 }
 
-/**
- * Displays filters
- */
-function openagenda_filters() {
-	echo '<p>Filters here</p>';
-}
-

@@ -65,7 +65,7 @@ class Metaboxes implements Hookable {
 	public function get_fields() {
 		if ( empty( $this->fields ) ) {
 			$this->fields = array(
-				'oa-calendar-uid'                => array(
+				'oa-calendar-uid'                     => array(
 					'metabox'     => 'oa-calendar-settings',
 					'type'        => 'text',
 					'label'       => __( 'Calendar UID', 'openagenda' ),
@@ -76,13 +76,13 @@ class Metaboxes implements Hookable {
 						__( 'How to find my calendar UID ?', 'openagenda' )
 					),
 				),
-				'oa-calendar-per-page'           => array(
+				'oa-calendar-per-page'                => array(
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'number',
 					'label'   => __( 'Events per page', 'openagenda' ),
 					'default' => (int) get_option( 'posts_per_page' ),
 				),
-				'oa-calendar-view'               => array(
+				'oa-calendar-view'                    => array(
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'radio',
 					'label'   => __( 'Display setting', 'openagenda' ),
@@ -98,7 +98,7 @@ class Metaboxes implements Hookable {
 						),
 					),
 				),
-				'oa-calendar-sort'               => array(
+				'oa-calendar-sort'                    => array(
 					'metabox'     => 'oa-calendar-settings',
 					'type'        => 'select',
 					'label'       => __( 'Default event sort', 'openagenda' ),
@@ -135,38 +135,44 @@ class Metaboxes implements Hookable {
 						),
 					),
 				),
-				'oa-calendar-content-on-archive' => array(
+				'oa-calendar-content-on-archive'      => array(
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'checkbox',
 					'label'   => __( 'Display editor content on list view.', 'openagenda' ),
 					'default' => 'yes',
 				),
-				'oa-calendar-content-on-single'  => array(
+				'oa-calendar-content-on-single'       => array(
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'checkbox',
 					'label'   => __( 'Display editor content on single event views.', 'openagenda' ),
 					'default' => 'no',
 				),
-				'oa-calendar-exclude'            => array(
+				'oa-calendar-display-default-filters' => array(
+					'metabox' => 'oa-calendar-settings',
+					'type'    => 'checkbox',
+					'label'   => __( 'Display default event filters at the top of the list view.', 'openagenda' ),
+					'default' => 'no',
+				),
+				'oa-calendar-exclude'                 => array(
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'checkbox',
 					'label'   => __( 'Only display current and upcoming events. Past events can be displayed using the calendar widget.', 'openagenda' ),
 					'default' => 'no',
 				),
-				'oa-calendar-infinite-scroll'    => array(
+				'oa-calendar-infinite-scroll'         => array(
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'checkbox',
 					'label'   => __( 'Activate infinite scroll functionnality to dynamically load more events.', 'openagenda' ),
 					'default' => 'no',
 				),
-				'oa-calendar-filters'            => array(
+				'oa-calendar-filters'                 => array(
 					'metabox'     => 'oa-calendar-settings',
 					'type'        => 'text',
 					'label'       => __( 'Default filters (advanced)', 'openagenda' ),
 					'default'     => '',
 					'description' => __( 'Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed.', 'openagenda' ),
 				),
-				'oa-calendar-api-key'            => array(
+				'oa-calendar-api-key'                 => array(
 					'metabox'               => 'oa-calendar-settings',
 					'type'                  => 'password',
 					'label'                 => __( 'API key (advanced)', 'openagenda' ),
@@ -437,13 +443,15 @@ class Metaboxes implements Hookable {
 			update_post_meta( $post_ID, 'oa-calendar-api-key', sanitize_text_field( $_POST['oa-calendar-api-key'] ) );
 		}
 
-		$content_on_archive  = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';
-		$content_on_single   = isset( $_POST['oa-calendar-content-on-single'] ) ? 'yes' : 'no';
-		$exclude_past_events = isset( $_POST['oa-calendar-exclude'] ) ? 'yes' : 'no';
-		$infinite_scroll     = isset( $_POST['oa-calendar-infinite-scroll'] ) ? 'yes' : 'no';
+		$content_on_archive    = isset( $_POST['oa-calendar-content-on-archive'] ) ? 'yes' : 'no';
+		$content_on_single     = isset( $_POST['oa-calendar-content-on-single'] ) ? 'yes' : 'no';
+		$exclude_past_events   = isset( $_POST['oa-calendar-exclude'] ) ? 'yes' : 'no';
+		$default_event_filters = isset( $_POST['oa-calendar-display-default-filters'] ) ? 'yes' : 'no';
+		$infinite_scroll       = isset( $_POST['oa-calendar-infinite-scroll'] ) ? 'yes' : 'no';
 		update_post_meta( $post_ID, 'oa-calendar-content-on-archive', $content_on_archive );
 		update_post_meta( $post_ID, 'oa-calendar-content-on-single', $content_on_single );
 		update_post_meta( $post_ID, 'oa-calendar-exclude', $exclude_past_events );
+		update_post_meta( $post_ID, 'oa-calendar-display-default-filters', $default_event_filters );
 		update_post_meta( $post_ID, 'oa-calendar-infinite-scroll', $infinite_scroll );
 
 		if ( $update ) {

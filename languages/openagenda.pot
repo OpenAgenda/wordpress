@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-11T13:26:22+00:00\n"
+"POT-Creation-Date: 2025-06-11T15:29:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -196,7 +196,7 @@ msgstr ""
 
 #: inc/class-filter-widget.php:23
 #: inc/class-settings.php:297
-#: inc/class-shortcodes.php:372
+#: inc/class-shortcodes.php:409
 #: inc/template-tags.php:768
 msgid "OpenStreetMap contributors"
 msgstr ""
@@ -260,8 +260,8 @@ msgid "Choose a field to display"
 msgstr ""
 
 #: inc/class-filter-widget.php:93
-#: inc/class-shortcodes.php:243
-#: inc/class-shortcodes.php:253
+#: inc/class-shortcodes.php:260
+#: inc/class-shortcodes.php:270
 msgid "Favorites"
 msgstr ""
 
@@ -329,50 +329,61 @@ msgstr ""
 msgid "Displays a filter widget."
 msgstr ""
 
-#: inc/class-filter-widget.php:192
+#: inc/class-filter-widget.php:193
 #: inc/class-preview-widget.php:129
 msgid "Title :"
 msgstr ""
 
-#: inc/class-filter-widget.php:196
+#: inc/class-filter-widget.php:197
 msgid "Filter to display :"
 msgstr ""
 
-#: inc/class-filter-widget.php:198
+#: inc/class-filter-widget.php:199
 msgid "Choose filter"
 msgstr ""
 
+#: inc/class-filter-widget.php:207
+msgid "Display filter as a dropdown ?"
+msgstr ""
+
 #: inc/class-main.php:213
+#: inc/class-shortcodes.php:152
 msgctxt "Filter name"
 msgid "Active filters"
 msgstr ""
 
 #: inc/class-main.php:217
+#: inc/class-shortcodes.php:230
 msgctxt "Filter name"
 msgid "Choice"
 msgstr ""
 
 #: inc/class-main.php:221
+#: inc/class-shortcodes.php:324
 msgctxt "Filter name"
 msgid "Calendar"
 msgstr ""
 
 #: inc/class-main.php:225
+#: inc/class-shortcodes.php:366
 msgctxt "Filter name"
 msgid "Defined Ranges"
 msgstr ""
 
 #: inc/class-main.php:229
+#: inc/class-shortcodes.php:413
 msgctxt "Filter name"
 msgid "Map"
 msgstr ""
 
 #: inc/class-main.php:233
+#: inc/class-shortcodes.php:520
 msgctxt "Filter name"
 msgid "Upcoming"
 msgstr ""
 
 #: inc/class-main.php:237
+#: inc/class-shortcodes.php:557
 msgctxt "Filter name"
 msgid "Search"
 msgstr ""
@@ -456,55 +467,59 @@ msgid "Display editor content on single event views."
 msgstr ""
 
 #: inc/class-metaboxes.php:153
-msgid "Only display current and upcoming events. Past events can be displayed using the calendar widget."
+msgid "Display default event filters at the top of the list view."
 msgstr ""
 
 #: inc/class-metaboxes.php:159
-msgid "Activate infinite scroll functionnality to dynamically load more events."
+msgid "Only display current and upcoming events. Past events can be displayed using the calendar widget."
 msgstr ""
 
 #: inc/class-metaboxes.php:165
+msgid "Activate infinite scroll functionnality to dynamically load more events."
+msgstr ""
+
+#: inc/class-metaboxes.php:171
 #: inc/class-preview-widget.php:65
 msgid "Default filters (advanced)"
 msgstr ""
 
-#: inc/class-metaboxes.php:167
+#: inc/class-metaboxes.php:173
 msgid "Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed."
 msgstr ""
 
-#: inc/class-metaboxes.php:172
+#: inc/class-metaboxes.php:178
 msgid "API key (advanced)"
 msgstr ""
 
-#: inc/class-metaboxes.php:175
+#: inc/class-metaboxes.php:181
 #: inc/class-settings.php:122
 msgid "Show API key"
 msgstr ""
 
-#: inc/class-metaboxes.php:176
+#: inc/class-metaboxes.php:182
 msgid "Fill this field only if you want to make API calls with a API key different from the general settings."
 msgstr ""
 
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:219
+#: inc/class-metaboxes.php:225
 msgid "Please provide your account API key in <a href=\"%s\">the plugin settings</a>."
 msgstr ""
 
-#: inc/class-metaboxes.php:244
+#: inc/class-metaboxes.php:250
 msgid "New field"
 msgstr ""
 
-#: inc/class-metaboxes.php:377
+#: inc/class-metaboxes.php:383
 #: inc/class-settings.php:378
 msgid "Show password"
 msgstr ""
 
-#: inc/class-metaboxes.php:479
+#: inc/class-metaboxes.php:487
 msgid "Agenda could not be found. Please double check your agenda UID."
 msgstr ""
 
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:483
+#: inc/class-metaboxes.php:491
 msgid "The request could not be authenticated. Please double check API key in <a href=\"%s\">your general settings.</a>"
 msgstr ""
 
@@ -683,22 +698,32 @@ msgstr ""
 msgid "This page is not an agenda page. Events may not display as expected."
 msgstr ""
 
-#: inc/class-shortcodes.php:180
+#: inc/class-shortcodes.php:184
+msgctxt "Filter name"
+msgid "Events total"
+msgstr ""
+
+#: inc/class-shortcodes.php:191
 msgctxt "Total filter message when no events found"
 msgid "No event found"
 msgstr ""
 
-#: inc/class-shortcodes.php:181
+#: inc/class-shortcodes.php:192
 msgctxt "Total filter message when 1 event found. Keep {total} placeholder."
 msgid "{total} event"
 msgstr ""
 
-#: inc/class-shortcodes.php:182
+#: inc/class-shortcodes.php:193
 msgctxt "Total filter message when multiple event found. Keep {total} placeholder."
 msgid "{total} events"
 msgstr ""
 
-#: inc/class-shortcodes.php:380
+#: inc/class-shortcodes.php:296
+msgctxt "Filter name"
+msgid "Keywords"
+msgstr ""
+
+#: inc/class-shortcodes.php:419
 msgid "Search while moving the map"
 msgstr ""
 
