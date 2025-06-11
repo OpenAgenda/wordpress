@@ -18,7 +18,7 @@ if ( empty( openagenda_get_field( 'location' ) ) || empty( openagenda_get_field(
 		<?php
 			$latitude  = openagenda_get_field( 'location.latitude' );
 			$longitude = openagenda_get_field( 'location.longitude' );
-			$url       = add_query_arg( 'destination', urlencode( $latitude . ',' . $longitude ), 'https://www.google.com/maps/dir/?api=1' );
+			$url       = add_query_arg( 'destination', rawurlencode( $latitude . ',' . $longitude ), 'https://www.google.com/maps/dir/?api=1' );
 			printf( '<a href="%s" target="_blank" rel="noopener noreferer">%s</a>', esc_url( $url ), openagenda_get_field( 'location.address' ) );
 		?>
 	</address>

@@ -7,6 +7,7 @@
  * @package OpenAgenda
  * @version 2.14.0
  */
+
 $additional_fields = openagenda_get_additional_fields_template_fields();
 ?>
 <div class="oa-event-additional-fields">

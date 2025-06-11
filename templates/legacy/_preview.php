@@ -8,8 +8,9 @@
  * @package OpenAgenda
  * @deprecated  2.13.0
  */
-$permalink             = openagenda_event_permalink( false, false, false, $atts['links'] === 'oa' );
-$additional_attributes = $atts['links'] === 'oa' ? 'target="_blank" rel="noopener noreferer"' : '';
+
+$permalink             = openagenda_event_permalink( false, false, false, 'oa' === $atts['links'] );
+$additional_attributes = 'oa' === $atts['links'] ? 'target="_blank" rel="noopener noreferer"' : '';
 ?>
 <div class="oa-preview-event oa-preview-card">
 	<div class="oa-card">

@@ -7,21 +7,23 @@
  * @package OpenAgenda
  * @version 3.0.0
  */
+
+$date_range            = openagenda_get_field( 'dateRange' );
 $location              = openagenda_get_field( 'location' );
 $attendance_field      = openagenda_get_field( 'attendanceMode' );
 $attendance_mode       = is_array( $attendance_field ) && isset( $attendance_field['id'] ) ? (int) $attendance_field['id'] : (int) $attendance_field;
-$external              = isset( $atts ) ? isset( $atts['links'] ) && $atts['links'] === 'oa' : false;
+$external              = isset( $atts ) ? isset( $atts['links'] ) && 'oa' === $atts['links'] : false;
 $permalink             = openagenda_event_permalink( false, false, true, $external );
 $additional_attributes = $external ? 'target="_blank" rel="noopener noreferer"' : '';
 
 switch ( $attendance_mode ) {
-	case '2': // Online
+	case '2': // Online.
 		$location_label = openagenda_get_attendance_mode_label();
 		break;
-	case '3': // Mixed
+	case '3': // Mixed.
 		$location_label = ! empty( $location ) ? sprintf( '%s | %s, %s', __( 'Online', 'openagenda' ), esc_html( $location['name'] ?? '' ), esc_html( $location['city'] ?? '' ) ) : '';
 		break;
-	default: // 1 - On site
+	default: // 1 - On site.
 		$location_label = ! empty( $location ) ? sprintf( '%s, %s', esc_html( $location['name'] ?? '' ), esc_html( $location['city'] ?? '' ) ) : '';
 		break;
 }
@@ -35,9 +37,9 @@ switch ( $attendance_mode ) {
 		</div>
 
 		<div class="oa-event-details">
-			<?php if ( $dateRange = openagenda_get_field( 'dateRange' ) ) : ?>
+			<?php if ( $date_range ) : ?>
 				<p class="oa-event-range">
-					<strong><?php echo wp_kses_post( $dateRange ); ?></strong>
+					<strong><?php echo wp_kses_post( $date_range ); ?></strong>
 				</p>
 			<?php endif; ?>
 

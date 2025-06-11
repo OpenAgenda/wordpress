@@ -7,7 +7,8 @@
  * @package OpenAgenda
  * @version 3.0.0
  */
-$dateRange            = openagenda_get_field( 'dateRange' );
+
+$date_range           = openagenda_get_field( 'dateRange' );
 $registration_methods = openagenda_get_field( 'registration' );
 $conditions           = openagenda_get_field( 'conditions' );
 $keywords             = openagenda_get_field( 'keywords' );
@@ -32,11 +33,11 @@ $credits              = openagenda_get_field( 'imageCredits' );
 				?>
 			</div>
 			
-			<?php if ( ! empty( $dateRange ) ) : ?>
+			<?php if ( ! empty( $date_range ) ) : ?>
 				<div class="oa-event-range">
 					<?php
 					openagenda_icon( 'time' );
-					echo wp_kses_post( $dateRange );
+					echo wp_kses_post( $date_range );
 					?>
 				</div>
 			<?php endif; ?>

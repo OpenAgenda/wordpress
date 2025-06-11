@@ -8,6 +8,7 @@
  * @package OpenAgenda
  * @version 2.14.0
  */
+
 ?>
 <header class="<?php echo esc_attr( $class ); ?>">
 	<?php echo do_shortcode( '[openagenda_filter_total]' ); ?>

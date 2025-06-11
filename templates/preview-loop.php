@@ -8,6 +8,7 @@
  * @package OpenAgenda
  * @version 3.0.0
  */
+
 $view     = $atts['view'] ?? 'list';
 $template = ! empty( openagenda_get_template( 'preview' ) ) ? openagenda_get_template( 'preview' ) : openagenda_get_template( 'event' );
 

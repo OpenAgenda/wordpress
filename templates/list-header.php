@@ -8,6 +8,7 @@
  * @package OpenAgenda
  * @version 3.0.0
  */
+
 ?>
 <header class="<?php echo esc_attr( $class ); ?>">
 	<?php

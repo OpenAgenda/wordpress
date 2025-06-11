@@ -15,6 +15,7 @@
  * @package OpenAgenda
  * @version 2.14.0
  */
+
 if ( $openagenda->have_events() ) : ?>
 	<?php if ( $with_controls ) : ?>
 		<div class="oa-controls oa-controls-top">

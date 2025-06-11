@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-11T12:54:36+00:00\n"
+"POT-Creation-Date: 2025-06-11T13:26:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -35,37 +35,37 @@ msgstr ""
 msgid "https://openagenda.com/"
 msgstr ""
 
-#: inc/class-admin-pages.php:62
+#: inc/class-admin-pages.php:66
 msgid "OpenAgenda Settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:63
+#: inc/class-admin-pages.php:67
 #: openagenda.php:117
 msgid "Settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:82
+#: inc/class-admin-pages.php:86
 msgid "General"
 msgstr ""
 
-#: inc/class-admin-pages.php:83
+#: inc/class-admin-pages.php:87
 msgid "Integrations"
 msgstr ""
 
-#: inc/class-admin-pages.php:150
+#: inc/class-admin-pages.php:154
 #: inc/class-settings.php:83
 msgid "General settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:166
+#: inc/class-admin-pages.php:170
 msgid "Integrations settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:169
+#: inc/class-admin-pages.php:173
 msgid "OpenStreetMap settings"
 msgstr ""
 
-#: inc/class-admin-pages.php:173
+#: inc/class-admin-pages.php:177
 msgid "CloudImage settings"
 msgstr ""
 
@@ -330,7 +330,7 @@ msgid "Displays a filter widget."
 msgstr ""
 
 #: inc/class-filter-widget.php:192
-#: inc/class-preview-widget.php:135
+#: inc/class-preview-widget.php:129
 msgid "Title :"
 msgstr ""
 
@@ -342,169 +342,169 @@ msgstr ""
 msgid "Choose filter"
 msgstr ""
 
-#: inc/class-main.php:207
+#: inc/class-main.php:213
 msgctxt "Filter name"
 msgid "Active filters"
 msgstr ""
 
-#: inc/class-main.php:211
+#: inc/class-main.php:217
 msgctxt "Filter name"
 msgid "Choice"
 msgstr ""
 
-#: inc/class-main.php:215
+#: inc/class-main.php:221
 msgctxt "Filter name"
 msgid "Calendar"
 msgstr ""
 
-#: inc/class-main.php:219
+#: inc/class-main.php:225
 msgctxt "Filter name"
 msgid "Defined Ranges"
 msgstr ""
 
-#: inc/class-main.php:223
+#: inc/class-main.php:229
 msgctxt "Filter name"
 msgid "Map"
 msgstr ""
 
-#: inc/class-main.php:227
+#: inc/class-main.php:233
 msgctxt "Filter name"
 msgid "Upcoming"
 msgstr ""
 
-#: inc/class-main.php:231
+#: inc/class-main.php:237
 msgctxt "Filter name"
 msgid "Search"
 msgstr ""
 
-#: inc/class-metaboxes.php:43
+#: inc/class-metaboxes.php:47
 msgid "Calendar settings"
 msgstr ""
 
-#: inc/class-metaboxes.php:67
+#: inc/class-metaboxes.php:71
 msgid "Calendar UID"
 msgstr ""
 
-#: inc/class-metaboxes.php:72
+#: inc/class-metaboxes.php:76
 msgid "How to find my calendar UID ?"
 msgstr ""
 
-#: inc/class-metaboxes.php:78
+#: inc/class-metaboxes.php:82
 msgid "Events per page"
 msgstr ""
 
-#: inc/class-metaboxes.php:84
-#: inc/class-preview-widget.php:38
+#: inc/class-metaboxes.php:88
+#: inc/class-preview-widget.php:33
 msgid "Display setting"
 msgstr ""
 
-#: inc/class-metaboxes.php:88
-#: inc/class-preview-widget.php:43
+#: inc/class-metaboxes.php:92
+#: inc/class-preview-widget.php:38
 msgid "Display as list"
 msgstr ""
 
-#: inc/class-metaboxes.php:92
-#: inc/class-preview-widget.php:47
+#: inc/class-metaboxes.php:96
+#: inc/class-preview-widget.php:42
 msgid "Display as grid"
 msgstr ""
 
-#: inc/class-metaboxes.php:100
-#: inc/class-preview-widget.php:55
+#: inc/class-metaboxes.php:104
+#: inc/class-preview-widget.php:50
 msgid "Default event sort"
 msgstr ""
 
-#: inc/class-metaboxes.php:105
+#: inc/class-metaboxes.php:109
 msgid "Learn more about sort"
 msgstr ""
 
-#: inc/class-metaboxes.php:109
-#: inc/class-preview-widget.php:59
+#: inc/class-metaboxes.php:113
+#: inc/class-preview-widget.php:54
 msgid "Featured first, followed by ascending last occurrence (default)"
 msgstr ""
 
-#: inc/class-metaboxes.php:113
-#: inc/class-preview-widget.php:60
+#: inc/class-metaboxes.php:117
+#: inc/class-preview-widget.php:55
 msgid "Featured first, followed by ascending upcoming occurrence"
 msgstr ""
 
-#: inc/class-metaboxes.php:117
-#: inc/class-preview-widget.php:61
+#: inc/class-metaboxes.php:121
+#: inc/class-preview-widget.php:56
 msgid "Ascending last occurrence"
 msgstr ""
 
-#: inc/class-metaboxes.php:121
-#: inc/class-preview-widget.php:62
+#: inc/class-metaboxes.php:125
+#: inc/class-preview-widget.php:57
 msgid "Ascending upcoming occurrence"
 msgstr ""
 
-#: inc/class-metaboxes.php:125
-#: inc/class-preview-widget.php:63
+#: inc/class-metaboxes.php:129
+#: inc/class-preview-widget.php:58
 msgid "Descending update date"
 msgstr ""
 
-#: inc/class-metaboxes.php:129
-#: inc/class-preview-widget.php:64
+#: inc/class-metaboxes.php:133
+#: inc/class-preview-widget.php:59
 msgid "Ascending update date"
 msgstr ""
 
-#: inc/class-metaboxes.php:137
+#: inc/class-metaboxes.php:141
 msgid "Display editor content on list view."
 msgstr ""
 
-#: inc/class-metaboxes.php:143
+#: inc/class-metaboxes.php:147
 msgid "Display editor content on single event views."
 msgstr ""
 
-#: inc/class-metaboxes.php:149
+#: inc/class-metaboxes.php:153
 msgid "Only display current and upcoming events. Past events can be displayed using the calendar widget."
 msgstr ""
 
-#: inc/class-metaboxes.php:155
+#: inc/class-metaboxes.php:159
 msgid "Activate infinite scroll functionnality to dynamically load more events."
 msgstr ""
 
-#: inc/class-metaboxes.php:161
-#: inc/class-preview-widget.php:70
+#: inc/class-metaboxes.php:165
+#: inc/class-preview-widget.php:65
 msgid "Default filters (advanced)"
 msgstr ""
 
-#: inc/class-metaboxes.php:163
+#: inc/class-metaboxes.php:167
 msgid "Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed."
 msgstr ""
 
-#: inc/class-metaboxes.php:168
+#: inc/class-metaboxes.php:172
 msgid "API key (advanced)"
 msgstr ""
 
-#: inc/class-metaboxes.php:171
+#: inc/class-metaboxes.php:175
 #: inc/class-settings.php:122
 msgid "Show API key"
 msgstr ""
 
-#: inc/class-metaboxes.php:172
+#: inc/class-metaboxes.php:176
 msgid "Fill this field only if you want to make API calls with a API key different from the general settings."
 msgstr ""
 
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:215
+#: inc/class-metaboxes.php:219
 msgid "Please provide your account API key in <a href=\"%s\">the plugin settings</a>."
 msgstr ""
 
-#: inc/class-metaboxes.php:240
+#: inc/class-metaboxes.php:244
 msgid "New field"
 msgstr ""
 
-#: inc/class-metaboxes.php:373
+#: inc/class-metaboxes.php:377
 #: inc/class-settings.php:378
 msgid "Show password"
 msgstr ""
 
-#: inc/class-metaboxes.php:475
+#: inc/class-metaboxes.php:479
 msgid "Agenda could not be found. Please double check your agenda UID."
 msgstr ""
 
 #. translators: %s: settings page url
-#: inc/class-metaboxes.php:479
+#: inc/class-metaboxes.php:483
 msgid "The request could not be authenticated. Please double check API key in <a href=\"%s\">your general settings.</a>"
 msgstr ""
 
@@ -524,31 +524,31 @@ msgstr ""
 msgid "There was an error parsing the JSON."
 msgstr ""
 
-#: inc/class-preview-widget.php:31
+#: inc/class-preview-widget.php:26
 msgid "Number of events to display&nbsp;:"
 msgstr ""
 
-#: inc/class-preview-widget.php:74
+#: inc/class-preview-widget.php:69
 msgid "Use a query string representing a filtered query. Only events corresponding to these filters will be displayed."
 msgstr ""
 
-#: inc/class-preview-widget.php:79
+#: inc/class-preview-widget.php:74
 msgid "Use external links"
 msgstr ""
 
-#: inc/class-preview-widget.php:82
+#: inc/class-preview-widget.php:77
 msgid "Check to make event permalinks point to event pages on https://openagenda.com instead of local pages."
 msgstr ""
 
-#: inc/class-preview-widget.php:87
+#: inc/class-preview-widget.php:82
 msgid "OpenAgenda Preview"
 msgstr ""
 
-#: inc/class-preview-widget.php:89
+#: inc/class-preview-widget.php:84
 msgid "Displays a calendar preview widget."
 msgstr ""
 
-#: inc/class-preview-widget.php:139
+#: inc/class-preview-widget.php:133
 msgid "Agenda UID :"
 msgstr ""
 
@@ -828,8 +828,8 @@ msgid "On site"
 msgstr ""
 
 #: inc/template-tags.php:1003
-#: templates/event.php:22
-#: templates/legacy/event.php:22
+#: templates/event.php:24
+#: templates/legacy/event.php:24
 msgid "Online"
 msgstr ""
 
@@ -902,24 +902,24 @@ msgstr ""
 msgid "Additionnal links"
 msgstr ""
 
-#: templates/event-loop.php:39
-#: templates/legacy/event-loop.php:46
+#: templates/event-loop.php:40
+#: templates/legacy/event-loop.php:47
 msgid "Sorry, we could not find any event."
 msgstr ""
 
-#: templates/legacy/single-event.php:47
-#: templates/single-event.php:86
+#: templates/legacy/single-event.php:53
+#: templates/single-event.php:87
 msgid "Access the online event: "
 msgstr ""
 
-#: templates/legacy/single-event.php:54
+#: templates/legacy/single-event.php:60
 msgid "Registration: "
 msgstr ""
 
-#: templates/single-event.php:48
+#: templates/single-event.php:49
 msgid "Conditions"
 msgstr ""
 
-#: templates/single-event.php:58
+#: templates/single-event.php:59
 msgid "Registration"
 msgstr ""

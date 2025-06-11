@@ -14,7 +14,7 @@ if ( empty( openagenda_get_field( 'location' ) ) || empty( openagenda_get_field(
 
 $latitude  = openagenda_get_field( 'location.latitude' );
 $longitude = openagenda_get_field( 'location.longitude' );
-$url       = add_query_arg( 'destination', urlencode( $latitude . ',' . $longitude ), 'https://www.google.com/maps/dir/?api=1' );
+$url       = add_query_arg( 'destination', rawurlencode( $latitude . ',' . $longitude ), 'https://www.google.com/maps/dir/?api=1' );
 
 $address = openagenda_get_field( 'location.address' );
 $city    = openagenda_get_field( 'location.city' );
@@ -102,8 +102,8 @@ $credits = openagenda_get_field( 'location.imageCredits' );
 			<?php
 				printf( '<strong class="oa-label oa-event-location-links-label">%s</strong>', esc_html__( 'Additionnal links', 'openagenda' ) );
 				echo '<ul>';
-			foreach ( $links as $link ) {
-				printf( '<li><a class="oa-event-location-link" href="%s">%s</a></li>', esc_url( $link ), esc_html( $link ) );
+			foreach ( $links as $location_link ) {
+				printf( '<li><a class="oa-event-location-link" href="%s">%s</a></li>', esc_url( $location_link ), esc_html( $location_link ) );
 			}
 				echo '</ul>';
 			?>

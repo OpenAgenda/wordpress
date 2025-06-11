@@ -13,11 +13,15 @@ namespace OpenAgenda;
 class Metaboxes implements Hookable {
 	/**
 	 * Main metabox to register
+	 *
+	 * @var  array  $metaboxes
 	 */
 	protected $metaboxes = array();
 
 	/**
 	 * Fields to display
+	 *
+	 * @var array $fields
 	 */
 	protected $fields = array();
 
@@ -200,14 +204,14 @@ class Metaboxes implements Hookable {
 	/**
 	 * Settings metabox markup
 	 *
-	 * @param  WP_Post $post  Current post
-	 * @param  array   $args  Additional callback arguments, passed via add_meta_box() function call
+	 * @param  WP_Post $post  Current post.
+	 * @param  array   $args  Additional callback arguments, passed via add_meta_box() function call.
 	 */
 	public function calendar_settings_markup( $post, $args ) {
 		wp_nonce_field( 'oa_calendar_settings_metabox_save_' . (int) $post->ID, 'oa_calendar_settings_nonce' );
 		echo '<style>#oa-calendar-settings .components-base-control{margin-bottom: 1rem;}#oa-calendar-settings .is-warning{margin: 5px 0;}</style>';
 
-		// If no API key is provided, display an error message
+		// If no API key is provided, display an error message.
 		$general_settings = get_option( 'openagenda_general_settings' );
 		if ( ! $general_settings || empty( $general_settings['openagenda_api_key'] ) ) {
 			$settings_page_url = menu_page_url( 'openagenda', false );
@@ -226,8 +230,8 @@ class Metaboxes implements Hookable {
 	/**
 	 * Renders our metabox fields
 	 *
-	 * @param  string $name  Name of the field. Used in id and name attributes
-	 * @param  array  $args  Array of arguments for the field
+	 * @param  string $name  Name of the field. Used in id and name attributes.
+	 * @param  array  $args  Array of arguments for the field.
 	 */
 	public function render_field( $name, $args = array() ) {
 		global $post;
@@ -392,17 +396,17 @@ class Metaboxes implements Hookable {
 	 */
 	public function calendar_settings_save( $post_ID, $post, $update ) {
 
-		// Check nonce
+		// Check nonce.
 		if ( ! isset( $_POST['oa_calendar_settings_nonce'] ) || ! wp_verify_nonce( $_POST['oa_calendar_settings_nonce'], 'oa_calendar_settings_metabox_save_' . (int) $post->ID ) ) {
 			return;
 		}
 
-		// Check user has permissions
+		// Check user has permissions.
 		if ( ! current_user_can( 'edit_post', (int) $post_ID ) ) {
 			return;
 		}
 
-		// If autosaving, do nothing
+		// If autosaving, do nothing.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
@@ -490,7 +494,8 @@ class Metaboxes implements Hookable {
 	/**
 	 * Gets an agenda schema
 	 *
-	 * @param  string $agenda_uid  Agenda to fetch settings for
+	 * @param  string $agenda_uid  Agenda to fetch settings for.
+	 * @param  int    $post_id  Post ID.
 	 */
 	public function save_agenda_settings( $agenda_uid, $post_id ) {
 		$settings = get_option( 'openagenda_general_settings' );
@@ -508,7 +513,7 @@ class Metaboxes implements Hookable {
 			}
 		}
 
-		// Save agenda settings
+		// Save agenda settings.
 		if ( ! empty( $agenda_settings ) ) {
 			$all_languages = isset( $agenda_settings['summary']['languages'] ) ? array_keys( $agenda_settings['summary']['languages'] ) : array();
 			update_post_meta( $post_id, 'oa-calendar-languages', $all_languages );

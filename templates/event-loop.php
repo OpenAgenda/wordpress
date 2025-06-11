@@ -15,6 +15,7 @@
  * @package OpenAgenda
  * @version 3.0.0
  */
+
 if ( $openagenda->have_events() ) : ?>
 	<?php if ( $openagenda->is_single() ) : ?>
 		<div class="oa-controls oa-controls-top">
