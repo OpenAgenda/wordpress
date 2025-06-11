@@ -27,13 +27,11 @@ switch ( $attendance_mode ) {
 }
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-list-item">
-	<div class="oa-event-wrapper">
+	<a class="oa-event-wrapper" href="<?php echo esc_url( $permalink ); ?>" <?php echo $additional_attributes; ?>>
 		<?php openagenda_featured_badge(); ?>
 
 		<div class="oa-event-thumbnail">
-			<a class="oa-event-permalink" href="<?php echo esc_url( $permalink ); ?>" <?php echo $additional_attributes; ?>>
-				<?php openagenda_event_image(); ?>
-			</a>
+			<?php openagenda_event_image(); ?>
 		</div>
 
 		<div class="oa-event-details">
@@ -44,9 +42,7 @@ switch ( $attendance_mode ) {
 			<?php endif; ?>
 
 			<h2 class="oa-event-title">
-				<a class="oa-event-permalink" href="<?php echo esc_url( $permalink ); ?>" <?php echo $additional_attributes; ?>>
-					<?php openagenda_field( 'title' ); ?>
-				</a>
+				<?php openagenda_field( 'title' ); ?>
 			</h2>
 			
 			<p class="oa-event-description"><?php openagenda_field( 'description' ); ?></p>
@@ -59,5 +55,5 @@ switch ( $attendance_mode ) {
 		</div>
 		
 		<?php openagenda_event_schema(); ?>
-	</div>
+	</a>
 </article>

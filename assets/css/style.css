@@ -91,9 +91,6 @@ strong {
   margin-top: 0;
   margin-bottom: 0;
 }
-.oa-event-title a {
-  text-decoration: none;
-}
 
 .oa-event-details,
 .oa-event-additional-fields {
@@ -104,28 +101,6 @@ strong {
 .oa-event-details > *,
 .oa-event-additional-fields > * {
   margin: 0;
-}
-
-.oa-event-featured-badge {
-  --gradient-from: white 36px;
-  --gradient-to: transparent 0;
-  background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
-  height: 52px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 52px;
-  z-index: 10;
-}
-.oa-event-featured-badge .oa-event-featured-badge-wrapper {
-  --gradient-from: var(--oa-main-color) 32px;
-  background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
-  height: 100%;
-  padding: 2px;
-  width: 100%;
-}
-.oa-event-featured-badge .oa-icon {
-  fill: white;
 }
 
 .oa-label {
@@ -154,6 +129,13 @@ strong {
   display: grid;
   grid-gap: var(--oa-spacing-7);
 }
+.oa-event-list a.oa-event-wrapper,
+.oa-event-grid a.oa-event-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+}
 .oa-event-list .oa-event-range,
 .oa-event-grid .oa-event-range {
   color: var(--oa-gray-900);
@@ -173,6 +155,7 @@ strong {
 }
 .oa-event-list .oa-event-details,
 .oa-event-grid .oa-event-details {
+  flex: 1;
   font-size: var(--oa-text-4);
   padding: var(--oa-spacing-5);
 }
@@ -191,6 +174,31 @@ strong {
 .oa-event-grid .oa-event-location-label {
   color: var(--oa-gray-700);
   font-size: var(--oa-text-3);
+  margin-top: auto;
+}
+.oa-event-list .oa-event-featured-badge,
+.oa-event-grid .oa-event-featured-badge {
+  --gradient-from: white 36px;
+  --gradient-to: transparent 0;
+  background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
+  height: 52px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 52px;
+  z-index: 10;
+}
+.oa-event-list .oa-event-featured-badge .oa-event-featured-badge-wrapper,
+.oa-event-grid .oa-event-featured-badge .oa-event-featured-badge-wrapper {
+  --gradient-from: var(--oa-main-color) 32px;
+  background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
+  height: 100%;
+  padding: 2px;
+  width: 100%;
+}
+.oa-event-list .oa-event-featured-badge .oa-icon,
+.oa-event-grid .oa-event-featured-badge .oa-icon {
+  fill: white;
 }
 
 @media screen and (min-width: 700px) {
