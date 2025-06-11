@@ -147,15 +147,22 @@ class Shortcodes implements Hookable {
 		}
 		$uid = $openagenda->get_uid();
 
-		$defaults = array( 'id' => 'active-filters' );
+		$defaults = array(
+			'id'       => 'active-filters',
+			'title'    => _x( 'Active filters', 'Filter name', 'openagenda' ),
+			'dropdown' => false,
+		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_active' );
 
 		$params = array( 'name' => 'activeFilters' );
 		$filter = sprintf( '<div class="oa-widget oa-active-filters-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
 
-		return apply_filters( 'openagenda_filter_active', $filter, $uid );
-	}
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
 
+		return apply_filters( 'openagenda_filter_active', $filter, $uid, $atts );
+	}
 
 	/**
 	 * Callback function to display event totals.
@@ -172,7 +179,11 @@ class Shortcodes implements Hookable {
 		}
 		$uid = $openagenda->get_uid();
 
-		$defaults = array( 'id' => 'total' );
+		$defaults = array(
+			'id'       => 'total',
+			'title'    => _x( 'Events total', 'Filter name', 'openagenda' ),
+			'dropdown' => false,
+		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_total' );
 
 		$default_message = sprintf(
@@ -190,8 +201,12 @@ class Shortcodes implements Hookable {
 			),
 		);
 
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
 		$filter = sprintf( '<div class="oa-widget oa-events-total-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
-		return apply_filters( 'openagenda_filter_total', $filter, $uid );
+		return apply_filters( 'openagenda_filter_total', $filter, $uid, $atts );
 	}
 
 
@@ -212,6 +227,8 @@ class Shortcodes implements Hookable {
 
 		$defaults = array(
 			'id'               => 'choice',
+			'title'            => _x( 'Choice', 'Filter name', 'openagenda' ),
+			'dropdown'         => false,
 			'field'            => '',
 			'additional_field' => '',
 			'page_size'        => 10,
@@ -257,6 +274,10 @@ class Shortcodes implements Hookable {
 			$filter = sprintf( '<div class="oa-widget oa-choice-widget" data-oa-filter="%s" data-oa-filter-params="%s">%s</div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ), $inner_html );
 		}
 
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
 		return apply_filters( 'openagenda_filter_choice', $filter, $uid, $atts );
 	}
 
@@ -272,6 +293,8 @@ class Shortcodes implements Hookable {
 	public function openagenda_filter_tags( $atts = array(), $content = null, $tag = 'openagenda_filter_tags' ) {
 		$defaults = array(
 			'id'               => 'choice',
+			'title'            => _x( 'Keywords', 'Filter name', 'openagenda' ),
+			'dropdown'         => false,
 			'field'            => 'keyword',
 			'additional_field' => '',
 			'page_size'        => 10,
@@ -298,6 +321,8 @@ class Shortcodes implements Hookable {
 
 		$defaults = array(
 			'id'             => 'date-range',
+			'title'          => _x( 'Calendar', 'Filter name', 'openagenda' ),
+			'dropdown'       => false,
 			'display_ranges' => false,
 			'ranges'         => array(),
 		);
@@ -313,6 +338,11 @@ class Shortcodes implements Hookable {
 		$ranges_filter = (bool) $atts['display_ranges'] ? $this->openagenda_filter_ranges( array( 'static_ranges' => $atts['ranges'] ) ) : '';
 
 		$filter = sprintf( '<div class="oa-widget oa-calendar-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>%s', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ), $ranges_filter );
+
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
 		return apply_filters( 'openagenda_filter_calendar', $filter, $uid, $atts );
 	}
 
@@ -333,6 +363,8 @@ class Shortcodes implements Hookable {
 
 		$defaults = array(
 			'id'            => 'defined-ranges',
+			'title'         => _x( 'Defined Ranges', 'Filter name', 'openagenda' ),
+			'dropdown'      => false,
 			'static_ranges' => array(),
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_ranges' );
@@ -348,6 +380,11 @@ class Shortcodes implements Hookable {
 		}
 
 		$filter = sprintf( '<div class="oa-widget oa-ranges-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
+
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
 		return apply_filters( 'openagenda_filter_ranges', $filter, $uid, $atts );
 	}
 
@@ -373,6 +410,8 @@ class Shortcodes implements Hookable {
 
 		$defaults = array(
 			'id'               => 'map',
+			'title'            => _x( 'Map', 'Filter name', 'openagenda' ),
+			'dropdown'         => false,
 			'map_tiles_link'   => $default_tiles,
 			'map_attribution'  => $default_attribution,
 			'map_zoom'         => 12,
@@ -397,6 +436,10 @@ class Shortcodes implements Hookable {
 			esc_attr( $atts['id'] ),
 			esc_attr( wp_json_encode( $params ) )
 		);
+
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
 
 		wp_enqueue_style( 'oa-leaflet' );
 		return apply_filters( 'openagenda_filter_map', $filter, $uid, $atts );
@@ -472,7 +515,11 @@ class Shortcodes implements Hookable {
 		}
 		$uid = $openagenda->get_uid();
 
-		$defaults = array( 'id' => 'relative' );
+		$defaults = array(
+			'id'       => 'relative',
+			'title'    => _x( 'Upcoming', 'Filter name', 'openagenda' ),
+			'dropdown' => false,
+		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_relative' );
 
 		$params = array(
@@ -481,6 +528,11 @@ class Shortcodes implements Hookable {
 		);
 
 		$filter = sprintf( '<div class="oa-widget oa-relative-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
+
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
 		return apply_filters( 'openagenda_filter_relative', $filter, $uid, $atts );
 	}
 
@@ -502,6 +554,8 @@ class Shortcodes implements Hookable {
 
 		$defaults = array(
 			'id'          => 'search',
+			'title'       => _x( 'Search', 'Filter name', 'openagenda' ),
+			'dropdown'    => false,
 			'placeholder' => '',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
@@ -518,6 +572,22 @@ class Shortcodes implements Hookable {
 			esc_attr( wp_json_encode( $params ) )
 		);
 
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
 		return apply_filters( 'openagenda_filter_search', $filter, $uid, $atts );
+	}
+
+	/**
+	 * Wraps a widget in a <details> tag if the display option is set.
+	 *
+	 * @param  string $html  Filter HTML.
+	 * @param  array  $atts  Filter attributes.
+	 * @return  string  $html
+	 */
+	public function wrap_in_dropdown( $html, $atts ) {
+		$html = sprintf( '<details class="oa-widget-details"><summary class="oa-widget-summary">%s</summary>%s</details>', $atts['title'], $html );
+		return apply_filters( 'openagenda_wrapped_widget', $html, $atts );
 	}
 }

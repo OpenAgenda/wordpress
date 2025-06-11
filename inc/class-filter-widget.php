@@ -186,6 +186,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 	public function form( $instance ) {
 		$title             = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$filter            = ! empty( $instance['filter'] ) ? $instance['filter'] : '';
+		$dropdown          = ! empty( $instance['dropdown'] ) ? $instance['dropdown'] : '';
 		$available_filters = $this->get_available_filters();
 		?>
 			<p>
@@ -200,6 +201,10 @@ class Filter_Widget extends OpenAgenda_Widget {
 						<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $filter, $key ); ?>><?php echo esc_html( $filter_data['label'] ); ?></option>
 					<?php endforeach; ?>
 				</select>
+			</p>
+			<p>
+				<input type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'dropdown' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'dropdown' ) ); ?>" <?php checked( $dropdown ); ?>>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'dropdown' ) ); ?>"><?php esc_html_e( 'Display filter as a dropdown ?', 'openagenda' ); ?></label>
 			</p>
 		<?php
 
@@ -234,8 +239,9 @@ class Filter_Widget extends OpenAgenda_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array(
-			'title'  => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
-			'filter' => array_key_exists( $new_instance['filter'], $this->get_available_filters() ) ? $new_instance['filter'] : '',
+			'title'    => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
+			'filter'   => array_key_exists( $new_instance['filter'], $this->get_available_filters() ) ? $new_instance['filter'] : '',
+			'dropdown' => ! empty( $new_instance['dropdown'] ) ? (bool) $new_instance['dropdown'] : false,
 		);
 
 		switch ( $instance['filter'] ) {
