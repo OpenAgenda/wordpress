@@ -52,7 +52,7 @@ switch ( $attendance_mode ) {
 			<p class="oa-event-description"><?php openagenda_field( 'description' ); ?></p>
 				
 			<?php if ( $location_label ) : ?>
-				<p class="oa-event-location">
+				<p class="oa-event-location-label">
 					<?php echo wp_kses_post( $location_label ); ?>
 				</p>
 			<?php endif; ?>
