@@ -204,6 +204,7 @@ function openagenda_esc_field( $value, $field ) {
 			$value = esc_attr( $value );
 			break;
 		case 'title':
+		case 'location.description':
 		case 'description':
 			$value = wp_kses_post( $value );
 			break;
@@ -980,6 +981,42 @@ function openagenda_get_attendance_mode_label( $uid = false ) {
 	return apply_filters( 'openagenda_event_attendance_mode_label', $label, $uid );
 }
 
+
+/**
+ * Returns status label
+ * 
+ * @param  string  $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ * @return  string $label  Label of the attendance mode.
+ */
+function openagenda_event_status_label( $uid = false, $display = true ){
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$status = openagenda_get_field( 'status' ) ?? [];
+	$default_labels  = apply_filters(
+		'openagenda_status_labels',
+		array(
+			1 => __( 'Scheduled', 'openagenda' ),
+			2 => __( 'Rescheduled', 'openagenda' ),
+			3 => __( 'Switched to online', 'openagenda' ),
+			4 => __( 'Postponed', 'openagenda' ),
+			5 => __( 'Sold out', 'openagenda' ),
+			6 => __( 'Cancelled', 'openagenda' ),
+		)
+	);
+
+	if ( is_array( $status ) ) {
+		$labels = ! empty( $status['label'] ) ? $status['label'] : array();
+		$label  = openagenda_get_i18n_value( $labels );
+	} else {
+		$label = array_key_exists( $status, $default_labels ) ? $default_labels[ $status ] : $default_labels[1];
+	}
+
+	return apply_filters( 'openagenda_event_status_label', $label, $uid );
+}
 
 
 /**
