@@ -663,6 +663,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay {
   text-align: center;
   top: 0;
   width: 100%;
+  z-index: 10;
 }
 div[data-container-id=oa-wrapper] .oa-update-overlay .oa-icon-refresh {
   display: inline-block;
