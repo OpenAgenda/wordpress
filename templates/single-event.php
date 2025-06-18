@@ -28,7 +28,7 @@ $credits              = openagenda_get_field( 'imageCredits' );
 		<div class="oa-event-details">
 			<div class="oa-event-share-button">
 				<?php
-					openagenda_icon( 'xpost' );
+					openagenda_icon( 'share' );
 					openagenda_event_share_button();
 				?>
 			</div>
@@ -36,7 +36,7 @@ $credits              = openagenda_get_field( 'imageCredits' );
 			<?php if ( ! empty( $date_range ) ) : ?>
 				<div class="oa-event-range">
 					<?php
-					openagenda_icon( 'time' );
+					openagenda_icon( 'clock' );
 					echo wp_kses_post( $date_range );
 					?>
 				</div>
@@ -45,7 +45,7 @@ $credits              = openagenda_get_field( 'imageCredits' );
 			<?php if ( ! empty( $conditions ) ) : ?>
 				<div class="oa-event-conditions">
 					<?php
-						openagenda_icon( 'info' );
+						openagenda_icon( 'ticket' );
 						printf( '<strong class="oa-label oa-conditions-label">%s</strong>', esc_html__( 'Conditions', 'openagenda' ) );
 						printf( '<div class="oa-conditions-value">%s</div>', esc_html( $conditions ) );
 					?>
@@ -55,7 +55,7 @@ $credits              = openagenda_get_field( 'imageCredits' );
 			<?php if ( ! empty( $registration_methods ) ) : ?>
 				<div class="oa-event-registration">
 					<?php
-						openagenda_icon( 'document' );
+						openagenda_icon( 'check' );
 						printf( '<strong class="oa-label oa-registration-label">%s</strong>', esc_html__( 'Registration', 'openagenda' ) );
 						openagenda_event_registration_methods();
 					?>

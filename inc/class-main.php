@@ -93,7 +93,7 @@ class Main {
 	public function wp_head() {
 		$customizer_settings = get_option( 'openagenda_customizer' );
 		$main_color          = isset( $customizer_settings['main_color'] ) ? $customizer_settings['main_color'] : '#41acdd';
-		$oa_styles           = '.oa-icon{width: 24px; height: 24px;}.oa-icon-refresh{animation: rotate 1s linear infinite;}@keyframes rotate{to{transform: rotateZ(360deg)}}';
+		$oa_styles           = '';
 
 		if ( $main_color ) {
 			$oa_styles .= sprintf( ':root{--oa-main-color: %s }', sanitize_hex_color( $main_color ) );

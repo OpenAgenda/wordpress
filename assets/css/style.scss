@@ -80,6 +80,20 @@ strong {
 	}
 }
 
+.oa-icon {
+	font-size: var(--oa-text-4);
+}
+
+.oa-icon-refresh {
+	animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+	to {
+		transform: rotateZ(360deg)
+	}
+}
+
 /*************************
  * Events lists and grid
  *************************/
@@ -150,9 +164,10 @@ strong {
 		--gradient-to: transparent 0;
 		background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
 		height: 52px;
+		left: 0px;
+		line-height: 1;
 		position: absolute;
 		top: 0px;
-		left: 0px;
 		width: 52px;
 		z-index: 10;
 
@@ -165,7 +180,9 @@ strong {
 		}
 
 		.oa-icon {
-			fill: white;
+			color: white;
+			margin-top: var(--oa-spacing-1);
+			margin-left: var(--oa-spacing-1);
 		}
 	}
 }
@@ -213,6 +230,7 @@ ul.oa-pagination {
 	align-items: center;
 	display: flex;
 	justify-content: end;
+	gap: var(--oa-spacing-2);
 	flex-wrap: wrap;
 	margin: var(--oa-spacing-4) 0;
 }
@@ -242,6 +260,10 @@ ul.oa-pagination {
 .oa-previous-link,
 .oa-next-link {
 	text-decoration: none;
+
+	.oa-icon {
+		font-size: var(--oa-text-5);
+	}
 }
 
 /***********************
@@ -280,11 +302,17 @@ ul.oa-pagination {
 		row-gap: var(--oa-spacing-1);
 
 		.oa-icon {
-			fill: var(--oa-gray-400);
-			height: 32px;
-			width: 32px;
+			color: var(--oa-gray-400);
+			font-size: var(--oa-text-7);
 		}
 	}
+
+	.oa-registration-method-wrapper {
+		span.oa-icon {
+			font-size: var(--oa-text-4);
+		}
+	}
+
 
 	.oa-event-thumbnail,
 	.oa-event-location-image {
@@ -625,7 +653,7 @@ button.oa-button {
 	background: transparent;
 	border: none;
 	line-height: 1;
-	padding: 0;
+	padding: var(--oa-spacing-2);
 	margin: 0;
 
 	&:hover,

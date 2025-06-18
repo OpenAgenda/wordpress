@@ -28,6 +28,21 @@ img {
 	height: auto;
 }
 
+.oa-icon {
+	width: 24px;
+	height: 24px;
+}
+
+.oa-icon-refresh {
+	animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+	to {
+		transform: rotateZ(360deg)
+	}
+}
+
 /*****************************
  * Screen reader text helper
  *****************************/
