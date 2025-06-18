@@ -93,6 +93,12 @@ strong {
 		flex-direction: column;
 		height: 100%;
 		text-decoration: none;
+
+
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
 	}
 
 	.oa-event-range {
@@ -107,6 +113,10 @@ strong {
 	.oa-event {
 		border: 1px solid var(--oa-gray-400);
 		position: relative;
+
+		&:hover {
+			border-color: var(--oa-gray-600);
+		}
 	}
 
 	.oa-event-description {

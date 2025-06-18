@@ -151,6 +151,11 @@ strong {
   height: 100%;
   text-decoration: none;
 }
+.oa-event-list a.oa-event-wrapper:hover, .oa-event-list a.oa-event-wrapper:focus,
+.oa-event-grid a.oa-event-wrapper:hover,
+.oa-event-grid a.oa-event-wrapper:focus {
+  text-decoration: none;
+}
 .oa-event-list .oa-event-range,
 .oa-event-grid .oa-event-range {
   color: var(--oa-gray-900);
@@ -164,6 +169,10 @@ strong {
 .oa-event-grid .oa-event {
   border: 1px solid var(--oa-gray-400);
   position: relative;
+}
+.oa-event-list .oa-event:hover,
+.oa-event-grid .oa-event:hover {
+  border-color: var(--oa-gray-600);
 }
 .oa-event-list .oa-event-description,
 .oa-event-grid .oa-event-description {
