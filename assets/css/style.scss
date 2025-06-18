@@ -476,7 +476,41 @@ ul.oa-week {
  *********************************/
 .oa-search-widget {
 	.input-group {
+		border: 1px solid var(--oa-gray-300);
+		border-radius: 0;
+		color: var(--oa-gray-700);
+		cursor: pointer;
 		display: flex;
+		font-size: var(--oa-text-3);
+		min-height: var(--oa-spacing-6);
+	}
+
+	.input-group-append {
+		display: flex;
+		flex-direction: column;
+	}
+
+	input[type="search"],
+	button[type="submit"] {
+		border: none;
+		background: transparent;
+		padding: var(--oa-spacing-3);
+	}
+
+	input[type="search"] {
+		flex: 1;
+	}
+
+	button[type="submit"] {
+		color: var(--oa-main-color);
+		flex: 1;
+
+		&:hover,
+		&:focus {
+			background: transparent;
+			border: none;
+			color: var(--oa-main-color-lighter);
+		}
 	}
 }
 

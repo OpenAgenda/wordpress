@@ -16,7 +16,7 @@ $display_default_filters = 'yes' === get_post_meta( get_the_ID(), 'oa-calendar-d
 		<div class="oa-filters oa-default-filters">
 			<?php
 				echo do_shortcode( '[openagenda_filter_calendar dropdown="true"]' );
-				echo do_shortcode( '[openagenda_filter_search dropdown=""]' );
+				echo do_shortcode( '[openagenda_filter_search]' );
 			?>
 		</div>
 	<?php endif; ?>
