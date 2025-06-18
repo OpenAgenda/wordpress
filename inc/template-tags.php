@@ -1023,7 +1023,7 @@ function openagenda_get_attendance_mode_label( $uid = false ) {
  * @param  bool   $display  Whether to echo or just return the html.
  * @return  string $label  Label of the attendance mode.
  */
-function openagenda_event_status_label( $uid = false, $display = true ) {
+function openagenda_get_event_status_label( $uid = false ) {
 	$event = openagenda_get_event( $uid );
 	if ( ! $uid ) {
 		$uid = $event['uid'];

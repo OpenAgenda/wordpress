@@ -9,10 +9,10 @@
  * @version 3.0.0
  */
 
-$display_default_filters = 'yes' === get_post_meta( get_the_ID(), 'oa-calendar-display-default-filters', true );
+$oa_display_default_filters = 'yes' === get_post_meta( get_the_ID(), 'oa-calendar-display-default-filters', true );
 ?>
 <header class="<?php echo esc_attr( $class ); ?>">
-	<?php if ( $display_default_filters ) : ?>
+	<?php if ( $oa_display_default_filters ) : ?>
 		<div class="oa-filters oa-default-filters">
 			<?php
 				echo do_shortcode( '[openagenda_filter_calendar dropdown="true"]' );

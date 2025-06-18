@@ -9,17 +9,17 @@
  * @version 3.0.0
  */
 
-$view     = $atts['view'] ?? 'list';
-$template = ! empty( openagenda_get_template( 'preview' ) ) ? openagenda_get_template( 'preview' ) : openagenda_get_template( 'event' );
+$oa_view     = $atts['view'] ?? 'list';
+$oa_template = ! empty( openagenda_get_template( 'preview' ) ) ? openagenda_get_template( 'preview' ) : openagenda_get_template( 'event' );
 
 if ( $openagenda->have_events() ) :
 	$openagenda->reset_index(); ?>
-	<div class="oa-preview <?php echo esc_attr( $view ); ?>">
+	<div class="oa-preview <?php echo esc_attr( $oa_view ); ?>">
 		<div class="oa-preview-events">
 			<?php
 			while ( $openagenda->have_events() ) :
 				$openagenda->the_event();
-				include $template;
+				include $oa_template;
 				endwhile;
 			?>
 		</div>

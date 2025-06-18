@@ -108,6 +108,7 @@
 		<properties>
 			<property name="prefixes" type="array">
 				<element value="openagenda" />
+				<element value="oa_" />
 			</property>
 		</properties>
 	</rule>

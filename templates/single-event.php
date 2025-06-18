@@ -8,12 +8,12 @@
  * @version 3.0.0
  */
 
-$date_range           = openagenda_get_field( 'dateRange' );
-$registration_methods = openagenda_get_field( 'registration' );
-$conditions           = openagenda_get_field( 'conditions' );
-$keywords             = openagenda_get_field( 'keywords' );
-$access_link          = openagenda_get_field( 'onlineAccessLink' );
-$credits              = openagenda_get_field( 'imageCredits' );
+$oa_date_range           = openagenda_get_field( 'dateRange' );
+$oa_registration_methods = openagenda_get_field( 'registration' );
+$oa_conditions           = openagenda_get_field( 'conditions' );
+$oa_keywords             = openagenda_get_field( 'keywords' );
+$oa_access_link          = openagenda_get_field( 'onlineAccessLink' );
+$oa_credits              = openagenda_get_field( 'imageCredits' );
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
 	<div class="oa-event-wrapper">
@@ -33,26 +33,26 @@ $credits              = openagenda_get_field( 'imageCredits' );
 				?>
 			</div>
 			
-			<?php if ( ! empty( $date_range ) ) : ?>
+			<?php if ( ! empty( $oa_date_range ) ) : ?>
 				<div class="oa-event-range">
 					<?php
 					openagenda_icon( 'clock' );
-					echo wp_kses_post( $date_range );
+					echo wp_kses_post( $oa_date_range );
 					?>
 				</div>
 			<?php endif; ?>
 	
-			<?php if ( ! empty( $conditions ) ) : ?>
+			<?php if ( ! empty( $oa_conditions ) ) : ?>
 				<div class="oa-event-conditions">
 					<?php
 						openagenda_icon( 'ticket' );
 						printf( '<strong class="oa-label oa-conditions-label">%s</strong>', esc_html__( 'Conditions', 'openagenda' ) );
-						printf( '<div class="oa-conditions-value">%s</div>', esc_html( $conditions ) );
+						printf( '<div class="oa-conditions-value">%s</div>', esc_html( $oa_conditions ) );
 					?>
 				</div>
 			<?php endif; ?>
 	
-			<?php if ( ! empty( $registration_methods ) ) : ?>
+			<?php if ( ! empty( $oa_registration_methods ) ) : ?>
 				<div class="oa-event-registration">
 					<?php
 						openagenda_icon( 'check' );
@@ -66,8 +66,8 @@ $credits              = openagenda_get_field( 'imageCredits' );
 		<figure class="oa-event-thumbnail">
 			<?php
 				openagenda_event_image();
-			if ( ! empty( $credits ) ) {
-				printf( '<figcaption class="oa-image-credits">%s</figcaption>', esc_html( $credits ) );
+			if ( ! empty( $oa_credits ) ) {
+				printf( '<figcaption class="oa-image-credits">%s</figcaption>', esc_html( $oa_credits ) );
 			}
 			?>
 		</figure>
@@ -76,15 +76,15 @@ $credits              = openagenda_get_field( 'imageCredits' );
 			<?php openagenda_field( 'longDescription' ); ?>
 		</div>
 			
-		<?php if ( ! empty( $keywords ) ) : ?>
+		<?php if ( ! empty( $oa_keywords ) ) : ?>
 			<div class="oa-event-keywords">
 				<?php openagenda_field( 'keywords-list' ); ?>
 			</div>
 		<?php endif; ?>
 
-		<?php if ( ! empty( $access_link ) ) : ?>
+		<?php if ( ! empty( $oa_access_link ) ) : ?>
 			<div class="oa-event-access-link">
-				<?php printf( '<strong class="oa-label oa-access-link-label">%1$s</strong><p><a href="%2$s">%2$s</a></p>', esc_html__( 'Access the online event: ', 'openagenda' ), esc_url( $access_link ) ); ?>
+				<?php printf( '<strong class="oa-label oa-access-link-label">%1$s</strong><p><a href="%2$s">%2$s</a></p>', esc_html__( 'Access the online event: ', 'openagenda' ), esc_url( $oa_access_link ) ); ?>
 			</div>
 		<?php endif; ?>
 		
