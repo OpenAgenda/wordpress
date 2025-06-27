@@ -34,6 +34,7 @@ function openagenda_get_template( $slug ) {
 		}
 	}
 
+	$located = apply_filters( 'openagenda_get_template', $located, $slug );
 	return str_replace( '..', '', $located );
 }
 
