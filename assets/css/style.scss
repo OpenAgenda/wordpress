@@ -81,7 +81,9 @@ strong {
 }
 
 .oa-icon {
-	font-size: var(--oa-text-4);
+	width: var(--oa-text-4);
+	height: var(--oa-text-4);
+	fill: currentColor;
 }
 
 .oa-icon-refresh {
@@ -302,14 +304,17 @@ ul.oa-pagination {
 		row-gap: var(--oa-spacing-1);
 
 		.oa-icon {
-			color: var(--oa-gray-400);
-			font-size: var(--oa-text-7);
+			fill: var(--oa-gray-400);
+			width: var(--oa-text-6);
+			height: var(--oa-text-6);
+
 		}
 	}
 
 	.oa-registration-method-wrapper {
-		span.oa-icon {
-			font-size: var(--oa-text-4);
+		svg.oa-icon {
+			width: var(--oa-text-4);
+			height: var(--oa-text-4);
 		}
 	}
 

@@ -137,7 +137,9 @@ strong {
 }
 
 .oa-icon {
-  font-size: var(--oa-text-4);
+  width: var(--oa-text-4);
+  height: var(--oa-text-4);
+  fill: currentColor;
 }
 
 .oa-icon-refresh {
@@ -346,11 +348,13 @@ ul.oa-pagination .oa-page a:focus {
 }
 .oa-single-event .oa-event-details > div .oa-icon,
 .oa-single-event .oa-registration-method-wrapper .oa-icon {
-  color: var(--oa-gray-400);
-  font-size: var(--oa-text-7);
+  fill: var(--oa-gray-400);
+  width: var(--oa-text-6);
+  height: var(--oa-text-6);
 }
-.oa-single-event .oa-registration-method-wrapper span.oa-icon {
-  font-size: var(--oa-text-4);
+.oa-single-event .oa-registration-method-wrapper svg.oa-icon {
+  width: var(--oa-text-4);
+  height: var(--oa-text-4);
 }
 .oa-single-event .oa-event-thumbnail,
 .oa-single-event .oa-event-location-image {
