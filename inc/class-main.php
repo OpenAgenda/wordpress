@@ -96,6 +96,7 @@ class Main {
 		$oa_styles           = '';
 
 		if ( $main_color ) {
+			// TODO: Generate --oa-main-color--lighter and --oa-main-color--darker
 			$oa_styles .= sprintf( ':root{--oa-main-color: %s }', sanitize_hex_color( $main_color ) );
 		}
 
