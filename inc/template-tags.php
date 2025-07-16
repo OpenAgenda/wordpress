@@ -839,7 +839,7 @@ function openagenda_event_share_buttons( $uid = false, $display = true ) {
 		$links = '';
 		foreach ( $sharers as $id => $sharer ) {
 			$links .= sprintf(
-				'<li><a role="button" class="oa-sharer-button oa-sharer-%s" href="%s" rel="noopener noreferrer" target="_blank">%s<span class="oa-sharer-label oa-sr-text">%s</span></a></li>',
+				'<li><a role="button" class="oa-button oa-sharer-button oa-sharer-%s" href="%s" rel="noopener noreferrer" target="_blank">%s<span class="oa-sharer-label oa-sr-text">%s</span></a></li>',
 				sanitize_html_class( $id ),
 				esc_url( $sharer['url'] ),
 				$sharer['icon'],
@@ -1549,7 +1549,7 @@ function openagenda_favorite_badge( $uid = false, $display = true ) {
 	$text = sprintf( __( 'Add %s to favorites.', 'openagenda' ), openagenda_get_field( 'title', $uid ) );
 
 	$html = sprintf(
-		'<button class="oa-event-favorite-badge" data-oa-widget="%s" data-oa-widget-params="%s">
+		'<button class="oa-button oa-event-favorite-badge" data-oa-widget="%s" data-oa-widget-params="%s">
             <span class="screen-reader-text">%s</span>
             <span class="active-icon">%s</span>
             <span class="inactive-icon">%s</span>

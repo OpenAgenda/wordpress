@@ -136,6 +136,15 @@ strong {
   * Choice widget
   *********************************/
   /*********************************
+  * Favorite widget
+  *********************************/
+  /*********************
+  * Language switcher
+  *********************/
+  /*****************************
+  * Exports and Share Buttons
+  *****************************/
+  /*********************************
   * Date Range and Calendar widget
   *********************************/
 }
@@ -170,11 +179,14 @@ strong {
 }
 .single-oa-calendar .oa-button,
 .oa-preview .oa-button {
+  align-items: center;
   background: transparent;
   border: 1px solid var(--oa-main-color);
   border-radius: 4px;
   color: var(--oa-main-color);
+  display: inline-flex;
   font-size: var(--oa-text-3);
+  gap: var(--oa-spacing-1);
   line-height: 1;
   padding: var(--oa-spacing-2);
   text-decoration: none;
@@ -845,6 +857,96 @@ strong {
 .single-oa-calendar .oa-choice-widget .oa-filter-total,
 .oa-preview .oa-choice-widget .oa-filter-total {
   font-size: smaller;
+}
+.single-oa-calendar button.oa-event-favorite-badge,
+.oa-preview button.oa-event-favorite-badge {
+  align-items: center;
+  background: transparent;
+  border: none;
+  display: inline-flex;
+  font-size: var(--oa-text-3);
+  gap: 0;
+  padding: var(--oa-spacing-1);
+}
+.single-oa-calendar button.oa-event-favorite-badge:hover, .single-oa-calendar button.oa-event-favorite-badge:focus,
+.oa-preview button.oa-event-favorite-badge:hover,
+.oa-preview button.oa-event-favorite-badge:focus {
+  cursor: pointer;
+  outline: 1px solid var(--oa-main-color-lighter);
+}
+.single-oa-calendar button.oa-event-favorite-badge .inactive-icon,
+.oa-preview button.oa-event-favorite-badge .inactive-icon {
+  display: inline-block;
+}
+.single-oa-calendar button.oa-event-favorite-badge .active-icon,
+.oa-preview button.oa-event-favorite-badge .active-icon {
+  display: none;
+}
+.single-oa-calendar button.oa-event-favorite-badge.active .active-icon,
+.oa-preview button.oa-event-favorite-badge.active .active-icon {
+  display: inline-block;
+}
+.single-oa-calendar button.oa-event-favorite-badge.active .inactive-icon,
+.oa-preview button.oa-event-favorite-badge.active .inactive-icon {
+  display: none;
+}
+.single-oa-calendar .oa-languages,
+.oa-preview .oa-languages {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: var(--oa-spacing-2) 0;
+}
+.single-oa-calendar .oa-language-link,
+.oa-preview .oa-language-link {
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  font-size: var(--oa-text-3);
+  text-transform: uppercase;
+  padding: var(--oa-spacing-1);
+}
+.single-oa-calendar .oa-language-link a,
+.oa-preview .oa-language-link a {
+  text-decoration: none;
+}
+.single-oa-calendar .oa-language-link.active, .single-oa-calendar .oa-language-link:focus-within, .single-oa-calendar .oa-language-link:hover,
+.oa-preview .oa-language-link.active,
+.oa-preview .oa-language-link:focus-within,
+.oa-preview .oa-language-link:hover {
+  border-bottom: 2px solid var(--oa-main-color);
+}
+.single-oa-calendar .oa-exports,
+.single-oa-calendar .oa-sharers,
+.oa-preview .oa-exports,
+.oa-preview .oa-sharers {
+  align-items: center;
+  display: flex;
+  font-size: var(--oa-text-3);
+  justify-content: flex-end;
+  margin: var(--oa-spacing-2) 0;
+  gap: var(--oa-spacing-1);
+}
+.single-oa-calendar ul.oa-exports-links,
+.single-oa-calendar ul.oa-sharers-links,
+.oa-preview ul.oa-exports-links,
+.oa-preview ul.oa-sharers-links {
+  display: flex;
+  gap: var(--oa-spacing-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.single-oa-calendar .oa-export-button,
+.single-oa-calendar .oa-sharer-button,
+.oa-preview .oa-export-button,
+.oa-preview .oa-sharer-button {
+  padding: var(--oa-spacing-1);
+}
+.single-oa-calendar .oa-registration-label,
+.single-oa-calendar .oa-access-link-label,
+.oa-preview .oa-registration-label,
+.oa-preview .oa-access-link-label {
+  display: block;
 }
 .single-oa-calendar .rdrCalendarWrapper,
 .oa-preview .rdrCalendarWrapper {
@@ -1611,88 +1713,6 @@ strong {
 .oa-preview .rdrNoSelection .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span:after,
 .oa-preview .rdrNoSelection .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span:after {
   background: var(--oa-main-color);
-}
-
-/************************************
- * Styles below are not yet updated
- ************************************/
-/*********************************
- * Favorite widget and filter
- *********************************/
-button.oa-event-favorite-badge {
-  background: transparent;
-  border: none;
-  line-height: 1;
-  padding: 0;
-}
-button.oa-event-favorite-badge:hover, button.oa-event-favorite-badge:focus {
-  background: transparent;
-}
-button.oa-event-favorite-badge:focus {
-  outline: 1px dotted;
-}
-button.oa-event-favorite-badge .inactive-icon {
-  display: inline-block;
-}
-button.oa-event-favorite-badge .active-icon {
-  display: none;
-}
-button.oa-event-favorite-badge.active .active-icon {
-  display: inline-block;
-}
-button.oa-event-favorite-badge.active .inactive-icon {
-  display: none;
-}
-
-/*********************
- * Language switcher
- *********************/
-.oa-languages {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 1rem 0;
-}
-
-.oa-language-link {
-  text-transform: uppercase;
-  padding: 0.5rem;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
-}
-.oa-language-link.active {
-  border-bottom: 2px solid var(--oa-main-color);
-}
-
-/*****************************
- * Exports and Share Buttons
- *****************************/
-.oa-exports,
-.oa-sharers {
-  align-items: center;
-  display: flex;
-  justify-content: flex-end;
-  margin: 1rem 0;
-}
-
-ul.oa-exports-links,
-ul.oa-sharers-links {
-  display: flex;
-  list-style: none;
-  margin: 0;
-}
-
-.oa-export-button,
-.oa-sharer-button {
-  align-items: center;
-  display: inline-flex;
-  padding: 0.25rem;
-  margin-left: 8px;
-}
-
-.oa-registration-label,
-.oa-access-link-label {
-  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */
