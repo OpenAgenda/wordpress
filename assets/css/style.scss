@@ -113,6 +113,7 @@ strong {
 			align-items: center;
 			background-color: rgba(white, .9);
 			display: flex;
+			font-size: var(--oa-text-4);
 			flex-direction: column;
 			height: 100%;
 			left: 0;
@@ -121,13 +122,13 @@ strong {
 			text-align: center;
 			top: 0;
 			width: 100%;
-			z-index: 10;
+			z-index: 100;
 
 			.oa-icon-refresh {
 				display: inline-block;
-				height: var(--oa-spacing-6);
-				margin: 0 var(--oa-spacing-4);
-				width: var(--oa-spacing-6);
+				height: var(--oa-spacing-5);
+				margin: 0 var(--oa-spacing-5);
+				width: var(--oa-spacing-5);
 			}
 
 			p {
