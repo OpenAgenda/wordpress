@@ -122,7 +122,7 @@ class Settings implements Hookable {
 						'show_password_message' => __( 'Show API key', 'openagenda' ),
 						'description'           => sprintf(
 							/* translators: %1$s: Openagenda settings page url, %2$s Documentation url */
-							__( 'Your API key can be found in your <a href="%1$s" target="_blank">OpenAgenda account</a>. Check out the <a href="%2$s" target="_blank">documentation</a>.', 'openagenda' ),
+							__( 'Your API key can be found in your <a href="%1$s" target="_blank" rel="external noopener noreferrer">OpenAgenda account</a>. Check out the <a href="%2$s" target="_blank" rel="external noopener noreferrer">documentation</a>.', 'openagenda' ),
 							'https://openagenda.com/settings/apiKey',
 							'https://doc.openagenda.com/fr/article/cles-dacces-11lapqz/',
 						),

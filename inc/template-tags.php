@@ -267,10 +267,10 @@ function openagenda_get_additional_field( $field, $uid = false ) {
 				$alt      = $value['originalName'] ?? '';
 				$value    = 'image' === $field_schema['fieldType']
 				? sprintf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $link ), esc_attr( $alt ) )
-				: sprintf( '<a href="%s" target="_blank" />%s</a>', esc_url( $link ), esc_html( $alt ) );
+				: sprintf( '<a href="%s" target="_blank" rel="external noopener noreferrer" />%s</a>', esc_url( $link ), esc_html( $alt ) );
 				break;
 			case 'link':
-				$value = esc_url( $value );
+				$value = sprintf( '<a href="%1$s" target="_blank" rel="external noopener noreferrer">%1$s</a>', esc_url( $value ) );
 				break;
 			case 'integer':
 				$value = (int) $value;

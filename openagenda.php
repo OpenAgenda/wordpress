@@ -117,7 +117,7 @@ function openagenda_plugin_action_links( $actions ) {
 		esc_html__( 'Settings', 'openagenda' )
 	);
 	$actions['documentation'] = sprintf(
-		'<a href="%s" target="_blank" rel="nooepener noreferrer">%s</a>',
+		'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
 		esc_url( 'https://developers.openagenda.com/extension-wordpress/' ),
 		esc_html__( 'Documentation', 'openagenda' )
 	);
