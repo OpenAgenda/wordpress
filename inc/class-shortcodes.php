@@ -321,7 +321,7 @@ class Shortcodes implements Hookable {
 
 		$defaults = array(
 			'id'             => 'date-range',
-			'title'          => _x( 'Calendar', 'Filter name', 'openagenda' ),
+			'title'          => _x( 'Date', 'Filter name', 'openagenda' ),
 			'dropdown'       => false,
 			'display_ranges' => false,
 			'ranges'         => array(),
