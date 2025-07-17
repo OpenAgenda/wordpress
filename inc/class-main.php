@@ -142,7 +142,7 @@ class Main {
 		wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'openagenda-qs' ), OPENAGENDA_VERSION, true );
 		wp_register_script( 'openagenda-qs', OPENAGENDA_URL . 'assets/js/qs.min.js', array(), '6.10.3', true );
 		wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), '5.15.4' );
-		wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '2.12.6', true );
+		wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '2.13.1', true );
 
 		// Register map dependencies
 		wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
