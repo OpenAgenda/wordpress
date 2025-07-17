@@ -102,6 +102,29 @@ function openagenda_uninstallation() {
 	}
 }
 
+add_action( 'plugins_loaded', 'openagenda_update_version' );
+/**
+ * Maybe update version in database.
+ */
+function openagenda_update_version() {
+
+	$db_version = get_option( 'openagenda_version' );
+	if( ! $db_version ){	
+		$settings = get_option( 'openagenda_general_settings' );
+		if( ! empty( $settings ) ){
+			if( ! isset( $settings['openagenda_use_legacy_templates'] ) ){
+				$settings['openagenda_use_legacy_templates'] = true;
+				update_option( 'openagenda_general_settings', $settings );
+			}
+		}
+	}
+
+	// Maybe update version
+	if( ! $db_version || version_compare( $db_version, OPENAGENDA_VERSION, '!=' )){
+		update_option( 'openagenda_version', OPENAGENDA_VERSION );
+	}
+}
+
 
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'openagenda_plugin_action_links', 10, 4 );
 /**

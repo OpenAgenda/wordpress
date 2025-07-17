@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-17T10:33:45+00:00\n"
+"POT-Creation-Date: 2025-07-17T11:26:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -40,7 +40,7 @@ msgid "OpenAgenda Settings"
 msgstr ""
 
 #: inc/class-admin-pages.php:67
-#: openagenda.php:117
+#: openagenda.php:140
 msgid "Settings"
 msgstr ""
 
@@ -911,7 +911,7 @@ msgstr ""
 msgid "Add %s to favorites."
 msgstr ""
 
-#: openagenda.php:122
+#: openagenda.php:145
 msgid "Documentation"
 msgstr ""
 
