@@ -335,7 +335,12 @@ class Shortcodes implements Hookable {
 			'dateFormatStyle' => 'php',
 		);
 
-		$ranges_filter = (bool) $atts['display_ranges'] ? $this->openagenda_filter_ranges( array( 'static_ranges' => $atts['ranges'], 'id' => 'calendar-defined-ranges' ) ) : '';
+		$ranges_filter = (bool) $atts['display_ranges'] ? $this->openagenda_filter_ranges(
+			array(
+				'static_ranges' => $atts['ranges'],
+				'id'            => 'calendar-defined-ranges',
+			)
+		) : '';
 
 		$filter = sprintf( '<div class="oa-widget oa-calendar-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>%s', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ), $ranges_filter );
 

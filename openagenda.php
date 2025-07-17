@@ -109,18 +109,18 @@ add_action( 'plugins_loaded', 'openagenda_update_version' );
 function openagenda_update_version() {
 
 	$db_version = get_option( 'openagenda_version' );
-	if( ! $db_version ){	
+	if ( ! $db_version ) {
 		$settings = get_option( 'openagenda_general_settings' );
-		if( ! empty( $settings ) ){
-			if( ! isset( $settings['openagenda_use_legacy_templates'] ) ){
+		if ( ! empty( $settings ) ) {
+			if ( ! isset( $settings['openagenda_use_legacy_templates'] ) ) {
 				$settings['openagenda_use_legacy_templates'] = true;
 				update_option( 'openagenda_general_settings', $settings );
 			}
 		}
 	}
 
-	// Maybe update version
-	if( ! $db_version || version_compare( $db_version, OPENAGENDA_VERSION, '!=' )){
+	// Maybe update version.
+	if ( ! $db_version || version_compare( $db_version, OPENAGENDA_VERSION, '!=' ) ) {
 		update_option( 'openagenda_version', OPENAGENDA_VERSION );
 	}
 }

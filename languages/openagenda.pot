@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-17T11:26:42+00:00\n"
+"POT-Creation-Date: 2025-07-17T11:32:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -196,7 +196,7 @@ msgstr ""
 
 #: inc/class-filter-widget.php:23
 #: inc/class-settings.php:297
-#: inc/class-shortcodes.php:409
+#: inc/class-shortcodes.php:414
 #: inc/template-tags.php:768
 msgid "OpenStreetMap contributors"
 msgstr ""
@@ -346,43 +346,43 @@ msgstr ""
 msgid "Display filter as a dropdown ?"
 msgstr ""
 
-#: inc/class-main.php:214
+#: inc/class-main.php:213
 #: inc/class-shortcodes.php:152
 msgctxt "Filter name"
 msgid "Active filters"
 msgstr ""
 
-#: inc/class-main.php:218
+#: inc/class-main.php:217
 #: inc/class-shortcodes.php:230
 msgctxt "Filter name"
 msgid "Choice"
 msgstr ""
 
-#: inc/class-main.php:222
+#: inc/class-main.php:221
 msgctxt "Filter name"
 msgid "Calendar"
 msgstr ""
 
-#: inc/class-main.php:226
-#: inc/class-shortcodes.php:366
+#: inc/class-main.php:225
+#: inc/class-shortcodes.php:371
 msgctxt "Filter name"
 msgid "Defined Ranges"
 msgstr ""
 
-#: inc/class-main.php:230
-#: inc/class-shortcodes.php:413
+#: inc/class-main.php:229
+#: inc/class-shortcodes.php:418
 msgctxt "Filter name"
 msgid "Map"
 msgstr ""
 
-#: inc/class-main.php:234
-#: inc/class-shortcodes.php:520
+#: inc/class-main.php:233
+#: inc/class-shortcodes.php:525
 msgctxt "Filter name"
 msgid "Upcoming"
 msgstr ""
 
-#: inc/class-main.php:238
-#: inc/class-shortcodes.php:557
+#: inc/class-main.php:237
+#: inc/class-shortcodes.php:562
 msgctxt "Filter name"
 msgid "Search"
 msgstr ""
@@ -727,7 +727,7 @@ msgctxt "Filter name"
 msgid "Date"
 msgstr ""
 
-#: inc/class-shortcodes.php:419
+#: inc/class-shortcodes.php:424
 msgid "Search while moving the map"
 msgstr ""
 
@@ -773,13 +773,13 @@ msgid "%s ago"
 msgstr ""
 
 #: inc/template-filters.php:65
-#: inc/template-tags.php:1443
+#: inc/template-tags.php:1442
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
 #: inc/template-filters.php:66
-#: inc/template-tags.php:1444
+#: inc/template-tags.php:1443
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
@@ -866,48 +866,48 @@ msgstr ""
 msgid "Mixed"
 msgstr ""
 
-#: inc/template-tags.php:1036
+#: inc/template-tags.php:1035
 msgid "Scheduled"
 msgstr ""
 
-#: inc/template-tags.php:1037
+#: inc/template-tags.php:1036
 msgid "Rescheduled"
 msgstr ""
 
-#: inc/template-tags.php:1038
+#: inc/template-tags.php:1037
 msgid "Switched to online"
 msgstr ""
 
-#: inc/template-tags.php:1039
+#: inc/template-tags.php:1038
 msgid "Postponed"
 msgstr ""
 
-#: inc/template-tags.php:1040
+#: inc/template-tags.php:1039
 msgid "Sold out"
 msgstr ""
 
-#: inc/template-tags.php:1041
+#: inc/template-tags.php:1040
 msgid "Cancelled"
 msgstr ""
 
-#: inc/template-tags.php:1176
+#: inc/template-tags.php:1175
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:1177
+#: inc/template-tags.php:1176
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:1339
+#: inc/template-tags.php:1338
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:1493
+#: inc/template-tags.php:1492
 msgid "Back to list"
 msgstr ""
 
 #. translators: %s: event title
-#: inc/template-tags.php:1549
+#: inc/template-tags.php:1548
 msgid "Add %s to favorites."
 msgstr ""
 

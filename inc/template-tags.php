@@ -1020,7 +1020,6 @@ function openagenda_get_attendance_mode_label( $uid = false ) {
  * Returns status label
  *
  * @param  string $uid   UID of the event.
- * @param  bool   $display  Whether to echo or just return the html.
  * @return  string $label  Label of the attendance mode.
  */
 function openagenda_get_event_status_label( $uid = false ) {
