@@ -18,6 +18,7 @@ if (oaData) {
                 oa.values = values
                 oa.aggregations = aggregations
                 const result = await oa.getEvents({ ...values, size: 0 }, aggregations);
+                filtersRef.updateLocation(values);
                 filtersRef.updateFiltersAndWidgets(values, result);
             } catch (e) {
                 console.log('onLoad error: ', e);
