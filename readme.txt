@@ -200,6 +200,10 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Changelog ==
 
+= 2.14.1 =
+* Fix : Fixed initial map zoom
+* Improvement : Updated React Filters JS
+
 = 2.14.0 =
 * Feature : Added sort parameter to calendars
 * Fix     : Minor code corrections to prevent PHP warnings
