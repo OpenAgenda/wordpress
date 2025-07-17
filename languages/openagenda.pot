@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-02T11:18:19+00:00\n"
+"POT-Creation-Date: 2025-07-17T07:59:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -359,7 +359,6 @@ msgid "Choice"
 msgstr ""
 
 #: inc/class-main.php:222
-#: inc/class-shortcodes.php:324
 msgctxt "Filter name"
 msgid "Calendar"
 msgstr ""
@@ -581,7 +580,7 @@ msgstr ""
 
 #. translators: %1$s: Openagenda settings page url, %2$s Documentation url
 #: inc/class-settings.php:125
-msgid "Your API key can be found in your <a href=\"%1$s\" target=\"_blank\">OpenAgenda account</a>. Check out the <a href=\"%2$s\" target=\"_blank\">documentation</a>."
+msgid "Your API key can be found in your <a href=\"%1$s\" target=\"_blank\" rel=\"external noopener noreferrer\">OpenAgenda account</a>. Check out the <a href=\"%2$s\" target=\"_blank\" rel=\"external noopener noreferrer\">documentation</a>."
 msgstr ""
 
 #: inc/class-settings.php:133
@@ -721,6 +720,11 @@ msgstr ""
 #: inc/class-shortcodes.php:296
 msgctxt "Filter name"
 msgid "Keywords"
+msgstr ""
+
+#: inc/class-shortcodes.php:324
+msgctxt "Filter name"
+msgid "Date"
 msgstr ""
 
 #: inc/class-shortcodes.php:419
