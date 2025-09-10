@@ -15,9 +15,6 @@ $oa_keywords             = openagenda_get_field( 'keywords' );
 $oa_access_link          = openagenda_get_field( 'onlineAccessLink' );
 $oa_credits              = openagenda_get_field( 'imageCredits' );
 $oa_age_label            = openagenda_get_event_age_label();
-var_dump($oa_age_label);
-
-
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
 	<div class="oa-event-wrapper">
