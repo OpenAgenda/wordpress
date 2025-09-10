@@ -765,7 +765,13 @@ class OpenAgenda {
 		if ( $this->is_archive() ) {
 			$args          = $this->get_args();
 			$params        = $this->get_params();
-			$filters       = $this->get_filters();
+			$filters       = array_filter(
+				$this->get_filters(),
+				function ( $value, $key ) {
+					return 'aggregations' !== $key;
+				},
+				ARRAY_FILTER_USE_BOTH
+			);
 			$this->context = array(
 				'params'  => $params,
 				'filters' => $filters,
