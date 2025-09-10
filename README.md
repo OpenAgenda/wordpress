@@ -41,6 +41,7 @@ The General settings tab provides the following settings :
  * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com/settings/apiKey](https://openagenda.com/settings/apiKey)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
+ * *Legacy templates* : Templates have been updated in 3.0.0. Check this option to continue using legacy templates.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
  * *Default event image* : Choose an image to use in case events do not have one.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
