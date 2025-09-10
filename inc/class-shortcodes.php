@@ -241,6 +241,7 @@ class Shortcodes implements Hookable {
 			$inner_html = '';
 			$params     = array(
 				'type'     => 'choice',
+				'tag'      => 'label',
 				'name'     => sanitize_text_field( $atts['field'] ),
 				'pageSize' => (int) $atts['page_size'],
 				'sort'     => sanitize_text_field( $atts['sort'] ),
