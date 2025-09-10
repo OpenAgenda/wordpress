@@ -14,6 +14,10 @@ $oa_conditions           = openagenda_get_field( 'conditions' );
 $oa_keywords             = openagenda_get_field( 'keywords' );
 $oa_access_link          = openagenda_get_field( 'onlineAccessLink' );
 $oa_credits              = openagenda_get_field( 'imageCredits' );
+$oa_age_label            = openagenda_get_event_age_label();
+var_dump($oa_age_label);
+
+
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
 	<div class="oa-event-wrapper">
@@ -38,6 +42,15 @@ $oa_credits              = openagenda_get_field( 'imageCredits' );
 					<?php
 					openagenda_icon( 'clock' );
 					echo wp_kses_post( $oa_date_range );
+					?>
+				</div>
+			<?php endif; ?>
+
+			<?php if ( ! empty( $oa_age_label ) ) : ?>
+				<div class="oa-event-age">
+					<?php
+						openagenda_icon( 'child' );
+						echo wp_kses_post( $oa_age_label );
 					?>
 				</div>
 			<?php endif; ?>

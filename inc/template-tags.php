@@ -1051,6 +1051,36 @@ function openagenda_get_event_status_label( $uid = false ) {
 	return apply_filters( 'openagenda_event_status_label', $label, $uid );
 }
 
+/**
+ * Returns age label
+ *
+ * @param  string $uid   UID of the event.
+ * @return  string $label  Label of the age field.
+ */
+function openagenda_get_event_age_label( $uid = false ) {
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$label = '';
+	$age   = openagenda_get_field( 'age', $uid );
+	$min = isset( $age['min'] ) ? (int) $age['min'] : false;
+	$max = isset( $age['max'] ) ? (int) $age['max'] : false;
+
+	if( $min && ! $max ){
+		$label = sprintf( _x( 'From %d years old.', 'Age field', 'openagenda' ), $min );
+	}
+	if( ! $min && $max ){
+		$label = sprintf( _x( 'Up to %d years old.', 'Age field', 'openagenda' ), $max );
+	}
+	if( $min && $max ){
+		$label = sprintf( _x( 'From %d to %d years old.', 'Age field', 'openagenda' ), $min, $max );
+	}
+
+	return apply_filters( 'openagenda_event_age_label', $label, $uid );
+}
+
 
 /**
  * Displays or return links to pre-filtered calendar pages, using an additional field
