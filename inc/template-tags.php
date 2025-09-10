@@ -937,7 +937,7 @@ function openagenda_event_registration_methods( $uid = false, $display = true ) 
 				}
 				$href = sprintf( '%s%s', sanitize_text_field( $prefix ), $value );
 				$item = sprintf(
-					'<li class="oa-registration-method"><span class="oa-registration-method-wrapper">%s<a href="%s" class="oa-registration-method-label">%s</a></span></li>',
+					'<li class="oa-registration-method"><span class="oa-registration-method-wrapper">%s<a href="%s" target="_blank" rel="noopener noreferer" class="oa-registration-method-label">%s</a></span></li>',
 					$icon,
 					esc_url( $href ),
 					esc_html( $method['value'] )
