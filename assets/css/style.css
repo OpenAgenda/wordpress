@@ -633,9 +633,21 @@ strong {
 }
 .single-oa-calendar ul.oa-week,
 .oa-preview ul.oa-week {
-  margin-top: 0.75rem;
+  margin-top: var(--oa-spacing-3);
   list-style: none;
   padding: 0;
+}
+.single-oa-calendar ul.oa-day-timings,
+.oa-preview ul.oa-day-timings {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: auto;
+}
+.single-oa-calendar .oa-day,
+.oa-preview .oa-day {
+  margin-top: var(--oa-spacing-1);
+  display: flex;
 }
 .single-oa-calendar .oa-event-location,
 .oa-preview .oa-event-location {

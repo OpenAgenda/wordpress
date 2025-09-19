@@ -528,6 +528,7 @@ function openagenda_group_timings( $timings ) {
 	$months        = array();
 	$month_cursor  = false;
 	$week_cursor   = false;
+	$day_cursor    = false;
 	$nearest_month = false;
 
 	foreach ( $timings as $timing ) {
@@ -552,7 +553,15 @@ function openagenda_group_timings( $timings ) {
 			);
 		}
 
-		$months[ $month_cursor ]['weeks'][ $week_cursor ]['timings'][] = $timing;
+		if ( $day_cursor !== $timing['start_day_label'] ) {
+			$day_cursor = $timing['start_day_label'];
+			$months[ $month_cursor ]['weeks'][ $week_cursor ]['days'][ $day_cursor ] = array(
+				'label'   => $timing['start_day_label'],
+				'current' => $timing['start_day'] === $today->format( 'd' ),
+			);
+		}
+
+		$months[ $month_cursor ]['weeks'][ $week_cursor ]['days'][ $day_cursor ]['timings'][] = $timing;
 	}
 
 	if ( $nearest_month ) {

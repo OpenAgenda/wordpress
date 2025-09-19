@@ -510,9 +510,21 @@ strong {
 	}
 
 	ul.oa-week {
-		margin-top: .75rem;
+		margin-top: var(--oa-spacing-3);
 		list-style: none;
 		padding: 0;
+	}
+
+	ul.oa-day-timings {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		margin-left: auto;
+	}
+
+	.oa-day {
+		margin-top: var(--oa-spacing-1);
+		display: flex;
 	}
 
 
