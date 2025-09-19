@@ -15,6 +15,7 @@ $oa_keywords             = openagenda_get_field( 'keywords' );
 $oa_access_link          = openagenda_get_field( 'onlineAccessLink' );
 $oa_credits              = openagenda_get_field( 'imageCredits' );
 $oa_age_label            = openagenda_get_event_age_label();
+$oa_event_accessibility  = openagenda_event_accessibility( false, false );
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
 	<div class="oa-event-wrapper">
@@ -68,6 +69,16 @@ $oa_age_label            = openagenda_get_event_age_label();
 						openagenda_icon( 'check' );
 						printf( '<strong class="oa-label oa-registration-label">%s</strong>', esc_html__( 'Registration', 'openagenda' ) );
 						openagenda_event_registration_methods();
+					?>
+				</div>
+			<?php endif; ?>
+
+			<?php if ( ! empty( $oa_event_accessibility ) ) : ?>
+				<div class="oa-event-accessibility">
+					<?php
+						openagenda_icon( 'accessibility-mi' );
+						printf( '<strong class="oa-label oa-accessibility-label">%s</strong>', esc_html__( 'Accessibility adjustments', 'openagenda' ) );
+						openagenda_event_accessibility();
 					?>
 				</div>
 			<?php endif; ?>

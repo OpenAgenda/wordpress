@@ -484,8 +484,10 @@ strong {
 }
 .single-oa-calendar .oa-single-event .oa-event-details > div,
 .single-oa-calendar .oa-single-event .oa-registration-method-wrapper,
+.single-oa-calendar .oa-single-event .oa-accessibility-adjustment-wrapper,
 .oa-preview .oa-single-event .oa-event-details > div,
-.oa-preview .oa-single-event .oa-registration-method-wrapper {
+.oa-preview .oa-single-event .oa-registration-method-wrapper,
+.oa-preview .oa-single-event .oa-accessibility-adjustment-wrapper {
   align-items: center;
   color: var(--oa-gray-900);
   column-gap: var(--oa-spacing-4);
@@ -497,8 +499,10 @@ strong {
 }
 .single-oa-calendar .oa-single-event .oa-event-details > div .oa-icon,
 .single-oa-calendar .oa-single-event .oa-registration-method-wrapper .oa-icon,
+.single-oa-calendar .oa-single-event .oa-accessibility-adjustment-wrapper .oa-icon,
 .oa-preview .oa-single-event .oa-event-details > div .oa-icon,
-.oa-preview .oa-single-event .oa-registration-method-wrapper .oa-icon {
+.oa-preview .oa-single-event .oa-registration-method-wrapper .oa-icon,
+.oa-preview .oa-single-event .oa-accessibility-adjustment-wrapper .oa-icon {
   fill: var(--oa-gray-400);
   width: var(--oa-text-6);
   height: var(--oa-text-6);
@@ -525,12 +529,20 @@ strong {
   margin-bottom: var(--oa-spacing-4);
 }
 .single-oa-calendar .oa-single-event .oa-registration-methods,
-.oa-preview .oa-single-event .oa-registration-methods {
+.single-oa-calendar .oa-single-event .oa-accessibility-adjustments,
+.oa-preview .oa-single-event .oa-registration-methods,
+.oa-preview .oa-single-event .oa-accessibility-adjustments {
   list-style: none;
   padding: 0;
   margin: 0;
   grid-column: 2;
   flex-basis: 100%;
+}
+.single-oa-calendar .oa-single-event .oa-registration-methods li,
+.single-oa-calendar .oa-single-event .oa-accessibility-adjustments li,
+.oa-preview .oa-single-event .oa-registration-methods li,
+.oa-preview .oa-single-event .oa-accessibility-adjustments li {
+  margin-bottom: var(--oa-spacing-2);
 }
 .single-oa-calendar .oa-single-event .oa-conditions-value,
 .oa-preview .oa-single-event .oa-conditions-value {

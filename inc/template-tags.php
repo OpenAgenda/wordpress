@@ -1123,6 +1123,47 @@ function openagenda_event_links( $field, $uid = false, $display = true ) {
 	return $html;
 }
 
+/**
+ * Displays a list of registration methods for the event
+ *
+ * @param  string $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ */
+function openagenda_event_accessibility( $uid = false, $display = true ) {
+
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$codes = array_filter(
+		openagenda_get_field( 'accessibility', $uid ),
+		function ( $value ) {
+			return (bool) $value;
+		}
+	);
+
+	$items = array();
+	foreach ( $codes as $code => $value ) {
+		$items[ $code ] = sprintf(
+			'<li class="oa-accessibility-adjustment"><span class="oa-accessibility-adjustment-wrapper">%s<span class="oa-accessibility-adjustment-label">%s</span></span></li>',
+			openagenda_icon( 'accessibility-' . $code, false ),
+			openagenda_accessibility_label( $code ),
+		);
+	}
+
+	$html = '';
+	if ( ! empty( $items ) ) {
+		$html = sprintf( '<ul class="oa-accessibility-adjustments">%s</ul>', join( '', $items ) );
+	}
+
+	$html = apply_filters( 'openagenda_event_accessibility', $html, $uid );
+	if ( $display ) {
+		echo $html;
+	}
+	return $html;
+}
+
 
 /**
  * Displays or return an event additional field links

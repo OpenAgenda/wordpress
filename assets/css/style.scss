@@ -363,7 +363,8 @@ strong {
 		}
 
 		.oa-event-details>div,
-		.oa-registration-method-wrapper {
+		.oa-registration-method-wrapper,
+		.oa-accessibility-adjustment-wrapper {
 			align-items: center;
 			color: var(--oa-gray-900);
 			column-gap: var(--oa-spacing-4);
@@ -406,12 +407,17 @@ strong {
 			}
 		}
 
-		.oa-registration-methods {
+		.oa-registration-methods,
+		.oa-accessibility-adjustments {
 			list-style: none;
 			padding: 0;
 			margin: 0;
 			grid-column: 2;
 			flex-basis: 100%;
+
+			li {
+				margin-bottom: var(--oa-spacing-2);
+			}
 		}
 
 		.oa-conditions-value {
