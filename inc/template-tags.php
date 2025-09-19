@@ -683,21 +683,23 @@ function openagenda_event_timings( $uid = false, $display = true ) {
 				esc_html( __( 'View next month', 'openagenda' ) )
 			);
 			foreach ( $month['weeks'] as $week ) {
-				$html .= '<ul class="oa-week">';
+				$html             .= '<ul class="oa-week">';
+				$current_day_label = '';
 				foreach ( $week['timings'] as $timing ) {
-					$html .= sprintf(
+					$html             .= sprintf(
 						'<li class="oa-timing">
                             <span class="oa-timing-date">%s</span>
                             <span class="oa-timing-times">
-                            <span class="oa-timing-start-time">%s</span>
-                            <span class="oa-timing-seperator">-</span> 
-                            <span class="oa-timing-end-time">%s</span>
+								<span class="oa-timing-start-time">%s</span>
+								<span class="oa-timing-seperator">-</span> 
+								<span class="oa-timing-end-time">%s</span>
                             </span>
                         </li>',
-						esc_html( $timing['start_day_label'] ),
+						$current_day_label !== $timing['start_day_label'] ? esc_html( $timing['start_day_label'] ) : '',
 						esc_html( $timing['start_time_label'] ),
 						esc_html( $timing['end_time_label'] )
 					);
+					$current_day_label = $timing['start_day_label'];
 				}
 				$html .= '</ul>';
 			}
