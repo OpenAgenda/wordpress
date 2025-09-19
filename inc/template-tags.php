@@ -1071,15 +1071,15 @@ function openagenda_get_event_age_label( $uid = false ) {
 	$max   = isset( $age['max'] ) ? (int) $age['max'] : false;
 
 	if ( $min ) {
-		/** translators: %d minimum age */
+		/* translators: %d minimum age */
 		$label = sprintf( _x( 'From %d years old.', 'Age field', 'openagenda' ), $min );
 	}
 	if ( $max ) {
-		/** translators: %d maximum age */
+		/* translators: %d maximum age */
 		$label = sprintf( _x( 'Up to %d years old.', 'Age field', 'openagenda' ), $max );
 	}
 	if ( $min && $max ) {
-		/** translators: %1$d minimum age, %2$d maximum age */
+		/* translators: %1$d minimum age, %2$d maximum age */
 		$label = sprintf( _x( 'From %1$d to %2$d years old.', 'Age field', 'openagenda' ), $min, $max );
 	}
 
