@@ -179,7 +179,8 @@ Here is a list of templates you can find in the plugin's `templates/` folder :
 * `event-location.php` : template used to display the location information on single event views.
 * `event-additional-fields.php` : template used to the list of additional fields on single event views.
 * `preview-loop.php` : main wrapper for the preview widget and shortcode.
-* `preview-event.php` : template used to display events in the preview widget.
+
+The `legacy/` folder contains templates used prior to version 3.0.0. If you updated the plugin and notice issues on your frontend, that's probably because your site used legacy templates. Please try and check the _Use legacy templates_ checkbox in the settings page.
 
 The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. These basic functions are documented below. Feel free to define your own in your theme.
 

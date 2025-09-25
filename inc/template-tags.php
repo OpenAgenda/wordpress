@@ -1137,7 +1137,7 @@ function openagenda_event_links( $field, $uid = false, $display = true ) {
 }
 
 /**
- * Displays a list of registration methods for the event
+ * Displays a list of accessibility adjustments for the event
  *
  * @param  string $uid   UID of the event.
  * @param  bool   $display  Whether to echo or just return the html.
