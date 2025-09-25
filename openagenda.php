@@ -1,38 +1,41 @@
 <?php
-/*
-Plugin Name: OpenAgenda
-Plugin URI:  https://wordpress.org/plugins/openagenda/
-Description: Display your OpenAgenda data on your WordPress site.
-Version:     2.14.1
-Author:      OpenAgenda
-Author URI:  https://openagenda.com/
-Text Domain: openagenda
-Domain Path: /languages
-License:     GPL v2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Requires PHP: 7.4.1
-Requires at least: 5.0
-Tested up to: 6.8.2
-
-OpenAgenda is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-any later version.
-
-OpenAgenda is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with OpenAgenda. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
-*/
+/**
+ * Plugin Name: OpenAgenda
+ * Plugin URI:  https://wordpress.org/plugins/openagenda/
+ * Description: Display your OpenAgenda data on your WordPress site.
+ * Version:     3.0.0
+ * Author:      OpenAgenda
+ * Author URI:  https://openagenda.com/
+ * Text Domain: openagenda
+ * Domain Path: /languages
+ * License:     GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Requires PHP: 7.4.1
+ * Requires at least: 5.0
+ * Tested up to: 6.8.2
+ *
+ * @package OpenAgenda
+ * @version 3.0.0
+ *
+ * OpenAgenda is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * any later version.
+ *
+ * OpenAgenda is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with OpenAgenda. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
+ */
 
 defined( 'ABSPATH' ) || die();
 
 define( 'OPENAGENDA_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OPENAGENDA_URL', plugin_dir_url( __FILE__ ) );
-define( 'OPENAGENDA_VERSION', '2.14.1' );
+define( 'OPENAGENDA_VERSION', '3.0.0' );
 
 
 add_action( 'init', 'openagenda_load_textdomain' );
@@ -99,25 +102,45 @@ function openagenda_uninstallation() {
 	}
 }
 
+add_action( 'plugins_loaded', 'openagenda_update_version' );
+/**
+ * Maybe update version in database.
+ */
+function openagenda_update_version() {
+
+	$db_version = get_option( 'openagenda_version' );
+	if ( ! $db_version ) {
+		$settings = get_option( 'openagenda_general_settings' );
+		if ( ! empty( $settings ) ) {
+			if ( ! isset( $settings['openagenda_use_legacy_templates'] ) ) {
+				$settings['openagenda_use_legacy_templates'] = true;
+				update_option( 'openagenda_general_settings', $settings );
+			}
+		}
+	}
+
+	// Maybe update version.
+	if ( ! $db_version || version_compare( $db_version, OPENAGENDA_VERSION, '!=' ) ) {
+		update_option( 'openagenda_version', OPENAGENDA_VERSION );
+	}
+}
+
 
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'openagenda_plugin_action_links', 10, 4 );
 /**
  * Adds plugin action links
  *
- * @param   array  $actions  Available actions
- * @param   string $file  Plugin file
- * @param   array  $data  $plugin data
- * @param   string $context  Context
- * @return  array   $actions
+ * @param   array $actions  Available actions.
+ * @return  array   $actions Actions.
  */
-function openagenda_plugin_action_links( $actions, $file, $data, $context ) {
+function openagenda_plugin_action_links( $actions ) {
 	$actions['settings']      = sprintf(
 		'<a href="%s">%s</a>',
 		esc_url( menu_page_url( 'openagenda', false ) ),
 		esc_html__( 'Settings', 'openagenda' )
 	);
 	$actions['documentation'] = sprintf(
-		'<a href="%s" target="_blank" rel="nooepener noreferrer">%s</a>',
+		'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
 		esc_url( 'https://developers.openagenda.com/extension-wordpress/' ),
 		esc_html__( 'Documentation', 'openagenda' )
 	);

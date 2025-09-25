@@ -14,11 +14,15 @@ class OpenAgenda_Widget extends \WP_Widget {
 
 	/**
 	 * Array of additional settings
+	 *
+	 * @var  array  $additional_settings
 	 */
 	protected $additional_settings = array();
 
 	/**
 	 * Array of available filters
+	 *
+	 * @var  array  $available_filters
 	 */
 	protected $available_filters = array();
 
@@ -32,7 +36,7 @@ class OpenAgenda_Widget extends \WP_Widget {
 	 *                                 on accepted arguments. Default empty array.
 	 * @param  array  $control_options Optional. Widget control options. See wp_register_widget_control() for
 	 *                                 information on accepted arguments. Default empty array.
-	 * @param  array  $args            Optional. Additional arguments
+	 * @param  array  $args            Optional. Additional arguments.
 	 */
 	public function __construct( $id_base, $name, $widget_options = array(), $control_options = array(), $args = array() ) {
 		$this->available_filters   = ! empty( $args['available_filters'] ) ? $args['available_filters'] : array();
@@ -83,8 +87,8 @@ class OpenAgenda_Widget extends \WP_Widget {
 	/**
 	 * Generates a settings field
 	 *
-	 * @param  array $field     Array of field arguments
-	 * @param  array $instance  Instance settings
+	 * @param  array $field     Array of field arguments.
+	 * @param  array $instance  Instance settings.
 	 */
 	public function additional_setting_field( $field, $instance ) {
 		$value = isset( $instance[ $field['name'] ] ) ? $instance[ $field['name'] ] : $field['default'];
@@ -127,7 +131,7 @@ class OpenAgenda_Widget extends \WP_Widget {
 				$options     = '';
 				if ( ! empty( $field['options'] ) ) {
 					foreach ( $field['options'] as $option_value => $option_label ) {
-						$checked  = in_array( $option_value, $value ) ? 'checked=checked' : '';
+						$checked  = in_array( $option_value, $value, true ) ? 'checked=checked' : '';
 						$options .= sprintf(
 							'<span>
                                 <input type="checkbox" id="%1$s" name="%2$s[]" class="%4$s" value="%5$s" %6$s>
@@ -148,7 +152,7 @@ class OpenAgenda_Widget extends \WP_Widget {
 					$options
 				);
 				break;
-			case 'select';
+			case 'select':
 				$options = '';
 				if ( ! empty( $field['options'] ) ) {
 					if ( ! empty( $field['option_none'] ) ) {
@@ -175,8 +179,8 @@ class OpenAgenda_Widget extends \WP_Widget {
 					esc_attr( $field['class'] ),
 					$options
 				);
-			break;
-			case 'radio';
+				break;
+			case 'radio':
 				$options = '';
 				if ( ! empty( $field['options'] ) ) {
 					foreach ( $field['options'] as $option => $data ) {

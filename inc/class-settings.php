@@ -19,16 +19,22 @@ class Settings implements Hookable {
 	/**
 	 * Settings groups to register.
 	 * Basically one for each settings tab.
+	 *
+	 * @var  array  $settings
 	 */
 	protected $settings = array();
 
 	/**
 	 * Settings sections to register.
+	 *
+	 * @var  array  $sections
 	 */
 	protected $sections = array();
 
 	/**
 	 * Settings fields to register.
+	 *
+	 * @var array  $fields
 	 */
 	protected $fields = array();
 
@@ -116,7 +122,7 @@ class Settings implements Hookable {
 						'show_password_message' => __( 'Show API key', 'openagenda' ),
 						'description'           => sprintf(
 							/* translators: %1$s: Openagenda settings page url, %2$s Documentation url */
-							__( 'Your API key can be found in your <a href="%1$s" target="_blank">OpenAgenda account</a>. Check out the <a href="%2$s" target="_blank">documentation</a>.', 'openagenda' ),
+							__( 'Your API key can be found in your <a href="%1$s" target="_blank" rel="external noopener noreferrer">OpenAgenda account</a>. Check out the <a href="%2$s" target="_blank" rel="external noopener noreferrer">documentation</a>.', 'openagenda' ),
 							'https://openagenda.com/settings/apiKey',
 							'https://doc.openagenda.com/fr/article/cles-dacces-11lapqz/',
 						),
@@ -151,6 +157,22 @@ class Settings implements Hookable {
 						'type'        => 'checkbox',
 						'default'     => true,
 						'description' => __( 'Load default styling.', 'openagenda' ),
+					),
+				),
+				'use-legacy-templates'          => array(
+					'id'       => 'openagenda_use_legacy_templates',
+					'title'    => __( 'Legacy templates.', 'openagenda' ),
+					'callback' => array( $this, 'checkbox_field_markup' ),
+					'page'     => 'openagenda',
+					'section'  => 'openagenda_general_settings',
+					'args'     => array(
+						'id'          => 'openagenda_use_legacy_templates',
+						'option_name' => 'openagenda_general_settings',
+						'label_for'   => 'openagenda_use_legacy_templates',
+						'type'        => 'checkbox',
+						'default'     => false,
+						'description' => __( 'Use legacy templates.', 'openagenda' ),
+						'help-text'   => __( 'Templates have been updated with version 3.0.0. If you are experiencing display problems and want to use older templates instead of the new ones, check this option.', 'openagenda' ),
 					),
 				),
 				'cache-duration'                => array(
@@ -318,7 +340,7 @@ class Settings implements Hookable {
 	/**
 	 * Displays a <input> field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call
+	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
 	 */
 	public function input_field_markup( $args ) {
 
@@ -353,7 +375,7 @@ class Settings implements Hookable {
 					'<p class="password-toggle"><input type="checkbox" id="%1$s" data-input="%2$s" /><label for="%1$s">%3$s</label></p>',
 					esc_attr( "{$field_id}-show-password" ),
 					esc_attr( $field_id ),
-					$args['show_password_message'] ?? __( 'Show password', 'openagenda' )
+					! empty( $args['show_password_message'] ) ? esc_html( $args['show_password_message'] ) : esc_html__( 'Show password', 'openagenda' )
 				);
 			}
 			if ( ! empty( $args['description'] ) ) {
@@ -365,7 +387,7 @@ class Settings implements Hookable {
 	/**
 	 * Displays a media button uploader field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call
+	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
 	 */
 	public function media_upload_field_markup( $args ) {
 
@@ -434,7 +456,7 @@ class Settings implements Hookable {
 	/**
 	 * Displays a <input type="checkbox"> field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call
+	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
 	 */
 	public function checkbox_field_markup( $args ) {
 
@@ -478,7 +500,7 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes general settings
 	 *
-	 * @param   array $settings  Settings value to sanitize
+	 * @param   array $settings  Settings value to sanitize.
 	 * @return  array  $settings
 	 */
 	public function sanitize_general_settings( $settings ) {
@@ -487,6 +509,7 @@ class Settings implements Hookable {
 			'openagenda_cache_duration'               => ! empty( $settings['openagenda_cache_duration'] ) && (int) $settings['openagenda_cache_duration'] > 0 ? (int) $settings['openagenda_cache_duration'] : (int) ( HOUR_IN_SECONDS / 2 ),
 			'openagenda_include_embeds'               => isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : false,
 			'openagenda_include_styles'               => isset( $settings['openagenda_include_styles'] ) ? (bool) $settings['openagenda_include_styles'] : false,
+			'openagenda_use_legacy_templates'         => isset( $settings['openagenda_use_legacy_templates'] ) ? (bool) $settings['openagenda_use_legacy_templates'] : false,
 			'openagenda_default_event_image'          => ! empty( $settings['openagenda_default_event_image'] ) ? (int) $settings['openagenda_default_event_image'] : 0,
 			'openagenda_delete_content_on_uninstall'  => isset( $settings['openagenda_delete_content_on_uninstall'] ) ? (bool) $settings['openagenda_delete_content_on_uninstall'] : false,
 			'openagenda_delete_options_on_uninstall'  => isset( $settings['openagenda_delete_options_on_uninstall'] ) ? (bool) $settings['openagenda_delete_options_on_uninstall'] : false,
@@ -500,7 +523,7 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes integrations settings
 	 *
-	 * @param   array $settings  Settings value to sanitize
+	 * @param   array $settings  Settings value to sanitize.
 	 * @return  array  $settings
 	 */
 	public function sanitize_integrations_settings( $settings ) {
@@ -516,7 +539,7 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes permalinks settings
 	 *
-	 * @param   array $settings  Settings value to sanitize
+	 * @param   array $settings  Settings value to sanitize.
 	 * @return  array  $settings
 	 */
 	public function sanitize_permalinks_settings( $settings ) {
@@ -527,7 +550,7 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes and saves permalinks settings
 	 */
-	public function save_permalinks_settings( $settings ) {
+	public function save_permalinks_settings() {
 		if ( isset( $_POST['openagenda_permalinks_settings'] ) ) {
 			check_admin_referer( 'update-permalink' );
 			$settings = array(

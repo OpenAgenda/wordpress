@@ -13,13 +13,20 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package OpenAgenda
- * @version 3.0.0
+ * @version 2.14.0
  */
 
 if ( $openagenda->have_events() ) : ?>
-	<?php if ( $openagenda->is_single() ) : ?>
+	<?php if ( $with_controls ) : ?>
 		<div class="oa-controls oa-controls-top">
-			<?php openagenda_navigation(); ?>
+			<?php
+			if ( $openagenda->is_archive() ) {
+				openagenda_exports();
+				openagenda_pagination();
+			} else {
+				openagenda_navigation();
+			}
+			?>
 		</div>
 	<?php endif; ?>
 	<div data-container-id="oa-events" class="<?php echo esc_attr( $class ); ?>">

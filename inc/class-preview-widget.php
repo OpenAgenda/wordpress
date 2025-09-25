@@ -14,14 +14,9 @@ class Preview_Widget extends OpenAgenda_Widget {
 
 	/**
 	 * Constructor
+	 * Uses parent constructor.
 	 *
-	 * @param  string $id_base         Optional Base ID for the widget, lowercase and unique. If left empty,
-	 *                                 a portion of the widget's class name will be used Has to be unique.
-	 * @param  string $name            Name for the widget displayed on the admin page.
-	 * @param  array  $widget_options  Optional. Widget options. See wp_register_sidebar_widget() for information
-	 *                                 on accepted arguments. Default empty array.
-	 * @param  array  $control_options Optional. Widget control options. See wp_register_widget_control() for
-	 *                                 information on accepted arguments. Default empty array.
+	 * @param  array $args  Additional arguments.
 	 */
 	public function __construct( $args = array() ) {
 		$args['additional_settings'] = array(
@@ -109,8 +104,8 @@ class Preview_Widget extends OpenAgenda_Widget {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
 		}
 
-		// Encode filters to avoid brackets issues with do_shortcode()
-		$instance['filters'] = ! empty( $instance['filters'] ) ? urlencode( $instance['filters'] ) : '';
+		// Encode filters to avoid brackets issues with do_shortcode().
+		$instance['filters'] = ! empty( $instance['filters'] ) ? rawurlencode( $instance['filters'] ) : '';
 		$instance['links']   = ! empty( $instance['links'] ) ? 'oa' : '';
 
 		$shortcode = 'openagenda_filter_preview';
@@ -125,7 +120,6 @@ class Preview_Widget extends OpenAgenda_Widget {
 	 * Outputs the settings form in the Widgets administration screen
 	 *
 	 * @param array $instance  Current settings.
-	 * @return string          Default return is 'noform'.
 	 */
 	public function form( $instance ) {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : '';

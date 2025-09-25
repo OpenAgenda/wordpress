@@ -14,11 +14,15 @@ class Admin_Pages implements Hookable {
 
 	/**
 	 * Main page to register
+	 *
+	 * @var array  $main_page
 	 */
 	protected $main_page = array();
 
 	/**
 	 * Tabs to register
+	 *
+	 * @var  array  $tabs
 	 */
 	protected $tabs = array();
 

@@ -70,7 +70,14 @@ function openagenda_get_field( $field, $uid = false ) {
 			$value              = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $calendar_permalink ) . $slug : add_query_arg( 'oa-slug', rawurlencode( $slug ), $calendar_permalink );
 			break;
 		case 'external-permalink':
-			$value = sprintf( 'https://openagenda.com/agendas/%s/events/%s?from=wp', $openagenda->get_uid(), $uid );
+			$agenda_settings = openagenda_get_calendar_settings();
+			$agenda_slug     = ! empty( $agenda_settings['slug'] ) ? sanitize_title( $agenda_settings['slug'] ) : false;
+			$event_slug      = ! empty( $event['slug'] ) ? sanitize_title( $event['slug'] ) : false;
+			if ( $agenda_slug && $event_slug ) {
+				$value = sprintf( 'https://openagenda.com/%s/events/%s', $agenda_slug, $event_slug );
+			} else {
+				$value = sprintf( 'https://openagenda.com/agendas/%s/events/%s?from=wp', $openagenda->get_uid(), $uid );
+			}
 			break;
 		case 'timings':
 		case 'next-timings':
@@ -135,6 +142,18 @@ function openagenda_get_field( $field, $uid = false ) {
 		case 'range':
 			return openagenda_get_field( 'dateRange' );
 			break;
+		case 'keywords-list':
+			$values = openagenda_get_field( 'keywords' );
+			$value  = ! empty( $values ) ? join(
+				', ',
+				array_map(
+					function ( $keyword ) {
+						return ucfirst( trim( $keyword ) );
+					},
+					$values
+				)
+			) : '';
+			break;
 		default:
 			$end_value = array_reduce(
 				explode( '.', $field ),
@@ -185,6 +204,7 @@ function openagenda_esc_field( $value, $field ) {
 			$value = esc_attr( $value );
 			break;
 		case 'title':
+		case 'location.description':
 		case 'description':
 			$value = wp_kses_post( $value );
 			break;
@@ -247,10 +267,10 @@ function openagenda_get_additional_field( $field, $uid = false ) {
 				$alt      = $value['originalName'] ?? '';
 				$value    = 'image' === $field_schema['fieldType']
 				? sprintf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $link ), esc_attr( $alt ) )
-				: sprintf( '<a href="%s" target="_blank" />%s</a>', esc_url( $link ), esc_html( $alt ) );
+				: sprintf( '<a href="%s" target="_blank" rel="external noopener noreferrer" />%s</a>', esc_url( $link ), esc_html( $alt ) );
 				break;
 			case 'link':
-				$value = esc_url( $value );
+				$value = sprintf( '<a href="%1$s" target="_blank" rel="external noopener noreferrer">%1$s</a>', esc_url( $value ) );
 				break;
 			case 'integer':
 				$value = (int) $value;
@@ -537,6 +557,40 @@ function openagenda_event_image( $size = '', $uid = '' ) {
 
 
 /**
+ * Displays an event location image
+ *
+ * @param   string $uid   UID of the event to get location image from.
+ * @param   bool   $display   Whether to echo or just return the html.
+ * @return  string  $html  The corresponding <img> tag.
+ */
+function openagenda_event_location_image( $uid = false, $display = true ) {
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$html      = '';
+	$image_url = openagenda_get_field( 'location.image' ) ?? '';
+	if ( ! filter_var( $image_url, FILTER_VALIDATE_URL ) ) {
+		$image_url = sprintf( 'https://cdn.openagenda.com/main/%s', $image_url );
+	}
+	if ( $image_url ) {
+		$html = sprintf(
+			'<img src="%s" alt="%s" loading="lazy" />',
+			esc_url( $image_url ),
+			esc_attr( openagenda_get_field( 'location.name', $uid ) ?? '' )
+		);
+	}
+
+	$html = apply_filters( 'openagenda_event_location_image', $html, $uid, $image_url );
+	if ( $display ) {
+		echo wp_kses_post( $html );
+	}
+	return $html;
+}
+
+
+/**
  * Displays next and last timings for a event.
  *
  * @param  string $format   Accepts 'relative' or 'date'.
@@ -630,19 +684,29 @@ function openagenda_event_timings( $uid = false, $display = true ) {
 			);
 			foreach ( $month['weeks'] as $week ) {
 				$html .= '<ul class="oa-week">';
-				foreach ( $week['timings'] as $timing ) {
+				foreach ( $week['days'] as $day_label => $day ) {
+					$day_timings = '';
+					foreach ( $day['timings'] as $timing ) {
+						$day_timings .= sprintf(
+							'<li class="oa-timing">
+								<span class="oa-timing-times">
+									<span class="oa-timing-start-time">%s</span>
+									<span class="oa-timing-seperator">-</span> 
+									<span class="oa-timing-end-time">%s</span>
+								</span>
+							</li>',
+							esc_html( $timing['start_time_label'] ),
+							esc_html( $timing['end_time_label'] )
+						);
+					}
+
 					$html .= sprintf(
-						'<li class="oa-timing">
-                            <span class="oa-timing-date">%s</span>
-                            <span class="oa-timing-times">
-                            <span class="oa-timing-start-time">%s</span>
-                            <span class="oa-timing-seperator">-</span> 
-                            <span class="oa-timing-end-time">%s</span>
-                            </span>
-                        </li>',
-						esc_html( $timing['start_day_label'] ),
-						esc_html( $timing['start_time_label'] ),
-						esc_html( $timing['end_time_label'] )
+						'<li class="oa-day">
+							<span class="oa-timing-date">%s</span>
+							<ul class="oa-day-timings">%s</ul>
+						</li>',
+						$day['label'],
+						$day_timings
 					);
 				}
 				$html .= '</ul>';
@@ -785,7 +849,7 @@ function openagenda_event_share_buttons( $uid = false, $display = true ) {
 		$links = '';
 		foreach ( $sharers as $id => $sharer ) {
 			$links .= sprintf(
-				'<li><a role="button" class="oa-sharer-button oa-sharer-%s" href="%s" rel="noopener noreferrer" target="_blank">%s<span class="oa-sharer-label oa-sr-text">%s</span></a></li>',
+				'<li><a role="button" class="oa-button oa-sharer-button oa-sharer-%s" href="%s" rel="noopener noreferrer" target="_blank">%s<span class="oa-sharer-label oa-sr-text">%s</span></a></li>',
 				sanitize_html_class( $id ),
 				esc_url( $sharer['url'] ),
 				$sharer['icon'],
@@ -809,6 +873,37 @@ function openagenda_event_share_buttons( $uid = false, $display = true ) {
 	return $html;
 }
 
+
+/**
+ * Displays or returns unique share button.
+ *
+ * @param  string $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ */
+function openagenda_event_share_button( $uid = false, $display = true ) {
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$html      = '';
+	$permalink = openagenda_get_field( 'external-permalink', $uid );
+	$share_url = add_query_arg( 'sharemodal', 1, $permalink );
+
+	if ( ! empty( $share_url ) ) {
+		$html = sprintf(
+			'<a role="button" class="oa-share-button oa-button" href="%s" rel="noopener noreferrer" target="_blank">%s</a>',
+			esc_url( $share_url ),
+			esc_html__( 'Share', 'openagenda' ),
+		);
+	}
+
+	$html = apply_filters( 'openagenda_sharer_button_html', $html, $uid, $event );
+	if ( $display ) {
+		echo $html;
+	}
+	return $html;
+}
 
 /**
  * Displays a list of registration methods for the event
@@ -852,7 +947,7 @@ function openagenda_event_registration_methods( $uid = false, $display = true ) 
 				}
 				$href = sprintf( '%s%s', sanitize_text_field( $prefix ), $value );
 				$item = sprintf(
-					'<li class="oa-registration-method"><span class="oa-registration-method-wrapper">%s<a href="%s" class="oa-registration-method-label">%s</a></span></li>',
+					'<li class="oa-registration-method"><span class="oa-registration-method-wrapper">%s<a href="%s" target="_blank" rel="noopener noreferer" class="oa-registration-method-label">%s</a></span></li>',
 					$icon,
 					esc_url( $href ),
 					esc_html( $method['value'] )
@@ -931,6 +1026,74 @@ function openagenda_get_attendance_mode_label( $uid = false ) {
 }
 
 
+/**
+ * Returns status label
+ *
+ * @param  string $uid   UID of the event.
+ * @return  string $label  Label of the attendance mode.
+ */
+function openagenda_get_event_status_label( $uid = false ) {
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$status         = openagenda_get_field( 'status' ) ?? array();
+	$default_labels = apply_filters(
+		'openagenda_status_labels',
+		array(
+			1 => __( 'Scheduled', 'openagenda' ),
+			2 => __( 'Rescheduled', 'openagenda' ),
+			3 => __( 'Switched to online', 'openagenda' ),
+			4 => __( 'Postponed', 'openagenda' ),
+			5 => __( 'Sold out', 'openagenda' ),
+			6 => __( 'Cancelled', 'openagenda' ),
+		)
+	);
+
+	if ( is_array( $status ) ) {
+		$labels = ! empty( $status['label'] ) ? $status['label'] : array();
+		$label  = openagenda_get_i18n_value( $labels );
+	} else {
+		$label = array_key_exists( $status, $default_labels ) ? $default_labels[ $status ] : $default_labels[1];
+	}
+
+	return apply_filters( 'openagenda_event_status_label', $label, $uid );
+}
+
+/**
+ * Returns age label
+ *
+ * @param  string $uid   UID of the event.
+ * @return  string $label  Label of the age field.
+ */
+function openagenda_get_event_age_label( $uid = false ) {
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$label = '';
+	$age   = openagenda_get_field( 'age', $uid );
+	$min   = isset( $age['min'] ) ? (int) $age['min'] : false;
+	$max   = isset( $age['max'] ) ? (int) $age['max'] : false;
+
+	if ( $min ) {
+		/* translators: %d minimum age */
+		$label = sprintf( _x( 'From %d years old.', 'Age field', 'openagenda' ), $min );
+	}
+	if ( $max ) {
+		/* translators: %d maximum age */
+		$label = sprintf( _x( 'Up to %d years old.', 'Age field', 'openagenda' ), $max );
+	}
+	if ( $min && $max ) {
+		/* translators: %1$d minimum age, %2$d maximum age */
+		$label = sprintf( _x( 'From %1$d to %2$d years old.', 'Age field', 'openagenda' ), $min, $max );
+	}
+
+	return apply_filters( 'openagenda_event_age_label', $label, $uid );
+}
+
 
 /**
  * Displays or return links to pre-filtered calendar pages, using an additional field
@@ -969,6 +1132,47 @@ function openagenda_event_links( $field, $uid = false, $display = true ) {
 	$html = apply_filters( 'openagenda_event_links', $html, $field, $uid );
 	if ( $display ) {
 		echo wp_kses_post( $html );
+	}
+	return $html;
+}
+
+/**
+ * Displays a list of accessibility adjustments for the event
+ *
+ * @param  string $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ */
+function openagenda_event_accessibility( $uid = false, $display = true ) {
+
+	$event = openagenda_get_event( $uid );
+	if ( ! $uid ) {
+		$uid = $event['uid'];
+	}
+
+	$codes = array_filter(
+		openagenda_get_field( 'accessibility', $uid ),
+		function ( $value ) {
+			return (bool) $value;
+		}
+	);
+
+	$items = array();
+	foreach ( $codes as $code => $value ) {
+		$items[ $code ] = sprintf(
+			'<li class="oa-accessibility-adjustment"><span class="oa-accessibility-adjustment-wrapper">%s<span class="oa-accessibility-adjustment-label">%s</span></span></li>',
+			openagenda_icon( 'accessibility-' . $code, false ),
+			openagenda_accessibility_label( $code ),
+		);
+	}
+
+	$html = '';
+	if ( ! empty( $items ) ) {
+		$html = sprintf( '<ul class="oa-accessibility-adjustments">%s</ul>', join( '', $items ) );
+	}
+
+	$html = apply_filters( 'openagenda_event_accessibility', $html, $uid );
+	if ( $display ) {
+		echo $html;
 	}
 	return $html;
 }
@@ -1071,7 +1275,7 @@ function openagenda_get_page_links( $args = array() ) {
 	}
 
 	for ( $i = 1; $i <= $total_pages; $i++ ) {
-		if ( $i <= $args['end_size'] || ( $current_page - $args['mid_size'] ) <= $i && $i <= ( $current_page + $args['mid_size'] ) || $i > ( $total_pages - $args['end_size'] ) ) {
+		if ( ( $i <= $args['end_size'] ) || ( ( $current_page - $args['mid_size'] ) <= $i && $i <= ( $current_page + $args['mid_size'] ) ) || ( $i > ( $total_pages - $args['end_size'] ) ) ) {
 			$links[] = array(
 				'label'  => sprintf( $args['label_format'], $i ),
 				'url'    => openagenda_get_page_permalink( $i ),
@@ -1267,12 +1471,12 @@ function openagenda_navigation( $display = true ) {
 
 	$html = sprintf(
 		'<nav class="oa-event-navigation">%s%s%s</nav>',
-		$previous_link,
 		$back_link,
+		$previous_link,
 		$next_link
 	);
 
-	$html = apply_filters( 'openagenda_event_navigation', $html, $previous_link, $next_link );
+	$html = apply_filters( 'openagenda_event_navigation', $html, $previous_link, $next_link, $back_link );
 	if ( $display ) {
 		echo $html;
 	}
@@ -1284,17 +1488,19 @@ function openagenda_navigation( $display = true ) {
  * Returns a link to an adjacent event, if any
  *
  * @param   string $direction  'next' or 'previous'.
- * @param  string $uid   UID of the event.
- * @return  string  $html        Link html.
+ * @param   string $uid        UID of the event.
+ * @return  string  $html       Link html.
  */
 function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false ) {
 	global $openagenda;
+
+	if ( ! $openagenda || ! $openagenda->is_single() ) {
+		return '';
+	}
+
 	$event = openagenda_get_event( $uid );
 	if ( ! $uid ) {
 		$uid = $event['uid'];
-	}
-	if ( ! $openagenda || ! $openagenda->is_single() ) {
-		return false;
 	}
 
 	$encoded_context = isset( $_GET['context'] ) ? $_GET['context'] : false;
@@ -1317,16 +1523,10 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
 			admin_url( 'admin-post.php' )
 		);
 
-		$next_label     = sprintf( '<span>%s</span>%s', esc_html_x( 'Next event', 'event navigation', 'openagenda' ), openagenda_icon( 'next', false ) );
-		$previous_label = sprintf( '%s<span>%s</span>', openagenda_icon( 'previous', false ), esc_html_x( 'Previous event', 'event navigation', 'openagenda' ) );
+		$next_label     = sprintf( '<span class="oa-sr-text">%s</span>%s', esc_html_x( 'Next event', 'event navigation', 'openagenda' ), openagenda_icon( 'next', false ) );
+		$previous_label = sprintf( '%s<span class="oa-sr-text">%s</span>', openagenda_icon( 'previous', false ), esc_html_x( 'Previous event', 'event navigation', 'openagenda' ) );
 
-		if ( $invalid ) {
-			$html = sprintf(
-				'<span class="oa-nav-link oa-%1$s-link oa-nav-link-disabled">%2$s</span>',
-				esc_attr( $direction ),
-				'previous' === $direction ? $previous_label : $next_label
-			);
-		} else {
+		if ( ! $invalid ) {
 			$html = sprintf(
 				'<a class="oa-nav-link oa-%1$s-link" href="%2$s">%3$s</a>',
 				esc_attr( $direction ),
@@ -1351,22 +1551,16 @@ function openagenda_get_back_link() {
 		return '';
 	}
 
-	$context = openagenda_decode_context();
-
-	$html      = '';
-	$page_link = '';
-	$page      = 1;
-	$fragment  = '';
+	$html     = '';
+	$page_url = '';
+	$page     = 1;
+	$fragment = '';
+	$context  = openagenda_decode_context();
 
 	if ( $context ) {
-		$filters      = ! empty( $context['filters'] ) ? $context['filters'] : array();
-		$params       = ! empty( $context['params'] ) ? $context['params'] : array();
-		$size         = ! empty( $params['size'] ) ? (int) $params['size'] : $openagenda->get_size();
-		$total        = ! empty( $context['total'] ) ? (int) $context['total'] : 0;
-		$page         = ! empty( $context['page'] ) ? (int) $context['page'] : 1;
-		$event_offset = ! empty( $context['event_offset'] ) ? (int) $context['event_offset'] : 0;
-		$event_number = $event_offset + 1;
-		$fragment     = sprintf( 'event-%s', openagenda_get_field( 'uid' ) );
+		$filters  = ! empty( $context['filters'] ) ? $context['filters'] : array();
+		$page     = ! empty( $context['page'] ) ? (int) $context['page'] : 1;
+		$fragment = sprintf( 'event-%s', openagenda_get_field( 'uid' ) );
 
 		// Force return to page 1 when using infinite scroll.
 		if ( $openagenda->uses_infinite_scroll() ) {
@@ -1374,19 +1568,17 @@ function openagenda_get_back_link() {
 			$page               = 1;
 		}
 
-		$page_link = openagenda_get_page_permalink( $page, $filters, $fragment );
-		if ( $page_link ) {
+		$page_url = openagenda_get_page_permalink( $page, $filters, $fragment );
+		if ( $page_url ) {
 			$html = sprintf(
-				'<a class="oa-nav-link oa-back-link" href="%s">%s<span>%d / %d</span></a>',
-				esc_url( $page_link ),
-				openagenda_icon( 'home', false ),
-				(int) $event_number,
-				(int) $total
+				'<a class="oa-nav-link oa-back-link" href="%s">%s</a>',
+				esc_url( $page_url ),
+				__( 'Back to list', 'openagenda' ),
 			);
 		}
 	}
 
-	$html = apply_filters( 'openagenda_back_link', $html, $page_link, $page, $context );
+	$html = apply_filters( 'openagenda_back_link', $html, $page_url, $page, $context );
 	return $html;
 }
 
@@ -1440,7 +1632,7 @@ function openagenda_favorite_badge( $uid = false, $display = true ) {
 	$text = sprintf( __( 'Add %s to favorites.', 'openagenda' ), openagenda_get_field( 'title', $uid ) );
 
 	$html = sprintf(
-		'<button class="oa-event-favorite-badge" data-oa-widget="%s" data-oa-widget-params="%s">
+		'<button class="oa-button oa-event-favorite-badge" data-oa-widget="%s" data-oa-widget-params="%s">
             <span class="screen-reader-text">%s</span>
             <span class="active-icon">%s</span>
             <span class="inactive-icon">%s</span>
@@ -1453,6 +1645,27 @@ function openagenda_favorite_badge( $uid = false, $display = true ) {
 	);
 
 	$html = apply_filters( 'openagenda_event_favorite_badge', $html, $uid, $agenda_uid, $icon_active, $icon_inactive, $text );
+	if ( $display ) {
+		echo $html;
+	}
+	return $html;
+}
+
+
+/**
+ * Displays a featured badge
+ *
+ * @param  string $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ */
+function openagenda_featured_badge( $uid = false, $display = true ) {
+
+	$html = '';
+	if ( openagenda_get_field( 'featured', $uid ) ) {
+		$html = sprintf( '<div class="oa-event-featured-badge"><div class="oa-event-featured-badge-wrapper">%s</div></div>', openagenda_icon( 'pinned', false ) );
+	}
+
+	$html = apply_filters( 'openagenda_event_featured_badge', $html, $uid );
 	if ( $display ) {
 		echo $html;
 	}

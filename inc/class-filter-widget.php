@@ -15,13 +15,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 	/**
 	 * Constructor
 	 *
-	 * @param  string $id_base         Optional Base ID for the widget, lowercase and unique. If left empty,
-	 *                                 a portion of the widget's class name will be used Has to be unique.
-	 * @param  string $name            Name for the widget displayed on the admin page.
-	 * @param  array  $widget_options  Optional. Widget options. See wp_register_sidebar_widget() for information
-	 *                                 on accepted arguments. Default empty array.
-	 * @param  array  $control_options Optional. Widget control options. See wp_register_widget_control() for
-	 *                                 information on accepted arguments. Default empty array.
+	 * @param  array $args Optional. Additional arguments.
 	 */
 	public function __construct( $args = array() ) {
 		$settings            = get_option( 'openagenda_integrations_settings' );
@@ -166,7 +160,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 			return;
 		}
 
-		echo $args['before_widget'];
+		echo $args['before_widget']; // phpcs:ignore 
 
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
@@ -188,11 +182,11 @@ class Filter_Widget extends OpenAgenda_Widget {
 	 * Outputs the settings form in the Widgets administration screen
 	 *
 	 * @param array $instance  Current settings.
-	 * @return string          Default return is 'noform'.
 	 */
 	public function form( $instance ) {
 		$title             = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$filter            = ! empty( $instance['filter'] ) ? $instance['filter'] : '';
+		$dropdown          = ! empty( $instance['dropdown'] ) ? $instance['dropdown'] : '';
 		$available_filters = $this->get_available_filters();
 		?>
 			<p>
@@ -207,6 +201,10 @@ class Filter_Widget extends OpenAgenda_Widget {
 						<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $filter, $key ); ?>><?php echo esc_html( $filter_data['label'] ); ?></option>
 					<?php endforeach; ?>
 				</select>
+			</p>
+			<p>
+				<input type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'dropdown' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'dropdown' ) ); ?>" <?php checked( $dropdown ); ?>>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'dropdown' ) ); ?>"><?php esc_html_e( 'Display filter as a dropdown ?', 'openagenda' ); ?></label>
 			</p>
 		<?php
 
@@ -241,8 +239,9 @@ class Filter_Widget extends OpenAgenda_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array(
-			'title'  => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
-			'filter' => array_key_exists( $new_instance['filter'], $this->get_available_filters() ) ? $new_instance['filter'] : '',
+			'title'    => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
+			'filter'   => array_key_exists( $new_instance['filter'], $this->get_available_filters() ) ? $new_instance['filter'] : '',
+			'dropdown' => ! empty( $new_instance['dropdown'] ) ? (bool) $new_instance['dropdown'] : false,
 		);
 
 		switch ( $instance['filter'] ) {

@@ -41,6 +41,7 @@ The General settings tab provides the following settings :
  * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com/settings/apiKey](https://openagenda.com/settings/apiKey)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
+ * *Legacy templates* : Templates have been updated in 3.0.0. Check this option to continue using legacy templates.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
  * *Default event image* : Choose an image to use in case events do not have one.
  * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
@@ -178,7 +179,8 @@ Here is a list of templates you can find in the plugin's `templates/` folder :
 * `event-location.php` : template used to display the location information on single event views.
 * `event-additional-fields.php` : template used to the list of additional fields on single event views.
 * `preview-loop.php` : main wrapper for the preview widget and shortcode.
-* `preview-event.php` : template used to display events in the preview widget.
+
+The `legacy/` folder contains templates used prior to version 3.0.0. If you updated the plugin and notice issues on your frontend, that's probably because your site used legacy templates. Please try and check the _Use legacy templates_ checkbox in the settings page.
 
 The plugin provide convenient template tags for you to display event data in the `inc/template-tags.php` file. These basic functions are documented below. Feel free to define your own in your theme.
 

@@ -18,6 +18,8 @@ class Ajax_Handler {
 
 	/**
 	 * Debug
+	 *
+	 * @var  bool  $debug
 	 */
 	protected $debug = false;
 
@@ -25,7 +27,7 @@ class Ajax_Handler {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->debug = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG;
+		$this->debug = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG );
 	}
 
 	/**
@@ -40,8 +42,6 @@ class Ajax_Handler {
 
 	/**
 	 * Handles filter AJAX request and returns events HTML
-	 *
-	 * @return  array  $response  Array with total number of events, and events HTML.
 	 */
 	public function update_events() {
 		global $openagenda;
@@ -59,11 +59,11 @@ class Ajax_Handler {
 			exit;
 		}
 
-		// Setup $post global to allow for basic template tags to work
+		// Setup $post global to allow for basic template tags to work.
 		$post = get_post( $post_id );
 		setup_postdata( $post );
 
-		// Build query params
+		// Build query params.
 		$query     = array();
 		$view      = get_post_meta( $post_id, 'oa-calendar-view', true );
 		$page_size = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
@@ -73,24 +73,25 @@ class Ajax_Handler {
 			'page'      => isset( $_GET['page'] ) ? (int) $_GET['page'] : 1,
 		);
 
-		// Read GET query param
+		// Read GET query param.
 		if ( ! empty( $_GET ) ) {
 			$query = array_filter(
 				$_GET,
 				function ( $value, $key ) {
-					return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view', 'isLoadingMore' ) );
+					return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view', 'isLoadingMore' ), true );
 				},
 				ARRAY_FILTER_USE_BOTH
 			);
 			$args  = array_merge( $args, $query );
 		}
 
-		// Merge default filters
-		if ( ! empty( $prefilters = openagenda_get_pre_filters( $post_id, $query ) ) ) {
+		// Merge default filters.
+		$prefilters = openagenda_get_pre_filters( $post_id, $query );
+		if ( ! empty( $prefilters ) ) {
 			$args = array_merge( $args, $prefilters );
 		}
 
-		// Send response
+		// Send response.
 		$options = array(
 			'cache'           => false,
 			'context'         => true,
@@ -98,15 +99,15 @@ class Ajax_Handler {
 			'api_key'         => get_post_meta( $post_id, 'oa-calendar-api-key', true ),
 		);
 
-		$with_controls = ! $options['infinite_scroll'];
-		$isLoadingMore = ! empty( $_GET['isLoadingMore'] ) ? (bool) $_GET['isLoadingMore'] : false;
+		$with_controls   = ! $options['infinite_scroll'];
+		$is_loading_more = ! empty( $_GET['isLoadingMore'] ) ? (bool) $_GET['isLoadingMore'] : false;
 
 		$openagenda = new OpenAgenda( $uid, $args, $options );
 		$response   = array_merge(
 			$openagenda->get_json(),
 			array(
 				'source' => sanitize_key( $openagenda->get_source() ),
-				'html'   => $isLoadingMore ? \openagenda_get_events_loop_html() : \openagenda_get_events_html( $view, $with_controls ),
+				'html'   => $is_loading_more ? \openagenda_get_events_loop_html() : \openagenda_get_events_html( $view, $with_controls ),
 			)
 		);
 
@@ -125,7 +126,7 @@ class Ajax_Handler {
 			wp_die();
 		}
 
-		// Read request
+		// Read request.
 		$referer   = wp_get_referer();
 		$context   = openagenda_decode_context();
 		$direction = 'next' === $_GET['direction'] ? 'next' : 'previous';
@@ -136,14 +137,14 @@ class Ajax_Handler {
 			exit;
 		}
 
-		// Read referer event
+		// Read referer event.
 		$event_offset = isset( $context['event_offset'] ) ? (int) $context['event_offset'] : null;
 		if ( null === $event_offset ) {
 			wp_safe_redirect( $referer );
 			exit;
 		}
 
-		// Prepare another query to fetch adjacent event
+		// Prepare another query to fetch adjacent event.
 		$params  = $context['params'];
 		$filters = $context['filters'];
 		$from    = 'next' === $direction ? (int) $event_offset + 1 : (int) $event_offset - 1;
@@ -167,14 +168,14 @@ class Ajax_Handler {
 			'api_key'         => get_post_meta( get_the_ID(), 'oa-calendar-api-key', true ),
 		);
 
-		// Fetch the event
+		// Fetch the event.
 		$openagenda = new OpenAgenda( $uid, $args, $options );
 		$event      = $openagenda->get_current_event();
 
 		if ( ! empty( $event ) ) {
 			$event_permalink = openagenda_get_field( 'permalink' );
 
-			// Update context
+			// Update context.
 			$context['event_offset']   = (int) $from;
 			$context['page']           = (int) ceil( ( $from + 1 ) / (int) $context['params']['size'] );
 			$context['params']['from'] = ( $context['page'] - 1 ) * $context['params']['size'];
@@ -187,31 +188,5 @@ class Ajax_Handler {
 
 		wp_safe_redirect( $referer );
 		exit;
-	}
-
-
-	/**
-	 * Sanitizes the received oaq query data
-	 *
-	 * @param  array $query
-	 */
-	public function sanitize_query( $query ) {
-		$clean = array();
-		if ( is_array( $query ) ) {
-			foreach ( $query as $filter_key => $filter_value ) {
-				switch ( $filter_key ) {
-					case 'tags':
-						if ( is_array( $filter_value ) ) {
-							$filter_value = array_map( 'sanitize_text_field', $filter_value );
-						}
-						break;
-					default:
-						$filter_value = sanitize_text_field( $filter_value );
-						break;
-				}
-				$clean[ sanitize_text_field( $filter_key ) ] = $filter_value;
-			}
-		}
-		return $clean;
 	}
 }

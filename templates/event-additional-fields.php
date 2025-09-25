@@ -5,24 +5,26 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package OpenAgenda
+ * @version 3.0.0
  */
-$additional_fields = openagenda_get_additional_fields_template_fields();
+
+$oa_additional_fields = openagenda_get_additional_fields_template_fields();
 ?>
 <div class="oa-event-additional-fields">
 		<?php
-		foreach ( $additional_fields as $field ) {
-			$value = openagenda_get_additional_field( $field );
-			if ( $value ) {
-				$label = openagenda_get_field_label( $field );
+		foreach ( $oa_additional_fields as $oa_field ) {
+			$oa_value = openagenda_get_additional_field( $oa_field );
+			if ( $oa_value ) {
+				$oa_label = openagenda_get_field_label( $oa_field );
 				?>
-						<p class="oa-event-<?php echo esc_attr( $field ); ?>">
-							<strong class="oa-event-<?php echo esc_attr( $field ); ?>-label block">
-							<?php echo esc_html( $label ); ?>
+						<div class="oa-event-additional-field oa-event-<?php echo esc_attr( $oa_field ); ?>">
+							<strong class="oa-label oa-event-<?php echo esc_attr( $oa_field ); ?>-label">
+							<?php echo esc_html( $oa_label ); ?>
 							</strong>
-							<span class="oa-event-<?php echo esc_attr( $field ); ?>-value block">
-							<?php echo wp_kses_post( $value ); ?>
-							</span>
-						</p>
+							<div class="oa-event-<?php echo esc_attr( $oa_field ); ?>-value">
+							<?php echo wp_kses_post( $oa_value ); ?>
+							</div>
+						</div>
 					<?php
 			}
 		}
