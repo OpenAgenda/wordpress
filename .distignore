@@ -40,6 +40,7 @@ node_modules
 *.tar.gz
 *.zip
 *.map
+*.scss
 .phpunit.result.cache
 svn
 postcss.config.js
