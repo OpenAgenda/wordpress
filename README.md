@@ -89,7 +89,7 @@ Once you have it displayed, scroll down a little, and you will find your UID jus
 
 ## Filter widget and shortcodes
 
-To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additionnal settings in the widgets admin.
+To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additional settings in the widgets admin.
 
 ![You can use convenient filter widgets to add filtering functionnality to your calendars.](assets/screenshots/screenshot-5.png)
 

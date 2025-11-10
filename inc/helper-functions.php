@@ -464,7 +464,7 @@ function openagenda_get_update_notice_html() {
  *
  * @param   array        $timing        Timing from the JSON event data.
  * @param   DateTimeZone $datetimezone  Timezone to use.
- * @return  array         $timing        Timing with additionnal formatted data.
+ * @return  array         $timing        Timing with additional formatted data.
  */
 function openagenda_format_timing( $timing, $datetimezone = null ) {
 	$start_timestamp = strtotime( $timing['begin'] );

@@ -75,7 +75,7 @@ Simply publish your settings and refresh the page, or open your agenda page in a
 
 ## Filter widget and shortcodes
 
-To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additionnal settings in the widgets admin.
+To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additional settings in the widgets admin.
 
 To integrate filters directly in your content instead of widget areas, the plugin also provide shortcodes.
 
@@ -120,7 +120,7 @@ Displays a preview of any calendar. It takes the following parameters :
 
  * `uid` : UID of the calendar you wish to preview.
  * `size` : Number of events to display.
- * `sort` : Event sort option. Accepts `lastTimingWithFeatured.asc`, `timingsWithFeatured.asc`, `lastTiming.asc`, `timings.asc`, `updatedAt.asc` or `updatedAt.desc`. 
+ * `sort` : Event sort option. Accepts `lastTimingWithFeatured.asc`, `timingsWithFeatured.asc`, `lastTiming.asc`, `timings.asc`, `updatedAt.asc` or `updatedAt.desc`.
  * `filters` : Query string representing filters to apply to the request. **To ensure it works properly and avoid breaking the shortcode, you should urlencode the query string**. You can do so via a simple tool like [https://www.urlencoder.org/fr/](https://www.urlencoder.org/fr/)
  * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
 
@@ -222,7 +222,7 @@ This version contains new updated templates. If you experience issues on the fro
 
 = 2.14.0 =
 * Feature : Added sort parameter to calendars
-* Fix     : Minor code corrections to prevent PHP warnings
+* Fix : Minor code corrections to prevent PHP warnings
 * Improvement : Updated React Filters JS
 
 = 2.13.1 =

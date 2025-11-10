@@ -83,14 +83,14 @@ if (oaData) {
             }
             return true;
         },
-        getEvents: async (values, aggregations = [], additionnal_args = []) => {
+        getEvents: async (values, aggregations = [], additional_args = []) => {
             const args = {
                 postId: oaData.postId,
                 action: oaData.action,
                 view: oaData.view,
                 page: parseInt(window.oa.page),
                 size: parseInt(window.oa.size),
-                ...additionnal_args
+                ...additional_args
             }
             const url = `${oaData.ajaxUrl}?${Qs.stringify({ ...args, ...values, aggregations })}`;
             const result = await fetch(url).then(response => response.json());
