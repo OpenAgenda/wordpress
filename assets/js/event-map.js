@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
 		{
 			icon: L.icon(
 				{
-					iconUrl: '//s3-eu-west-1.amazonaws.com/cibulstatic/markerIcon.png',
+					iconUrl: '//cdn.openagenda.com/static/markerIcon.png',
 					iconSize: [18, 25],
 					iconAnchor: [9, 25]
 				}
