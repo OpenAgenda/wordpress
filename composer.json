@@ -16,6 +16,9 @@
         }
     },
     "require-dev": {
-        "wp-coding-standards/wpcs": "^3.0"
+        "wp-coding-standards/wpcs": "^3.0",
+        "phpcompatibility/php-compatibility": "^10.0.0@dev",
+        "phpcompatibility/phpcompatibility-paragonie": "^2.0@dev",
+        "phpcompatibility/phpcompatibility-wp": "^3.0@dev"
     }
 }
