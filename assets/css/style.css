@@ -97,57 +97,6 @@ strong {
 /*************************
  * Events styles
  *************************/
-.single-oa-calendar,
-.oa-preview {
-  /******************
-  * Update overlay
-  ******************/
-  /***************
-  * Notices
-  **************/
-  /*************************
-  * Events lists and grid
-  *************************/
-  /*******************
-  * Pagination
-  *******************/
-  /**************
-  * Navigation
-  **************/
-  /***********************
-  * Single event styles
-  ***********************/
-  /***********
-  * Timings
-  ***********/
-  /*******************
-  * Location styles
-  *******************/
-  /*********************************
-  * Filters widgets
-  *********************************/
-  /*********************************
-  * Active filters widget
-  *********************************/
-  /*********************************
-  * Search widget
-  *********************************/
-  /*********************************
-  * Choice widget
-  *********************************/
-  /*********************************
-  * Favorite widget
-  *********************************/
-  /*********************
-  * Language switcher
-  *********************/
-  /*****************************
-  * Exports and Share Buttons
-  *****************************/
-  /*********************************
-  * Date Range and Calendar widget
-  *********************************/
-}
 .single-oa-calendar .oa-event-title,
 .oa-preview .oa-event-title {
   color: var(--oa-gray-900);
@@ -212,6 +161,12 @@ strong {
     transform: rotateZ(360deg);
   }
 }
+.single-oa-calendar,
+.oa-preview {
+  /******************
+  * Update overlay
+  ******************/
+}
 .single-oa-calendar div[data-container-id=oa-wrapper],
 .oa-preview div[data-container-id=oa-wrapper] {
   position: relative;
@@ -243,6 +198,12 @@ strong {
 .oa-preview div[data-container-id=oa-wrapper] .oa-update-overlay p {
   margin: var(--oa-spacing-4) 0;
 }
+.single-oa-calendar,
+.oa-preview {
+  /***************
+  * Notices
+  **************/
+}
 .single-oa-calendar .oa-notice,
 .oa-preview .oa-notice {
   padding: var(--oa-spacing-4);
@@ -264,6 +225,12 @@ strong {
 .single-oa-calendar .map-container .leaflet-container,
 .oa-preview .map-container .leaflet-container {
   height: 300px;
+}
+.single-oa-calendar,
+.oa-preview {
+  /*************************
+  * Events lists and grid
+  *************************/
 }
 .single-oa-calendar .oa-event-list,
 .single-oa-calendar .oa-event-grid,
@@ -387,9 +354,15 @@ strong {
 }
 @media screen and (min-width: 700px) {
   .single-oa-calendar .oa-event-grid,
-.oa-preview .oa-event-grid {
+  .oa-preview .oa-event-grid {
     grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
   }
+}
+.single-oa-calendar,
+.oa-preview {
+  /*******************
+  * Pagination
+  *******************/
 }
 .single-oa-calendar ul.oa-pagination,
 .oa-preview ul.oa-pagination {
@@ -419,6 +392,12 @@ strong {
 .oa-preview ul.oa-pagination .oa-page a:hover,
 .oa-preview ul.oa-pagination .oa-page a:focus {
   color: var(--oa-main-color);
+}
+.single-oa-calendar,
+.oa-preview {
+  /**************
+  * Navigation
+  **************/
 }
 .single-oa-calendar .oa-event-navigation,
 .oa-preview .oa-event-navigation {
@@ -462,6 +441,12 @@ strong {
 .oa-preview .oa-previous-link .oa-icon,
 .oa-preview .oa-next-link .oa-icon {
   font-size: var(--oa-text-5);
+}
+.single-oa-calendar,
+.oa-preview {
+  /***********************
+  * Single event styles
+  ***********************/
 }
 .single-oa-calendar .oa-single-event .oa-event-wrapper,
 .oa-preview .oa-single-event .oa-event-wrapper {
@@ -577,6 +562,12 @@ strong {
 .oa-preview .oa-single-event .oa-event-timings {
   margin-bottom: var(--oa-spacing-7);
 }
+.single-oa-calendar,
+.oa-preview {
+  /***********
+  * Timings
+  ***********/
+}
 .single-oa-calendar .oa-event-timings,
 .oa-preview .oa-event-timings {
   font-size: var(--oa-text-4);
@@ -649,6 +640,12 @@ strong {
   margin-top: var(--oa-spacing-1);
   display: flex;
 }
+.single-oa-calendar,
+.oa-preview {
+  /*******************
+  * Location styles
+  *******************/
+}
 .single-oa-calendar .oa-event-location,
 .oa-preview .oa-event-location {
   font-size: var(--oa-text-4);
@@ -696,6 +693,12 @@ strong {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+.single-oa-calendar,
+.oa-preview {
+  /*********************************
+  * Filters widgets
+  *********************************/
 }
 .single-oa-calendar .oa-default-filters,
 .oa-preview .oa-default-filters {
@@ -803,10 +806,22 @@ strong {
 .oa-preview .oa-widget input[type=checkbox]:checked {
   background-color: var(--oa-main-color);
 }
+.single-oa-calendar,
+.oa-preview {
+  /*********************************
+  * Active filters widget
+  *********************************/
+}
 .single-oa-calendar .oa-active-filters-widget button,
 .oa-preview .oa-active-filters-widget button {
   margin-right: var(--oa-spacing-2);
   margin-bottom: var(--oa-spacing-2);
+}
+.single-oa-calendar,
+.oa-preview {
+  /*********************************
+  * Search widget
+  *********************************/
 }
 .single-oa-calendar .oa-search-widget .input-group,
 .oa-preview .oa-search-widget .input-group {
@@ -862,6 +877,12 @@ strong {
   color: var(--oa-main-color-lighter);
   outline: 2px solid var(--oa-main-color-lighter);
 }
+.single-oa-calendar,
+.oa-preview {
+  /*********************************
+  * Choice widget
+  *********************************/
+}
 .single-oa-calendar .oa-choice-widget,
 .oa-preview .oa-choice-widget {
   display: flex;
@@ -882,6 +903,12 @@ strong {
 .single-oa-calendar .oa-choice-widget .oa-filter-total,
 .oa-preview .oa-choice-widget .oa-filter-total {
   font-size: smaller;
+}
+.single-oa-calendar,
+.oa-preview {
+  /*********************************
+  * Favorite widget
+  *********************************/
 }
 .single-oa-calendar button.oa-event-favorite-badge,
 .oa-preview button.oa-event-favorite-badge {
@@ -915,6 +942,12 @@ strong {
 .oa-preview button.oa-event-favorite-badge.active .inactive-icon {
   display: none;
 }
+.single-oa-calendar,
+.oa-preview {
+  /*********************
+  * Language switcher
+  *********************/
+}
 .single-oa-calendar .oa-languages,
 .oa-preview .oa-languages {
   display: flex;
@@ -939,6 +972,12 @@ strong {
 .oa-preview .oa-language-link:focus-within,
 .oa-preview .oa-language-link:hover {
   border-bottom: 2px solid var(--oa-main-color);
+}
+.single-oa-calendar,
+.oa-preview {
+  /*****************************
+  * Exports and Share Buttons
+  *****************************/
 }
 .single-oa-calendar .oa-exports,
 .single-oa-calendar .oa-sharers,
@@ -972,6 +1011,12 @@ strong {
 .oa-preview .oa-registration-label,
 .oa-preview .oa-access-link-label {
   display: block;
+}
+.single-oa-calendar,
+.oa-preview {
+  /*********************************
+  * Date Range and Calendar widget
+  *********************************/
 }
 .single-oa-calendar .rdrCalendarWrapper,
 .oa-preview .rdrCalendarWrapper {
@@ -1145,7 +1190,7 @@ strong {
 }
 @supports (-ms-ime-align: auto) {
   .single-oa-calendar .rdrDay,
-.oa-preview .rdrDay {
+  .oa-preview .rdrDay {
     flex-basis: 14.285% !important;
   }
 }
@@ -1310,7 +1355,7 @@ strong {
 .single-oa-calendar .rdrPprevButton i,
 .oa-preview .rdrPprevButton i {
   border-width: 4px 6px 4px 4px;
-  border-color: transparent #34495e transparent transparent;
+  border-color: transparent rgb(52, 73, 94) transparent transparent;
   -webkit-transform: translate(-3px, 0px);
   transform: translate(-3px, 0px);
 }
@@ -1318,7 +1363,7 @@ strong {
 .oa-preview .rdrNextButton i {
   margin: 0 0 0 7px;
   border-width: 4px 4px 4px 6px;
-  border-color: transparent transparent transparent #34495e;
+  border-color: transparent transparent transparent rgb(52, 73, 94);
   -webkit-transform: translate(3px, 0px);
   transform: translate(3px, 0px);
 }
@@ -1343,7 +1388,7 @@ strong {
 .oa-preview .rdrWeekDay {
   font-weight: 400;
   line-height: 2.667em;
-  color: #849095;
+  color: rgb(132, 144, 149);
 }
 .single-oa-calendar button.rdrDay,
 .oa-preview button.rdrDay {
@@ -1609,9 +1654,9 @@ strong {
   line-height: 30px;
   border-radius: 4px;
   text-align: center;
-  border: solid 1px #dee7eb;
+  border: solid 1px rgb(222, 231, 235);
   margin-right: 10px;
-  color: #6c767a;
+  color: rgb(108, 118, 122);
 }
 .single-oa-calendar .rdrInputRangeInput:focus,
 .single-oa-calendar .rdrInputRangeInput:hover,
