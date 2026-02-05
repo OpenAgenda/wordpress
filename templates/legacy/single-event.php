@@ -8,7 +8,7 @@
  * @version 2.14.0
  */
 
-$timing               = openagenda_event_timing( 'date', false, false );
+$timing               = openagenda_event_timing( 'relative', false, false );
 $date_range           = openagenda_get_field( 'dateRange' );
 $access_link          = openagenda_get_field( 'onlineAccessLink' );
 $registration_methods = openagenda_get_field( 'registration' );
