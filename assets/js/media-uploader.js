@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', e => {
 			frame.on('select', e => {
 				const attachment = frame.state().get('selection').first();
 				inputField.value = attachment.id;
-				updateButton.innerHTML = updateButton.dataset.update
-				preview.innerHTML = ` < img src = ${attachment.attributes.sizes.thumbnail.url} alt = ${attachment.attributes.alt} / > `
+				updateButton.innerHTML = updateButton.dataset.update;
+				preview.innerHTML = `<img src=${attachment.attributes.sizes.thumbnail.url} alt=${attachment.attributes.alt} />`;
 				removeButton.classList.remove('hidden');
 				frame.close();
 			});
