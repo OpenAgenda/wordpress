@@ -4,7 +4,7 @@
   "description": "Display your OpenAgenda data on your WordPress site",
   "main": "assets/js/main.js",
   "devDependencies": {
-    "terser": "^5.24.0"
+    "terser": "^5.46.0"
   },
   "scripts": {
     "start": "sass --watch assets/css/style.scss:assets/css/style.css & sass --watch assets/css/admin.scss:assets/css/admin.css & sass --watch assets/css/legacy.scss:assets/css/legacy.css",
