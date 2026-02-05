@@ -147,7 +147,7 @@ class Ajax_Handler {
 		}
 
 		// Setup $post global to allow for basic template tags to work.
-		if( $post_id ){
+		if ( $post_id ) {
 			$post = get_post( $post_id );
 			setup_postdata( $post );
 		}

@@ -80,8 +80,8 @@ class Metaboxes implements Hookable {
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'number',
 					'label'   => __( 'Events per page', 'openagenda' ),
-					'min'	  => 1,
-					'max'	  => 300,
+					'min'     => 1,
+					'max'     => 300,
 					'default' => (int) get_option( 'posts_per_page' ),
 				),
 				'oa-calendar-view'                    => array(
@@ -436,7 +436,7 @@ class Metaboxes implements Hookable {
 		}
 
 		if ( ! empty( $_POST['oa-calendar-per-page'] ) ) {
-			$value = max(1, min(300, (int) $_POST['oa-calendar-per-page']));
+			$value = max( 1, min( 300, (int) $_POST['oa-calendar-per-page'] ) );
 			update_post_meta( $post_ID, 'oa-calendar-per-page', $value );
 		}
 

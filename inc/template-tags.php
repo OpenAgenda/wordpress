@@ -262,16 +262,16 @@ function openagenda_get_additional_field( $field, $uid = false, $args = array() 
 				$filename = $value['filename'] ?? '';
 				$alt      = $value['originalName'] ?? '';
 				$link     = sprintf( 'https://cdn.openagenda.com/main/%s', $filename );
-				if( 'image' === $field_schema['fieldType'] ){
-					$img_width = isset( $args['img_width'] ) ? (int) $args['img_width'] : null;
+				if ( 'image' === $field_schema['fieldType'] ) {
+					$img_width  = isset( $args['img_width'] ) ? (int) $args['img_width'] : null;
 					$img_height = isset( $args['img_height'] ) ? (int) $args['img_height'] : null;
-					if( $img_width && $img_height ){
+					if ( $img_width && $img_height ) {
 						$link = sprintf( 'https://img.openagenda.com/u/%dx%d/main/%s', $img_width, $img_height, $filename, );
 					} else {
 						$link = sprintf( 'https://img.openagenda.com/u/main/%s', $filename );
 					}
 				}
-				$value    = 'image' === $field_schema['fieldType']
+				$value = 'image' === $field_schema['fieldType']
 				? sprintf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $link ), esc_attr( $alt ) )
 				: sprintf( '<a href="%s" target="_blank" rel="external noopener noreferrer" />%s</a>', esc_url( $link ), esc_html( $alt ) );
 				break;
