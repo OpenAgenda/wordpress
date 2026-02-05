@@ -593,7 +593,7 @@ class OpenAgenda {
 				'openagenda_remote_request_args',
 				array(
 					'headers' => array(
-						'Key' => $this->get_api_key(),
+						'key' => $this->get_api_key(),
 					),
 				)
 			);
