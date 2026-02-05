@@ -1517,6 +1517,7 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
 				'action'    => 'get_adjacent_event',
 				'nonce'     => wp_create_nonce( 'get_adjacent_event' ),
 				'uid'       => $openagenda->get_uid(),
+				'post_id'   => get_the_ID(),
 				'direction' => 'next' === $direction ? 'next' : 'previous',
 				'context'   => $encoded_context,
 			),

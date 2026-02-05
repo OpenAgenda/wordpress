@@ -121,6 +121,7 @@ class Ajax_Handler {
 	 */
 	public function get_adjacent_event() {
 		global $openagenda;
+		global $post;
 
 		if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], 'get_adjacent_event' ) ) {
 			wp_die();
@@ -131,6 +132,7 @@ class Ajax_Handler {
 		$context   = openagenda_decode_context();
 		$direction = 'next' === $_GET['direction'] ? 'next' : 'previous';
 		$uid       = isset( $_GET['uid'] ) ? (int) $_GET['uid'] : false;
+		$post_id   = isset( $_GET['post_id'] ) ? (int) $_GET['post_id'] : false;
 
 		if ( ! $context || ! $uid ) {
 			wp_safe_redirect( $referer );
@@ -142,6 +144,12 @@ class Ajax_Handler {
 		if ( null === $event_offset ) {
 			wp_safe_redirect( $referer );
 			exit;
+		}
+
+		// Setup $post global to allow for basic template tags to work.
+		if( $post_id ){
+			$post = get_post( $post_id );
+			setup_postdata( $post );
 		}
 
 		// Prepare another query to fetch adjacent event.
