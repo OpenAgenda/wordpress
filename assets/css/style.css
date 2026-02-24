@@ -812,6 +812,16 @@ strong {
   * Active filters widget
   *********************************/
 }
+.single-oa-calendar .oa-events-total-widget,
+.oa-preview .oa-events-total-widget {
+  margin: var(--oa-spacing-2) 0;
+}
+.single-oa-calendar,
+.oa-preview {
+  /*********************************
+  * Active filters widget
+  *********************************/
+}
 .single-oa-calendar .oa-active-filters-widget button,
 .oa-preview .oa-active-filters-widget button {
   margin-right: var(--oa-spacing-2);
