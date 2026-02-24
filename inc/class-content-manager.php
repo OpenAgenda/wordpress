@@ -29,7 +29,7 @@ class Content_Manager implements Hookable {
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
 		add_filter( 'body_class', array( $this, 'body_class' ), 10, 1 );
 		add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 10, 1 );
-		add_filter( 'the_content', array( $this, 'the_content' ), 5, 2 );
+		add_filter( 'the_content', array( $this, 'the_content' ), 8, 2 );
 		add_filter( 'write_your_story', array( $this, 'write_your_story' ), 10, 2 );
 		add_filter( 'get_pages', array( $this, 'get_front_pages' ), 10, 2 );
 		add_action( 'pre_get_posts', array( $this, 'allow_calendars_front_page' ) );
@@ -215,9 +215,9 @@ class Content_Manager implements Hookable {
 		$filters         = openagenda_is_archive() ? openagenda_filter( 'active', array(), false ) : '';
 
 		if ( 'yes' !== $display_content ) {
-			$content = do_shortcode( '[openagenda]' );
+			$content = '[openagenda]';
 		} elseif ( ! has_shortcode( $content, 'openagenda' ) ) {
-				$content .= do_shortcode( '[openagenda]' );
+			$content .= '[openagenda]';
 		}
 
 		return $content;
