@@ -217,7 +217,7 @@ This version contains new updated templates. If you experience issues on the fro
 * Fix : Fixed next event display date.
 * Fix : Fixed timings not displaying day sometimes.
 * Improvement : Added max size to requests.
-* Improvement : Switch to api.openagenda.com and cdn.openagenda.com for addictional content requests.
+* Improvement : Switch to api.openagenda.com and cdn.openagenda.com for additional content requests.
 
 = 3.0.0 =
 * Improvement : Complete overhaul of frontend templates
