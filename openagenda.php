@@ -12,7 +12,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Requires PHP: 7.4.1
  * Requires at least: 5.0
- * Tested up to: 6.8.2
+ * Tested up to: 6.9.1
  *
  * @package OpenAgenda
  * @version 3.0.1
