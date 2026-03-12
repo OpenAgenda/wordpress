@@ -619,7 +619,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 
 .rdrDateDisplayItem {
   border-radius: 4px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 1px 2px 0 rgba(35, 57, 66, 0.21);
   border: 1px solid transparent;
 }
@@ -709,7 +709,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 
 .rdrPprevButton i {
   border-width: 4px 6px 4px 4px;
-  border-color: transparent #34495e transparent transparent;
+  border-color: transparent rgb(52, 73, 94) transparent transparent;
   -webkit-transform: translate(-3px, 0px);
   transform: translate(-3px, 0px);
 }
@@ -717,7 +717,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .rdrNextButton i {
   margin: 0 0 0 7px;
   border-width: 4px 4px 4px 6px;
-  border-color: transparent transparent transparent #34495e;
+  border-color: transparent transparent transparent rgb(52, 73, 94);
   -webkit-transform: translate(3px, 0px);
   transform: translate(3px, 0px);
 }
@@ -742,7 +742,7 @@ div[data-container-id=oa-wrapper] .oa-update-overlay p {
 .rdrWeekDay {
   font-weight: 400;
   line-height: 2.667em;
-  color: #849095;
+  color: rgb(132, 144, 149);
 }
 
 .rdrDay {
@@ -993,9 +993,9 @@ button.rdrStaticRange {
   line-height: 30px;
   border-radius: 4px;
   text-align: center;
-  border: solid 1px #dee7eb;
+  border: solid 1px rgb(222, 231, 235);
   margin-right: 10px;
-  color: #6c767a;
+  color: rgb(108, 118, 122);
 }
 
 .rdrInputRangeInput:focus,
@@ -1036,7 +1036,7 @@ button.rdrStaticRange {
 }
 
 .rdrDayDisabled {
-  background-color: #f8f8f8;
+  background-color: rgb(248, 248, 248);
 }
 
 .rdrDayDisabled .rdrDayNumber span {

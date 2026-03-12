@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.8.2
-Stable tag: 3.0.0
+Tested up to: 6.9.1
+Stable tag: 3.0.1
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -210,6 +210,14 @@ This version contains new updated templates. If you experience issues on the fro
 * Improvement : Updated React Filters JS
 
 == Changelog ==
+
+= 3.0.1 = 
+* Fix : Conflict with Elementor fixed. No more double rendering of events when shortcode is added with a page builder. 
+* Fix : Fixed agenda links on ajax calls. Links were not always correct when multiple agendas with same UID were used.
+* Fix : Fixed next event display date.
+* Fix : Fixed timings not displaying day sometimes.
+* Improvement : Added max size to requests.
+* Improvement : Switch to api.openagenda.com and cdn.openagenda.com for additional content requests.
 
 = 3.0.0 =
 * Improvement : Complete overhaul of frontend templates

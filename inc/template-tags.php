@@ -227,9 +227,10 @@ function openagenda_esc_field( $value, $field ) {
  *
  * @param   string $field  Slug of the field to fetch.
  * @param   string $uid    UID of the event to fetch field for. Defaults to current event.
+ * @param   array  $args   Array of additional arguments.
  * @return  string  $value  Field value.
  */
-function openagenda_get_additional_field( $field, $uid = false ) {
+function openagenda_get_additional_field( $field, $uid = false, $args = array() ) {
 	global $openagenda;
 	if ( ! $openagenda ) {
 		return '';
@@ -258,14 +259,19 @@ function openagenda_get_additional_field( $field, $uid = false ) {
 				break;
 			case 'image':
 			case 'file':
-				$store    = $field_schema['store'] ?? array(
-					'type'   => 's3',
-					'bucket' => 'main',
-				);
 				$filename = $value['filename'] ?? '';
-				$link     = sprintf( 'https://02034510ef5d488190e4cf17d19a788b.s3.pub1.infomaniak.cloud/%s/%s', $store['bucket'], $filename );
 				$alt      = $value['originalName'] ?? '';
-				$value    = 'image' === $field_schema['fieldType']
+				$link     = sprintf( 'https://cdn.openagenda.com/main/%s', $filename );
+				if ( 'image' === $field_schema['fieldType'] ) {
+					$img_width  = isset( $args['img_width'] ) ? (int) $args['img_width'] : null;
+					$img_height = isset( $args['img_height'] ) ? (int) $args['img_height'] : null;
+					if ( $img_width && $img_height ) {
+						$link = sprintf( 'https://img.openagenda.com/u/%dx%d/main/%s', $img_width, $img_height, $filename, );
+					} else {
+						$link = sprintf( 'https://img.openagenda.com/u/main/%s', $filename );
+					}
+				}
+				$value = 'image' === $field_schema['fieldType']
 				? sprintf( '<img src="%s" alt="%s" loading="lazy" />', esc_url( $link ), esc_attr( $alt ) )
 				: sprintf( '<a href="%s" target="_blank" rel="external noopener noreferrer" />%s</a>', esc_url( $link ), esc_html( $alt ) );
 				break;
@@ -1517,6 +1523,7 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
 				'action'    => 'get_adjacent_event',
 				'nonce'     => wp_create_nonce( 'get_adjacent_event' ),
 				'uid'       => $openagenda->get_uid(),
+				'post_id'   => get_the_ID(),
 				'direction' => 'next' === $direction ? 'next' : 'previous',
 				'context'   => $encoded_context,
 			),

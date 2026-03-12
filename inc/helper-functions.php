@@ -547,6 +547,7 @@ function openagenda_group_timings( $timings ) {
 
 		if ( $week_cursor !== $timing['start_week'] ) {
 			$week_cursor                                      = $timing['start_week'];
+			$day_cursor                                       = false;
 			$months[ $month_cursor ]['weeks'][ $week_cursor ] = array(
 				'label'   => $timing['start_week_label'],
 				'current' => $timing['start_week'] === $today->format( 'W' ),

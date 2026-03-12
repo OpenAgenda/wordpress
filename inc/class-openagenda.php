@@ -554,7 +554,7 @@ class OpenAgenda {
 		$this->is_single  = ! empty( $args['slug'] );
 		$this->is_archive = ! $this->is_single;
 		$this->page       = ! empty( $args['page'] ) ? (int) $args['page'] : 1;
-		$this->size       = $this->is_single() ? 1 : (int) $args['size'];
+		$this->size       = $this->is_single() ? 1 : max( 1, min( 300, (int) $args['size'] ) );
 		$this->offset     = ( $this->page - 1 ) * $this->size;
 		if ( $this->page > 1 ) {
 			$args['from'] = (int) $this->offset;
@@ -593,7 +593,7 @@ class OpenAgenda {
 				'openagenda_remote_request_args',
 				array(
 					'headers' => array(
-						'Key' => $this->get_api_key(),
+						'key' => $this->get_api_key(),
 					),
 				)
 			);

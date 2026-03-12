@@ -1,17 +1,17 @@
 @use "sass:math";
 @use "sass:map";
 
-@import 'variables';
-@import 'mixins';
+@use 'variables';
+@use 'mixins';
 
 :root {
 	scroll-behavior: smooth;
-	--oa-main-color: #{map.get($colors, primary-500)};
-	--oa-main-color-lighter: #{map.get($colors, primary-300)};
-	--oa-main-color-darker: #{map.get($colors, primary-700)};
-	@include css_variables('oa', $colors );
-	@include css_variables('oa-spacing', $spacings );
-	@include css_variables('oa-text', $fontSizes );
+	--oa-main-color: #{map.get(variables.$colors, primary-500)};
+	--oa-main-color-lighter: #{map.get(variables.$colors, primary-300)};
+	--oa-main-color-darker: #{map.get(variables.$colors, primary-700)};
+	@include mixins.css_variables('oa', variables.$colors );
+	@include mixins.css_variables('oa-spacing', variables.$spacings );
+	@include mixins.css_variables('oa-text', variables.$fontSizes );
 }
 
 /*****************************
@@ -673,6 +673,13 @@ strong {
 	/*********************************
 	* Active filters widget
 	*********************************/
+	.oa-events-total-widget {
+		margin: var(--oa-spacing-2) 0;
+	}
+
+	/*********************************
+	* Active filters widget
+	*********************************/
 	.oa-active-filters-widget {
 		button {
 			margin-right: var(--oa-spacing-2);
@@ -1242,7 +1249,7 @@ strong {
 		line-height: 3em;
 		height: 3em;
 		text-align: center;
-		color: #{map.get($colors, grey-900)};
+		color: #{map.get(variables.$colors, grey-900)};
 	}
 
 	.rdrDay.rdrDayPassive {

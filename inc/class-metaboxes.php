@@ -80,6 +80,8 @@ class Metaboxes implements Hookable {
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'number',
 					'label'   => __( 'Events per page', 'openagenda' ),
+					'min'     => 1,
+					'max'     => 300,
 					'default' => (int) get_option( 'posts_per_page' ),
 				),
 				'oa-calendar-view'                    => array(
@@ -362,11 +364,21 @@ class Metaboxes implements Hookable {
 				<?php
 				break;
 			default:
+				$min = isset( $args['min'] ) ? sprintf( 'min="%d"', (int) $args['min'] ) : '';
+				$max = isset( $args['max'] ) ? sprintf( 'max="%d"', (int) $args['max'] ) : '';
 				?>
 					<div class="components-base-control">
 						<div class="components-base-control__field">
 							<label for="<?php echo esc_attr( $name ); ?>" class="components-base-control__label" style="display: block; margin-bottom: 8px"><?php echo esc_html( $args['label'] ); ?></label>
-							<input id="<?php echo esc_attr( $name ); ?>" name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $args['type'] ); ?>" class="components-text-control__input" value="<?php echo esc_attr( $field_value ); ?>" />
+							<input 
+								id="<?php echo esc_attr( $name ); ?>" 
+								name="<?php echo esc_attr( $name ); ?>" 
+								type="<?php echo esc_attr( $args['type'] ); ?>" 
+								class="components-text-control__input" 
+								value="<?php echo esc_attr( $field_value ); ?>"
+								<?php echo $min; ?>
+								<?php echo $max; ?>
+							/>
 						</div>
 						<?php
 						if ( ! empty( $args['message'] ) ) {
@@ -424,7 +436,8 @@ class Metaboxes implements Hookable {
 		}
 
 		if ( ! empty( $_POST['oa-calendar-per-page'] ) ) {
-			update_post_meta( $post_ID, 'oa-calendar-per-page', (int) $_POST['oa-calendar-per-page'] );
+			$value = max( 1, min( 300, (int) $_POST['oa-calendar-per-page'] ) );
+			update_post_meta( $post_ID, 'oa-calendar-per-page', $value );
 		}
 
 		if ( ! empty( $_POST['oa-calendar-view'] ) && in_array( $_POST['oa-calendar-view'], array( 'list', 'grid' ), true ) ) {
