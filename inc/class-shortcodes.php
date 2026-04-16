@@ -326,11 +326,12 @@ class Shortcodes implements Hookable {
 			'dropdown'       => false,
 			'display_ranges' => false,
 			'ranges'         => array(),
+			'type'           => 'dateRange',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_calendar' );
 
 		$params = array(
-			'type'            => 'dateRange',
+			'type'            => $atts['type'] ?? 'dateRange',
 			'name'            => 'timings',
 			'dateFormat'      => get_option( 'date_format' ),
 			'dateFormatStyle' => 'php',

@@ -53,6 +53,16 @@ class Filter_Widget extends OpenAgenda_Widget {
 					'default' => false,
 					'type'    => 'checkbox',
 				),
+				'type'           => array(
+					'name'    => 'type',
+					'label'   => __( 'Type of filter', 'openagenda' ),
+					'default' => 'dateRange',
+					'type'    => 'select',
+					'options' => array(
+						'dateRange'      => __( 'Calendar picker', 'openagenda' ),
+						'simpleDateRange' => __( 'Native date input fields', 'openagenda' ),
+					),
+				),
 				'ranges'         => array(
 					'name'        => 'ranges',
 					'description' => __( 'Ranges to display: ', 'openagenda' ),
@@ -262,6 +272,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 			case 'openagenda_filter_calendar':
 				$additional_settings = array(
 					'display_ranges' => isset( $new_instance['display_ranges'] ) ? (bool) $new_instance['display_ranges'] : false,
+					'type'           => ! empty( $new_instance['type'] ) ? sanitize_text_field( $new_instance['type'] ) : 'dateRange',
 					'ranges'         => ! empty( $new_instance['ranges'] ) ? array_unique(
 						array_map(
 							function ( $range ) {
