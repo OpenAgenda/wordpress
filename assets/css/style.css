@@ -102,6 +102,22 @@ strong {
   color: var(--oa-gray-900);
   margin: 0;
 }
+.single-oa-calendar .oa-event-title .oa-event-status-badge,
+.oa-preview .oa-event-title .oa-event-status-badge {
+  margin-right: var(--oa-spacing-2);
+}
+.single-oa-calendar .oa-event-status-badge,
+.oa-preview .oa-event-status-badge {
+  background-color: var(--oa-gray-200);
+  border-radius: 4px;
+  font-size: var(--oa-text-2);
+  padding: var(--oa-spacing-1) var(--oa-spacing-2);
+}
+.single-oa-calendar .oa-event-status-6,
+.oa-preview .oa-event-status-6 {
+  background-color: var(--oa-danger-600);
+  color: var(--oa-danger-50);
+}
 .single-oa-calendar .oa-event-details,
 .single-oa-calendar .oa-event-additional-fields,
 .single-oa-calendar .oa-event-location,

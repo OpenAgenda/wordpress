@@ -44,7 +44,10 @@ switch ( $oa_attendance_mode ) {
 			<?php endif; ?>
 
 			<h2 class="oa-event-title">
-				<?php openagenda_field( 'title' ); ?>
+				<?php 
+					openagenda_status_badge();
+					openagenda_field( 'title' );
+				?>
 			</h2>
 			
 			<p class="oa-event-description">

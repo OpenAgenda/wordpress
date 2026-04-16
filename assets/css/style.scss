@@ -46,6 +46,22 @@ strong {
 	.oa-event-title {
 		color: var(--oa-gray-900);
 		margin: 0;
+
+		.oa-event-status-badge {
+			margin-right: var(--oa-spacing-2);
+		}
+	}
+
+	.oa-event-status-badge {
+		background-color: var(--oa-gray-200);
+		border-radius: 4px;
+		font-size: var(--oa-text-2);
+		padding: var(--oa-spacing-1) var(--oa-spacing-2);
+	}
+
+	.oa-event-status-6 {
+		background-color: var(--oa-danger-600);
+		color: var(--oa-danger-50);
 	}
 
 	.oa-event-details,

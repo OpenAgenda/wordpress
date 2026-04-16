@@ -1044,7 +1044,7 @@ function openagenda_get_event_status_label( $uid = false ) {
 		$uid = $event['uid'];
 	}
 
-	$status         = openagenda_get_field( 'status' ) ?? array();
+	$status         = openagenda_get_field( 'status', $uid ) ?? array();
 	$default_labels = apply_filters(
 		'openagenda_status_labels',
 		array(
@@ -1065,6 +1065,36 @@ function openagenda_get_event_status_label( $uid = false ) {
 	}
 
 	return apply_filters( 'openagenda_event_status_label', $label, $uid );
+}
+
+
+/**
+ * Displays a status badge if the event is cancelled.
+ * 
+ * @since 3.0.2
+ * 
+ * @param  string $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ */
+function openagenda_status_badge( $uid = false, $display = true ) {
+	$status = openagenda_get_field( 'status', $uid );
+	if( is_array( $status ) ) {
+		$status_code = ! empty( $status['id'] ) ? (int) $status['id'] : 1;
+	} else {
+		$status_code = (int) $status;
+	}
+
+	$html = '';
+	$status_to_display = apply_filters( 'openagenda_status_to_display', array( 6 ), $uid );
+	if( in_array( $status_code, $status_to_display, true ) ) {
+		$html = sprintf( '<span class="oa-event-status-badge oa-event-status-%d">%s</span>', $status_code, openagenda_get_event_status_label( $uid ) );
+	}
+
+	$html = apply_filters( 'openagenda_event_status_badge', $html, $uid );
+	if ( $display ) {
+		echo $html;
+	}
+	return $html;
 }
 
 /**
@@ -1666,7 +1696,6 @@ function openagenda_favorite_badge( $uid = false, $display = true ) {
  * @param  bool   $display  Whether to echo or just return the html.
  */
 function openagenda_featured_badge( $uid = false, $display = true ) {
-
 	$html = '';
 	if ( openagenda_get_field( 'featured', $uid ) ) {
 		$html = sprintf( '<div class="oa-event-featured-badge"><div class="oa-event-featured-badge-wrapper">%s</div></div>', openagenda_icon( 'pinned', false ) );

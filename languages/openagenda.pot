@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-24T09:49:40+00:00\n"
+"POT-Creation-Date: 2026-04-16T09:43:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -196,7 +196,7 @@ msgstr ""
 
 #: inc/class-filter-widget.php:23
 #: inc/class-settings.php:297
-#: inc/class-shortcodes.php:415
+#: inc/class-shortcodes.php:416
 #: inc/template-tags.php:784
 msgid "OpenStreetMap contributors"
 msgstr ""
@@ -222,127 +222,139 @@ msgid "Display defined ranges shortcuts ?"
 msgstr ""
 
 #: inc/class-filter-widget.php:58
-#: inc/class-filter-widget.php:73
-msgid "Ranges to display: "
+msgid "Type of filter"
 msgstr ""
 
 #: inc/class-filter-widget.php:62
-#: inc/class-filter-widget.php:77
-msgid "Today"
+msgid "Calendar picker"
 msgstr ""
 
 #: inc/class-filter-widget.php:63
-#: inc/class-filter-widget.php:78
+msgid "Native date input fields"
+msgstr ""
+
+#: inc/class-filter-widget.php:68
+#: inc/class-filter-widget.php:83
+msgid "Ranges to display: "
+msgstr ""
+
+#: inc/class-filter-widget.php:72
+#: inc/class-filter-widget.php:87
+msgid "Today"
+msgstr ""
+
+#: inc/class-filter-widget.php:73
+#: inc/class-filter-widget.php:88
 msgid "Tomorrow"
 msgstr ""
 
-#: inc/class-filter-widget.php:64
-#: inc/class-filter-widget.php:79
+#: inc/class-filter-widget.php:74
+#: inc/class-filter-widget.php:89
 msgid "This week end"
 msgstr ""
 
-#: inc/class-filter-widget.php:65
-#: inc/class-filter-widget.php:80
+#: inc/class-filter-widget.php:75
+#: inc/class-filter-widget.php:90
 msgid "This week"
 msgstr ""
 
-#: inc/class-filter-widget.php:66
-#: inc/class-filter-widget.php:81
+#: inc/class-filter-widget.php:76
+#: inc/class-filter-widget.php:91
 msgid "This month"
 msgstr ""
 
-#: inc/class-filter-widget.php:88
+#: inc/class-filter-widget.php:98
 msgid "Choose field: "
 msgstr ""
 
-#: inc/class-filter-widget.php:91
+#: inc/class-filter-widget.php:101
 msgid "Choose a field to display"
 msgstr ""
 
-#: inc/class-filter-widget.php:93
+#: inc/class-filter-widget.php:103
 #: inc/class-shortcodes.php:261
 #: inc/class-shortcodes.php:271
 msgid "Favorites"
 msgstr ""
 
-#: inc/class-filter-widget.php:94
+#: inc/class-filter-widget.php:104
 msgid "Cities"
 msgstr ""
 
-#: inc/class-filter-widget.php:95
+#: inc/class-filter-widget.php:105
 msgid "Districts"
 msgstr ""
 
-#: inc/class-filter-widget.php:96
+#: inc/class-filter-widget.php:106
 msgid "Keywords"
 msgstr ""
 
-#: inc/class-filter-widget.php:97
+#: inc/class-filter-widget.php:107
 msgid "Admin Level 3"
 msgstr ""
 
-#: inc/class-filter-widget.php:98
+#: inc/class-filter-widget.php:108
 msgid "Departments"
 msgstr ""
 
-#: inc/class-filter-widget.php:99
+#: inc/class-filter-widget.php:109
 msgid "Regions"
 msgstr ""
 
-#: inc/class-filter-widget.php:100
+#: inc/class-filter-widget.php:110
 msgid "Attendance Mode"
 msgstr ""
 
-#: inc/class-filter-widget.php:101
+#: inc/class-filter-widget.php:111
 msgid "Additional field"
 msgstr ""
 
-#: inc/class-filter-widget.php:106
+#: inc/class-filter-widget.php:116
 msgid "Additional field name: "
 msgstr ""
 
-#: inc/class-filter-widget.php:110
+#: inc/class-filter-widget.php:120
 msgid "You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )"
 msgstr ""
 
-#: inc/class-filter-widget.php:116
+#: inc/class-filter-widget.php:126
 msgid "Number of options to display at once: "
 msgstr ""
 
-#: inc/class-filter-widget.php:122
+#: inc/class-filter-widget.php:132
 msgid "Sort options by "
 msgstr ""
 
-#: inc/class-filter-widget.php:125
+#: inc/class-filter-widget.php:135
 msgid "Decreasing count"
 msgstr ""
 
-#: inc/class-filter-widget.php:127
+#: inc/class-filter-widget.php:137
 msgid "Alphabetical order"
 msgstr ""
 
-#: inc/class-filter-widget.php:135
+#: inc/class-filter-widget.php:145
 msgid "OpenAgenda Filter"
 msgstr ""
 
-#: inc/class-filter-widget.php:137
+#: inc/class-filter-widget.php:147
 msgid "Displays a filter widget."
 msgstr ""
 
-#: inc/class-filter-widget.php:193
+#: inc/class-filter-widget.php:203
 #: inc/class-preview-widget.php:129
 msgid "Title :"
 msgstr ""
 
-#: inc/class-filter-widget.php:197
+#: inc/class-filter-widget.php:207
 msgid "Filter to display :"
 msgstr ""
 
-#: inc/class-filter-widget.php:199
+#: inc/class-filter-widget.php:209
 msgid "Choose filter"
 msgstr ""
 
-#: inc/class-filter-widget.php:207
+#: inc/class-filter-widget.php:217
 msgid "Display filter as a dropdown ?"
 msgstr ""
 
@@ -364,25 +376,25 @@ msgid "Calendar"
 msgstr ""
 
 #: inc/class-main.php:225
-#: inc/class-shortcodes.php:372
+#: inc/class-shortcodes.php:373
 msgctxt "Filter name"
 msgid "Defined Ranges"
 msgstr ""
 
 #: inc/class-main.php:229
-#: inc/class-shortcodes.php:419
+#: inc/class-shortcodes.php:420
 msgctxt "Filter name"
 msgid "Map"
 msgstr ""
 
 #: inc/class-main.php:233
-#: inc/class-shortcodes.php:526
+#: inc/class-shortcodes.php:527
 msgctxt "Filter name"
 msgid "Upcoming"
 msgstr ""
 
 #: inc/class-main.php:237
-#: inc/class-shortcodes.php:563
+#: inc/class-shortcodes.php:564
 msgctxt "Filter name"
 msgid "Search"
 msgstr ""
@@ -727,7 +739,7 @@ msgctxt "Filter name"
 msgid "Date"
 msgstr ""
 
-#: inc/class-shortcodes.php:425
+#: inc/class-shortcodes.php:426
 msgid "Search while moving the map"
 msgstr ""
 
@@ -773,13 +785,13 @@ msgid "%s ago"
 msgstr ""
 
 #: inc/template-filters.php:66
-#: inc/template-tags.php:1533
+#: inc/template-tags.php:1563
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
 #: inc/template-filters.php:67
-#: inc/template-tags.php:1534
+#: inc/template-tags.php:1564
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
@@ -891,41 +903,41 @@ msgid "Cancelled"
 msgstr ""
 
 #. translators: %d minimum age
-#: inc/template-tags.php:1089
+#: inc/template-tags.php:1119
 msgctxt "Age field"
 msgid "From %d years old."
 msgstr ""
 
 #. translators: %d maximum age
-#: inc/template-tags.php:1093
+#: inc/template-tags.php:1123
 msgctxt "Age field"
 msgid "Up to %d years old."
 msgstr ""
 
 #. translators: %1$d minimum age, %2$d maximum age
-#: inc/template-tags.php:1097
+#: inc/template-tags.php:1127
 msgctxt "Age field"
 msgid "From %1$d to %2$d years old."
 msgstr ""
 
-#: inc/template-tags.php:1265
+#: inc/template-tags.php:1295
 msgid "Previous page"
 msgstr ""
 
-#: inc/template-tags.php:1266
+#: inc/template-tags.php:1296
 msgid "Next page"
 msgstr ""
 
-#: inc/template-tags.php:1428
+#: inc/template-tags.php:1458
 msgid "Download :"
 msgstr ""
 
-#: inc/template-tags.php:1583
+#: inc/template-tags.php:1613
 msgid "Back to list"
 msgstr ""
 
 #. translators: %s: event title
-#: inc/template-tags.php:1639
+#: inc/template-tags.php:1669
 msgid "Add %s to favorites."
 msgstr ""
 
@@ -955,7 +967,7 @@ msgid "Sorry, we could not find any event."
 msgstr ""
 
 #: templates/legacy/single-event.php:53
-#: templates/single-event.php:108
+#: templates/single-event.php:111
 msgid "Access the online event: "
 msgstr ""
 
@@ -963,14 +975,14 @@ msgstr ""
 msgid "Registration: "
 msgstr ""
 
-#: templates/single-event.php:60
+#: templates/single-event.php:63
 msgid "Conditions"
 msgstr ""
 
-#: templates/single-event.php:70
+#: templates/single-event.php:73
 msgid "Registration"
 msgstr ""
 
-#: templates/single-event.php:80
+#: templates/single-event.php:83
 msgid "Accessibility adjustments"
 msgstr ""
