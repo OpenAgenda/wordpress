@@ -65,7 +65,7 @@ class Shortcodes implements Hookable {
 	 * @param   array  $atts     Array of attributes passed to the shortcode.
 	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
 	 * @param   string $tag      Name of the shortcode.
-	 * @return  string  $html     HTML to display.
+	 * @return  string $html     HTML to display.
 	 */
 	public function openagenda( $atts = array(), $content = null, $tag = 'openagenda' ) {
 		global $openagenda;
@@ -127,8 +127,8 @@ class Shortcodes implements Hookable {
 
 		$list_header = \openagenda_is_archive() ? \openagenda_get_list_header_html( $atts['view'] ) : '';
 		$event_html  = \openagenda_get_events_html( $atts['view'], ! $atts['infinite_scroll'] );
-
-		return sprintf( '%s<div data-container-id="oa-wrapper">%s</div>', $list_header, $event_html );
+		$html        = sprintf( '%s<div data-container-id="oa-wrapper">%s</div>', $list_header, $event_html );
+		return apply_filters( 'openagenda_events_html', $html, $atts );
 	}
 
 
