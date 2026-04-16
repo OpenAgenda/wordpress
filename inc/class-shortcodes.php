@@ -205,7 +205,7 @@ class Shortcodes implements Hookable {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$filter = sprintf( '<div class="oa-widget oa-events-total-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
+		$filter = sprintf( '<div role="status" class="oa-widget oa-events-total-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
 		return apply_filters( 'openagenda_filter_total', $filter, $uid, $atts );
 	}
 
