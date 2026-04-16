@@ -159,7 +159,7 @@ function openagenda_get_field( $field, $uid = false ) {
 				explode( '.', $field ),
 				function ( $arr, $field ) use ( $locale ) {
 					if ( openagenda_is_i18n_field( $field ) && isset( $arr[ $field ] ) && is_array( $arr[ $field ] ) ) {
-						return openagenda_maybe_parse_field( $field, openagenda_get_i18n_value( $arr[ $field ] ) );
+						return openagenda_maybe_parse_field( $field, openagenda_get_i18n_value( $arr[ $field ], $locale ) );
 					}
 					return ! empty( $arr[ $field ] ) ? $arr[ $field ] : '';
 				},
@@ -415,10 +415,14 @@ function openagenda_maybe_parse_field( $field, $value ) {
  * Returns the value corresponding to the locale
  *
  * @param   array $i18n_field  Array of locale => label.
+ * @param   string $locale      Locale to use.
  * @return  string  $value       Value corresponding to the current locale, or first available value, or empty.
  */
-function openagenda_get_i18n_value( $i18n_field ) {
-	$locale = openagenda_get_locale();
+function openagenda_get_i18n_value( $i18n_field, $locale = null ) {
+	if( ! $locale ) {
+		$locale = openagenda_get_locale();
+	}
+	
 	$value  = '';
 
 	if ( is_string( $i18n_field ) ) {
