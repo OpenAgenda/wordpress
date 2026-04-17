@@ -59,7 +59,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 					'default' => 'dateRange',
 					'type'    => 'select',
 					'options' => array(
-						'dateRange'      => __( 'Calendar picker', 'openagenda' ),
+						'dateRange'       => __( 'Calendar picker', 'openagenda' ),
 						'simpleDateRange' => __( 'Native date input fields', 'openagenda' ),
 					),
 				),

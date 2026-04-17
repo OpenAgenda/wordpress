@@ -20,7 +20,7 @@ $oa_event_accessibility  = openagenda_event_accessibility( false, false );
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
 	<div class="oa-event-wrapper">
 		<h2 class="oa-event-title">
-			<?php 
+			<?php
 				openagenda_status_badge();
 				openagenda_field( 'title' );
 			?>

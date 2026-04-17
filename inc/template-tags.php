@@ -414,16 +414,16 @@ function openagenda_maybe_parse_field( $field, $value ) {
 /**
  * Returns the value corresponding to the locale
  *
- * @param   array $i18n_field  Array of locale => label.
+ * @param   array  $i18n_field  Array of locale => label.
  * @param   string $locale      Locale to use.
  * @return  string  $value       Value corresponding to the current locale, or first available value, or empty.
  */
 function openagenda_get_i18n_value( $i18n_field, $locale = null ) {
-	if( ! $locale ) {
+	if ( ! $locale ) {
 		$locale = openagenda_get_locale();
 	}
-	
-	$value  = '';
+
+	$value = '';
 
 	if ( is_string( $i18n_field ) ) {
 		$value = $i18n_field;
@@ -1074,23 +1074,23 @@ function openagenda_get_event_status_label( $uid = false ) {
 
 /**
  * Displays a status badge if the event is cancelled.
- * 
+ *
  * @since 3.0.2
- * 
+ *
  * @param  string $uid   UID of the event.
  * @param  bool   $display  Whether to echo or just return the html.
  */
 function openagenda_status_badge( $uid = false, $display = true ) {
 	$status = openagenda_get_field( 'status', $uid );
-	if( is_array( $status ) ) {
+	if ( is_array( $status ) ) {
 		$status_code = ! empty( $status['id'] ) ? (int) $status['id'] : 1;
 	} else {
 		$status_code = (int) $status;
 	}
 
-	$html = '';
+	$html              = '';
 	$status_to_display = apply_filters( 'openagenda_status_to_display', array( 6 ), $uid );
-	if( in_array( $status_code, $status_to_display, true ) ) {
+	if ( in_array( $status_code, $status_to_display, true ) ) {
 		$html = sprintf( '<span class="oa-event-status-badge oa-event-status-%d">%s</span>', $status_code, openagenda_get_event_status_label( $uid ) );
 	}
 
