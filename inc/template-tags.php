@@ -182,7 +182,7 @@ function openagenda_get_field( $field, $uid = false ) {
 function openagenda_field( $field, $uid = false ) {
 	$value = openagenda_get_field( $field, $uid );
 	if ( ! empty( $value ) ) {
-		echo openagenda_esc_field( $value, $field );
+		echo openagenda_esc_field( $value, $field ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 
@@ -466,7 +466,7 @@ function openagenda_event_permalink( $uid = false, $display = true, $use_context
 
 	$permalink = apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context, $external );
 	if ( $display ) {
-		echo openagenda_esc_field( $permalink, 'permalink' );
+		echo esc_url( $permalink );
 	}
 	return $permalink;
 }

@@ -170,10 +170,10 @@ class Filter_Widget extends OpenAgenda_Widget {
 			return;
 		}
 
-		echo $args['before_widget']; // phpcs:ignore 
+		echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		$filter    = $available_filters[ $instance['filter'] ];
@@ -184,7 +184,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 			echo do_shortcode( sprintf( '[%s %s]', $shortcode, $atts ) );
 		}
 
-		echo $args['after_widget'];
+		echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 
@@ -232,7 +232,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 							'default'     => '',
 						)
 					);
-					echo $this->additional_setting_field( $field, $instance );
+					echo $this->additional_setting_field( $field, $instance ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 				echo '</div>';
 			}
