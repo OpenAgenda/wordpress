@@ -55,10 +55,21 @@ strong {
 	.oa-event-status-badge {
 		background-color: var(--oa-gray-200);
 		border-radius: 4px;
+		display: inline-block;
 		font-size: var(--oa-text-2);
+		font-weight: bold;
 		padding: var(--oa-spacing-1) var(--oa-spacing-2);
+		vertical-align: middle;
 	}
 
+	.oa-event-status-2,
+	.oa-event-status-3,
+	.oa-event-status-4 {
+		background-color: var(--oa-warning-200);
+		color: var(--oa-warning-50);
+	}
+
+	.oa-event-status-5,
 	.oa-event-status-6 {
 		background-color: var(--oa-danger-600);
 		color: var(--oa-danger-50);
@@ -371,6 +382,11 @@ strong {
 
 		.oa-event-title {
 			font-weight: normal;
+		}
+
+		.oa-event-status-badge {
+			font-size: var(--oa-text-4);
+			margin-top: -0.25em;
 		}
 
 		.oa-event-description {
