@@ -42,7 +42,7 @@ add_filter( 'openagenda_adjacent_event_link', 'openagenda_adjacent_event_link_le
 function openagenda_adjacent_event_link_legacy_html( $html, $uid, $direction ) {
 	global $openagenda;
 	if ( openagenda_use_legacy_templates() ) {
-		$encoded_context = isset( $_GET['context'] ) ? $_GET['context'] : false;
+		$encoded_context = isset( $_GET['context'] ) ? $_GET['context'] : null;
 		$context         = openagenda_decode_context( $encoded_context );
 
 		$html = '';

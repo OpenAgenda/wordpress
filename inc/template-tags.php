@@ -1730,7 +1730,7 @@ function openagenda_language_switcher( $uid = false, $display = true ) {
 	if ( openagenda_is_single() ) {
 		$event = openagenda_get_event( $uid );
 		if ( ! $event ) {
-			return false;
+			return '';
 		}
 		if ( ! $uid ) {
 			$uid = $event['uid'];
