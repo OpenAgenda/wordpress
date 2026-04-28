@@ -425,7 +425,7 @@ class OpenAgenda {
 	/**
 	 * Retrieve the longDescription field format
 	 */
-	public function get_longDescription_format() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+	public function get_longDescription_format() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
 		return $this->get_option( 'include_embeds' ) ? 'HTMLWithEmbeds' : 'markdown';
 	}
 
