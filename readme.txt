@@ -211,6 +211,13 @@ This version contains new updated templates. If you experience issues on the fro
 
 == Changelog ==
 
+= 3.0.2 =
+* Improvement : Added status badge when event status is not default (scheduled).
+* Improvement : Added new display setting for calendar filter.
+* Improvement : Accessibility tweaks.
+* Improvement : Updated filters JS.
+* Fix : Fixed undefined index warnings.
+
 = 3.0.1 = 
 * Fix : Conflict with Elementor fixed. No more double rendering of events when shortcode is added with a page builder. 
 * Fix : Fixed agenda links on ajax calls. Links were not always correct when multiple agendas with same UID were used.
