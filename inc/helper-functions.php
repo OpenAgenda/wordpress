@@ -46,7 +46,7 @@ function openagenda_get_template( $slug ) {
  */
 function openagenda_use_legacy_templates() {
 	$settings            = get_option( 'openagenda_general_settings' );
-	$use_legacy_template = (bool) $settings['openagenda_use_legacy_templates'] ?? false;
+	$use_legacy_template = isset( $settings['openagenda_use_legacy_templates'] ) ? (bool) $settings['openagenda_use_legacy_templates'] : false;
 	return ! empty( $settings ) && $use_legacy_template;
 }
 

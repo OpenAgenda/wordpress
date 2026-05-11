@@ -2,8 +2,8 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 6.9.1
-Stable tag: 3.0.1
+Tested up to: 6.9.4
+Stable tag: 3.0.2
 Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -210,6 +210,13 @@ This version contains new updated templates. If you experience issues on the fro
 * Improvement : Updated React Filters JS
 
 == Changelog ==
+
+= 3.0.2 =
+* Improvement : Added status badge when event status is not default (scheduled).
+* Improvement : Added new display setting for calendar filter.
+* Improvement : Accessibility tweaks.
+* Improvement : Updated filters JS.
+* Fix : Fixed undefined index warnings.
 
 = 3.0.1 = 
 * Fix : Conflict with Elementor fixed. No more double rendering of events when shortcode is added with a page builder. 

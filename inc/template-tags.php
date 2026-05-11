@@ -159,7 +159,7 @@ function openagenda_get_field( $field, $uid = false ) {
 				explode( '.', $field ),
 				function ( $arr, $field ) use ( $locale ) {
 					if ( openagenda_is_i18n_field( $field ) && isset( $arr[ $field ] ) && is_array( $arr[ $field ] ) ) {
-						return openagenda_maybe_parse_field( $field, openagenda_get_i18n_value( $arr[ $field ] ) );
+						return openagenda_maybe_parse_field( $field, openagenda_get_i18n_value( $arr[ $field ], $locale ) );
 					}
 					return ! empty( $arr[ $field ] ) ? $arr[ $field ] : '';
 				},
@@ -182,7 +182,7 @@ function openagenda_get_field( $field, $uid = false ) {
 function openagenda_field( $field, $uid = false ) {
 	$value = openagenda_get_field( $field, $uid );
 	if ( ! empty( $value ) ) {
-		echo openagenda_esc_field( $value, $field );
+		echo openagenda_esc_field( $value, $field ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 
@@ -414,12 +414,16 @@ function openagenda_maybe_parse_field( $field, $value ) {
 /**
  * Returns the value corresponding to the locale
  *
- * @param   array $i18n_field  Array of locale => label.
+ * @param   array  $i18n_field  Array of locale => label.
+ * @param   string $locale      Locale to use.
  * @return  string  $value       Value corresponding to the current locale, or first available value, or empty.
  */
-function openagenda_get_i18n_value( $i18n_field ) {
-	$locale = openagenda_get_locale();
-	$value  = '';
+function openagenda_get_i18n_value( $i18n_field, $locale = null ) {
+	if ( ! $locale ) {
+		$locale = openagenda_get_locale();
+	}
+
+	$value = '';
 
 	if ( is_string( $i18n_field ) ) {
 		$value = $i18n_field;
@@ -462,7 +466,7 @@ function openagenda_event_permalink( $uid = false, $display = true, $use_context
 
 	$permalink = apply_filters( 'openagenda_event_permalink', $permalink, $uid, $use_context, $external );
 	if ( $display ) {
-		echo openagenda_esc_field( $permalink, 'permalink' );
+		echo esc_url( $permalink );
 	}
 	return $permalink;
 }
@@ -1044,7 +1048,7 @@ function openagenda_get_event_status_label( $uid = false ) {
 		$uid = $event['uid'];
 	}
 
-	$status         = openagenda_get_field( 'status' ) ?? array();
+	$status         = openagenda_get_field( 'status', $uid ) ?? array();
 	$default_labels = apply_filters(
 		'openagenda_status_labels',
 		array(
@@ -1065,6 +1069,37 @@ function openagenda_get_event_status_label( $uid = false ) {
 	}
 
 	return apply_filters( 'openagenda_event_status_label', $label, $uid );
+}
+
+
+/**
+ * Displays a status badge if the event is cancelled.
+ *
+ * @since 3.0.2
+ *
+ * @param  string $uid   UID of the event.
+ * @param  bool   $display  Whether to echo or just return the html.
+ */
+function openagenda_status_badge( $uid = false, $display = true ) {
+	$status = openagenda_get_field( 'status', $uid );
+
+	if ( is_array( $status ) ) {
+		$status_code = ! empty( $status['id'] ) ? (int) $status['id'] : 1;
+	} else {
+		$status_code = (int) $status;
+	}
+
+	$html              = '';
+	$status_to_display = apply_filters( 'openagenda_status_to_display', array( 2, 3, 4, 5, 6 ), $uid );
+	if ( in_array( $status_code, $status_to_display, true ) ) {
+		$html = sprintf( '<span class="oa-event-status-badge oa-event-status-%d">%s</span>', $status_code, openagenda_get_event_status_label( $uid ) );
+	}
+
+	$html = apply_filters( 'openagenda_event_status_badge', $html, $uid );
+	if ( $display ) {
+		echo $html;
+	}
+	return $html;
 }
 
 /**
@@ -1666,7 +1701,6 @@ function openagenda_favorite_badge( $uid = false, $display = true ) {
  * @param  bool   $display  Whether to echo or just return the html.
  */
 function openagenda_featured_badge( $uid = false, $display = true ) {
-
 	$html = '';
 	if ( openagenda_get_field( 'featured', $uid ) ) {
 		$html = sprintf( '<div class="oa-event-featured-badge"><div class="oa-event-featured-badge-wrapper">%s</div></div>', openagenda_icon( 'pinned', false ) );
@@ -1696,7 +1730,7 @@ function openagenda_language_switcher( $uid = false, $display = true ) {
 	if ( openagenda_is_single() ) {
 		$event = openagenda_get_event( $uid );
 		if ( ! $event ) {
-			return false;
+			return '';
 		}
 		if ( ! $uid ) {
 			$uid = $event['uid'];

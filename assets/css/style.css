@@ -102,6 +102,36 @@ strong {
   color: var(--oa-gray-900);
   margin: 0;
 }
+.single-oa-calendar .oa-event-title .oa-event-status-badge,
+.oa-preview .oa-event-title .oa-event-status-badge {
+  margin-right: var(--oa-spacing-2);
+}
+.single-oa-calendar .oa-event-status-badge,
+.oa-preview .oa-event-status-badge {
+  background-color: var(--oa-gray-200);
+  border-radius: 4px;
+  display: inline-block;
+  font-size: var(--oa-text-2);
+  font-weight: bold;
+  padding: var(--oa-spacing-1) var(--oa-spacing-2);
+  vertical-align: middle;
+}
+.single-oa-calendar .oa-event-status-2,
+.single-oa-calendar .oa-event-status-3,
+.single-oa-calendar .oa-event-status-4,
+.oa-preview .oa-event-status-2,
+.oa-preview .oa-event-status-3,
+.oa-preview .oa-event-status-4 {
+  background-color: var(--oa-warning-200);
+  color: var(--oa-warning-50);
+}
+.single-oa-calendar .oa-event-status-5,
+.single-oa-calendar .oa-event-status-6,
+.oa-preview .oa-event-status-5,
+.oa-preview .oa-event-status-6 {
+  background-color: var(--oa-danger-600);
+  color: var(--oa-danger-50);
+}
 .single-oa-calendar .oa-event-details,
 .single-oa-calendar .oa-event-additional-fields,
 .single-oa-calendar .oa-event-location,
@@ -461,6 +491,11 @@ strong {
 .single-oa-calendar .oa-single-event .oa-event-title,
 .oa-preview .oa-single-event .oa-event-title {
   font-weight: normal;
+}
+.single-oa-calendar .oa-single-event .oa-event-status-badge,
+.oa-preview .oa-single-event .oa-event-status-badge {
+  font-size: var(--oa-text-4);
+  margin-top: -0.25em;
 }
 .single-oa-calendar .oa-single-event .oa-event-description,
 .oa-preview .oa-single-event .oa-event-description {
