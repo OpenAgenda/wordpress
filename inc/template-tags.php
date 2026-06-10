@@ -1406,15 +1406,20 @@ function openagenda_get_permalink( $uid = false ) {
 	}
 
 	if ( ! $permalink && $uid ) {
-		$posts = get_posts(
-			array(
-				'post_type'   => 'oa-calendar',
-				'meta_key'    => 'oa-calendar-uid',
-				'meta_value'  => sanitize_text_field( $uid ),
-				'numberposts' => 1,
-				'fields'      => 'ids',
-			)
+		$args = array(
+			'post_type'   => 'oa-calendar',
+			'meta_key'    => 'oa-calendar-uid',
+			'meta_value'  => sanitize_text_field( $uid ),
+			'numberposts' => 1,
+			'fields'      => 'ids',
 		);
+
+		$post_id = (int) $openagenda->get_post_id();
+		if ( $post_id ) {
+			$args['p'] = (int) $post_id;
+		}
+
+		$posts = get_posts( $args );
 		if ( ! empty( $posts ) ) {
 			$post_id   = $posts[0];
 			$permalink = get_permalink( $post_id );

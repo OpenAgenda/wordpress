@@ -472,6 +472,7 @@ class Shortcodes implements Hookable {
 			'sort'    => 'lastTimingWithFeatured.asc',
 			'links'   => '',
 			'api_key' => '',
+			'post_id' => '',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
 
@@ -493,6 +494,7 @@ class Shortcodes implements Hookable {
 			'cache'      => false,
 			'context'    => false,
 			'api_key'    => $atts['api_key'],
+			'post_id'    => (int) $atts['post_id'],
 		);
 
 		// If we're on a events page, backup the main events.

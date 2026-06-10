@@ -41,6 +41,13 @@ class OpenAgenda {
 	protected $uid = '';
 
 	/**
+	 * Calendar post id
+	 *
+	 * @var int $post_id
+	 */
+	protected $post_id = 0;
+
+	/**
 	 * Source of data
 	 *
 	 * @var  string $source
@@ -219,6 +226,9 @@ class OpenAgenda {
 		if ( ! empty( $this->get_option( 'api_key' ) ) ) {
 			$this->api_key = $this->get_option( 'api_key' );
 		}
+		if ( ! empty( $options['post_id'] ) ) {
+			$this->post_id = (int) $options['post_id'];
+		}
 
 		$this->args         = $this->parse_args( $args );
 		$this->raw_response = $this->request();
@@ -247,6 +257,14 @@ class OpenAgenda {
 	 */
 	public function get_uid() {
 		return $this->uid;
+	}
+
+
+	/**
+	 * Returns the calendar post id.
+	 */
+	public function get_post_id() {
+		return (int) $this->post_id;
 	}
 
 
@@ -523,6 +541,7 @@ class OpenAgenda {
 			'include_usage'   => ! empty( $settings ) && isset( $settings['openagenda_allow_usage_stats_collection'] ) ? (bool) $settings['openagenda_allow_usage_stats_collection'] : true,
 			'include_embeds'  => ! empty( $settings ) && isset( $settings['openagenda_include_embeds'] ) ? (bool) $settings['openagenda_include_embeds'] : true,
 			'api_key'         => '',
+			'post_id'         => 0,
 		);
 
 		// Check deprecated call to class constructor.
