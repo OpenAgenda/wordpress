@@ -351,6 +351,7 @@ class Settings implements Hookable {
 				'placeholder' => '',
 				'default'     => '',
 				'description' => '',
+				'show_password' => false,
 			)
 		);
 
