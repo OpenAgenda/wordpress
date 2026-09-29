@@ -621,6 +621,14 @@ strong {
 		}
 	}
 
+	.oa-list-options {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-bottom: var(--oa-spacing-4);
+	}
+
 	.oa-widget-details {
 		border: 1px solid var(--oa-gray-300);
 		color: var(--oa-gray-700);

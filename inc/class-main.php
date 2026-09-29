@@ -237,6 +237,10 @@ class Main {
 					'label'     => _x( 'Search', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_search',
 				),
+				'openagenda_filter_sort'   => array(
+					'label'     => _x( 'Sort', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_sort',
+				),
 			);
 		}
 		return apply_filters( 'openagenda_available_filters', $this->available_filters );

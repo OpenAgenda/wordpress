@@ -746,6 +746,14 @@ strong {
 .oa-preview .oa-default-filters > * {
   margin: 0;
 }
+.single-oa-calendar .oa-list-options,
+.oa-preview .oa-list-options {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: var(--oa-spacing-4);
+}
 .single-oa-calendar .oa-widget-details,
 .oa-preview .oa-widget-details {
   border: 1px solid var(--oa-gray-300);

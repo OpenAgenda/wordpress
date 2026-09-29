@@ -35,6 +35,7 @@ if (oaData) {
                     const url = `${oaData.listUrl}?${Qs.stringify(values)}`;
                     window.location.href = url;
                 } else {
+                    // If no sort setting when searching by text, switch sort by relevance
                     const result = await oa.getEvents(values, aggregations);
                     if (result.success && result.html) {
                         oa.updateHTML(oaWrapper, result.html);

@@ -46,6 +46,23 @@ class Filter_Widget extends OpenAgenda_Widget {
 					'default' => '',
 				),
 			),
+			'openagenda_filter_sort'   => array(
+				'options'         => array(
+					'name'        => 'options',
+					'description' => __( 'Sort options to display: ', 'openagenda' ),
+					'default'     => array( 'score', 'lastTimingWithFeatured.asc', 'timingsWithFeatured.asc' ),
+					'type'        => 'multi-checkbox',
+					'options' => array(
+						'score'                      => __( 'Score', 'openagenda' ),
+						'lastTimingWithFeatured.asc' => __( 'Featured first, followed by ascending last occurrence', 'openagenda' ),
+						'timingsWithFeatured.asc'    => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
+						'lastTiming.asc'             => __( 'Ascending last occurrence', 'openagenda' ),
+						'timings.asc'                => __( 'Ascending upcoming occurrence', 'openagenda' ),
+						// 'updatedAt.desc'             => __( 'Descending update date', 'openagenda' ),
+						// 'updatedAt.asc'              => __( 'Ascending update date', 'openagenda' ),
+					),
+				),
+			),
 			'openagenda_filter_calendar' => array(
 				'display_ranges' => array(
 					'name'    => 'display_ranges',
@@ -291,6 +308,18 @@ class Filter_Widget extends OpenAgenda_Widget {
 								return sanitize_text_field( $range );
 							},
 							$new_instance['static_ranges']
+						)
+					) : array(),
+				);
+				break;
+			case 'openagenda_filter_sort':
+				$additional_settings = array(
+					'options' => ! empty( $new_instance['options'] ) ? array_unique(
+						array_map(
+							function ( $value ) {
+								return sanitize_text_field( $value );
+							},
+							$new_instance['options']
 						)
 					) : array(),
 				);

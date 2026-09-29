@@ -19,9 +19,14 @@ $oa_display_default_filters = 'yes' === get_post_meta( get_the_ID(), 'oa-calenda
 				echo do_shortcode( '[openagenda_filter_search]' );
 			?>
 		</div>
-	<?php endif; ?>
-	<?php
-		echo do_shortcode( '[openagenda_filter_active]' );
-		echo do_shortcode( '[openagenda_filter_total]' );
+	<?php endif;
+
+	echo do_shortcode( '[openagenda_filter_active]' );
 	?>
+	<div class="oa-list-options">
+		<?php 
+			echo do_shortcode( '[openagenda_filter_total]' );
+			echo do_shortcode( '[openagenda_filter_sort]' );
+		?>
+	</div>
 </header>

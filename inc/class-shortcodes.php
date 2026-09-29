@@ -36,6 +36,7 @@ class Shortcodes implements Hookable {
 			'openagenda_filter_preview'  => array( $this, 'openagenda_filter_preview' ),
 			'openagenda_filter_relative' => array( $this, 'openagenda_filter_relative' ),
 			'openagenda_filter_search '  => array( $this, 'openagenda_filter_search' ),
+			'openagenda_filter_sort '    => array( $this, 'openagenda_filter_sort' ),
 		);
 	}
 
@@ -567,7 +568,7 @@ class Shortcodes implements Hookable {
 			'dropdown'    => false,
 			'placeholder' => '',
 		);
-		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_preview' );
+		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_search' );
 
 		$params = array(
 			'type'        => 'search',
@@ -586,6 +587,52 @@ class Shortcodes implements Hookable {
 		}
 
 		return apply_filters( 'openagenda_filter_search', $filter, $uid, $atts );
+	}
+
+	/**
+	 * Callback function to display sort widget.
+	 *
+	 * @param   array  $atts     Array of attributes passed to the shortcode.
+	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string $tag      Name of the shortcode.
+	 * @return  string  $html     HTML to display.
+	 */
+	public function openagenda_filter_sort( $atts = array(), $content = null, $tag = 'openagenda_filter_sort' ) {
+		global $openagenda;
+		if ( ! $openagenda ) {
+			return '';
+		}
+		$uid = $openagenda->get_uid();
+		$sort = get_post_meta( $openagenda->get_post_id(), 'oa-calendar-sort', true );
+
+		$defaults = array(
+			'id'          => 'sort',
+			'title'       => _x( 'Sort', 'Filter name', 'openagenda' ),
+			'dropdown'    => false,
+			'options'     => 'score, lastTimingWithFeatured.asc, timingsWithFeatured.asc',
+			'default'     => $sort ? $sort : 'lastTimingWithFeatured.asc',
+
+		);
+		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_sort' );
+
+		$params = array(
+			'type'        => 'sort',
+			'name'        => 'sort',
+			'options'     => array_map('trim', explode( ',', $atts['options'] ) ),
+			'default'     => $atts['default'],
+		);
+
+		$filter = sprintf(
+			'<div class="oa-widget oa-sort-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>',
+			esc_attr( $atts['id'] ),
+			esc_attr( wp_json_encode( $params ) )
+		);
+
+		if ( $atts['dropdown'] ) {
+			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
+		return apply_filters( 'openagenda_filter_sort', $filter, $uid, $atts );
 	}
 
 	/**
