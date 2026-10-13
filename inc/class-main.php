@@ -283,7 +283,7 @@ class Main {
 			}
 
 			// Merge default filters.
-			$prefilters = openagenda_get_pre_filters( false, $args );
+			$prefilters = openagenda_get_pre_filters( $post_id, $args );
 			if ( ! empty( $prefilters ) ) {
 				$args = array_merge( $args, $prefilters );
 			}

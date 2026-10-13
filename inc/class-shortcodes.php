@@ -373,7 +373,7 @@ class Shortcodes implements Hookable {
 			'id'            => 'defined-ranges',
 			'title'         => _x( 'Defined Ranges', 'Filter name', 'openagenda' ),
 			'dropdown'      => false,
-			'static_ranges' => array(),
+			'static_ranges' => '',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_ranges' );
 
@@ -382,7 +382,7 @@ class Shortcodes implements Hookable {
 			'name' => 'timings',
 		);
 
-		$ranges = ! empty( $atts['static_ranges'] ) ? explode( ',', $atts['static_ranges'] ) : array();
+		$ranges = ! empty( $atts['static_ranges'] ) ? array_filter( array_map( 'trim', explode( ',', $atts['static_ranges'] ) ) ) : array();
 		if ( ! empty( $ranges ) ) {
 			$params['staticRanges'] = $ranges;
 		}
@@ -603,24 +603,29 @@ class Shortcodes implements Hookable {
 			return '';
 		}
 		$uid = $openagenda->get_uid();
-		$sort = get_post_meta( $openagenda->get_post_id(), 'oa-calendar-sort', true );
+		$sort = ! empty( $openagenda->get_filters() ) ? $openagenda->get_filters()['sort'] ?? null : null;
 
 		$defaults = array(
 			'id'          => 'sort',
 			'title'       => _x( 'Sort', 'Filter name', 'openagenda' ),
 			'dropdown'    => false,
-			'options'     => 'score, lastTimingWithFeatured.asc, timingsWithFeatured.asc',
-			'default'     => $sort ? $sort : 'lastTimingWithFeatured.asc',
-
+			'options'     => 'score,lastTimingWithFeatured.asc,timingsWithFeatured.asc',
+			'defaultValue' => $sort ? $sort : 'lastTimingWithFeatured.asc',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_sort' );
 
 		$params = array(
 			'type'        => 'sort',
 			'name'        => 'sort',
-			'options'     => array_map('trim', explode( ',', $atts['options'] ) ),
-			'default'     => $atts['default'],
+			'defaultValue' => $atts['defaultValue'],
 		);
+
+		$options = array_filter( array_map( 'trim', explode( ',', $atts['options'] ) ) );
+		if ( ! empty( $options ) ) {
+			$params['options'] = $options;
+		} else {
+			$params['options'] = array( 'score', 'lastTimingWithFeatured.asc', 'timingsWithFeatured.asc' );
+		}
 
 		$filter = sprintf(
 			'<div class="oa-widget oa-sort-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>',

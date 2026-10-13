@@ -711,7 +711,7 @@ strong {
 	}
 
 	/*********************************
-	* Active filters widget
+	* Events total widget
 	*********************************/
 	.oa-events-total-widget {
 		margin: var(--oa-spacing-2) 0;
@@ -780,6 +780,11 @@ strong {
 			}
 		}
 	}
+
+	/*********************************
+	* Sort widget
+	*********************************/
+	.oa-sort-widget {}
 
 	/*********************************
 	* Choice widget
