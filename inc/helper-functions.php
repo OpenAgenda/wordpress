@@ -76,9 +76,11 @@ function openagenda_get_locale() {
 		$locale = sanitize_key( $_GET['oa-lang'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 
-	$context = $openagenda->get_context();
-	if ( $openagenda && ! empty( $context ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ) {
-		$locale = sanitize_key( $context['filters']['oa-lang'] );
+	if ( $openagenda ) {
+		$context = $openagenda->get_context();
+		if ( ! empty( $context ) && ! empty( $context['filters'] ) && ! empty( $context['filters']['oa-lang'] ) ) {
+			$locale = sanitize_key( $context['filters']['oa-lang'] );
+		}
 	}
 
 	return apply_filters( 'openagenda_locale', $locale );
