@@ -59,7 +59,9 @@ class OpenAgenda_Widget extends \WP_Widget {
 	 * @param array $instance  Current settings.
 	 * @return string          Default return is 'noform'.
 	 */
-	public function form( $instance ) {}
+	public function form( $instance ) {
+		return '';
+	}
 
 	/**
 	 * Saves our options
@@ -68,20 +70,22 @@ class OpenAgenda_Widget extends \WP_Widget {
 	 * @param   array $old_instance  Old settings for this instance.
 	 * @return  array                 Settings to save or bool false to cancel saving
 	 */
-	public function update( $new_instance, $old_instance ) {}
+	public function update( $new_instance, $old_instance ) {
+		return $new_instance;
+	}
 
 	/**
 	 * Returns array of available settings
 	 */
 	public function get_additional_settings() {
-		return apply_filters( "{$this->id_base}_additional_settings", $this->additional_settings );
+		return apply_filters( "{$this->id_base}_additional_settings", $this->additional_settings ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**
 	 * Returns array of available filters
 	 */
 	public function get_available_filters() {
-		return apply_filters( "{$this->id_base}_available_filters", $this->available_filters );
+		return apply_filters( "{$this->id_base}_available_filters", $this->available_filters ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**

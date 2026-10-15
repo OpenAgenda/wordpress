@@ -98,10 +98,10 @@ class Preview_Widget extends OpenAgenda_Widget {
 	 * @param array $instance  The settings for the particular instance of the widget.
 	 */
 	public function widget( $args, $instance ) {
-		echo $args['before_widget'];
+		echo $args['before_widget'];  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		// Encode filters to avoid brackets issues with do_shortcode().
@@ -110,9 +110,9 @@ class Preview_Widget extends OpenAgenda_Widget {
 
 		$shortcode = 'openagenda_filter_preview';
 		$atts      = openagenda_get_shortcode_attributes( $instance );
-		echo do_shortcode( sprintf( '[%s %s]', $shortcode, $atts ) );
+		echo do_shortcode( sprintf( '[%s %s]', $shortcode, $atts ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-		echo $args['after_widget'];
+		echo $args['after_widget'];  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 
@@ -147,7 +147,7 @@ class Preview_Widget extends OpenAgenda_Widget {
 						'default'     => '',
 					)
 				);
-				echo $this->additional_setting_field( $field, $instance );
+				echo $this->additional_setting_field( $field, $instance ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 	}

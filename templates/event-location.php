@@ -12,21 +12,21 @@ if ( empty( openagenda_get_field( 'location' ) ) || empty( openagenda_get_field(
 	return;
 }
 
-$oa_latitude  = openagenda_get_field( 'location.latitude' );
-$oa_longitude = openagenda_get_field( 'location.longitude' );
-$oa_url       = add_query_arg( 'destination', rawurlencode( $oa_latitude . ',' . $oa_longitude ), 'https://www.google.com/maps/dir/?api=1' );
+$openagenda_latitude  = openagenda_get_field( 'location.latitude' );
+$openagenda_longitude = openagenda_get_field( 'location.longitude' );
+$openagenda_url       = add_query_arg( 'destination', rawurlencode( $openagenda_latitude . ',' . $openagenda_longitude ), 'https://www.google.com/maps/dir/?api=1' );
 
-$oa_address = openagenda_get_field( 'location.address' );
-$oa_city    = openagenda_get_field( 'location.city' );
-$oa_region  = openagenda_get_field( 'location.region' );
+$openagenda_address = openagenda_get_field( 'location.address' );
+$openagenda_city    = openagenda_get_field( 'location.city' );
+$openagenda_region  = openagenda_get_field( 'location.region' );
 
-$oa_credits = openagenda_get_field( 'location.imageCredits' );
+$openagenda_credits = openagenda_get_field( 'location.imageCredits' );
 
-$oa_website = openagenda_get_field( 'location.website' );
-$oa_phone   = openagenda_get_field( 'location.phone' );
-$oa_email   = openagenda_get_field( 'location.email' );
+$openagenda_website = openagenda_get_field( 'location.website' );
+$openagenda_phone   = openagenda_get_field( 'location.phone' );
+$openagenda_email   = openagenda_get_field( 'location.email' );
 
-$oa_links = openagenda_get_field( 'location.links' );
+$openagenda_links = openagenda_get_field( 'location.links' );
 ?>
 <div class="oa-event-location">
 	<h2 class="oa-event-location-title">
@@ -39,12 +39,12 @@ $oa_links = openagenda_get_field( 'location.links' );
 		</strong>
 		
 		<?php
-			printf( '<a class="oa-event-location-address-link" href="%s" target="_blank" rel="noopener noreferer">%s</a>', esc_url( $oa_url ), $oa_address );
-		if ( ! empty( $oa_city ) ) {
-			printf( '<span class="oa-event-location-city">%s</span>', esc_html( $oa_city ) );
+			printf( '<a class="oa-event-location-address-link" href="%s" target="_blank" rel="noopener noreferer">%s</a>', esc_url( $openagenda_url ), wp_kses_post( $openagenda_address ) );
+		if ( ! empty( $openagenda_city ) ) {
+			printf( '<span class="oa-event-location-city">%s</span>', esc_html( $openagenda_city ) );
 		}
-		if ( ! empty( $oa_region ) ) {
-			printf( '<span class="oa-event-location-region">%s</span>', esc_html( $oa_region ) );
+		if ( ! empty( $openagenda_region ) ) {
+			printf( '<span class="oa-event-location-region">%s</span>', esc_html( $openagenda_region ) );
 		}
 		?>
 	</address>
@@ -63,8 +63,8 @@ $oa_links = openagenda_get_field( 'location.links' );
 	<figure class="oa-event-location-image">
 		<?php
 			openagenda_event_location_image();
-		if ( ! empty( $oa_credits ) ) {
-			printf( '<figcaption class="oa-image-credits">%s</figcaption>', esc_html( $oa_credits ) );
+		if ( ! empty( $openagenda_credits ) ) {
+			printf( '<figcaption class="oa-image-credits">%s</figcaption>', esc_html( $openagenda_credits ) );
 		}
 		?>
 
@@ -72,39 +72,39 @@ $oa_links = openagenda_get_field( 'location.links' );
 
 	<div class="oa-event-location-contact">
 		<?php printf( '<strong class="oa-label oa-event-location-contact-label">%s</strong>', esc_html__( 'Contact information', 'openagenda' ) ); ?>
-		<?php if ( ! empty( $oa_website ) ) : ?>
+		<?php if ( ! empty( $openagenda_website ) ) : ?>
 			<div class="oa-event-location-website">
 				<?php
 					openagenda_icon( 'website' );
-					printf( '<a href="tel:%1$s">%1$s</a>', $oa_website );
+					printf( '<a href="%1$s">%1$s</a>', esc_url( $openagenda_website ) );
 				?>
 			</div>
 		<?php endif; ?>
-		<?php if ( ! empty( $oa_phone ) ) : ?>
+		<?php if ( ! empty( $openagenda_phone ) ) : ?>
 			<div class="oa-event-location-phone">
 				<?php
 					openagenda_icon( 'phone' );
-					printf( '<a href="tel:%1$s">%1$s</a>', $oa_phone );
+					printf( '<a href="tel:%1$s">%1$s</a>', esc_attr( $openagenda_phone ) );
 				?>
 			</div>
 		<?php endif; ?>
-		<?php if ( ! empty( $oa_email ) ) : ?>
+		<?php if ( ! empty( $openagenda_email ) ) : ?>
 			<div class="oa-event-location-email">
 				<?php
 					openagenda_icon( 'email' );
-					printf( '<a href="tel:%1$s">%1$s</a>', $oa_email );
+					printf( '<a href="mailto:%1$s">%1$s</a>', esc_attr( $openagenda_email ) );
 				?>
 			</div>
 		<?php endif; ?>
 	</div>
 
-	<?php if ( ! empty( $oa_links ) ) : ?>
+	<?php if ( ! empty( $openagenda_links ) ) : ?>
 		<div class="oa-event-location-links">
 			<?php
 				printf( '<strong class="oa-label oa-event-location-links-label">%s</strong>', esc_html__( 'Additionnal links', 'openagenda' ) );
 				echo '<ul>';
-			foreach ( $oa_links as $oa_location_link ) {
-				printf( '<li><a class="oa-event-location-link" href="%s">%s</a></li>', esc_url( $oa_location_link ), esc_html( $oa_location_link ) );
+			foreach ( $openagenda_links as $openagenda_location_link ) {
+				printf( '<li><a class="oa-event-location-link" href="%s">%s</a></li>', esc_url( $openagenda_location_link ), esc_html( $openagenda_location_link ) );
 			}
 				echo '</ul>';
 			?>

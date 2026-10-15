@@ -141,7 +141,6 @@ function openagenda_get_field( $field, $uid = false ) {
 			break;
 		case 'range':
 			return openagenda_get_field( 'dateRange' );
-			break;
 		case 'keywords-list':
 			$values = openagenda_get_field( 'keywords' );
 			$value  = ! empty( $values ) ? join(
@@ -652,7 +651,7 @@ function openagenda_event_timing( $format = 'date', $uid = false, $display = tru
 
 	$html = apply_filters( 'openagenda_event_timing', $html, $uid, $format );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -729,7 +728,7 @@ function openagenda_event_timings( $uid = false, $display = true ) {
 	$html = apply_filters( 'openagenda_event_timings', $html, $uid, $months );
 
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		wp_enqueue_script( 'oa-timings' );
 	}
 	return $html;
@@ -798,7 +797,7 @@ function openagenda_event_map( $uid = false, $display = true ) {
 	$html = apply_filters( 'openagenda_event_map_html', $html, $uid );
 
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		wp_enqueue_style( 'oa-leaflet' );
 		wp_enqueue_script( 'oa-event-map' );
 	}
@@ -878,7 +877,7 @@ function openagenda_event_share_buttons( $uid = false, $display = true ) {
 
 	$html = apply_filters( 'openagenda_sharers_html', $html, $uid, $event );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -910,7 +909,7 @@ function openagenda_event_share_button( $uid = false, $display = true ) {
 
 	$html = apply_filters( 'openagenda_sharer_button_html', $html, $uid, $event );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -972,7 +971,7 @@ function openagenda_event_registration_methods( $uid = false, $display = true ) 
 
 	$html = apply_filters( 'openagenda_event_registration_methods', $html, $uid );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -997,7 +996,7 @@ function openagenda_event_attendance_mode( $uid = false, $display = true ) {
 	$html = sprintf( '%s%s', esc_html( $label ), $link );
 	$html = apply_filters( 'openagenda_event_attendance_mode', $html, $uid );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -1097,7 +1096,7 @@ function openagenda_status_badge( $uid = false, $display = true ) {
 
 	$html = apply_filters( 'openagenda_event_status_badge', $html, $uid );
 	if ( $display ) {
-		echo $html;
+		echo wp_kses_post( $html );
 	}
 	return $html;
 }
@@ -1213,7 +1212,7 @@ function openagenda_event_accessibility( $uid = false, $display = true ) {
 
 	$html = apply_filters( 'openagenda_event_accessibility', $html, $uid );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -1221,7 +1220,7 @@ function openagenda_event_accessibility( $uid = false, $display = true ) {
 
 /**
  * Displays or return an event additional field links
- * Wrapper for openagenda_event_additional_field()
+ * Wrapper for openagenda_event_links()
  *
  * @param  string $field  Additional field to display.
  * @param  string $uid   UID of the event.
@@ -1231,7 +1230,7 @@ function openagenda_event_additional_field( $field, $uid = false, $display = tru
 	$html = openagenda_event_links( $field, $uid, false );
 	$html = apply_filters( 'openagenda_event_additional_field', $html, $field, $uid );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -1256,9 +1255,9 @@ function openagenda_pagination( $args = array() ) {
 						$classes = $link['active'] ? 'oa-page-link active' : 'oa-page-link';
 						$aria    = $link['active'] ? 'aria-current="page"' : '';
 						if ( $link['active'] ) {
-							printf( '<span class="%s" %s >%s</span>', esc_attr( $classes ), $aria, esc_html( $link['label'] ) );
+							printf( '<span class="%s" %s >%s</span>', esc_attr( $classes ), esc_attr( $aria ), esc_html( $link['label'] ) );
 						} else {
-							printf( '<a href="%s" class="%s" %s >%s</a>', esc_url( $link['url'] ), esc_attr( $classes ), $aria, esc_html( $link['label'] ) );
+							printf( '<a href="%s" class="%s" %s >%s</a>', esc_url( $link['url'] ), esc_attr( $classes ), esc_attr( $aria ), esc_html( $link['label'] ) );
 						}
 					} else {
 						printf( '<span class="oa-dots">%s</span>', esc_html( $link['label'] ) );
@@ -1473,7 +1472,7 @@ function openagenda_exports( $uid = false, $display = true ) {
 
 	$html = apply_filters( 'openagenda_exports_html', $html, $uid );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -1490,7 +1489,7 @@ function openagenda_filter( $filter, $args = array(), $display = true ) {
 	$atts = openagenda_get_shortcode_attributes( $args );
 	$html = do_shortcode( sprintf( '[openagenda_filter_%s %s]', sanitize_key( $filter ), $atts ) );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -1524,7 +1523,7 @@ function openagenda_navigation( $display = true ) {
 
 	$html = apply_filters( 'openagenda_event_navigation', $html, $previous_link, $next_link, $back_link );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -1549,7 +1548,7 @@ function openagenda_get_adjacent_event_link( $direction = 'next', $uid = false )
 		$uid = $event['uid'];
 	}
 
-	$encoded_context = isset( $_GET['context'] ) ? $_GET['context'] : false;
+	$encoded_context = isset( $_GET['context'] ) ? $_GET['context'] : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$context         = openagenda_decode_context( $encoded_context );
 
 	$html = '';
@@ -1693,7 +1692,7 @@ function openagenda_favorite_badge( $uid = false, $display = true ) {
 
 	$html = apply_filters( 'openagenda_event_favorite_badge', $html, $uid, $agenda_uid, $icon_active, $icon_inactive, $text );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -1713,7 +1712,7 @@ function openagenda_featured_badge( $uid = false, $display = true ) {
 
 	$html = apply_filters( 'openagenda_event_featured_badge', $html, $uid );
 	if ( $display ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $html;
 }
@@ -1768,7 +1767,7 @@ function openagenda_language_switcher( $uid = false, $display = true ) {
 
 	$html = apply_filters( 'openagenda_language_switcher', $html, $uid );
 	if ( $display ) {
-		echo $html;
+		echo wp_kses_post( $html );
 	}
 	return $html;
 }

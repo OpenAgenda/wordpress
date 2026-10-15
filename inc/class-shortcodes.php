@@ -108,8 +108,8 @@ class Shortcodes implements Hookable {
 			}
 
 			// Merge filters in URL.
-			if ( ! empty( $_GET ) ) {
-				$args = array_merge( $args, $_GET );
+			if ( ! empty( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$args = array_merge( $args, $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			}
 
 			// Merge default filters.
@@ -592,6 +592,7 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display sort widget.
 	 *
+	 * @since   3.0.3
 	 * @param   array  $atts     Array of attributes passed to the shortcode.
 	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
 	 * @param   string $tag      Name of the shortcode.
@@ -602,21 +603,21 @@ class Shortcodes implements Hookable {
 		if ( ! $openagenda ) {
 			return '';
 		}
-		$uid = $openagenda->get_uid();
+		$uid  = $openagenda->get_uid();
 		$sort = ! empty( $openagenda->get_filters() ) ? $openagenda->get_filters()['sort'] ?? null : null;
 
 		$defaults = array(
-			'id'          => 'sort',
-			'title'       => _x( 'Sort', 'Filter name', 'openagenda' ),
-			'dropdown'    => false,
-			'options'     => 'score,lastTimingWithFeatured.asc,timingsWithFeatured.asc',
+			'id'           => 'sort',
+			'title'        => _x( 'Sort', 'Filter name', 'openagenda' ),
+			'dropdown'     => false,
+			'options'      => 'score,lastTimingWithFeatured.asc,timingsWithFeatured.asc',
 			'defaultValue' => $sort ? $sort : 'lastTimingWithFeatured.asc',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_sort' );
 
 		$params = array(
-			'type'        => 'sort',
-			'name'        => 'sort',
+			'type'         => 'sort',
+			'name'         => 'sort',
 			'defaultValue' => $atts['defaultValue'],
 		);
 

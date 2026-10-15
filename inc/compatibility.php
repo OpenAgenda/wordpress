@@ -10,7 +10,25 @@
  * Temporary fix for older installs.
  */
 if ( ! function_exists( 'wp_date' ) ) {
-	function wp_date( $format, $timestamp = null, $timezone = null ) {
+	/**
+	 * Retrieves the date, in localized format.
+	 *
+	 * This is a newer function, intended to replace `date_i18n()` without legacy quirks in it.
+	 *
+	 * Note that, unlike `date_i18n()`, this function accepts a true Unix timestamp, not summed
+	 * with timezone offset.
+	 *
+	 * @since 5.3.0
+	 *
+	 * @global WP_Locale $wp_locale WordPress date and time locale object.
+	 *
+	 * @param string            $format    PHP date format.
+	 * @param int|null          $timestamp Optional. Unix timestamp. Defaults to current time.
+	 * @param DateTimeZone|null $timezone  Optional. Timezone to output result in. Defaults to timezone
+	 *                                     from site settings.
+	 * @return string|false The date, translated if locale specifies it. False on invalid timestamp input.
+	 */
+	function wp_date( $format, $timestamp = null, $timezone = null ) { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
 		global $wp_locale;
 
 		if ( null === $timestamp ) {
@@ -85,7 +103,7 @@ if ( ! function_exists( 'wp_date' ) ) {
 		 * @param int          $timestamp Unix timestamp.
 		 * @param DateTimeZone $timezone  Timezone.
 		 */
-		$date = apply_filters( 'wp_date', $date, $format, $timestamp, $timezone );
+		$date = apply_filters( 'wp_date', $date, $format, $timestamp, $timezone ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
 		return $date;
 	}
@@ -93,7 +111,26 @@ if ( ! function_exists( 'wp_date' ) ) {
 
 
 if ( ! function_exists( 'wp_timezone_string' ) ) {
-	function wp_timezone_string() {
+	/**
+	 * Retrieves the timezone of the site as a string.
+	 *
+	 * Uses the `timezone_string` option to get a proper timezone name if available,
+	 * otherwise falls back to a manual UTC ± offset.
+	 *
+	 * Example return values:
+	 *
+	 *  - 'Europe/Rome'
+	 *  - 'America/North_Dakota/New_Salem'
+	 *  - 'UTC'
+	 *  - '-06:30'
+	 *  - '+00:00'
+	 *  - '+08:45'
+	 *
+	 * @since 5.3.0
+	 *
+	 * @return string PHP timezone name or a ±HH:MM offset.
+	 */
+	function wp_timezone_string() { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
 		$timezone_string = get_option( 'timezone_string' );
 
 		if ( $timezone_string ) {

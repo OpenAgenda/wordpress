@@ -226,7 +226,7 @@ class Metaboxes implements Hookable {
 			/* translators: %s: settings page url */
 			$message = sprintf( __( 'Please provide your account API key in <a href="%s">the plugin settings</a>.', 'openagenda' ), esc_url( $settings_page_url ) );
 			$html    = sprintf( '<div class="components-notice is-warning"><div class="components-notice__content">%s</div></div>', wp_kses_post( $message ) );
-			echo $html;
+			echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		foreach ( $this->get_fields() as $name => $args ) {
@@ -277,7 +277,7 @@ class Metaboxes implements Hookable {
 					<div class="components-base-control">
 						<div class="components-base-control__field">
 							<?php echo '<style>:root{--checkbox-input-size:20px;}</style>'; ?>
-							<span class="<?php echo $container_class; ?>">
+							<span class="<?php echo esc_attr( $container_class ); ?>">
 								<?php
 								if ( use_block_editor_for_post( $post ) ) {
 									printf( '<style>#%s:checked { background-color:var(--wp-admin-theme-color); border-color: var(--wp-admin-theme-color); }</style>', esc_attr( $name ) );
@@ -285,7 +285,7 @@ class Metaboxes implements Hookable {
 								?>
 								<input id="<?php echo esc_attr( $name ); ?>" 
 										name="<?php echo esc_attr( $name ); ?>" 
-										class="<?php echo $input_class; ?>" 
+										class="<?php echo esc_attr( $input_class ); ?>"
 										type="checkbox"
 										value="yes"
 										<?php checked( $checked ); ?> 
@@ -318,10 +318,10 @@ class Metaboxes implements Hookable {
 								foreach ( $args['choices'] as $key => $choice ) :
 									$field_id = sprintf( '%s-%s', $name, $choice['value'] );
 									?>
-									<div class="<?php echo $container_class; ?>">
+									<div class="<?php echo esc_attr( $container_class ); ?>">
 										<input  id="<?php echo esc_attr( $field_id ); ?>" 
 												name="<?php echo esc_attr( $name ); ?>" 
-												class="<?php echo $input_class; ?>" 
+												class="<?php echo esc_attr( $input_class ); ?>" 
 												type="radio"
 												value="<?php echo esc_attr( $choice['value'] ); ?>"
 												<?php checked( $field_value, $choice['value'] ); ?> 
@@ -349,7 +349,7 @@ class Metaboxes implements Hookable {
 								foreach ( $args['choices'] as $key => $choice ) :
 									$selected = selected( $field_value, $choice['value'], false );
 									?>
-									<option value="<?php echo esc_attr( $choice['value'] ); ?>" <?php echo $selected; ?>>
+									<option value="<?php echo esc_attr( $choice['value'] ); ?>" <?php echo esc_attr( $selected ); ?>>
 										<?php echo esc_html( $choice['label'] ); ?>
 									</option>
 								<?php endforeach; ?>
@@ -376,8 +376,8 @@ class Metaboxes implements Hookable {
 								type="<?php echo esc_attr( $args['type'] ); ?>" 
 								class="components-text-control__input" 
 								value="<?php echo esc_attr( $field_value ); ?>"
-								<?php echo $min; ?>
-								<?php echo $max; ?>
+								<?php echo esc_attr( $min ); ?>
+								<?php echo esc_attr( $max ); ?>
 							/>
 						</div>
 						<?php
@@ -392,7 +392,7 @@ class Metaboxes implements Hookable {
 								</p>',
 								esc_attr( "{$name}-show-password" ),
 								esc_attr( $name ),
-								$args['show_password_message'] ?? __( 'Show password', 'openagenda' )
+								! empty( $args['show_password_message'] ) ? esc_html( $args['show_password_message'] ) : esc_html__( 'Show password', 'openagenda' )
 							);
 						}
 						if ( ! empty( $args['description'] ) ) {

@@ -8,14 +8,14 @@
  * @version 3.0.0
  */
 
-$oa_date_range           = openagenda_get_field( 'dateRange' );
-$oa_registration_methods = openagenda_get_field( 'registration' );
-$oa_conditions           = openagenda_get_field( 'conditions' );
-$oa_keywords             = openagenda_get_field( 'keywords' );
-$oa_access_link          = openagenda_get_field( 'onlineAccessLink' );
-$oa_credits              = openagenda_get_field( 'imageCredits' );
-$oa_age_label            = openagenda_get_event_age_label();
-$oa_event_accessibility  = openagenda_event_accessibility( false, false );
+$openagenda_date_range           = openagenda_get_field( 'dateRange' );
+$openagenda_registration_methods = openagenda_get_field( 'registration' );
+$openagenda_conditions           = openagenda_get_field( 'conditions' );
+$openagenda_keywords             = openagenda_get_field( 'keywords' );
+$openagenda_access_link          = openagenda_get_field( 'onlineAccessLink' );
+$openagenda_credits              = openagenda_get_field( 'imageCredits' );
+$openagenda_age_label            = openagenda_get_event_age_label();
+$openagenda_event_accessibility  = openagenda_event_accessibility( false, false );
 ?>
 <article id="event-<?php openagenda_field( 'uid' ); ?>" class="oa-event oa-single-event">
 	<div class="oa-event-wrapper">
@@ -38,35 +38,35 @@ $oa_event_accessibility  = openagenda_event_accessibility( false, false );
 				?>
 			</div>
 			
-			<?php if ( ! empty( $oa_date_range ) ) : ?>
+			<?php if ( ! empty( $openagenda_date_range ) ) : ?>
 				<div class="oa-event-range">
 					<?php
 					openagenda_icon( 'clock' );
-					echo wp_kses_post( $oa_date_range );
+					echo wp_kses_post( $openagenda_date_range );
 					?>
 				</div>
 			<?php endif; ?>
 
-			<?php if ( ! empty( $oa_age_label ) ) : ?>
+			<?php if ( ! empty( $openagenda_age_label ) ) : ?>
 				<div class="oa-event-age">
 					<?php
 						openagenda_icon( 'child' );
-						echo wp_kses_post( $oa_age_label );
+						echo wp_kses_post( $openagenda_age_label );
 					?>
 				</div>
 			<?php endif; ?>
 	
-			<?php if ( ! empty( $oa_conditions ) ) : ?>
+			<?php if ( ! empty( $openagenda_conditions ) ) : ?>
 				<div class="oa-event-conditions">
 					<?php
 						openagenda_icon( 'ticket' );
 						printf( '<strong class="oa-label oa-conditions-label">%s</strong>', esc_html__( 'Conditions', 'openagenda' ) );
-						printf( '<div class="oa-conditions-value">%s</div>', esc_html( $oa_conditions ) );
+						printf( '<div class="oa-conditions-value">%s</div>', esc_html( $openagenda_conditions ) );
 					?>
 				</div>
 			<?php endif; ?>
 	
-			<?php if ( ! empty( $oa_registration_methods ) ) : ?>
+			<?php if ( ! empty( $openagenda_registration_methods ) ) : ?>
 				<div class="oa-event-registration">
 					<?php
 						openagenda_icon( 'check' );
@@ -76,7 +76,7 @@ $oa_event_accessibility  = openagenda_event_accessibility( false, false );
 				</div>
 			<?php endif; ?>
 
-			<?php if ( ! empty( $oa_event_accessibility ) ) : ?>
+			<?php if ( ! empty( $openagenda_event_accessibility ) ) : ?>
 				<div class="oa-event-accessibility">
 					<?php
 						openagenda_icon( 'accessibility-mi' );
@@ -90,8 +90,8 @@ $oa_event_accessibility  = openagenda_event_accessibility( false, false );
 		<figure class="oa-event-thumbnail">
 			<?php
 				openagenda_event_image();
-			if ( ! empty( $oa_credits ) ) {
-				printf( '<figcaption class="oa-image-credits">%s</figcaption>', esc_html( $oa_credits ) );
+			if ( ! empty( $openagenda_credits ) ) {
+				printf( '<figcaption class="oa-image-credits">%s</figcaption>', esc_html( $openagenda_credits ) );
 			}
 			?>
 		</figure>
@@ -100,15 +100,15 @@ $oa_event_accessibility  = openagenda_event_accessibility( false, false );
 			<?php openagenda_field( 'longDescription' ); ?>
 		</div>
 			
-		<?php if ( ! empty( $oa_keywords ) ) : ?>
+		<?php if ( ! empty( $openagenda_keywords ) ) : ?>
 			<div class="oa-event-keywords">
 				<?php openagenda_field( 'keywords-list' ); ?>
 			</div>
 		<?php endif; ?>
 
-		<?php if ( ! empty( $oa_access_link ) ) : ?>
+		<?php if ( ! empty( $openagenda_access_link ) ) : ?>
 			<div class="oa-event-access-link">
-				<?php printf( '<strong class="oa-label oa-access-link-label">%1$s</strong><p><a href="%2$s">%2$s</a></p>', esc_html__( 'Access the online event: ', 'openagenda' ), esc_url( $oa_access_link ) ); ?>
+				<?php printf( '<strong class="oa-label oa-access-link-label">%1$s</strong><p><a href="%2$s">%2$s</a></p>', esc_html__( 'Access the online event: ', 'openagenda' ), esc_url( $openagenda_access_link ) ); ?>
 			</div>
 		<?php endif; ?>
 		

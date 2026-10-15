@@ -72,8 +72,8 @@ function openagenda_get_locale() {
 	$current_locale = get_user_locale();
 	$locale         = substr( $current_locale, 0, 2 );
 
-	if ( ! empty( $_GET['oa-lang'] ) ) {
-		$locale = sanitize_key( $_GET['oa-lang'] );
+	if ( ! empty( $_GET['oa-lang'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$locale = sanitize_key( $_GET['oa-lang'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 
 	$context = $openagenda->get_context();
@@ -304,7 +304,7 @@ function openagenda_icon( $slug, $display = true ) {
 	}
 	$icon = apply_filters( 'openagenda_icon', $icon, $slug );
 	if ( $display ) {
-		echo $icon;
+		echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	return $icon;
 }
@@ -580,9 +580,9 @@ function openagenda_group_timings( $timings ) {
  */
 function openagenda_decode_context( $context_string = null ) {
 	if ( ! $context_string ) {
-		$context_string = isset( $_GET['context'] ) ? $_GET['context'] : false;
+		$context_string = isset( $_GET['context'] ) ? $_GET['context'] : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
-	$decoded_context = ! empty( $context_string ) ? base64_decode( $_GET['context'] ) : false;
+	$decoded_context = ! empty( $context_string ) ? base64_decode( $_GET['context'] ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$context         = $decoded_context ? json_decode( $decoded_context, true ) : false;
 	return $context;
 }

@@ -23,6 +23,10 @@
 	<exclude-pattern>/assets/*</exclude-pattern>
 	<exclude-pattern>*.min.js</exclude-pattern>
 
+	<!-- Exclude legacy templates files. -->
+	<exclude-pattern>/templates/legacy/*</exclude-pattern>
+
+
 	<!-- Strip the filepaths down to the relevant bit. -->
 	<arg name="basepath" value="." />
 
@@ -50,8 +54,8 @@
 		They are not intended as advice about which sniffs to exclude.
 		-->
 
+		<exclude name="WordPress.NamingConventions.PrefixAllGlobals.ShortPrefixPassed"/>
 		<!--
-		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
 		<exclude name="Modernize.FunctionCalls.Dirname.Nested"/>
 		-->
 	</rule>
@@ -76,42 +80,6 @@
 	<rule ref="PHPCompatibilityWP">
 		<include-pattern>*\.php</include-pattern>
 	</rule>
-
-
-	<!--
-	#############################################################################
-	SNIFF SPECIFIC CONFIGURATION
-	#############################################################################
-	-->
-
-	<!--
-	To get the optimal benefits of using WordPressCS, we should add a couple of
-	custom properties.
-	Adjust the values of these properties to fit our needs.
-
-	For information on additional custom properties available, check out
-	the wiki:
-	https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
-	-->
-	<config name="minimum_wp_version" value="6.0" />
-
-	<rule ref="WordPress.WP.I18n">
-		<properties>
-			<property name="text_domain" type="array">
-				<element value="openagenda" />
-			</property>
-		</properties>
-	</rule>
-
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<properties>
-			<property name="prefixes" type="array">
-				<element value="openagenda" />
-				<element value="oa" />
-			</property>
-		</properties>
-	</rule>
-
 
 	<!--
 	#############################################################################
@@ -143,4 +111,38 @@
 		<exclude-pattern>/path/to/Tests/*Test\.php</exclude-pattern>
 	</rule>
 
+
+	<!--
+	#############################################################################
+	SNIFF SPECIFIC CONFIGURATION
+	#############################################################################
+	-->
+
+	<!--
+	To get the optimal benefits of using WordPressCS, we should add a couple of
+	custom properties.
+	Adjust the values of these properties to fit our needs.
+
+	For information on additional custom properties available, check out
+	the wiki:
+	https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
+	-->
+	<config name="minimum_wp_version" value="6.0" />
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="openagenda" />
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="oa" />
+				<element value="openagenda" />
+			</property>
+		</properties>
+	</rule>
 </ruleset>

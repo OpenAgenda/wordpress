@@ -119,7 +119,7 @@ class Admin_Pages implements Hookable {
 	 */
 	public function settings_page_markup() {
 		$tabs        = $this->get_tabs();
-		$current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : 'general';
+		$current_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$base_url    = $this->get_menu_page_url();
 		wp_enqueue_style( 'openagenda-admin' );
 		?>

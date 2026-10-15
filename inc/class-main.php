@@ -93,13 +93,13 @@ class Main {
 	public function wp_head() {
 		$customizer_settings = get_option( 'openagenda_customizer' );
 		$main_color          = isset( $customizer_settings['main_color'] ) ? $customizer_settings['main_color'] : '#41acdd';
-		$oa_styles           = '';
+		$openagenda_styles   = '';
 
 		if ( $main_color ) {
-			$oa_styles .= sprintf( ':root{--oa-main-color: %s }', sanitize_hex_color( $main_color ) );
+			$openagenda_styles .= sprintf( ':root{--oa-main-color: %s }', sanitize_hex_color( $main_color ) );
 		}
 
-		printf( '<style id="oa-styles">%s</style>', $oa_styles );
+		printf( '<style id="oa-styles">%s</style>', esc_html( $openagenda_styles ) );
 	}
 
 
@@ -237,7 +237,7 @@ class Main {
 					'label'     => _x( 'Search', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_search',
 				),
-				'openagenda_filter_sort'   => array(
+				'openagenda_filter_sort'     => array(
 					'label'     => _x( 'Sort', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_sort',
 				),
@@ -278,8 +278,8 @@ class Main {
 			}
 
 			// Merge filters in URL.
-			if ( ! empty( $_GET ) ) {
-				$args = array_merge( $args, $_GET );
+			if ( ! empty( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$args = array_merge( $args, $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			}
 
 			// Merge default filters.

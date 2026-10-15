@@ -46,13 +46,13 @@ class Filter_Widget extends OpenAgenda_Widget {
 					'default' => '',
 				),
 			),
-			'openagenda_filter_sort'   => array(
-				'options'         => array(
+			'openagenda_filter_sort'     => array(
+				'options' => array(
 					'name'        => 'options',
 					'description' => __( 'Sort options to display: ', 'openagenda' ),
 					'default'     => array( 'score', 'lastTimingWithFeatured.asc', 'timingsWithFeatured.asc' ),
 					'type'        => 'multi-checkbox',
-					'options' => array(
+					'options'     => array(
 						'score'                      => __( 'Score', 'openagenda' ),
 						'lastTimingWithFeatured.asc' => __( 'Featured first, followed by ascending last occurrence', 'openagenda' ),
 						'timingsWithFeatured.asc'    => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),

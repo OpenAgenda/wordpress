@@ -47,7 +47,7 @@ class Ajax_Handler {
 		global $openagenda;
 		global $post;
 
-		$post_id = isset( $_REQUEST['postId'] ) ? (int) $_REQUEST['postId'] : false;
+		$post_id = isset( $_REQUEST['postId'] ) ? (int) $_REQUEST['postId'] : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( ! $post_id ) {
 			wp_send_json_error( new \WP_Error( 'missing-postid', __( 'No post ID was provided.', 'openagenda' ) ) );
 			exit;
@@ -60,7 +60,7 @@ class Ajax_Handler {
 		}
 
 		// Setup $post global to allow for basic template tags to work.
-		$post = get_post( $post_id );
+		$post = get_post( $post_id ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		setup_postdata( $post );
 
 		// Build query params.
@@ -70,13 +70,13 @@ class Ajax_Handler {
 		$args      = array(
 			'size'      => $page_size,
 			'page_size' => $page_size,
-			'page'      => isset( $_GET['page'] ) ? (int) $_GET['page'] : 1,
+			'page'      => isset( $_GET['page'] ) ? (int) $_GET['page'] : 1, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		);
 
 		// Read GET query param.
-		if ( ! empty( $_GET ) ) {
+		if ( ! empty( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$query = array_filter(
-				$_GET,
+				$_GET, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				function ( $value, $key ) {
 					return ! in_array( $key, array( 'nonce', 'action', 'postId', 'view', 'isLoadingMore' ), true );
 				},
@@ -100,7 +100,7 @@ class Ajax_Handler {
 		);
 
 		$with_controls   = ! $options['infinite_scroll'];
-		$is_loading_more = ! empty( $_GET['isLoadingMore'] ) ? (bool) $_GET['isLoadingMore'] : false;
+		$is_loading_more = ! empty( $_GET['isLoadingMore'] ) ? (bool) $_GET['isLoadingMore'] : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$openagenda = new OpenAgenda( $uid, $args, $options );
 		$response   = array_merge(
@@ -111,7 +111,7 @@ class Ajax_Handler {
 			)
 		);
 
-		echo wp_send_json( $response );
+		echo wp_send_json( $response ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		wp_die();
 	}
 
@@ -148,7 +148,7 @@ class Ajax_Handler {
 
 		// Setup $post global to allow for basic template tags to work.
 		if ( $post_id ) {
-			$post = get_post( $post_id );
+			$post = get_post( $post_id ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			setup_postdata( $post );
 		}
 

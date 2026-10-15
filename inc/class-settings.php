@@ -347,10 +347,10 @@ class Settings implements Hookable {
 		$args = wp_parse_args(
 			$args,
 			array(
-				'type'        => 'text',
-				'placeholder' => '',
-				'default'     => '',
-				'description' => '',
+				'type'          => 'text',
+				'placeholder'   => '',
+				'default'       => '',
+				'description'   => '',
 				'show_password' => false,
 			)
 		);
