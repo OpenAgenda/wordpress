@@ -345,7 +345,8 @@ class Shortcodes implements Hookable {
 			)
 		) : '';
 
-		$filter = sprintf( '<div class="oa-widget oa-calendar-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>%s', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ), $ranges_filter );
+		$type_class = empty( $atts['type'] ) ? '' : sprintf( 'oa-calendar-widget-%s', sanitize_title( $atts['type'] ) );
+		$filter = sprintf( '<div class="oa-widget oa-calendar-widget %s" data-oa-filter="%s" data-oa-filter-params="%s"></div>%s', esc_attr( $type_class ), esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ), $ranges_filter );
 
 		if ( $atts['dropdown'] ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );

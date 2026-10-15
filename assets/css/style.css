@@ -762,9 +762,9 @@ strong {
   padding: var(--oa-spacing-2);
   font-size: var(--oa-text-3);
 }
-.single-oa-calendar .oa-widget-details .oa-widget-summary + *,
-.oa-preview .oa-widget-details .oa-widget-summary + * {
-  margin-top: 1rem;
+.single-oa-calendar .oa-widget-details .oa-widget-summary ~ *,
+.oa-preview .oa-widget-details .oa-widget-summary ~ * {
+  margin-top: var(--oa-spacing-4);
 }
 .single-oa-calendar .oa-widget,
 .oa-preview .oa-widget {
@@ -852,7 +852,7 @@ strong {
 .single-oa-calendar,
 .oa-preview {
   /*********************************
-  * Active filters widget
+  * Events total widget
   *********************************/
 }
 .single-oa-calendar .oa-events-total-widget,
@@ -1070,6 +1070,13 @@ strong {
   /*********************************
   * Date Range and Calendar widget
   *********************************/
+}
+.single-oa-calendar .oa-calendar-widget-simpledaterange > div,
+.oa-preview .oa-calendar-widget-simpledaterange > div {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--oa-spacing-4);
 }
 .single-oa-calendar .rdrCalendarWrapper,
 .oa-preview .rdrCalendarWrapper {

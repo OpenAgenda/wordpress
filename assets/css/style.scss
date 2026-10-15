@@ -636,8 +636,8 @@ strong {
 		padding: var(--oa-spacing-2);
 		font-size: var(--oa-text-3);
 
-		.oa-widget-summary+* {
-			margin-top: 1rem;
+		.oa-widget-summary~* {
+			margin-top: var(--oa-spacing-4);
 		}
 	}
 
@@ -782,11 +782,6 @@ strong {
 	}
 
 	/*********************************
-	* Sort widget
-	*********************************/
-	.oa-sort-widget {}
-
-	/*********************************
 	* Choice widget
 	*********************************/
 	.oa-choice-widget {
@@ -914,6 +909,15 @@ strong {
 	/*********************************
 	* Date Range and Calendar widget
 	*********************************/
+	.oa-calendar-widget-simpledaterange {
+		&>div {
+			align-items: center;
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--oa-spacing-4);
+		}
+	}
+
 	.rdrCalendarWrapper {
 		box-sizing: border-box;
 		display: -webkit-inline-flex;
