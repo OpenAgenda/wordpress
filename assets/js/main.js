@@ -67,22 +67,28 @@ if (oaData) {
             entries.forEach(async entry => {
                 if (!entry.isIntersecting) return;
                 const loaded = await oa.loadMore();
-                if (loaded) oa.setupObserver();
+                if (loaded) {
+                    oa.setupObserver();
+                } else {
+                    oa.observer.unobserve(oa.observed);
+                }
             });
         },
         loadMore: async () => {
             try {
                 oa.page += 1
                 const result = await oa.getEvents(oa.values, oa.aggregations, { 'isLoadingMore': true });
-                if (result.success && result.html) {
+                if (result.success && result.events?.length > 0 && result.html !== '') {
                     const eventsWrapper = document.querySelector('[data-container-id="oa-events"],.oa-event-grid,.oa-event-list');
                     eventsWrapper.insertAdjacentHTML('beforeend', result.html);
+                    return true;
+                } else {
+                    return false;
                 }
             } catch (e) {
                 console.log('loadMore error: ', e);
                 return false;
             }
-            return true;
         },
         getEvents: async (values, aggregations = [], additional_args = []) => {
             const args = {
