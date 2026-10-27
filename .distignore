@@ -30,6 +30,7 @@ multisite.xml.dist
 phpcs.xml
 .phpcs.xml.dist
 phpcs.xml.dist
+.phpstan.neon
 README.md
 webpack.config.js
 wp-cli.local.yml
