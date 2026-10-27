@@ -24,6 +24,7 @@
   --oa-gray-700: #5c5c5c;
   --oa-gray-800: #474747;
   --oa-gray-900: #333333;
+  --oa-warning-50: #fff9ec;
   --oa-warning-100: #f8c663;
   --oa-warning-200: #f7bf50;
   --oa-warning-300: #f6b83c;
@@ -245,8 +246,15 @@ strong {
 }
 .single-oa-calendar .oa-notice-error,
 .oa-preview .oa-notice-error {
-  background-color: #FEF2F2;
+  background-color: var(--oa-danger-50);
   border-left: 3px solid var(--oa-danger-900);
+}
+.single-oa-calendar .oa-notice-info,
+.single-oa-calendar .oa-notice-warning,
+.oa-preview .oa-notice-info,
+.oa-preview .oa-notice-warning {
+  background-color: var(--oa-warning-50);
+  border-left: 3px solid var(--oa-warning-900);
 }
 .single-oa-calendar .event-map,
 .oa-preview .event-map {

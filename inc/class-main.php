@@ -149,9 +149,9 @@ class Main {
 		wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style' . $css_suffix, array(), OPENAGENDA_VERSION );
 		wp_register_style( 'openagenda-legacy', OPENAGENDA_URL . 'assets/css/legacy' . $css_suffix, array(), OPENAGENDA_VERSION );
 		wp_register_script( 'openagenda-qs', OPENAGENDA_URL . 'assets/js/qs.min.js', array(), '6.15.0', true );
-		wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'openagenda-qs' ), OPENAGENDA_VERSION, true );
+		wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'openagenda-qs', 'wp-i18n' ), OPENAGENDA_VERSION, true );
 		wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), '5.15.4', true );
-		wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '3.2.0', true );
+		wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '3.2.1', true );
 
 		// Register map dependencies.
 		wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
@@ -169,6 +169,8 @@ class Main {
 		if ( is_singular( 'oa-calendar' ) ) {
 			wp_enqueue_script( 'openagenda-main' );
 			wp_enqueue_script( 'openagenda-filters' );
+			$settings        = get_option( 'openagenda_general_settings' );
+			$manual_submit   = isset( $settings['openagenda_manual_submit'] ) ? (bool) $settings['openagenda_manual_submit'] : true;
 			$post_id         = get_the_ID();
 			$agenda_uid      = get_post_meta( $post_id, 'oa-calendar-uid', true );
 			$view            = get_post_meta( $post_id, 'oa-calendar-view', true );
@@ -196,6 +198,7 @@ class Main {
 						'locale'         => \openagenda_get_locale(),
 						'page'           => ! empty( get_query_var( 'oa-page' ) ) ? (int) get_query_var( 'oa-page' ) : 1,
 						'size'           => $page_size,
+						'manualSubmit'   => $manual_submit,
 					)
 				)
 			);
@@ -240,6 +243,10 @@ class Main {
 				'openagenda_filter_sort'     => array(
 					'label'     => _x( 'Sort', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_sort',
+				),
+				'openagenda_filter_submit'   => array(
+					'label'     => _x( 'Filter submit', 'Filter name', 'openagenda' ),
+					'shortcode' => 'openagenda_filter_submit',
 				),
 			);
 		}

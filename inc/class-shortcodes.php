@@ -35,8 +35,9 @@ class Shortcodes implements Hookable {
 			'openagenda_filter_map'      => array( $this, 'openagenda_filter_map' ),
 			'openagenda_filter_preview'  => array( $this, 'openagenda_filter_preview' ),
 			'openagenda_filter_relative' => array( $this, 'openagenda_filter_relative' ),
-			'openagenda_filter_search '  => array( $this, 'openagenda_filter_search' ),
-			'openagenda_filter_sort '    => array( $this, 'openagenda_filter_sort' ),
+			'openagenda_filter_search'   => array( $this, 'openagenda_filter_search' ),
+			'openagenda_filter_sort'     => array( $this, 'openagenda_filter_sort' ),
+			'openagenda_filter_submit'   => array( $this, 'openagenda_filter_submit' ),
 		);
 	}
 
@@ -130,7 +131,7 @@ class Shortcodes implements Hookable {
 
 		$list_header = \openagenda_is_archive() ? \openagenda_get_list_header_html( $atts['view'] ) : '';
 		$event_html  = \openagenda_get_events_html( $atts['view'], ! $atts['infinite_scroll'] );
-		$html        = sprintf( '%s<div data-container-id="oa-wrapper">%s</div>', $list_header, $event_html );
+		$html        = sprintf( '%s<div data-container-id="oa-wrapper" role="status">%s</div>', $list_header, $event_html );
 		return apply_filters( 'openagenda_events_html', $html, $atts );
 	}
 
@@ -607,15 +608,16 @@ class Shortcodes implements Hookable {
 		if ( ! $openagenda ) {
 			return '';
 		}
-		$uid  = $openagenda->get_uid();
-		$sort = ! empty( $openagenda->get_filters() ) ? $openagenda->get_filters()['sort'] ?? null : null;
+		$uid     = $openagenda->get_uid();
+		$filters = $openagenda->get_filters();
+		$sort    = $filters['sort'] ?? null;
 
 		$defaults = array(
 			'id'           => 'sort',
 			'title'        => _x( 'Sort', 'Filter name', 'openagenda' ),
 			'dropdown'     => false,
 			'options'      => 'score,lastTimingWithFeatured.asc,timingsWithFeatured.asc',
-			'defaultValue' => $sort ? $sort : 'lastTimingWithFeatured.asc',
+			'defaultValue' => $sort ?? 'lastTimingWithFeatured.asc',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_sort' );
 
@@ -643,6 +645,34 @@ class Shortcodes implements Hookable {
 		}
 
 		return apply_filters( 'openagenda_filter_sort', $filter, $uid, $atts );
+	}
+
+
+	/**
+	 * Callback function to display submit widget.
+	 *
+	 * @since   3.0.3
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
+	 * @return  string  $html     HTML to display.
+	 */
+	public function openagenda_filter_submit( $atts = array(), $content = null, $tag = 'openagenda_filter_submit' ) {
+		global $openagenda;
+		if ( ! $openagenda ) {
+			return '';
+		}
+		$uid           = $openagenda->get_uid();
+		$settings      = get_option( 'openagenda_general_settings' );
+		$manual_submit = isset( $settings['openagenda_manual_submit'] ) ? (bool) $settings['openagenda_manual_submit'] : true;
+
+		if ( $manual_submit ) {
+			$filter = sprintf( '<div class="oa-widget oa-submit-widget"><div class="oa-notice-wrapper" role="status"></div><button type="submit">%s</button></div>', __( 'Submit', 'openagenda' ) );
+		} else {
+			$filter = '';
+		}
+
+		return apply_filters( 'openagenda_filter_submit', $filter, $uid, $atts );
 	}
 
 	/**

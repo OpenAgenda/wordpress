@@ -178,8 +178,14 @@ strong {
 	}
 
 	.oa-notice-error {
-		background-color: #FEF2F2;
+		background-color: var(--oa-danger-50);
 		border-left: 3px solid var(--oa-danger-900);
+	}
+
+	.oa-notice-info,
+	.oa-notice-warning {
+		background-color: var(--oa-warning-50);
+		border-left: 3px solid var(--oa-warning-900);
 	}
 
 	.event-map {

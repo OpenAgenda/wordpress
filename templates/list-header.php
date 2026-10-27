@@ -17,6 +17,7 @@ $openagenda_display_default_filters = 'yes' === get_post_meta( get_the_ID(), 'oa
 			<?php
 				echo do_shortcode( '[openagenda_filter_calendar dropdown="true" display_ranges="true"]' );
 				echo do_shortcode( '[openagenda_filter_search]' );
+				echo do_shortcode( '[openagenda_filter_submit]' );
 			?>
 		</div>
 		<?php

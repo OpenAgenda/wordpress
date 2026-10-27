@@ -2,6 +2,9 @@
 if (oaData) {
     const oaWrapper = document.querySelector('[data-container-id="oa-wrapper"]');
     oaWrapper.insertAdjacentHTML('afterbegin', '<div class="oa-notice-wrapper"></div>');
+    const submitButtons = document.querySelectorAll('.oa-submit-widget button[type=submit]');
+    const { sprintf, __ } = wp.i18n;
+
     window.oa = {
         res: oaData.res,
         agendaUid: oaData.agendaUid,
@@ -12,8 +15,10 @@ if (oaData) {
         observer: null,
         values: {},
         aggregations: {},
+        manualSubmit: oaData.manualSubmit && submitButtons.length > 0,
         onLoad: async (values, aggregations, filtersRef, _form) => {
             oa.setupObserver();
+            oa.setupManualSubmit(_form);
             try {
                 oa.values = values
                 oa.aggregations = aggregations
@@ -22,6 +27,18 @@ if (oaData) {
                 filtersRef.updateFiltersAndWidgets(values, result);
             } catch (e) {
                 console.log('onLoad error: ', e);
+            }
+        },
+        onPendingChange: (pending) => {
+            const pendingNoticeWrappers = document.querySelectorAll('.oa-submit-widget .oa-notice-wrapper');
+            if (pendingNoticeWrappers) {
+                pendingNoticeWrappers.forEach(wrapper => {
+                    if (pending) {
+                        oa.updateHTML(wrapper, sprintf('<div class="oa-notice oa-notice-info">%s</div>', __('The results do not match the selected filters yet.', 'openagenda')));
+                    } else {
+                        oa.updateHTML(wrapper, '');
+                    }
+                });
             }
         },
         onFilterChange: async (values, aggregations, filtersRef, _form) => {
@@ -35,7 +52,6 @@ if (oaData) {
                     const url = `${oaData.listUrl}?${Qs.stringify(values)}`;
                     window.location.href = url;
                 } else {
-                    // If no sort setting when searching by text, switch sort by relevance
                     const result = await oa.getEvents(values, aggregations);
                     if (result.success && result.html) {
                         oa.updateHTML(oaWrapper, result.html);
@@ -44,10 +60,16 @@ if (oaData) {
                         history.pushState(null, document.title, url);
                         filtersRef.updateLocation(values);
                         filtersRef.updateFiltersAndWidgets(values, result);
+                    } else {
+                        console.log(result);
+                        if (result.data && result.data.length > 0) {
+                            oa.updateHTML(oaWrapper, oaData.errorNotice);
+                        }
                     }
                 }
             } catch (e) {
                 console.log('onFilterChange error: ', e);
+                oa.updateHTML(oaWrapper, oaData.errorNotice);
             }
         },
         setupObserver: () => {
@@ -61,6 +83,19 @@ if (oaData) {
                 if (!oa.observed) return;
                 oa.observer = new IntersectionObserver(oa.onIntersect, {});
                 oa.observer.observe(oa.observed);
+            }
+        },
+        setupManualSubmit: (_form) => {
+            if (oa.manualSubmit) {
+                const submitButtons = document.querySelectorAll('.oa-submit-widget button[type=submit]');
+                if (submitButtons.length > 0) {
+                    submitButtons.forEach((button) => {
+                        button.addEventListener('click', async (e) => {
+                            e.preventDefault();
+                            _form.submit();
+                        });
+                    });
+                }
             }
         },
         onIntersect: (entries, observer) => {

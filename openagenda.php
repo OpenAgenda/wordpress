@@ -129,6 +129,16 @@ function openagenda_update_version() {
 		}
 	}
 
+	if ( false !== $db_version && version_compare( $db_version, '3.1.0', '<' ) ) {
+		$settings = get_option( 'openagenda_general_settings' );
+		if ( ! empty( $settings ) ) {
+			if ( ! isset( $settings['openagenda_manual_submit'] ) ) {
+				$settings['openagenda_manual_submit'] = false;
+				update_option( 'openagenda_general_settings', $settings );
+			}
+		}
+	}
+
 	// Maybe update version.
 	if ( ! $db_version || version_compare( $db_version, OPENAGENDA_VERSION, '!=' ) ) {
 		update_option( 'openagenda_version', OPENAGENDA_VERSION );
