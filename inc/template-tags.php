@@ -11,8 +11,9 @@
  * Defaults to the current event in the loop
  *
  * @param  int $uid  Uid of the event to look for.
+ * @return array<array>  $event  Event found.
  */
-function openagenda_get_event( $uid = false ) {
+function openagenda_get_event( $uid = 0 ) {
 	global $openagenda;
 	if ( ! $openagenda ) {
 		return array();
@@ -21,7 +22,7 @@ function openagenda_get_event( $uid = false ) {
 	// Default to current event in the loop.
 	$event = $openagenda->get_current_event();
 
-	if ( (int) $uid ) {
+	if ( 0 !== (int) $uid ) {
 		$events = $openagenda->get_events();
 		$events = array_values(
 			array_filter(

@@ -15,7 +15,7 @@ class Shortcodes implements Hookable {
 	/**
 	 * Shortcodes to register
 	 *
-	 * @var array $shortcodes
+	 * @var array<string,array{0: $this, 1: string}> $shortcodes
 	 */
 	protected $shortcodes = array();
 
@@ -43,7 +43,7 @@ class Shortcodes implements Hookable {
 	/**
 	 * Returns the shortcodes to register
 	 *
-	 * @return  array
+	 * @return  array<string,array{0: $this, 1: string}>
 	 */
 	public function get_shortcodes() {
 		return apply_filters( 'openagenda_shortcodes', $this->shortcodes );
@@ -52,6 +52,8 @@ class Shortcodes implements Hookable {
 
 	/**
 	 * Registers hooks
+	 *
+	 * @return void
 	 */
 	public function register_hooks() {
 		foreach ( $this->get_shortcodes() as $slug => $callback ) {
@@ -63,9 +65,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Openagenda shortcode callback function
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string $html     HTML to display.
 	 */
 	public function openagenda( $atts = array(), $content = null, $tag = 'openagenda' ) {
@@ -136,9 +138,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display active filters.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_active( $atts = array(), $content = null, $tag = 'openagenda_filter_active' ) {
@@ -168,9 +170,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display event totals.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_total( $atts = array(), $content = null, $tag = 'openagenda_filter_total' ) {
@@ -202,11 +204,12 @@ class Shortcodes implements Hookable {
 			),
 		);
 
+		$filter = sprintf( '<div role="status" class="oa-widget oa-events-total-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
+
 		if ( $atts['dropdown'] ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$filter = sprintf( '<div role="status" class="oa-widget oa-events-total-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
 		return apply_filters( 'openagenda_filter_total', $filter, $uid, $atts );
 	}
 
@@ -214,9 +217,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display choice filter.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_choice( $atts = array(), $content = null, $tag = 'openagenda_filter_choice' ) {
@@ -287,9 +290,9 @@ class Shortcodes implements Hookable {
 	 * Callback function to display former tags filter.
 	 * Displays a choice widget with keywords param
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_tags( $atts = array(), $content = null, $tag = 'openagenda_filter_tags' ) {
@@ -309,9 +312,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display Calendar.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_calendar( $atts = array(), $content = null, $tag = 'openagenda_filter_calendar' ) {
@@ -332,7 +335,7 @@ class Shortcodes implements Hookable {
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_calendar' );
 
 		$params = array(
-			'type'            => $atts['type'] ?? 'dateRange',
+			'type'            => $atts['type'],
 			'name'            => 'timings',
 			'dateFormat'      => get_option( 'date_format' ),
 			'dateFormatStyle' => 'php',
@@ -358,9 +361,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display Defined Ranges.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_ranges( $atts = array(), $content = null, $tag = 'openagenda_filter_ranges' ) {
@@ -401,9 +404,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display Map.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_map( $atts = array(), $content = null, $tag = 'openagenda_filter_map' ) {
@@ -457,9 +460,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display preview.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_preview( $atts = array(), $content = null, $tag = 'openagenda_filter_preview' ) {
@@ -501,7 +504,7 @@ class Shortcodes implements Hookable {
 
 		// If we're on a events page, backup the main events.
 		openagenda_save();
-		$openagenda = new OpenAgenda( $atts['uid'], $args, $options );
+		$openagenda = new OpenAgenda( (int) $atts['uid'], $args, $options );
 		ob_start();
 		include openagenda_get_template( 'preview-loop' );
 		$filter = ob_get_clean();
@@ -514,9 +517,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display relative widget.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_relative( $atts = array(), $content = null, $tag = 'openagenda_filter_relative' ) {
@@ -551,9 +554,9 @@ class Shortcodes implements Hookable {
 	/**
 	 * Callback function to display search widget.
 	 *
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_search( $atts = array(), $content = null, $tag = 'openagenda_filter_search' ) {
@@ -594,9 +597,9 @@ class Shortcodes implements Hookable {
 	 * Callback function to display sort widget.
 	 *
 	 * @since   3.0.3
-	 * @param   array  $atts     Array of attributes passed to the shortcode.
-	 * @param   string $content  Content if enclosing shortcode. Defaults to null.
-	 * @param   string $tag      Name of the shortcode.
+	 * @param   array<string,string> $atts     Array of attributes passed to the shortcode.
+	 * @param   string               $content  Content if enclosing shortcode. Defaults to null.
+	 * @param   string               $tag      Name of the shortcode.
 	 * @return  string  $html     HTML to display.
 	 */
 	public function openagenda_filter_sort( $atts = array(), $content = null, $tag = 'openagenda_filter_sort' ) {
@@ -645,11 +648,11 @@ class Shortcodes implements Hookable {
 	/**
 	 * Wraps a widget in a <details> tag if the display option is set.
 	 *
-	 * @param  string $html  Filter HTML.
-	 * @param  array  $atts  Filter attributes.
+	 * @param  string               $html  Filter HTML.
+	 * @param  array<string,string> $atts  Filter attributes.
 	 * @return  string  $html
 	 */
-	public function wrap_in_dropdown( $html, $atts ) {
+	public function wrap_in_dropdown( $html, $atts = array() ) {
 		$html = sprintf( '<details class="oa-widget-details"><summary class="oa-widget-summary">%s</summary>%s</details>', $atts['title'], $html );
 		return apply_filters( 'openagenda_wrapped_widget', $html, $atts );
 	}

@@ -92,10 +92,10 @@ add_filter( 'openagenda_back_link', 'openagenda_back_link_legacy_html', 5, 4 );
  * Filters event adjacent link html.
  * Provides legacy HTML when legacy templates are used.
  *
- * @param  string $html  Original HTML.
- * @param  string $page_url  URL to list page.
- * @param   int    $page  Page number.
- * @param   array  $context  Decoded context.
+ * @param  string              $html  Original HTML.
+ * @param  string              $page_url  URL to list page.
+ * @param   int                 $page  Page number.
+ * @param   array<string,mixed> $context  Decoded context.
  * @return  string  $html
  */
 function openagenda_back_link_legacy_html( $html, $page_url, $page, $context ) {

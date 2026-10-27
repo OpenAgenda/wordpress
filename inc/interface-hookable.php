@@ -14,6 +14,8 @@ interface Hookable {
 	/**
 	 * Registers all the hooks
 	 * Basically contains `add_action()` and `add_filter()` calls
+	 *
+	 * @return void
 	 */
 	public function register_hooks();
 }

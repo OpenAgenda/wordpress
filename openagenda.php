@@ -41,6 +41,8 @@ define( 'OPENAGENDA_VERSION', '3.1.0' );
 add_action( 'init', 'openagenda_load_textdomain' );
 /**
  * Load translations
+ *
+ * @return void
  */
 function openagenda_load_textdomain() {
 	load_plugin_textdomain( 'openagenda', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -50,6 +52,8 @@ function openagenda_load_textdomain() {
 register_activation_hook( __FILE__, 'openagenda_activation' );
 /**
  * Activation procedure
+ *
+ * @return void
  */
 function openagenda_activation() {
 	require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
@@ -64,6 +68,8 @@ function openagenda_activation() {
 register_deactivation_hook( __FILE__, 'openagenda_deactivation' );
 /**
  * Deactivation procedure
+ *
+ * @return void
  */
 function openagenda_deactivation() {
 	flush_rewrite_rules();
@@ -73,6 +79,8 @@ function openagenda_deactivation() {
 register_uninstall_hook( __FILE__, 'openagenda_uninstallation' );
 /**
  * Uninstall procedure
+ *
+ * @return void
  */
 function openagenda_uninstallation() {
 	$settings              = get_option( 'openagenda_general_settings' );
@@ -105,6 +113,8 @@ function openagenda_uninstallation() {
 add_action( 'plugins_loaded', 'openagenda_update_version' );
 /**
  * Maybe update version in database.
+ *
+ * @return void
  */
 function openagenda_update_version() {
 
@@ -126,14 +136,14 @@ function openagenda_update_version() {
 }
 
 
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'openagenda_plugin_action_links', 10, 4 );
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'openagenda_plugin_action_links', 10 );
 /**
  * Adds plugin action links
  *
- * @param   array $actions  Available actions.
- * @return  array   $actions Actions.
+ * @param   array<string,string> $actions  Available actions.
+ * @return  array<string,string>   $actions Actions.
  */
-function openagenda_plugin_action_links( $actions ) {
+function openagenda_plugin_action_links( array $actions ) {
 	$actions['settings']      = sprintf(
 		'<a href="%s">%s</a>',
 		esc_url( menu_page_url( 'openagenda', false ) ),
@@ -151,6 +161,8 @@ function openagenda_plugin_action_links( $actions ) {
 add_action( 'plugins_loaded', 'openagenda_init' );
 /**
  * Loads core class and initialize it.
+ *
+ * @return void
  */
 function openagenda_init() {
 	require_once OPENAGENDA_PATH . 'inc/class-main.php';
