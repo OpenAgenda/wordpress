@@ -14,6 +14,7 @@
     "make-pot": "wp i18n make-pot . languages/openagenda.pot --exclude=\"node_modules, svn, js\" ",
     "phpcs": "./vendor/bin/phpcs -s .",
     "phpcbf": "./vendor/bin/phpcbf .",
+    "phpstan": "./vendor/bin/phpstan analyse -c ./.phpstan.neon -v --memory-limit=1G",
     "archive": "wp dist-archive ./ --plugin-dirname=openagenda",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
