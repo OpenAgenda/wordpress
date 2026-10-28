@@ -90,7 +90,7 @@ function openagenda_get_locale() {
 /**
  * Returns an array of expected image sizes, width dimensions.
  *
- * @return  array  $sizes  Image dimensions, keyed by size name.
+ * @return  array<string, array{width: int|string, height: int|string}>  Image dimensions, keyed by size name.
  */
 function openagenda_image_sizes() {
 	$sizes = array(
@@ -110,8 +110,8 @@ function openagenda_image_sizes() {
 /**
  * Returns the dimensions for a given image size name.
  *
- * @param   string $size        OpenAgenda image size.
- * @return  array   $dimensions  Width and height of the image.
+ * @param   string|array{width?: int|string, height?: int|string} $size OpenAgenda image size or Cloudimage dimensions.
+ * @return  array{width: int|string, height: int|string} $dimensions Width and height of the image.
  */
 function openagenda_get_image_dimensions( $size = '' ) {
 	$sizes = openagenda_image_sizes();
@@ -142,15 +142,15 @@ function openagenda_get_image_dimensions( $size = '' ) {
 /**
  * Returns the dimensions for a given image size name.
  *
- * @param   string $url             Url to the original image.
- * @param   array  $args            Array of Cloudimage arguments.
+ * @param   string                    $url             Url to the original image.
+ * @param   array<string, int|string> $args Array of Cloudimage arguments.
  * @return  string  $cloudimage_url
  */
 function openagenda_get_cloudimage_image_url( $url, $args ) {
 	$settings = get_option( 'openagenda_integrations_settings' );
 
 	$cloudimage_token = $settings['openagenda_cloudimage_api_key'];
-	if ( empty( $cloudimage_token ) || ! is_array( $args ) ) {
+	if ( empty( $cloudimage_token ) ) {
 		return $url;
 	}
 
@@ -163,7 +163,7 @@ function openagenda_get_cloudimage_image_url( $url, $args ) {
 /**
  * Returns an array of supported i18n fields, to allow for automatic language detection
  *
- * @return  array  Array of i18n fields
+ * @return  array<string> Array of i18n fields.
  */
 function openagenda_i18n_fields() {
 	$i18n = array( 'title', 'description', 'longDescription', 'html', 'access', 'range', 'dateRange', 'conditions', 'keywords' );
@@ -202,7 +202,7 @@ function openagenda_accessibility_label( $code ) {
 /**
  * Returns a list of accessibility codes and labels.
  *
- * @return  array  $codes  array of $code => $label
+ * @return  array<string, string> $codes Accessibility codes and labels.
  */
 function openagenda_accessibility_codes() {
 	$codes = array(
@@ -219,6 +219,8 @@ function openagenda_accessibility_codes() {
 
 /**
  * Returns an array of supported icons
+ *
+ * @return array<string, string> Icons keyed by slug.
  */
 function openagenda_icons() {
 	$icons = array(
@@ -345,8 +347,8 @@ function openagenda_is_archive() {
 /**
  * Stringifies an associative array to use in a shortcode.
  *
- * @param   array  $attributes  Associative array you wish to turn to shortcode attributes.
- * @param   string $id  Optional ID attribute to add.
+ * @param   array<string, mixed> $attributes Associative array you wish to turn to shortcode attributes.
+ * @param   string               $id  Optional ID attribute to add.
  * @return  string  $atts   Converted shortcode attributes.
  */
 function openagenda_get_shortcode_attributes( $attributes, $id = '' ) {
@@ -438,6 +440,8 @@ function openagenda_get_list_header_html( $view = 'list' ) {
 
 /**
  * Returns the AJAX overlay template html
+ *
+ * @return string
  */
 function openagenda_get_update_overlay_html() {
 	$html = sprintf(
@@ -451,6 +455,8 @@ function openagenda_get_update_overlay_html() {
 
 /**
  * Returns the AJAX overlay template html
+ *
+ * @return string
  */
 function openagenda_get_update_notice_html() {
 	$html = sprintf(
@@ -464,9 +470,9 @@ function openagenda_get_update_notice_html() {
 /**
  * Formats a given timing for display
  *
- * @param   array        $timing        Timing from the JSON event data.
- * @param   DateTimeZone $datetimezone  Timezone to use.
- * @return  array         $timing        Timing with additional formatted data.
+ * @param   array<string, mixed> $timing Timing from the JSON event data.
+ * @param   DateTimeZone|null    $datetimezone Timezone to use.
+ * @return  array<string, mixed> Timing with additional formatted data.
  */
 function openagenda_format_timing( $timing, $datetimezone = null ) {
 	$start_timestamp = strtotime( $timing['begin'] );
@@ -521,8 +527,8 @@ function openagenda_is_month_nearer( $month, $ref, $today ) {
 /**
  * Format and group event timings by month and week
  *
- * @param   array $timings  Timings to group.
- * @return  array  $months
+ * @param   array<int, array<string, mixed>> $timings Timings to group.
+ * @return  array<string, array<string, mixed>> Grouped timings by month, week, and day.
  */
 function openagenda_group_timings( $timings ) {
 	$today         = new DateTime();
@@ -577,8 +583,8 @@ function openagenda_group_timings( $timings ) {
 /**
  * Reads context from URL or passed string, and returns it.
  *
- * @param   string $context_string  Context data stringified array. Should be base64-encoded.
- * @return  array   $context         Decoded array of context data.
+ * @param   string|null $context_string Context data stringified array. Should be base64-encoded.
+ * @return  array<string, mixed>|false Decoded array of context data, or false if unavailable.
  */
 function openagenda_decode_context( $context_string = null ) {
 	if ( ! $context_string ) {
@@ -593,7 +599,7 @@ function openagenda_decode_context( $context_string = null ) {
 /**
  * Encodes the context data into a string.
  *
- * @param   array $context_array    Context data.
+ * @param   array<string, mixed> $context_array Context data.
  * @return  string  $encoded_context  Bas64 encode.
  */
 function openagenda_encode_context( $context_array ) {
@@ -604,6 +610,8 @@ function openagenda_encode_context( $context_array ) {
 /**
  * Backups the main openagenda request,
  * in case of alternate request on the main events page
+ *
+ * @return void
  */
 function openagenda_save() {
 	global $openagenda, $openagenda_backup;
@@ -616,6 +624,8 @@ function openagenda_save() {
 /**
  * Restore the original global $openagenda,
  * after alternate request has been treated
+ *
+ * @return void
  */
 function openagenda_reset() {
 	global $openagenda, $openagenda_backup;
@@ -627,6 +637,8 @@ function openagenda_reset() {
 
 /**
  * Clears transient when settings are saved.
+ *
+ * @return void
  */
 function openagenda_clear_transient() {
 	global $wpdb;
@@ -638,12 +650,12 @@ function openagenda_clear_transient() {
 /**
  * Parses and returns pre-filters
  *
- * @param   int   $post_id  Agenda ID to pre-filter.
- * @param  array $filters  Filters to apply to initial request.
- * @return  array   $filters  Filters to apply to initial request.
+ * @param   int                  $post_id Agenda ID to pre-filter.
+ * @param   array<string, mixed> $filters Filters to apply to initial request.
+ * @return  array<string, mixed> Filters to apply to initial request.
  */
-function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
-	if ( ! $post_id ) {
+function openagenda_get_pre_filters( $post_id = 0, $filters = array() ) {
+	if ( 0 === $post_id ) {
 		$post_id = get_the_ID();
 	}
 	$filters_url         = get_post_meta( $post_id, 'oa-calendar-filters', true );
@@ -677,10 +689,10 @@ function openagenda_get_pre_filters( $post_id = false, $filters = array() ) {
 /**
  * Retrieves the Event Rich Snippet object
  *
- * @param   string $uid     UID of the event.
- * @return  string  $schema  JSON encoded schema object
+ * @param   string $uid UID of the event.
+ * @return  array<string, mixed> Event rich snippet schema.
  */
-function openagenda_get_event_schema( $uid = false ) {
+function openagenda_get_event_schema( $uid = '' ) {
 	global $openagenda;
 	if ( ! $openagenda ) {
 		return array();
@@ -700,7 +712,7 @@ function openagenda_get_event_schema( $uid = false ) {
 /**
  * Retrieves default calendar post ID
  *
- * @return  $post_id  Default agenda id.
+ * @return int|false Default agenda post ID, or false when none is configured.
  */
 function openagenda_get_default_calendar_id() {
 	$args = array(
@@ -726,7 +738,7 @@ function openagenda_get_default_calendar_id() {
 /**
  * Retrieves default calendar UID
  *
- * @return  $uid  Default calendar uid.
+ * @return string Default calendar UID.
  */
 function openagenda_get_default_calendar_uid() {
 	$post_id = openagenda_get_default_calendar_id();
@@ -738,17 +750,17 @@ function openagenda_get_default_calendar_uid() {
 /**
  * Gets a calendar settings and schema
  *
- * @param   int $post_id  Calendar post id.
- * @return  array  $settings  Calendar settings an schema.
+ * @param   int $post_id Calendar post id.
+ * @return  array<string, mixed>|false Calendar settings, or false when the OpenAgenda instance is unavailable.
  */
-function openagenda_get_calendar_settings( $post_id = null ) {
+function openagenda_get_calendar_settings( $post_id = 0 ) {
 	global $openagenda;
 
 	if ( ! $openagenda ) {
 		return false;
 	}
 
-	if ( ! $post_id ) {
+	if ( 0 === $post_id ) {
 		$post_id = get_the_ID();
 	}
 
@@ -769,10 +781,10 @@ function openagenda_get_calendar_settings( $post_id = null ) {
  * Gets a calendar fields schema
  *
  * @param   string $type   Type of fields you need schema for. Default 'all'.
- * @param   int    $post_id   Calendar post id.
- * @return  array  $schema  Fields schema.
+ * @param   int    $post_id Calendar post id.
+ * @return  array<int, array<string, mixed>> Fields schema.
  */
-function openagenda_get_calendar_fields_schema( $type = 'all', $post_id = null ) {
+function openagenda_get_calendar_fields_schema( $type = 'all', $post_id = 0 ) {
 	$agenda_settings = openagenda_get_calendar_settings( $post_id );
 	$schema          = $agenda_settings['schema']['fields'] ?? array();
 	switch ( $type ) {
@@ -804,10 +816,10 @@ function openagenda_get_calendar_fields_schema( $type = 'all', $post_id = null )
  * Gets a single field schema
  *
  * @param   string $field   Field name.
- * @param   int    $post_id   Calendar post id.
- * @return  array  $settings  Calendar settings an schema.
+ * @param   int    $post_id Calendar post id.
+ * @return  array<string, mixed> Field schema.
  */
-function openagenda_get_field_schema( $field, $post_id = null ) {
+function openagenda_get_field_schema( $field, $post_id = 0 ) {
 	$schema       = openagenda_get_calendar_fields_schema( 'all', $post_id );
 	$field_schema = array_values(
 		array_filter(
@@ -817,6 +829,6 @@ function openagenda_get_field_schema( $field, $post_id = null ) {
 			}
 		)
 	);
-	$field_schema = ! empty( $field_schema ) && is_array( $field_schema ) ? $field_schema[0] : array();
+	$field_schema = ! empty( $field_schema ) ? $field_schema[0] : array();
 	return $field_schema;
 }

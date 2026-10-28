@@ -130,15 +130,13 @@ function openagenda_get_field( $field, $uid = '' ) {
 				break;
 			}
 
-			if ( 'next-timings' === $field ) {
-				$value = array_map(
-					function ( $timing ) use ( $datetimezone ) {
-						return openagenda_format_timing( $timing, $datetimezone );
-					},
-					$next_timings
-				);
-				break;
-			}
+			// Fallback when $field === 'next-timings'.
+			$value = array_map(
+				function ( $timing ) use ( $datetimezone ) {
+					return openagenda_format_timing( $timing, $datetimezone );
+				},
+				$next_timings
+			);
 			break;
 		case 'range':
 			return openagenda_get_field( 'dateRange' );
