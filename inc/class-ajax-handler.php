@@ -113,7 +113,7 @@ class Ajax_Handler implements Hookable {
 			)
 		);
 
-		echo wp_send_json( $response ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		wp_send_json( $response );
 	}
 
 
@@ -139,14 +139,14 @@ class Ajax_Handler implements Hookable {
 
 		if ( ! $context || '' === $uid ) {
 			wp_safe_redirect( $referer );
-			return;
+			exit;
 		}
 
 		// Read referer event.
 		$event_offset = isset( $context['event_offset'] ) ? (int) $context['event_offset'] : null;
 		if ( null === $event_offset ) {
 			wp_safe_redirect( $referer );
-			return;
+			exit;
 		}
 
 		// Setup $post global to allow for basic template tags to work.
@@ -194,6 +194,7 @@ class Ajax_Handler implements Hookable {
 			$encoded_context = openagenda_encode_context( $context );
 			$event_permalink = add_query_arg( 'context', $encoded_context, $event_permalink );
 			wp_safe_redirect( $event_permalink );
+			exit;
 		}
 
 		wp_safe_redirect( $referer );
