@@ -57,35 +57,35 @@ class OpenAgenda {
 	/**
 	 * Arguments
 	 *
-	 * @var  array $args
+	 * @var  array<string, mixed> $args
 	 */
 	protected $args = array();
 
 	/**
 	 * Agenda options
 	 *
-	 * @var  array $options
+	 * @var  array<string, mixed> $options
 	 */
 	protected $options = array();
 
 	/**
 	 * Agenda settings and schema
 	 *
-	 * @var  array $settings
+	 * @var  array<string, mixed> $settings
 	 */
 	protected $settings = array();
 
 	/**
 	 * Query params
 	 *
-	 * @var  array $params
+	 * @var  array<string, mixed> $params
 	 */
 	protected $params = array();
 
 	/**
 	 * Query filters
 	 *
-	 * @var  array $filters
+	 * @var  array<string, mixed> $filters
 	 */
 	protected $filters = array();
 
@@ -141,14 +141,14 @@ class OpenAgenda {
 	/**
 	 * Raw response
 	 *
-	 * @var  array $raw_response
+	 * @var  array<string, mixed>|\WP_Error|null $raw_response
 	 */
 	protected $raw_response = null;
 
 	/**
 	 * Errors
 	 *
-	 * @var  array  $errors
+	 * @var  list<\WP_Error> $errors
 	 */
 	protected $errors = array();
 
@@ -162,28 +162,28 @@ class OpenAgenda {
 	/**
 	 * Parsed JSON response
 	 *
-	 * @var  array  $json
+	 * @var  array<string, mixed> $json
 	 */
 	protected $json = array();
 
 	/**
 	 * Queried events
 	 *
-	 * @var  array  $events
+	 * @var  list<array<string, mixed>> $events
 	 */
 	protected $events = array();
 
 	/**
 	 * Current event in the loop
 	 *
-	 * @var  array  $event
+	 * @var  array<string, mixed>|null $event
 	 */
 	protected $event = null;
 
 	/**
 	 * Context data
 	 *
-	 * @var  array  $context
+	 * @var  array<string, mixed>|null $context
 	 */
 	protected $context = null;
 
@@ -211,14 +211,14 @@ class OpenAgenda {
 	/**
 	 * Constructor
 	 *
-	 * @param  int   $uid   UID of the calendar.
-	 * @param  array $args  Array of arguments.
-	 * @param  array $options  Array of options.
-	 * @param  bool  $use_context  Whether to use context (Deprecated. Value passed in $options).
+	 * @param  string                    $uid   UID of the calendar.
+	 * @param  array<string, mixed>      $args  Array of arguments.
+	 * @param  array<string, mixed>|bool $options  Array of options, or legacy cache setting.
+	 * @param  bool                      $use_context  Whether to use context (Deprecated. Value passed in $options).
 	 */
 	public function __construct( $uid, $args = array(), $options = array(), $use_context = true ) {
 		$settings      = get_option( 'openagenda_general_settings' );
-		$this->uid     = $uid;
+		$this->uid     = (string) $uid;
 		$this->api_key = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
 		$this->debug   = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG );
 
@@ -226,7 +226,7 @@ class OpenAgenda {
 		if ( ! empty( $this->get_option( 'api_key' ) ) ) {
 			$this->api_key = $this->get_option( 'api_key' );
 		}
-		if ( ! empty( $options['post_id'] ) ) {
+		if ( isset( $options['post_id'] ) && 0 !== (int) $options['post_id'] ) {
 			$this->post_id = (int) $options['post_id'];
 		}
 
@@ -254,6 +254,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the calendar uid.
+	 *
+	 * @return string
 	 */
 	public function get_uid() {
 		return $this->uid;
@@ -262,6 +264,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the calendar post id.
+	 *
+	 * @return int
 	 */
 	public function get_post_id() {
 		return (int) $this->post_id;
@@ -270,6 +274,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the user API key.
+	 *
+	 * @return string
 	 */
 	public function get_api_key() {
 		return $this->api_key;
@@ -278,6 +284,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the current page.
+	 *
+	 * @return int
 	 */
 	public function get_current_page() {
 		return $this->page;
@@ -286,6 +294,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the total number of events.
+	 *
+	 * @return int
 	 */
 	public function get_total() {
 		return $this->total;
@@ -294,6 +304,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the number of events per request.
+	 *
+	 * @return int
 	 */
 	public function get_size() {
 		return $this->size;
@@ -302,6 +314,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the total number of pages.
+	 *
+	 * @return int
 	 */
 	public function get_total_pages() {
 		return $this->total_pages;
@@ -310,6 +324,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns query_arguments
+	 *
+	 * @return array<string, mixed>
 	 */
 	public function get_args() {
 		return apply_filters( 'openagenda_request_args', $this->args, $this->uid );
@@ -318,6 +334,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns query params
+	 *
+	 * @return array<string, mixed>
 	 */
 	public function get_params() {
 		return apply_filters( 'openagenda_params', $this->params, $this->uid );
@@ -326,6 +344,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns query filters
+	 *
+	 * @return array<string, mixed>
 	 */
 	public function get_filters() {
 		return apply_filters( 'openagenda_filters', $this->filters, $this->uid );
@@ -334,6 +354,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns options
+	 *
+	 * @return array<string, mixed>
 	 */
 	public function get_options() {
 		return apply_filters( 'openagenda_options', $this->options, $this->uid );
@@ -355,6 +377,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns events
+	 *
+	 * @return list<array<string, mixed>>
 	 */
 	public function get_events() {
 		return apply_filters( 'openagenda_events', $this->events, $this->uid );
@@ -363,6 +387,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the current event in the loop.
+	 *
+	 * @return array<string, mixed>|null
 	 */
 	public function get_current_event() {
 		return $this->event;
@@ -371,6 +397,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the raw response.
+	 *
+	 * @return array<string, mixed>|\WP_Error|null
 	 */
 	public function get_raw_response() {
 		return $this->raw_response;
@@ -379,6 +407,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the JSON reponse.
+	 *
+	 * @return array<string, mixed>
 	 */
 	public function get_json() {
 		return ! empty( $this->json ) ? $this->json : array();
@@ -387,6 +417,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the source.
+	 *
+	 * @return string
 	 */
 	public function get_source() {
 		return $this->source;
@@ -395,6 +427,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns whether to allow for embedded content.
+	 *
+	 * @return mixed
 	 */
 	public function include_embeds() {
 		return apply_filters( 'openagenda_include_embeds', $this->get_option( 'include_embeds' ), $this->uid );
@@ -403,6 +437,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns whether infinite scroll should be used
+	 *
+	 * @return mixed
 	 */
 	public function uses_infinite_scroll() {
 		return apply_filters( 'openagenda_infinite_scroll', $this->get_option( 'infinite_scroll' ), $this->uid );
@@ -442,6 +478,8 @@ class OpenAgenda {
 
 	/**
 	 * Retrieve the longDescription field format
+	 *
+	 * @return string
 	 */
 	public function get_longDescription_format() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
 		return $this->get_option( 'include_embeds' ) ? 'HTMLWithEmbeds' : 'markdown';
@@ -451,7 +489,7 @@ class OpenAgenda {
 	/**
 	 * Retrieve an array of supported exports formats
 	 *
-	 * @return  array  $formats
+	 * @return  array<string, string> $formats
 	 */
 	public function get_exports_formats() {
 		$formats = array(
@@ -478,12 +516,12 @@ class OpenAgenda {
 	/**
 	 * Returns the base API URL.
 	 *
-	 * @param  string $slug  Slug of the event, if a single event is requested.
+	 * @param  string $slug Slug of the event, if a single event is requested.
 	 * @return  string  $base_API_url  URL to the root events export, based on UID.
 	 */
-	public function get_api_url( $slug = false ) {
+	public function get_api_url( $slug = '' ) {
 		$base_api_url = sprintf( '%s/agendas/%s/events', $this->base_api_url, $this->uid );
-		if ( $this->is_single() && $slug ) {
+		if ( $this->is_single() && '' !== $slug ) {
 			$base_api_url = sprintf( '%s/agendas/%s/events/slug/%s', $this->base_api_url, $this->uid, sanitize_text_field( $slug ) );
 		}
 		return $base_api_url;
@@ -494,10 +532,10 @@ class OpenAgenda {
 	 * Returns a usable request URL
 	 * Finalizes the request URL by adding user API key and other params.
 	 *
-	 * @param   string $export  Export format, if request is for an export.
+	 * @param   string $export Export format, if request is for an export.
 	 * @return  string  $url     URL for the export event.
 	 */
-	public function get_request_url( $export = false ) {
+	public function get_request_url( $export = '' ) {
 
 		// Get the base url.
 		$args    = $this->get_args();
@@ -526,9 +564,9 @@ class OpenAgenda {
 	/**
 	 * Parses options
 	 *
-	 * @param   array $options      If boolean, then a deprecated constructor is used.
-	 * @param   bool  $use_context  If provided, then a deprecated constructor is used.
-	 * @return  array  $options
+	 * @param   array<string, mixed>|bool $options If boolean, then a deprecated constructor is used.
+	 * @param   bool                      $use_context  If provided, then a deprecated constructor is used.
+	 * @return  array<string, mixed> $options
 	 */
 	public function parse_options( $options = array(), $use_context = true ) {
 		$settings = get_option( 'openagenda_general_settings' );
@@ -545,7 +583,7 @@ class OpenAgenda {
 		);
 
 		// Check deprecated call to class constructor.
-		if ( is_bool( $options ) ) {
+		if ( ! is_array( $options ) ) {
 			$options = array(
 				'cache'   => (bool) $options,
 				'context' => (bool) $use_context,
@@ -559,8 +597,8 @@ class OpenAgenda {
 	/**
 	 * Parse query arguments
 	 *
-	 * @param  array $args  Arguments to parse.
-	 * @return  array $args
+	 * @param  array<string, mixed> $args Arguments to parse.
+	 * @return  array<string, mixed> Parsed arguments.
 	 */
 	public function parse_args( $args = array() ) {
 		$defaults         = $this->get_default_params();
@@ -597,8 +635,8 @@ class OpenAgenda {
 	/**
 	 * Performs the actual request
 	 *
-	 * @param  array $args  Request arguments.
-	 * @return         $response
+	 * @param  array<string, mixed> $args Request arguments.
+	 * @return array<string, mixed>|\WP_Error|false Remote response.
 	 */
 	public function request( $args = array() ) {
 
@@ -636,6 +674,8 @@ class OpenAgenda {
 
 	/**
 	 * Parses the raw response to get the JSON
+	 *
+	 * @return array<string, mixed>
 	 */
 	public function parse_response() {
 		$body = wp_remote_retrieve_body( $this->raw_response );
@@ -650,6 +690,8 @@ class OpenAgenda {
 
 	/**
 	 * Maybe cache the raw reponse.
+	 *
+	 * @return void
 	 */
 	public function maybe_cache() {
 		if ( $this->should_cache() ) {
@@ -678,7 +720,7 @@ class OpenAgenda {
 	 * @return  bool  $should_cache
 	 */
 	public function should_cache() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		if ( wp_doing_ajax() ) {
 			return false;
 		}
 		if ( 0 === $this->total_pages ) {
@@ -698,7 +740,7 @@ class OpenAgenda {
 	 * @return  bool  $should_cache
 	 */
 	public function should_serve_cache() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		if ( wp_doing_ajax() ) {
 			return false;
 		}
 		if ( ! $this->get_option( 'use_cache' ) ) {
@@ -711,6 +753,8 @@ class OpenAgenda {
 
 	/**
 	 * Resets the index
+	 *
+	 * @return void
 	 */
 	public function reset_index() {
 		$this->index = 0;
@@ -719,6 +763,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns whether there are events to display.
+	 *
+	 * @return bool
 	 */
 	public function have_events() {
 		return ! empty( $this->events ) && $this->count > 0 && $this->count > $this->index;
@@ -727,6 +773,8 @@ class OpenAgenda {
 
 	/**
 	 * Prepares the event to display.
+	 *
+	 * @return void
 	 */
 	public function the_event() {
 		$events       = $this->get_events();
@@ -737,6 +785,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns whether there are pages to go through
+	 *
+	 * @return bool
 	 */
 	public function have_pages() {
 		return $this->total_pages > 1;
@@ -745,6 +795,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns the offset of the current event in the loop
+	 *
+	 * @return int
 	 */
 	public function get_event_offset() {
 		$offset       = (int) $this->offset;
@@ -756,6 +808,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns whether this instance uses context
+	 *
+	 * @return bool
 	 */
 	public function use_context() {
 		return (bool) $this->get_option( 'context' );
@@ -764,6 +818,8 @@ class OpenAgenda {
 
 	/**
 	 * Gets the navigation context
+	 *
+	 * @return array<string, mixed>|false
 	 */
 	public function get_context() {
 		if ( ! $this->get_option( 'context' ) ) {
@@ -776,6 +832,8 @@ class OpenAgenda {
 
 	/**
 	 * Sets the navigation context
+	 *
+	 * @return void
 	 */
 	public function set_context() {
 		if ( ! $this->get_option( 'context' ) ) {
@@ -808,8 +866,8 @@ class OpenAgenda {
 	/**
 	 * Extract API params from an array or arguments
 	 *
-	 * @param   array $args     Array of args.
-	 * @return  array  $params   Array of params.
+	 * @param   array<string, mixed> $args Array of args.
+	 * @return  array<string, mixed> Array of params.
 	 */
 	public function extract_params( $args = array() ) {
 		if ( empty( $args ) ) {
@@ -831,8 +889,8 @@ class OpenAgenda {
 	/**
 	 * Cleans up an array of api query argument to get only filters
 	 *
-	 * @param   array $args     Array of args.
-	 * @return  array  $filters  Array of filters.
+	 * @param   array<string, mixed> $args Array of args.
+	 * @return  array<string, mixed> Array of filters.
 	 */
 	public function extract_filters( $args ) {
 		$filters  = array();
@@ -850,6 +908,8 @@ class OpenAgenda {
 
 	/**
 	 * Returns default api params keys
+	 *
+	 * @return array<string, mixed>
 	 */
 	public function get_default_params() {
 		$defaults = array(
@@ -873,7 +933,7 @@ class OpenAgenda {
 	/**
 	 * Returns agenda settings and schema
 	 *
-	 * @return  array  $settings;
+	 * @return array<string, mixed> Settings and schema.
 	 */
 	public function get_settings() {
 		if ( ! $this->settings ) {
