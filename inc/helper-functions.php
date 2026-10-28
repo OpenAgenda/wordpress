@@ -587,11 +587,11 @@ function openagenda_group_timings( $timings ) {
  * @return  array<string, mixed>|false Decoded array of context data, or false if unavailable.
  */
 function openagenda_decode_context( $context_string = null ) {
-	if ( ! $context_string ) {
-		$context_string = isset( $_GET['context'] ) ? $_GET['context'] : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( null === $context_string ) {
+		$context_string = isset( $_GET['context'] ) ? $_GET['context'] : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
-	$decoded_context = ! empty( $context_string ) ? base64_decode( $_GET['context'] ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$context         = $decoded_context ? json_decode( $decoded_context, true ) : false;
+	$decoded_context = ! empty( $context_string ) ? base64_decode( $context_string ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$context         = false !== $decoded_context ? json_decode( $decoded_context, true ) : array();
 	return $context;
 }
 

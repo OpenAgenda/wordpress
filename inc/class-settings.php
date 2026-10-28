@@ -20,26 +20,28 @@ class Settings implements Hookable {
 	 * Settings groups to register.
 	 * Basically one for each settings tab.
 	 *
-	 * @var  array  $settings
+	 * @var  array<string, array<string, mixed>> $settings
 	 */
 	protected $settings = array();
 
 	/**
 	 * Settings sections to register.
 	 *
-	 * @var  array  $sections
+	 * @var  array<string, array<string, mixed>> $sections
 	 */
 	protected $sections = array();
 
 	/**
 	 * Settings fields to register.
 	 *
-	 * @var array  $fields
+	 * @var array<string, array<string, mixed>> $fields
 	 */
 	protected $fields = array();
 
 	/**
 	 * Registers hooks
+	 *
+	 * @return void
 	 */
 	public function register_hooks() {
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
@@ -48,6 +50,8 @@ class Settings implements Hookable {
 
 	/**
 	 * Returns the array of settings to register
+	 *
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_settings() {
 		if ( empty( $this->settings ) ) {
@@ -74,6 +78,8 @@ class Settings implements Hookable {
 
 	/**
 	 * Returns the array of settings sections to register
+	 *
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_sections() {
 		if ( empty( $this->sections ) ) {
@@ -103,6 +109,8 @@ class Settings implements Hookable {
 
 	/**
 	 * Returns the array of settings fields to register
+	 *
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_fields() {
 		if ( empty( $this->fields ) ) {
@@ -338,6 +346,8 @@ class Settings implements Hookable {
 
 	/**
 	 * Registers all our settings.
+	 *
+	 * @return void
 	 */
 	public function register_settings() {
 		foreach ( $this->get_settings() as $slug => $setting ) {
@@ -356,7 +366,8 @@ class Settings implements Hookable {
 	/**
 	 * Displays a <input> field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
+	 * @param  array<string, mixed> $args Arguments passed to corresponding add_settings_field() call.
+	 * @return void
 	 */
 	public function input_field_markup( $args ) {
 
@@ -404,7 +415,8 @@ class Settings implements Hookable {
 	/**
 	 * Displays a media button uploader field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
+	 * @param  array<string, mixed> $args Arguments passed to corresponding add_settings_field() call.
+	 * @return void
 	 */
 	public function media_upload_field_markup( $args ) {
 
@@ -441,8 +453,8 @@ class Settings implements Hookable {
 				<button
 					type="button"
 					class="button media-upload-button"
-					data-update="<?php echo esc_attr( $args['update_label'] ); ?>"
-					data-value="<?php echo esc_attr( $value ); ?>"
+					data-update="<?php echo esc_attr( (string) $args['update_label'] ); ?>"
+					data-value="<?php echo esc_attr( (string) $value ); ?>"
 				>
 					<?php echo esc_html( $label ); ?>
 				</button>
@@ -459,7 +471,7 @@ class Settings implements Hookable {
 					id="<?php echo esc_attr( $field_id ); ?>" 
 					name="<?php echo esc_attr( $field_name ); ?>" 
 					class="media-input-field"
-					value="<?php echo esc_attr( $value ); ?>"
+					value="<?php echo esc_attr( (string) $value ); ?>"
 				>
 				<?php
 				if ( ! empty( $args['description'] ) ) {
@@ -473,7 +485,8 @@ class Settings implements Hookable {
 	/**
 	 * Displays a <input type="checkbox"> field
 	 *
-	 * @param  array $args  Arguments passed to corresponding add_settings_field() call.
+	 * @param  array<string, mixed> $args Arguments passed to corresponding add_settings_field() call.
+	 * @return void
 	 */
 	public function checkbox_field_markup( $args ) {
 
@@ -517,8 +530,8 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes general settings
 	 *
-	 * @param   array $settings  Settings value to sanitize.
-	 * @return  array  $settings
+	 * @param   array<string, mixed> $settings Settings value to sanitize.
+	 * @return  array<string, mixed> Sanitized settings.
 	 */
 	public function sanitize_general_settings( $settings ) {
 		$new_settings = array(
@@ -541,8 +554,8 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes integrations settings
 	 *
-	 * @param   array $settings  Settings value to sanitize.
-	 * @return  array  $settings
+	 * @param   array<string, mixed> $settings Settings value to sanitize.
+	 * @return  array<string, mixed> Sanitized settings.
 	 */
 	public function sanitize_integrations_settings( $settings ) {
 		$new_settings = array(
@@ -557,8 +570,8 @@ class Settings implements Hookable {
 	/**
 	 * Sanitizes permalinks settings
 	 *
-	 * @param   array $settings  Settings value to sanitize.
-	 * @return  array  $settings
+	 * @param   array<string, mixed> $settings Settings value to sanitize.
+	 * @return  array<string, mixed> Sanitized settings.
 	 */
 	public function sanitize_permalinks_settings( $settings ) {
 		return $settings;
@@ -567,6 +580,8 @@ class Settings implements Hookable {
 
 	/**
 	 * Sanitizes and saves permalinks settings
+	 *
+	 * @return void
 	 */
 	public function save_permalinks_settings() {
 		if ( isset( $_POST['openagenda_permalinks_settings'] ) ) {

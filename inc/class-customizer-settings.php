@@ -19,21 +19,21 @@ class Customizer_Settings implements Hookable {
 	/**
 	 * Array of panels to register
 	 *
-	 * @var  array  $panels
+	 * @var  array<string, array<string, mixed>> $panels
 	 */
 	protected $panels = array();
 
 	/**
 	 * Array of sections to register
 	 *
-	 * @var  array  $sections
+	 * @var  array<string, array<string, mixed>> $sections
 	 */
 	protected $sections = array();
 
 	/**
 	 * Array of settings to register
 	 *
-	 * @var  array  $settings
+	 * @var  array<string, array<string, mixed>> $settings
 	 */
 	protected $settings = array();
 
@@ -48,6 +48,8 @@ class Customizer_Settings implements Hookable {
 
 	/**
 	 * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
+	 *
+	 * @return void
 	 */
 	public function customize_preview_js() {
 		wp_enqueue_script( 'oa-customizer', OPENAGENDA_URL . 'assets/js/customizer.js', array( 'customize-preview' ), OPENAGENDA_VERSION, true );
@@ -56,6 +58,8 @@ class Customizer_Settings implements Hookable {
 
 	/**
 	 * Returns all customizer panels
+	 *
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_panels() {
 		if ( empty( $this->panels ) ) {
@@ -72,6 +76,8 @@ class Customizer_Settings implements Hookable {
 
 	/**
 	 * Returns all customizer sections
+	 *
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_sections() {
 		if ( empty( $this->sections ) ) {
@@ -87,6 +93,8 @@ class Customizer_Settings implements Hookable {
 
 	/**
 	 * Returns all customizer settings
+	 *
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_settings() {
 		if ( empty( $this->settings ) ) {
@@ -110,7 +118,8 @@ class Customizer_Settings implements Hookable {
 	/**
 	 * Register all the customizer settings
 	 *
-	 * @param  WP_Customize_Manager $wp_customize  Customizer instance.
+	 * @param  \WP_Customize_Manager $wp_customize  Customizer instance.
+	 * @return void
 	 */
 	public function customize_register( $wp_customize ) {
 

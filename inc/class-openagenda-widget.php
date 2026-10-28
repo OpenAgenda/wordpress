@@ -15,28 +15,28 @@ class OpenAgenda_Widget extends \WP_Widget {
 	/**
 	 * Array of additional settings
 	 *
-	 * @var  array  $additional_settings
+	 * @var  array<string, array<string, mixed>> $additional_settings
 	 */
 	protected $additional_settings = array();
 
 	/**
 	 * Array of available filters
 	 *
-	 * @var  array  $available_filters
+	 * @var  array<string, array<string, mixed>> $available_filters
 	 */
 	protected $available_filters = array();
 
 	/**
 	 * Constructor
 	 *
-	 * @param  string $id_base         Optional Base ID for the widget, lowercase and unique. If left empty,
-	 *                                 a portion of the widget's class name will be used Has to be unique.
-	 * @param  string $name            Name for the widget displayed on the admin page.
-	 * @param  array  $widget_options  Optional. Widget options. See wp_register_sidebar_widget() for information
+	 * @param  string               $id_base         Optional Base ID for the widget, lowercase and unique. If left empty,
+	 *                                               a portion of the widget's class name will be used Has to be unique.
+	 * @param  string               $name            Name for the widget displayed on the admin page.
+	 * @param  array<string, mixed> $widget_options Optional. Widget options. See wp_register_sidebar_widget() for information
 	 *                                 on accepted arguments. Default empty array.
-	 * @param  array  $control_options Optional. Widget control options. See wp_register_widget_control() for
+	 * @param  array<string, mixed> $control_options Optional. Widget control options. See wp_register_widget_control() for
 	 *                                 information on accepted arguments. Default empty array.
-	 * @param  array  $args            Optional. Additional arguments.
+	 * @param  array<string, mixed> $args Optional. Additional arguments.
 	 */
 	public function __construct( $id_base, $name, $widget_options = array(), $control_options = array(), $args = array() ) {
 		$this->available_filters   = ! empty( $args['available_filters'] ) ? $args['available_filters'] : array();
@@ -47,35 +47,38 @@ class OpenAgenda_Widget extends \WP_Widget {
 	/**
 	 * Outputs the widget on the front end
 	 *
-	 * @param array $args      Display arguments including 'before_title', 'after_title',
+	 * @param array<string, mixed> $args Display arguments including 'before_title', 'after_title',
 	 *                         'before_widget', and 'after_widget'.
-	 * @param array $instance  The settings for the particular instance of the widget.
+	 * @param array<string, mixed> $instance The settings for the particular instance of the widget.
+	 * @return void
 	 */
-	public function widget( $args, $instance ) {}
+	public function widget( $args, $instance ): void {}
 
 	/**
 	 * Outputs the settings form in the Widgets administration screen
 	 *
-	 * @param array $instance  Current settings.
-	 * @return string          Default return is 'noform'.
+	 * @param array<string, mixed> $instance Current settings.
+	 * @return string|null
 	 */
-	public function form( $instance ) {
-		return '';
+	public function form( $instance ): ?string {
+		return null;
 	}
 
 	/**
 	 * Saves our options
 	 *
-	 * @param   array $new_instance  New settings for this instance.
-	 * @param   array $old_instance  Old settings for this instance.
-	 * @return  array                 Settings to save or bool false to cancel saving
+	 * @param   array<string, mixed> $new_instance New settings for this instance.
+	 * @param   array<string, mixed> $old_instance Old settings for this instance.
+	 * @return  array<string, mixed> Settings to save.
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		return $new_instance;
 	}
 
 	/**
 	 * Returns array of available settings
+	 *
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_additional_settings() {
 		return apply_filters( "{$this->id_base}_additional_settings", $this->additional_settings ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
@@ -83,6 +86,8 @@ class OpenAgenda_Widget extends \WP_Widget {
 
 	/**
 	 * Returns array of available filters
+	 *
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_available_filters() {
 		return apply_filters( "{$this->id_base}_available_filters", $this->available_filters ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
@@ -91,10 +96,11 @@ class OpenAgenda_Widget extends \WP_Widget {
 	/**
 	 * Generates a settings field
 	 *
-	 * @param  array $field     Array of field arguments.
-	 * @param  array $instance  Instance settings.
+	 * @param  array<string, mixed> $field Array of field arguments.
+	 * @param  array<string, mixed> $instance Instance settings.
+	 * @return string
 	 */
-	public function additional_setting_field( $field, $instance ) {
+	public function additional_setting_field( $field, $instance ): string {
 		$value = isset( $instance[ $field['name'] ] ) ? $instance[ $field['name'] ] : $field['default'];
 		$html  = '';
 		switch ( $field['type'] ) {

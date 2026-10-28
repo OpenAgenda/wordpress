@@ -15,19 +15,21 @@ class Admin_Pages implements Hookable {
 	/**
 	 * Main page to register
 	 *
-	 * @var array  $main_page
+	 * @var array<string, mixed> $main_page
 	 */
 	protected $main_page = array();
 
 	/**
 	 * Tabs to register
 	 *
-	 * @var  array  $tabs
+	 * @var  array<string, string> $tabs
 	 */
 	protected $tabs = array();
 
 	/**
 	 * Registers hooks
+	 *
+	 * @return void
 	 */
 	public function register_hooks() {
 		add_action( 'admin_menu', array( $this, 'register_admin_page' ) );
@@ -38,6 +40,8 @@ class Admin_Pages implements Hookable {
 
 	/**
 	 * Registers the admin pages
+	 *
+	 * @return void
 	 */
 	public function register_admin_page() {
 		$main_page = $this->get_main_page();
@@ -57,7 +61,7 @@ class Admin_Pages implements Hookable {
 	/**
 	 * Returns the parent admin page to register
 	 *
-	 * @return  array  Main page arguments
+	 * @return  array<string, mixed> Main page arguments
 	 */
 	public function get_main_page() {
 		if ( empty( $this->main_page ) ) {
@@ -78,7 +82,7 @@ class Admin_Pages implements Hookable {
 	/**
 	 * Returns the registered tabs on the admin page.
 	 *
-	 * @return  array  Main page arguments
+	 * @return  array<string, string> Main page tabs
 	 */
 	public function get_tabs() {
 		if ( empty( $this->tabs ) ) {
@@ -95,7 +99,7 @@ class Admin_Pages implements Hookable {
 	 * Returns the settings page url.
 	 * Override for menu_page_url() (to get unescaped url)
 	 *
-	 * @return  string  Settings page url
+	 * @return  string Settings page URL.
 	 */
 	public function get_menu_page_url() {
 		global $_parent_pages;
@@ -116,6 +120,8 @@ class Admin_Pages implements Hookable {
 
 	/**
 	 * Settings page display callback
+	 *
+	 * @return void
 	 */
 	public function settings_page_markup() {
 		$tabs        = $this->get_tabs();
@@ -148,6 +154,8 @@ class Admin_Pages implements Hookable {
 
 	/**
 	 * Content for the "General" settings tab
+	 *
+	 * @return void
 	 */
 	public function general_tab_content() {
 		?>
@@ -164,6 +172,8 @@ class Admin_Pages implements Hookable {
 
 	/**
 	 * Content for the 'display' settings tab
+	 *
+	 * @return void
 	 */
 	public function integrations_tab_content() {
 		?>

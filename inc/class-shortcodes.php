@@ -505,7 +505,7 @@ class Shortcodes implements Hookable {
 
 		// If we're on a events page, backup the main events.
 		openagenda_save();
-		$openagenda = new OpenAgenda( (int) $atts['uid'], $args, $options );
+		$openagenda = new OpenAgenda( $atts['uid'], $args, $options );
 		ob_start();
 		include openagenda_get_template( 'preview-loop' );
 		$filter = ob_get_clean();

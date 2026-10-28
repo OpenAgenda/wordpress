@@ -14,7 +14,7 @@ namespace OpenAgenda;
  *
  * Handles all Ajax requests.
  */
-class Ajax_Handler {
+class Ajax_Handler implements Hookable {
 
 	/**
 	 * Debug
@@ -32,6 +32,8 @@ class Ajax_Handler {
 
 	/**
 	 * Registers hooks
+	 *
+	 * @return void
 	 */
 	public function register_hooks() {
 		add_action( 'wp_ajax_update_events', array( $this, 'update_events' ) );
@@ -42,21 +44,21 @@ class Ajax_Handler {
 
 	/**
 	 * Handles filter AJAX request and returns events HTML
+	 *
+	 * @return void
 	 */
 	public function update_events() {
 		global $openagenda;
 		global $post;
 
-		$post_id = isset( $_REQUEST['postId'] ) ? (int) $_REQUEST['postId'] : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( ! $post_id ) {
+		$post_id = isset( $_REQUEST['postId'] ) ? (int) $_REQUEST['postId'] : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( 0 === $post_id ) {
 			wp_send_json_error( new \WP_Error( 'missing-postid', __( 'No post ID was provided.', 'openagenda' ) ) );
-			exit;
 		}
 
-		$uid = get_post_meta( $post_id, 'oa-calendar-uid', true );
-		if ( ! $uid ) {
+		$uid = (string) get_post_meta( $post_id, 'oa-calendar-uid', true );
+		if ( '' === $uid ) {
 			wp_send_json_error( new \WP_Error( 'wrong-calendar-id', __( 'The post ID provided does not refer to a calendar.', 'openagenda' ) ) );
-			exit;
 		}
 
 		// Setup $post global to allow for basic template tags to work.
@@ -112,12 +114,13 @@ class Ajax_Handler {
 		);
 
 		echo wp_send_json( $response ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		wp_die();
 	}
 
 
 	/**
 	 * Handler for event navigation on single event pages.
+	 *
+	 * @return void
 	 */
 	public function get_adjacent_event() {
 		global $openagenda;
@@ -131,23 +134,23 @@ class Ajax_Handler {
 		$referer   = wp_get_referer();
 		$context   = openagenda_decode_context();
 		$direction = 'next' === $_GET['direction'] ? 'next' : 'previous';
-		$uid       = isset( $_GET['uid'] ) ? (int) $_GET['uid'] : false;
-		$post_id   = isset( $_GET['post_id'] ) ? (int) $_GET['post_id'] : false;
+		$uid       = isset( $_GET['uid'] ) ? sanitize_text_field( wp_unslash( $_GET['uid'] ) ) : '';
+		$post_id   = isset( $_GET['post_id'] ) ? (int) $_GET['post_id'] : 0;
 
-		if ( ! $context || ! $uid ) {
+		if ( ! $context || '' === $uid ) {
 			wp_safe_redirect( $referer );
-			exit;
+			return;
 		}
 
 		// Read referer event.
 		$event_offset = isset( $context['event_offset'] ) ? (int) $context['event_offset'] : null;
 		if ( null === $event_offset ) {
 			wp_safe_redirect( $referer );
-			exit;
+			return;
 		}
 
 		// Setup $post global to allow for basic template tags to work.
-		if ( $post_id ) {
+		if ( 0 !== $post_id ) {
 			$post = get_post( $post_id ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			setup_postdata( $post );
 		}
@@ -191,7 +194,6 @@ class Ajax_Handler {
 			$encoded_context = openagenda_encode_context( $context );
 			$event_permalink = add_query_arg( 'context', $encoded_context, $event_permalink );
 			wp_safe_redirect( $event_permalink );
-			exit;
 		}
 
 		wp_safe_redirect( $referer );

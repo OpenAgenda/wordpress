@@ -16,7 +16,7 @@ class Preview_Widget extends OpenAgenda_Widget {
 	 * Constructor
 	 * Uses parent constructor.
 	 *
-	 * @param  array $args  Additional arguments.
+	 * @param  array<string, mixed> $args Additional arguments.
 	 */
 	public function __construct( $args = array() ) {
 		$args['additional_settings'] = array(
@@ -93,11 +93,12 @@ class Preview_Widget extends OpenAgenda_Widget {
 	/**
 	 * Outputs the widget on the front end
 	 *
-	 * @param array $args      Display arguments including 'before_title', 'after_title',
+	 * @param array<string, mixed> $args Display arguments including 'before_title', 'after_title',
 	 *                         'before_widget', and 'after_widget'.
-	 * @param array $instance  The settings for the particular instance of the widget.
+	 * @param array<string, mixed> $instance The settings for the particular instance of the widget.
+	 * @return void
 	 */
-	public function widget( $args, $instance ) {
+	public function widget( $args, $instance ): void {
 		echo $args['before_widget'];  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		if ( ! empty( $instance['title'] ) ) {
@@ -119,9 +120,10 @@ class Preview_Widget extends OpenAgenda_Widget {
 	/**
 	 * Outputs the settings form in the Widgets administration screen
 	 *
-	 * @param array $instance  Current settings.
+	 * @param array<string, mixed> $instance Current settings.
+	 * @return string|null
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): ?string {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$uid   = ! empty( $instance['uid'] ) ? $instance['uid'] : '';
 		?>
@@ -150,17 +152,18 @@ class Preview_Widget extends OpenAgenda_Widget {
 				echo $this->additional_setting_field( $field, $instance ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
+		return null;
 	}
 
 
 	/**
 	 * Saves our options
 	 *
-	 * @param   array $new_instance  New settings for this instance.
-	 * @param   array $old_instance  Old settings for this instance.
-	 * @return  array                 Settings to save or bool false to cancel saving
+	 * @param   array<string, mixed> $new_instance New settings for this instance.
+	 * @param   array<string, mixed> $old_instance Old settings for this instance.
+	 * @return  array<string, mixed> Settings to save.
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		$instance = array(
 			'title'   => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
 			'uid'     => ! empty( $new_instance['uid'] ) ? sanitize_text_field( $new_instance['uid'] ) : '',

@@ -15,7 +15,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 	/**
 	 * Constructor
 	 *
-	 * @param  array $args Optional. Additional arguments.
+	 * @param  array<string, mixed> $args Optional. Additional arguments.
 	 */
 	public function __construct( $args = array() ) {
 		$settings            = get_option( 'openagenda_integrations_settings' );
@@ -173,11 +173,12 @@ class Filter_Widget extends OpenAgenda_Widget {
 	/**
 	 * Outputs the widget on the front end
 	 *
-	 * @param array $args      Display arguments including 'before_title', 'after_title',
+	 * @param array<string, mixed> $args Display arguments including 'before_title', 'after_title',
 	 *                         'before_widget', and 'after_widget'.
-	 * @param array $instance  The settings for the particular instance of the widget.
+	 * @param array<string, mixed> $instance The settings for the particular instance of the widget.
+	 * @return void
 	 */
-	public function widget( $args, $instance ) {
+	public function widget( $args, $instance ): void {
 		$available_filters = $this->get_available_filters();
 
 		if ( ! is_singular( 'oa-calendar' ) ) {
@@ -208,9 +209,10 @@ class Filter_Widget extends OpenAgenda_Widget {
 	/**
 	 * Outputs the settings form in the Widgets administration screen
 	 *
-	 * @param array $instance  Current settings.
+	 * @param array<string, mixed> $instance Current settings.
+	 * @return string|null
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): ?string {
 		$title             = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$filter            = ! empty( $instance['filter'] ) ? $instance['filter'] : '';
 		$dropdown          = ! empty( $instance['dropdown'] ) ? $instance['dropdown'] : '';
@@ -254,17 +256,18 @@ class Filter_Widget extends OpenAgenda_Widget {
 				echo '</div>';
 			}
 		}
+		return null;
 	}
 
 
 	/**
 	 * Saves our options
 	 *
-	 * @param   array $new_instance  New settings for this instance.
-	 * @param   array $old_instance  Old settings for this instance.
-	 * @return  array                 Settings to save or bool false to cancel saving
+	 * @param   array<string, mixed> $new_instance New settings for this instance.
+	 * @param   array<string, mixed> $old_instance Old settings for this instance.
+	 * @return  array<string, mixed> Settings to save.
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		$instance = array(
 			'title'    => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
 			'filter'   => array_key_exists( $new_instance['filter'], $this->get_available_filters() ) ? $new_instance['filter'] : '',

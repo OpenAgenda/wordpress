@@ -14,14 +14,14 @@ class Metaboxes implements Hookable {
 	/**
 	 * Main metabox to register
 	 *
-	 * @var  array  $metaboxes
+	 * @var  array<string, array<string, mixed>> $metaboxes
 	 */
 	protected $metaboxes = array();
 
 	/**
 	 * Fields to display
 	 *
-	 * @var array $fields
+	 * @var array<string, array<string, mixed>> $fields
 	 */
 	protected $fields = array();
 
@@ -37,7 +37,7 @@ class Metaboxes implements Hookable {
 	/**
 	 * Returns the parent admin page to register
 	 *
-	 * @return  array  Main page arguments
+	 * @return  array<string, array<string, mixed>> Metabox arguments.
 	 */
 	public function get_metaboxes() {
 		if ( empty( $this->metaboxes ) ) {
@@ -60,7 +60,7 @@ class Metaboxes implements Hookable {
 	/**
 	 * Returns the list of fields
 	 *
-	 * @return  array  Fields array : 'name' => $args
+	 * @return  array<string, array<string, mixed>> Fields keyed by name.
 	 */
 	public function get_fields() {
 		if ( empty( $this->fields ) ) {
@@ -191,8 +191,9 @@ class Metaboxes implements Hookable {
 	/**
 	 * Register the metaboxes
 	 *
-	 * @param  string  $post_type  The post type for the current page.
-	 * @param  WP_Post $post       The post object.
+	 * @param  string   $post_type  The post type for the current page.
+	 * @param  \WP_Post $post The post object.
+	 * @return void
 	 */
 	public function register_metaboxes( $post_type, $post ) {
 		foreach ( $this->get_metaboxes() as $id => $args ) {
@@ -212,8 +213,9 @@ class Metaboxes implements Hookable {
 	/**
 	 * Settings metabox markup
 	 *
-	 * @param  WP_Post $post  Current post.
-	 * @param  array   $args  Additional callback arguments, passed via add_meta_box() function call.
+	 * @param  \WP_Post             $post Current post.
+	 * @param  array<string, mixed> $args Additional callback arguments, passed via add_meta_box() function call.
+	 * @return void
 	 */
 	public function calendar_settings_markup( $post, $args ) {
 		wp_nonce_field( 'oa_calendar_settings_metabox_save_' . (int) $post->ID, 'oa_calendar_settings_nonce' );
@@ -238,8 +240,9 @@ class Metaboxes implements Hookable {
 	/**
 	 * Renders our metabox fields
 	 *
-	 * @param  string $name  Name of the field. Used in id and name attributes.
-	 * @param  array  $args  Array of arguments for the field.
+	 * @param  string               $name  Name of the field. Used in id and name attributes.
+	 * @param  array<string, mixed> $args Array of arguments for the field.
+	 * @return void
 	 */
 	public function render_field( $name, $args = array() ) {
 		global $post;
@@ -408,9 +411,10 @@ class Metaboxes implements Hookable {
 	/**
 	 * Saves settings metabox fields
 	 *
-	 * @param  int     $post_ID  Post ID.
-	 * @param  WP_Post $post     Post object.
-	 * @param  bool    $update   Whether this is an existing post being updated or not.
+	 * @param  int      $post_ID  Post ID.
+	 * @param  \WP_Post $post Post object.
+	 * @param  bool     $update   Whether this is an existing post being updated or not.
+	 * @return void
 	 */
 	public function calendar_settings_save( $post_ID, $post, $update ) {
 
@@ -478,7 +482,7 @@ class Metaboxes implements Hookable {
 	 *
 	 * @param  string $uid  Agenda uid to test.
 	 * @param  int    $post_id  Post ID.
-	 * @return  array  $valid  Validity and error message.
+	 * @return  array{valid: bool, message: string} Validity and error message.
 	 */
 	public function validate_agenda( $uid, $post_id ) {
 		$openagenda = new OpenAgenda(
@@ -517,6 +521,7 @@ class Metaboxes implements Hookable {
 	 *
 	 * @param  string $agenda_uid  Agenda to fetch settings for.
 	 * @param  int    $post_id  Post ID.
+	 * @return array<string, mixed> Agenda settings.
 	 */
 	public function save_agenda_settings( $agenda_uid, $post_id ) {
 		$settings = get_option( 'openagenda_general_settings' );

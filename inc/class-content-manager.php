@@ -15,7 +15,7 @@ class Content_Manager implements Hookable {
 	/**
 	 * Post types to register
 	 *
-	 * @var  array  $post_types
+	 * @var  array<string, array<string, mixed>> $post_types
 	 */
 	protected $post_types;
 
@@ -29,7 +29,7 @@ class Content_Manager implements Hookable {
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
 		add_filter( 'body_class', array( $this, 'body_class' ), 10, 1 );
 		add_filter( 'document_title_parts', array( $this, 'document_title_parts' ), 10, 1 );
-		add_filter( 'the_content', array( $this, 'the_content' ), 8, 2 );
+		add_filter( 'the_content', array( $this, 'the_content' ), 8, 1 );
 		add_filter( 'write_your_story', array( $this, 'write_your_story' ), 10, 2 );
 		add_filter( 'get_pages', array( $this, 'get_front_pages' ), 10, 2 );
 		add_action( 'pre_get_posts', array( $this, 'allow_calendars_front_page' ) );
@@ -54,6 +54,8 @@ class Content_Manager implements Hookable {
 
 	/**
 	 * Registers necessary post types
+	 *
+	 * @return void
 	 */
 	public function register_post_types() {
 		$post_types = $this->get_post_types();
@@ -66,7 +68,7 @@ class Content_Manager implements Hookable {
 	/**
 	 * Returns a filterable array of post types to register
 	 *
-	 * @return  array  $post_types
+	 * @return  array<string, array<string, mixed>> $post_types
 	 */
 	public function get_post_types() {
 		if ( empty( $this->post_types ) ) {
@@ -117,6 +119,8 @@ class Content_Manager implements Hookable {
 
 	/**
 	 * Register rewrite rule for single events.
+	 *
+	 * @return void
 	 */
 	public function register_rewrite_rules() {
 
@@ -138,8 +142,8 @@ class Content_Manager implements Hookable {
 	/**
 	 * Adds relevant body classes
 	 *
-	 * @param   array $classes  Array of registered body classes.
-	 * @return  array  $classes
+	 * @param   array<string> $classes Array of registered body classes.
+	 * @return  array<string> Body classes.
 	 */
 	public function body_class( $classes ) {
 		global $openagenda;
@@ -158,7 +162,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function canonical_url( $url ) {
 		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
-			$url = openagenda_event_permalink( false, false, false );
+			$url = openagenda_event_permalink( '', false, false );
 		}
 		return $url;
 	}
@@ -191,7 +195,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function the_title( $title, $id ) {
 		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
-			$title = \openagenda_get_field( 'title', false, false );
+			$title = \openagenda_get_field( 'title' );
 		}
 		return $title;
 	}
@@ -227,8 +231,8 @@ class Content_Manager implements Hookable {
 	/**
 	 * Filters the content prompt on calendars.
 	 *
-	 * @param   string  $prompt  Default Prompt.
-	 * @param   WP_Post $post    Current post.
+	 * @param   string   $prompt  Default Prompt.
+	 * @param   \WP_Post $post Current post.
 	 * @return  string   $prompt  Filtered Prompt.
 	 */
 	public function write_your_story( $prompt, $post ) {
@@ -242,10 +246,10 @@ class Content_Manager implements Hookable {
 	/**
 	 * Filters the permalink for single events.
 	 *
-	 * @param   string  $post_link  Post permalink.
-	 * @param   WP_Post $post       Post object.
-	 * @param   bool    $leavename  Whether to keep the post name.
-	 * @param   bool    $sample     Is it a sample permalink.
+	 * @param   string   $post_link  Post permalink.
+	 * @param   \WP_Post $post Post object.
+	 * @param   bool     $leavename  Whether to keep the post name.
+	 * @param   bool     $sample     Is it a sample permalink.
 	 * @return  string   $post_link
 	 */
 	public function permalink( $post_link, $post, $leavename, $sample ) {
@@ -259,6 +263,8 @@ class Content_Manager implements Hookable {
 
 	/**
 	 * Writes meta tags in the <head> of the page
+	 *
+	 * @return void
 	 */
 	public function wp_head_meta() {
 		global $openagenda;
@@ -280,6 +286,8 @@ class Content_Manager implements Hookable {
 
 	/**
 	 * Prints <script> tag with Rich Snippet data for the event on single event pages
+	 *
+	 * @return void
 	 */
 	public function print_schema() {
 		global $openagenda;
@@ -292,12 +300,12 @@ class Content_Manager implements Hookable {
 	/**
 	 * Filters the title parts of the document.
 	 *
-	 * @param   array $parts  Array of title elements.
-	 * @return  array  $parts
+	 * @param   array<string, string> $parts Array of title elements.
+	 * @return  array<string, string> Title elements.
 	 */
 	public function document_title_parts( $parts ) {
 		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
-			$parts['title'] = wp_strip_all_tags( \openagenda_get_field( 'title', false, false ) );
+			$parts['title'] = wp_strip_all_tags( \openagenda_get_field( 'title' ) );
 		}
 		return $parts;
 	}
@@ -306,7 +314,7 @@ class Content_Manager implements Hookable {
 	/**
 	 * Retrieves default <meta> tags to print in <head>
 	 *
-	 * @return array  $metas  Associative array name => content
+	 * @return array<string, string|false> Associative array name => content.
 	 */
 	public function get_default_meta() {
 		global $post;
@@ -324,7 +332,7 @@ class Content_Manager implements Hookable {
 			$event          = openagenda_get_event();
 			$image_filename = ! empty( $event['image']['filename'] ) ? $event['image']['filename'] : '';
 			$image_url      = ! empty( $image_filename ) && ! empty( $event['image']['base'] ) ? trailingslashit( $event['image']['base'] ) . $image_filename : false;
-			$description    = \openagenda_get_field( 'description', false );
+			$description    = \openagenda_get_field( 'description' );
 
 			if ( ! empty( $description ) ) {
 				$metas['description']         = $description;
@@ -354,7 +362,7 @@ class Content_Manager implements Hookable {
 	/**
 	 * Retrieves default <meta> properties to print in <head>
 	 *
-	 * @return array  $metas  Associative array property => content
+	 * @return array<string, string|false> Associative array property => content.
 	 */
 	public function get_default_properties() {
 		global $post;
@@ -369,13 +377,13 @@ class Content_Manager implements Hookable {
 		);
 
 		if ( $openagenda->is_single() ) {
-			$properties['og:url'] = esc_url( \openagenda_get_field( 'permalink', false ) );
+			$properties['og:url'] = esc_url( \openagenda_get_field( 'permalink' ) );
 
 			$event          = openagenda_get_event();
 			$image_filename = ! empty( $event['image']['filename'] ) ? $event['image']['filename'] : '';
 			$image_url      = ! empty( $image_filename ) && ! empty( $event['image']['base'] ) ? trailingslashit( $event['image']['base'] ) . $image_filename : false;
-			$description    = ! empty( \openagenda_get_field( 'description', false ) ) ? \openagenda_get_field( 'description', false ) : false;
-			if ( $description ) {
+			$description    = \openagenda_get_field( 'description' );
+			if ( '' !== $description ) {
 				$properties['og:description'] = wp_strip_all_tags( $description );
 			}
 			if ( $image_url ) {
@@ -400,13 +408,13 @@ class Content_Manager implements Hookable {
 	/**
 	 * Filters Yoast SEO replacements on single event pages
 	 *
-	 * @param   array  $replacements  Replacements.
-	 * @param   object $args  Arguments.
-	 * @return  array   $replacements  Filtered replacements.
+	 * @param   array<string, mixed> $replacements Replacements.
+	 * @param   object               $args  Arguments.
+	 * @return  array<string, mixed> Filtered replacements.
 	 */
 	public function wpseo_replacements( $replacements, $args ) {
 		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
-			$replacements['%%title%%'] = wp_strip_all_tags( \openagenda_get_field( 'title', false, false ) );
+			$replacements['%%title%%'] = wp_strip_all_tags( \openagenda_get_field( 'title' ) );
 		}
 		return $replacements;
 	}
@@ -472,9 +480,9 @@ class Content_Manager implements Hookable {
 	/**
 	 * Adds OpenAgenda calendars to list of available front end options.
 	 *
-	 * @param   WP_Post[] $pages  Pages listed in the options.
-	 * @param   array     $args  Arguments.
-	 * @return  WP_Post[]  $pages  Filtered list of pages.
+	 * @param   array<\WP_Post>      $pages Pages listed in the options.
+	 * @param   array<string, mixed> $args Arguments.
+	 * @return  array<\WP_Post> Filtered list of pages.
 	 */
 	public function get_front_pages( $pages, $args ) {
 		if ( is_admin() && function_exists( 'get_current_screen' ) ) {
@@ -497,7 +505,8 @@ class Content_Manager implements Hookable {
 	/**
 	 * Allows for calendars on the front page
 	 *
-	 * @param  WP_Query $query  Main query.
+	 * @param  \WP_Query $query Main query.
+	 * @return void
 	 */
 	public function allow_calendars_front_page( $query ) {
 		if ( $query->is_main_query() ) {

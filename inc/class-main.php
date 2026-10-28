@@ -19,19 +19,21 @@ class Main {
 	/**
 	 * Array of dependencies objects
 	 *
-	 * @var  array  $dependencies
+	 * @var  array<string, Hookable> $dependencies
 	 */
 	private $dependencies = array();
 
 	/**
 	 * Array of available filters
 	 *
-	 * @var  array  $available_filters
+	 * @var  array<string, array<string, string>> $available_filters
 	 */
 	private $available_filters = array();
 
 	/**
 	 * Loads required files.
+	 *
+	 * @return void
 	 */
 	public function init() {
 		$this->load_dependencies();
@@ -40,6 +42,8 @@ class Main {
 
 	/**
 	 * Loads necessary files and register them as dependencies
+	 *
+	 * @return void
 	 */
 	private function load_dependencies() {
 
@@ -74,6 +78,8 @@ class Main {
 
 	/**
 	 * Hooks all the dependencies
+	 *
+	 * @return void
 	 */
 	private function register_hooks() {
 		foreach ( $this->dependencies as $key => $dependency ) {
@@ -89,6 +95,8 @@ class Main {
 
 	/**
 	 * Writes necessary <head> styles for spinner
+	 *
+	 * @return void
 	 */
 	public function wp_head() {
 		$customizer_settings = get_option( 'openagenda_customizer' );
@@ -105,6 +113,8 @@ class Main {
 
 	/**
 	 * Register the filter and preview widgets
+	 *
+	 * @return void
 	 */
 	public function register_widgets() {
 		require_once OPENAGENDA_PATH . 'inc/class-openagenda-widget.php';
@@ -122,6 +132,7 @@ class Main {
 	 * Registers scripts for the admin pages
 	 *
 	 * @param  string $hook  Page hook.
+	 * @return void
 	 */
 	public function register_admin_scripts( $hook ) {
 		$css_suffix = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.css' : '.min.css';
@@ -139,6 +150,8 @@ class Main {
 
 	/**
 	 * Loads scripts and styles
+	 *
+	 * @return void
 	 */
 	public function register_scripts() {
 
@@ -208,6 +221,8 @@ class Main {
 
 	/**
 	 * Returns array of available filters
+	 *
+	 * @return array<string, array{label: string, shortcode: string}>
 	 */
 	public function get_available_filters() {
 		if ( empty( $this->available_filters ) ) {
@@ -256,12 +271,14 @@ class Main {
 
 	/**
 	 * Initialize the global openagenda instance
+	 *
+	 * @return void
 	 */
 	public function init_calendar() {
 		global $openagenda;
 		if ( is_singular( 'oa-calendar' ) ) {
 			$post_id         = get_the_ID();
-			$uid             = get_post_meta( $post_id, 'oa-calendar-uid', true );
+			$uid             = (string) get_post_meta( $post_id, 'oa-calendar-uid', true );
 			$page_size       = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );
 			$infinite_scroll = get_post_meta( $post_id, 'oa-calendar-infinite-scroll', true ) === 'yes';
 			$api_key         = get_post_meta( $post_id, 'oa-calendar-api-key', true );
@@ -295,7 +312,7 @@ class Main {
 				$args = array_merge( $args, $prefilters );
 			}
 
-			if ( $uid ) {
+			if ( '' !== $uid ) {
 				$openagenda = new OpenAgenda( $uid, $args, $options );
 			}
 		}
