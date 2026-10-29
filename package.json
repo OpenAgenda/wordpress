@@ -16,7 +16,8 @@
     "phpcbf": "./vendor/bin/phpcbf .",
     "phpstan": "./vendor/bin/phpstan analyse -c ./.phpstan.neon -v --memory-limit=1G",
     "archive": "wp dist-archive ./ --plugin-dirname=openagenda",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./vendor/bin/phpunit",
+    "install-tests": "./bin/install-wp-tests.sh test test test localhost latest"
   },
   "repository": {
     "type": "git",
