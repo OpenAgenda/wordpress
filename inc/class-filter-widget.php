@@ -63,6 +63,14 @@ class Filter_Widget extends OpenAgenda_Widget {
 					),
 				),
 			),
+			'openagenda_filter_submit' => array(
+				'buttonLabel' => array(
+					'name'    => 'button_label',
+					'label'   => __( 'Button label', 'openagenda' ),
+					'class'   => 'widefat',
+					'default' => __( 'Refresh events', 'openagenda' ),
+				),
+			),
 			'openagenda_filter_calendar' => array(
 				'display_ranges' => array(
 					'name'    => 'display_ranges',
@@ -333,6 +341,11 @@ class Filter_Widget extends OpenAgenda_Widget {
 					'additional_field' => ! empty( $new_instance['additional_field'] ) ? sanitize_text_field( $new_instance['additional_field'] ) : '',
 					'page_size'        => ! empty( $new_instance['page_size'] ) ? (int) $new_instance['page_size'] : 10,
 					'sort'             => ! empty( $new_instance['sort'] ) ? sanitize_text_field( $new_instance['sort'] ) : '',
+				);
+				break;
+			case 'openagenda_filter_submit':
+				$additional_settings = array(
+					'button_label' => ! empty( $new_instance['button_label'] ) ? sanitize_text_field( $new_instance['button_label'] ) : '',
 				);
 				break;
 			default:
