@@ -1332,7 +1332,7 @@ strong {
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 1px 2px 0 rgba(35, 57, 66, 0.21);
-  border: 1px solid transparent;
+  border: 1px solid var(--oa-gray-300);
 }
 .single-oa-calendar .rdrDateDisplayItem input,
 .oa-preview .rdrDateDisplayItem input {
@@ -1673,7 +1673,7 @@ strong {
 .oa-preview button.rdrStaticRange {
   background: transparent;
   box-shadow: 0 1px 2px 0 rgba(35, 57, 66, 0.21);
-  border: 1px solid transparent;
+  border: 1px solid var(--oa-gray-300);
   border-radius: 4px;
   color: inherit;
   cursor: pointer;
