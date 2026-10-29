@@ -63,7 +63,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 					),
 				),
 			),
-			'openagenda_filter_submit' => array(
+			'openagenda_filter_submit'   => array(
 				'buttonLabel' => array(
 					'name'    => 'button_label',
 					'label'   => __( 'Button label', 'openagenda' ),

@@ -568,19 +568,19 @@ class Shortcodes implements Hookable {
 		$uid = $openagenda->get_uid();
 
 		$defaults = array(
-			'id'          => 'search',
-			'title'       => _x( 'Search', 'Filter name', 'openagenda' ),
+			'id'           => 'search',
+			'title'        => _x( 'Search', 'Filter name', 'openagenda' ),
 			'manualSearch' => false,
-			'dropdown'    => false,
-			'placeholder' => '',
+			'dropdown'     => false,
+			'placeholder'  => '',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_search' );
 
 		$params = array(
-			'type'        => 'search',
-			'name'        => 'search',
-			'placeholder' => $atts['placeholder'],
-			'manualSearch' => (bool) $atts['manualSearch']
+			'type'         => 'search',
+			'name'         => 'search',
+			'placeholder'  => $atts['placeholder'],
+			'manualSearch' => (bool) $atts['manualSearch'],
 		);
 
 		$filter = sprintf(
@@ -667,12 +667,12 @@ class Shortcodes implements Hookable {
 		$uid           = $openagenda->get_uid();
 		$settings      = get_option( 'openagenda_general_settings' );
 		$manual_submit = isset( $settings['openagenda_manual_submit'] ) ? (bool) $settings['openagenda_manual_submit'] : true;
-		
+
 		$defaults = array(
 			'id'           => 'submit',
 			'title'        => _x( 'Submit', 'Filter name', 'openagenda' ),
 			'dropdown'     => false,
-			'button_label'  => __( 'Refresh events', 'openagenda' ),
+			'button_label' => __( 'Refresh events', 'openagenda' ),
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_sort' );
 
