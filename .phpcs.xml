@@ -25,6 +25,9 @@
 
 	<!-- Exclude legacy templates files. -->
 	<exclude-pattern>/templates/legacy/*</exclude-pattern>
+	
+	<!-- Exclude test bootstrap. -->
+	<exclude-pattern>/tests/bootstrap.php</exclude-pattern>
 
 
 	<!-- Strip the filepaths down to the relevant bit. -->
