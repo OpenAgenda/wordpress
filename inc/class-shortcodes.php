@@ -570,6 +570,7 @@ class Shortcodes implements Hookable {
 		$defaults = array(
 			'id'          => 'search',
 			'title'       => _x( 'Search', 'Filter name', 'openagenda' ),
+			'manualSearch' => false,
 			'dropdown'    => false,
 			'placeholder' => '',
 		);
@@ -579,6 +580,7 @@ class Shortcodes implements Hookable {
 			'type'        => 'search',
 			'name'        => 'search',
 			'placeholder' => $atts['placeholder'],
+			'manualSearch' => (bool) $atts['manualSearch']
 		);
 
 		$filter = sprintf(
