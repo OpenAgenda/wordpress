@@ -665,9 +665,17 @@ class Shortcodes implements Hookable {
 		$uid           = $openagenda->get_uid();
 		$settings      = get_option( 'openagenda_general_settings' );
 		$manual_submit = isset( $settings['openagenda_manual_submit'] ) ? (bool) $settings['openagenda_manual_submit'] : true;
+		
+		$defaults = array(
+			'id'           => 'submit',
+			'title'        => _x( 'Submit', 'Filter name', 'openagenda' ),
+			'dropdown'     => false,
+			'button_label'  => __( 'Refresh events', 'openagenda' ),
+		);
+		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_sort' );
 
 		if ( $manual_submit ) {
-			$filter = sprintf( '<div class="oa-widget oa-submit-widget"><div class="oa-notice-wrapper" role="status"></div><button type="submit">%s</button></div>', __( 'Submit', 'openagenda' ) );
+			$filter = sprintf( '<div class="oa-widget oa-submit-widget"><button type="submit" class="oa-button">%s</button></div>', esc_html( $atts['button_label'] ) );
 		} else {
 			$filter = '';
 		}

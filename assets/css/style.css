@@ -177,6 +177,11 @@ strong {
   border-color: var(--oa-main-color-darker);
   color: var(--oa-main-color-darker);
 }
+.single-oa-calendar .oa-button:disabled,
+.oa-preview .oa-button:disabled {
+  background-color: var(--oa-gray-600);
+  opacity: 0.5;
+}
 .single-oa-calendar .oa-icon,
 .oa-preview .oa-icon {
   width: var(--oa-text-4);

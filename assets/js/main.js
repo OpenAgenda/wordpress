@@ -1,9 +1,7 @@
 'use strict';
 if (oaData) {
     const oaWrapper = document.querySelector('[data-container-id="oa-wrapper"]');
-    oaWrapper.insertAdjacentHTML('afterbegin', '<div class="oa-notice-wrapper"></div>');
     const submitButtons = document.querySelectorAll('.oa-submit-widget button[type=submit]');
-    const { sprintf, __ } = wp.i18n;
 
     window.oa = {
         res: oaData.res,
@@ -30,14 +28,9 @@ if (oaData) {
             }
         },
         onPendingChange: (pending) => {
-            const pendingNoticeWrappers = document.querySelectorAll('.oa-submit-widget .oa-notice-wrapper');
-            if (pendingNoticeWrappers) {
-                pendingNoticeWrappers.forEach(wrapper => {
-                    if (pending) {
-                        oa.updateHTML(wrapper, sprintf('<div class="oa-notice oa-notice-info">%s</div>', __('The results do not match the selected filters yet.', 'openagenda')));
-                    } else {
-                        oa.updateHTML(wrapper, '');
-                    }
+            if (oa.manualSubmit && submitButtons.length > 0) {
+                submitButtons.forEach(button => {
+                    pending ? button.removeAttribute('disabled') : button.setAttribute('disabled', true);
                 });
             }
         },
@@ -90,6 +83,7 @@ if (oaData) {
                 const submitButtons = document.querySelectorAll('.oa-submit-widget button[type=submit]');
                 if (submitButtons.length > 0) {
                     submitButtons.forEach((button) => {
+                        button.setAttribute('disabled', true);
                         button.addEventListener('click', async (e) => {
                             e.preventDefault();
                             _form.submit();

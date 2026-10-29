@@ -111,6 +111,11 @@ strong {
 			border-color: var(--oa-main-color-darker);
 			color: var(--oa-main-color-darker);
 		}
+
+		&:disabled {
+			background-color: var(--oa-gray-600);
+			opacity: .5;
+		}
 	}
 
 	.oa-icon {
