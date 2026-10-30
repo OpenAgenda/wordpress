@@ -57,7 +57,7 @@ register_activation_hook( __FILE__, 'openagenda_activation' );
  */
 function openagenda_activation() {
 	require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
-	require_once OPENAGENDA_PATH . 'inc/class-content-manager.php';
+	require_once OPENAGENDA_PATH . 'inc/frontend/class-content-manager.php';
 	$manager = new OpenAgenda\Content_Manager();
 	$manager->register_post_types();
 	$manager->register_rewrite_rules();

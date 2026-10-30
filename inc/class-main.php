@@ -49,14 +49,14 @@ class Main {
 
 		// Needed both on frontend and backend.
 		require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
-		require_once OPENAGENDA_PATH . 'inc/helper-functions.php';
-		require_once OPENAGENDA_PATH . 'inc/template-tags.php';
-		require_once OPENAGENDA_PATH . 'inc/template-filters.php';
-		require_once OPENAGENDA_PATH . 'inc/class-content-manager.php';
-		require_once OPENAGENDA_PATH . 'inc/class-openagenda.php';
-		require_once OPENAGENDA_PATH . 'inc/class-customizer-settings.php';
-		require_once OPENAGENDA_PATH . 'inc/class-shortcodes.php';
-		require_once OPENAGENDA_PATH . 'inc/compatibility.php';
+		require_once OPENAGENDA_PATH . 'inc/functions/helper-functions.php';
+		require_once OPENAGENDA_PATH . 'inc/functions/template-tags.php';
+		require_once OPENAGENDA_PATH . 'inc/functions/template-filters.php';
+		require_once OPENAGENDA_PATH . 'inc/functions/compatibility.php';
+		require_once OPENAGENDA_PATH . 'inc/frontend/class-content-manager.php';
+		require_once OPENAGENDA_PATH . 'inc/frontend/class-openagenda.php';
+		require_once OPENAGENDA_PATH . 'inc/frontend/class-shortcodes.php';
+		require_once OPENAGENDA_PATH . 'inc/admin/class-customizer-settings.php';
 		require_once OPENAGENDA_PATH . 'vendor/autoload.php';
 
 		$this->dependencies['content-manager'] = new Content_Manager();
@@ -65,10 +65,10 @@ class Main {
 
 		if ( is_admin() ) {
 			// Only needed in the admin.
-			require_once OPENAGENDA_PATH . 'inc/class-admin-pages.php';
-			require_once OPENAGENDA_PATH . 'inc/class-settings.php';
-			require_once OPENAGENDA_PATH . 'inc/class-metaboxes.php';
-			require_once OPENAGENDA_PATH . 'inc/class-ajax-handler.php';
+			require_once OPENAGENDA_PATH . 'inc/admin/class-admin-pages.php';
+			require_once OPENAGENDA_PATH . 'inc/admin/class-settings.php';
+			require_once OPENAGENDA_PATH . 'inc/admin/class-metaboxes.php';
+			require_once OPENAGENDA_PATH . 'inc/admin/class-ajax-handler.php';
 			$this->dependencies['admin-pages']  = new Admin_Pages();
 			$this->dependencies['settings']     = new Settings();
 			$this->dependencies['metaboxes']    = new Metaboxes();
@@ -117,9 +117,9 @@ class Main {
 	 * @return void
 	 */
 	public function register_widgets() {
-		require_once OPENAGENDA_PATH . 'inc/class-openagenda-widget.php';
-		require_once OPENAGENDA_PATH . 'inc/class-filter-widget.php';
-		require_once OPENAGENDA_PATH . 'inc/class-preview-widget.php';
+		require_once OPENAGENDA_PATH . 'inc/widgets/class-openagenda-widget.php';
+		require_once OPENAGENDA_PATH . 'inc/widgets/class-filter-widget.php';
+		require_once OPENAGENDA_PATH . 'inc/widgets/class-preview-widget.php';
 		$args           = array( 'available_filters' => $this->get_available_filters() );
 		$filter_widget  = new Filter_Widget( $args );
 		$preview_widget = new Preview_Widget( $args );
