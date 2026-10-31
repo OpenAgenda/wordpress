@@ -1,17 +1,17 @@
 @use "sass:math";
 @use "sass:map";
-
-@use 'variables';
-@use 'mixins';
+@use "variables";
+@use "mixins";
 
 :root {
 	scroll-behavior: smooth;
 	--oa-main-color: #{map.get(variables.$colors, primary-500)};
 	--oa-main-color-lighter: #{map.get(variables.$colors, primary-300)};
 	--oa-main-color-darker: #{map.get(variables.$colors, primary-700)};
-	@include mixins.css_variables('oa', variables.$colors );
-	@include mixins.css_variables('oa-spacing', variables.$spacings );
-	@include mixins.css_variables('oa-text', variables.$fontSizes );
+
+	@include mixins.css_variables("oa", variables.$colors );
+	@include mixins.css_variables("oa-spacing", variables.$spacings );
+	@include mixins.css_variables("oa-text", variables.$fontSizes );
 }
 
 /*****************************
@@ -23,7 +23,7 @@ img {
 }
 
 strong {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .oa-sr-text {
@@ -43,6 +43,7 @@ strong {
  *************************/
 .single-oa-calendar,
 .oa-preview {
+
 	.oa-event-title {
 		color: var(--oa-gray-900);
 		margin: 0;
@@ -57,7 +58,7 @@ strong {
 		border-radius: 4px;
 		display: inline-block;
 		font-size: var(--oa-text-2);
-		font-weight: bold;
+		font-weight: 700;
 		padding: var(--oa-spacing-1) var(--oa-spacing-2);
 		vertical-align: middle;
 	}
@@ -114,14 +115,14 @@ strong {
 
 		&:disabled {
 			background-color: var(--oa-gray-600);
-			opacity: .5;
+			opacity: 0.5;
 		}
 	}
 
 	.oa-icon {
 		width: var(--oa-text-4);
 		height: var(--oa-text-4);
-		fill: currentColor;
+		fill: currentcolor;
 	}
 
 	.oa-icon-refresh {
@@ -129,8 +130,9 @@ strong {
 	}
 
 	@keyframes rotate {
+
 		to {
-			transform: rotateZ(360deg)
+			transform: rotateZ(360deg);
 		}
 	}
 
@@ -143,7 +145,7 @@ strong {
 
 		.oa-update-overlay {
 			align-items: center;
-			background-color: rgba(white, .9);
+			background-color: rgba(white, 0.9);
 			display: flex;
 			font-size: var(--oa-text-4);
 			flex-direction: column;
@@ -208,7 +210,7 @@ strong {
 	.oa-event-list,
 	.oa-event-grid {
 		display: grid;
-		grid-gap: var(--oa-spacing-7);
+		gap: var(--oa-spacing-7);
 
 		a.oa-event-wrapper {
 			display: flex;
@@ -228,7 +230,7 @@ strong {
 
 		.oa-event-title {
 			font-size: inherit;
-			font-weight: bold;
+			font-weight: 700;
 		}
 
 		.oa-event {
@@ -271,10 +273,10 @@ strong {
 			--gradient-to: transparent 0;
 			background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
 			height: 52px;
-			left: 0px;
+			left: 0;
 			line-height: 1;
 			position: absolute;
-			top: 0px;
+			top: 0;
 			width: 52px;
 			z-index: 10;
 
@@ -295,6 +297,7 @@ strong {
 	}
 
 	.oa-event-grid {
+
 		@media screen and (min-width: 700px) {
 			grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
 		}
@@ -392,7 +395,7 @@ strong {
 		}
 
 		.oa-event-title {
-			font-weight: normal;
+			font-weight: 400;
 		}
 
 		.oa-event-status-badge {
@@ -426,6 +429,7 @@ strong {
 		}
 
 		.oa-registration-method-wrapper {
+
 			svg.oa-icon {
 				width: var(--oa-text-4);
 				height: var(--oa-text-4);
@@ -435,6 +439,7 @@ strong {
 
 		.oa-event-thumbnail,
 		.oa-event-location-image {
+
 			figcaption {
 				color: var(--oa-gray-500);
 				font-size: var(--oa-text-3);
@@ -538,7 +543,7 @@ strong {
 		padding: var(--oa-spacing-2) 0;
 
 		.oa-month-label {
-			font-weight: bold;
+			font-weight: 700;
 		}
 
 
@@ -610,6 +615,7 @@ strong {
 	}
 
 	.oa-event-location-links {
+
 		ul {
 			padding: 0;
 			margin: 0;
@@ -732,6 +738,7 @@ strong {
 	* Active filters widget
 	*********************************/
 	.oa-active-filters-widget {
+
 		button {
 			margin-right: var(--oa-spacing-2);
 			margin-bottom: var(--oa-spacing-2);
@@ -742,6 +749,7 @@ strong {
 	* Search widget
 	*********************************/
 	.oa-search-widget {
+
 		.input-group {
 			border: 1px solid var(--oa-gray-300);
 			border-radius: 0;
@@ -844,6 +852,7 @@ strong {
 		}
 
 		&.active {
+
 			.active-icon {
 				display: inline-block;
 			}
@@ -921,6 +930,7 @@ strong {
 	* Date Range and Calendar widget
 	*********************************/
 	.oa-calendar-widget-simpledaterange {
+
 		&>div {
 			align-items: center;
 			display: flex;
@@ -951,7 +961,7 @@ strong {
 	}
 
 	.rdrDateDisplayItem {
-		-webkit-box-flex: 1;
+		flex-grow: 1;
 		flex: 1 1;
 		width: 0;
 		text-align: center;
@@ -979,14 +989,14 @@ strong {
 	}
 
 	.rdrMonthAndYearPickers {
-		-webkit-box-flex: 1;
+		flex-grow: 1;
 		flex: 1 1 auto;
 		flex-wrap: wrap;
 		display: -webkit-flex;
 		display: flex;
 		-webkit-box-pack: center;
 		justify-content: center;
-		-webkit-box-align: center;
+		align-items: center;
 		align-items: center;
 	}
 
@@ -1100,6 +1110,7 @@ strong {
 	}
 
 	@supports (-ms-ime-align: auto) {
+
 		.rdrDay {
 			flex-basis: 14.285% !important;
 		}
@@ -1178,7 +1189,7 @@ strong {
 		cursor: pointer;
 		height: 2.5em;
 		line-height: 2.5;
-		border: 0px;
+		border: 0;
 		background: transparent;
 		width: 100%;
 		color: #849095;
@@ -1186,15 +1197,15 @@ strong {
 
 	.rdrDateDisplayItemActive,
 	.rdrDateDisplayItem:hover {
-		border-color: currentColor;
+		border-color: currentcolor;
 	}
 
 	.rdrDateDisplayItemActive input {
-		color: var(--oa-gray-400)
+		color: var(--oa-gray-400);
 	}
 
 	.rdrMonthAndYearWrapper {
-		-webkit-box-align: center;
+		align-items: center;
 		align-items: center;
 	}
 
@@ -1207,7 +1218,6 @@ strong {
 		appearance: none;
 		-webkit-appearance: none;
 		border: 0;
-		background: transparent;
 		padding: 10px 30px 10px 10px;
 		border-radius: 4px;
 		outline: 0;
@@ -1262,16 +1272,16 @@ strong {
 	.rdrPprevButton i {
 		border-width: 4px 6px 4px 4px;
 		border-color: transparent rgb(52, 73, 94) transparent transparent;
-		-webkit-transform: translate(-3px, 0px);
-		transform: translate(-3px, 0px);
+		-webkit-transform: translate(-3px, 0);
+		transform: translate(-3px, 0);
 	}
 
 	.rdrNextButton i {
 		margin: 0 0 0 7px;
 		border-width: 4px 4px 4px 6px;
 		border-color: transparent transparent transparent rgb(52, 73, 94);
-		-webkit-transform: translate(3px, 0px);
-		transform: translate(3px, 0px);
+		-webkit-transform: translate(3px, 0);
+		transform: translate(3px, 0);
 	}
 
 	.rdrWeekDays {
@@ -1330,7 +1340,7 @@ strong {
 		bottom: 5px;
 		display: -webkit-flex;
 		display: flex;
-		-webkit-box-align: center;
+		align-items: center;
 		align-items: center;
 		-webkit-box-pack: center;
 		justify-content: center;
@@ -1340,7 +1350,7 @@ strong {
 		font-weight: 500;
 	}
 
-	.rdrDayToday .rdrDayNumber span:after {
+	.rdrDayToday .rdrDayNumber span::after {
 		content: "";
 		position: absolute;
 		bottom: 4px;
@@ -1353,10 +1363,10 @@ strong {
 		background: var(--oa-main-color);
 	}
 
-	.rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span:after,
-	.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span:after,
-	.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span:after,
-	.rdrDayToday:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span:after {
+	.rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span::after,
+	.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span::after,
+	.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span::after,
+	.rdrDayToday:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span::after {
 		background: #fff;
 	}
 
@@ -1445,11 +1455,11 @@ strong {
 		background: rgba(255, 255, 255, 0.09);
 		position: absolute;
 		top: 5px;
-		left: 0px;
-		right: 0px;
+		left: 0;
+		right: 0;
 		bottom: 5px;
 		pointer-events: none;
-		border: 0px solid var(--oa-main-color);
+		border: 0 solid var(--oa-main-color);
 		z-index: 1;
 	}
 
@@ -1482,7 +1492,7 @@ strong {
 
 	.rdrDefinedRangesWrapper .rdrStaticRangeSelected {
 		border-color: var(--oa-main-color);
-		color: var(--oa-main-color) ! important;
+		color: var(--oa-main-color) !important;
 		font-weight: 600;
 	}
 
@@ -1514,7 +1524,7 @@ strong {
 	.rdrStaticRangeLabel {
 		color: inherit;
 		display: block;
-		font-weight: normal;
+		font-weight: 400;
 		line-height: 18px;
 		outline: 0;
 		padding: 5px;
@@ -1527,7 +1537,7 @@ strong {
 	}
 
 	.rdrInputRange {
-		-webkit-box-align: center;
+		align-items: center;
 		align-items: center;
 		padding: 5px 20px;
 	}
@@ -1550,15 +1560,15 @@ strong {
 		color: var(--oa-gray-900);
 	}
 
-	.rdrCalendarWrapper:not(.rdrDateRangeWrapper) .rdrDayHovered .rdrDayNumber:after {
+	.rdrCalendarWrapper:not(.rdrDateRangeWrapper) .rdrDayHovered .rdrDayNumber::after {
 		content: "";
-		border: 1px solid currentColor;
+		border: 1px solid currentcolor;
 		border-radius: 1.333em;
 		position: absolute;
 		top: -2px;
 		bottom: -2px;
-		left: 0px;
-		right: 0px;
+		left: 0;
+		right: 0;
 		background: transparent;
 	}
 
@@ -1640,7 +1650,7 @@ strong {
 		.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
 			color: var(--oa-gray-900);
 
-			&:after {
+			&::after {
 				background: var(--oa-main-color);
 			}
 		}

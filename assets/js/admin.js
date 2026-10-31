@@ -1,12 +1,1 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const passwordToggles = document.querySelectorAll('.password-toggle [type="checkbox"]');
-    if (!passwordToggles) return;
-
-    passwordToggles.forEach(toggle => {
-        toggle.addEventListener('click', e => {
-            const inputId = toggle.dataset.input;
-            const input = inputId ? document.querySelector(`#${inputId}`) : null;
-            if (input) input.setAttribute('type', toggle.checked ? 'text' : 'password');
-        });
-    });
-});
+(()=>{"use strict";document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelectorAll('.password-toggle [type="checkbox"]');e&&e.forEach(e=>{e.addEventListener("click",t=>{const c=e.dataset.input,o=c?document.querySelector(`#${c}`):null;o&&o.setAttribute("type",e.checked?"text":"password")})})})})();

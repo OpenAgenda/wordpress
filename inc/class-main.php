@@ -154,25 +154,20 @@ class Main {
 	 * @return void
 	 */
 	public function register_scripts() {
-
-		$css_suffix = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.css' : '.min.css';
-		$js_suffix  = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '.js' : '.min.js';
-
 		// Register main styles and scripts.
-		wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style' . $css_suffix, array(), OPENAGENDA_VERSION );
-		wp_register_style( 'openagenda-legacy', OPENAGENDA_URL . 'assets/css/legacy' . $css_suffix, array(), OPENAGENDA_VERSION );
-		wp_register_script( 'openagenda-qs', OPENAGENDA_URL . 'assets/js/qs.min.js', array(), '6.15.0', true );
-		wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main' . $js_suffix, array( 'openagenda-qs', 'wp-i18n' ), OPENAGENDA_VERSION, true );
-		wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.min.js', array(), '5.15.4', true );
-		wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.min.js', array( 'openagenda-fontawesome' ), '3.2.1', true );
+		wp_register_style( 'openagenda-main', OPENAGENDA_URL . 'assets/css/style.css', array(), OPENAGENDA_VERSION );
+		wp_register_style( 'openagenda-legacy', OPENAGENDA_URL . 'assets/css/legacy.css', array(), OPENAGENDA_VERSION );
+		wp_register_script( 'openagenda-main', OPENAGENDA_URL . 'assets/js/main.js', array( 'wp-i18n' ), OPENAGENDA_VERSION, true );
+		wp_register_script( 'openagenda-fontawesome', OPENAGENDA_URL . 'assets/js/fontawesome.js', array(), '5.15.4', true );
+		wp_register_script( 'openagenda-filters', OPENAGENDA_URL . 'assets/js/filters.js', array( 'openagenda-fontawesome' ), '3.2.1', true );
 
 		// Register map dependencies.
-		wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet' . $css_suffix, array(), OPENAGENDA_VERSION );
-		wp_register_script( 'oa-leaflet', OPENAGENDA_URL . 'assets/js/leaflet.min.js', array(), '1.3.4', true );
-		wp_register_script( 'oa-event-map', OPENAGENDA_URL . 'assets/js/event-map' . $js_suffix, array( 'jquery', 'oa-leaflet' ), OPENAGENDA_VERSION, true );
+		wp_register_style( 'oa-leaflet', OPENAGENDA_URL . 'assets/css/leaflet.css', array(), OPENAGENDA_VERSION );
+		wp_register_script( 'oa-leaflet', OPENAGENDA_URL . 'assets/js/leaflet.js', array(), '1.3.4', true );
+		wp_register_script( 'oa-event-map', OPENAGENDA_URL . 'assets/js/event-map.js', array( 'jquery', 'oa-leaflet' ), OPENAGENDA_VERSION, true );
 
 		// Timings calendar JS.
-		wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings' . $js_suffix, array(), OPENAGENDA_VERSION, true );
+		wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings.js', array(), OPENAGENDA_VERSION, true );
 
 		if ( openagenda_should_enqueue_styles() ) {
 			$stylesheet = openagenda_use_legacy_templates() ? 'openagenda-legacy' : 'openagenda-main';
