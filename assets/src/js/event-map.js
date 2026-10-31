@@ -1,16 +1,17 @@
 'use strict';
-jQuery( document ).ready( function ( $ ) {
-	var elem = $( '.event-map' );
-	var coords = [ elem.attr( 'latitude' ), elem.attr( 'longitude' ) ];
-	var map = L.map( 'event-map' ).setView( coords, 13 );
-	L.tileLayer( elem.attr( 'tiles' ), {
-		attribution: elem.attr( 'attribution' ),
-	} ).addTo( map );
-	L.marker( coords, {
-		icon: L.icon( {
+document.addEventListener('DOMContentLoaded', () => {
+	const elem = document.querySelector('.event-map');
+	const coords = [elem.getAttribute('latitude'), elem.getAttribute('longitude')];
+	const map = L.map('event-map').setView(coords, 13);
+
+	L.tileLayer(elem.getAttribute('tiles'), {
+		attribution: elem.getAttribute('attribution'),
+	}).addTo(map);
+	L.marker(coords, {
+		icon: L.icon({
 			iconUrl: '//cdn.openagenda.com/static/markerIcon.png',
-			iconSize: [ 18, 25 ],
-			iconAnchor: [ 9, 25 ],
-		} ),
-	} ).addTo( map );
-} );
+			iconSize: [18, 25],
+			iconAnchor: [9, 25],
+		}),
+	}).addTo(map);
+});
