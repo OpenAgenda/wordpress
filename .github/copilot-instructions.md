@@ -27,8 +27,12 @@ Note about filters : The filter shortcodes defined in `inc/class-shortcodes` onl
 - Run `composer run phpcbf` to format files.
 - Run `composer run phpstan` to check for PHP errors.
 - Run `composer run phpcs` to check for formatting errors.
+- When checking code, use build scripts from the `composer.json` file instead of direct calls to binaries in vendor/ folder.
 
 ## JavaScript Standard
 
 - Use semi-colon to end statements.
 - Use arrow functions and `const` variable declaration.
+- When checking builds, use build scripts from the `package.json` file instead of direct calls to node_modules
+
+## Build processes
