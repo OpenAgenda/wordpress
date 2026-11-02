@@ -161,6 +161,13 @@ class Metaboxes implements Hookable {
 					'label'   => __( 'Only display current and upcoming events. Past events can be displayed using the calendar widget.', 'openagenda' ),
 					'default' => 'no',
 				),
+				'oa-calendar-display-all-states'      => array(
+					'metabox'     => 'oa-calendar-settings',
+					'type'        => 'checkbox',
+					'label'       => __( 'Display all events regardless of their state (Published, Ready to publish, To review, Refused)', 'openagenda' ),
+					'default'     => 'no',
+					'description' => __( 'Be careful ! Checking this box displays all events! Ths is useful for testing an agenda, but should not be used in production.', 'openagenda' ),
+				),
 				'oa-calendar-infinite-scroll'         => array(
 					'metabox' => 'oa-calendar-settings',
 					'type'    => 'checkbox',
@@ -465,11 +472,13 @@ class Metaboxes implements Hookable {
 		$exclude_past_events   = isset( $_POST['oa-calendar-exclude'] ) ? 'yes' : 'no';
 		$default_event_filters = isset( $_POST['oa-calendar-display-default-filters'] ) ? 'yes' : 'no';
 		$infinite_scroll       = isset( $_POST['oa-calendar-infinite-scroll'] ) ? 'yes' : 'no';
+		$display_all_states    = isset( $_POST['oa-calendar-display-all-states'] ) ? 'yes' : 'no';
 		update_post_meta( $post_ID, 'oa-calendar-content-on-archive', $content_on_archive );
 		update_post_meta( $post_ID, 'oa-calendar-content-on-single', $content_on_single );
 		update_post_meta( $post_ID, 'oa-calendar-exclude', $exclude_past_events );
 		update_post_meta( $post_ID, 'oa-calendar-display-default-filters', $default_event_filters );
 		update_post_meta( $post_ID, 'oa-calendar-infinite-scroll', $infinite_scroll );
+		update_post_meta( $post_ID, 'oa-calendar-display-all-states', $display_all_states );
 
 		if ( $update ) {
 			openagenda_clear_transient();

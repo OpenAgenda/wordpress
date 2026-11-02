@@ -663,6 +663,7 @@ function openagenda_get_pre_filters( $post_id = 0, $filters = array() ) {
 	$filters_url         = get_post_meta( $post_id, 'oa-calendar-filters', true );
 	$exclude_past_events = get_post_meta( $post_id, 'oa-calendar-exclude', true );
 	$sort                = get_post_meta( $post_id, 'oa-calendar-sort', true );
+	$all_states          = get_post_meta( $post_id, 'oa-calendar-display-all-states', true );
 
 	$prefilters = array();
 
@@ -682,6 +683,12 @@ function openagenda_get_pre_filters( $post_id = 0, $filters = array() ) {
 
 	if ( ! empty( $sort ) && ! isset( $filters['sort'] ) ) {
 		$prefilters['sort'] = $sort;
+	}
+
+	if ( 'yes' === $all_states ) {
+		if ( ! isset( $filters['state'] ) ) {
+			$prefilters['state'] = array( -1, 0, 1, 2 );
+		}
 	}
 
 	return apply_filters( 'openagenda_pre_filters', $prefilters, $post_id );
