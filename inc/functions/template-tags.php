@@ -1173,8 +1173,8 @@ function openagenda_event_links( $field, $uid = '', $display = true ) {
 	$links = array();
 	foreach ( $values as $value ) {
 		$value_id = ! empty( $value['id'] ) ? (int) $value['id'] : 0;
-		$labels    = ! empty( $value['label'] ) ? $value['label'] : array();
-		$label     = openagenda_get_i18n_value( $labels );
+		$labels   = ! empty( $value['label'] ) ? $value['label'] : array();
+		$label    = openagenda_get_i18n_value( $labels );
 		if ( $value_id && $label ) {
 			$links[] = sprintf( '<a href="%s">%s</a>', add_query_arg( sanitize_title( $field ), $value_id, openagenda_get_permalink() ), $label );
 		}

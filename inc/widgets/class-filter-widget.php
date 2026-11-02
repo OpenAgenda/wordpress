@@ -18,8 +18,8 @@ class Filter_Widget extends OpenAgenda_Widget {
 	 * @param  array<string, mixed> $args Optional. Additional arguments.
 	 */
 	public function __construct( $args = array() ) {
-		$settings            = get_option( 'openagenda_integrations_settings' );
-		$default_tiles       = ! empty( $settings['openagenda_map_tiles_link'] ) ? $settings['openagenda_map_tiles_link'] : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+		$settings      = get_option( 'openagenda_integrations_settings' );
+		$default_tiles = ! empty( $settings['openagenda_map_tiles_link'] ) ? $settings['openagenda_map_tiles_link'] : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
 		$args['additional_settings'] = array(
 			'openagenda_filter_map'      => array(
