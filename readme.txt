@@ -37,6 +37,7 @@ The General settings page provides the following settings :
  * *OpenAgenda API key* : Your user API key. **Providing your account API key is required for the plugin to work properly.** It can be found in your account on [https://openagenda.com](https://openagenda.com)
  * *Allow for embedded content* : If your events contain embedded content, tick this box to allow the corresponding HTML tags.
  * *Load default stylesheets* : The plugin provides very basic styling and depends heavily on your theme's styles. Disable this to rely 100% on your theme styles.
+ * *Submit filters manually* : When checked, clicking a button to refresh events is necessary. If unchecked, changing a filter value will automatically trigger a refresh of the events list. 
  * *Legacy templates* : Templates have been updated in 3.0.0. Check this option to continue using legacy templates.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
  * *Default event image* : Choose an image to use in case events do not have one.
@@ -77,11 +78,15 @@ Simply publish your settings and refresh the page, or open your agenda page in a
 
 To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additional settings in the widgets admin.
 
+![You can use convenient filter widgets to add filtering functionnality to your calendars.](assets/screenshots/screenshot-5.png)
+
 To integrate filters directly in your content instead of widget areas, the plugin also provide shortcodes.
 
 Every shortcode listed here (except for `[openagenda]`) corresponds to a filter option in the widget.
 
 Additionaly, shortcodes and widget filters have the same parameters, and every shortcode attribute corresponds to a widget filter setting.
+
+Every shortcode and widget can be displayed in a dropdown wrapper. All widgets have a *Display filter as a dropdown ?* checkbox, and all shortcodes have the corresponding `dropdown` parameter, which you can set to `true` to display the filter in a dropdown.
 
 **`[openagenda]`**
 
@@ -89,15 +94,31 @@ Displays the calendar. You do not need to use this shortcode explicitely, as it 
 
 However, if you need to insert static content after your list of events, you can do so by inserting this shortcode, then your static content afterwards.
 
+**`[openagenda_preview]`**
+
+Displays a preview of an calendar. It takes the following parameters : 
+
+ * `uid` : UID of the calendar you wish to preview.
+ * `size` : Number of events to display.
+ * `sort` : Event sort option. Accepts `lastTimingWithFeatured.asc`, `timingsWithFeatured.asc`, `lastTiming.asc`, `timings.asc`, `updatedAt.asc` or `updatedAt.desc`.
+ * `view` : Accepts 'list' or 'grid'.
+ * `filters` : Query string representing filters to apply to the request. **To ensure it works properly and avoid breaking the shortcode, you should urlencode the query string**. You can do so via a simple tool like [https://www.urlencoder.org/fr/](https://www.urlencoder.org/fr/)
+ * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
+ * `api_key`: API key to use for this request. Useful if you need to use a different API key from the general settings.
+
 **`[openagenda_filter_active]`**
 
 Displays the active filters. It takes no parameters.
+
+**`[openagenda_filter_total]`**
+
+Displays the events found total. It takes no parameters.
 
 **`[openagenda_filter_choice]`**
 
 Displays a list of choices, depending on the field chosen. It takes the following parameters : 
 
- * `field`: the slug of the choice field you want to display (e.g. "cities", "keywords", "departments", "favorites", etc... ).
+ * `field`: the slug of the choice field you want to display (e.g. "cities", "keywords", "departments", etc... ).
  * `additional_field`: Any custom field you have setup in your OpenAgenda administration. Only works when 'Additional Field' is the chosen field.
  * `page_size`: Number of options to display before the 'More options' button.
 
@@ -105,24 +126,23 @@ You can find the list of available additional fields in the Forms section of you
 
 **`[openagenda_filter_calendar]`**
 
-Displays a calendar. It takes no parameters.
+Displays a calendar. It takes the following parameters :
+
+ * `display_ranges` : Whether display the defined ranges, just like the `[openagenda_filter_ranges]` filter. 
+ * `ranges` : Ranges to display : comma-separated list containing one or more of the following options: `today`,`tomorrow`,`thisWeekend`,`currentWeek`,`currentMonth`. 
 
 **`[openagenda_filter_map]`**
 
 Displays an interactive map to locate and search events. It takes the following parameters :
 
- * `map_tiles_link` : Map tiles link to use. Defaults to `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
+ * `map_tiles_link` : Lien tiles link to use. Defaults to `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`
  * `map_auto` : Whether to automatically update map on scroll. 
 
-**`[openagenda_preview]`**
+**`[openagenda_filter_ranges]`**
 
-Displays a preview of any calendar. It takes the following parameters : 
+Displays buttons to quickly filter events based on pre-defined date ranges. It takes the following parameters :
 
- * `uid` : UID of the calendar you wish to preview.
- * `size` : Number of events to display.
- * `sort` : Event sort option. Accepts `lastTimingWithFeatured.asc`, `timingsWithFeatured.asc`, `lastTiming.asc`, `timings.asc`, `updatedAt.asc` or `updatedAt.desc`.
- * `filters` : Query string representing filters to apply to the request. **To ensure it works properly and avoid breaking the shortcode, you should urlencode the query string**. You can do so via a simple tool like [https://www.urlencoder.org/fr/](https://www.urlencoder.org/fr/)
- * `links` : Accepts `oa` or an empty string. If set to `oa`, event links will point to events pages on https//openagenda.com instead of local pages.
+ * `static_ranges` : Ranges to display : comma-separated list containing one or more of the following options: `today`,`tomorrow`,`thisWeekend`,`currentWeek`,`currentMonth`. 
 
 **`[openagenda_filter_relative]`**
 
@@ -133,6 +153,20 @@ Allows to filters past or upcoming events. It takes no parameters.
 Displays a search field. It takes the following parameters :
 
  * `placeholder` : text field placeholder.
+ * `manualSearch` : Whether to require submitting the form to refresh the list.
+
+**`[openagenda_filter_sort]`**
+
+Displays a sort field. It takes the following parameters :
+
+ * `options` : comma-seperated list of available sort options. Defaults to `score,lastTimingWithFeatured.asc,timingsWithFeatured.asc`
+ * `defaultValue` : Default value. The default is `lastTimingWithFeatured.asc`.
+
+**`[openagenda_filter_submit]`**
+
+Displays a filters submit button. If you checked the _Submit filters manually_ checkbox in the general settings, you are required to include this widget somewhere on your page, after your filters. It takes the following parameters :
+
+ * `button_label` : Label of the button. Defaults to "Refresh events".
 
 ## Customization
 
