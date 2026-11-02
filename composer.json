@@ -23,11 +23,13 @@
 		"phpstan/phpstan": "^2.3",
 		"szepeviktor/phpstan-wordpress": "^2.0",
 		"phpunit/phpunit": "^9.0",
-		"yoast/phpunit-polyfills": "^4.0"
+		"yoast/phpunit-polyfills": "^4.0",
+		"phpmd/phpmd": "^2.15"
 	},
 	"scripts": {
 		"phpcs": "./vendor/bin/phpcs -s .",
 		"phpcbf": "./vendor/bin/phpcbf .",
+		"phpmd": "./vendor/bin/phpmd -vvv ./ ansi .phpmd.xml",
 		"phpstan": "./vendor/bin/phpstan analyse -c ./.phpstan.neon -v --memory-limit=1G",
 		"test": "./vendor/bin/phpunit --verbose",
 		"install-tests": "./bin/install-wp-tests.sh test test test localhost latest",
