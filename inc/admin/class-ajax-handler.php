@@ -17,20 +17,6 @@ namespace OpenAgenda;
 class Ajax_Handler implements Hookable {
 
 	/**
-	 * Debug
-	 *
-	 * @var  bool  $debug
-	 */
-	protected $debug = false;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->debug = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG );
-	}
-
-	/**
 	 * Registers hooks
 	 *
 	 * @return void

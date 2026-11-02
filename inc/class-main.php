@@ -57,6 +57,7 @@ class Main {
 		require_once OPENAGENDA_PATH . 'inc/frontend/class-openagenda.php';
 		require_once OPENAGENDA_PATH . 'inc/frontend/class-shortcodes.php';
 		require_once OPENAGENDA_PATH . 'inc/admin/class-customizer-settings.php';
+		require_once OPENAGENDA_PATH . 'inc/tools/class-logger.php';
 		require_once OPENAGENDA_PATH . 'vendor/autoload.php';
 
 		$this->dependencies['content-manager'] = new Content_Manager();

@@ -592,7 +592,7 @@ function openagenda_decode_context( $context_string = null ) {
 	if ( null === $context_string ) {
 		$context_string = isset( $_GET['context'] ) ? $_GET['context'] : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
-	$decoded_context = ! empty( $context_string ) ? base64_decode( $context_string ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$decoded_context = ! empty( $context_string ) ? base64_decode( $context_string ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
 	$context         = false !== $decoded_context ? json_decode( $decoded_context, true ) : array();
 	return $context;
 }
@@ -605,7 +605,7 @@ function openagenda_decode_context( $context_string = null ) {
  * @return  string  $encoded_context  Bas64 encode.
  */
 function openagenda_encode_context( $context_array ) {
-	return base64_encode( wp_json_encode( $context_array ) );
+	return base64_encode( wp_json_encode( $context_array ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 }
 
 

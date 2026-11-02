@@ -153,13 +153,6 @@ class OpenAgenda {
 	protected $errors = array();
 
 	/**
-	 * Debug
-	 *
-	 * @var  bool $debug
-	 */
-	protected $debug = false;
-
-	/**
 	 * Parsed JSON response
 	 *
 	 * @var  array<string, mixed> $json
@@ -220,7 +213,6 @@ class OpenAgenda {
 		$settings      = get_option( 'openagenda_general_settings' );
 		$this->uid     = (string) $uid;
 		$this->api_key = ! empty( $settings['openagenda_api_key'] ) ? $settings['openagenda_api_key'] : '';
-		$this->debug   = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG );
 
 		$this->options = $this->parse_options( $options, $use_context );
 		if ( ! empty( $this->get_option( 'api_key' ) ) ) {
@@ -656,16 +648,12 @@ class OpenAgenda {
 			);
 			$response     = wp_safe_remote_get( $this->get_request_url(), $args );
 			$this->source = 'request';
-			if ( $this->debug ) {
-				error_log( sprintf( 'OpenAgenda request URL : %s', $this->get_request_url() ) );
-			}
+			Logger::log( sprintf( 'OpenAgenda request URL : %s', $this->get_request_url() ) );
 		}
 
 		if ( is_wp_error( $response ) ) {
 			$this->errors[] = $response;
-			if ( $this->debug ) {
-				error_log( sprintf( 'OpenAgenda request error : %s', sanitize_text_field( $response->get_error_message() ) ) );
-			}
+			Logger::log( sprintf( 'OpenAgenda request error : %s', sanitize_text_field( $response->get_error_message() ) ), 'error' );
 		}
 
 		return $response;
