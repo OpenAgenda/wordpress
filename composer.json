@@ -34,6 +34,6 @@
 		"test": "./vendor/bin/phpunit --verbose",
 		"install-tests": "./bin/install-wp-tests.sh test test test localhost latest",
 		"make-pot": "wp i18n make-pot . languages/openagenda.pot --exclude=\"node_modules, svn, js\" ",
-		"archive": "wp dist-archive ./ --plugin-dirname=openagenda"
+		"dist-archive": "wp dist-archive ./ --plugin-dirname=openagenda"
 	}
 }
