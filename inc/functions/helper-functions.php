@@ -5,6 +5,8 @@
  * @package OpenAgenda
  */
 
+use OpenAgendaSdk\OpenAgendaSdk;
+
 /**
  * Returns the path to a template file.
  * Looks first if the file exists in the `openagenda/` folder in the child theme,
@@ -699,7 +701,7 @@ function openagenda_get_event_schema( $uid = '' ) {
 	}
 
 	$api_key = $openagenda->get_api_key();
-	$client  = new \OpenAgendaSdk\OpenAgendaSdk( $api_key );
+	$client  = new OpenAgendaSdk( $api_key );
 
 	$event     = openagenda_get_event( $uid );
 	$permalink = openagenda_event_permalink( $uid, false, false );
@@ -792,17 +794,17 @@ function openagenda_get_calendar_fields_schema( $type = 'all', $post_id = 0 ) {
 		case 'additional':
 			$schema = array_filter(
 				$schema,
-				function ( $f ) use ( $type ) {
+				function ( $field ) use ( $type ) {
 					return 'standard' === $type
-					? ! empty( $f['schemaType'] ) && 'event' === $f['schemaType']
-					: ! empty( $f['schemaType'] ) && 'event' !== $f['schemaType'];
+					? ! empty( $field['schemaType'] ) && 'event' === $field['schemaType']
+					: ! empty( $field['schemaType'] ) && 'event' !== $field['schemaType'];
 				}
 			);
 			$schema = array_values(
 				array_filter(
 					$schema,
-					function ( $f ) {
-						return ( empty( $f['type'] ) || 'section' !== $f['type'] ) && ( empty( $f['fieldtype'] ) || 'abstract' !== $f['fieldtype'] );
+					function ( $field ) {
+						return ( empty( $field['type'] ) || 'section' !== $field['type'] ) && ( empty( $field['fieldtype'] ) || 'abstract' !== $field['fieldtype'] );
 					}
 				)
 			);
@@ -824,8 +826,8 @@ function openagenda_get_field_schema( $field, $post_id = 0 ) {
 	$field_schema = array_values(
 		array_filter(
 			$schema,
-			function ( $f ) use ( $field ) {
-				return ! empty( $f['field'] ) && $f['field'] === $field;
+			function ( $field_data ) use ( $field ) {
+				return ! empty( $field_data['field'] ) && $field_data['field'] === $field;
 			}
 		)
 	);

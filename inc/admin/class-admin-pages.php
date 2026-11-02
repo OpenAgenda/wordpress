@@ -46,7 +46,7 @@ class Admin_Pages implements Hookable {
 	public function register_admin_page() {
 		$main_page = $this->get_main_page();
 
-		$hook = add_submenu_page(
+		add_submenu_page(
 			$main_page['parent_slug'],
 			$main_page['page_title'],
 			$main_page['menu_title'],

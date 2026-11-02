@@ -309,8 +309,8 @@ function openagenda_get_additional_field( $field, $uid = '', $args = array() ) {
 			case 'multiselect':
 			case 'checkbox':
 				$values = is_array( $value ) ? array_map(
-					function ( $v ) {
-						return is_array( $v ) && ! empty( $v['label'] ) ? openagenda_get_i18n_value( $v['label'] ) : '';
+					function ( $value ) {
+						return is_array( $value ) && ! empty( $value['label'] ) ? openagenda_get_i18n_value( $value['label'] ) : '';
 					},
 					$value
 				) : array();
@@ -334,8 +334,8 @@ function openagenda_get_additional_fields_template_fields( $post_id = 0 ) {
 	$fields = array_values(
 		array_filter(
 			array_map(
-				function ( $f ) {
-					return $f['field'] ?? '';
+				function ( $field ) {
+					return $field['field'] ?? '';
 				},
 				openagenda_get_calendar_fields_schema( 'additional', $post_id )
 			)
@@ -680,7 +680,7 @@ function openagenda_event_timings( $uid = '', $display = true ) {
 	$html = '';
 	if ( $timings ) {
 		$html .= '<ul class="oa-months">';
-		foreach ( $months as $number => $month ) {
+		foreach ( $months as $month ) {
 			$class = true === $month['nearest'] ? 'oa-current' : 'oa-hidden';
 			$html .= sprintf(
 				'<li class="oa-month %s">
@@ -698,7 +698,7 @@ function openagenda_event_timings( $uid = '', $display = true ) {
 			);
 			foreach ( $month['weeks'] as $week ) {
 				$html .= '<ul class="oa-week">';
-				foreach ( $week['days'] as $day_label => $day ) {
+				foreach ( $week['days'] as $day ) {
 					$day_timings = '';
 					foreach ( $day['timings'] as $timing ) {
 						$day_timings .= sprintf(
@@ -1172,11 +1172,11 @@ function openagenda_event_links( $field, $uid = '', $display = true ) {
 
 	$links = array();
 	foreach ( $values as $value ) {
-		$id     = ! empty( $value['id'] ) ? (int) $value['id'] : 0;
-		$labels = ! empty( $value['label'] ) ? $value['label'] : array();
-		$label  = openagenda_get_i18n_value( $labels );
-		if ( $id && $label ) {
-			$links[] = sprintf( '<a href="%s">%s</a>', add_query_arg( sanitize_title( $field ), $id, openagenda_get_permalink() ), $label );
+		$value_id = ! empty( $value['id'] ) ? (int) $value['id'] : 0;
+		$labels    = ! empty( $value['label'] ) ? $value['label'] : array();
+		$label     = openagenda_get_i18n_value( $labels );
+		if ( $value_id && $label ) {
+			$links[] = sprintf( '<a href="%s">%s</a>', add_query_arg( sanitize_title( $field ), $value_id, openagenda_get_permalink() ), $label );
 		}
 	}
 

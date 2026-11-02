@@ -82,7 +82,7 @@ class Main {
 	 * @return void
 	 */
 	private function register_hooks() {
-		foreach ( $this->dependencies as $key => $dependency ) {
+		foreach ( $this->dependencies as $dependency ) {
 			$dependency->register_hooks();
 		}
 		add_action( 'wp', array( $this, 'init_calendar' ) );

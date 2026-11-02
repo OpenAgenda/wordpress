@@ -20,7 +20,6 @@ class Filter_Widget extends OpenAgenda_Widget {
 	public function __construct( $args = array() ) {
 		$settings            = get_option( 'openagenda_integrations_settings' );
 		$default_tiles       = ! empty( $settings['openagenda_map_tiles_link'] ) ? $settings['openagenda_map_tiles_link'] : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		$default_attribution = ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? $settings['openagenda_map_tiles_attribution_link'] : sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) );
 
 		$args['additional_settings'] = array(
 			'openagenda_filter_map'      => array(
@@ -249,7 +248,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 		if ( ! empty( $additional_settings ) ) {
 			foreach ( $additional_settings as $filter => $fields ) {
 				printf( '<div data-filter="%1$s" class="openagenda-additional-settings %1$s-additional-settings">', esc_attr( $filter ) );
-				foreach ( $fields as $field_id => $field ) {
+				foreach ( $fields as $field ) {
 					$field = wp_parse_args(
 						$field,
 						array(

@@ -196,7 +196,7 @@ class Metaboxes implements Hookable {
 	 * @return void
 	 */
 	public function register_metaboxes( $post_type, $post ) {
-		foreach ( $this->get_metaboxes() as $id => $args ) {
+		foreach ( $this->get_metaboxes() as $args ) {
 			add_meta_box(
 				$args['id'],
 				$args['title'],

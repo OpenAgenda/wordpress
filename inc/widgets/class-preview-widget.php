@@ -139,7 +139,7 @@ class Preview_Widget extends OpenAgenda_Widget {
 
 		$additional_settings = $this->get_additional_settings();
 		if ( ! empty( $additional_settings ) ) {
-			foreach ( $additional_settings as $field_id => $field ) {
+			foreach ( $additional_settings as $field ) {
 				$field = wp_parse_args(
 					$field,
 					array(

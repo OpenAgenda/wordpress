@@ -31,6 +31,9 @@
  * along with OpenAgenda. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
  */
 
+use OpenAgenda\Content_Manager;
+use OpenAgenda\Main;
+
 defined( 'ABSPATH' ) || die();
 
 define( 'OPENAGENDA_PATH', plugin_dir_path( __FILE__ ) );
@@ -58,7 +61,7 @@ register_activation_hook( __FILE__, 'openagenda_activation' );
 function openagenda_activation() {
 	require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
 	require_once OPENAGENDA_PATH . 'inc/frontend/class-content-manager.php';
-	$manager = new OpenAgenda\Content_Manager();
+	$manager = new Content_Manager();
 	$manager->register_post_types();
 	$manager->register_rewrite_rules();
 	flush_rewrite_rules();
@@ -121,21 +124,17 @@ function openagenda_update_version() {
 	$db_version = get_option( 'openagenda_version' );
 	if ( ! $db_version ) {
 		$settings = get_option( 'openagenda_general_settings' );
-		if ( ! empty( $settings ) ) {
-			if ( ! isset( $settings['openagenda_use_legacy_templates'] ) ) {
-				$settings['openagenda_use_legacy_templates'] = true;
-				update_option( 'openagenda_general_settings', $settings );
-			}
+		if ( ! empty( $settings ) && ! isset( $settings['openagenda_use_legacy_templates'] ) ) {
+			$settings['openagenda_use_legacy_templates'] = true;
+			update_option( 'openagenda_general_settings', $settings );
 		}
 	}
 
 	if ( false !== $db_version && version_compare( $db_version, '3.1.0', '<' ) ) {
 		$settings = get_option( 'openagenda_general_settings' );
-		if ( ! empty( $settings ) ) {
-			if ( ! isset( $settings['openagenda_manual_submit'] ) ) {
-				$settings['openagenda_manual_submit'] = false;
-				update_option( 'openagenda_general_settings', $settings );
-			}
+		if ( ! empty( $settings ) && ! isset( $settings['openagenda_manual_submit'] ) ) {
+			$settings['openagenda_manual_submit'] = false;
+			update_option( 'openagenda_general_settings', $settings );
 		}
 	}
 
@@ -176,6 +175,6 @@ add_action( 'plugins_loaded', 'openagenda_init' );
  */
 function openagenda_init() {
 	require_once OPENAGENDA_PATH . 'inc/class-main.php';
-	$oa_main = new OpenAgenda\Main();
+	$oa_main = new Main();
 	$oa_main->init();
 }
