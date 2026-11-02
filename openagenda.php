@@ -75,6 +75,7 @@ register_deactivation_hook( __FILE__, 'openagenda_deactivation' );
  * @return void
  */
 function openagenda_deactivation() {
+	wp_clear_scheduled_hook( 'openagenda_cleanup_logs' );
 	flush_rewrite_rules();
 }
 

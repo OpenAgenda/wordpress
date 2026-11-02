@@ -58,8 +58,10 @@ class Main {
 		require_once OPENAGENDA_PATH . 'inc/frontend/class-shortcodes.php';
 		require_once OPENAGENDA_PATH . 'inc/admin/class-customizer-settings.php';
 		require_once OPENAGENDA_PATH . 'inc/tools/class-logger.php';
+		require_once OPENAGENDA_PATH . 'inc/tools/class-tasks.php';
 		require_once OPENAGENDA_PATH . 'vendor/autoload.php';
 
+		$this->dependencies['tasks']           = new Tasks();
 		$this->dependencies['content-manager'] = new Content_Manager();
 		$this->dependencies['customizer']      = new Customizer_Settings();
 		$this->dependencies['shortcodes']      = new Shortcodes();
