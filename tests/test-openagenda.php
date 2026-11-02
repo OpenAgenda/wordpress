@@ -32,6 +32,13 @@ class OpenagendaTest extends WP_UnitTestCase {
 	private $request_url = '';
 
 	/**
+	 * HTTP pre-request callback.
+	 *
+	 * @var callable|null
+	 */
+	private $http_callback = null;
+
+	/**
 	 * Agenda post_id.
 	 *
 	 * @var int
@@ -62,10 +69,21 @@ class OpenagendaTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Remove the mocked HTTP callback.
+	 */
+	public function tearDown(): void {
+		if ( $this->http_callback ) {
+			remove_filter( 'pre_http_request', $this->http_callback, 10 );
+		}
+
+		parent::tearDown();
+	}
+
+	/**
 	 * The constructor parses the query and populates an agenda response.
 	 */
 	public function test_constructor_initializes_paginated_agenda() {
-		$this->mock_remote_response( wp_json_encode( $this->events_response ) );
+		$this->http_callback = openagenda_test_mock_remote_response( wp_json_encode( $this->events_response ), $this->request_url );
 
 		$agenda = new \OpenAgenda\OpenAgenda(
 			'76126842',
@@ -98,7 +116,7 @@ class OpenagendaTest extends WP_UnitTestCase {
 	 * A slug argument initializes the constructor's single-event state.
 	 */
 	public function test_constructor_initializes_single_event() {
-		$this->mock_remote_response( wp_json_encode( $this->single_event_response ) );
+		$this->http_callback = openagenda_test_mock_remote_response( wp_json_encode( $this->single_event_response ), $this->request_url );
 
 		$agenda = new \OpenAgenda\OpenAgenda(
 			'76126842',
@@ -130,8 +148,8 @@ class OpenagendaTest extends WP_UnitTestCase {
 	 * @param array<string, mixed> $expected Expected parsed state.
 	 */
 	public function test_parse_args( $input, $expected ) {
-		$this->mock_remote_response( wp_json_encode( $this->events_response ) );
-		$agenda = new \OpenAgenda\OpenAgenda(
+		$this->http_callback = openagenda_test_mock_remote_response( wp_json_encode( $this->events_response ), $this->request_url );
+		$agenda              = new \OpenAgenda\OpenAgenda(
 			'76126842',
 			array(),
 			array(
@@ -139,7 +157,7 @@ class OpenagendaTest extends WP_UnitTestCase {
 				'use_cache' => false,
 			)
 		);
-		$args   = $agenda->parse_args( $input );
+		$args                = $agenda->parse_args( $input );
 
 		$this->assertSame( $expected['size'], $agenda->get_size() );
 		$this->assertSame( $expected['page'], $agenda->get_current_page() );
@@ -388,34 +406,6 @@ class OpenagendaTest extends WP_UnitTestCase {
 					)
 				),
 			),
-		);
-	}
-
-	/**
-	 * Intercept the request and return a fake successful HTTP response.
-	 *
-	 * @param string $body Response body.
-	 */
-	private function mock_remote_response( $body ) {
-		$response = array(
-			'headers'  => array(),
-			'body'     => $body,
-			'response' => array(
-				'code'    => 200,
-				'message' => 'OK',
-			),
-			'cookies'  => array(),
-			'filename' => null,
-		);
-
-		add_filter(
-			'pre_http_request',
-			function ( $preempt, $args, $url ) use ( $response ) {
-				$this->request_url = $url;
-				return $response;
-			},
-			10,
-			3
 		);
 	}
 }
