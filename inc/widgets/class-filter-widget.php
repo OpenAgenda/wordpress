@@ -195,7 +195,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 			return;
 		}
 
-		$display_on_single = ! in_array( $instance['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! isset( $instance['display_on_single'] ) || ! in_array( $instance['display_on_single'], array( 'false', '0', '', 0, false ), true );
 		if ( openagenda_is_single() && ! $display_on_single ) {
 			return;
 		}
