@@ -195,6 +195,11 @@ class Filter_Widget extends OpenAgenda_Widget {
 			return;
 		}
 
+		$display_on_single = ! in_array( $instance['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( openagenda_is_single() && ! $display_on_single ) {
+			return;
+		}
+
 		echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		if ( ! empty( $instance['title'] ) ) {
@@ -223,6 +228,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 		$title             = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$filter            = ! empty( $instance['filter'] ) ? $instance['filter'] : '';
 		$dropdown          = ! empty( $instance['dropdown'] ) ? $instance['dropdown'] : '';
+		$display_on_single = ! empty( $instance['display_on_single'] ) ? $instance['display_on_single'] : true;
 		$available_filters = $this->get_available_filters();
 		?>
 			<p>
@@ -237,6 +243,10 @@ class Filter_Widget extends OpenAgenda_Widget {
 						<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $filter, $key ); ?>><?php echo esc_html( $filter_data['label'] ); ?></option>
 					<?php endforeach; ?>
 				</select>
+			</p>
+			<p>
+				<input type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'display_on_single' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'display_on_single' ) ); ?>" <?php checked( $display_on_single ); ?>>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'display_on_single' ) ); ?>"><?php esc_html_e( 'Display filter on single event views ?', 'openagenda' ); ?></label>
 			</p>
 			<p>
 				<input type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'dropdown' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'dropdown' ) ); ?>" <?php checked( $dropdown ); ?>>
@@ -276,9 +286,10 @@ class Filter_Widget extends OpenAgenda_Widget {
 	 */
 	public function update( $new_instance, $old_instance ): array {
 		$instance = array(
-			'title'    => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
-			'filter'   => array_key_exists( $new_instance['filter'], $this->get_available_filters() ) ? $new_instance['filter'] : '',
-			'dropdown' => ! empty( $new_instance['dropdown'] ) ? (bool) $new_instance['dropdown'] : false,
+			'title'             => ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '',
+			'filter'            => array_key_exists( $new_instance['filter'], $this->get_available_filters() ) ? $new_instance['filter'] : '',
+			'dropdown'          => ! empty( $new_instance['dropdown'] ) ? (bool) $new_instance['dropdown'] : false,
+			'display_on_single' => ! empty( $new_instance['display_on_single'] ) ? (bool) $new_instance['display_on_single'] : false,
 		);
 
 		switch ( $instance['filter'] ) {

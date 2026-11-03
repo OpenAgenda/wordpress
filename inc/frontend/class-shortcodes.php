@@ -152,9 +152,10 @@ class Shortcodes implements Hookable {
 		$uid = $openagenda->get_uid();
 
 		$defaults = array(
-			'id'       => 'active-filters',
-			'title'    => _x( 'Active filters', 'Filter name', 'openagenda' ),
-			'dropdown' => false,
+			'id'                => 'active-filters',
+			'title'             => _x( 'Active filters', 'Filter name', 'openagenda' ),
+			'display_on_single' => true,
+			'dropdown'          => false,
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_active' );
 
@@ -163,6 +164,11 @@ class Shortcodes implements Hookable {
 
 		if ( $atts['dropdown'] ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
 		}
 
 		return apply_filters( 'openagenda_filter_active', $filter, $uid, $atts );
@@ -184,9 +190,10 @@ class Shortcodes implements Hookable {
 		$uid = $openagenda->get_uid();
 
 		$defaults = array(
-			'id'       => 'total',
-			'title'    => _x( 'Events total', 'Filter name', 'openagenda' ),
-			'dropdown' => false,
+			'id'                => 'total',
+			'title'             => _x( 'Events total', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_total' );
 
@@ -211,6 +218,11 @@ class Shortcodes implements Hookable {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
+		}
+
 		return apply_filters( 'openagenda_filter_total', $filter, $uid, $atts );
 	}
 
@@ -231,13 +243,14 @@ class Shortcodes implements Hookable {
 		$uid = $openagenda->get_uid();
 
 		$defaults = array(
-			'id'               => 'choice',
-			'title'            => _x( 'Choice', 'Filter name', 'openagenda' ),
-			'dropdown'         => false,
-			'field'            => '',
-			'additional_field' => '',
-			'page_size'        => 10,
-			'sort'             => '',
+			'id'                => 'choice',
+			'title'             => _x( 'Choice', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
+			'field'             => '',
+			'additional_field'  => '',
+			'page_size'         => 10,
+			'sort'              => '',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_choice' );
 
@@ -284,6 +297,11 @@ class Shortcodes implements Hookable {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
+		}
+
 		return apply_filters( 'openagenda_filter_choice', $filter, $uid, $atts );
 	}
 
@@ -298,12 +316,13 @@ class Shortcodes implements Hookable {
 	 */
 	public function openagenda_filter_tags( $atts = array(), $content = null, $tag = 'openagenda_filter_tags' ) {
 		$defaults = array(
-			'id'               => 'choice',
-			'title'            => _x( 'Keywords', 'Filter name', 'openagenda' ),
-			'dropdown'         => false,
-			'field'            => 'keyword',
-			'additional_field' => '',
-			'page_size'        => 10,
+			'id'                => 'choice',
+			'title'             => _x( 'Keywords', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
+			'field'             => 'keyword',
+			'additional_field'  => '',
+			'page_size'         => 10,
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_tags' );
 		return $this->openagenda_filter_choice( $atts );
@@ -326,12 +345,13 @@ class Shortcodes implements Hookable {
 		$uid = $openagenda->get_uid();
 
 		$defaults = array(
-			'id'             => 'date-range',
-			'title'          => _x( 'Date', 'Filter name', 'openagenda' ),
-			'dropdown'       => false,
-			'display_ranges' => false,
-			'ranges'         => array(),
-			'type'           => 'dateRange',
+			'id'                => 'date-range',
+			'title'             => _x( 'Date', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
+			'display_ranges'    => false,
+			'ranges'            => array(),
+			'type'              => 'dateRange',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_calendar' );
 
@@ -356,6 +376,11 @@ class Shortcodes implements Hookable {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
+		}
+
 		return apply_filters( 'openagenda_filter_calendar', $filter, $uid, $atts );
 	}
 
@@ -375,10 +400,11 @@ class Shortcodes implements Hookable {
 		$uid = $openagenda->get_uid();
 
 		$defaults = array(
-			'id'            => 'defined-ranges',
-			'title'         => _x( 'Defined Ranges', 'Filter name', 'openagenda' ),
-			'dropdown'      => false,
-			'static_ranges' => '',
+			'id'                => 'defined-ranges',
+			'title'             => _x( 'Defined Ranges', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
+			'static_ranges'     => '',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_ranges' );
 
@@ -396,6 +422,11 @@ class Shortcodes implements Hookable {
 
 		if ( $atts['dropdown'] ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
 		}
 
 		return apply_filters( 'openagenda_filter_ranges', $filter, $uid, $atts );
@@ -422,16 +453,17 @@ class Shortcodes implements Hookable {
 		$default_attribution = ! empty( $settings['openagenda_map_tiles_attribution_link'] ) ? $settings['openagenda_map_tiles_attribution_link'] : sprintf( '<a href="%s">%s</a>', 'https://www.openstreetmap.org/copyright', __( 'OpenStreetMap contributors', 'openagenda' ) );
 
 		$defaults = array(
-			'id'               => 'map',
-			'title'            => _x( 'Map', 'Filter name', 'openagenda' ),
-			'dropdown'         => false,
-			'map_tiles_link'   => $default_tiles,
-			'map_attribution'  => $default_attribution,
-			'map_zoom'         => 12,
-			'map_auto'         => true,
-			'map_auto_message' => __( 'Search while moving the map', 'openagenda' ),
-			'map_longitude'    => '',
-			'map_latitude'     => '',
+			'id'                => 'map',
+			'title'             => _x( 'Map', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
+			'map_tiles_link'    => $default_tiles,
+			'map_attribution'   => $default_attribution,
+			'map_zoom'          => 12,
+			'map_auto'          => true,
+			'map_auto_message'  => __( 'Search while moving the map', 'openagenda' ),
+			'map_longitude'     => '',
+			'map_latitude'      => '',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_map' );
 
@@ -454,7 +486,13 @@ class Shortcodes implements Hookable {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		wp_enqueue_style( 'oa-leaflet' );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
+		} else {
+			wp_enqueue_style( 'oa-leaflet' );
+		}
+
 		return apply_filters( 'openagenda_filter_map', $filter, $uid, $atts );
 	}
 
@@ -531,9 +569,10 @@ class Shortcodes implements Hookable {
 		$uid = $openagenda->get_uid();
 
 		$defaults = array(
-			'id'       => 'relative',
-			'title'    => _x( 'Upcoming', 'Filter name', 'openagenda' ),
-			'dropdown' => false,
+			'id'                => 'relative',
+			'title'             => _x( 'Upcoming', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_relative' );
 
@@ -546,6 +585,11 @@ class Shortcodes implements Hookable {
 
 		if ( $atts['dropdown'] ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
 		}
 
 		return apply_filters( 'openagenda_filter_relative', $filter, $uid, $atts );
@@ -568,11 +612,12 @@ class Shortcodes implements Hookable {
 		$uid = $openagenda->get_uid();
 
 		$defaults = array(
-			'id'           => 'search',
-			'title'        => _x( 'Search', 'Filter name', 'openagenda' ),
-			'manualSearch' => false,
-			'dropdown'     => false,
-			'placeholder'  => '',
+			'id'                => 'search',
+			'title'             => _x( 'Search', 'Filter name', 'openagenda' ),
+			'manualSearch'      => false,
+			'dropdown'          => false,
+			'display_on_single' => true,
+			'placeholder'       => '',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_search' );
 
@@ -591,6 +636,11 @@ class Shortcodes implements Hookable {
 
 		if ( $atts['dropdown'] ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
+		}
+
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
 		}
 
 		return apply_filters( 'openagenda_filter_search', $filter, $uid, $atts );
@@ -615,11 +665,12 @@ class Shortcodes implements Hookable {
 		$sort    = $filters['sort'] ?? null;
 
 		$defaults = array(
-			'id'           => 'sort',
-			'title'        => _x( 'Sort', 'Filter name', 'openagenda' ),
-			'dropdown'     => false,
-			'options'      => 'score,lastTimingWithFeatured.asc,timingsWithFeatured.asc',
-			'defaultValue' => $sort ?? 'lastTimingWithFeatured.asc',
+			'id'                => 'sort',
+			'title'             => _x( 'Sort', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
+			'options'           => 'score,lastTimingWithFeatured.asc,timingsWithFeatured.asc',
+			'defaultValue'      => $sort ?? 'lastTimingWithFeatured.asc',
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_sort' );
 
@@ -646,6 +697,11 @@ class Shortcodes implements Hookable {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
+			$filter = '';
+		}
+
 		return apply_filters( 'openagenda_filter_sort', $filter, $uid, $atts );
 	}
 
@@ -669,16 +725,22 @@ class Shortcodes implements Hookable {
 		$manual_submit = isset( $settings['openagenda_manual_submit'] ) ? (bool) $settings['openagenda_manual_submit'] : true;
 
 		$defaults = array(
-			'id'           => 'submit',
-			'title'        => _x( 'Submit', 'Filter name', 'openagenda' ),
-			'dropdown'     => false,
-			'button_label' => __( 'Refresh events', 'openagenda' ),
+			'id'                => 'submit',
+			'title'             => _x( 'Submit', 'Filter name', 'openagenda' ),
+			'dropdown'          => false,
+			'display_on_single' => true,
+			'button_label'      => __( 'Refresh events', 'openagenda' ),
 		);
 		$atts     = shortcode_atts( $defaults, $atts, 'openagenda_filter_sort' );
 
 		if ( $manual_submit ) {
 			$filter = sprintf( '<div class="oa-widget oa-submit-widget"><button type="submit" class="oa-button">%s</button></div>', esc_html( $atts['button_label'] ) );
 		} else {
+			$filter = '';
+		}
+
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
 
