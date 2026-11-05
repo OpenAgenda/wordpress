@@ -8,6 +8,8 @@
     "build": "npm run build:styles & npm run build:scripts",
     "start:scripts": "wp-scripts start admin.js customizer.js event-map.js filters.js fontawesome.js leaflet.js main.js media-uploader.js timings.js widgets.js --source-path=assets/src/js --output-path=assets/js",
     "build:scripts": "wp-scripts build admin.js customizer.js event-map.js filters.js fontawesome.js leaflet.js main.js media-uploader.js timings.js widgets.js --source-path=assets/src/js --output-path=assets/js",
+    "start:blocks": "wp-scripts start --webpack-src-dir=assets/src/js/blocks --output-path=assets/blocks",
+    "build:blocks": "wp-scripts build --webpack-src-dir=assets/src/js/blocks --output-path=assets/blocks",
     "start:styles": "npm run start:styles:style & npm run start:styles:admin & npm run start:styles:legacy & npm run start:styles:leaflet",
     "start:styles:style": "sass --watch assets/src/css/style.scss:assets/css/style.css",
     "start:styles:admin": "sass --watch assets/src/css/admin.scss:assets/css/admin.css",

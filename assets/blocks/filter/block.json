@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "openagenda/filter",
+  "version": "1.0.0",
+  "title": "Openagenda Filter",
+  "category": "widgets",
+  "icon": "filter",
+  "description": "Display filters for the event list.",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "openagenda",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
