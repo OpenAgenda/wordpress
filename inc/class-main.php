@@ -66,7 +66,7 @@ class Main {
 		$this->dependencies['content-manager'] = new Content_Manager();
 		$this->dependencies['customizer']      = new Customizer_Settings();
 		$this->dependencies['shortcodes']      = new Shortcodes();
-		$this->dependencies['blocks']          = new Blocks();
+		$this->dependencies['blocks']          = new Blocks( array( $this, 'get_available_filters' ) );
 
 		if ( is_admin() ) {
 			// Only needed in the admin.

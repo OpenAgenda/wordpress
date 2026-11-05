@@ -4,7 +4,7 @@
     "name": "openagenda/filter",
     "version": "1.0.0",
     "title": "Openagenda Filter",
-    "category": "widgets",
+    "category": "openagenda",
     "icon": "filter",
     "description": "Display filters for the event list.",
     "supports": {

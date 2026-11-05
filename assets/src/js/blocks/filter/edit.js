@@ -22,6 +22,8 @@ import { useBlockProps } from '@wordpress/block-editor';
  * @return {import('@wordpress/element').WPElement} Element to render.
  */
 export default function Edit() {
+    console.log(window.openagendaFilterSettings);
+
     return (
         <form {...useBlockProps()}>
             <input

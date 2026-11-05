@@ -27,6 +27,7 @@ const variations = [
         keywords: [__('Search filter', 'openagenda'), __('search', 'openagenda'), __('filter', 'openagenda'), __('openagenda', 'openagenda')],
         description: __('Displays a search input filter.', 'openagenda'),
         attributes: { filter: 'search' },
+        isDefault: true,
     },
 ];
 

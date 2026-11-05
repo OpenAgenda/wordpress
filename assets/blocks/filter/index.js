@@ -206,7 +206,8 @@ const variations = [{
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Displays a search input filter.', 'openagenda'),
   attributes: {
     filter: 'search'
-  }
+  },
+  isDefault: true
 }];
 
 /**
@@ -282,7 +283,7 @@ module.exports = window["wp"]["i18n"];
   \************************************************/
 (module) {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"openagenda/filter","version":"1.0.0","title":"Openagenda Filter","category":"widgets","icon":"filter","description":"Display filters for the event list.","supports":{"html":false},"textdomain":"openagenda","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"openagenda/filter","version":"1.0.0","title":"Openagenda Filter","category":"openagenda","icon":"filter","description":"Display filters for the event list.","supports":{"html":false},"textdomain":"openagenda","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ }
 
