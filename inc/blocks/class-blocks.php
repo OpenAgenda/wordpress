@@ -16,7 +16,7 @@ namespace OpenAgenda;
  * Register blocks and render callbacks.
  */
 class Blocks implements Hookable {
-    /**
+	/**
 	 * Registers hooks
 	 *
 	 * @return void
@@ -25,12 +25,12 @@ class Blocks implements Hookable {
 		add_action( 'init', array( $this, 'register_block_types' ) );
 	}
 
-    /**
-     * Register main filter block and its variations
-     * 
-     * @return void
-     */
-    public function register_block_types(){
+	/**
+	 * Register main filter block and its variations
+	 *
+	 * @return void
+	 */
+	public function register_block_types() {
 		register_block_type( OPENAGENDA_PATH . 'assets/blocks/filter' );
 	}
 }

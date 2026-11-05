@@ -26,7 +26,7 @@ class Main {
 	/**
 	 * Array of available filters
 	 *
-	 * @var  array<string, array<string, string>> $available_filters
+	 * @var  array<string, array<string, mixed>> $available_filters
 	 */
 	private $available_filters = array();
 
@@ -66,7 +66,7 @@ class Main {
 		$this->dependencies['content-manager'] = new Content_Manager();
 		$this->dependencies['customizer']      = new Customizer_Settings();
 		$this->dependencies['shortcodes']      = new Shortcodes();
-		$this->dependencies['blocks']      = new Blocks();
+		$this->dependencies['blocks']          = new Blocks();
 
 		if ( is_admin() ) {
 			// Only needed in the admin.
@@ -220,46 +220,191 @@ class Main {
 	/**
 	 * Returns array of available filters
 	 *
-	 * @return array<string, array{label: string, shortcode: string}>
+	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_available_filters() {
 		if ( empty( $this->available_filters ) ) {
+			$settings      = get_option( 'openagenda_integrations_settings' );
+			$default_tiles = ! empty( $settings['openagenda_map_tiles_link'] ) ? $settings['openagenda_map_tiles_link'] : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
 			$this->available_filters = array(
 				'openagenda_filter_active'   => array(
 					'label'     => _x( 'Active filters', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_active',
+					'settings'  => array(),
 				),
 				'openagenda_filter_choice'   => array(
 					'label'     => _x( 'Choice', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_choice',
+					'settings'  => array(
+						'field'            => array(
+							'name'        => 'field',
+							'label'       => __( 'Choose field: ', 'openagenda' ),
+							'type'        => 'select',
+							'class'       => 'openagenda-filter-choice-field widefat',
+							'option_none' => __( 'Choose a field to display', 'openagenda' ),
+							'options'     => array(
+								'favorites'        => __( 'Favorites', 'openagenda' ),
+								'city'             => __( 'Cities', 'openagenda' ),
+								'district'         => __( 'Districts', 'openagenda' ),
+								'keyword'          => __( 'Keywords', 'openagenda' ),
+								'adminLevel3'      => __( 'Admin Level 3', 'openagenda' ),
+								'department'       => __( 'Departments', 'openagenda' ),
+								'region'           => __( 'Regions', 'openagenda' ),
+								'attendanceMode'   => __( 'Attendance Mode', 'openagenda' ),
+								'additional_field' => __( 'Additional field', 'openagenda' ),
+							),
+						),
+						'additional_field' => array(
+							'name'        => 'additional_field',
+							'label'       => __( 'Additional field name: ', 'openagenda' ),
+							'class'       => 'openagenda-filter-choice-additional-field widefat',
+							'default'     => '',
+							'description' => sprintf(
+								__( 'You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )', 'openagenda' )
+							),
+						),
+						'page_size'        => array(
+							'name'    => 'page_size',
+							'type'    => 'number',
+							'label'   => __( 'Number of options to display at once: ', 'openagenda' ),
+							'class'   => 'openagenda-filter-choice-pagesize widefat',
+							'default' => 10,
+						),
+						'sort'             => array(
+							'name'        => 'sort',
+							'label'       => __( 'Sort options by ', 'openagenda' ),
+							'type'        => 'select',
+							'class'       => 'openagenda-filter-choice-sort widefat',
+							'option_none' => __( 'Decreasing count', 'openagenda' ),
+							'options'     => array(
+								'alphabetical' => __( 'Alphabetical order', 'openagenda' ),
+							),
+						),
+					),
 				),
 				'openagenda_filter_calendar' => array(
 					'label'     => _x( 'Calendar', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_calendar',
+					'settings'  => array(
+						'display_ranges' => array(
+							'name'    => 'display_ranges',
+							'label'   => __( 'Display defined ranges shortcuts ?', 'openagenda' ),
+							'default' => false,
+							'type'    => 'checkbox',
+						),
+						'type'           => array(
+							'name'    => 'type',
+							'label'   => __( 'Type of filter', 'openagenda' ),
+							'default' => 'dateRange',
+							'type'    => 'select',
+							'options' => array(
+								'dateRange'       => __( 'Calendar picker', 'openagenda' ),
+								'simpleDateRange' => __( 'Native date input fields', 'openagenda' ),
+							),
+						),
+						'ranges'         => array(
+							'name'        => 'ranges',
+							'description' => __( 'Ranges to display: ', 'openagenda' ),
+							'default'     => array( 'today', 'tomorrow', 'thisWeekend', 'currentWeek', 'currentMonth' ),
+							'type'        => 'multi-checkbox',
+							'options'     => array(
+								'today'        => __( 'Today', 'openagenda' ),
+								'tomorrow'     => __( 'Tomorrow', 'openagenda' ),
+								'thisWeekend'  => __( 'This week end', 'openagenda' ),
+								'currentWeek'  => __( 'This week', 'openagenda' ),
+								'currentMonth' => __( 'This month', 'openagenda' ),
+							),
+						),
+					),
 				),
 				'openagenda_filter_ranges'   => array(
 					'label'     => _x( 'Defined Ranges', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_ranges',
+					'settings'  => array(
+						'static_ranges' => array(
+							'name'        => 'static_ranges',
+							'description' => __( 'Ranges to display: ', 'openagenda' ),
+							'default'     => array( 'today', 'tomorrow', 'thisWeekend', 'currentWeek', 'currentMonth' ),
+							'type'        => 'multi-checkbox',
+							'options'     => array(
+								'today'        => __( 'Today', 'openagenda' ),
+								'tomorrow'     => __( 'Tomorrow', 'openagenda' ),
+								'thisWeekend'  => __( 'This week end', 'openagenda' ),
+								'currentWeek'  => __( 'This week', 'openagenda' ),
+								'currentMonth' => __( 'This month', 'openagenda' ),
+							),
+						),
+					),
 				),
 				'openagenda_filter_map'      => array(
 					'label'     => _x( 'Map', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_map',
+					'settings'  => array(
+						'map_tiles_link' => array(
+							'name'        => 'map_tiles_link',
+							'label'       => __( 'Map tiles link:', 'openagenda' ),
+							'class'       => 'widefat',
+							'default'     => $default_tiles,
+							'description' => __( 'The default map tile link can be found in your Integrations settings.', 'openagenda' ),
+						),
+						'map_auto'       => array(
+							'name'    => 'map_auto',
+							'label'   => __( 'Automatically update map on scroll ?', 'openagenda' ),
+							'type'    => 'checkbox',
+							'default' => false,
+						),
+					),
 				),
 				'openagenda_filter_relative' => array(
 					'label'     => _x( 'Upcoming', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_relative',
+					'settings'  => array(),
 				),
 				'openagenda_filter_search'   => array(
 					'label'     => _x( 'Search', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_search',
+					'settings'  => array(
+						'placeholder' => array(
+							'name'    => 'placeholder',
+							'label'   => __( 'Placeholder:', 'openagenda' ),
+							'class'   => 'widefat',
+							'default' => '',
+						),
+					),
 				),
 				'openagenda_filter_sort'     => array(
 					'label'     => _x( 'Sort', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_sort',
+					'settings'  => array(
+						'options' => array(
+							'name'        => 'options',
+							'description' => __( 'Sort options to display: ', 'openagenda' ),
+							'default'     => array( 'score', 'lastTimingWithFeatured.asc', 'timingsWithFeatured.asc' ),
+							'type'        => 'multi-checkbox',
+							'options'     => array(
+								'score'                   => __( 'Score', 'openagenda' ),
+								'lastTimingWithFeatured.asc' => __( 'Featured first, followed by ascending last occurrence', 'openagenda' ),
+								'timingsWithFeatured.asc' => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
+								'lastTiming.asc'          => __( 'Ascending last occurrence', 'openagenda' ),
+								'timings.asc'             => __( 'Ascending upcoming occurrence', 'openagenda' ),
+								'updatedAt.desc'          => __( 'Descending update date', 'openagenda' ),
+								'updatedAt.asc'           => __( 'Ascending update date', 'openagenda' ),
+							),
+						),
+					),
 				),
 				'openagenda_filter_submit'   => array(
 					'label'     => _x( 'Filter submit', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_submit',
+					'settings'  => array(
+						'buttonLabel' => array(
+							'name'    => 'button_label',
+							'label'   => __( 'Button label', 'openagenda' ),
+							'class'   => 'widefat',
+							'default' => __( 'Refresh events', 'openagenda' ),
+						),
+					),
 				),
 			);
 		}
