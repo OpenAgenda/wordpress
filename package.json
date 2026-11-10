@@ -5,7 +5,7 @@
   "main": "assets/js/main.js",
   "scripts": {
     "start": "npm run start:styles & npm run start:scripts & npm run start:blocks",
-    "build": "npm run build:styles & npm run build:scripts & npm run build:blocks",
+    "build": "npm run build:styles && npm run build:scripts && npm run build:blocks",
     "start:scripts": "wp-scripts start admin.js customizer.js event-map.js filters.js fontawesome.js leaflet.js main.js media-uploader.js timings.js widgets.js --source-path=assets/src/js --output-path=assets/js",
     "build:scripts": "wp-scripts build admin.js customizer.js event-map.js filters.js fontawesome.js leaflet.js main.js media-uploader.js timings.js widgets.js --source-path=assets/src/js --output-path=assets/js",
     "start:blocks": "wp-scripts start --webpack-src-dir=assets/src/js/blocks --output-path=assets/blocks",
