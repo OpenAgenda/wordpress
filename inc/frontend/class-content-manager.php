@@ -24,6 +24,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function register_hooks() {
 		add_action( 'init', array( $this, 'register_post_types' ), 10 );
+		add_action( 'init', array( $this, 'register_post_metas' ), 10 );
 		add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
 		add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
@@ -62,6 +63,89 @@ class Content_Manager implements Hookable {
 		foreach ( $post_types as $slug => $args ) {
 			register_post_type( $slug, $args );
 		}
+	}
+
+	/**
+	 * Registers metadata for each post type.
+	 *
+	 * @return void
+	 */
+	public function register_post_metas() {
+		foreach ( $this->get_post_metas() as $post_type => $metas ) {
+			foreach ( $metas as $meta_key => $args ) {
+				register_post_meta( $post_type, $meta_key, $args );
+			}
+		}
+	}
+
+
+	/**
+	 * Returns metadata to register for each post type.
+	 *
+	 * @return array<string, array<string, array<string, mixed>>> Metadata keyed by post type and meta key.
+	 */
+	public function get_post_metas() {
+		$post_metas = array(
+			'oa-calendar' => array(
+				'oa-calendar-uid'                     => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-per-page'                => array(
+					'type'         => 'integer',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-view'                    => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-sort'                    => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-content-on-archive'      => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-content-on-single'       => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-display-default-filters' => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-exclude'                 => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-display-all-states'      => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-infinite-scroll'         => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				),
+				'oa-calendar-filters'                 => array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				)
+			),
+		);
+
+		return apply_filters( 'openagenda_post_metas', $post_metas );
 	}
 
 
@@ -103,7 +187,7 @@ class Content_Manager implements Hookable {
 					'public'        => true,
 					'show_in_rest'  => true,
 					'menu_icon'     => 'dashicons-book',
-					'supports'      => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+					'supports'      => array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields' ),
 					'has_archive'   => false,
 					'menu_position' => 5,
 					'rewrite'       => array(
