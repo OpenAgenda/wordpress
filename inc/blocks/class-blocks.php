@@ -65,7 +65,31 @@ class Blocks implements Hookable {
 	 * @return void
 	 */
 	public function register_block_types() {
-		register_block_type( OPENAGENDA_PATH . 'assets/blocks/filter' );
-		wp_localize_script( 'openagenda-filter-editor-script', 'openagendaFilterSettings', ( $this->get_available_filters )() );
+		register_block_type(
+			OPENAGENDA_PATH . 'assets/blocks/filter',
+			array(
+				'render_callback' => array( $this, 'render_filter_block' ),
+			)
+		);
+		wp_localize_script( 'openagenda-filter-editor-script', 'openagendaFilters', ( $this->get_available_filters )() );
+	}
+
+	/**
+	 * Renders the Filter block with its corresponding shortcode.
+	 *
+	 * @param array<string, mixed> $attributes Block attributes.
+	 * @return string Block markup.
+	 */
+	public function render_filter_block( $attributes = array() ) {
+		$shortcode = ! empty( $attributes['shortcode'] ) ? sanitize_key( $attributes['shortcode'] ) : '';
+
+		if ( '' === $shortcode || ! shortcode_exists( $shortcode ) ) {
+			return '';
+		}
+
+		$settings = ! empty( $attributes['filterSettings'] ) && is_array( $attributes['filterSettings'] ) ? $attributes['filterSettings'] : array();
+		$atts     = \openagenda_get_shortcode_attributes( $settings );
+
+		return do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ) );
 	}
 }

@@ -1,17 +1,7 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-import { __ } from '@wordpress/i18n';
+import ServerSideRender from '@wordpress/server-side-render';
+import metadata from './block.json';
+import FilterInspector from './inspector';
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -21,16 +11,17 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {import('@wordpress/element').WPElement} Element to render.
  */
-export default function Edit() {
-    console.log(window.openagendaFilterSettings);
-
+export default function Edit({ attributes, setAttributes }) {
     return (
-        <form {...useBlockProps()}>
-            <input
-                type="text"
-                placeholder={__('Your email address')}
-            ></input>
-            <button type="submit">{__('Sign Up')}</button>
-        </form>
+        <>
+            <FilterInspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+            />
+            <ServerSideRender
+                block={metadata.name}
+                attributes={attributes}
+            />
+        </>
     );
 }

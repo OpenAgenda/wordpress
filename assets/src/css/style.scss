@@ -83,7 +83,7 @@ strong {
 		flex-direction: column;
 		gap: var(--oa-spacing-2);
 
-		&>* {
+		& > * {
 			margin: 0;
 		}
 	}
@@ -389,7 +389,7 @@ strong {
 			flex-direction: column;
 			gap: var(--oa-spacing-4);
 
-			&>* {
+			& > * {
 				margin: 0;
 			}
 		}
@@ -408,7 +408,7 @@ strong {
 			font-size: var(--oa-text-6);
 		}
 
-		.oa-event-details>div,
+		.oa-event-details > div,
 		.oa-registration-method-wrapper,
 		.oa-accessibility-adjustment-wrapper {
 			align-items: center;
@@ -633,7 +633,7 @@ strong {
 		gap: var(--oa-spacing-4);
 		margin-bottom: var(--oa-spacing-4);
 
-		&>* {
+		& > * {
 			margin: 0;
 		}
 	}
@@ -653,7 +653,7 @@ strong {
 		padding: var(--oa-spacing-2);
 		font-size: var(--oa-text-3);
 
-		.oa-widget-summary~* {
+		.oa-widget-summary ~ * {
 			margin-top: var(--oa-spacing-4);
 		}
 	}
@@ -809,7 +809,7 @@ strong {
 		gap: var(--oa-spacing-1);
 		align-items: start;
 
-		&>* {
+		& > * {
 			margin: 0;
 		}
 
@@ -931,7 +931,7 @@ strong {
 	*********************************/
 	.oa-calendar-widget-simpledaterange {
 
-		&>div {
+		& > div {
 			align-items: center;
 			display: flex;
 			flex-wrap: wrap;
@@ -968,7 +968,7 @@ strong {
 		color: inherit;
 	}
 
-	.rdrDateDisplayItem+.rdrDateDisplayItem {
+	.rdrDateDisplayItem + .rdrDateDisplayItem {
 		margin-left: var(--oa-spacing-3);
 	}
 
@@ -1025,7 +1025,7 @@ strong {
 		flex-direction: column;
 	}
 
-	.rdrMonthsHorizontal>div>div>div {
+	.rdrMonthsHorizontal > div > div > div {
 		display: -webkit-flex;
 		display: flex;
 		-webkit-box-orient: horizontal;
@@ -1363,17 +1363,17 @@ strong {
 		background: var(--oa-main-color);
 	}
 
-	.rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span::after,
-	.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span::after,
-	.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span::after,
-	.rdrDayToday:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span::after {
+	.rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
+	.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
+	.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,
+	.rdrDayToday:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span::after {
 		background: #fff;
 	}
 
-	.rdrDay:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
+	.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
 		color: rgba(255, 255, 255, 0.85);
 	}
 
@@ -1517,7 +1517,7 @@ strong {
 		}
 	}
 
-	.rdrStaticRange+.rdrStaticRange {
+	.rdrStaticRange + .rdrStaticRange {
 		margin-left: 8px;
 	}
 
@@ -1644,10 +1644,10 @@ strong {
 			background: #fff;
 		}
 
-		.rdrDay:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span,
-		.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
-		.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
-		.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
+		.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
+		.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
+		.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
+		.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
 			color: var(--oa-gray-900);
 
 			&::after {

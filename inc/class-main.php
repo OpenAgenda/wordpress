@@ -304,6 +304,7 @@ class Main {
 							),
 						),
 						'ranges'         => array(
+							'label'       => __( 'Ranges to display: ', 'openagenda' ),
 							'name'        => 'ranges',
 							'description' => __( 'Ranges to display: ', 'openagenda' ),
 							'default'     => array( 'today', 'tomorrow', 'thisWeekend', 'currentWeek', 'currentMonth' ),
@@ -323,6 +324,7 @@ class Main {
 					'shortcode' => 'openagenda_filter_ranges',
 					'settings'  => array(
 						'static_ranges' => array(
+							'label'       => __( 'Ranges to display: ', 'openagenda' ),
 							'name'        => 'static_ranges',
 							'description' => __( 'Ranges to display: ', 'openagenda' ),
 							'default'     => array( 'today', 'tomorrow', 'thisWeekend', 'currentWeek', 'currentMonth' ),
@@ -378,6 +380,7 @@ class Main {
 					'shortcode' => 'openagenda_filter_sort',
 					'settings'  => array(
 						'options' => array(
+							'label'       => __( 'Sort options to display: ', 'openagenda' ),
 							'name'        => 'options',
 							'description' => __( 'Sort options to display: ', 'openagenda' ),
 							'default'     => array( 'score', 'lastTimingWithFeatured.asc', 'timingsWithFeatured.asc' ),

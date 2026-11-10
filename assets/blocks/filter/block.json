@@ -10,6 +10,18 @@
   "supports": {
     "html": false
   },
+  "attributes": {
+    "filter": {
+      "type": "string"
+    },
+    "shortcode": {
+      "type": "string"
+    },
+    "filterSettings": {
+      "type": "object",
+      "default": {}
+    }
+  },
   "textdomain": "openagenda",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
