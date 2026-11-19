@@ -20,11 +20,18 @@ class Content_Manager implements Hookable {
 	protected $post_types;
 
 	/**
+	 * Default URL prefix of agenda pages.
+	 */
+	const DEFAULT_REWRITE_BASE = 'agendas';
+
+	/**
 	 * Register all the hooks
 	 */
 	public function register_hooks() {
+		add_action( 'init', array( $this, 'maybe_keep_former_rewrite_base' ), 1 );
 		add_action( 'init', array( $this, 'register_post_types' ), 10 );
 		add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
+		add_action( 'template_redirect', array( $this, 'redirect_former_rewrite_base' ), 1 );
 		add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
 		add_filter( 'body_class', array( $this, 'body_class' ), 10, 1 );
@@ -70,32 +77,31 @@ class Content_Manager implements Hookable {
 	 */
 	public function get_post_types() {
 		if ( empty( $this->post_types ) ) {
-			$rewrite_settings = get_option( 'openagenda_permalinks_settings' );
-			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
+			$rewrite_base = $this->get_rewrite_base();
 
 			$this->post_types = array(
 				'oa-calendar' => array(
 					'labels'        => array(
-						'name'                  => _x( 'Calendars', 'Post type general name', 'openagenda' ),
-						'singular_name'         => _x( 'Calendar', 'Post type singular name', 'openagenda' ),
-						'menu_name'             => _x( 'Calendars', 'Admin Menu text', 'openagenda' ),
-						'name_admin_bar'        => _x( 'Calendar', 'Add New on Toolbar', 'openagenda' ),
-						'add_new_item'          => __( 'Add New Calendar', 'openagenda' ),
-						'new_item'              => __( 'New Calendar', 'openagenda' ),
-						'edit_item'             => __( 'Edit Calendar', 'openagenda' ),
-						'view_item'             => __( 'View Calendar', 'openagenda' ),
-						'all_items'             => __( 'All Calendars', 'openagenda' ),
-						'search_items'          => __( 'Search Calendars', 'openagenda' ),
-						'parent_item_colon'     => __( 'Parent Calendars:', 'openagenda' ),
-						'not_found'             => __( 'No Calendars found.', 'openagenda' ),
-						'not_found_in_trash'    => __( 'No Calendars found in Trash.', 'openagenda' ),
-						'featured_image'        => _x( 'Calendar Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'openagenda' ),
-						'archives'              => _x( 'Calendar archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'openagenda' ),
-						'insert_into_item'      => _x( 'Insert into Calendar', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'openagenda' ),
-						'uploaded_to_this_item' => _x( 'Uploaded to this Calendar', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'openagenda' ),
-						'filter_items_list'     => _x( 'Filter Calendars list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'openagenda' ),
-						'items_list_navigation' => _x( 'Calendars list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'openagenda' ),
-						'items_list'            => _x( 'Calendars list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'openagenda' ),
+						'name'                  => _x( 'Agendas', 'Post type general name', 'openagenda' ),
+						'singular_name'         => _x( 'Agenda', 'Post type singular name', 'openagenda' ),
+						'menu_name'             => _x( 'Agendas', 'Admin Menu text', 'openagenda' ),
+						'name_admin_bar'        => _x( 'Agenda', 'Add New on Toolbar', 'openagenda' ),
+						'add_new_item'          => __( 'Add New Agenda', 'openagenda' ),
+						'new_item'              => __( 'New Agenda', 'openagenda' ),
+						'edit_item'             => __( 'Edit Agenda', 'openagenda' ),
+						'view_item'             => __( 'View Agenda', 'openagenda' ),
+						'all_items'             => __( 'All Agendas', 'openagenda' ),
+						'search_items'          => __( 'Search Agendas', 'openagenda' ),
+						'parent_item_colon'     => __( 'Parent Agendas:', 'openagenda' ),
+						'not_found'             => __( 'No Agendas found.', 'openagenda' ),
+						'not_found_in_trash'    => __( 'No Agendas found in Trash.', 'openagenda' ),
+						'featured_image'        => _x( 'Agenda Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'openagenda' ),
+						'archives'              => _x( 'Agenda archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'openagenda' ),
+						'insert_into_item'      => _x( 'Insert into Agenda', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'openagenda' ),
+						'uploaded_to_this_item' => _x( 'Uploaded to this Agenda', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'openagenda' ),
+						'filter_items_list'     => _x( 'Filter Agendas list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'openagenda' ),
+						'items_list_navigation' => _x( 'Agendas list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'openagenda' ),
+						'items_list'            => _x( 'Agendas list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'openagenda' ),
 					),
 					'hierarchical'  => true,
 					'public'        => true,
@@ -127,10 +133,109 @@ class Content_Manager implements Hookable {
 
 		// If pretty permalinks are enabled, add in our rewrite rules.
 		if ( ! empty( get_option( 'permalink_structure' ) ) ) {
-			$rewrite_settings = get_option( 'openagenda_permalinks_settings' );
-			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
+			$rewrite_base = $this->get_rewrite_base();
 			add_rewrite_rule( "{$rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]', 'top' );
 			add_rewrite_rule( "{$rewrite_base}/([^/]+)/([^&]+)?", 'index.php?oa-calendar=$matches[1]&oa-slug=$matches[2]', 'top' );
+		}
+	}
+
+
+	/**
+	 * Returns the URL prefix of agenda pages.
+	 *
+	 * @return  string
+	 */
+	public function get_rewrite_base() {
+		$settings = get_option( 'openagenda_permalinks_settings' );
+		$base     = is_array( $settings ) && ! empty( $settings['openagenda_calendar_base'] ) ? sanitize_title( $settings['openagenda_calendar_base'] ) : '';
+		return ! empty( $base ) ? $base : self::DEFAULT_REWRITE_BASE;
+	}
+
+
+	/**
+	 * Keeps the URL prefix of a site that was installed before "agendas" became the default.
+	 *
+	 * The default prefix used to be the translation of "calendar" ("calendar" in
+	 * English, "agenda" in French...) and was not stored anywhere. Such a site gets
+	 * its current prefix stored once, so its URLs do not change with this update.
+	 * New installations are flagged in openagenda_update_version() and skip this.
+	 */
+	public function maybe_keep_former_rewrite_base() {
+		if ( get_option( 'openagenda_rewrite_base_checked' ) ) {
+			return;
+		}
+		$settings = get_option( 'openagenda_permalinks_settings' );
+		if ( ! is_array( $settings ) || empty( $settings['openagenda_calendar_base'] ) ) {
+			$settings                             = is_array( $settings ) ? $settings : array();
+			$settings['openagenda_calendar_base'] = $this->get_former_rewrite_base();
+			update_option( 'openagenda_permalinks_settings', $settings );
+		}
+		update_option( 'openagenda_rewrite_base_checked', 'kept' );
+	}
+
+
+	/**
+	 * Returns the URL prefix a site was using before "agendas" became the default.
+	 *
+	 * @return  string
+	 */
+	public function get_former_rewrite_base() {
+		// The stored rewrite rules tell which prefix the site URLs really use.
+		$rules = get_option( 'rewrite_rules' );
+		if ( is_array( $rules ) ) {
+			foreach ( $rules as $match => $query ) {
+				if ( 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]' === $query && preg_match( '#^(.+)/\(\[\^/\]\+\)/page/#', $match, $found ) ) {
+					return sanitize_title( $found[1] );
+				}
+			}
+		}
+
+		// No stored rules (plain permalinks, or rules not built yet): use the former default, in the site language.
+		$switched = switch_to_locale( get_locale() );
+		/* translators: former default URL prefix of agenda pages. Do not change an existing translation: existing sites rely on it. */
+		$base = sanitize_title( __( 'calendar', 'openagenda' ) );
+		if ( $switched ) {
+			restore_previous_locale();
+		}
+		return ! empty( $base ) ? $base : 'calendar';
+	}
+
+
+	/**
+	 * Redirects URLs using a prefix this site used before, once the prefix has been changed.
+	 *
+	 * Only acts on a request WordPress could not resolve, whose path starts with a
+	 * recorded former prefix followed by the slug of an existing agenda. Anything
+	 * else, such as a regular page living under that prefix, is left alone.
+	 */
+	public function redirect_former_rewrite_base() {
+		global $wp, $wp_rewrite;
+		if ( ! is_404() || empty( $wp->request ) || ! is_string( $wp->request ) ) {
+			return;
+		}
+		$former_bases = get_option( 'openagenda_former_rewrite_bases' );
+		if ( empty( $former_bases ) || ! is_array( $former_bases ) ) {
+			return;
+		}
+		$base     = $this->get_rewrite_base();
+		$segments = explode( '/', $wp->request );
+		if ( count( $segments ) < 2 || $segments[0] === $base || ! in_array( $segments[0], $former_bases, true ) ) {
+			return;
+		}
+		// Only published agendas: a redirect must not reveal that a private or draft one exists.
+		$agenda = get_page_by_path( $segments[1], OBJECT, 'oa-calendar' );
+		if ( ! $agenda || 'publish' !== $agenda->post_status ) {
+			return;
+		}
+		$segments[0] = $base;
+		$url         = home_url( $wp_rewrite->root . user_trailingslashit( implode( '/', $segments ) ) );
+		if ( ! empty( $_SERVER['QUERY_STRING'] ) ) {
+			$url .= '?' . wp_unslash( $_SERVER['QUERY_STRING'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		}
+		// The prefix can be changed back: browsers must not keep this redirect.
+		nocache_headers();
+		if ( wp_safe_redirect( esc_url_raw( $url ), 301 ) ) {
+			exit;
 		}
 	}
 
@@ -233,7 +338,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function write_your_story( $prompt, $post ) {
 		if ( 'oa-calendar' === $post->post_type ) {
-			$prompt = __( 'Please provide a calendar UID in this calendar\'s settings box first.', 'openagenda' );
+			$prompt = __( 'Please provide an agenda UID in this agenda\'s settings box first.', 'openagenda' );
 		}
 		return $prompt;
 	}

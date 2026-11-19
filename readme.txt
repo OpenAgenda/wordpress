@@ -8,25 +8,25 @@ Requires PHP: 7.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Display calendars from https://openagenda.com on your site.
+Display agendas from https://openagenda.com on your site.
 
 == Description ==
 
 ## Basic usage
 
-This WordPress plugin allows you to embed any calendar hosted on [https://openagenda.com](https://openagenda.com) on your WordPress site.
+This WordPress plugin allows you to embed any agenda hosted on [https://openagenda.com](https://openagenda.com) on your WordPress site.
 
-Upon activation, the plugin creates a new post type named *Calendars*. Just create a new calendar, provide the UID of the calendar you wish to display in the calendar settings box, and that's it !
+Upon activation, the plugin creates a new post type named *Agendas*. Just create a new agenda, provide the UID of the agenda you wish to display in the agenda settings box, and that's it !
 
-You can leave the content area for this calendar empty, as it will be populated automatically with your events !
+You can leave the content area for this agenda empty, as it will be populated automatically with your events !
 
 Your events are automatically inserted after your content. If you wish to control where your events will be listed, just use the shortcode `[openagenda]` in your content.
 
 ## Settings
 
-General settings can be found under the *Calendar > Settings* entry in the admin menu.
+General settings can be found under the *Agendas > Settings* entry in the admin menu.
 
-All data related to your API key or calendars can be found on https://openagenda.com.
+All data related to your API key or agendas can be found on https://openagenda.com.
 
 The settings are divided into two tabs: General and Integrations.
 
@@ -40,8 +40,8 @@ The General settings page provides the following settings :
  * *Legacy templates* : Templates have been updated in 3.0.0. Check this option to continue using legacy templates.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
  * *Default event image* : Choose an image to use in case events do not have one.
- * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your calendars on uninstall.
- * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
+ * *Delete all agenda content on uninstall ?* : controls whether you want to delete all your agendas on uninstall.
+ * *Delete all options on uninstall ?* : controls whether you want to delete all your agenda settings on uninstall.
  * *Allow OpenAgenda to collect usage stats ?* : controls whether you want to send CMS used and site URL to OpenAgenda, for statistic purposes.
 
 ### Integrations settings
@@ -59,9 +59,9 @@ The *Integrations* tab allows you to fine tune settings for various third party 
 
 ### Permalinks settings
 
-In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
+In the *Permalinks* settings, you can change the prefix for your agenda pages (`agendas` by default; sites installed before this default was introduced keep the prefix they had). You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
 
-In the *Settings > Reading* section, you can set a calendar page as your front page. Note that it will still use the default calendar template provided by the plugin and the default front page template provided by your theme.
+In the *Settings > Reading* section, you can set an agenda page as your front page. Note that it will still use the default agenda template provided by the plugin and the default front page template provided by your theme.
 
 ### Customizer settings
 
@@ -85,7 +85,7 @@ Additionaly, shortcodes and widget filters have the same parameters, and every s
 
 **`[openagenda]`**
 
-Displays the calendar. You do not need to use this shortcode explicitely, as it is automatically injected in the content of your "calendars" posts.
+Displays the agenda. You do not need to use this shortcode explicitely, as it is automatically injected in the content of your "agendas" posts.
 
 However, if you need to insert static content after your list of events, you can do so by inserting this shortcode, then your static content afterwards.
 
@@ -116,9 +116,9 @@ Displays an interactive map to locate and search events. It takes the following 
 
 **`[openagenda_preview]`**
 
-Displays a preview of any calendar. It takes the following parameters : 
+Displays a preview of any agenda. It takes the following parameters : 
 
- * `uid` : UID of the calendar you wish to preview.
+ * `uid` : UID of the agenda you wish to preview.
  * `size` : Number of events to display.
  * `sort` : Event sort option. Accepts `lastTimingWithFeatured.asc`, `timingsWithFeatured.asc`, `lastTiming.asc`, `timings.asc`, `updatedAt.asc` or `updatedAt.desc`.
  * `filters` : Query string representing filters to apply to the request. **To ensure it works properly and avoid breaking the shortcode, you should urlencode the query string**. You can do so via a simple tool like [https://www.urlencoder.org/fr/](https://www.urlencoder.org/fr/)
@@ -174,17 +174,17 @@ Icons used in the UI are [Genericons](https://genericons.com/), licenced under t
 
 = Where is the settings page ? =
 
-The settings page is located under the *Calendar* main menu entry, just alongside your content. It is not polluting the main *Settings* menu entry, or adding any top-level entry. 
+The settings page is located under the *Agendas* main menu entry, just alongside your content. It is not polluting the main *Settings* menu entry, or adding any top-level entry. 
 
-= Where can I find API key and calendar UIDs ? =
+= Where can I find API key and agenda UIDs ? =
 
 All data related to your personal account and API keys can be found on your profile page at [https://openagenda.com/settings](https://openagenda.com/settings).
 
-All data related to calendars can be found on the calendar itself on [https://openagenda.com](https://openagenda.com). Just look for the calendar you wish to display, and find the UID in the sidebar, under the filter widgets.
+All data related to agendas can be found on the agenda itself on [https://openagenda.com](https://openagenda.com). Just look for the agenda you wish to display, and find the UID in the sidebar, under the filter widgets.
 
-= Can I display any calendar ? Even if it's not mine ? =
+= Can I display any agenda ? Even if it's not mine ? =
 
-Yes ! No problem ! Just create a new Calendar post, provide its UID and it will work.
+Yes ! No problem ! Just create a new Agenda post, provide its UID and it will work.
 
 = Where can I find developer documentation ? =
 
@@ -192,11 +192,11 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 
 == Screenshots ==
 
-1. A new *Calendars* menu entry is created, allowing you to manage your calendars and settings.
+1. A new *Agendas* menu entry is created, allowing you to manage your agendas and settings.
 2. The simple settings page allow you to enter in your API key and tweak various settings.
-3. Just create a new calendar post, and provide the OpenAgenda calendar UID in the *Calendar settings* metabox.
-4. Find your Calendar UID on the openagenda.com site, just under the sidebar.
-5. You can use convenient filter widgets to add filtering functionnality to your calendars.
+3. Just create a new agenda post, and provide the OpenAgenda agenda UID in the *Agenda settings* metabox.
+4. Find your Agenda UID on the openagenda.com site, just under the sidebar.
+5. You can use convenient filter widgets to add filtering functionnality to your agendas.
 6. In the *Customizer*, a new panel is available to house various display settings.
 7. Enjoy !
 

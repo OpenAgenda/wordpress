@@ -209,7 +209,7 @@ class Settings implements Hookable {
 				),
 				'delete-calendars-on-uninstall' => array(
 					'id'       => 'openagenda_delete_content_on_uninstall',
-					'title'    => __( 'Delete all calendar content on uninstall ?', 'openagenda' ),
+					'title'    => __( 'Delete all agenda content on uninstall ?', 'openagenda' ),
 					'callback' => array( $this, 'checkbox_field_markup' ),
 					'page'     => 'openagenda',
 					'section'  => 'openagenda_general_settings',
@@ -219,7 +219,7 @@ class Settings implements Hookable {
 						'label_for'   => 'openagenda_delete_content_on_uninstall',
 						'type'        => 'checkbox',
 						'default'     => false,
-						'description' => __( 'Delete all posts of type "Calendar" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin.', 'openagenda' ),
+						'description' => __( 'Delete all posts of type "Agenda" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin.', 'openagenda' ),
 					),
 				),
 				'delete-options-on-uninstall'   => array(
@@ -254,7 +254,7 @@ class Settings implements Hookable {
 				),
 				'calendar-prefix'               => array(
 					'id'       => 'openagenda_calendar_base',
-					'title'    => __( 'Calendar base', 'openagenda' ),
+					'title'    => __( 'Agenda base', 'openagenda' ),
 					'callback' => array( $this, 'input_field_markup' ),
 					'page'     => 'permalink',
 					'section'  => 'optional',
@@ -263,10 +263,10 @@ class Settings implements Hookable {
 						'option_name' => 'openagenda_permalinks_settings',
 						'label_for'   => 'openagenda_calendar_base',
 						'type'        => 'text',
-						'default'     => 'calendar',
+						'default'     => Content_Manager::DEFAULT_REWRITE_BASE,
 						'description' => sprintf(
 							/* translators: %s : home url */
-							__( 'You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>.', 'openagenda' ),
+							__( 'You can modify the URL prefix for the agendas. For example, the default prefix is <code>agendas</code>, so URLs will look like <code>%s/agendas/agenda-name</code>.', 'openagenda' ),
 							esc_url( get_home_url() )
 						),
 					),
@@ -553,9 +553,23 @@ class Settings implements Hookable {
 	public function save_permalinks_settings() {
 		if ( isset( $_POST['openagenda_permalinks_settings'] ) ) {
 			check_admin_referer( 'update-permalink' );
+			$new_base = ! empty( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) ? sanitize_title( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) : '';
 			$settings = array(
-				'openagenda_calendar_base' => ! empty( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) ? sanitize_title( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) : __( 'calendar', 'openagenda' ),
+				// A value made only of characters a URL cannot hold sanitizes to nothing.
+				'openagenda_calendar_base' => ! empty( $new_base ) ? $new_base : Content_Manager::DEFAULT_REWRITE_BASE,
 			);
+
+			// Remember the prefix being replaced, so that its URLs are redirected to the new one.
+			$manager      = new Content_Manager();
+			$former_base  = $manager->get_rewrite_base();
+			$former_bases = get_option( 'openagenda_former_rewrite_bases' );
+			$former_bases = is_array( $former_bases ) ? $former_bases : array();
+			if ( $former_base !== $settings['openagenda_calendar_base'] ) {
+				$former_bases[] = $former_base;
+			}
+			$former_bases = array_values( array_diff( array_unique( $former_bases ), array( $settings['openagenda_calendar_base'] ) ) );
+			update_option( 'openagenda_former_rewrite_bases', $former_bases );
+
 			update_option( 'openagenda_permalinks_settings', $settings );
 		}
 	}

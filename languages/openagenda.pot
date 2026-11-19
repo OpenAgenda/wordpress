@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-11T08:58:15+00:00\n"
+"POT-Creation-Date: 2026-11-19T13:24:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: openagenda\n"
 
 #. Plugin Name of the plugin
@@ -40,7 +40,7 @@ msgid "OpenAgenda Settings"
 msgstr ""
 
 #: inc/class-admin-pages.php:67
-#: openagenda.php:140
+#: openagenda.php:200
 msgid "Settings"
 msgstr ""
 
@@ -74,116 +74,115 @@ msgid "No post ID was provided."
 msgstr ""
 
 #: inc/class-ajax-handler.php:58
-msgid "The post ID provided does not refer to a calendar."
-msgstr ""
-
-#: inc/class-content-manager.php:74
-#: inc/class-content-manager.php:131
-#: inc/class-settings.php:557
-msgid "calendar"
-msgstr ""
-
-#: inc/class-content-manager.php:79
-msgctxt "Post type general name"
-msgid "Calendars"
-msgstr ""
-
-#: inc/class-content-manager.php:80
-msgctxt "Post type singular name"
-msgid "Calendar"
-msgstr ""
-
-#: inc/class-content-manager.php:81
-msgctxt "Admin Menu text"
-msgid "Calendars"
-msgstr ""
-
-#: inc/class-content-manager.php:82
-msgctxt "Add New on Toolbar"
-msgid "Calendar"
-msgstr ""
-
-#: inc/class-content-manager.php:83
-msgid "Add New Calendar"
-msgstr ""
-
-#: inc/class-content-manager.php:84
-msgid "New Calendar"
+msgid "The post ID provided does not refer to an agenda."
 msgstr ""
 
 #: inc/class-content-manager.php:85
-msgid "Edit Calendar"
+msgctxt "Post type general name"
+msgid "Agendas"
 msgstr ""
 
 #: inc/class-content-manager.php:86
-msgid "View Calendar"
+msgctxt "Post type singular name"
+msgid "Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:87
-msgid "All Calendars"
+msgctxt "Admin Menu text"
+msgid "Agendas"
 msgstr ""
 
 #: inc/class-content-manager.php:88
-msgid "Search Calendars"
+msgctxt "Add New on Toolbar"
+msgid "Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:89
-msgid "Parent Calendars:"
+msgid "Add New Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:90
-msgid "No Calendars found."
+msgid "New Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:91
-msgid "No Calendars found in Trash."
+msgid "Edit Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:92
-msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
-msgid "Calendar Cover Image"
+msgid "View Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:93
-msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
-msgid "Calendar archives"
+msgid "All Agendas"
 msgstr ""
 
 #: inc/class-content-manager.php:94
-msgctxt "Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4"
-msgid "Insert into Calendar"
+msgid "Search Agendas"
 msgstr ""
 
 #: inc/class-content-manager.php:95
-msgctxt "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4"
-msgid "Uploaded to this Calendar"
+msgid "Parent Agendas:"
 msgstr ""
 
 #: inc/class-content-manager.php:96
-msgctxt "Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
-msgid "Filter Calendars list"
+msgid "No Agendas found."
 msgstr ""
 
 #: inc/class-content-manager.php:97
-msgctxt "Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
-msgid "Calendars list navigation"
+msgid "No Agendas found in Trash."
 msgstr ""
 
 #: inc/class-content-manager.php:98
-msgctxt "Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4"
-msgid "Calendars list"
+msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
+msgid "Agenda Cover Image"
 msgstr ""
 
-#: inc/class-content-manager.php:236
-msgid "Please provide a calendar UID in this calendar's settings box first."
+#: inc/class-content-manager.php:99
+msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
+msgid "Agenda archives"
+msgstr ""
+
+#: inc/class-content-manager.php:100
+msgctxt "Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4"
+msgid "Insert into Agenda"
+msgstr ""
+
+#: inc/class-content-manager.php:101
+msgctxt "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4"
+msgid "Uploaded to this Agenda"
+msgstr ""
+
+#: inc/class-content-manager.php:102
+msgctxt "Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
+msgid "Filter Agendas list"
+msgstr ""
+
+#: inc/class-content-manager.php:103
+msgctxt "Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
+msgid "Agendas list navigation"
+msgstr ""
+
+#: inc/class-content-manager.php:104
+msgctxt "Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4"
+msgid "Agendas list"
+msgstr ""
+
+#. translators: former default URL prefix of agenda pages. Do not change an existing translation: existing sites rely on it.
+#: inc/class-content-manager.php:196
+msgid "calendar"
+msgstr ""
+
+#: inc/class-content-manager.php:341
+msgid "Please provide an agenda UID in this agenda's settings box first."
 msgstr ""
 
 #: inc/class-customizer-settings.php:64
-msgid "Calendars"
+msgid "Agendas"
 msgstr ""
 
 #: inc/class-customizer-settings.php:65
-msgid "Manage calendars display settings here."
+msgid "Manage agendas display settings here."
 msgstr ""
 
 #: inc/class-customizer-settings.php:80
@@ -400,15 +399,15 @@ msgid "Search"
 msgstr ""
 
 #: inc/class-metaboxes.php:47
-msgid "Calendar settings"
+msgid "Agenda settings"
 msgstr ""
 
 #: inc/class-metaboxes.php:71
-msgid "Calendar UID"
+msgid "Agenda UID"
 msgstr ""
 
 #: inc/class-metaboxes.php:76
-msgid "How to find my calendar UID ?"
+msgid "How to find my agenda UID ?"
 msgstr ""
 
 #: inc/class-metaboxes.php:82
@@ -495,7 +494,7 @@ msgid "Default filters (advanced)"
 msgstr ""
 
 #: inc/class-metaboxes.php:175
-msgid "Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed."
+msgid "Paste a url to a pre-filtered agenda page. Only events corresponding to these filters will be displayed."
 msgstr ""
 
 #: inc/class-metaboxes.php:180
@@ -513,6 +512,7 @@ msgstr ""
 
 #. translators: %s: settings page url
 #: inc/class-metaboxes.php:227
+#, php-format
 msgid "Please provide your account API key in <a href=\"%s\">the plugin settings</a>."
 msgstr ""
 
@@ -531,6 +531,7 @@ msgstr ""
 
 #. translators: %s: settings page url
 #: inc/class-metaboxes.php:504
+#, php-format
 msgid "The request could not be authenticated. Please double check API key in <a href=\"%s\">your general settings.</a>"
 msgstr ""
 
@@ -571,7 +572,7 @@ msgid "OpenAgenda Preview"
 msgstr ""
 
 #: inc/class-preview-widget.php:84
-msgid "Displays a calendar preview widget."
+msgid "Displays an agenda preview widget."
 msgstr ""
 
 #: inc/class-preview-widget.php:133
@@ -592,6 +593,7 @@ msgstr ""
 
 #. translators: %1$s: Openagenda settings page url, %2$s Documentation url
 #: inc/class-settings.php:125
+#, php-format
 msgid "Your API key can be found in your <a href=\"%1$s\" target=\"_blank\" rel=\"external noopener noreferrer\">OpenAgenda account</a>. Check out the <a href=\"%2$s\" target=\"_blank\" rel=\"external noopener noreferrer\">documentation</a>."
 msgstr ""
 
@@ -652,11 +654,11 @@ msgid "Remove default image"
 msgstr ""
 
 #: inc/class-settings.php:212
-msgid "Delete all calendar content on uninstall ?"
+msgid "Delete all agenda content on uninstall ?"
 msgstr ""
 
 #: inc/class-settings.php:222
-msgid "Delete all posts of type \"Calendar\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
+msgid "Delete all posts of type \"Agenda\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
 msgstr ""
 
 #: inc/class-settings.php:227
@@ -676,12 +678,13 @@ msgid "Allow OpenAgenda to collect plugin usage information for statistics purpo
 msgstr ""
 
 #: inc/class-settings.php:257
-msgid "Calendar base"
+msgid "Agenda base"
 msgstr ""
 
 #. translators: %s : home url
 #: inc/class-settings.php:269
-msgid "You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>."
+#, php-format
+msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>agendas</code>, so URLs will look like <code>%s/agendas/agenda-name</code>."
 msgstr ""
 
 #: inc/class-settings.php:276
@@ -698,11 +701,12 @@ msgstr ""
 
 #. translators: %s: openagenda site url
 #: inc/class-settings.php:313
+#, php-format
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
 #: inc/class-shortcodes.php:88
-msgid "Please provide a valid calendar UID to display in the calendar settings."
+msgid "Please provide a valid agenda UID to display in the agenda settings."
 msgstr ""
 
 #: inc/class-shortcodes.php:92
@@ -774,12 +778,14 @@ msgstr ""
 
 #. translators: %s : next event relative timing
 #: inc/helper-functions.php:489
+#, php-format
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
 #: inc/helper-functions.php:491
+#, php-format
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
@@ -818,6 +824,7 @@ msgstr ""
 
 #. translators: %d: number of upcoming events
 #: inc/template-tags.php:756
+#, php-format
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] ""
@@ -830,6 +837,7 @@ msgstr ""
 
 #. translators: %d: number of passed events
 #: inc/template-tags.php:759
+#, php-format
 msgid "%d passed event."
 msgid_plural "%d passed events."
 msgstr[0] ""
@@ -904,18 +912,21 @@ msgstr ""
 
 #. translators: %d minimum age
 #: inc/template-tags.php:1124
+#, php-format
 msgctxt "Age field"
 msgid "From %d years old."
 msgstr ""
 
 #. translators: %d maximum age
 #: inc/template-tags.php:1128
+#, php-format
 msgctxt "Age field"
 msgid "Up to %d years old."
 msgstr ""
 
 #. translators: %1$d minimum age, %2$d maximum age
 #: inc/template-tags.php:1132
+#, php-format
 msgctxt "Age field"
 msgid "From %1$d to %2$d years old."
 msgstr ""
@@ -938,10 +949,11 @@ msgstr ""
 
 #. translators: %s: event title
 #: inc/template-tags.php:1674
+#, php-format
 msgid "Add %s to favorites."
 msgstr ""
 
-#: openagenda.php:145
+#: openagenda.php:205
 msgid "Documentation"
 msgstr ""
 
