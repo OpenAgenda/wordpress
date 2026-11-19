@@ -132,6 +132,8 @@ function openagenda_uninstallation() {
 		delete_option( 'openagenda_rewrite_base_checked' );
 		delete_option( 'openagenda_customizer' );
 		delete_expired_transients();
+		// Without its options, a later reinstall must count as a new installation.
+		delete_option( 'openagenda_version' );
 	}
 }
 
