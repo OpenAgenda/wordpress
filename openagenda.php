@@ -48,19 +48,36 @@ function openagenda_load_textdomain() {
 
 
 /**
+ * Tells whether this site holds posts of the given type, in any status but auto-draft.
+ *
+ * Queries the database directly: the post type may not be registered.
+ *
+ * @param   string $post_type  Post type name.
+ * @return  bool
+ */
+function openagenda_has_posts( $post_type ) {
+	global $wpdb;
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+	return (bool) $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_status <> 'auto-draft' LIMIT 1", $post_type ) );
+}
+
+
+/**
  * Tells whether the plugin was already in use on this site before the current request.
+ *
+ * Agendas are proof of it. Without any, both the stored version and the settings
+ * are required: versions up to 3.0.2 left the version behind on uninstall, and
+ * settings may be written by a setup script before the first activation.
  *
  * Must be called before openagenda_update_version() stores the version.
  *
  * @return  bool
  */
 function openagenda_is_existing_install() {
-	global $wpdb;
-	if ( get_option( 'openagenda_version' ) || get_option( 'openagenda_general_settings' ) ) {
+	if ( openagenda_has_posts( 'oa-calendar' ) ) {
 		return true;
 	}
-	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-	return (bool) $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s LIMIT 1", 'oa-calendar' ) );
+	return get_option( 'openagenda_version' ) && get_option( 'openagenda_general_settings' );
 }
 
 
@@ -114,8 +131,10 @@ function openagenda_uninstallation() {
 	if ( $should_delete_content ) {
 		$calendar_ids = get_posts(
 			array(
-				'post_type' => 'oa-calendar',
-				'fields'    => 'ids',
+				'post_type'   => 'oa-calendar',
+				'post_status' => array_values( get_post_stati() ),
+				'numberposts' => -1,
+				'fields'      => 'ids',
 			)
 		);
 		if ( ! empty( $calendar_ids ) ) {

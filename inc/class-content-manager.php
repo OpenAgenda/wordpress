@@ -222,7 +222,9 @@ class Content_Manager implements Hookable {
 		if ( count( $segments ) < 2 || $segments[0] === $base || ! in_array( $segments[0], $former_bases, true ) ) {
 			return;
 		}
-		if ( ! get_page_by_path( $segments[1], OBJECT, 'oa-calendar' ) ) {
+		// Only published agendas: a redirect must not reveal that a private or draft one exists.
+		$agenda = get_page_by_path( $segments[1], OBJECT, 'oa-calendar' );
+		if ( ! $agenda || 'publish' !== $agenda->post_status ) {
 			return;
 		}
 		$segments[0] = $base;
@@ -230,8 +232,9 @@ class Content_Manager implements Hookable {
 		if ( ! empty( $_SERVER['QUERY_STRING'] ) ) {
 			$url .= '?' . wp_unslash( $_SERVER['QUERY_STRING'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		}
-		wp_safe_redirect( esc_url_raw( $url ), 301 );
-		exit;
+		if ( wp_safe_redirect( esc_url_raw( $url ), 301 ) ) {
+			exit;
+		}
 	}
 
 
