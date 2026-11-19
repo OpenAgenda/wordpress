@@ -76,26 +76,26 @@ class Content_Manager implements Hookable {
 			$this->post_types = array(
 				'oa-calendar' => array(
 					'labels'        => array(
-						'name'                  => _x( 'Calendars', 'Post type general name', 'openagenda' ),
-						'singular_name'         => _x( 'Calendar', 'Post type singular name', 'openagenda' ),
-						'menu_name'             => _x( 'Calendars', 'Admin Menu text', 'openagenda' ),
-						'name_admin_bar'        => _x( 'Calendar', 'Add New on Toolbar', 'openagenda' ),
-						'add_new_item'          => __( 'Add New Calendar', 'openagenda' ),
-						'new_item'              => __( 'New Calendar', 'openagenda' ),
-						'edit_item'             => __( 'Edit Calendar', 'openagenda' ),
-						'view_item'             => __( 'View Calendar', 'openagenda' ),
-						'all_items'             => __( 'All Calendars', 'openagenda' ),
-						'search_items'          => __( 'Search Calendars', 'openagenda' ),
-						'parent_item_colon'     => __( 'Parent Calendars:', 'openagenda' ),
-						'not_found'             => __( 'No Calendars found.', 'openagenda' ),
-						'not_found_in_trash'    => __( 'No Calendars found in Trash.', 'openagenda' ),
-						'featured_image'        => _x( 'Calendar Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'openagenda' ),
-						'archives'              => _x( 'Calendar archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'openagenda' ),
-						'insert_into_item'      => _x( 'Insert into Calendar', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'openagenda' ),
-						'uploaded_to_this_item' => _x( 'Uploaded to this Calendar', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'openagenda' ),
-						'filter_items_list'     => _x( 'Filter Calendars list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'openagenda' ),
-						'items_list_navigation' => _x( 'Calendars list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'openagenda' ),
-						'items_list'            => _x( 'Calendars list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'openagenda' ),
+						'name'                  => _x( 'Agendas', 'Post type general name', 'openagenda' ),
+						'singular_name'         => _x( 'Agenda', 'Post type singular name', 'openagenda' ),
+						'menu_name'             => _x( 'Agendas', 'Admin Menu text', 'openagenda' ),
+						'name_admin_bar'        => _x( 'Agenda', 'Add New on Toolbar', 'openagenda' ),
+						'add_new_item'          => __( 'Add New Agenda', 'openagenda' ),
+						'new_item'              => __( 'New Agenda', 'openagenda' ),
+						'edit_item'             => __( 'Edit Agenda', 'openagenda' ),
+						'view_item'             => __( 'View Agenda', 'openagenda' ),
+						'all_items'             => __( 'All Agendas', 'openagenda' ),
+						'search_items'          => __( 'Search Agendas', 'openagenda' ),
+						'parent_item_colon'     => __( 'Parent Agendas:', 'openagenda' ),
+						'not_found'             => __( 'No Agendas found.', 'openagenda' ),
+						'not_found_in_trash'    => __( 'No Agendas found in Trash.', 'openagenda' ),
+						'featured_image'        => _x( 'Agenda Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'openagenda' ),
+						'archives'              => _x( 'Agenda archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'openagenda' ),
+						'insert_into_item'      => _x( 'Insert into Agenda', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'openagenda' ),
+						'uploaded_to_this_item' => _x( 'Uploaded to this Agenda', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'openagenda' ),
+						'filter_items_list'     => _x( 'Filter Agendas list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'openagenda' ),
+						'items_list_navigation' => _x( 'Agendas list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'openagenda' ),
+						'items_list'            => _x( 'Agendas list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'openagenda' ),
 					),
 					'hierarchical'  => true,
 					'public'        => true,
@@ -233,7 +233,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function write_your_story( $prompt, $post ) {
 		if ( 'oa-calendar' === $post->post_type ) {
-			$prompt = __( 'Please provide a calendar UID in this calendar\'s settings box first.', 'openagenda' );
+			$prompt = __( 'Please provide an agenda UID in this agenda\'s settings box first.', 'openagenda' );
 		}
 		return $prompt;
 	}

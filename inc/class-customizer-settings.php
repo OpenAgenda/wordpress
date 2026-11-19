@@ -61,8 +61,8 @@ class Customizer_Settings implements Hookable {
 		if ( empty( $this->panels ) ) {
 			$this->panels = array(
 				'oa_customizer' => array(
-					'title'       => __( 'Calendars', 'openagenda' ),
-					'description' => __( 'Manage calendars display settings here.', 'openagenda' ),
+					'title'       => __( 'Agendas', 'openagenda' ),
+					'description' => __( 'Manage agendas display settings here.', 'openagenda' ),
 				),
 			);
 		}

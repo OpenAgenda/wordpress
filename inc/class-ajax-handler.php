@@ -55,7 +55,7 @@ class Ajax_Handler {
 
 		$uid = get_post_meta( $post_id, 'oa-calendar-uid', true );
 		if ( ! $uid ) {
-			wp_send_json_error( new \WP_Error( 'wrong-calendar-id', __( 'The post ID provided does not refer to a calendar.', 'openagenda' ) ) );
+			wp_send_json_error( new \WP_Error( 'wrong-calendar-id', __( 'The post ID provided does not refer to an agenda.', 'openagenda' ) ) );
 			exit;
 		}
 

@@ -74,7 +74,7 @@ msgid "No post ID was provided."
 msgstr ""
 
 #: inc/class-ajax-handler.php:58
-msgid "The post ID provided does not refer to a calendar."
+msgid "The post ID provided does not refer to an agenda."
 msgstr ""
 
 #: inc/class-content-manager.php:74
@@ -85,105 +85,105 @@ msgstr ""
 
 #: inc/class-content-manager.php:79
 msgctxt "Post type general name"
-msgid "Calendars"
+msgid "Agendas"
 msgstr ""
 
 #: inc/class-content-manager.php:80
 msgctxt "Post type singular name"
-msgid "Calendar"
+msgid "Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:81
 msgctxt "Admin Menu text"
-msgid "Calendars"
+msgid "Agendas"
 msgstr ""
 
 #: inc/class-content-manager.php:82
 msgctxt "Add New on Toolbar"
-msgid "Calendar"
+msgid "Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:83
-msgid "Add New Calendar"
+msgid "Add New Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:84
-msgid "New Calendar"
+msgid "New Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:85
-msgid "Edit Calendar"
+msgid "Edit Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:86
-msgid "View Calendar"
+msgid "View Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:87
-msgid "All Calendars"
+msgid "All Agendas"
 msgstr ""
 
 #: inc/class-content-manager.php:88
-msgid "Search Calendars"
+msgid "Search Agendas"
 msgstr ""
 
 #: inc/class-content-manager.php:89
-msgid "Parent Calendars:"
+msgid "Parent Agendas:"
 msgstr ""
 
 #: inc/class-content-manager.php:90
-msgid "No Calendars found."
+msgid "No Agendas found."
 msgstr ""
 
 #: inc/class-content-manager.php:91
-msgid "No Calendars found in Trash."
+msgid "No Agendas found in Trash."
 msgstr ""
 
 #: inc/class-content-manager.php:92
 msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
-msgid "Calendar Cover Image"
+msgid "Agenda Cover Image"
 msgstr ""
 
 #: inc/class-content-manager.php:93
 msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
-msgid "Calendar archives"
+msgid "Agenda archives"
 msgstr ""
 
 #: inc/class-content-manager.php:94
 msgctxt "Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4"
-msgid "Insert into Calendar"
+msgid "Insert into Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:95
 msgctxt "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4"
-msgid "Uploaded to this Calendar"
+msgid "Uploaded to this Agenda"
 msgstr ""
 
 #: inc/class-content-manager.php:96
 msgctxt "Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
-msgid "Filter Calendars list"
+msgid "Filter Agendas list"
 msgstr ""
 
 #: inc/class-content-manager.php:97
 msgctxt "Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
-msgid "Calendars list navigation"
+msgid "Agendas list navigation"
 msgstr ""
 
 #: inc/class-content-manager.php:98
 msgctxt "Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4"
-msgid "Calendars list"
+msgid "Agendas list"
 msgstr ""
 
 #: inc/class-content-manager.php:236
-msgid "Please provide a calendar UID in this calendar's settings box first."
+msgid "Please provide an agenda UID in this agenda's settings box first."
 msgstr ""
 
 #: inc/class-customizer-settings.php:64
-msgid "Calendars"
+msgid "Agendas"
 msgstr ""
 
 #: inc/class-customizer-settings.php:65
-msgid "Manage calendars display settings here."
+msgid "Manage agendas display settings here."
 msgstr ""
 
 #: inc/class-customizer-settings.php:80
@@ -400,15 +400,15 @@ msgid "Search"
 msgstr ""
 
 #: inc/class-metaboxes.php:47
-msgid "Calendar settings"
+msgid "Agenda settings"
 msgstr ""
 
 #: inc/class-metaboxes.php:71
-msgid "Calendar UID"
+msgid "Agenda UID"
 msgstr ""
 
 #: inc/class-metaboxes.php:76
-msgid "How to find my calendar UID ?"
+msgid "How to find my agenda UID ?"
 msgstr ""
 
 #: inc/class-metaboxes.php:82
@@ -495,7 +495,7 @@ msgid "Default filters (advanced)"
 msgstr ""
 
 #: inc/class-metaboxes.php:175
-msgid "Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed."
+msgid "Paste a url to a pre-filtered agenda page. Only events corresponding to these filters will be displayed."
 msgstr ""
 
 #: inc/class-metaboxes.php:180
@@ -571,7 +571,7 @@ msgid "OpenAgenda Preview"
 msgstr ""
 
 #: inc/class-preview-widget.php:84
-msgid "Displays a calendar preview widget."
+msgid "Displays an agenda preview widget."
 msgstr ""
 
 #: inc/class-preview-widget.php:133
@@ -652,11 +652,11 @@ msgid "Remove default image"
 msgstr ""
 
 #: inc/class-settings.php:212
-msgid "Delete all calendar content on uninstall ?"
+msgid "Delete all agenda content on uninstall ?"
 msgstr ""
 
 #: inc/class-settings.php:222
-msgid "Delete all posts of type \"Calendar\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
+msgid "Delete all posts of type \"Agenda\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
 msgstr ""
 
 #: inc/class-settings.php:227
@@ -676,12 +676,12 @@ msgid "Allow OpenAgenda to collect plugin usage information for statistics purpo
 msgstr ""
 
 #: inc/class-settings.php:257
-msgid "Calendar base"
+msgid "Agenda base"
 msgstr ""
 
 #. translators: %s : home url
 #: inc/class-settings.php:269
-msgid "You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>."
+msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/agenda-name</code>."
 msgstr ""
 
 #: inc/class-settings.php:276
@@ -702,7 +702,7 @@ msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
 #: inc/class-shortcodes.php:88
-msgid "Please provide a valid calendar UID to display in the calendar settings."
+msgid "Please provide a valid agenda UID to display in the agenda settings."
 msgstr ""
 
 #: inc/class-shortcodes.php:92
