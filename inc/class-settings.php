@@ -553,8 +553,10 @@ class Settings implements Hookable {
 	public function save_permalinks_settings() {
 		if ( isset( $_POST['openagenda_permalinks_settings'] ) ) {
 			check_admin_referer( 'update-permalink' );
+			$new_base = ! empty( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) ? sanitize_title( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) : '';
 			$settings = array(
-				'openagenda_calendar_base' => ! empty( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) ? sanitize_title( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) : Content_Manager::DEFAULT_REWRITE_BASE,
+				// A value made only of characters a URL cannot hold sanitizes to nothing.
+				'openagenda_calendar_base' => ! empty( $new_base ) ? $new_base : Content_Manager::DEFAULT_REWRITE_BASE,
 			);
 
 			// Remember the prefix being replaced, so that its URLs are redirected to the new one.

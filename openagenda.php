@@ -90,6 +90,8 @@ function openagenda_is_existing_install() {
 function openagenda_flag_new_install() {
 	if ( ! get_option( 'openagenda_rewrite_base_checked' ) && ! openagenda_is_existing_install() ) {
 		update_option( 'openagenda_rewrite_base_checked', 'new' );
+		// The site may have rules built for the former default prefix: have WordPress rebuild them.
+		delete_option( 'rewrite_rules' );
 	}
 }
 

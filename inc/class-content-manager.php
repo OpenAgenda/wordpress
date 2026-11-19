@@ -185,7 +185,7 @@ class Content_Manager implements Hookable {
 		if ( is_array( $rules ) ) {
 			foreach ( $rules as $match => $query ) {
 				if ( 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]' === $query && preg_match( '#^(.+)/\(\[\^/\]\+\)/page/#', $match, $found ) ) {
-					return $found[1];
+					return sanitize_title( $found[1] );
 				}
 			}
 		}
@@ -232,6 +232,8 @@ class Content_Manager implements Hookable {
 		if ( ! empty( $_SERVER['QUERY_STRING'] ) ) {
 			$url .= '?' . wp_unslash( $_SERVER['QUERY_STRING'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		}
+		// The prefix can be changed back: browsers must not keep this redirect.
+		nocache_headers();
 		if ( wp_safe_redirect( esc_url_raw( $url ), 301 ) ) {
 			exit;
 		}
