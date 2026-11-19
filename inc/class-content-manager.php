@@ -31,6 +31,7 @@ class Content_Manager implements Hookable {
 		add_action( 'init', array( $this, 'maybe_keep_former_rewrite_base' ), 1 );
 		add_action( 'init', array( $this, 'register_post_types' ), 10 );
 		add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
+		add_action( 'template_redirect', array( $this, 'redirect_former_rewrite_base' ), 1 );
 		add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
 		add_filter( 'body_class', array( $this, 'body_class' ), 10, 1 );
@@ -197,6 +198,40 @@ class Content_Manager implements Hookable {
 			restore_previous_locale();
 		}
 		return ! empty( $base ) ? $base : 'calendar';
+	}
+
+
+	/**
+	 * Redirects URLs using a prefix this site used before, once the prefix has been changed.
+	 *
+	 * Only acts on a request WordPress could not resolve, whose path starts with a
+	 * recorded former prefix followed by the slug of an existing agenda. Anything
+	 * else, such as a regular page living under that prefix, is left alone.
+	 */
+	public function redirect_former_rewrite_base() {
+		global $wp, $wp_rewrite;
+		if ( ! is_404() || empty( $wp->request ) || ! is_string( $wp->request ) ) {
+			return;
+		}
+		$former_bases = get_option( 'openagenda_former_rewrite_bases' );
+		if ( empty( $former_bases ) || ! is_array( $former_bases ) ) {
+			return;
+		}
+		$base     = $this->get_rewrite_base();
+		$segments = explode( '/', $wp->request );
+		if ( count( $segments ) < 2 || $segments[0] === $base || ! in_array( $segments[0], $former_bases, true ) ) {
+			return;
+		}
+		if ( ! get_page_by_path( $segments[1], OBJECT, 'oa-calendar' ) ) {
+			return;
+		}
+		$segments[0] = $base;
+		$url         = home_url( $wp_rewrite->root . user_trailingslashit( implode( '/', $segments ) ) );
+		if ( ! empty( $_SERVER['QUERY_STRING'] ) ) {
+			$url .= '?' . wp_unslash( $_SERVER['QUERY_STRING'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		}
+		wp_safe_redirect( esc_url_raw( $url ), 301 );
+		exit;
 	}
 
 

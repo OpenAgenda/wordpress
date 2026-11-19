@@ -556,6 +556,18 @@ class Settings implements Hookable {
 			$settings = array(
 				'openagenda_calendar_base' => ! empty( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) ? sanitize_title( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) : Content_Manager::DEFAULT_REWRITE_BASE,
 			);
+
+			// Remember the prefix being replaced, so that its URLs are redirected to the new one.
+			$manager      = new Content_Manager();
+			$former_base  = $manager->get_rewrite_base();
+			$former_bases = get_option( 'openagenda_former_rewrite_bases' );
+			$former_bases = is_array( $former_bases ) ? $former_bases : array();
+			if ( $former_base !== $settings['openagenda_calendar_base'] ) {
+				$former_bases[] = $former_base;
+			}
+			$former_bases = array_values( array_diff( array_unique( $former_bases ), array( $settings['openagenda_calendar_base'] ) ) );
+			update_option( 'openagenda_former_rewrite_bases', $former_bases );
+
 			update_option( 'openagenda_permalinks_settings', $settings );
 		}
 	}

@@ -130,6 +130,7 @@ function openagenda_uninstallation() {
 		delete_option( 'openagenda_integrations_settings' );
 		delete_option( 'openagenda_permalinks_settings' );
 		delete_option( 'openagenda_rewrite_base_checked' );
+		delete_option( 'openagenda_former_rewrite_bases' );
 		delete_option( 'openagenda_customizer' );
 		delete_expired_transients();
 		// Without its options, a later reinstall must count as a new installation.
