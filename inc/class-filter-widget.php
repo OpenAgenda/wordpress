@@ -163,7 +163,7 @@ class Filter_Widget extends OpenAgenda_Widget {
 	public function widget( $args, $instance ) {
 		$available_filters = $this->get_available_filters();
 
-		if ( ! is_singular( 'oa-calendar' ) ) {
+		if ( ! is_singular( \openagenda_get_post_type() ) ) {
 			return;
 		}
 		if ( empty( $instance['filter'] ) || ! array_key_exists( $instance['filter'], $available_filters ) ) {

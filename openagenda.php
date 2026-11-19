@@ -48,6 +48,47 @@ function openagenda_load_textdomain() {
 
 
 /**
+ * Returns the name of the post type holding agendas.
+ *
+ * Sites that installed the plugin when the post type was named "oa-calendar"
+ * keep that name, so their content and customizations are untouched.
+ * New installations use "oa-agenda". The choice is made once and stored.
+ *
+ * @return  string  "oa-agenda" or "oa-calendar".
+ */
+function openagenda_get_post_type() {
+	$post_type = get_option( 'openagenda_post_type' );
+	if ( ! in_array( $post_type, array( 'oa-agenda', 'oa-calendar' ), true ) ) {
+		$post_type = openagenda_detect_post_type();
+		update_option( 'openagenda_post_type', $post_type );
+		if ( 'oa-agenda' === $post_type ) {
+			// Stored rules may still target the former post type: have WordPress rebuild them.
+			delete_option( 'rewrite_rules' );
+		}
+	}
+	return $post_type;
+}
+
+
+/**
+ * Tells which post type name this site should use.
+ *
+ * Existing "oa-agenda" posts settle it. Otherwise any trace of an earlier
+ * installation means the site keeps "oa-calendar".
+ *
+ * Must be called before openagenda_update_version() stores the version.
+ *
+ * @return  string  "oa-agenda" or "oa-calendar".
+ */
+function openagenda_detect_post_type() {
+	if ( openagenda_has_posts( 'oa-agenda' ) ) {
+		return 'oa-agenda';
+	}
+	return openagenda_is_existing_install() ? 'oa-calendar' : 'oa-agenda';
+}
+
+
+/**
  * Tells whether this site holds posts of the given type, in any status but auto-draft.
  *
  * Queries the database directly: the post type may not be registered.
@@ -103,6 +144,7 @@ register_activation_hook( __FILE__, 'openagenda_activation' );
 function openagenda_activation() {
 	require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
 	require_once OPENAGENDA_PATH . 'inc/class-content-manager.php';
+	openagenda_get_post_type();
 	$manager = new OpenAgenda\Content_Manager();
 	openagenda_flag_new_install();
 	$manager->maybe_keep_former_rewrite_base();
@@ -133,7 +175,8 @@ function openagenda_uninstallation() {
 	if ( $should_delete_content ) {
 		$calendar_ids = get_posts(
 			array(
-				'post_type'   => 'oa-calendar',
+				// Both names: content left under the other one would make a reinstall look like an existing site.
+				'post_type'   => array( 'oa-agenda', 'oa-calendar' ),
 				'post_status' => array_values( get_post_stati() ),
 				'numberposts' => -1,
 				'fields'      => 'ids',
@@ -152,6 +195,7 @@ function openagenda_uninstallation() {
 		delete_option( 'openagenda_permalinks_settings' );
 		delete_option( 'openagenda_rewrite_base_checked' );
 		delete_option( 'openagenda_former_rewrite_bases' );
+		delete_option( 'openagenda_post_type' );
 		delete_option( 'openagenda_customizer' );
 		delete_expired_transients();
 		// Without its options, a later reinstall must count as a new installation.
@@ -166,6 +210,7 @@ add_action( 'plugins_loaded', 'openagenda_update_version' );
 function openagenda_update_version() {
 
 	// Must run before the version is stored: a stored version marks an existing installation.
+	openagenda_get_post_type();
 	openagenda_flag_new_install();
 
 	$db_version = get_option( 'openagenda_version' );

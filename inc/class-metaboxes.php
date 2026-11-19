@@ -30,7 +30,7 @@ class Metaboxes implements Hookable {
 	 */
 	public function register_hooks() {
 		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 );
-		add_action( 'save_post_oa-calendar', array( $this, 'calendar_settings_save' ), 10, 3 );
+		add_action( 'save_post_' . \openagenda_get_post_type(), array( $this, 'calendar_settings_save' ), 10, 3 );
 	}
 
 
@@ -46,7 +46,7 @@ class Metaboxes implements Hookable {
 					'id'            => 'oa-calendar-settings',
 					'title'         => __( 'Agenda settings', 'openagenda' ),
 					'callback'      => array( $this, 'calendar_settings_markup' ),
-					'screen'        => 'oa-calendar',
+					'screen'        => \openagenda_get_post_type(),
 					'context'       => 'side',
 					'priority'      => 'default',
 					'callback_args' => array(),

@@ -16,6 +16,8 @@ If you wish to install this plugin on your local machine from this GitHub reposi
 
 Upon activation, the plugin creates a new post type named *Agendas*. Just create a new agenda, provide the UID of the agenda you wish to display in the  settings box, and that's it !
 
+The post type is registered as `oa-agenda` on new installations. Sites that installed the plugin before this name was introduced keep the former name, `oa-calendar`, with their content unchanged. In custom code, use `openagenda_get_post_type()` instead of hard-coding either name.
+
 ![A new *Agendas* menu entry is created, allowing you to manage your agendas and settings](assets/screenshots/screenshot-1.png)
 
 You can leave the content area for this agenda empty, as it will be populated automatically with your events.

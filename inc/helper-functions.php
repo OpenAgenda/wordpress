@@ -702,7 +702,7 @@ function openagenda_get_event_schema( $uid = false ) {
  */
 function openagenda_get_default_calendar_id() {
 	$args = array(
-		'post_type'      => 'oa-calendar',
+		'post_type'      => openagenda_get_post_type(),
 		'posts_per_page' => 1,
 		'fields'         => 'ids',
 		'meta_query'     => array(
@@ -751,7 +751,7 @@ function openagenda_get_calendar_settings( $post_id = null ) {
 	}
 
 	$settings = array();
-	if ( 'oa-calendar' === get_post_type( $post_id ) ) {
+	if ( openagenda_get_post_type() === get_post_type( $post_id ) ) {
 		$settings = get_post_meta( $post_id, 'oa-calendar-settings', true );
 	}
 
