@@ -77,7 +77,7 @@ msgstr ""
 msgid "The post ID provided does not refer to an agenda."
 msgstr ""
 
-#. translators: former default URL prefix of agenda pages. Do not change an existing translation: it keeps old URLs working.
+#. translators: former default URL prefix of agenda pages. Do not change an existing translation: existing sites rely on it.
 #: inc/class-content-manager.php
 msgid "calendar"
 msgstr ""

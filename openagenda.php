@@ -47,6 +47,36 @@ function openagenda_load_textdomain() {
 }
 
 
+/**
+ * Tells whether the plugin was already in use on this site before the current request.
+ *
+ * Must be called before openagenda_update_version() stores the version.
+ *
+ * @return  bool
+ */
+function openagenda_is_existing_install() {
+	global $wpdb;
+	if ( get_option( 'openagenda_version' ) || get_option( 'openagenda_general_settings' ) ) {
+		return true;
+	}
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+	return (bool) $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s LIMIT 1", 'oa-calendar' ) );
+}
+
+
+/**
+ * Flags a new installation, which uses the default URL prefix.
+ *
+ * Sites left unflagged are existing ones: Content_Manager::maybe_keep_former_rewrite_base()
+ * stores the prefix they were using.
+ */
+function openagenda_flag_new_install() {
+	if ( ! get_option( 'openagenda_rewrite_base_checked' ) && ! openagenda_is_existing_install() ) {
+		update_option( 'openagenda_rewrite_base_checked', 'new' );
+	}
+}
+
+
 register_activation_hook( __FILE__, 'openagenda_activation' );
 /**
  * Activation procedure
@@ -55,10 +85,11 @@ function openagenda_activation() {
 	require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
 	require_once OPENAGENDA_PATH . 'inc/class-content-manager.php';
 	$manager = new OpenAgenda\Content_Manager();
+	openagenda_flag_new_install();
+	$manager->maybe_keep_former_rewrite_base();
 	$manager->register_post_types();
 	$manager->register_rewrite_rules();
 	flush_rewrite_rules();
-	update_option( 'openagenda_rewrite_rules_version', OpenAgenda\Content_Manager::REWRITE_RULES_VERSION );
 }
 
 
@@ -98,7 +129,7 @@ function openagenda_uninstallation() {
 		delete_option( 'openagenda_general_settings' );
 		delete_option( 'openagenda_integrations_settings' );
 		delete_option( 'openagenda_permalinks_settings' );
-		delete_option( 'openagenda_rewrite_rules_version' );
+		delete_option( 'openagenda_rewrite_base_checked' );
 		delete_option( 'openagenda_customizer' );
 		delete_expired_transients();
 	}
@@ -109,6 +140,9 @@ add_action( 'plugins_loaded', 'openagenda_update_version' );
  * Maybe update version in database.
  */
 function openagenda_update_version() {
+
+	// Must run before the version is stored: a stored version marks an existing installation.
+	openagenda_flag_new_install();
 
 	$db_version = get_option( 'openagenda_version' );
 	if ( ! $db_version ) {

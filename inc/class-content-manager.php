@@ -25,18 +25,12 @@ class Content_Manager implements Hookable {
 	const DEFAULT_REWRITE_BASE = 'agendas';
 
 	/**
-	 * Bump this whenever the rewrite rules change, so they are rebuilt after a plugin update.
-	 */
-	const REWRITE_RULES_VERSION = '2';
-
-	/**
 	 * Register all the hooks
 	 */
 	public function register_hooks() {
+		add_action( 'init', array( $this, 'maybe_keep_former_rewrite_base' ), 1 );
 		add_action( 'init', array( $this, 'register_post_types' ), 10 );
 		add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
-		add_action( 'init', array( $this, 'maybe_flush_rewrite_rules' ), 99 );
-		add_action( 'parse_request', array( $this, 'redirect_legacy_urls' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
 		add_filter( 'body_class', array( $this, 'body_class' ), 10, 1 );
@@ -135,18 +129,12 @@ class Content_Manager implements Hookable {
 		add_rewrite_tag( '%oa-slug%', '([^&]+)' );
 		add_rewrite_tag( '%oa-page%', '(\d+)' );
 		add_rewrite_tag( '%oaq%', '([^&]+)' );
-		add_rewrite_tag( '%oa-legacy-path%', '(.+)' );
 
 		// If pretty permalinks are enabled, add in our rewrite rules.
 		if ( ! empty( get_option( 'permalink_structure' ) ) ) {
 			$rewrite_base = $this->get_rewrite_base();
 			add_rewrite_rule( "{$rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]', 'top' );
 			add_rewrite_rule( "{$rewrite_base}/([^/]+)/([^&]+)?", 'index.php?oa-calendar=$matches[1]&oa-slug=$matches[2]', 'top' );
-
-			// Keep URLs using a former default prefix working.
-			foreach ( $this->get_legacy_rewrite_bases() as $legacy_base ) {
-				add_rewrite_rule( preg_quote( $legacy_base, '#' ) . '/(.+)$', 'index.php?oa-legacy-path=$matches[1]', 'top' );
-			}
 		}
 	}
 
@@ -164,56 +152,51 @@ class Content_Manager implements Hookable {
 
 
 	/**
-	 * Returns the former default URL prefixes, which redirect to the current one.
+	 * Keeps the URL prefix of a site that was installed before "agendas" became the default.
 	 *
-	 * The default prefix used to be the translation of "calendar", so it depended
-	 * on the site language ("calendar" in English, "agenda" in French...).
-	 * A site with a custom prefix never used them, so it gets no redirect.
-	 *
-	 * @return  array
+	 * The default prefix used to be the translation of "calendar" ("calendar" in
+	 * English, "agenda" in French...) and was not stored anywhere. Such a site gets
+	 * its current prefix stored once, so its URLs do not change with this update.
+	 * New installations are flagged in openagenda_update_version() and skip this.
 	 */
-	public function get_legacy_rewrite_bases() {
-		$bases = array();
-		if ( self::DEFAULT_REWRITE_BASE === $this->get_rewrite_base() ) {
-			$bases = array(
-				'calendar',
-				/* translators: former default URL prefix of agenda pages. Do not change an existing translation: it keeps old URLs working. */
-				sanitize_title( __( 'calendar', 'openagenda' ) ),
-			);
-			$bases = array_values( array_diff( array_unique( array_filter( $bases ) ), array( self::DEFAULT_REWRITE_BASE ) ) );
-		}
-		return apply_filters( 'openagenda_legacy_rewrite_bases', $bases );
-	}
-
-
-	/**
-	 * Rebuilds the rewrite rules once after a plugin update that changed them.
-	 */
-	public function maybe_flush_rewrite_rules() {
-		if ( self::REWRITE_RULES_VERSION !== get_option( 'openagenda_rewrite_rules_version' ) ) {
-			flush_rewrite_rules( false );
-			update_option( 'openagenda_rewrite_rules_version', self::REWRITE_RULES_VERSION );
-		}
-	}
-
-
-	/**
-	 * Redirects URLs using a former default prefix to the current one.
-	 *
-	 * @param  \WP $wp  Current WordPress environment instance.
-	 */
-	public function redirect_legacy_urls( $wp ) {
-		if ( empty( $wp->query_vars['oa-legacy-path'] ) ) {
+	public function maybe_keep_former_rewrite_base() {
+		if ( get_option( 'openagenda_rewrite_base_checked' ) ) {
 			return;
 		}
-		$path = ltrim( $wp->query_vars['oa-legacy-path'], '/' );
-		$url  = home_url( user_trailingslashit( $this->get_rewrite_base() . '/' . $path ) );
-		if ( ! empty( $_SERVER['QUERY_STRING'] ) ) {
-			$url .= '?' . wp_unslash( $_SERVER['QUERY_STRING'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$url  = remove_query_arg( 'oa-legacy-path', $url );
+		$settings = get_option( 'openagenda_permalinks_settings' );
+		if ( ! is_array( $settings ) || empty( $settings['openagenda_calendar_base'] ) ) {
+			$settings                             = is_array( $settings ) ? $settings : array();
+			$settings['openagenda_calendar_base'] = $this->get_former_rewrite_base();
+			update_option( 'openagenda_permalinks_settings', $settings );
 		}
-		wp_safe_redirect( esc_url_raw( $url ), 301 );
-		exit;
+		update_option( 'openagenda_rewrite_base_checked', 'kept' );
+	}
+
+
+	/**
+	 * Returns the URL prefix a site was using before "agendas" became the default.
+	 *
+	 * @return  string
+	 */
+	public function get_former_rewrite_base() {
+		// The stored rewrite rules tell which prefix the site URLs really use.
+		$rules = get_option( 'rewrite_rules' );
+		if ( is_array( $rules ) ) {
+			foreach ( $rules as $match => $query ) {
+				if ( 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]' === $query && preg_match( '#^(.+)/\(\[\^/\]\+\)/page/#', $match, $found ) ) {
+					return $found[1];
+				}
+			}
+		}
+
+		// No stored rules (plain permalinks, or rules not built yet): use the former default, in the site language.
+		$switched = switch_to_locale( get_locale() );
+		/* translators: former default URL prefix of agenda pages. Do not change an existing translation: existing sites rely on it. */
+		$base = sanitize_title( __( 'calendar', 'openagenda' ) );
+		if ( $switched ) {
+			restore_previous_locale();
+		}
+		return ! empty( $base ) ? $base : 'calendar';
 	}
 
 
