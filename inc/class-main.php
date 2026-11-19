@@ -166,7 +166,7 @@ class Main {
 			wp_enqueue_style( $stylesheet );
 		}
 
-		if ( is_singular( 'oa-calendar' ) ) {
+		if ( is_singular( \openagenda_get_post_type() ) ) {
 			wp_enqueue_script( 'openagenda-main' );
 			wp_enqueue_script( 'openagenda-filters' );
 			$post_id         = get_the_ID();
@@ -248,7 +248,7 @@ class Main {
 	 */
 	public function init_calendar() {
 		global $openagenda;
-		if ( is_singular( 'oa-calendar' ) ) {
+		if ( is_singular( \openagenda_get_post_type() ) ) {
 			$post_id         = get_the_ID();
 			$uid             = get_post_meta( $post_id, 'oa-calendar-uid', true );
 			$page_size       = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );

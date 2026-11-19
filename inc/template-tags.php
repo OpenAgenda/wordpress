@@ -1401,14 +1401,14 @@ function openagenda_get_permalink( $uid = false ) {
 	if ( $openagenda && ! $uid ) {
 		$uid = $openagenda->get_uid();
 	}
-	if ( 'oa-calendar' === get_post_type() && ! $openagenda->is_preview() ) {
+	if ( openagenda_get_post_type() === get_post_type() && ! $openagenda->is_preview() ) {
 		$permalink = get_permalink();
 	}
 
 	if ( ! $permalink && $uid ) {
 		$posts = get_posts(
 			array(
-				'post_type'   => 'oa-calendar',
+				'post_type'   => openagenda_get_post_type(),
 				'meta_key'    => 'oa-calendar-uid',
 				'meta_value'  => sanitize_text_field( $uid ),
 				'numberposts' => 1,
@@ -1777,7 +1777,7 @@ function openagenda_language_switcher( $uid = false, $display = true ) {
  */
 function openagenda_event_schema( $uid = false ) {
 	global $openagenda;
-	if ( $openagenda && is_singular( 'oa-calendar' ) ) {
+	if ( $openagenda && is_singular( openagenda_get_post_type() ) ) {
 		if ( ! $uid ) {
 			$uid = openagenda_get_field( 'uid' );
 		}
