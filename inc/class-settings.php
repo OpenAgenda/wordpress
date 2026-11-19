@@ -263,10 +263,10 @@ class Settings implements Hookable {
 						'option_name' => 'openagenda_permalinks_settings',
 						'label_for'   => 'openagenda_calendar_base',
 						'type'        => 'text',
-						'default'     => 'calendar',
+						'default'     => Content_Manager::DEFAULT_REWRITE_BASE,
 						'description' => sprintf(
 							/* translators: %s : home url */
-							__( 'You can modify the URL prefix for the agendas. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/agenda-name</code>.', 'openagenda' ),
+							__( 'You can modify the URL prefix for the agendas. For example, the default prefix is <code>agendas</code>, so URLs will look like <code>%s/agendas/agenda-name</code>.', 'openagenda' ),
 							esc_url( get_home_url() )
 						),
 					),
@@ -554,7 +554,7 @@ class Settings implements Hookable {
 		if ( isset( $_POST['openagenda_permalinks_settings'] ) ) {
 			check_admin_referer( 'update-permalink' );
 			$settings = array(
-				'openagenda_calendar_base' => ! empty( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) ? sanitize_title( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) : __( 'calendar', 'openagenda' ),
+				'openagenda_calendar_base' => ! empty( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) ? sanitize_title( $_POST['openagenda_permalinks_settings']['openagenda_calendar_base'] ) : Content_Manager::DEFAULT_REWRITE_BASE,
 			);
 			update_option( 'openagenda_permalinks_settings', $settings );
 		}

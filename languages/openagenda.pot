@@ -77,9 +77,8 @@ msgstr ""
 msgid "The post ID provided does not refer to an agenda."
 msgstr ""
 
-#: inc/class-content-manager.php:74
-#: inc/class-content-manager.php:131
-#: inc/class-settings.php:557
+#. translators: former default URL prefix of agenda pages. Do not change an existing translation: it keeps old URLs working.
+#: inc/class-content-manager.php
 msgid "calendar"
 msgstr ""
 
@@ -681,7 +680,7 @@ msgstr ""
 
 #. translators: %s : home url
 #: inc/class-settings.php:269
-msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/agenda-name</code>."
+msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>agendas</code>, so URLs will look like <code>%s/agendas/agenda-name</code>."
 msgstr ""
 
 #: inc/class-settings.php:276

@@ -20,11 +20,23 @@ class Content_Manager implements Hookable {
 	protected $post_types;
 
 	/**
+	 * Default URL prefix of agenda pages.
+	 */
+	const DEFAULT_REWRITE_BASE = 'agendas';
+
+	/**
+	 * Bump this whenever the rewrite rules change, so they are rebuilt after a plugin update.
+	 */
+	const REWRITE_RULES_VERSION = '2';
+
+	/**
 	 * Register all the hooks
 	 */
 	public function register_hooks() {
 		add_action( 'init', array( $this, 'register_post_types' ), 10 );
 		add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
+		add_action( 'init', array( $this, 'maybe_flush_rewrite_rules' ), 99 );
+		add_action( 'parse_request', array( $this, 'redirect_legacy_urls' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
 		add_filter( 'body_class', array( $this, 'body_class' ), 10, 1 );
@@ -70,8 +82,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function get_post_types() {
 		if ( empty( $this->post_types ) ) {
-			$rewrite_settings = get_option( 'openagenda_permalinks_settings' );
-			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
+			$rewrite_base = $this->get_rewrite_base();
 
 			$this->post_types = array(
 				'oa-calendar' => array(
@@ -124,14 +135,85 @@ class Content_Manager implements Hookable {
 		add_rewrite_tag( '%oa-slug%', '([^&]+)' );
 		add_rewrite_tag( '%oa-page%', '(\d+)' );
 		add_rewrite_tag( '%oaq%', '([^&]+)' );
+		add_rewrite_tag( '%oa-legacy-path%', '(.+)' );
 
 		// If pretty permalinks are enabled, add in our rewrite rules.
 		if ( ! empty( get_option( 'permalink_structure' ) ) ) {
-			$rewrite_settings = get_option( 'openagenda_permalinks_settings' );
-			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
+			$rewrite_base = $this->get_rewrite_base();
 			add_rewrite_rule( "{$rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]', 'top' );
 			add_rewrite_rule( "{$rewrite_base}/([^/]+)/([^&]+)?", 'index.php?oa-calendar=$matches[1]&oa-slug=$matches[2]', 'top' );
+
+			// Keep URLs using a former default prefix working.
+			foreach ( $this->get_legacy_rewrite_bases() as $legacy_base ) {
+				add_rewrite_rule( preg_quote( $legacy_base, '#' ) . '/(.+)$', 'index.php?oa-legacy-path=$matches[1]', 'top' );
+			}
 		}
+	}
+
+
+	/**
+	 * Returns the URL prefix of agenda pages.
+	 *
+	 * @return  string
+	 */
+	public function get_rewrite_base() {
+		$settings = get_option( 'openagenda_permalinks_settings' );
+		$base     = is_array( $settings ) && ! empty( $settings['openagenda_calendar_base'] ) ? sanitize_title( $settings['openagenda_calendar_base'] ) : '';
+		return ! empty( $base ) ? $base : self::DEFAULT_REWRITE_BASE;
+	}
+
+
+	/**
+	 * Returns the former default URL prefixes, which redirect to the current one.
+	 *
+	 * The default prefix used to be the translation of "calendar", so it depended
+	 * on the site language ("calendar" in English, "agenda" in French...).
+	 * A site with a custom prefix never used them, so it gets no redirect.
+	 *
+	 * @return  array
+	 */
+	public function get_legacy_rewrite_bases() {
+		$bases = array();
+		if ( self::DEFAULT_REWRITE_BASE === $this->get_rewrite_base() ) {
+			$bases = array(
+				'calendar',
+				/* translators: former default URL prefix of agenda pages. Do not change an existing translation: it keeps old URLs working. */
+				sanitize_title( __( 'calendar', 'openagenda' ) ),
+			);
+			$bases = array_values( array_diff( array_unique( array_filter( $bases ) ), array( self::DEFAULT_REWRITE_BASE ) ) );
+		}
+		return apply_filters( 'openagenda_legacy_rewrite_bases', $bases );
+	}
+
+
+	/**
+	 * Rebuilds the rewrite rules once after a plugin update that changed them.
+	 */
+	public function maybe_flush_rewrite_rules() {
+		if ( self::REWRITE_RULES_VERSION !== get_option( 'openagenda_rewrite_rules_version' ) ) {
+			flush_rewrite_rules( false );
+			update_option( 'openagenda_rewrite_rules_version', self::REWRITE_RULES_VERSION );
+		}
+	}
+
+
+	/**
+	 * Redirects URLs using a former default prefix to the current one.
+	 *
+	 * @param  \WP $wp  Current WordPress environment instance.
+	 */
+	public function redirect_legacy_urls( $wp ) {
+		if ( empty( $wp->query_vars['oa-legacy-path'] ) ) {
+			return;
+		}
+		$path = ltrim( $wp->query_vars['oa-legacy-path'], '/' );
+		$url  = home_url( user_trailingslashit( $this->get_rewrite_base() . '/' . $path ) );
+		if ( ! empty( $_SERVER['QUERY_STRING'] ) ) {
+			$url .= '?' . wp_unslash( $_SERVER['QUERY_STRING'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$url  = remove_query_arg( 'oa-legacy-path', $url );
+		}
+		wp_safe_redirect( esc_url_raw( $url ), 301 );
+		exit;
 	}
 
 

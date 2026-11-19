@@ -58,6 +58,7 @@ function openagenda_activation() {
 	$manager->register_post_types();
 	$manager->register_rewrite_rules();
 	flush_rewrite_rules();
+	update_option( 'openagenda_rewrite_rules_version', OpenAgenda\Content_Manager::REWRITE_RULES_VERSION );
 }
 
 
@@ -97,6 +98,7 @@ function openagenda_uninstallation() {
 		delete_option( 'openagenda_general_settings' );
 		delete_option( 'openagenda_integrations_settings' );
 		delete_option( 'openagenda_permalinks_settings' );
+		delete_option( 'openagenda_rewrite_rules_version' );
 		delete_option( 'openagenda_customizer' );
 		delete_expired_transients();
 	}
