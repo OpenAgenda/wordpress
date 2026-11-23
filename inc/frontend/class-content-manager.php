@@ -20,12 +20,20 @@ class Content_Manager implements Hookable {
 	protected $post_types;
 
 	/**
+	 * Whether the current template being rendered has the openagenda/events block already
+	 *
+	 * @var  bool
+	 */
+	protected $template_has_block = false;
+
+	/**
 	 * Register all the hooks
 	 */
 	public function register_hooks() {
 		add_action( 'init', array( $this, 'register_post_types' ), 10 );
 		add_action( 'init', array( $this, 'register_post_metas' ), 10 );
 		add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
+		add_filter( 'template_include', array( $this, 'template_has_block' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
 		add_filter( 'body_class', array( $this, 'body_class' ), 10, 1 );
@@ -141,7 +149,7 @@ class Content_Manager implements Hookable {
 					'type'         => 'string',
 					'single'       => true,
 					'show_in_rest' => true,
-				)
+				),
 			),
 		);
 
@@ -298,16 +306,32 @@ class Content_Manager implements Hookable {
 		if ( ! is_main_query() || ! in_the_loop() ) {
 			return $content;
 		}
-
 		$display_content = openagenda_is_archive() ? get_post_meta( get_the_ID(), 'oa-calendar-content-on-archive', true ) : get_post_meta( get_the_ID(), 'oa-calendar-content-on-single', true );
 
-		if ( 'yes' !== $display_content ) {
-			$content = '[openagenda]';
-		} elseif ( ! has_shortcode( $content, 'openagenda' ) ) {
-			$content .= '[openagenda]';
+		if ( (bool) ! $this->template_has_block ) {
+			if ( 'yes' !== $display_content ) {
+				$content = '[openagenda]';
+			} elseif ( ! has_shortcode( $content, 'openagenda' ) && ! has_block( 'openagenda/events' ) ) {
+				$content .= '[openagenda]';
+			}
 		}
 
 		return $content;
+	}
+
+
+	/**
+	 * Checks whether the current template has the openagenda/events block already
+	 *
+	 * @param  string $template  Template to render.
+	 * @return string $template
+	 */
+	public function template_has_block( $template ) {
+		global $_wp_current_template_content;
+		if ( isset( $_wp_current_template_content ) && is_string( $_wp_current_template_content ) ) {
+			$this->template_has_block = has_block( 'openagenda/events', $_wp_current_template_content );
+		}
+		return $template;
 	}
 
 

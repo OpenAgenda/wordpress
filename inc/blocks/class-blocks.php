@@ -66,6 +66,13 @@ class Blocks implements Hookable {
 	 */
 	public function register_block_types() {
 		register_block_type(
+			OPENAGENDA_PATH . 'assets/blocks/events',
+			array(
+				'render_callback' => array( $this, 'render_events_block' ),
+			)
+		);
+
+		register_block_type(
 			OPENAGENDA_PATH . 'assets/blocks/filter',
 			array(
 				'render_callback' => array( $this, 'render_filter_block' ),
@@ -75,21 +82,70 @@ class Blocks implements Hookable {
 	}
 
 	/**
+	 * Renders the Events block with the OpenAgenda shortcode.
+	 *
+	 * @param array<string,mixed> $attributes  Array of block attributes.
+	 * @return string Block markup.
+	 */
+	public function render_events_block( $attributes = array() ) {
+		global $openagenda;
+		global $post;
+		
+		if ( $openagenda && is_singular( 'oa-calendar' ) ) {
+			$wrapper_attributes = get_block_wrapper_attributes();
+			return sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
+		} else {
+			if ( wp_is_serving_rest_request() ) {
+				$agenda = $this->get_editor_sample_agenda();
+				if( null !== $agenda ){
+					$post = $agenda;
+					setup_postdata( $post );
+					$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'single-oa-calendar' ) );
+					$html               = sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
+					wp_reset_postdata();
+					return $html;
+				}
+			}
+			$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'single-oa-calendar' ) );
+			return sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
+		}
+	}
+
+	/**
+	 * Gets the first registered agenda to display in site editor.
+	 * 
+	 * @return WP_Post|null  $agenda  First available agenda post. 
+	 */
+	public function get_editor_sample_agenda(){
+		$agenda = null;
+		$args    = array(
+			'post_type'   => 'oa-calendar',
+			'numberposts' => 1,
+			'fields'      => 'ids',
+		);
+		$agendas = get_posts( $args );
+		if ( ! empty( $agendas ) ) {
+			$agenda = get_post( $agendas[0] );
+		}
+		return $agenda;
+	}
+
+	/**
 	 * Renders the Filter block with its corresponding shortcode.
 	 *
 	 * @param array<string, mixed> $attributes Block attributes.
 	 * @return string Block markup.
 	 */
-	public function render_filter_block( $attributes = array() ) {
+	public function render_filter_block( $attributes = array(), $content, $block ) {
 		$shortcode = ! empty( $attributes['shortcode'] ) ? sanitize_key( $attributes['shortcode'] ) : '';
 
 		if ( '' === $shortcode || ! shortcode_exists( $shortcode ) ) {
 			return '';
 		}
 
-		$settings = ! empty( $attributes['filterSettings'] ) && is_array( $attributes['filterSettings'] ) ? $attributes['filterSettings'] : array();
-		$atts     = \openagenda_get_shortcode_attributes( $settings );
-
-		return do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ) );
+		$settings           = ! empty( $attributes['filterSettings'] ) && is_array( $attributes['filterSettings'] ) ? $attributes['filterSettings'] : array();
+		$atts               = \openagenda_get_shortcode_attributes( $settings );
+		$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => sprintf( 'wp-block-openagenda-filter-%s', sanitize_title( $attributes['filter'] ) ) ) );
+		return sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ) ) );
 	}
 }

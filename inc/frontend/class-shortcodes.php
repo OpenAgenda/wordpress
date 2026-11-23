@@ -92,9 +92,9 @@ class Shortcodes implements Hookable {
 			return sprintf( '<p>%s</p>', __( 'Please provide a valid calendar UID to display in the calendar settings.', 'openagenda' ) );
 		}
 
-		if ( ! is_singular( 'oa-calendar' ) ) {
-			return sprintf( '<p>%s</p>', __( 'This page is not an agenda page. Events may not display as expected.', 'openagenda' ) );
-		}
+		// if ( ! is_singular( 'oa-calendar' ) ) {
+		// return sprintf( '<p>%s</p>', __( 'This page is not an agenda page. Events may not display as expected.', 'openagenda' ) );
+		// }
 
 		if ( ! $openagenda ) {
 			$args = array(
