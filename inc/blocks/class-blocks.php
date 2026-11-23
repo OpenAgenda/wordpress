@@ -92,11 +92,25 @@ class Blocks implements Hookable {
 		global $post;
 
 		$is_editor_preview = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
-		
+
 		if ( $is_editor_preview ) {
 			$this->init_editor_agenda();
 			$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'single-oa-calendar' ) );
-			$html               = sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
+			if ( ! class_exists( '\WP_HTML_Tag_Processor' ) ) {
+				// Older WordPress versions lack the HTML tag processor.
+				$wrapper_attributes = sprintf( '%s inert', $wrapper_attributes );
+			}
+			$html = sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
+			if ( class_exists( '\WP_HTML_Tag_Processor' ) ) {
+				$processor = new \WP_HTML_Tag_Processor( $html );
+				while ( $processor->next_tag( array( 'tag_name' => 'A' ) ) ) {
+					$processor->remove_attribute( 'href' );
+					$processor->remove_attribute( 'target' );
+					$processor->remove_attribute( 'tabindex' );
+					$processor->set_attribute( 'aria-disabled', 'true' );
+				}
+				$html = $processor->get_updated_html();
+			}
 			wp_reset_postdata();
 			return $html;
 		}
@@ -168,7 +182,7 @@ class Blocks implements Hookable {
 	/**
 	 * Gets the first registered agenda to display in site editor.
 	 *
-	 * @return \WP_Post|null First available agenda post.
+	 * @return int First available agenda post ID, or zero when none exists.
 	 */
 	public function get_editor_sample_agenda_post_id() {
 		$agenda_post_id  = 0;
