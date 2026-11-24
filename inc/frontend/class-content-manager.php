@@ -344,7 +344,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function write_your_story( $prompt, $post ) {
 		if ( 'oa-calendar' === $post->post_type ) {
-			$prompt = __( 'Please provide a calendar UID in this calendar\'s settings box first.', 'openagenda' );
+			$prompt = __( 'Please provide a calendar UID in this calendar\'s settings box first. You can leave your content empty, as the event list is automatically inserted after your content.', 'openagenda' );
 		}
 		return $prompt;
 	}
