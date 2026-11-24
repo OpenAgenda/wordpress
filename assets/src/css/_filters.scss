@@ -3,6 +3,184 @@
 @use "variables";
 @use "mixins";
 
+/*
+ * Stylesheet for the components of @openagenda/react-filters.
+ *
+ * Load it once in the host application, after the framework stylesheet the
+ * components sit on (bootstrap here): several rules below deliberately rely on
+ * source order rather than specificity to win against `.btn`, `.badge` and
+ * `.form-control`, which lets a consumer override any of them with a class of
+ * its own placed later.
+ *
+ *   import '@openagenda/react-filters/style.css';
+ *
+ * The `oa-filters-*` class names are part of the public API — they are safe to
+ * target from a consumer stylesheet.
+ */
+
+/* ValueBadge */
+
+.oa-filters-value-badge {
+	line-height: 18px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.oa-filters-value-badge:hover {
+	color: #da4453;
+	border-color: #d43f3a;
+}
+
+/* ChoiceFilter */
+
+.oa-filters-choice-search {
+	width: 50%;
+}
+
+/* MapField */
+
+.oa-filters-map-container {
+	position: relative;
+}
+
+/*
+ * MapField sizes the map it lays out; `Map` rendered on its own is sized by
+ * whoever renders it.
+ */
+.oa-filters-map-container .oa-filters-map {
+	height: 100%;
+}
+
+/* MapField — marker clusters */
+
+.oa-filters-map .marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+}
+
+.oa-filters-map .marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+}
+
+.oa-filters-map .marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+}
+
+.oa-filters-map .marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+}
+
+.oa-filters-map .marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+}
+
+.oa-filters-map .marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+}
+
+.oa-filters-map .marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+}
+
+.oa-filters-map .marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+	text-align: center;
+	border-radius: 15px;
+	font:
+		12px 'Helvetica Neue',
+		Arial,
+		Helvetica,
+		sans-serif;
+}
+
+.oa-filters-map .marker-cluster span {
+	line-height: 30px;
+}
+
+/* MapField — gesture handling overlay */
+
+.oa-filters-map.leaflet-gesture-handling:after {
+	color: #fff;
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 22px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	padding: 15px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1001;
+	pointer-events: none;
+	text-align: center;
+	transition: opacity 0.8s ease-in-out;
+	opacity: 0;
+	content: '';
+}
+
+.oa-filters-map.leaflet-gesture-handling-warning:after {
+	transition-duration: 0.3s;
+	opacity: 1;
+}
+
+.oa-filters-map.leaflet-gesture-handling-touch:after {
+	content: attr(data-gesture-handling-touch-content);
+}
+
+.oa-filters-map.leaflet-gesture-handling-scroll:after {
+	content: attr(data-gesture-handling-scroll-content);
+}
+
+/* SearchHereControl */
+
+.oa-filters-search-here {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	white-space: nowrap;
+	z-index: 400;
+}
+
+.oa-filters-search-here-button {
+	outline: none;
+	overflow: hidden;
+	transition-duration: 0.2s;
+	cursor: pointer;
+	background: white;
+	height: 24px;
+	border-radius: 16px;
+	padding: 0 12px;
+	box-shadow: rgba(0, 0, 0, 0.16) 0 2px 8px 0;
+	border: 0;
+}
+
+.oa-filters-search-here-button:hover {
+	background-color: #f3f3f3;
+}
+
+.oa-filters-search-here-button:active {
+	background-color: #eaeaea;
+}
+
+.oa-filters-sort-option {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+/* same size as the label: set apart by a lighter shade of the option color,
+   which keeps it readable on the selected option */
+.oa-filters-sort-description {
+	opacity: 0.8;
+}
+
 /*********************************
  * Filters widgets
 *********************************/
@@ -12,7 +190,7 @@
 	gap: var(--oa-spacing-4);
 	margin-bottom: var(--oa-spacing-4);
 
-	& > * {
+	&>* {
 		margin: 0;
 	}
 }
@@ -32,7 +210,7 @@
 	padding: var(--oa-spacing-2);
 	font-size: var(--oa-text-3);
 
-	.oa-widget-summary ~ * {
+	.oa-widget-summary~* {
 		margin-top: var(--oa-spacing-4);
 	}
 }
@@ -188,7 +366,7 @@
 	gap: var(--oa-spacing-1);
 	align-items: start;
 
-	& > * {
+	&>* {
 		margin: 0;
 	}
 
@@ -310,7 +488,7 @@ ul.oa-sharers-links {
 *********************************/
 .oa-calendar-widget-simpledaterange {
 
-	& > div {
+	&>div {
 		align-items: center;
 		display: flex;
 		flex-wrap: wrap;
@@ -347,7 +525,7 @@ ul.oa-sharers-links {
 	color: inherit;
 }
 
-.rdrDateDisplayItem + .rdrDateDisplayItem {
+.rdrDateDisplayItem+.rdrDateDisplayItem {
 	margin-left: var(--oa-spacing-3);
 }
 
@@ -404,7 +582,7 @@ ul.oa-sharers-links {
 	flex-direction: column;
 }
 
-.rdrMonthsHorizontal > div > div > div {
+.rdrMonthsHorizontal>div>div>div {
 	display: -webkit-flex;
 	display: flex;
 	-webkit-box-orient: horizontal;
@@ -742,17 +920,17 @@ button.rdrDay {
 	background: var(--oa-main-color);
 }
 
-.rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span::after {
+.rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span::after {
 	background: #fff;
 }
 
-.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
-.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
-.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
-.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
+.rdrDay:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
 	color: rgba(255, 255, 255, 0.85);
 }
 
@@ -896,7 +1074,7 @@ button.rdrStaticRange {
 	}
 }
 
-.rdrStaticRange + .rdrStaticRange {
+.rdrStaticRange+.rdrStaticRange {
 	margin-left: 8px;
 }
 
@@ -1023,10 +1201,10 @@ button.rdrStaticRange {
 		background: #fff;
 	}
 
-	.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
+	.rdrDay:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
 		color: var(--oa-gray-900);
 
 		&::after {
