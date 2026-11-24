@@ -2,11 +2,13 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { Notice, Spinner } from '@wordpress/components';
 import { useEntityRecords } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 import metadata from './block.json';
 import './editor.scss';
 import FilterInspector from './inspector';
+import { getFilterData } from './utils';
+
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -21,6 +23,9 @@ import FilterInspector from './inspector';
  */
 export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps();
+	const { filter } = attributes;
+	const filterData = getFilterData(filter);
+	const filterLabel = filterData.label ?? filter;
 
 	const { hasResolved, records } = useEntityRecords(
 		'postType',
@@ -66,9 +71,13 @@ export default function Edit({ attributes, setAttributes }) {
 			/>
 			<Notice status="info" isDismissible={false}>
 				<p style={{ margin: '0' }}>
-					{__(
-						'Filters are not initialized in the admin area. Please check your frontend.',
-						'openagenda'
+					{sprintf(
+						/* translators: %s: Filter label. */
+						__(
+							'%s filter: Filters are not initialized in the admin area. Please check your frontend.',
+							'openagenda'
+						),
+						filterLabel
 					)}
 				</p>
 			</Notice>
