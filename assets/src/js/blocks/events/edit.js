@@ -1,11 +1,11 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import { Notice, Spinner } from '@wordpress/components';
 import { useEntityRecords } from '@wordpress/core-data';
+import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 import metadata from './block.json';
 import './editor.scss';
-import '/assets/js/main.js';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -17,18 +17,26 @@ import '/assets/js/main.js';
  */
 export default function Edit({ attributes }) {
     const blockProps = useBlockProps();
-    const { hasResolved, records } = useEntityRecords('postType', 'oa-calendar', { per_page: 1 });
+    let agendaPostId = useSelect((select) => {
+        const editor = select('core/editor');
+        return 'oa-calendar' === editor.getEditedPostAttribute('type')
+            ? editor.getEditedPostAttribute('id')
+            : 0;
+    }, []);
 
-    if (!hasResolved) {
-        return <Spinner />;
+    if (0 === agendaPostId) {
+        const { hasResolved, records } = useEntityRecords('postType', 'oa-calendar', { per_page: 1 });
+        if (!hasResolved) {
+            return <Spinner />;
+        }
+        agendaPostId = records[0]?.id || 0;
     }
 
-    const agenda = records[0] || null;
-    if (!agenda) {
+    if (0 === agendaPostId) {
         return (
             <div {...blockProps}>
                 <Notice status="warning" isDismissible={false}>
-                    <p>{__('No agenda could be found. Setup a new agenda to display a preview.', 'openagenda')}</p>
+                    <p>{__('No agenda could be found. Setup a new agenda to display a preview of your events list.', 'openagenda')}</p>
                 </Notice>
             </div>
         );
@@ -37,7 +45,7 @@ export default function Edit({ attributes }) {
     return (
         <ServerSideRender
             block={metadata.name}
-            attributes={attributes}
+            attributes={{ ...attributes, postId: agendaPostId }}
         />
     );
 }

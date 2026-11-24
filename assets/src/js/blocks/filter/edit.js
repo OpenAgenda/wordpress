@@ -1,7 +1,11 @@
+import { useBlockProps } from '@wordpress/block-editor';
+import { Notice, Spinner } from '@wordpress/components';
+import { useEntityRecords } from '@wordpress/core-data';
+import { useSelect } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 import metadata from './block.json';
 import FilterInspector from './inspector';
-
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -12,6 +16,33 @@ import FilterInspector from './inspector';
  * @return {import('@wordpress/element').WPElement} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
+    const blockProps = useBlockProps();
+
+    let agendaPostId = useSelect((select) => {
+        const editor = select('core/editor');
+        return 'oa-calendar' === editor.getEditedPostAttribute('type')
+            ? editor.getEditedPostAttribute('id')
+            : 0;
+    }, []);
+
+    if (0 === agendaPostId) {
+        const { hasResolved, records } = useEntityRecords('postType', 'oa-calendar', { per_page: 1 });
+        if (!hasResolved) {
+            return <Spinner />;
+        }
+        agendaPostId = records[0]?.id || 0;
+    }
+
+    if (0 === agendaPostId) {
+        return (
+            <div {...blockProps}>
+                <Notice status="warning" isDismissible={false}>
+                    <p>{__('No agenda could be found. Setup a new agenda to display a preview of the filter.', 'openagenda')}</p>
+                </Notice>
+            </div>
+        );
+    }
+
     return (
         <>
             <FilterInspector
@@ -20,7 +51,7 @@ export default function Edit({ attributes, setAttributes }) {
             />
             <ServerSideRender
                 block={metadata.name}
-                attributes={attributes}
+                attributes={{ ...attributes, postId: agendaPostId }}
             />
         </>
     );

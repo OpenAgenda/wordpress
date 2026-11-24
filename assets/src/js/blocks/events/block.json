@@ -10,7 +10,11 @@
     "supports": {
         "html": false
     },
-    "attributes": {},
+    "attributes": {
+        "postId": {
+            "type": "integer"
+        }
+    },
     "textdomain": "openagenda",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
