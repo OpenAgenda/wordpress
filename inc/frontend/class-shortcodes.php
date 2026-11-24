@@ -158,11 +158,12 @@ class Shortcodes implements Hookable {
 		$params = array( 'name' => 'activeFilters' );
 		$filter = sprintf( '<div class="oa-widget oa-active-filters-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );	
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
@@ -210,11 +211,12 @@ class Shortcodes implements Hookable {
 
 		$filter = sprintf( '<div role="status" class="oa-widget oa-events-total-widget" data-oa-widget="%s" data-oa-widget-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );	
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
@@ -289,11 +291,12 @@ class Shortcodes implements Hookable {
 			$filter = sprintf( '<div class="oa-widget oa-choice-widget" data-oa-filter="%s" data-oa-filter-params="%s">%s</div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ), $inner_html );
 		}
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );	
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
@@ -368,11 +371,12 @@ class Shortcodes implements Hookable {
 		$type_class = empty( $atts['type'] ) ? '' : sprintf( 'oa-calendar-widget-%s', sanitize_title( $atts['type'] ) );
 		$filter     = sprintf( '<div class="oa-widget oa-calendar-widget %s" data-oa-filter="%s" data-oa-filter-params="%s"></div>%s', esc_attr( $type_class ), esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ), $ranges_filter );
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );	
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
@@ -416,11 +420,12 @@ class Shortcodes implements Hookable {
 
 		$filter = sprintf( '<div class="oa-widget oa-ranges-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );	
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
@@ -478,11 +483,12 @@ class Shortcodes implements Hookable {
 			esc_attr( wp_json_encode( $params ) )
 		);
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		} else {
@@ -579,11 +585,12 @@ class Shortcodes implements Hookable {
 
 		$filter = sprintf( '<div class="oa-widget oa-relative-widget" data-oa-filter="%s" data-oa-filter-params="%s"></div>', esc_attr( $atts['id'] ), esc_attr( wp_json_encode( $params ) ) );
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );	
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
@@ -630,11 +637,12 @@ class Shortcodes implements Hookable {
 			esc_attr( wp_json_encode( $params ) )
 		);
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );	
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
@@ -689,11 +697,12 @@ class Shortcodes implements Hookable {
 			esc_attr( wp_json_encode( $params ) )
 		);
 
-		if ( $atts['dropdown'] ) {
+		$display_in_dropdown = ! in_array( $atts['dropdown'], array( 'false', '0', '', 'off', 0, false ), true );	
+		if ( $display_in_dropdown ) {
 			$filter = $this->wrap_in_dropdown( $filter, $atts );
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}
@@ -735,7 +744,7 @@ class Shortcodes implements Hookable {
 			$filter = '';
 		}
 
-		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 0, false ), true );
+		$display_on_single = ! in_array( $atts['display_on_single'], array( 'false', '0', '', 'off', 0, false ), true );
 		if ( $openagenda->is_single() && ! $display_on_single ) {
 			$filter = '';
 		}

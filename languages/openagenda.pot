@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-24T14:41:01+00:00\n"
+"POT-Creation-Date: 2026-11-24T15:08:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: openagenda\n"
@@ -368,7 +368,7 @@ msgid "Default map tiles attribution link"
 msgstr ""
 
 #: inc/admin/class-settings.php:321
-#: inc/frontend/class-shortcodes.php:449
+#: inc/frontend/class-shortcodes.php:454
 #: inc/functions/template-tags.php:793
 msgid "OpenStreetMap contributors"
 msgstr ""
@@ -400,7 +400,7 @@ msgid "Active filters"
 msgstr ""
 
 #: inc/class-main.php:237
-#: inc/frontend/class-shortcodes.php:243
+#: inc/frontend/class-shortcodes.php:245
 msgctxt "Filter name"
 msgid "Choice"
 msgstr ""
@@ -414,8 +414,8 @@ msgid "Choose a field to display"
 msgstr ""
 
 #: inc/class-main.php:247
-#: inc/frontend/class-shortcodes.php:275
-#: inc/frontend/class-shortcodes.php:285
+#: inc/frontend/class-shortcodes.php:277
+#: inc/frontend/class-shortcodes.php:287
 msgid "Favorites"
 msgstr ""
 
@@ -529,13 +529,13 @@ msgid "This month"
 msgstr ""
 
 #: inc/class-main.php:323
-#: inc/frontend/class-shortcodes.php:400
+#: inc/frontend/class-shortcodes.php:404
 msgctxt "Filter name"
 msgid "Defined Ranges"
 msgstr ""
 
 #: inc/class-main.php:343
-#: inc/frontend/class-shortcodes.php:453
+#: inc/frontend/class-shortcodes.php:458
 msgctxt "Filter name"
 msgid "Map"
 msgstr ""
@@ -553,13 +553,13 @@ msgid "Automatically update map on scroll ?"
 msgstr ""
 
 #: inc/class-main.php:362
-#: inc/frontend/class-shortcodes.php:569
+#: inc/frontend/class-shortcodes.php:575
 msgctxt "Filter name"
 msgid "Upcoming"
 msgstr ""
 
 #: inc/class-main.php:367
-#: inc/frontend/class-shortcodes.php:612
+#: inc/frontend/class-shortcodes.php:619
 msgctxt "Filter name"
 msgid "Search"
 msgstr ""
@@ -569,7 +569,7 @@ msgid "Placeholder:"
 msgstr ""
 
 #: inc/class-main.php:379
-#: inc/frontend/class-shortcodes.php:665
+#: inc/frontend/class-shortcodes.php:673
 msgctxt "Filter name"
 msgid "Sort"
 msgstr ""
@@ -597,7 +597,7 @@ msgid "Button label"
 msgstr ""
 
 #: inc/class-main.php:408
-#: inc/frontend/class-shortcodes.php:728
+#: inc/frontend/class-shortcodes.php:737
 msgid "Refresh events"
 msgstr ""
 
@@ -716,41 +716,41 @@ msgstr ""
 msgid "Please provide a valid calendar UID to display in the calendar settings."
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:190
+#: inc/frontend/class-shortcodes.php:191
 msgctxt "Filter name"
 msgid "Events total"
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:198
+#: inc/frontend/class-shortcodes.php:199
 msgctxt "Total filter message when no events found"
 msgid "No event found"
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:199
+#: inc/frontend/class-shortcodes.php:200
 msgctxt "Total filter message when 1 event found. Keep {total} placeholder."
 msgid "{total} event"
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:200
+#: inc/frontend/class-shortcodes.php:201
 msgctxt "Total filter message when multiple event found. Keep {total} placeholder."
 msgid "{total} events"
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:316
+#: inc/frontend/class-shortcodes.php:319
 msgctxt "Filter name"
 msgid "Keywords"
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:345
+#: inc/frontend/class-shortcodes.php:348
 msgctxt "Filter name"
 msgid "Date"
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:460
+#: inc/frontend/class-shortcodes.php:465
 msgid "Search while moving the map"
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:725
+#: inc/frontend/class-shortcodes.php:734
 msgctxt "Filter name"
 msgid "Submit"
 msgstr ""
