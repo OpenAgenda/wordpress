@@ -5,6 +5,7 @@ import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 import metadata from './block.json';
+import './editor.scss';
 import FilterInspector from './inspector';
 
 /**
@@ -37,7 +38,7 @@ export default function Edit({ attributes, setAttributes }) {
         return (
             <div {...blockProps}>
                 <Notice status="warning" isDismissible={false}>
-                    <p>{__('No agenda could be found. Setup a new agenda to display a preview of the filter.', 'openagenda')}</p>
+                    <p style={{ 'margin': '0' }}>{__('No agenda could be found. Setup a new agenda to display a preview of the filter.', 'openagenda')}</p>
                 </Notice>
             </div>
         );
@@ -49,6 +50,9 @@ export default function Edit({ attributes, setAttributes }) {
                 attributes={attributes}
                 setAttributes={setAttributes}
             />
+            <Notice status="info" isDismissible={false}>
+                <p style={{ 'margin': '0' }}>{__('Filters are not initialized in the admin area. Please check your frontend.', 'openagenda')}</p>
+            </Notice >
             <ServerSideRender
                 block={metadata.name}
                 attributes={{ ...attributes, postId: agendaPostId }}

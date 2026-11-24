@@ -17,6 +17,7 @@ import './editor.scss';
  */
 export default function Edit({ attributes }) {
     const blockProps = useBlockProps();
+
     let agendaPostId = useSelect((select) => {
         const editor = select('core/editor');
         return 'oa-calendar' === editor.getEditedPostAttribute('type')
@@ -36,7 +37,7 @@ export default function Edit({ attributes }) {
         return (
             <div {...blockProps}>
                 <Notice status="warning" isDismissible={false}>
-                    <p>{__('No agenda could be found. Setup a new agenda to display a preview of your events list.', 'openagenda')}</p>
+                    <p style={{ 'margin': '0' }}>{__('No agenda could be found. Setup a new agenda to display a preview of your events list.', 'openagenda')}</p>
                 </Notice>
             </div>
         );

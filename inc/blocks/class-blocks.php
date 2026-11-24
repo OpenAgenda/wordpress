@@ -82,47 +82,6 @@ class Blocks implements Hookable {
 	}
 
 	/**
-	 * Renders the Events block with the OpenAgenda shortcode.
-	 *
-	 * @param array<string,mixed> $attributes  Array of block attributes.
-	 * @param string              $content     Inner block content.
-	 * @param \WP_Block|null      $block       Block instance.
-	 * @return string Block markup.
-	 */
-	public function render_events_block( $attributes = array(), $content = '', $block = null ) {
-		global $openagenda;
-
-		$is_editor_preview = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
-
-		if ( $is_editor_preview ) {
-			$post_id = ! empty( $attributes['postId'] ) ? absint( $attributes['postId'] ) : 0;
-			$this->init_editor_agenda( $post_id );
-			$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'single-oa-calendar' ) );
-			if ( ! class_exists( '\WP_HTML_Tag_Processor' ) ) {
-				// Older WordPress versions lack the HTML tag processor.
-				$wrapper_attributes = sprintf( '%s inert', $wrapper_attributes );
-			}
-			$html = sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
-			if ( class_exists( '\WP_HTML_Tag_Processor' ) ) {
-				$processor = new \WP_HTML_Tag_Processor( $html );
-				while ( $processor->next_tag( array( 'tag_name' => 'A' ) ) ) {
-					$processor->remove_attribute( 'href' );
-					$processor->remove_attribute( 'target' );
-					$processor->remove_attribute( 'tabindex' );
-					$processor->set_attribute( 'aria-disabled', 'true' );
-				}
-				$html = $processor->get_updated_html();
-			}
-			wp_reset_postdata();
-			return apply_filters( 'openagenda_render_events_block', $html, $attributes, $content, $block );
-		}
-
-		$wrapper_attributes = get_block_wrapper_attributes();
-		$html               = sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
-		return apply_filters( 'openagenda_render_events_block', $html, $attributes, $content, $block );
-	}
-
-	/**
 	 * Initializes the agenda globals for a calendar post or editor preview.
 	 *
 	 * @param int $post_id Optional calendar post ID.
@@ -202,6 +161,47 @@ class Blocks implements Hookable {
 	}
 
 	/**
+	 * Renders the Events block with the OpenAgenda shortcode.
+	 *
+	 * @param array<string,mixed> $attributes  Array of block attributes.
+	 * @param string              $content     Inner block content.
+	 * @param \WP_Block|null      $block       Block instance.
+	 * @return string Block markup.
+	 */
+	public function render_events_block( $attributes = array(), $content = '', $block = null ) {
+		global $openagenda;
+
+		$is_editor_preview = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
+
+		if ( $is_editor_preview ) {
+			$post_id = ! empty( $attributes['postId'] ) ? absint( $attributes['postId'] ) : 0;
+			$this->init_editor_agenda( $post_id );
+			$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'single-oa-calendar' ) );
+			if ( ! class_exists( '\WP_HTML_Tag_Processor' ) ) {
+				// Older WordPress versions lack the HTML tag processor.
+				$wrapper_attributes = sprintf( '%s inert', $wrapper_attributes );
+			}
+			$html = sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
+			if ( class_exists( '\WP_HTML_Tag_Processor' ) ) {
+				$processor = new \WP_HTML_Tag_Processor( $html );
+				while ( $processor->next_tag( array( 'tag_name' => 'A' ) ) ) {
+					$processor->remove_attribute( 'href' );
+					$processor->remove_attribute( 'target' );
+					$processor->remove_attribute( 'tabindex' );
+					$processor->set_attribute( 'aria-disabled', 'true' );
+				}
+				$html = $processor->get_updated_html();
+			}
+			wp_reset_postdata();
+			return apply_filters( 'openagenda_render_events_block', $html, $attributes, $content, $block );
+		}
+
+		$wrapper_attributes = get_block_wrapper_attributes();
+		$html               = sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( '[openagenda]' ) );
+		return apply_filters( 'openagenda_render_events_block', $html, $attributes, $content, $block );
+	}
+
+	/**
 	 * Renders the Filter block with its corresponding shortcode.
 	 *
 	 * @param array<string, mixed> $attributes Block attributes.
@@ -220,8 +220,9 @@ class Blocks implements Hookable {
 		$is_editor_preview  = wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
 		$settings           = ! empty( $attributes['filterSettings'] ) && is_array( $attributes['filterSettings'] ) ? $attributes['filterSettings'] : array();
 		$atts               = \openagenda_get_shortcode_attributes( $settings );
+		$content            = do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ), true );
 		$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => sprintf( 'wp-block-openagenda-filter-%s', sanitize_title( $attributes['filter'] ) ) ) );
-		$html               = sprintf( '<div %s>%s</div>', $wrapper_attributes, do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ), true ) );
+		$html               = sprintf( '<div %s>%s</div>', $wrapper_attributes, $content );
 		return apply_filters( 'openagenda_render_filter_block', $html, $attributes, $content, $block );
 	}
 }
