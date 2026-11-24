@@ -19,7 +19,7 @@ import FilterInspector from './inspector';
  *
  * @return {import('@wordpress/element').WPElement} Element to render.
  */
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps();
 
 	const { hasResolved, records } = useEntityRecords(
@@ -28,30 +28,30 @@ export default function Edit( { attributes, setAttributes } ) {
 		{ per_page: 1 }
 	);
 
-	let agendaPostId = useSelect( ( select ) => {
-		const editor = select( 'core/editor' );
-		return 'oa-calendar' === editor.getEditedPostAttribute( 'type' )
-			? editor.getEditedPostAttribute( 'id' )
+	let agendaPostId = useSelect((select) => {
+		const editor = select('core/editor');
+		return 'oa-calendar' === editor.getEditedPostAttribute('type')
+			? editor.getEditedPostAttribute('id')
 			: 0;
-	}, [] );
+	}, []);
 
-	if ( ! hasResolved ) {
+	if (!hasResolved) {
 		return <Spinner />;
 	}
 
-	if ( 0 === agendaPostId ) {
-		agendaPostId = records.length > 0 ? records[ 0 ]?.id : 0;
+	if (0 === agendaPostId) {
+		agendaPostId = records.length > 0 ? records[0]?.id : 0;
 	}
 
-	if ( 0 === agendaPostId ) {
+	if (0 === agendaPostId) {
 		return (
-			<div { ...blockProps }>
-				<Notice status="warning" isDismissible={ false }>
-					<p style={ { margin: '0' } }>
-						{ __(
+			<div {...blockProps}>
+				<Notice status="warning" isDismissible={false}>
+					<p style={{ margin: '0' }}>
+						{__(
 							'No agenda could be found. Setup a new agenda to display a preview of the filter.',
 							'openagenda'
-						) }
+						)}
 					</p>
 				</Notice>
 			</div>
@@ -59,23 +59,23 @@ export default function Edit( { attributes, setAttributes } ) {
 	}
 
 	return (
-		<>
+		<div {...blockProps}>
 			<FilterInspector
-				attributes={ attributes }
-				setAttributes={ setAttributes }
+				attributes={attributes}
+				setAttributes={setAttributes}
 			/>
-			<Notice status="info" isDismissible={ false }>
-				<p style={ { margin: '0' } }>
-					{ __(
+			<Notice status="info" isDismissible={false}>
+				<p style={{ margin: '0' }}>
+					{__(
 						'Filters are not initialized in the admin area. Please check your frontend.',
 						'openagenda'
-					) }
+					)}
 				</p>
 			</Notice>
 			<ServerSideRender
-				block={ metadata.name }
-				attributes={ { ...attributes, postId: agendaPostId } }
+				block={metadata.name}
+				attributes={{ ...attributes, postId: agendaPostId }}
 			/>
-		</>
+		</div>
 	);
 }
