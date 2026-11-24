@@ -16,7 +16,7 @@ import Edit from './edit.js';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType(metadata.name, {
+registerBlockType( metadata.name, {
 	edit: Edit,
 	save: () => null,
-});
+} );
