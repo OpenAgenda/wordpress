@@ -88,19 +88,21 @@ The UID of the calendar you wish to display can be found directly on your calend
 
 Once you have it displayed, scroll down a little, and you will find your UID just under the last widget, in the sidebar on the right.
 
-## Filter widget and shortcodes
+## Filter blocks, widgets and shortcodes
 
-To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additional settings in the widgets admin.
+To allow users to easily find relevant events, the plugin also provides convenient filters. Filters can be inserted into a page with the Filter blocks, with widgets or with shortcodes.
+
+Place the filter block or relevant widget in your sidebar or other widgetized area, and tweak filter settings in the block inspector or widgets admin.
 
 ![You can use convenient filter widgets to add filtering functionnality to your calendars.](assets/screenshots/screenshot-5.png)
 
-To integrate filters directly in your content instead of widget areas, the plugin also provide shortcodes.
+To integrate filters directly in your content instead of widget areas, you can use the Filter blocks or shortcodes.
 
-Every shortcode listed here (except for `[openagenda]`) corresponds to a filter option in the widget.
+Every shortcode listed here (except for `[openagenda]`) corresponds to a filter option in the widget, or to a Filter block variation.
 
-Additionaly, shortcodes and widget filters have the same parameters, and every shortcode attribute corresponds to a widget filter setting.
+Additionaly, blocks, shortcodes and widget filters have the same parameters, and every shortcode attribute corresponds to a widget or block setting.
 
-Every shortcode and widget can be displayed in a dropdown wrapper. All widgets have a *Display filter as a dropdown ?* checkbox, and all shortcodes have the corresponding `dropdown` parameter, which you can set to `true` to display the filter in a dropdown.
+Every filter can be displayed in a dropdown wrapper. All blocks, widgets have a *Display filter as a dropdown ?* checkbox, and all shortcodes have the corresponding `dropdown` parameter, which you can set to `true` to display the filter in a dropdown.
 
 **`[openagenda]`**
 

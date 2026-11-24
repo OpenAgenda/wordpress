@@ -2,7 +2,7 @@
 Contributors: openagenda, vincentdubroeucq
 Tags: openagenda, agenda, calendar, event, events
 Requires at least: 5.0
-Tested up to: 7.1.3
+Tested up to: 7.1.5
 Stable tag: 3.1.0
 Requires PHP: 7.4.1
 License: GPLv2 or later
@@ -74,20 +74,21 @@ If you add Openagenda Filter widgets via the customizer, **the preview will not 
 
 Simply publish your settings and refresh the page, or open your agenda page in another tab. Your filter should work just fine. 
 
-## Filter widget and shortcodes
+## Filter blocks, widgets and shortcodes
 
-To allow users to easily find relevant events, the plugin also provides a convenient filter widget. Place the widget in your sidebar or other widgetized area, pick a filter and tweak any additional settings in the widgets admin.
+To allow users to easily find relevant events, the plugin also provides convenient filters. Filters can be inserted into a page with the Filter blocks, with widgets or with shortcodes.
+
+Place the filter block or relevant widget in your sidebar or other widgetized area, and tweak filter settings in the block inspector or widgets admin.
 
 ![You can use convenient filter widgets to add filtering functionnality to your calendars.](assets/screenshots/screenshot-5.png)
 
-To integrate filters directly in your content instead of widget areas, the plugin also provide shortcodes.
+To integrate filters directly in your content instead of widget areas, you can use the Filter blocks or shortcodes.
 
-Every shortcode listed here (except for `[openagenda]`) corresponds to a filter option in the widget.
+Every shortcode listed here (except for `[openagenda]`) corresponds to a filter option in the widget, or to a Filter block variation.
 
-Additionaly, shortcodes and widget filters have the same parameters, and every shortcode attribute corresponds to a widget filter setting.
+Additionaly, blocks, shortcodes and widget filters have the same parameters, and every shortcode attribute corresponds to a widget or block setting.
 
-Every shortcode and widget can be displayed in a dropdown wrapper. All widgets have a *Display filter as a dropdown ?* checkbox, and all shortcodes have the corresponding `dropdown` parameter, which you can set to `true` to display the filter in a dropdown.
-
+Every filter can be displayed in a dropdown wrapper. All blocks, widgets have a *Display filter as a dropdown ?* checkbox, and all shortcodes have the corresponding `dropdown` parameter, which you can set to `true` to display the filter in a dropdown.
 **`[openagenda]`**
 
 Displays the calendar. You do not need to use this shortcode explicitely, as it is automatically injected in the content of your "calendars" posts.
@@ -235,6 +236,17 @@ You can find more thorough documentation on [https://developers.openagenda.com/e
 7. Enjoy !
 
 == Upgrade Notice ==
+
+= 3.1.0 =
+This version contains new blocks for building your agenda template with the site editor. Please note that filter blocks are not initialized in the site editor, and won't display properly. They only work on the front end.
+ 
+* Improvement : Added Events block and Filter block
+* Improvement : Updated React Filters JS
+* Improvement : Added a setting to allow to submit filters manually.
+* Improvement : Added sort filter and manual submit button widget.
+* Improvement : Added support for manual search submit for Search filter.
+* Fix : Fixed openagenda_get_locale() triggering fatal errors on non-agenda pages
+* Fix : Fixed load more triggering indefinitely when at the end of event list.
 
 = 3.0.0 =
 This version contains new updated templates. If you experience issues on the front end, check the _Use legacy templates_ checkbox in the settings page.
