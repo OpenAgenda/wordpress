@@ -3,10 +3,10 @@
   "apiVersion": 3,
   "name": "openagenda/events",
   "version": "1.0.0",
-  "title": "Openagenda Events",
+  "title": "Openagenda Event List",
   "category": "openagenda",
-  "icon": "web",
   "description": "Display event list.",
+  "icon": "location-alt",
   "supports": {
     "html": false
   },

@@ -6,6 +6,7 @@
   "title": "Openagenda Event List",
   "category": "openagenda",
   "description": "Display event list.",
+  "icon": "location-alt",
   "supports": {
     "html": false
   },
