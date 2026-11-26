@@ -86,13 +86,18 @@ class OpenagendaWidgetsTest extends WP_UnitTestCase {
 	/**
 	 * Preview widget settings are sanitized and displayed in its form.
 	 *
-	 * @dataProvider preview_widget_settings_data_provider
+	 * @dataProvider preview_widgets_settings_data_provider
 	 *
 	 * @param array<string, mixed> $new_instance New widget settings.
 	 * @param array<string, mixed> $expected     Expected saved settings.
 	 */
 	public function test_preview_widget_updates_and_displays_settings( $new_instance, $expected ) {
-		$widget   = new \OpenAgenda\Preview_Widget();
+		$main             = new \OpenAgenda\Main();
+		$widgets_settings = $main->get_widgets_settings();
+		$this->assertSame( 'openagenda_preview', array_key_first( $widgets_settings ) );
+		$blocks = new \OpenAgenda\Blocks( array( $main, 'get_widgets_settings' ) );
+		$this->assertSame( $widgets_settings['openagenda_preview']['settings'], $blocks->get_preview_settings() );
+		$widget   = new \OpenAgenda\Preview_Widget( array( 'additional_settings' => $widgets_settings['openagenda_preview']['settings'] ) );
 		$instance = $widget->update( $new_instance, array() );
 
 		$this->assertSame( $expected, $instance );
@@ -252,7 +257,7 @@ class OpenagendaWidgetsTest extends WP_UnitTestCase {
 	/**
 	 * Filter widget settings are sanitized and displayed in its form.
 	 *
-	 * @dataProvider filter_widget_settings_data_provider
+	 * @dataProvider filter_widgets_settings_data_provider
 	 *
 	 * @param array<string, array<string, mixed>> $available_filters Available filter definitions.
 	 * @param array<string, mixed>                $new_instance      New widget settings.
@@ -323,7 +328,7 @@ class OpenagendaWidgetsTest extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array<int, mixed>>
 	 */
-	public static function preview_widget_settings_data_provider() {
+	public static function preview_widgets_settings_data_provider() {
 		return array(
 			'list defaults' => array(
 				array(
@@ -416,7 +421,7 @@ class OpenagendaWidgetsTest extends WP_UnitTestCase {
 	 *
 	 * @return array<string, array<int, mixed>>
 	 */
-	public static function filter_widget_settings_data_provider() {
+	public static function filter_widgets_settings_data_provider() {
 		$search_filter = array(
 			'openagenda_filter_search' => array(
 				'label'     => 'Search',

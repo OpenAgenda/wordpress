@@ -17,19 +17,29 @@ namespace OpenAgenda;
  */
 class Blocks implements Hookable {
 	/**
-	 * Available filters and their settings.
+	 * Blocks settings callback.
 	 *
 	 * @var \Closure(): array<string, array<string, mixed>>
 	 */
-	private $get_available_filters;
+	private $get_blocks_settings;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param array{0: Main, 1: 'get_available_filters'} $get_available_filters Callback returning available filters and their settings.
+	 * @param array{0: Main, 1: 'get_widgets_settings'} $get_blocks_settings Callback returning widget settings.
 	 */
-	public function __construct( array $get_available_filters ) {
-		$this->get_available_filters = \Closure::fromCallable( $get_available_filters );
+	public function __construct( array $get_blocks_settings ) {
+		$this->get_blocks_settings = \Closure::fromCallable( $get_blocks_settings );
+	}
+
+	/**
+	 * Returns preview widget settings.
+	 *
+	 * @return array<string, array<string, mixed>>
+	 */
+	public function get_preview_settings() {
+		$settings = ( $this->get_blocks_settings )();
+		return ! empty( $settings['openagenda_preview']['settings'] ) ? $settings['openagenda_preview']['settings'] : array();
 	}
 
 	/**
@@ -78,7 +88,9 @@ class Blocks implements Hookable {
 				'render_callback' => array( $this, 'render_filter_block' ),
 			)
 		);
-		wp_localize_script( 'openagenda-filter-editor-script', 'openagendaFilters', ( $this->get_available_filters )() );
+		$settings = ( $this->get_blocks_settings )();
+		unset( $settings['openagenda_preview'] );
+		wp_localize_script( 'openagenda-filter-editor-script', 'openagendaFilters', $settings );
 	}
 
 	/**

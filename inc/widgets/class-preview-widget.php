@@ -19,64 +19,6 @@ class Preview_Widget extends OpenAgenda_Widget {
 	 * @param  array<string, mixed> $args Additional arguments.
 	 */
 	public function __construct( $args = array() ) {
-		$args['additional_settings'] = array(
-			'size'    => array(
-				'name'    => 'size',
-				'type'    => 'number',
-				'label'   => __( 'Number of events to display&nbsp;:', 'openagenda' ),
-				'class'   => 'widefat',
-				'default' => 3,
-			),
-			'view'    => array(
-				'name'    => 'view',
-				'type'    => 'radio',
-				'label'   => __( 'Display setting', 'openagenda' ),
-				'default' => 'list',
-				'class'   => 'widefat',
-				'options' => array(
-					'list' => array(
-						'label' => __( 'Display as list', 'openagenda' ),
-						'value' => 'list',
-					),
-					'grid' => array(
-						'label' => __( 'Display as grid', 'openagenda' ),
-						'value' => 'grid',
-					),
-				),
-			),
-			'sort'    => array(
-				'name'    => 'sort',
-				'type'    => 'select',
-				'label'   => __( 'Default event sort', 'openagenda' ),
-				'default' => 'lastTimingWithFeatured.asc',
-				'class'   => 'widefat',
-				'options' => array(
-					'lastTimingWithFeatured.asc' => __( 'Featured first, followed by ascending last occurrence (default)', 'openagenda' ),
-					'timingsWithFeatured.asc'    => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
-					'lastTiming.asc'             => __( 'Ascending last occurrence', 'openagenda' ),
-					'timings.asc'                => __( 'Ascending upcoming occurrence', 'openagenda' ),
-					'updatedAt.desc'             => __( 'Descending update date', 'openagenda' ),
-					'updatedAt.asc'              => __( 'Ascending update date', 'openagenda' ),
-				),
-			),
-			'filters' => array(
-				'name'        => 'filters',
-				'type'        => 'text',
-				'label'       => __( 'Default filters (advanced)', 'openagenda' ),
-				'class'       => 'widefat',
-				'placeholder' => '?relative[]=upcoming',
-				'default'     => '',
-				'description' => __( 'Use a query string representing a filtered query. Only events corresponding to these filters will be displayed.', 'openagenda' ),
-			),
-			'links'   => array(
-				'name'        => 'links',
-				'type'        => 'checkbox',
-				'label'       => __( 'Use external links', 'openagenda' ),
-				'class'       => 'widefat',
-				'default'     => false,
-				'description' => __( 'Check to make event permalinks point to event pages on https://openagenda.com instead of local pages.', 'openagenda' ),
-			),
-		);
 		parent::__construct(
 			'openagenda-preview-widget',
 			__( 'OpenAgenda Preview', 'openagenda' ),

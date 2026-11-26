@@ -24,11 +24,11 @@ class Main {
 	private $dependencies = array();
 
 	/**
-	 * Array of available filters
+	 * Widgets settings.
 	 *
-	 * @var  array<string, array<string, mixed>> $available_filters
+	 * @var array<string, array<string, mixed>>
 	 */
-	private $available_filters = array();
+	private $widgets_settings = array();
 
 	/**
 	 * Loads required files.
@@ -66,7 +66,7 @@ class Main {
 		$this->dependencies['content-manager'] = new Content_Manager();
 		$this->dependencies['customizer']      = new Customizer_Settings();
 		$this->dependencies['shortcodes']      = new Shortcodes();
-		$this->dependencies['blocks']          = new Blocks( array( $this, 'get_available_filters' ) );
+		$this->dependencies['blocks']          = new Blocks( array( $this, 'get_widgets_settings' ) );
 
 		if ( is_admin() ) {
 			// Only needed in the admin.
@@ -125,9 +125,16 @@ class Main {
 		require_once OPENAGENDA_PATH . 'inc/widgets/class-openagenda-widget.php';
 		require_once OPENAGENDA_PATH . 'inc/widgets/class-filter-widget.php';
 		require_once OPENAGENDA_PATH . 'inc/widgets/class-preview-widget.php';
-		$args           = array( 'available_filters' => $this->get_available_filters() );
-		$filter_widget  = new Filter_Widget( $args );
-		$preview_widget = new Preview_Widget( $args );
+		$widgets_settings = $this->get_widgets_settings();
+		$filter_settings  = $widgets_settings;
+		unset( $filter_settings['openagenda_preview'] );
+
+		$filter_widget  = new Filter_Widget( array( 'available_filters' => $filter_settings ) );
+		$preview_widget = new Preview_Widget(
+			array(
+				'additional_settings' => ! empty( $widgets_settings['openagenda_preview']['settings'] ) ? $widgets_settings['openagenda_preview']['settings'] : array(),
+			)
+		);
 		register_widget( $filter_widget );
 		register_widget( $preview_widget );
 	}
@@ -218,16 +225,76 @@ class Main {
 
 
 	/**
-	 * Returns array of available filters
+	 * Returns widgets settings.
 	 *
 	 * @return array<string, array<string, mixed>>
 	 */
-	public function get_available_filters() {
-		if ( empty( $this->available_filters ) ) {
+	public function get_widgets_settings() {
+		if ( empty( $this->widgets_settings ) ) {
 			$settings      = get_option( 'openagenda_integrations_settings' );
 			$default_tiles = ! empty( $settings['openagenda_map_tiles_link'] ) ? $settings['openagenda_map_tiles_link'] : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-			$this->available_filters = array(
+			$this->widgets_settings = array(
+				'openagenda_preview'         => array(
+					'settings' => array(
+						'size'    => array(
+							'name'    => 'size',
+							'type'    => 'number',
+							'label'   => __( 'Number of events to display&nbsp;:', 'openagenda' ),
+							'class'   => 'widefat',
+							'default' => 3,
+						),
+						'view'    => array(
+							'name'    => 'view',
+							'type'    => 'radio',
+							'label'   => __( 'Display setting', 'openagenda' ),
+							'default' => 'list',
+							'class'   => 'widefat',
+							'options' => array(
+								'list' => array(
+									'label' => __( 'Display as list', 'openagenda' ),
+									'value' => 'list',
+								),
+								'grid' => array(
+									'label' => __( 'Display as grid', 'openagenda' ),
+									'value' => 'grid',
+								),
+							),
+						),
+						'sort'    => array(
+							'name'    => 'sort',
+							'type'    => 'select',
+							'label'   => __( 'Default event sort', 'openagenda' ),
+							'default' => 'lastTimingWithFeatured.asc',
+							'class'   => 'widefat',
+							'options' => array(
+								'lastTimingWithFeatured.asc' => __( 'Featured first, followed by ascending last occurrence (default)', 'openagenda' ),
+								'timingsWithFeatured.asc' => __( 'Featured first, followed by ascending upcoming occurrence', 'openagenda' ),
+								'lastTiming.asc'          => __( 'Ascending last occurrence', 'openagenda' ),
+								'timings.asc'             => __( 'Ascending upcoming occurrence', 'openagenda' ),
+								'updatedAt.desc'          => __( 'Descending update date', 'openagenda' ),
+								'updatedAt.asc'           => __( 'Ascending update date', 'openagenda' ),
+							),
+						),
+						'filters' => array(
+							'name'        => 'filters',
+							'type'        => 'text',
+							'label'       => __( 'Default filters (advanced)', 'openagenda' ),
+							'class'       => 'widefat',
+							'placeholder' => '?relative[]=upcoming',
+							'default'     => '',
+							'description' => __( 'Use a query string representing a filtered query. Only events corresponding to these filters will be displayed.', 'openagenda' ),
+						),
+						'links'   => array(
+							'name'        => 'links',
+							'type'        => 'checkbox',
+							'label'       => __( 'Use external links', 'openagenda' ),
+							'class'       => 'widefat',
+							'default'     => false,
+							'description' => __( 'Check to make event permalinks point to event pages on https://openagenda.com instead of local pages.', 'openagenda' ),
+						),
+					),
+				),
 				'openagenda_filter_active'   => array(
 					'label'     => _x( 'Active filters', 'Filter name', 'openagenda' ),
 					'shortcode' => 'openagenda_filter_active',
@@ -411,7 +478,8 @@ class Main {
 				),
 			);
 		}
-		return apply_filters( 'openagenda_available_filters', $this->available_filters );
+		$this->widgets_settings = apply_filters( 'openagenda_available_filters', $this->widgets_settings );
+		return apply_filters( 'openagenda_widgets_settings', $this->widgets_settings );
 	}
 
 
