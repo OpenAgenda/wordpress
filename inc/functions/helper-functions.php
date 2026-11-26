@@ -59,8 +59,9 @@ function openagenda_use_legacy_templates() {
  * @return  bool  $include_styles  Option value.
  */
 function openagenda_should_enqueue_styles() {
-	$settings = get_option( 'openagenda_general_settings' );
-	return ! empty( $settings ) && (bool) $settings['openagenda_include_styles'];
+	$settings       = get_option( 'openagenda_general_settings' );
+	$include_styles = isset( $settings['openagenda_include_styles'] ) ? (bool) $settings['openagenda_include_styles'] : false;
+	return ! empty( $settings ) && $include_styles;
 }
 
 
