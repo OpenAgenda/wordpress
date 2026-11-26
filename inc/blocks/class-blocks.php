@@ -303,6 +303,7 @@ class Blocks implements Hookable {
 
 		$is_editor_preview  = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
 		$settings           = ! empty( $attributes['settings'] ) && is_array( $attributes['settings'] ) ? $attributes['settings'] : array();
+		$settings['links']  = ! empty( $settings['links'] ) ? 'oa' : '';
 		$atts               = \openagenda_get_shortcode_attributes( $settings );
 		$content            = do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ), true );
 		$wrapper_attributes = get_block_wrapper_attributes();
