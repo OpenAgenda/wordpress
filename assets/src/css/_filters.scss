@@ -372,15 +372,15 @@
 			margin: 0;
 		}
 
-		.oa-choice-option-label {
-			display: flex;
-			align-items: center;
-			gap: var(--oa-spacing-2);
-		}
-
 		.oa-filter-total {
 			font-size: smaller;
 		}
+	}
+
+	.oa-choice-option-label {
+		display: flex;
+		align-items: center;
+		gap: var(--oa-spacing-2);
 	}
 
 
