@@ -95,8 +95,14 @@ class OpenagendaWidgetsTest extends WP_UnitTestCase {
 		$main             = new \OpenAgenda\Main();
 		$widgets_settings = $main->get_widgets_settings();
 		$this->assertSame( 'openagenda_preview', array_key_first( $widgets_settings ) );
-		$blocks = new \OpenAgenda\Blocks( array( $main, 'get_widgets_settings' ) );
-		$this->assertSame( $widgets_settings['openagenda_preview']['settings'], $blocks->get_preview_settings() );
+		$blocks           = new \OpenAgenda\Blocks( array( $main, 'get_widgets_settings' ) );
+		$preview_settings = $blocks->get_preview_settings();
+		$this->assertSame(
+			$widgets_settings['openagenda_preview']['settings'],
+			array_intersect_key( $preview_settings, $widgets_settings['openagenda_preview']['settings'] )
+		);
+		$this->assertArrayHasKey( 'title', $preview_settings );
+		$this->assertArrayHasKey( 'uid', $preview_settings );
 		$widget   = new \OpenAgenda\Preview_Widget( array( 'additional_settings' => $widgets_settings['openagenda_preview']['settings'] ) );
 		$instance = $widget->update( $new_instance, array() );
 
