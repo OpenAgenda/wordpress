@@ -550,6 +550,11 @@ class Shortcodes implements Hookable {
 		include openagenda_get_template( 'preview-loop' );
 		$filter = ob_get_clean();
 
+		if ( openagenda_should_enqueue_styles() ) {
+			$stylesheet = openagenda_use_legacy_templates() ? 'openagenda-legacy' : 'openagenda-main';
+			wp_enqueue_style( $stylesheet );
+		}
+
 		openagenda_reset();
 		return apply_filters( 'openagenda_filter_preview', $filter, $atts );
 	}

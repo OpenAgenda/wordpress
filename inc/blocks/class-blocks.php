@@ -301,10 +301,10 @@ class Blocks implements Hookable {
 			return '';
 		}
 
-		$is_editor_preview = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
-		$settings = ! empty( $attributes['settings'] ) && is_array( $attributes['settings'] ) ? $attributes['settings'] : array();
-		$atts     = \openagenda_get_shortcode_attributes( $settings );
-		$content  = do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ), true );
+		$is_editor_preview  = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
+		$settings           = ! empty( $attributes['settings'] ) && is_array( $attributes['settings'] ) ? $attributes['settings'] : array();
+		$atts               = \openagenda_get_shortcode_attributes( $settings );
+		$content            = do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ), true );
 		$wrapper_attributes = get_block_wrapper_attributes();
 		if ( $is_editor_preview && ! class_exists( '\WP_HTML_Tag_Processor' ) ) {
 			$wrapper_attributes = sprintf( '%s inert', $wrapper_attributes );

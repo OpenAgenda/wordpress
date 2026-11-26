@@ -179,12 +179,11 @@ class Main {
 		// Timings calendar JS.
 		wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings.js', array(), OPENAGENDA_VERSION, true );
 
-		if ( openagenda_should_enqueue_styles() ) {
-			$stylesheet = openagenda_use_legacy_templates() ? 'openagenda-legacy' : 'openagenda-main';
-			wp_enqueue_style( $stylesheet );
-		}
-
 		if ( is_singular( 'oa-calendar' ) ) {
+			if ( openagenda_should_enqueue_styles() ) {
+				$stylesheet = openagenda_use_legacy_templates() ? 'openagenda-legacy' : 'openagenda-main';
+				wp_enqueue_style( $stylesheet );
+			}
 			wp_enqueue_script( 'openagenda-main' );
 			wp_enqueue_script( 'openagenda-filters' );
 			$settings        = get_option( 'openagenda_general_settings' );
