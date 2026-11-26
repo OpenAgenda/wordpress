@@ -58,7 +58,7 @@ function openagenda_get_field( $field, $uid = '' ) {
 	if ( ! $event ) {
 		return false;
 	}
-	if ( '' === $uid ) {
+	if ( empty( $uid ) ) {
 		$uid = $event['uid'];
 	}
 
