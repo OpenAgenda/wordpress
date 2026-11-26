@@ -38,4 +38,8 @@ As a general rule, all assets files registered with a fixed arbitrary version nu
 - Use arrow functions and `const` variable declaration.
 - When checking builds, use build scripts from the `package.json` file instead of direct calls to node_modules
 
-## Build processes
+## When writing PHP tests
+
+* Setup a dummy agenda in the `setUp()` method. Create corresponding `tearDown()` method.
+* Write tests for non-trivial methods only.
+* Use dataProviders to test against multiple cases.
