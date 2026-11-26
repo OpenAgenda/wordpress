@@ -51,6 +51,10 @@ export default function Edit({ attributes, setAttributes }) {
 	if (0 === agendaPostId) {
 		return (
 			<div {...blockProps}>
+				<FilterInspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
 				<Notice status="warning" isDismissible={false}>
 					<p style={{ margin: '0' }}>
 						{__(

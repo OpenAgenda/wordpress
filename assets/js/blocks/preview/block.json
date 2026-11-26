@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "openagenda/preview",
+  "version": "1.0.0",
+  "title": "Openagenda Preview",
+  "category": "openagenda",
+  "icon": "location-alt",
+  "description": "Display a preview of an agenda.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "settings": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "textdomain": "openagenda",
+  "editorScript": "file:./index.js"
+}
