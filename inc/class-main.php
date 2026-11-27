@@ -362,7 +362,7 @@ class Main {
 						'type'           => array(
 							'name'    => 'type',
 							'label'   => __( 'Type of filter', 'openagenda' ),
-							'default' => 'dateRange',
+							'default' => 'simpleDateRange',
 							'type'    => 'select',
 							'options' => array(
 								'dateRange'       => __( 'Calendar picker', 'openagenda' ),
