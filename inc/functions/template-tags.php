@@ -495,11 +495,10 @@ function openagenda_get_event_image( $size = '', $uid = '' ) {
 		$width  = ! empty( $dimensions['width'] ) ? sprintf( 'width="%s"', esc_attr( $dimensions['width'] ) ) : '';
 		$height = ! empty( $dimensions['height'] ) ? sprintf( 'height="%s"', esc_attr( $dimensions['height'] ) ) : '';
 		$html   = sprintf(
-			'<img src="%s" %s %s alt="%s" loading="lazy" />',
+			'<img src="%s" %s %s alt="" loading="lazy" />',
 			esc_url( $image_url ),
 			$width,
 			$height,
-			esc_attr( openagenda_get_field( 'title', $uid ) )
 		);
 	}
 
