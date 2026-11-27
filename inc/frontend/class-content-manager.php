@@ -94,7 +94,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function get_post_metas() {
 		$post_metas = array(
-			'oa-calendar' => array(
+			OPENAGENDA_POST_TYPE_SLUG => array(
 				'oa-calendar-uid'                     => array(
 					'type'         => 'string',
 					'single'       => true,
@@ -168,7 +168,7 @@ class Content_Manager implements Hookable {
 			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
 
 			$this->post_types = array(
-				'oa-calendar' => array(
+				OPENAGENDA_POST_TYPE_SLUG => array(
 					'labels'        => array(
 						'name'                  => _x( 'Agendas', 'Post type general name', 'openagenda' ),
 						'singular_name'         => _x( 'Agenda', 'Post type singular name', 'openagenda' ),
@@ -225,8 +225,8 @@ class Content_Manager implements Hookable {
 		if ( ! empty( get_option( 'permalink_structure' ) ) ) {
 			$rewrite_settings = get_option( 'openagenda_permalinks_settings' );
 			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
-			add_rewrite_rule( "{$rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?oa-calendar=$matches[1]&oa-page=$matches[2]', 'top' );
-			add_rewrite_rule( "{$rewrite_base}/([^/]+)/([^&]+)?", 'index.php?oa-calendar=$matches[1]&oa-slug=$matches[2]', 'top' );
+			add_rewrite_rule( "{$rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?' . OPENAGENDA_POST_TYPE_SLUG . '=$matches[1]&oa-page=$matches[2]', 'top' );
+			add_rewrite_rule( "{$rewrite_base}/([^/]+)/([^&]+)?", 'index.php?' . OPENAGENDA_POST_TYPE_SLUG . '=$matches[1]&oa-slug=$matches[2]', 'top' );
 		}
 	}
 
@@ -239,8 +239,12 @@ class Content_Manager implements Hookable {
 	 */
 	public function body_class( $classes ) {
 		global $openagenda;
-		if ( $openagenda && is_singular( 'oa-calendar' ) ) {
+		if ( $openagenda && is_singular( OPENAGENDA_POST_TYPE_SLUG ) ) {
 			$classes[] = openagenda_is_single() ? 'single-oa-calendar-event' : 'single-oa-calendar-archive';
+			// Styles are scoped to the legacy post type class.
+			if ( ! in_array( 'single-oa-calendar', $classes, true ) ) {
+				$classes[] = 'single-oa-calendar';
+			}
 		}
 		return $classes;
 	}
@@ -253,7 +257,7 @@ class Content_Manager implements Hookable {
 	 * @return  string  $url
 	 */
 	public function canonical_url( $url ) {
-		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) && \openagenda_is_single() ) {
 			$url = openagenda_event_permalink( '', false, false );
 		}
 		return $url;
@@ -270,7 +274,7 @@ class Content_Manager implements Hookable {
 	 * @return  string  $shortlink
 	 */
 	public function get_shortlink( $shortlink, $id, $context, $allow_slugs ) {
-		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) && \openagenda_is_single() ) {
 			$event_slug = openagenda_get_field( 'slug' );
 			$shortlink  = add_query_arg( 'oa-slug', sanitize_title( $event_slug ), $shortlink );
 		}
@@ -286,7 +290,7 @@ class Content_Manager implements Hookable {
 	 * @return  string  $title  Filtered title.
 	 */
 	public function the_title( $title, $id ) {
-		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) && \openagenda_is_single() ) {
 			$title = \openagenda_get_field( 'title' );
 		}
 		return $title;
@@ -300,7 +304,7 @@ class Content_Manager implements Hookable {
 	 * @return  string  $content  Filtered content.
 	 */
 	public function the_content( $content ) {
-		if ( ! is_singular( 'oa-calendar' ) ) {
+		if ( ! is_singular( OPENAGENDA_POST_TYPE_SLUG ) ) {
 			return $content;
 		}
 		if ( ! is_main_query() || ! in_the_loop() ) {
@@ -343,7 +347,7 @@ class Content_Manager implements Hookable {
 	 * @return  string   $prompt  Filtered Prompt.
 	 */
 	public function write_your_story( $prompt, $post ) {
-		if ( 'oa-calendar' === $post->post_type ) {
+		if ( OPENAGENDA_POST_TYPE_SLUG === $post->post_type ) {
 			$prompt = __( 'Please provide an agenda UID in this agenda\'s settings box first. You can leave your content empty, as the event list is automatically inserted after your content.', 'openagenda' );
 		}
 		return $prompt;
@@ -360,7 +364,7 @@ class Content_Manager implements Hookable {
 	 * @return  string   $post_link
 	 */
 	public function permalink( $post_link, $post, $leavename, $sample ) {
-		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) && \openagenda_is_single() ) {
 			$slug      = \openagenda_get_field( 'slug' );
 			$post_link = ! empty( get_option( 'permalink_structure' ) ) ? trailingslashit( $post_link ) . $slug : add_query_arg( 'oa-slug', rawurlencode( $slug ), $post_link );
 		}
@@ -381,7 +385,7 @@ class Content_Manager implements Hookable {
 			return;
 		}
 
-		if ( is_singular( 'oa-calendar' ) && $openagenda ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) && $openagenda ) {
 			foreach ( $this->get_default_meta() as $name => $content ) {
 				printf( '<meta name="%s" content="%s">', esc_attr( $name ), esc_attr( $content ) );
 			}
@@ -398,7 +402,7 @@ class Content_Manager implements Hookable {
 	 */
 	public function print_schema() {
 		global $openagenda;
-		if ( $openagenda && is_singular( 'oa-calendar' ) && $openagenda->is_single() ) {
+		if ( $openagenda && is_singular( OPENAGENDA_POST_TYPE_SLUG ) && $openagenda->is_single() ) {
 			openagenda_event_schema();
 		}
 	}
@@ -411,7 +415,7 @@ class Content_Manager implements Hookable {
 	 * @return  array<string, string> Title elements.
 	 */
 	public function document_title_parts( $parts ) {
-		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) && \openagenda_is_single() ) {
 			$parts['title'] = wp_strip_all_tags( \openagenda_get_field( 'title' ) );
 		}
 		return $parts;
@@ -520,7 +524,7 @@ class Content_Manager implements Hookable {
 	 * @return  array<string, mixed> Filtered replacements.
 	 */
 	public function wpseo_replacements( $replacements, $args ) {
-		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) && \openagenda_is_single() ) {
 			$replacements['%%title%%'] = wp_strip_all_tags( \openagenda_get_field( 'title' ) );
 		}
 		return $replacements;
@@ -534,7 +538,7 @@ class Content_Manager implements Hookable {
 	 * @return  string  $value
 	 */
 	public function yoast_seo_metadata( $value ) {
-		if ( is_singular( 'oa-calendar' ) && \openagenda_is_single() ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) && \openagenda_is_single() ) {
 			$meta       = $this->get_default_meta();
 			$properties = $this->get_default_properties();
 			$key        = current_filter();
@@ -598,7 +602,7 @@ class Content_Manager implements Hookable {
 				if ( isset( $args['name'] ) && 'page_on_front' === $args['name'] ) {
 					$calendars = get_posts(
 						array(
-							'post_type'   => 'oa-calendar',
+							'post_type'   => OPENAGENDA_POST_TYPE_SLUG,
 							'numberposts' => -1,
 						)
 					);
@@ -620,7 +624,7 @@ class Content_Manager implements Hookable {
 			$post_type = $query->get( 'post_type' );
 			$page_id   = $query->get( 'page_id' );
 			if ( empty( $post_type ) && ! empty( $page_id ) ) {
-				$query->set( 'post_type', array( 'page', 'oa-calendar' ) );
+				$query->set( 'post_type', array( 'page', OPENAGENDA_POST_TYPE_SLUG ) );
 			}
 		}
 	}

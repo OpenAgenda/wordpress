@@ -59,6 +59,9 @@ register_activation_hook( __FILE__, 'openagenda_activation' );
  * @return void
  */
 function openagenda_activation() {
+	// The activation request does not run the plugin's own hooks.
+	openagenda_update_version();
+	openagenda_set_rewrite_base();
 	require_once OPENAGENDA_PATH . 'inc/interface-hookable.php';
 	require_once OPENAGENDA_PATH . 'inc/frontend/class-content-manager.php';
 	$manager = new Content_Manager();
@@ -94,8 +97,10 @@ function openagenda_uninstallation() {
 	if ( $should_delete_content ) {
 		$calendar_ids = get_posts(
 			array(
-				'post_type' => 'oa-calendar',
-				'fields'    => 'ids',
+				'post_type'   => array( 'oa-calendar', 'oa-agenda' ),
+				'post_status' => 'any',
+				'numberposts' => -1,
+				'fields'      => 'ids',
 			)
 		);
 		if ( ! empty( $calendar_ids ) ) {
@@ -110,6 +115,7 @@ function openagenda_uninstallation() {
 		delete_option( 'openagenda_integrations_settings' );
 		delete_option( 'openagenda_permalinks_settings' );
 		delete_option( 'openagenda_customizer' );
+		delete_option( 'openagenda_post_type_slug' );
 		delete_expired_transients();
 	}
 }
@@ -139,10 +145,83 @@ function openagenda_update_version() {
 		}
 	}
 
+	// Decide once which post type the agendas use : existing sites keep "oa-calendar".
+	if ( ! get_option( 'openagenda_post_type_slug' ) ) {
+		$is_existing_install = openagenda_is_existing_install();
+		update_option( 'openagenda_post_type_slug', $is_existing_install ? 'oa-calendar' : 'oa-agenda' );
+		if ( ! $is_existing_install ) {
+			// Have WordPress rebuild its URL rules with the new names.
+			delete_option( 'rewrite_rules' );
+		}
+	}
+
 	// Maybe update version.
 	if ( ! $db_version || version_compare( $db_version, OPENAGENDA_VERSION, '!=' ) ) {
 		update_option( 'openagenda_version', OPENAGENDA_VERSION );
 	}
+
+	if ( ! defined( 'OPENAGENDA_POST_TYPE_SLUG' ) ) {
+		define( 'OPENAGENDA_POST_TYPE_SLUG', 'oa-agenda' === get_option( 'openagenda_post_type_slug' ) ? 'oa-agenda' : 'oa-calendar' );
+	}
+}
+
+
+/**
+ * Tells whether the plugin was already in use on this site before the "oa-agenda" post type existed.
+ *
+ * @return bool
+ */
+function openagenda_is_existing_install() {
+	$calendars = get_posts(
+		array(
+			'post_type'   => 'oa-calendar',
+			'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private', 'trash' ),
+			'numberposts' => 1,
+			'fields'      => 'ids',
+		)
+	);
+	if ( ! empty( $calendars ) ) {
+		return true;
+	}
+	// The version alone is not enough : it is kept in the database when the plugin is uninstalled.
+	return false !== get_option( 'openagenda_version' ) && ! empty( get_option( 'openagenda_general_settings' ) );
+}
+
+
+add_action( 'init', 'openagenda_set_rewrite_base', 1 );
+/**
+ * Stores the URL prefix of the agendas when none is saved yet.
+ *
+ * New sites get "agendas". Existing sites keep the prefix they already use,
+ * which was the translation of "calendar" and was never saved.
+ * Runs on init because translations cannot be read earlier.
+ *
+ * @return void
+ */
+function openagenda_set_rewrite_base() {
+	$settings = get_option( 'openagenda_permalinks_settings' );
+	if ( is_array( $settings ) && ! empty( $settings['openagenda_calendar_base'] ) ) {
+		return;
+	}
+
+	$base = _x( 'agendas', 'Default URL prefix', 'openagenda' );
+	if ( 'oa-calendar' === OPENAGENDA_POST_TYPE_SLUG ) {
+		// The prefix in use is the one of the stored URL rules. Otherwise translate it in the site language, not the user's.
+		$found = preg_grep( '/^index\.php\?oa-calendar=\$matches\[1\]&oa-page=/', (array) get_option( 'rewrite_rules' ) );
+		if ( ! empty( $found ) ) {
+			$base = strtok( (string) key( $found ), '/' );
+		} else {
+			$switched = switch_to_locale( get_locale() );
+			$base     = __( 'calendar', 'openagenda' );
+			if ( $switched ) {
+				restore_previous_locale();
+			}
+		}
+	}
+
+	$settings                             = is_array( $settings ) ? $settings : array();
+	$settings['openagenda_calendar_base'] = sanitize_title( $base );
+	update_option( 'openagenda_permalinks_settings', $settings );
 }
 
 

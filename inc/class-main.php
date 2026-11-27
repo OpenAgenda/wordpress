@@ -179,7 +179,7 @@ class Main {
 		// Timings calendar JS.
 		wp_register_script( 'oa-timings', OPENAGENDA_URL . 'assets/js/timings.js', array(), OPENAGENDA_VERSION, true );
 
-		if ( is_singular( 'oa-calendar' ) ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) ) {
 			if ( openagenda_should_enqueue_styles() ) {
 				$stylesheet = openagenda_use_legacy_templates() ? 'openagenda-legacy' : 'openagenda-main';
 				wp_enqueue_style( $stylesheet );
@@ -489,7 +489,7 @@ class Main {
 	 */
 	public function init_calendar() {
 		global $openagenda;
-		if ( is_singular( 'oa-calendar' ) ) {
+		if ( is_singular( OPENAGENDA_POST_TYPE_SLUG ) ) {
 			$post_id         = get_the_ID();
 			$uid             = (string) get_post_meta( $post_id, 'oa-calendar-uid', true );
 			$page_size       = get_post_meta( $post_id, 'oa-calendar-per-page', true ) ? (int) get_post_meta( $post_id, 'oa-calendar-per-page', true ) : (int) get_option( 'posts_per_page' );

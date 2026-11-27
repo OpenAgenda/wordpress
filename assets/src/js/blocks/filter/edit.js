@@ -27,15 +27,17 @@ export default function Edit({ attributes, setAttributes }) {
 	const filterData = getFilterData(filter);
 	const filterLabel = filterData.label ?? filter;
 
+	const agendaPostType = window.openagendaPostType ?? 'oa-calendar';
+
 	const { hasResolved, records } = useEntityRecords(
 		'postType',
-		'oa-calendar',
+		agendaPostType,
 		{ per_page: 1 }
 	);
 
 	let agendaPostId = useSelect((select) => {
 		const editor = select('core/editor');
-		return 'oa-calendar' === editor.getEditedPostAttribute('type')
+		return agendaPostType === editor.getEditedPostAttribute('type')
 			? editor.getEditedPostAttribute('id')
 			: 0;
 	}, []);
