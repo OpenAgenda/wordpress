@@ -15,7 +15,7 @@
     "start:styles:admin": "sass --watch assets/src/css/admin.scss:assets/css/admin.css",
     "start:styles:legacy": "sass --watch assets/src/css/legacy.scss:assets/css/legacy.css",
     "start:styles:leaflet": "sass --watch assets/src/css/leaflet.scss:assets/css/leaflet.css",
-    "build:styles": "npm run build:styles:style & npm run build:styles:admin & npm run build:styles:legacy & npm run build:styles:leaflet",
+    "build:styles": "npm run build:styles:style && npm run build:styles:admin && npm run build:styles:legacy && npm run build:styles:leaflet",
     "build:styles:style": "sass --style=compressed assets/src/css/style.scss:assets/css/style.css",
     "build:styles:admin": "sass --style=compressed assets/src/css/admin.scss:assets/css/admin.css",
     "build:styles:legacy": "sass --style=compressed assets/src/css/legacy.scss:assets/css/legacy.css",
