@@ -66,7 +66,7 @@ The *Integrations* tab allows you to fine tune settings for various third party 
 
 In the *Permalinks* settings, you can change the prefix for your agenda pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
 
-The default prefix is `agendas`. Sites that used the plugin before version 3.1.0 keep the prefix they already had (`calendar`, or its translation).
+The default prefix is `agenda`. Sites that used the plugin before version 3.1.0 keep the prefix they already had (`calendar`, or its translation).
 
 The same goes for the post type : new sites use `oa-agenda`, sites that used the plugin before version 3.1.0 keep `oa-calendar`. In your own code, use the `OPENAGENDA_POST_TYPE_SLUG` constant instead of either name.
 

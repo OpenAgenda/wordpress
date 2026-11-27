@@ -287,10 +287,10 @@ class Settings implements Hookable {
 						'option_name' => 'openagenda_permalinks_settings',
 						'label_for'   => 'openagenda_calendar_base',
 						'type'        => 'text',
-						'default'     => 'agendas',
+						'default'     => 'agenda',
 						'description' => sprintf(
 							/* translators: %s : home url */
-							__( 'You can modify the URL prefix for the agendas. For example, the default prefix is <code>agendas</code>, so URLs will look like <code>%s/agendas/agenda-name</code>.', 'openagenda' ),
+							__( 'You can modify the URL prefix for the agendas. For example, the default prefix is <code>agenda</code>, so URLs will look like <code>%s/agenda/agenda-name</code>.', 'openagenda' ),
 							esc_url( get_home_url() )
 						),
 					),

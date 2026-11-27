@@ -192,7 +192,7 @@ add_action( 'init', 'openagenda_set_rewrite_base', 1 );
 /**
  * Stores the URL prefix of the agendas when none is saved yet.
  *
- * New sites get "agendas". Existing sites keep the prefix they already use,
+ * New sites get "agenda". Existing sites keep the prefix they already use,
  * which was the translation of "calendar" and was never saved.
  * Runs on init because translations cannot be read earlier.
  *
@@ -204,7 +204,7 @@ function openagenda_set_rewrite_base() {
 		return;
 	}
 
-	$base = _x( 'agendas', 'Default URL prefix', 'openagenda' );
+	$base = __( 'agenda', 'openagenda' );
 	if ( 'oa-calendar' === OPENAGENDA_POST_TYPE_SLUG ) {
 		// The prefix in use is the one of the stored URL rules. Otherwise translate it in the site language, not the user's.
 		$found = preg_grep( '/^index\.php\?oa-calendar=\$matches\[1\]&oa-page=/', (array) get_option( 'rewrite_rules' ) );

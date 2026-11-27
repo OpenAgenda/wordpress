@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-27T17:29:10+00:00\n"
+"POT-Creation-Date: 2026-11-27T17:36:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: openagenda\n"
@@ -361,7 +361,7 @@ msgstr ""
 #. translators: %s : home url
 #: inc/admin/class-settings.php:293
 #, php-format
-msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>agendas</code>, so URLs will look like <code>%s/agendas/agenda-name</code>."
+msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>agenda</code>, so URLs will look like <code>%s/agenda/agenda-name</code>."
 msgstr ""
 
 #: inc/admin/class-settings.php:300
@@ -1029,8 +1029,7 @@ msgid "Displays an agenda preview widget."
 msgstr ""
 
 #: openagenda.php:207
-msgctxt "Default URL prefix"
-msgid "agendas"
+msgid "agenda"
 msgstr ""
 
 #: openagenda.php:244
