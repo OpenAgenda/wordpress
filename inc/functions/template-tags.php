@@ -873,7 +873,7 @@ function openagenda_event_share_buttons( $uid = '', $display = true ) {
 		}
 		$html = sprintf(
 			'<div class="oa-sharers">
-                <span class="oa-sharers-label">%s</span>
+                <p class="oa-sharers-label">%s</p>
                 <ul class="oa-sharers-links">%s</ul>
             </div>',
 			esc_html__( 'Share :', 'openagenda' ),
@@ -1476,7 +1476,7 @@ function openagenda_exports( $uid = '', $display = true ) {
 		if ( ! empty( $links ) ) {
 			$html .= sprintf(
 				'<div class="oa-exports">
-                    <span class="oa-exports-label">%s</span>
+                    <p class="oa-exports-label">%s</p>
                     <ul class="oa-exports-links">%s</ul>
                 </div>',
 				apply_filters( 'openagenda_exports_label', esc_html__( 'Download :', 'openagenda' ) ),
