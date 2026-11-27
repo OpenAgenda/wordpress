@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-27T17:22:54+00:00\n"
+"POT-Creation-Date: 2026-11-27T17:36:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: openagenda\n"
@@ -40,7 +40,7 @@ msgid "OpenAgenda Settings"
 msgstr ""
 
 #: inc/admin/class-admin-pages.php:71
-#: openagenda.php:160
+#: openagenda.php:239
 #: assets/blocks/preview/index.js:1
 msgid "Settings"
 msgstr ""
@@ -361,7 +361,7 @@ msgstr ""
 #. translators: %s : home url
 #: inc/admin/class-settings.php:293
 #, php-format
-msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/agenda-name</code>."
+msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>agenda</code>, so URLs will look like <code>%s/agenda/agenda-name</code>."
 msgstr ""
 
 #: inc/admin/class-settings.php:300
@@ -386,13 +386,6 @@ msgstr ""
 #: inc/admin/class-settings.php:337
 #, php-format
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
-msgstr ""
-
-#: inc/admin/class-settings.php:590
-#: inc/frontend/class-content-manager.php:168
-#: inc/frontend/class-content-manager.php:227
-#: assets/blocks/filter/index.js:1
-msgid "calendar"
 msgstr ""
 
 #: inc/blocks/class-blocks.php:46
@@ -634,6 +627,13 @@ msgstr ""
 msgid "Refresh events"
 msgstr ""
 
+#: inc/frontend/class-content-manager.php:168
+#: inc/frontend/class-content-manager.php:227
+#: openagenda.php:215
+#: assets/blocks/filter/index.js:1
+msgid "calendar"
+msgstr ""
+
 #: inc/frontend/class-content-manager.php:173
 msgctxt "Post type general name"
 msgid "Agendas"
@@ -725,7 +725,7 @@ msgctxt "Screen reader text for the items list heading on the post type listing 
 msgid "Agendas list"
 msgstr ""
 
-#: inc/frontend/class-content-manager.php:347
+#: inc/frontend/class-content-manager.php:351
 msgid "Please provide an agenda UID in this agenda's settings box first. You can leave your content empty, as the event list is automatically inserted after your content."
 msgstr ""
 
@@ -1028,7 +1028,11 @@ msgstr ""
 msgid "Displays an agenda preview widget."
 msgstr ""
 
-#: openagenda.php:165
+#: openagenda.php:207
+msgid "agenda"
+msgstr ""
+
+#: openagenda.php:244
 msgid "Documentation"
 msgstr ""
 

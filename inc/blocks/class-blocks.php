@@ -125,6 +125,11 @@ class Blocks implements Hookable {
 			)
 		);
 		wp_localize_script( 'openagenda-preview-editor-script', 'openagendaPreviewSettings', $this->get_preview_settings() );
+
+		// The editor scripts need to know which post type holds the agendas.
+		foreach ( array( 'events', 'filter' ) as $block ) {
+			wp_add_inline_script( "openagenda-{$block}-editor-script", 'window.openagendaPostType = ' . wp_json_encode( OPENAGENDA_POST_TYPE_SLUG ) . ';', 'before' );
+		}
 	}
 
 	/**
@@ -137,7 +142,7 @@ class Blocks implements Hookable {
 		global $post;
 		global $openagenda;
 
-		if ( 0 === (int) $post_id && isset( $post->ID ) && 'oa-calendar' === get_post_type( $post ) ) {
+		if ( 0 === (int) $post_id && isset( $post->ID ) && OPENAGENDA_POST_TYPE_SLUG === get_post_type( $post ) ) {
 			$post_id = (int) $post->ID;
 		}
 
@@ -150,7 +155,7 @@ class Blocks implements Hookable {
 		}
 
 		$agenda = get_post( $post_id );
-		if ( ! $agenda || 'oa-calendar' !== get_post_type( $agenda ) ) {
+		if ( ! $agenda || OPENAGENDA_POST_TYPE_SLUG !== get_post_type( $agenda ) ) {
 			return null;
 		}
 
@@ -195,7 +200,7 @@ class Blocks implements Hookable {
 	public function get_editor_sample_agenda_post_id() {
 		$agenda_post_id = 0;
 		$args           = array(
-			'post_type'   => 'oa-calendar',
+			'post_type'   => OPENAGENDA_POST_TYPE_SLUG,
 			'numberposts' => 1,
 			'fields'      => 'ids',
 		);
@@ -239,7 +244,7 @@ class Blocks implements Hookable {
 	public function render_events_block( $attributes = array(), $content = '', $block = null ) {
 		global $openagenda;
 
-		$is_editor_preview = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
+		$is_editor_preview = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( OPENAGENDA_POST_TYPE_SLUG );
 
 		if ( $is_editor_preview ) {
 			$post_id = ! empty( $attributes['postId'] ) ? absint( $attributes['postId'] ) : 0;
@@ -276,7 +281,7 @@ class Blocks implements Hookable {
 		}
 
 		$this->init_editor_agenda();
-		$is_editor_preview  = wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
+		$is_editor_preview  = wp_is_serving_rest_request() && ! is_singular( OPENAGENDA_POST_TYPE_SLUG );
 		$settings           = ! empty( $attributes['filterSettings'] ) && is_array( $attributes['filterSettings'] ) ? $attributes['filterSettings'] : array();
 		$atts               = \openagenda_get_shortcode_attributes( $settings );
 		$content            = do_shortcode( sprintf( '[%1$s %2$s]', $shortcode, $atts ), true );
@@ -301,7 +306,7 @@ class Blocks implements Hookable {
 			return '';
 		}
 
-		$is_editor_preview  = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( 'oa-calendar' );
+		$is_editor_preview  = ! $openagenda && wp_is_serving_rest_request() && ! is_singular( OPENAGENDA_POST_TYPE_SLUG );
 		$settings           = ! empty( $attributes['settings'] ) && is_array( $attributes['settings'] ) ? $attributes['settings'] : array();
 		$settings['links']  = ! empty( $settings['links'] ) ? 'oa' : '';
 		$atts               = \openagenda_get_shortcode_attributes( $settings );

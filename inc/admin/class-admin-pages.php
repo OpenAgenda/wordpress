@@ -66,7 +66,7 @@ class Admin_Pages implements Hookable {
 	public function get_main_page() {
 		if ( empty( $this->main_page ) ) {
 			$this->main_page = array(
-				'parent_slug' => 'edit.php?post_type=oa-calendar',
+				'parent_slug' => 'edit.php?post_type=' . OPENAGENDA_POST_TYPE_SLUG,
 				'page_title'  => __( 'OpenAgenda Settings', 'openagenda' ),
 				'menu_title'  => __( 'Settings', 'openagenda' ),
 				'capability'  => 'manage_options',

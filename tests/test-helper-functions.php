@@ -164,7 +164,7 @@ class OpenagendaHelperFunctionsTest extends WP_UnitTestCase {
 	public function test_get_pre_filters( $filters_url, $exclude, $sort, $filters, $expected ) {
 		$post_id = self::factory()->post->create(
 			array(
-				'post_type' => 'oa-calendar',
+				'post_type' => OPENAGENDA_POST_TYPE_SLUG,
 			)
 		);
 		update_post_meta( $post_id, 'oa-calendar-filters', $filters_url );
