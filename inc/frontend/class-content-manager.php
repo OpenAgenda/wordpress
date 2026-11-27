@@ -33,6 +33,7 @@ class Content_Manager implements Hookable {
 		add_action( 'init', array( $this, 'register_post_types' ), 10 );
 		add_action( 'init', array( $this, 'register_post_metas' ), 10 );
 		add_action( 'init', array( $this, 'register_rewrite_rules' ), 10 );
+		add_action( 'template_redirect', array( $this, 'redirect_former_rewrite_base' ), 1 );
 		add_filter( 'template_include', array( $this, 'template_has_block' ), 10, 1 );
 		add_action( 'wp_head', array( $this, 'wp_head_meta' ), 10 );
 		add_action( 'wp_head', array( $this, 'print_schema' ), 10 );
@@ -227,6 +228,47 @@ class Content_Manager implements Hookable {
 			$rewrite_base     = ! empty( $rewrite_settings ) && ! empty( $rewrite_settings['openagenda_calendar_base'] ) ? $rewrite_settings['openagenda_calendar_base'] : __( 'calendar', 'openagenda' );
 			add_rewrite_rule( "{$rewrite_base}/([^/]+)/page/(\d+)?", 'index.php?' . OPENAGENDA_POST_TYPE_SLUG . '=$matches[1]&oa-page=$matches[2]', 'top' );
 			add_rewrite_rule( "{$rewrite_base}/([^/]+)/([^&]+)?", 'index.php?' . OPENAGENDA_POST_TYPE_SLUG . '=$matches[1]&oa-slug=$matches[2]', 'top' );
+		}
+	}
+
+
+	/**
+	 * Redirects the URLs of a former URL prefix to the current one.
+	 *
+	 * When the prefix is changed in the Permalinks settings, the former one is
+	 * recorded, so that the URLs already shared or indexed keep working.
+	 *
+	 * @return void
+	 */
+	public function redirect_former_rewrite_base() {
+		global $wp, $wp_rewrite;
+		if ( ! is_404() || empty( $wp->request ) || ! is_string( $wp->request ) ) {
+			return;
+		}
+		$former_bases = get_option( 'openagenda_former_rewrite_bases' );
+		$settings     = get_option( 'openagenda_permalinks_settings' );
+		if ( empty( $former_bases ) || ! is_array( $former_bases ) || empty( $settings['openagenda_calendar_base'] ) ) {
+			return;
+		}
+		$base     = $settings['openagenda_calendar_base'];
+		$segments = explode( '/', $wp->request );
+		if ( count( $segments ) < 2 || $segments[0] === $base || ! in_array( $segments[0], $former_bases, true ) ) {
+			return;
+		}
+		// Only published agendas : a redirect must not reveal that a private or draft one exists.
+		$agenda = get_page_by_path( $segments[1], OBJECT, OPENAGENDA_POST_TYPE_SLUG );
+		if ( ! $agenda || 'publish' !== $agenda->post_status ) {
+			return;
+		}
+		$segments[0] = $base;
+		$url         = home_url( $wp_rewrite->root . user_trailingslashit( implode( '/', $segments ) ) );
+		if ( ! empty( $_SERVER['QUERY_STRING'] ) ) {
+			$url .= '?' . wp_unslash( $_SERVER['QUERY_STRING'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		}
+		// The prefix can be changed back : browsers must not keep this redirect.
+		nocache_headers();
+		if ( wp_safe_redirect( esc_url_raw( $url ), 301 ) ) {
+			exit;
 		}
 	}
 

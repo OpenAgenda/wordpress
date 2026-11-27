@@ -70,6 +70,8 @@ The default prefix is `agenda`. Sites that used the plugin before version 3.1.0 
 
 The same goes for the post type : new sites use `oa-agenda`, sites that used the plugin before version 3.1.0 keep `oa-calendar`. In your own code, use the `OPENAGENDA_POST_TYPE_SLUG` constant instead of either name.
 
+When you change the prefix, the URLs using the former prefix are redirected to the new ones.
+
 In the *Settings > Reading* section, you can set an agenda page as your front page. Note that it will still use the default agenda template provided by the plugin and the default front page template provided by your theme.
 
 ![You can set an agenda as your front page.](assets/screenshots/screenshot-8.png)

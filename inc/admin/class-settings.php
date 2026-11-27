@@ -591,6 +591,17 @@ class Settings implements Hookable {
 			if ( '' === $base ) {
 				return;
 			}
+
+			// Remember the prefix being replaced, so that its URLs are redirected to the new one.
+			$settings     = get_option( 'openagenda_permalinks_settings' );
+			$former_base  = ! empty( $settings['openagenda_calendar_base'] ) ? $settings['openagenda_calendar_base'] : '';
+			$former_bases = get_option( 'openagenda_former_rewrite_bases' );
+			$former_bases = is_array( $former_bases ) ? $former_bases : array();
+			if ( '' !== $former_base && $former_base !== $base ) {
+				$former_bases[] = $former_base;
+			}
+			update_option( 'openagenda_former_rewrite_bases', array_values( array_diff( array_unique( $former_bases ), array( $base ) ) ) );
+
 			update_option( 'openagenda_permalinks_settings', array( 'openagenda_calendar_base' => $base ) );
 		}
 	}
