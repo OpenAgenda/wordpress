@@ -23,25 +23,25 @@ $registration_methods = openagenda_get_field( 'registration' );
 					openagenda_favorite_badge();
 				?>
 			</h2>
-			<div class="oa-metas">
+			<ul class="oa-metas">
 				<?php if ( $timing ) : ?>
-					<p class="oa-meta oa-event-timing">
+					<li class="oa-meta oa-event-timing">
 						<?php
 						openagenda_icon( 'time' );
 						echo wp_kses_post( $timing );
 						?>
-					</p>
+					</li>
 				<?php endif; ?>
 				<?php if ( $date_range ) : ?>
-					<p class="oa-meta oa-event-range">
+					<li class="oa-meta oa-event-range">
 						<?php
 						openagenda_icon( 'month' );
 						echo wp_kses_post( $date_range );
 						?>
-					</p>
+					</li>
 				<?php endif; ?>
-				<div class="oa-event-share"><?php openagenda_event_share_buttons(); ?></div>
-			</div>
+			</ul>
+			<div class="oa-event-share"><?php openagenda_event_share_buttons(); ?></div>
 			<p class="oa-entry-description"><?php openagenda_field( 'description' ); ?></p>
 			<div class="oa-event-thumbnail"><?php openagenda_event_image(); ?></div>
 		</header>

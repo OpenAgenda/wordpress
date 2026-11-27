@@ -30,62 +30,62 @@ $openagenda_event_accessibility  = openagenda_event_accessibility( false, false 
 			<?php openagenda_field( 'description' ); ?>
 		</p>
 		
-		<div class="oa-event-details">
-			<div class="oa-event-share-button">
+		<ul class="oa-event-details">
+			<li class="oa-event-share-button">
 				<?php
 					openagenda_icon( 'share' );
 					openagenda_event_share_button();
 				?>
-			</div>
+			</li>
 			
 			<?php if ( ! empty( $openagenda_date_range ) ) : ?>
-				<div class="oa-event-range">
+				<li class="oa-event-range">
 					<?php
 					openagenda_icon( 'clock' );
 					echo wp_kses_post( $openagenda_date_range );
 					?>
-				</div>
+				</li>
 			<?php endif; ?>
 
 			<?php if ( ! empty( $openagenda_age_label ) ) : ?>
-				<div class="oa-event-age">
+				<li class="oa-event-age">
 					<?php
 						openagenda_icon( 'child' );
 						echo wp_kses_post( $openagenda_age_label );
 					?>
-				</div>
+				</li>
 			<?php endif; ?>
 	
 			<?php if ( ! empty( $openagenda_conditions ) ) : ?>
-				<div class="oa-event-conditions">
+				<li class="oa-event-conditions">
 					<?php
 						openagenda_icon( 'ticket' );
 						printf( '<strong class="oa-label oa-conditions-label">%s</strong>', esc_html__( 'Conditions', 'openagenda' ) );
 						printf( '<div class="oa-conditions-value">%s</div>', esc_html( $openagenda_conditions ) );
 					?>
-				</div>
+				</li>
 			<?php endif; ?>
 	
 			<?php if ( ! empty( $openagenda_registration_methods ) ) : ?>
-				<div class="oa-event-registration">
+				<li class="oa-event-registration">
 					<?php
 						openagenda_icon( 'check' );
 						printf( '<strong class="oa-label oa-registration-label">%s</strong>', esc_html__( 'Registration', 'openagenda' ) );
 						openagenda_event_registration_methods();
 					?>
-				</div>
+				</li>
 			<?php endif; ?>
 
 			<?php if ( ! empty( $openagenda_event_accessibility ) ) : ?>
-				<div class="oa-event-accessibility">
+				<li class="oa-event-accessibility">
 					<?php
 						openagenda_icon( 'accessibility-mi' );
 						printf( '<strong class="oa-label oa-accessibility-label">%s</strong>', esc_html__( 'Accessibility adjustments', 'openagenda' ) );
 						openagenda_event_accessibility();
 					?>
-				</div>
+				</li>
 			<?php endif; ?>
-		</div>
+		</ul>
 
 		<figure class="oa-event-thumbnail">
 			<?php

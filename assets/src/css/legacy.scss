@@ -216,6 +216,14 @@ ul.oa-sharers-links {
 	margin: 1rem 0;
 }
 
+.oa-metas {
+	list-style: none;
+
+	li {
+		margin-bottom: .5rem;
+	}
+}
+
 .oa-meta,
 .oa-card-meta,
 .oa-registration-method-wrapper {
@@ -463,7 +471,7 @@ div[data-container-id="oa-wrapper"] {
 	color: inherit;
 }
 
-.rdrDateDisplayItem + .rdrDateDisplayItem {
+.rdrDateDisplayItem+.rdrDateDisplayItem {
 	margin-left: 0.833em;
 }
 
@@ -520,7 +528,7 @@ div[data-container-id="oa-wrapper"] {
 	flex-direction: column;
 }
 
-.rdrMonthsHorizontal > div > div > div {
+.rdrMonthsHorizontal>div>div>div {
 	display: -webkit-flex;
 	display: flex;
 	-webkit-box-orient: horizontal;
@@ -853,17 +861,17 @@ div[data-container-id="oa-wrapper"] {
 	background: var(--oa-main-color, $oa-blue);
 }
 
-.rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span::after {
+.rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span::after {
 	background: #fff;
 }
 
-.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
-.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
-.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
-.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
+.rdrDay:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
 	color: rgba(255, 255, 255, 0.85);
 }
 
@@ -1015,7 +1023,7 @@ button.rdrStaticRange {
 	}
 }
 
-.rdrStaticRange + .rdrStaticRange {
+.rdrStaticRange+.rdrStaticRange {
 	margin-left: 8px;
 }
 
@@ -1147,10 +1155,10 @@ button.rdrStaticRange {
 		background: #fff;
 	}
 
-	.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
-	.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
+	.rdrDay:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span,
+	.rdrDay:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span {
 		color: $oa-black;
 
 		&::after {
