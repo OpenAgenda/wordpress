@@ -23,7 +23,7 @@ class Preview_Widget extends OpenAgenda_Widget {
 			'openagenda-preview-widget',
 			__( 'OpenAgenda Preview', 'openagenda' ),
 			array(
-				'description'                 => __( 'Displays a calendar preview widget.', 'openagenda' ),
+				'description'                 => __( 'Displays an agenda preview widget.', 'openagenda' ),
 				'customize_selective_refresh' => true,
 			),
 			array(),

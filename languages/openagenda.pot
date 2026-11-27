@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-24T15:26:04+00:00\n"
+"POT-Creation-Date: 2026-11-27T17:22:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: openagenda\n"
 
 #. Plugin Name of the plugin
@@ -41,6 +41,7 @@ msgstr ""
 
 #: inc/admin/class-admin-pages.php:71
 #: openagenda.php:160
+#: assets/blocks/preview/index.js:1
 msgid "Settings"
 msgstr ""
 
@@ -74,15 +75,15 @@ msgid "No post ID was provided."
 msgstr ""
 
 #: inc/admin/class-ajax-handler.php:47
-msgid "The post ID provided does not refer to a calendar."
+msgid "The post ID provided does not refer to an agenda."
 msgstr ""
 
 #: inc/admin/class-customizer-settings.php:68
-msgid "Calendars"
+msgid "Agendas"
 msgstr ""
 
 #: inc/admin/class-customizer-settings.php:69
-msgid "Manage calendars display settings here."
+msgid "Manage agendas display settings here."
 msgstr ""
 
 #: inc/admin/class-customizer-settings.php:86
@@ -94,15 +95,15 @@ msgid "OpenAgenda main color"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:47
-msgid "Calendar settings"
+msgid "Agenda settings"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:71
-msgid "Calendar UID"
+msgid "Agenda UID"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:76
-msgid "How to find my calendar UID ?"
+msgid "How to find my agenda UID ?"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:82
@@ -110,22 +111,22 @@ msgid "Events per page"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:90
-#: inc/widgets/class-preview-widget.php:33
+#: inc/class-main.php:249
 msgid "Display setting"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:94
-#: inc/widgets/class-preview-widget.php:38
+#: inc/class-main.php:254
 msgid "Display as list"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:98
-#: inc/widgets/class-preview-widget.php:42
+#: inc/class-main.php:258
 msgid "Display as grid"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:106
-#: inc/widgets/class-preview-widget.php:50
+#: inc/class-main.php:266
 msgid "Default event sort"
 msgstr ""
 
@@ -134,37 +135,37 @@ msgid "Learn more about sort"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:115
-#: inc/widgets/class-preview-widget.php:54
+#: inc/class-main.php:270
 msgid "Featured first, followed by ascending last occurrence (default)"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:119
-#: inc/class-main.php:391
-#: inc/widgets/class-preview-widget.php:55
+#: inc/class-main.php:271
+#: inc/class-main.php:457
 msgid "Featured first, followed by ascending upcoming occurrence"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:123
-#: inc/class-main.php:392
-#: inc/widgets/class-preview-widget.php:56
+#: inc/class-main.php:272
+#: inc/class-main.php:458
 msgid "Ascending last occurrence"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:127
-#: inc/class-main.php:393
-#: inc/widgets/class-preview-widget.php:57
+#: inc/class-main.php:273
+#: inc/class-main.php:459
 msgid "Ascending upcoming occurrence"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:131
-#: inc/class-main.php:394
-#: inc/widgets/class-preview-widget.php:58
+#: inc/class-main.php:274
+#: inc/class-main.php:460
 msgid "Descending update date"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:135
-#: inc/class-main.php:395
-#: inc/widgets/class-preview-widget.php:59
+#: inc/class-main.php:275
+#: inc/class-main.php:461
 msgid "Ascending update date"
 msgstr ""
 
@@ -197,12 +198,12 @@ msgid "Activate infinite scroll functionnality to dynamically load more events."
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:180
-#: inc/widgets/class-preview-widget.php:65
+#: inc/class-main.php:281
 msgid "Default filters (advanced)"
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:182
-msgid "Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed."
+msgid "Paste a url to a pre-filtered agenda page. Only events corresponding to these filters will be displayed."
 msgstr ""
 
 #: inc/admin/class-metaboxes.php:187
@@ -220,6 +221,7 @@ msgstr ""
 
 #. translators: %s: settings page url
 #: inc/admin/class-metaboxes.php:236
+#, php-format
 msgid "Please provide your account API key in <a href=\"%s\">the plugin settings</a>."
 msgstr ""
 
@@ -238,6 +240,7 @@ msgstr ""
 
 #. translators: %s: settings page url
 #: inc/admin/class-metaboxes.php:517
+#, php-format
 msgid "The request could not be authenticated. Please double check API key in <a href=\"%s\">your general settings.</a>"
 msgstr ""
 
@@ -255,6 +258,7 @@ msgstr ""
 
 #. translators: %1$s: Openagenda settings page url, %2$s Documentation url
 #: inc/admin/class-settings.php:133
+#, php-format
 msgid "Your API key can be found in your <a href=\"%1$s\" target=\"_blank\" rel=\"external noopener noreferrer\">OpenAgenda account</a>. Check out the <a href=\"%2$s\" target=\"_blank\" rel=\"external noopener noreferrer\">documentation</a>."
 msgstr ""
 
@@ -327,11 +331,11 @@ msgid "Remove default image"
 msgstr ""
 
 #: inc/admin/class-settings.php:236
-msgid "Delete all calendar content on uninstall ?"
+msgid "Delete all agenda content on uninstall ?"
 msgstr ""
 
 #: inc/admin/class-settings.php:246
-msgid "Delete all posts of type \"Calendar\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
+msgid "Delete all posts of type \"Agenda\" permanently when I uninstall the plugin. Content will NOT be deleted when deactivating the plugin."
 msgstr ""
 
 #: inc/admin/class-settings.php:251
@@ -351,12 +355,13 @@ msgid "Allow OpenAgenda to collect plugin usage information for statistics purpo
 msgstr ""
 
 #: inc/admin/class-settings.php:281
-msgid "Calendar base"
+msgid "Agenda base"
 msgstr ""
 
 #. translators: %s : home url
 #: inc/admin/class-settings.php:293
-msgid "You can modify the URL prefix for the calendars. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/calendar-name</code>."
+#, php-format
+msgid "You can modify the URL prefix for the agendas. For example, the default prefix is <code>calendar</code>, so URLs will look like <code>%s/calendar/agenda-name</code>."
 msgstr ""
 
 #: inc/admin/class-settings.php:300
@@ -369,7 +374,7 @@ msgstr ""
 
 #: inc/admin/class-settings.php:321
 #: inc/frontend/class-shortcodes.php:454
-#: inc/functions/template-tags.php:793
+#: inc/functions/template-tags.php:792
 msgid "OpenStreetMap contributors"
 msgstr ""
 
@@ -379,6 +384,7 @@ msgstr ""
 
 #. translators: %s: openagenda site url
 #: inc/admin/class-settings.php:337
+#, php-format
 msgid "Your API key can be found in your <a href=\"%s\">CloudImage account</a>."
 msgstr ""
 
@@ -389,311 +395,338 @@ msgstr ""
 msgid "calendar"
 msgstr ""
 
-#: inc/blocks/class-blocks.php:55
+#: inc/blocks/class-blocks.php:46
+#: inc/widgets/class-filter-widget.php:96
+#: inc/widgets/class-preview-widget.php:73
+msgid "Title :"
+msgstr ""
+
+#: inc/blocks/class-blocks.php:52
+#: inc/widgets/class-preview-widget.php:77
+msgid "Agenda UID :"
+msgstr ""
+
+#: inc/blocks/class-blocks.php:93
 msgid "Openagenda"
 msgstr ""
 
-#: inc/class-main.php:232
+#: inc/class-main.php:242
+msgid "Number of events to display&nbsp;:"
+msgstr ""
+
+#: inc/class-main.php:285
+msgid "Use a query string representing a filtered query. Only events corresponding to these filters will be displayed."
+msgstr ""
+
+#: inc/class-main.php:290
+msgid "Use external links"
+msgstr ""
+
+#: inc/class-main.php:293
+msgid "Check to make event permalinks point to event pages on https://openagenda.com instead of local pages."
+msgstr ""
+
+#: inc/class-main.php:298
 #: inc/frontend/class-shortcodes.php:152
 msgctxt "Filter name"
 msgid "Active filters"
 msgstr ""
 
-#: inc/class-main.php:237
+#: inc/class-main.php:303
 #: inc/frontend/class-shortcodes.php:245
 msgctxt "Filter name"
 msgid "Choice"
 msgstr ""
 
-#: inc/class-main.php:242
+#: inc/class-main.php:308
 msgid "Choose field: "
 msgstr ""
 
-#: inc/class-main.php:245
+#: inc/class-main.php:311
 msgid "Choose a field to display"
 msgstr ""
 
-#: inc/class-main.php:247
+#: inc/class-main.php:313
 #: inc/frontend/class-shortcodes.php:277
 #: inc/frontend/class-shortcodes.php:287
 msgid "Favorites"
 msgstr ""
 
-#: inc/class-main.php:248
+#: inc/class-main.php:314
 msgid "Cities"
 msgstr ""
 
-#: inc/class-main.php:249
+#: inc/class-main.php:315
 msgid "Districts"
 msgstr ""
 
-#: inc/class-main.php:250
+#: inc/class-main.php:316
 msgid "Keywords"
 msgstr ""
 
-#: inc/class-main.php:251
+#: inc/class-main.php:317
 msgid "Admin Level 3"
 msgstr ""
 
-#: inc/class-main.php:252
+#: inc/class-main.php:318
 msgid "Departments"
 msgstr ""
 
-#: inc/class-main.php:253
+#: inc/class-main.php:319
 msgid "Regions"
 msgstr ""
 
-#: inc/class-main.php:254
+#: inc/class-main.php:320
 msgid "Attendance Mode"
 msgstr ""
 
-#: inc/class-main.php:255
+#: inc/class-main.php:321
 msgid "Additional field"
 msgstr ""
 
-#: inc/class-main.php:260
+#: inc/class-main.php:326
 msgid "Additional field name: "
 msgstr ""
 
-#: inc/class-main.php:264
+#: inc/class-main.php:330
 msgid "You can find the list of available additional fields in the Forms section of your agenda settings on openagenda.com (ex: https://openagenda.com/[your-agenda]/admin/schema )"
 msgstr ""
 
-#: inc/class-main.php:270
+#: inc/class-main.php:336
 msgid "Number of options to display at once: "
 msgstr ""
 
-#: inc/class-main.php:276
+#: inc/class-main.php:342
 msgid "Sort options by "
 msgstr ""
 
-#: inc/class-main.php:279
+#: inc/class-main.php:345
 msgid "Decreasing count"
 msgstr ""
 
-#: inc/class-main.php:281
+#: inc/class-main.php:347
 msgid "Alphabetical order"
 msgstr ""
 
-#: inc/class-main.php:287
+#: inc/class-main.php:353
 msgctxt "Filter name"
 msgid "Calendar"
 msgstr ""
 
-#: inc/class-main.php:292
+#: inc/class-main.php:358
 msgid "Display defined ranges shortcuts ?"
 msgstr ""
 
-#: inc/class-main.php:298
+#: inc/class-main.php:364
 msgid "Type of filter"
 msgstr ""
 
-#: inc/class-main.php:302
+#: inc/class-main.php:368
 msgid "Calendar picker"
 msgstr ""
 
-#: inc/class-main.php:303
+#: inc/class-main.php:369
 msgid "Native date input fields"
 msgstr ""
 
-#: inc/class-main.php:307
-#: inc/class-main.php:309
-#: inc/class-main.php:327
-#: inc/class-main.php:329
+#: inc/class-main.php:373
+#: inc/class-main.php:375
+#: inc/class-main.php:393
+#: inc/class-main.php:395
 msgid "Ranges to display: "
 msgstr ""
 
-#: inc/class-main.php:313
-#: inc/class-main.php:333
+#: inc/class-main.php:379
+#: inc/class-main.php:399
 msgid "Today"
 msgstr ""
 
-#: inc/class-main.php:314
-#: inc/class-main.php:334
+#: inc/class-main.php:380
+#: inc/class-main.php:400
 msgid "Tomorrow"
 msgstr ""
 
-#: inc/class-main.php:315
-#: inc/class-main.php:335
+#: inc/class-main.php:381
+#: inc/class-main.php:401
 msgid "This week end"
 msgstr ""
 
-#: inc/class-main.php:316
-#: inc/class-main.php:336
+#: inc/class-main.php:382
+#: inc/class-main.php:402
 msgid "This week"
 msgstr ""
 
-#: inc/class-main.php:317
-#: inc/class-main.php:337
+#: inc/class-main.php:383
+#: inc/class-main.php:403
 msgid "This month"
 msgstr ""
 
-#: inc/class-main.php:323
+#: inc/class-main.php:389
 #: inc/frontend/class-shortcodes.php:404
 msgctxt "Filter name"
 msgid "Defined Ranges"
 msgstr ""
 
-#: inc/class-main.php:343
+#: inc/class-main.php:409
 #: inc/frontend/class-shortcodes.php:458
 msgctxt "Filter name"
 msgid "Map"
 msgstr ""
 
-#: inc/class-main.php:348
+#: inc/class-main.php:414
 msgid "Map tiles link:"
 msgstr ""
 
-#: inc/class-main.php:351
+#: inc/class-main.php:417
 msgid "The default map tile link can be found in your Integrations settings."
 msgstr ""
 
-#: inc/class-main.php:355
+#: inc/class-main.php:421
 msgid "Automatically update map on scroll ?"
 msgstr ""
 
-#: inc/class-main.php:362
-#: inc/frontend/class-shortcodes.php:575
+#: inc/class-main.php:428
+#: inc/frontend/class-shortcodes.php:580
 msgctxt "Filter name"
 msgid "Upcoming"
 msgstr ""
 
-#: inc/class-main.php:367
-#: inc/frontend/class-shortcodes.php:619
+#: inc/class-main.php:433
+#: inc/frontend/class-shortcodes.php:624
 msgctxt "Filter name"
 msgid "Search"
 msgstr ""
 
-#: inc/class-main.php:372
+#: inc/class-main.php:438
 msgid "Placeholder:"
 msgstr ""
 
-#: inc/class-main.php:379
-#: inc/frontend/class-shortcodes.php:673
+#: inc/class-main.php:445
+#: inc/frontend/class-shortcodes.php:678
 msgctxt "Filter name"
 msgid "Sort"
 msgstr ""
 
-#: inc/class-main.php:383
-#: inc/class-main.php:385
+#: inc/class-main.php:449
+#: inc/class-main.php:451
 msgid "Sort options to display: "
 msgstr ""
 
-#: inc/class-main.php:389
+#: inc/class-main.php:455
 msgid "Score"
 msgstr ""
 
-#: inc/class-main.php:390
+#: inc/class-main.php:456
 msgid "Featured first, followed by ascending last occurrence"
 msgstr ""
 
-#: inc/class-main.php:401
+#: inc/class-main.php:467
 msgctxt "Filter name"
 msgid "Filter submit"
 msgstr ""
 
-#: inc/class-main.php:406
+#: inc/class-main.php:472
 msgid "Button label"
 msgstr ""
 
-#: inc/class-main.php:408
-#: inc/frontend/class-shortcodes.php:737
+#: inc/class-main.php:474
+#: inc/frontend/class-shortcodes.php:742
 msgid "Refresh events"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:173
 msgctxt "Post type general name"
-msgid "Calendars"
+msgid "Agendas"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:174
 msgctxt "Post type singular name"
-msgid "Calendar"
+msgid "Agenda"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:175
 msgctxt "Admin Menu text"
-msgid "Calendars"
+msgid "Agendas"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:176
 msgctxt "Add New on Toolbar"
-msgid "Calendar"
+msgid "Agenda"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:177
-msgid "Add New Calendar"
+msgid "Add New Agenda"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:178
-msgid "New Calendar"
+msgid "New Agenda"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:179
-msgid "Edit Calendar"
+msgid "Edit Agenda"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:180
-msgid "View Calendar"
+msgid "View Agenda"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:181
-msgid "All Calendars"
+msgid "All Agendas"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:182
-msgid "Search Calendars"
+msgid "Search Agendas"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:183
-msgid "Parent Calendars:"
+msgid "Parent Agendas:"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:184
-msgid "No Calendars found."
+msgid "No Agendas found."
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:185
-msgid "No Calendars found in Trash."
+msgid "No Agendas found in Trash."
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:186
 msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
-msgid "Calendar Cover Image"
+msgid "Agenda Cover Image"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:187
 msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
-msgid "Calendar archives"
+msgid "Agenda archives"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:188
 msgctxt "Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4"
-msgid "Insert into Calendar"
+msgid "Insert into Agenda"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:189
 msgctxt "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4"
-msgid "Uploaded to this Calendar"
+msgid "Uploaded to this Agenda"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:190
 msgctxt "Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
-msgid "Filter Calendars list"
+msgid "Filter Agendas list"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:191
 msgctxt "Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4"
-msgid "Calendars list navigation"
+msgid "Agendas list navigation"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:192
 msgctxt "Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4"
-msgid "Calendars list"
+msgid "Agendas list"
 msgstr ""
 
 #: inc/frontend/class-content-manager.php:347
-msgid "Please provide a calendar UID in this calendar's settings box first. You can leave your content empty, as the event list is automatically inserted after your content."
+msgid "Please provide an agenda UID in this agenda's settings box first. You can leave your content empty, as the event list is automatically inserted after your content."
 msgstr ""
 
 #: inc/frontend/class-openagenda.php:488
@@ -713,7 +746,7 @@ msgid "There was an error parsing the JSON."
 msgstr ""
 
 #: inc/frontend/class-shortcodes.php:92
-msgid "Please provide a valid calendar UID to display in the calendar settings."
+msgid "Please provide a valid agenda UID to display in the agenda settings."
 msgstr ""
 
 #: inc/frontend/class-shortcodes.php:191
@@ -750,60 +783,62 @@ msgstr ""
 msgid "Search while moving the map"
 msgstr ""
 
-#: inc/frontend/class-shortcodes.php:734
+#: inc/frontend/class-shortcodes.php:739
 msgctxt "Filter name"
 msgid "Submit"
 msgstr ""
 
-#: inc/functions/helper-functions.php:211
+#: inc/functions/helper-functions.php:212
 msgid "Accessible to people suffering from motor disabilities."
 msgstr ""
 
-#: inc/functions/helper-functions.php:212
-#: inc/functions/helper-functions.php:215
+#: inc/functions/helper-functions.php:213
+#: inc/functions/helper-functions.php:216
 msgid "Accessible to people suffering from mental disabilities."
 msgstr ""
 
-#: inc/functions/helper-functions.php:213
+#: inc/functions/helper-functions.php:214
 msgid "Accessible to people suffering from hearing impairments."
 msgstr ""
 
-#: inc/functions/helper-functions.php:214
+#: inc/functions/helper-functions.php:215
 msgid "Accessible to people suffering from visual impairments."
 msgstr ""
 
-#: inc/functions/helper-functions.php:216
+#: inc/functions/helper-functions.php:217
 msgid "Accessible to people suffering from intellectual disabilities."
 msgstr ""
 
-#: inc/functions/helper-functions.php:452
+#: inc/functions/helper-functions.php:453
 msgid "Fetching events... Please wait a moment."
 msgstr ""
 
-#: inc/functions/helper-functions.php:466
+#: inc/functions/helper-functions.php:467
 msgid "There was an error updating the events. Pleaser refresh the page and try again."
 msgstr ""
 
 #. translators: %s : next event relative timing
-#: inc/functions/helper-functions.php:499
+#: inc/functions/helper-functions.php:500
+#, php-format
 msgctxt "next event timing"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s : last event relative timing
-#: inc/functions/helper-functions.php:501
+#: inc/functions/helper-functions.php:502
+#, php-format
 msgctxt "last event timing"
 msgid "%s ago"
 msgstr ""
 
 #: inc/functions/template-filters.php:66
-#: inc/functions/template-tags.php:1590
+#: inc/functions/template-tags.php:1589
 msgctxt "event navigation"
 msgid "Next event"
 msgstr ""
 
 #: inc/functions/template-filters.php:67
-#: inc/functions/template-tags.php:1591
+#: inc/functions/template-tags.php:1590
 msgctxt "event navigation"
 msgid "Previous event"
 msgstr ""
@@ -816,140 +851,146 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: inc/functions/template-tags.php:630
+#: inc/functions/template-tags.php:629
 msgid "No timing available"
 msgstr ""
 
-#: inc/functions/template-tags.php:694
+#: inc/functions/template-tags.php:693
 msgid "View previous month"
 msgstr ""
 
-#: inc/functions/template-tags.php:697
+#: inc/functions/template-tags.php:696
 msgid "View next month"
 msgstr ""
 
 #. translators: %d: number of upcoming events
-#: inc/functions/template-tags.php:760
+#: inc/functions/template-tags.php:759
+#, php-format
 msgid "%d upcoming event."
 msgid_plural "%d upcoming events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of upcoming events
-#: inc/functions/template-tags.php:760
+#: inc/functions/template-tags.php:759
 msgid "No upcoming event."
 msgstr ""
 
 #. translators: %d: number of passed events
-#: inc/functions/template-tags.php:763
+#: inc/functions/template-tags.php:762
+#, php-format
 msgid "%d passed event."
 msgid_plural "%d passed events."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of passed events
-#: inc/functions/template-tags.php:763
+#: inc/functions/template-tags.php:762
 msgid "No passed event."
 msgstr ""
 
-#: inc/functions/template-tags.php:831
+#: inc/functions/template-tags.php:830
 msgid "Share on Facebook"
 msgstr ""
 
-#: inc/functions/template-tags.php:836
+#: inc/functions/template-tags.php:835
 msgid "Share on X"
 msgstr ""
 
-#: inc/functions/template-tags.php:847
+#: inc/functions/template-tags.php:846
 msgid "Share on Linkedin"
 msgstr ""
 
-#: inc/functions/template-tags.php:880
+#: inc/functions/template-tags.php:879
 msgid "Share :"
 msgstr ""
 
-#: inc/functions/template-tags.php:914
+#: inc/functions/template-tags.php:913
 msgid "Share"
 msgstr ""
 
-#: inc/functions/template-tags.php:1005
+#: inc/functions/template-tags.php:1004
 msgid "Access the event"
 msgstr ""
 
-#: inc/functions/template-tags.php:1031
+#: inc/functions/template-tags.php:1030
 msgid "On site"
 msgstr ""
 
-#: inc/functions/template-tags.php:1032
+#: inc/functions/template-tags.php:1031
 #: templates/event.php:24
 #: templates/legacy/event.php:24
 msgid "Online"
 msgstr ""
 
-#: inc/functions/template-tags.php:1033
+#: inc/functions/template-tags.php:1032
 msgid "Mixed"
 msgstr ""
 
-#: inc/functions/template-tags.php:1064
+#: inc/functions/template-tags.php:1063
 msgid "Scheduled"
 msgstr ""
 
-#: inc/functions/template-tags.php:1065
+#: inc/functions/template-tags.php:1064
 msgid "Rescheduled"
 msgstr ""
 
-#: inc/functions/template-tags.php:1066
+#: inc/functions/template-tags.php:1065
 msgid "Switched to online"
 msgstr ""
 
-#: inc/functions/template-tags.php:1067
+#: inc/functions/template-tags.php:1066
 msgid "Postponed"
 msgstr ""
 
-#: inc/functions/template-tags.php:1068
+#: inc/functions/template-tags.php:1067
 msgid "Sold out"
 msgstr ""
 
-#: inc/functions/template-tags.php:1069
+#: inc/functions/template-tags.php:1068
 msgid "Cancelled"
 msgstr ""
 
 #. translators: %d minimum age
-#: inc/functions/template-tags.php:1134
+#: inc/functions/template-tags.php:1133
+#, php-format
 msgctxt "Age field"
 msgid "From %d years old."
 msgstr ""
 
 #. translators: %d maximum age
-#: inc/functions/template-tags.php:1138
+#: inc/functions/template-tags.php:1137
+#, php-format
 msgctxt "Age field"
 msgid "Up to %d years old."
 msgstr ""
 
 #. translators: %1$d minimum age, %2$d maximum age
-#: inc/functions/template-tags.php:1142
+#: inc/functions/template-tags.php:1141
+#, php-format
 msgctxt "Age field"
 msgid "From %1$d to %2$d years old."
 msgstr ""
 
-#: inc/functions/template-tags.php:1314
+#: inc/functions/template-tags.php:1313
 msgid "Previous page"
 msgstr ""
 
-#: inc/functions/template-tags.php:1315
+#: inc/functions/template-tags.php:1314
 msgid "Next page"
 msgstr ""
 
-#: inc/functions/template-tags.php:1483
+#: inc/functions/template-tags.php:1482
 msgid "Download :"
 msgstr ""
 
-#: inc/functions/template-tags.php:1640
+#: inc/functions/template-tags.php:1639
 msgid "Back to list"
 msgstr ""
 
 #. translators: %s: event title
-#: inc/functions/template-tags.php:1701
+#: inc/functions/template-tags.php:1700
+#, php-format
 msgid "Add %s to favorites."
 msgstr ""
 
@@ -959,11 +1000,6 @@ msgstr ""
 
 #: inc/widgets/class-filter-widget.php:32
 msgid "Displays a filter widget."
-msgstr ""
-
-#: inc/widgets/class-filter-widget.php:96
-#: inc/widgets/class-preview-widget.php:131
-msgid "Title :"
 msgstr ""
 
 #: inc/widgets/class-filter-widget.php:100
@@ -984,32 +1020,12 @@ msgstr ""
 msgid "Display filter as a dropdown ?"
 msgstr ""
 
-#: inc/widgets/class-preview-widget.php:26
-msgid "Number of events to display&nbsp;:"
-msgstr ""
-
-#: inc/widgets/class-preview-widget.php:69
-msgid "Use a query string representing a filtered query. Only events corresponding to these filters will be displayed."
-msgstr ""
-
-#: inc/widgets/class-preview-widget.php:74
-msgid "Use external links"
-msgstr ""
-
-#: inc/widgets/class-preview-widget.php:77
-msgid "Check to make event permalinks point to event pages on https://openagenda.com instead of local pages."
-msgstr ""
-
-#: inc/widgets/class-preview-widget.php:82
+#: inc/widgets/class-preview-widget.php:24
 msgid "OpenAgenda Preview"
 msgstr ""
 
-#: inc/widgets/class-preview-widget.php:84
-msgid "Displays a calendar preview widget."
-msgstr ""
-
-#: inc/widgets/class-preview-widget.php:135
-msgid "Agenda UID :"
+#: inc/widgets/class-preview-widget.php:26
+msgid "Displays an agenda preview widget."
 msgstr ""
 
 #: openagenda.php:165
@@ -1220,12 +1236,17 @@ msgstr ""
 
 #. translators: %s: Filter label.
 #: assets/blocks/filter/index.js:2
+#, js-format
 msgid "%s filter: Filters are not initialized in the admin area. Please check your frontend."
+msgstr ""
+
+#: assets/blocks/preview/index.js:1
+msgid "Please provide an agenda uid in the block settings."
 msgstr ""
 
 #: assets/blocks/events/block.json
 msgctxt "block title"
-msgid "Openagenda Events"
+msgid "Openagenda Event List"
 msgstr ""
 
 #: assets/blocks/events/block.json
@@ -1241,4 +1262,14 @@ msgstr ""
 #: assets/blocks/filter/block.json
 msgctxt "block description"
 msgid "Display filters for the event list."
+msgstr ""
+
+#: assets/blocks/preview/block.json
+msgctxt "block title"
+msgid "Openagenda Preview"
+msgstr ""
+
+#: assets/blocks/preview/block.json
+msgctxt "block description"
+msgid "Display a preview of an agenda."
 msgstr ""

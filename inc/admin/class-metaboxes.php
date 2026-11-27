@@ -44,7 +44,7 @@ class Metaboxes implements Hookable {
 			$this->metaboxes = array(
 				'oa-calendar-settings' => array(
 					'id'            => 'oa-calendar-settings',
-					'title'         => __( 'Calendar settings', 'openagenda' ),
+					'title'         => __( 'Agenda settings', 'openagenda' ),
 					'callback'      => array( $this, 'calendar_settings_markup' ),
 					'screen'        => 'oa-calendar',
 					'context'       => 'side',
@@ -68,12 +68,12 @@ class Metaboxes implements Hookable {
 				'oa-calendar-uid'                     => array(
 					'metabox'     => 'oa-calendar-settings',
 					'type'        => 'text',
-					'label'       => __( 'Calendar UID', 'openagenda' ),
+					'label'       => __( 'Agenda UID', 'openagenda' ),
 					'default'     => '',
 					'description' => sprintf(
 						'<a href="%s" class="components-external-link" target="_blank" rel="external noopener noreferrer">%s</a>',
 						'https://doc.openagenda.com/fr/article/trouver-le-lien-et-lidentifiant-de-mon-evenement-de-mon-agenda-27xykn/',
-						__( 'How to find my calendar UID ?', 'openagenda' )
+						__( 'How to find my agenda UID ?', 'openagenda' )
 					),
 				),
 				'oa-calendar-per-page'                => array(
@@ -179,7 +179,7 @@ class Metaboxes implements Hookable {
 					'type'        => 'text',
 					'label'       => __( 'Default filters (advanced)', 'openagenda' ),
 					'default'     => '',
-					'description' => __( 'Paste a url to a pre-filtered calendar page. Only events corresponding to these filters will be displayed.', 'openagenda' ),
+					'description' => __( 'Paste a url to a pre-filtered agenda page. Only events corresponding to these filters will be displayed.', 'openagenda' ),
 				),
 				'oa-calendar-api-key'                 => array(
 					'metabox'               => 'oa-calendar-settings',

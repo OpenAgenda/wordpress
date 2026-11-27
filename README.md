@@ -1,6 +1,6 @@
 # OpenAgenda WordPress Plugin
 
-This WordPress plugin allows you to embed any calendar hosted on [https://openagenda.com](https://openagenda.com) on your WordPress site.
+This WordPress plugin allows you to embed any agenda hosted on [https://openagenda.com](https://openagenda.com) on your WordPress site.
 
 ## Installation
 
@@ -14,21 +14,21 @@ If you wish to install this plugin on your local machine from this GitHub reposi
 
 ## Basic usage
 
-Upon activation, the plugin creates a new post type named *Calendars*. Just create a new calendar, provide the UID of the calendar you wish to display in the  settings box, and that's it !
+Upon activation, the plugin creates a new post type named *Agendas*. Just create a new agenda, provide the UID of the agenda you wish to display in the  settings box, and that's it !
 
-![A new *Calendars* menu entry is created, allowing you to manage your calendars and settings](assets/screenshots/screenshot-1.png)
+![A new *Agendas* menu entry is created, allowing you to manage your agendas and settings](assets/screenshots/screenshot-1.png)
 
-You can leave the content area for this calendar empty, as it will be populated automatically with your events.
+You can leave the content area for this agenda empty, as it will be populated automatically with your events.
 
-![Just create a new calendar post, and provide the OpenAgenda calendar UID in the *Calendar settings* metabox.](assets/screenshots/screenshot-3.png)
+![Just create a new agenda post, and provide the OpenAgenda agenda UID in the *Agenda settings* metabox.](assets/screenshots/screenshot-3.png)
 
 Your events are automatically inserted after your content. If you wish to control where your events will be listed, just use the shortcode `[openagenda]` in your content.
 
 ## Settings
 
-General settings can be found under the *Calendar > Settings* entry in the admin menu.
+General settings can be found under the *Agendas > Settings* entry in the admin menu.
 
-All data related to your API key or calendars can be found on [https://openagenda.com](https://openagenda.com).
+All data related to your API key or agendas can be found on [https://openagenda.com](https://openagenda.com).
 
 ![The simple settings page allow you to enter in your API key and tweak various settings.](assets/screenshots/screenshot-2.png)
 
@@ -45,8 +45,8 @@ The General settings tab provides the following settings :
  * *Legacy templates* : Templates have been updated in 3.0.0. Check this option to continue using legacy templates.
  * *Cache duration* : For performance reasons, basic requests to OpenAgenda are temporarily kept in cache. This settings controls the time to keep them cached, in seconds.
  * *Default event image* : Choose an image to use in case events do not have one.
- * *Delete all calendar content on uninstall ?* : controls whether you want to delete all your content on uninstall.
- * *Delete all options on uninstall ?* : controls whether you want to delete all your calendar settings on uninstall.
+ * *Delete all agenda content on uninstall ?* : controls whether you want to delete all your content on uninstall.
+ * *Delete all options on uninstall ?* : controls whether you want to delete all your agenda settings on uninstall.
  * *Allow OpenAgenda to collect usage stats ?* : controls whether you want to send CMS used and site URL to OpenAgenda, for statistic purposes.
 
 ### Integrations settings
@@ -64,11 +64,11 @@ The *Integrations* tab allows you to fine tune settings for various third party 
 
 ### Permalinks settings
 
-In the *Permalinks* settings, you can change the prefix for your calendar pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
+In the *Permalinks* settings, you can change the prefix for your agenda pages. You cannot leave this blank as your URLs will conflict with WordPress' default pages and posts.
 
-In the *Settings > Reading* section, you can set a calendar page as your front page. Note that it will still use the default calendar template provided by the plugin and the default front page template provided by your theme.
+In the *Settings > Reading* section, you can set an agenda page as your front page. Note that it will still use the default agenda template provided by the plugin and the default front page template provided by your theme.
 
-![You can set a calendar as your front page.](assets/screenshots/screenshot-8.png)
+![You can set an agenda as your front page.](assets/screenshots/screenshot-8.png)
 
 ### Customizer settings
 
@@ -80,9 +80,9 @@ If you add Openagenda Filter widgets via the customizer, **the preview will not 
 
 Simply publish your settings and refresh the page, or open your agenda page in another tab. Your filter should work just fine. 
 
-## How to get my calendar UID ?
+## How to get my agenda UID ?
 
-The UID of the calendar you wish to display can be found directly on your calendar page on [OpenAgenda](https://openagenda.com). Go to the site, and click *Look for an agenda*. Then use search box to find your calendar.
+The UID of the agenda you wish to display can be found directly on your agenda page on [OpenAgenda](https://openagenda.com). Go to the site, and click *Look for an agenda*. Then use search box to find your agenda.
 
 ![Your UID is just under the widgets in the sidebar](assets/screenshots/screenshot-4.png)
 
@@ -94,7 +94,7 @@ To allow users to easily find relevant events, the plugin also provides convenie
 
 Place the filter block or relevant widget in your sidebar or other widgetized area, and tweak filter settings in the block inspector or widgets admin.
 
-![You can use convenient filter widgets to add filtering functionnality to your calendars.](assets/screenshots/screenshot-5.png)
+![You can use convenient filter widgets to add filtering functionnality to your agendas.](assets/screenshots/screenshot-5.png)
 
 To integrate filters directly in your content instead of widget areas, you can use the Filter blocks or shortcodes.
 
@@ -106,15 +106,15 @@ Every filter can be displayed in a dropdown wrapper. All blocks, widgets have a 
 
 **`[openagenda]`**
 
-Displays the calendar. You do not need to use this shortcode explicitely, as it is automatically injected in the content of your "calendars" posts.
+Displays the agenda. You do not need to use this shortcode explicitely, as it is automatically injected in the content of your "agendas" posts.
 
 However, if you need to insert static content after your list of events, you can do so by inserting this shortcode, then your static content afterwards.
 
 **`[openagenda_preview]`**
 
-Displays a preview of an calendar. It takes the following parameters : 
+Displays a preview of an agenda. It takes the following parameters : 
 
- * `uid` : UID of the calendar you wish to preview.
+ * `uid` : UID of the agenda you wish to preview.
  * `size` : Number of events to display.
  * `sort` : Event sort option. Accepts `lastTimingWithFeatured.asc`, `timingsWithFeatured.asc`, `lastTiming.asc`, `timings.asc`, `updatedAt.asc` or `updatedAt.desc`.
  * `view` : Accepts 'list' or 'grid'.
@@ -364,13 +364,13 @@ The final HTML can be filtered using the following filter : `apply_filters( 'ope
 
 #### `openagenda_get_permalink( $agenda_uid = false )`
 
-Returns the permalink to the calendar corresponding to the UID given. Defaults to the current calendar on calendar pages.
+Returns the permalink to the agenda corresponding to the UID given. Defaults to the current agenda on agenda pages.
 
 The permalink can be filtrered using the following filter : `apply_filters( 'openagenda_permalink', $permalink, $agenda_uid )`.
 
 #### `openagenda_exports( $agenda_uid = false, $echo = true )`
 
-Displays exports links for the calendar corresponding to the given UID. Defaults to current calendar. 
+Displays exports links for the agenda corresponding to the given UID. Defaults to current agenda. 
 
 The returned HTML passes throught the following filter : `apply_filters( 'openagenda_exports_html', $html, $agenda_uid )`.
 
@@ -414,7 +414,7 @@ Returns the current OpenAgenda locale code. Defaults to current WordPress locale
 
 Displays a simple language switcher. On list views, languages available throughout the entire agenda are displayed. On event views, only languages available for this specific event are displayed.
 
-Also, on list views, if used, the `$uid` parameter must correspond to the calendar uid. On single event views, it must correspond to the event uid.
+Also, on list views, if used, the `$uid` parameter must correspond to the agenda uid. On single event views, it must correspond to the event uid.
 
 The available languages list is passed through the following filter : `apply_filters( 'openagenda_switcher_languages', $languages, $uid );`.
 
@@ -529,4 +529,4 @@ Allows to control which fields are displayed in the default template for additio
 The callback takes the following parameters :
 
 * array   `$fields`      All additional fields slugs
-* int     `$post_id`     Calendar post id
+* int     `$post_id`     Agenda post id
