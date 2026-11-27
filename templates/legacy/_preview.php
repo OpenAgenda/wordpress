@@ -18,13 +18,13 @@ $additional_attributes = 'oa' === $atts['links'] ? 'target="_blank" rel="noopene
 			<?php openagenda_event_image(); ?>
 		</a>
 		<div class="oa-card-body">
-			<p class="oa-card-link">
+			<h2 class="oa-event-title oa-card-link">
 				<strong>
 					<a href="<?php echo $permalink; ?>" <?php echo $additional_attributes; ?>>
 						<?php openagenda_field( 'title' ); ?>
 					</a>
 				</strong>
-			</p>
+			</h2>
 			<ul class="oa-card-metas oa-list-unstyled">
 				<li class="oa-card-meta">
 					<?php openagenda_icon( 'month' ); ?>

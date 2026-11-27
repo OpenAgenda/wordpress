@@ -397,6 +397,13 @@ div[data-container-id="oa-wrapper"] {
 
 .oa-card-link {
 	margin-bottom: 0.5rem;
+	font-size: inherit;
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
 }
 
 .oa-list-unstyled {
