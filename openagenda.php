@@ -116,6 +116,7 @@ function openagenda_uninstallation() {
 		delete_option( 'openagenda_permalinks_settings' );
 		delete_option( 'openagenda_customizer' );
 		delete_option( 'openagenda_post_type_slug' );
+		delete_option( 'openagenda_former_rewrite_bases' );
 		delete_expired_transients();
 	}
 }
