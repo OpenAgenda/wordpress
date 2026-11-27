@@ -89,7 +89,7 @@ class Shortcodes implements Hookable {
 		);
 
 		if ( empty( $atts['uid'] ) ) {
-			return sprintf( '<p>%s</p>', __( 'Please provide a valid calendar UID to display in the calendar settings.', 'openagenda' ) );
+			return sprintf( '<p>%s</p>', __( 'Please provide a valid agenda UID to display in the agenda settings.', 'openagenda' ) );
 		}
 
 		if ( ! $openagenda ) {
